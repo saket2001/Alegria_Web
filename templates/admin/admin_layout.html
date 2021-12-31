@@ -1,0 +1,205 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<body class='min-w-100 min-vh-100 sec-font'>
+    <div class="row w-100 vh-100 gx-0">
+        <!-- side nav -->
+        <div class="col-lg-3 col-sm-12 h-auto bg-brown p-4">
+            <nav class="d-flex flex-column shadow-sm">
+                <div class="d-flex justify-content-between align-items-center px-2">
+                    <h1
+                        class="fs-4 fw-bold text-center d-flex flex-row align-items-center justify-content-evenly text-beige mb-0">
+                        <!-- <img src="/static/images/alegria-logo.png" alt="alegria logo" class="me-2"> -->
+                        Alegria 2022
+                    </h1>
+                    <button id="nav-toggler" class="nav-menu-btn justify-content-end">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="" fill="none" viewBox="0 0 24 24" width="24px"
+                            height="24px" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+                <!-- desktop nav -->
+                <ul id="desktop-nav" class="h-100 d-grid gap-2 my-5 text-beige px-0">
+                    <li class="nav-links p-2 rounded" {% if activeNav=='dashboard' %}
+                        style="background-color:  #353327;" {% endif %}>
+                        <a href="/admin" class="w-100 d-flex align-items-center fs-6 fw-normal">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="text-beige me-2" width="28px" height="28px"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-links p-2 rounded d-flex align-items-center fs-6 dropdown" {% if activeNav=='events'
+                        %} style="background-color: #353327;" {% endif %}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="text-beige me-2" width="28px"
+                            height="28px" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+
+                        <a class='nav-links dropdown-toggle fs-6' id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">Events</a>
+                        <ul class="dropdown-menu" style="background-color: #26251A !important;"
+                            aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a class="dropdown-item nav-links" href="/admin/events/informals">Informals</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-links" href="/admin/events/fine-arts">Fine Arts</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-links" href="/admin/events/performing-arts">Performing
+                                    Arts</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-links" href="/admin/events/gaming">Gaming</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-links" href="/admin/events/sports">Sports</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-links" href="/admin/events/literary-arts">Literary
+                                    Arts</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-links" href="/admin/events/technical-events">Technical
+                                    Events</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-links" href="/admin/events/technical-workshop">Technical
+                                    Workshops</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-links" href="/admin/events/management-events">Managemnet
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-links" href="/admin/events/special-events">Special Events
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li class="nav-links p-2 rounded d-flex align-items-center fs-6 fw-normal" {% if
+                        activeNav=='merchandise' %} style="background-color:  #353327;" {% endif %}>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="text-beige me-2" width="28px" height="28px"
+                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                        <a class='nav-links dropdown-toggle fs-6 ' id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">Merchandise</a>
+                        <ul class="dropdown-menu" style="background-color: #26251A !important;"
+                            aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a class="dropdown-item nav-links" href="/admin/merchandise/Tshirts">Tshirts</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-links" href="/admin/merchandise/Bags">Bags</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-links" href="/admin/merchandise/Badges">Badges</a>
+                            </li>
+                        </ul>
+                    </li>
+                    </li>
+                    <li class="nav-links p-2 rounded d-flex align-items-center fs-6 fw-normal" {% if activeNav=='polls'
+                        %} style="background-color:  #353327;" {% endif %}>
+                        <a href="/admin/polls" class="w-100 d-flex align-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="text-beige me-2" width="28px" height="28px"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                            Polls
+                        </a>
+                    </li>
+                    <li class="justify-self-end d-flex justify-content-center w-100 mt-4">
+                        <a href="/admin-logout"
+                            class="nav-button d-flex justify-content-center rounded w-100 mx-2 fs-6 fw-normal">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="text-beige me-2" width="24px" height="24px"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+                <!-- mobile nav -->
+                <ul id="mobile-nav" class="h-100 d-grid gap-2 my-5 text-beige px-0 hidden">
+                    <li class="nav-links p-2 rounded" {% if activeNav=='dashboard' %}
+                        style="background-color:  #353327;" {% endif %}>
+                        <a href="/admin/saket-c" class="w-100 d-flex align-items-center fs-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="text-beige me-2" width="28px" height="28px"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-links p-2 rounded d-flex align-items-center" {% if activeNav=='events' %}
+                        style="background-color:  #353327;" {% endif %}>
+                        <a href="/admin/events" class="w-100 d-flex align-items-center fs-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="text-beige me-2" width="28px"
+                                height="28px" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                            Events
+                        </a>
+                    </li>
+                    <li class="nav-links p-2 rounded d-flex align-items-center" {% if activeNav=='merchandise' %}
+                        style="background-color:  #353327;" {% endif %}>
+                        <a href="/admin/merchandise" class="w-100 d-flex align-items-center fs-7">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="text-beige me-2" width="28px" height="28px"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>
+                            Merchandise
+                        </a>
+                    </li>
+                    <li class="nav-links p-2 rounded d-flex align-items-center fs-7 fw-normal" {% if activeNav=='polls'
+                        %} style="background-color:  #353327;" {% endif %}>
+                        <a href="/admin/polls/" class="w-100 d-flex align-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="text-beige me-2" width="28px" height="28px"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                            Polls
+                        </a>
+                    </li>
+                    <li class="justify-self-end px-2 py-1 w-100 mt-4">
+                        <button class="nav-button rounded w-100 me-1 fs-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="text-beige me-2" width="24px" height="24px"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                            Logout
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- content -->
+        <div class="col-lg-9 col-sm-12 bg-beige px-4">
+            <!--main content -->
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+</body>
+{% endblock %}

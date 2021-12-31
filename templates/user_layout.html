@@ -1,0 +1,263 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<body class="min-vh-100">
+    <nav class="navbar navbar-main navbar-expand-lg navbar-light p-2 position-relative">
+        <div class="container-fluid">
+            <a class="" href="/">
+                <img src="/static/images/AlegriaLogo.png" alt="alegria logo" width="60px" height="60px">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="ms-5 navbar-nav me-auto mt-1 mb-2 mb-lg-0 sec-font fw-bold gy-3">
+                    <li class="nav-item">
+                        <a href="/" class='navbar_links' {% if activeNav=='Home' %} style='color: #e8ff84;' {% endif
+                            %}>Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class='navbar_links dropdown-toggle' id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false" {% if activeNav=='Events' %} style='color: #e8ff84;' {% endif
+                            %}>Events</a>
+                        <ul class="dropdown-menu" style="background-color: #681b0aec !important;"
+                            aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a class="dropdown-item navbar_links" href="/events/informals">Informals</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item navbar_links" href="/events/fine-arts">Fine Arts</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item navbar_links" href="/events/performing-arts">Performing
+                                    Arts</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item navbar_links" href="/events/gaming">Gaming</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item navbar_links" href="/events/sports">Sports</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item navbar_links" href="/events/literary-arts">Literary
+                                    Arts</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item navbar_links" href="/events/technical-events">Technical
+                                    Events</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item navbar_links" href="/events/technical-workshop">Technical
+                                    Workshops</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item navbar_links" href="/events/management">Management
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item navbar_links" href="/events/special-events">Special Events
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="" class='navbar_links dropdown-toggle' id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false" {% if activeNav=='Merchandise' %}
+                            style='color: #e8ff84;' {% endif %}>Merchandise</a>
+                        <ul class="dropdown-menu" style="background-color: #681b0aec !important;"
+                            aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a class="dropdown-item navbar_links" href="/merchandise/Tshirts">Tshirts</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item navbar_links" href="/merchandise/Bags">Bags</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item navbar_links" href="/merchandise/Badges">Badges</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/hackathon" class='navbar_links' {% if activeNav=='Hackathon' %}
+                            style='color: #e8ff84;' {% endif %}>Hackathon</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/sponsors" class='navbar_links' {% if activeNav=='Sponsors' %} style='color: #e8ff84;'
+                            {% endif %}>Sponsors</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="" class='navbar_links dropdown-toggle' id="dropdownMenuButton2"
+                            data-bs-toggle="dropdown" aria-expanded="false">News</a>
+                        <ul class="dropdown-menu" style="background-color: #681b0aec !important;"
+                            aria-labelledby="dropdownMenuButton2">
+                            <li>
+                                <a class="dropdown-item navbar_links" href="https://pillaialegria.wordpress.com/"
+                                    target="_blank" rel="noopener noreferrer">Blog</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item navbar_links" href="/news/buzz">Buzz</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item navbar_links" href="/events/fine-arts">Highlights</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <a href="/user-login"
+                    class="d-flex justify-content-center align-items-center rounded-3 text-red bg-beige fs-7 px-5 py-1 me-2 main-font">
+                    Sign In
+                </a>
+                <a href="/user/cart" class="d-flex align-items-center u-text-brown p-2 mx-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="text-beige" width="32px" height="32px" fill="none"
+                        class="mx-2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- footer -->
+    <footer class="d-flex flex-column px-2 overflow-hidden u-text-beige" style="background-color: #272626;">
+        <div class="row d-flex justify-content-center g-4 p-4 pt-5">
+            <div class="col-lg-3 col-sm-6">
+                <p class="footer_link">Here's how you can reach us</p>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3772.6693193422207!2d73.12548141390256!3d18.990206059600766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7e866de88667f%3A0xc1c5d5badc610f5f!2sPillai%20College%20of%20Engineering%2C%20New%20Panvel!5e0!3m2!1sen!2sin!4v1639657181713!5m2!1sen!2sin"
+                    width="220" height="150" style="border:0;" allowfullscreen=true loading="lazy"
+                    class="rounded-3"></iframe>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <li>
+                    <a href="/events/fine-arts" class="footer_link mb-1">
+                        Fine Arts
+                    </a>
+                </li>
+                <li>
+                    <a href="/events/gaming" class="footer_link mb-1">
+                        Gaming
+                    </a>
+                </li>
+                <li>
+                    <a href="/events/informals" class="footer_link mb-1">
+                        Informals
+                    </a>
+                </li>
+                <li>
+                    <a href="/events/literary-arts" class="footer_link mb-1">
+                        Literary Arts
+                    </a>
+                </li>
+                <li>
+                    <a href="/events/management" class="footer_link mb-1">
+                        Management
+                    </a>
+                </li>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <li>
+                    <a href="/event/technical-events" class="footer_link mb-1">
+                        Technical Events
+                    </a>
+                </li>
+                <li>
+                    <a href="/events/technical-workshops" class="footer_link mb-1">
+                        Technical Workshops
+                    </a>
+                </li>
+                <li>
+                    <a href="/events/performing-arts" class="footer_link mb-1">
+                        Performing Arts
+                    </a>
+                </li>
+                <li>
+                    <a href="/events/sports" class="footer_link mb-1">
+                        Sports
+                    </a>
+                </li>
+                <li>
+                    <a href="/events/special-events" class="footer_link mb-1">
+                        Special Events
+                    </a>
+                </li>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <li>
+                    <a href="/" class="footer_link mb-1">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="/login" class="footer_link mb-1">
+                        Login
+                    </a>
+                </li>
+                <li>
+                    <a href="/hackathon" class="footer_link mb-1">
+                        Hackathon
+                    </a>
+                </li>
+                <li>
+                    <a href="/merchandise" class="footer_link mb-1">
+                        Merchandise
+                    </a>
+                </li>
+                <li>
+                    <a href="/developers" class="footer_link mb-1">
+                        Developers
+                    </a>
+                </li>
+                <li class="my-1">
+                    <a href="https://play.google.com/store/apps/details?id=com.mes.alegria" target="_blank"
+                        rel="noopener noreferrer" class="px-3 py-1 d-flex align-items-center rounded-3"
+                        style="background-color: black;width: 60%;height: 60%;">
+                        <img src="/static/images/icons/playstore.png" alt="playstore icon" class="me-1">
+                        <p class="sec-font mb-0" style="font-size: 0.7rem;">
+                            <span>
+                                Get It On
+                            </span>
+                            <br>
+                            <span>
+                                Google Play
+                            </span>
+                        </p>
+                    </a>
+                </li>
+            </div>
+        </div>
+        <div class="row py-2" style="background-color: #242121;">
+            <div class="col">
+                <p class="footer_link mb-1 text-center">Copyright 2022 Alegria</p>
+            </div>
+            <div class="col">
+                <div class="d-flex justify-content-center align-items-center">
+                    <a href="https://www.instagram.com/pillaisalegria/" target="_blank" rel="noopener noreferrer"
+                        class="footer_link mb-1 px-2 social-icons">
+                        <i class="fab fa-instagram fs-5"></i>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCfqP3NEaaXPsgHn8QX3qilw" target="_blank"
+                        rel="noopener noreferrer" class="footer_link mb-1 px-2 social-icons">
+                        <i class="fab fa-youtube fs-5"></i>
+                    </a>
+                    <a href="https://www.facebook.com/pillaisalegria" target="_blank" rel="noopener noreferrer"
+                        class="footer_link mb-1 px-2 social-icons">
+                        <i class="fab fa-facebook-square fs-5"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col">
+                <p class="footer_link mb-1 text-center">Powered by Alegria</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+{% endblock %}

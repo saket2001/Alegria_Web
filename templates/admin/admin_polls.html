@@ -1,0 +1,67 @@
+{% extends 'admin_layout.html' %}
+
+{% block title %}
+All Polls
+{% endblock %}
+
+
+{% block content %}
+<br>
+<div class="container" ">
+    <div class=" row d-flex align-items-center">
+    <div class="col my-1">
+        <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search by name or Code here"
+                aria-label="Search">
+            <button class="button outline_btn" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="col-md-auto my-1">
+        <a href="#" class="button outline_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Add
+            Poll</a>
+    </div>
+</div>
+</div>
+<br>
+<h5 class="fs-5 fw-bold">All Public Polls</h5>
+{% for ele in poll_list %}
+<div class="card bg-teal shadow-sm" style="padding:2%;margin-top:3%">
+    <h1 class='text-gray fw-bolder'>{{ele["p_id"]}}</h1>
+    <h5><b>{{ele["question"]}}</b></h5>
+    <div class="d-flex my-1">
+        <h6 class='text-danger'>{{ele["status"]}}</h6>&nbsp;&nbsp;&nbsp;&nbsp;
+        <h6 class='text-gray'>{{ele["votes"]}} Votes</h6>&nbsp;&nbsp;&nbsp;&nbsp;
+        <h6 class='text-gray'>Added On {{ele["date"]}}</h6>
+    </div>
+    <div class="buttons" style="margin-top:2%">
+        <a href="/admin/polls/12312/details" class="btn bg-brown text-teal  ">VIEW
+        </a>
+        &nbsp;
+        <a href="#" class="btn btn-outline-danger border-2">DELETE</a>
+    </div>
+</div>
+{% endfor %}
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Poll</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form class="modal-body" action='' method="post">
+                {{form.question(class="input_value",placeholder="Poll Question")}}
+                {{form.description(class="input_value",placeholder="Poll Description")}}
+                {{form.option1(class="input_value",placeholder="Poll option 1")}}
+                {{form.option2(class="input_value",placeholder="Poll option 2")}}
+                {{form.option3(class="input_value",placeholder="Poll option 3")}}
+                {{form.image1(class="input_value",placeholder="Poll image url 1")}}
+                {{form.image2(class="input_value",placeholder="Poll image url 2")}}
+                {{form.image3(class="input_value",placeholder="Poll image url 3")}}
+                {{form.dateTime(class="input_value")}}
+                <button type="submit" class="button w-100 my-2 bg-brown text-beige">Save Poll</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

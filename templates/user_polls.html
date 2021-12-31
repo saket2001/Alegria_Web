@@ -1,0 +1,102 @@
+{% extends 'user_layout.html' %}
+
+{% block title %}
+Alegria 2022 | Polls
+{% endblock %}
+
+{% block content %}
+<style>
+.poll-card{
+    background-color: rgba(79, 41, 8, 0.7);
+}
+.option-card{
+    background: linear-gradient(180deg, #a55c1b 0%, #2e1602 74%);
+}
+.option-card:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+.highVote,.lowVote{
+    position: absolute;
+    width:100%;
+    height:100%;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    border-radius: 5px;
+}
+.highVote{
+    font-size: 22px;
+    color:black;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+.lowVote{
+    font-size:22px;
+    color:white;
+    background-color: rgba(0,0,0,0.7);
+}
+@keyframes fullTurn{
+    0% {transform: rotateY(0deg);}
+    100% { transition: 3s ease-in-out; transform: rotateY(360deg)}
+}
+.option-image{
+    box-shadow: inset 0 -10px 10px -10px #000000;
+    width:96%; 
+    margin:2%; 
+    height: 300px;
+    border-radius: 10px 10px 0px 0px;
+}
+.option-name{
+    background: linear-gradient(180deg, #5e300bce 0%, #2e1602 60%); 
+    width: 96%; 
+    margin-left: 2%;
+}
+</style>
+
+<div class="bg-cover">
+<br>
+<h1 class="m-4 mt-0 text-brown" style="text-align: center;">Polls</h1>
+<div class="p-4 pt-0">
+{% for ele in polls %}
+<div class="poll-card card p-4 ">
+    <h4 class="mb-4" style="text-align: center; color: white;">{{ele['question']}}</h4>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 justify-content-center">
+        {% for item in images %}
+        <div class="col">
+            {% if (result=='') %}
+            <a href={{"/polls/{}/{}".format(ele['id'],item['poll_option_id'])}}>
+            {% endif %}
+            <div class="card p-1 mb-3 bg-body option-card" style="border-radius: 10px; text-align: center; box-shadow: 5px 10px 18px #331a00;">
+                <img class="option-image" src='{{item["image_url"]}}' alt="poll-image">
+                <div class="p-1 pt-2 mb-1 option-name">
+                    <h5 class="text-center text-teal">{{item["option_name"]}}</h5>
+                </div>
+                {% if (result!='' and result==item['poll_option_id']) %}
+                <div class="highVote"><h1 style="margin-top:40%">{{(item['option_votes']*100/ele['total_votes'])|int}}%</h1></div>
+                {% elif (result!='') %}
+                <div class="lowVote"><h1 style="margin-top:40%">{{(item['option_votes']*100/ele['total_votes'])|int}}%</h1></div>
+                {% endif %}
+            </div>
+            {% if (result=='') %}
+            </a>
+            {% endif %}
+        </div>
+        {% endfor %}   
+    </div>
+    <div class="d-flex w-100 justify-content-center p-2" >
+        <a href={{"/polls/{}".format(ele["id"]+1)}}><button class="btn bg-brown text-teal">Next</button></a>
+    </div>
+</div>
+{% endfor %}
+</div>
+</div>
+<script type="text/javascript" src="../static/js/vanilla-tilt.js"></script>
+<script>
+VanillaTilt.init(document.querySelectorAll(".option-card"), {
+    max: 25,
+    speed: 400,
+    glare: true,
+    "max-glare": 0.5
+});
+</script>
+{% endblock %}

@@ -1,0 +1,158 @@
+{% extends 'admin_layout.html' %}
+
+{% block title %}
+Event Edit Page
+{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static',filename='edit_detail.css')}}">
+{% endblock head %}
+
+
+{% block content %}
+<div class="row p-4 px-2">
+    <!-- go back button -->
+    <div class="row my-2 gy-2">
+        <div class="col-lg-3 col-sm-3">
+            <a href={{"/admin/events/{}".format(event_details['event_category_name'])}} type="button"
+                class="go_back_btn fs-7">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="me-2"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Go Back
+            </a>
+        </div>
+        <div class="col-lg-9 col-sm-12 d-flex justify-content-center align-items-center">
+            <h5 class="fs-4">Event Edit Details</h5>
+        </div>
+    </div>
+    <!-- form -->
+    <div class="row my-2 py-3">
+        <p class="fs-6 text-brown">Make changes in below inputs and save them.</p>
+        <!-- image -->
+        <div class="col-lg-5 col-sm-12 rounded-3 d-flex justify-content-center align-items-start my-3">
+            <img src={{event_details['icon_url']}} alt="event image" class='w-100'>
+        </div>
+        <!-- details -->
+        <form class="col-lg-7 col-sm-12 my-2"
+            action="/admin/events/{{event_details['event_category_name']}}/{{event_details['id']}}/edit"" method="
+            post">
+            <label class="fs-7 mb-0 text-gray" for="event_id">Event ID</label>
+            <input type="text" name="event_id" id="event_id" class="input_value" value="{{event_details['id']}}">
+            <label class="fs-7 mb-0 text-gray" for="event_title">Event Name</label>
+            <input type="text" name="event_title" id="event_title" class="input_value"
+                value="{{event_details['event_name']}}">
+            <label class="fs-7 mb-0 text-gray" for="event_description">Event Summary</label>
+            <textarea name="event_description" id="event_description" class="input_value" rows="7">{{event_details['event_summary']}}
+            </textarea>
+            <label class="fs-7 mb-0 text-gray" for="event_rules">Event Rules</label>
+            <textarea name="event_rules" id="event_rules" class="input_value" rows="10">{{event_details['event_rules']}}
+                        </textarea>
+            <label class="fs-7 mb-0 text-gray" for="event_date">Event Date & Time</label>
+            <input type="text" name="event_date" id="event_date" class="input_value"
+                value="{{event_details['event_date']}}">
+            <div class="row my-1">
+                <div class="col-lg-6 col-sm-12">
+                    <label class="fs-7 mb-0 text-gray" for="event_offline_cost">Event Offline Cost</label>
+                    <input type="text" name="event_offline_cost" id="event_offline_cost" class="input_value"
+                        value="{{event_details['offline_cost']}}">
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <label class="fs-7 mb-0 text-gray" for="event_online_cost">Event Online Cost</label>
+                    <input type="text" name="event_online_cost" id="event_online_cost" class="input_value"
+                        value="{{event_details['online_cost']}}">
+                </div>
+            </div>
+            <div class="row my-1">
+                <div class="col-lg-6 col-sm-12">
+                    <label class="fs-7 mb-0 text-gray" for="event_offline_cost">Event Supports Offline</label>
+                    <input type="text" name="supports_offline" id="supports_offline" class="input_value"
+                        value="{{event_details['supports_offline']}}">
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <label class="fs-7 mb-0 text-gray" for="event_online_cost">Event Supports Online</label>
+                    <input type="text" name="supports_online" id="supports_online" class="input_value"
+                        value="{{event_details['supports_online']}}">
+                </div>
+            </div>
+            <div class="row my-1">
+                <div class="col-lg-6 col-sm-12">
+                    <label class="fs-7 mb-0 text-gray" for="event_category">Event Category</label>
+                    <input type="text" name="event_category" id="event_category" class="input_value"
+                        value="{{event_details['event_category_name']}}">
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <label class="fs-7 mb-0 text-gray" for="event_category_id">Event Category ID</label>
+                    <input type="text" name="event_category_id" id="event_category_id" class="input_value"
+                        value="{{event_details['event_category_id']}}">
+                </div>
+            </div>
+            <div class="row my-1">
+                <div class="col-lg-6 col-sm-12">
+                    <label class="fs-7 mb-0 text-gray" for="event_type">Event Mode</label>
+                    <input type="text" name="event_type" id="event_type" class="input_value" value="{% if event_details['event_mode']=='0' %} Offline {% endif %} {% if
+                        event_details['event_mode']=='1' %} Online {% endif %}">
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <label class="fs-7 mb-0 text-gray" for="event_criteria">Event Criteria</label>
+                    <input type="text" name="event_criteria" id="event_criteria" class="input_value"
+                        value="{{event_details['event_criteria']}}">
+                </div>
+            </div>
+            <div class="row my-1">
+                <div class="col-lg-6 col-sm-12">
+                    <label class="fs-7 mb-0 text-gray" for="event_type">Event Contact 1</label>
+                    <input type="text" name="event_contact_1" id="event_contact_1" class="input_value"
+                        value="{{event_details['event_contact1']}}">
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <label class="fs-7 mb-0 text-gray" for="event_criteria">Event Contact 2</label>
+                    <input type="text" name="event_contact_2" id="event_contact_2" class="input_value"
+                        value="{{event_details['event_contact2']}}">
+                </div>
+            </div>
+            <div class="row my-1">
+                <div class="col-lg-6 col-sm-12">
+                    <label class="fs-7 mb-0 text-gray" for="event_type">Event Duration</label>
+                    <input type="text" name="event_duration" id="event_duration" class="input_value"
+                        value="{{event_details['event_duration']}} Hrs">
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <label class="fs-7 mb-0 text-gray" for="event_criteria">Event Perks 1</label>
+                    <input type="text" name="event_perks_1" id="event_perks_1" class="input_value"
+                        value="{{event_details['event_perks_1']}}">
+                </div>
+            </div>
+            <div class="row my-1">
+                <div class="col-lg-6 col-sm-12">
+                    <label class="fs-7 mb-0 text-gray" for="event_criteria">Event Perks 2</label>
+                    <input type="text" name="event_perks_2" id="event_perks_2" class="input_value"
+                        value="{{event_details['event_perks_2']}}">
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <label class="fs-7 mb-0 text-gray" for="event_criteria">Event Perks 3</label>
+                    <input type="text" name="event_perks_3" id="event_perks_3" class="input_value"
+                        value="{{event_details['event_perks_3']}}">
+                </div>
+            </div>
+            <!-- <a href={{"/admin/events/{}/{}/saveit".format(event_details['event_category_name'],event_details['id'])}}
+                class="btn btn-dark text-teal sec-font">EDIT</a> -->
+            <!-- href={{"/admin/events/{}/{}/save-edit".format(event_details['category'],event_details['event_id'])}} -->
+            <button type="submit" class="w-100 button bg-brown text-teal my-2">Save Changes</button>
+        </form>
+    </div>
+    <hr>
+    <div class="row my-2 rounded-3 shadow-sm bg-teal">
+        <div class="col-lg-6 col-sm-12 d-flex flex-column p-3">
+            <p class="text-muted fw-bold fs-6 my-1">Ticket Sales</p>
+            <h2 class="display-5 text-brown fw-bolder my-1">0</h2>
+        </div>
+        <div class="col-lg-6 col-sm-12 d-flex flex-column p-3">
+            <p class="text-muted fw-bold fs-6 my-1">Tickets Left</p>
+            <h2 class="display-5 text-brown fw-bolder my-1">0</h2>
+        </div>
+    </div>
+</div>
+{% endblock content %}
