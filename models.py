@@ -1,0 +1,207 @@
+from flask_sqlalchemy import SQLAlchemy
+#from flask_login import UserMixin
+from datetime import datetime
+
+
+# initialize database
+db = SQLAlchemy()
+
+
+#user model should come here
+class adminss(db.Model):
+    __tablename__ = 'adminss'
+    id = db.Column(db.Integer, primary_key=True)
+    email_id = db.Column(db.String(50), unique=True, nullable=False)
+
+    def __repr__(self) -> str:
+        return f"Event('{self.email_id}'')"
+
+
+
+
+class Eventdemo(db.Model):
+    __tablename__ = 'eventdemo'
+    id = db.Column(db.Integer, primary_key=True)
+    event_name = db.Column(db.String(50), unique=True, nullable=False)
+    event_code = db.Column(db.String(10), unique=True, nullable=False)
+    event_summary = db.Column(db.String(600), nullable=False)
+    event_criteria = db.Column(db.String(20), nullable=False)
+    event_category_id = db.Column(db.String(10), nullable=False)
+    event_category_name = db.Column(db.String(50), nullable=False)
+    supports_online = db.Column(db.String(5))
+    online_cost = db.Column(db.Integer, nullable=True)
+    supports_offline = db.Column(db.String(5))
+    offline_cost = db.Column(db.Integer, nullable=True)
+    event_contact1 = db.Column(db.String(50), nullable=False)
+    event_contact2 = db.Column(db.String(50), nullable=False)
+    event_contact3 = db.Column(db.String(50), nullable=True)
+    event_contact4 = db.Column(db.String(50), nullable=True)
+    pr_points = db.Column(db.String(50), nullable=True)
+
+    def __repr__(self) -> str:
+        return f"Event('{self.event_name}','{self.event_code}','{self.event_summary}','{self.event_criteria}','{self.event_category_id}','{self.event_category_name}','{self.supports_online}','{self.online_cost}','{self.supports_offline}','{self.offline_cost}','{self.event_contact1}','{self.event_contact2}')"
+
+
+
+
+
+class UserInfo(db.Model):
+    __tablename__ = 'userinfo'
+    id = db.Column(db.BigInteger, primary_key=True)
+    email = db.Column(db.String(25), unique=True, nullable=False)
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    image_url = db.Column(db.String(100), unique=True, nullable=False)
+    phone_number = db.Column(db.BigInteger, unique=True, nullable=False)
+    college_name = db.Column(db.String(100), unique=True, nullable=False)
+    isAdmin = db.Column(db.Boolean, default=False)
+    registeruser_id = db.relationship(
+        'RegisterEvent', backref='RegisterUser', lazy=True)
+    cart_user_id = db.relationship('Cart', backref='CartUser', lazy=True)
+
+    def __repr__(self, email, name, image_url, phone_number, college_name, isAdmin):
+        return f"UserInfo('{self.email}'-'{self.name}'-'{self.image_url}'-'{self.phone_number}'-'{self.college_name}'-'{self.isAdmin}')"
+
+
+class Eventdemo_details(db.Model):
+    __tablename__ = 'eventdemo_details'
+    event_id = db.Column(db.String(50), primary_key=True)
+    event_date = db.Column(db.String(60))
+    event_time = db.Column(db.String(50))
+    event_mode = db.Column(db.String(10), default=False)
+    event_duration = db.Column(db.String(60), nullable=False)
+    icon_url = db.Column(db.String(200), nullable=False)
+    event_rules = db.Column(db.String(3000), nullable=False)
+    event_perks_1 = db.Column(db.String(25), nullable=False)
+    event_perks_2 = db.Column(db.String(25), nullable=True)
+    event_perks_3 = db.Column(db.String(25), nullable=True)
+
+    def __repr__(self) -> str:
+        return f"EventDetails('{self.event_date}','{self.event_mode}','{self.event_duration}','{self.icon_url}','{self.event_details_file_name}','{self.event_rules}','{self.event_perks_1}','{self.event_perks_2}','{self.event_perks_3}')"
+
+
+class RegisterEvent(db.Model):
+    userinfo_id = db.Column(db.BigInteger, db.ForeignKey(
+        "userinfo.id"), primary_key=True)
+    event_id = db.Column(db.String(10), db.ForeignKey(
+        "event.id"), primary_key=True)
+    order_id = db.Column(db.Integer, unique=True,
+                         primary_key=True, nullable=False)
+    registered_time = db.Column(db.DateTime, default=datetime.now)
+    paid_amount = db.Column(db.Integer, nullable=False)
+    coupon_id = db.Column(db.String(10), db.ForeignKey(
+        "coupon_list.id"), primary_key=True)
+
+    def __repr__(self) -> str:
+        return f"RegisterEvent('{self.registered_time}', '{self.paid_amount}')"
+
+
+class Cart(db.Model):
+    __tablename__ = 'cart'
+    userinfo_id = db.Column(db.BigInteger, db.ForeignKey(
+        "userinfo.id"), primary_key=True)
+    event_id = db.Column(db.String(10), db.ForeignKey(
+        "event.id"), primary_key=True)
+
+
+class Poll(db.Model):
+    __tablename__ = 'poll'
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    question = db.Column(db.String(30), nullable=False)
+    desc = db.Column(db.Text(300), nullable=False)
+    poll_responses_id = db.relationship(
+        'PollResponses', backref='PollResponsesId', lazy=True)
+    poll_user_response_id = db.relationship(
+        'PollUserResponse', backref='PollUserResponseId', lazy=True)
+
+    def __repr__(self) -> str:
+        return f"Poll('{self.question}', '{self.desc}')"
+
+
+class PollResponses(db.Model):
+    __tablename__ = 'poll_responses'
+    id = db.Column(db.Integer, primary_key=True)
+    poll_id = db.Column(db.Integer, db.ForeignKey("poll.id"), primary_key=True)
+    option_detail = db.Column(db.String(10), nullable=False)
+    option_vote_count = db.Column(db.Integer, default=0, nullable=False)
+    image_file = db.Column(db.String(50), nullable=False)
+    poll_response_id = db.relationship(
+        'PollUserResponse', backref='PollUserId', lazy=True)
+
+    def __repr__(self) -> str:
+        return f"PollResponses('{self.option_detail}', '{self.option_vote_count}, '{self.image_file} ')"
+
+
+class PollUserResponse(db.Model):
+    __tablename__ = 'poll_user_response'
+    hashed_userid = db.Column(db.String(50), primary_key=True)
+    poll_id = db.Column(db.Integer, db.ForeignKey("poll.id"), primary_key=True)
+    poll_response_id = db.Column(db.Integer, db.ForeignKey(
+        "poll_responses.id"), primary_key=True)
+
+
+class CouponList(db.Model):
+    __tablename__ = 'coupon_list'
+    id = db.Column(db.String(10), primary_key=True)
+    coupon_name = db.Column(db.String(20), nullable=False)
+    discount_percent = db.Column(db.Integer, nullable=False)
+    coupon_details = db.Column(db.String(100), nullable=False)
+    coupon_id = db.relationship(
+        'RegisterEvent', backref='RegisterCoupon', lazy=True)
+    transaction_id = db.Column(db.Integer, nullable=False)
+
+
+class SpecialEvents(db.Model):
+    __tablename__ = 'special_events'
+    id = db.Column(db.String(10), primary_key=True)
+    special_event_name = db.Column(db.String(20), nullable=False)
+    date = db.Column(db.DateTime, default=datetime.now)
+    description = db.Column(db.String(100), nullable=False)
+
+
+class Calendar(db.Model):
+    __tablename__ = 'calendar'
+    event_id = db.Column(db.String(10), db.ForeignKey(
+        "event.id"), primary_key=True)
+    name = db.Column(db.String(20), nullable=False)
+    date = db.Column(db.DateTime, default=datetime.now)
+    is_Special = db.Column(db.Boolean, nullable=False, default=False)
+    is_Celebrity = db.Column(db.Boolean, nullable=False, default=False)
+    venue = db.Column(db.String(30), nullable=False)
+    event_time = db.Column(db.Time(), nullable=False, default=datetime.now)
+
+
+class Celebrity(db.Model):
+    __tablename__ = 'celebrity'
+    event_id = db.Column(db.String(10), db.ForeignKey(
+        "event.id"), primary_key=True)
+    celebrity_name = db.Column(db.String(20), nullable=False)
+    celebrity_pic = db.Column(db.String(50), nullable=False)
+
+
+class Announcement(db.Model):
+    __tablename__ = 'announcement'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(20), nullable=False)
+    title_desc = db.Column(db.String(100), nullable=False)
+
+
+class Merchandise(db.Model):
+    __tablename__ = 'merchandise'
+    id = db.Column(db.String(10), primary_key=True)
+    name = db.Column(db.String(20), nullable=False)
+    details = db.Column(db.String(100), nullable=False)
+    cost = db.Column(db.Integer, nullable=True)
+    item_img1 = db.Column(db.String(300), nullable=False)
+    item_img2 = db.Column(db.String(300), nullable=True)
+    quantity = db.Column(db.Integer, nullable=False)
+    size = db.Column(db.String(20), nullable=False)
+    color = db.Column(db.String(20), nullable=False)
+    category = db.Column(db.String(20), nullable=False)
+    code = db.Column(db.String(10), nullable=False)
+
+
+class Categories(db.Model):
+    __tablename__ = "categories"
+    id = db.Column(db.String(10), primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    img_url = db.Column(db.String(300), nullable=False)

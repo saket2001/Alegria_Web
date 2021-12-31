@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+
+{% block head %}
+<title>404 Error</title>
+{% endblock head %}
+
+
+{% block body %}
+<div class="container-fluid u-bg-beige min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="row h-100">
+        <div class="col-lg-6 col-sm-12 d-flex justify-content-center">
+            <img src="/static/images/error colored.svg" alt="Error character image" height="300px">
+        </div>
+        <div class="col-lg-5 col-sm-12 p-3 d-flex flex-column justify-content-center">
+            <h2 class="display-6 fw-bolder text-brown">Ops! Error 404</h2>
+            <p class="fw-normal">We think you visited wrong link or some error occurred from our side, sorry for
+                inconvenience caused. Please try again later
+            </p>
+            <div class="d-flex align-items-center">
+                <button type="button" class="d-flex align-items-center bg-brown me-2 py-1 px-2 rounded-3 border-brown"
+                    style="padding: 0.2rem 0.5rem;">
+                    <a href="/user/" class="text-beige fs-7">
+                        Go To Homepage
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

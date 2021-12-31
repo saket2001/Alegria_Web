@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+
+{% block head %}
+<title>401 Error</title>
+{% endblock head %}
+
+
+{% block body %}
+<div class="container-fluid u-bg-beige min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="row h-100">
+        <div class="col-lg-6 col-sm-12 d-flex justify-content-center">
+            <img src="/static/images/login/conifer-suspicious-activity.png" alt="Error character image" height="300px">
+        </div>
+        <div class="col-lg-5 col-sm-12 p-3 d-flex flex-column justify-content-center">
+            <h2 class="display-6 fw-bolder text-brown">Oh No! Error 401</h2>
+            <p class="fw-normal">You aren't logged in for accessing this page. Please login into your account to
+                continue further.
+            </p>
+            <div class="d-flex align-items-center">
+                <button type="button" class="d-flex align-items-center bg-brown me-2 py-1 px-2 rounded-3 border-brown"
+                    style="padding: 0.2rem 0.5rem;">
+                    <a href="/user/" class="text-beige fs-6">
+                        Go To Homepage
+                    </a>
+                </button>
+                <button type="button"
+                    class="d-flex align-items-center ms-1 bg-transparent dashed-dark-btn py-1 px-2 rounded-3">
+                    <a href="/user/login" class="fs-6 text-brown">
+                        Go To Login
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
