@@ -104,32 +104,26 @@ class Cart(db.Model):
 
 
 class Poll(db.Model):
-    __tablename__ = 'poll'
-    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    __tablename__ = 'polls'
+    poll_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     question = db.Column(db.String(30), nullable=False)
-    desc = db.Column(db.Text(300), nullable=False)
-    poll_responses_id = db.relationship(
-        'PollResponses', backref='PollResponsesId', lazy=True)
-    poll_user_response_id = db.relationship(
-        'PollUserResponse', backref='PollUserResponseId', lazy=True)
+    status = db.Column(db.Text(20), nullable=False)
+    date_published = db.Column(db.Text(20), nullable=False)
+    total_votes = db.Column(db.Integer, nullable=False)
 
     def __repr__(self) -> str:
-        return f"Poll('{self.question}', '{self.desc}')"
-
+        return f"Poll('{self.poll_id}','{self.question}', '{self.status}','{self.total_votes})"
 
 class PollResponses(db.Model):
-    __tablename__ = 'poll_responses'
-    id = db.Column(db.Integer, primary_key=True)
-    poll_id = db.Column(db.Integer, db.ForeignKey("poll.id"), primary_key=True)
-    option_detail = db.Column(db.String(10), nullable=False)
-    option_vote_count = db.Column(db.Integer, default=0, nullable=False)
-    image_file = db.Column(db.String(50), nullable=False)
-    poll_response_id = db.relationship(
-        'PollUserResponse', backref='PollUserId', lazy=True)
-
+    __tablename__ = 'poll_options'
+    poll_option_id = db.Column(db.Integer, primary_key=True)
+    poll_id = db.Column(db.Integer, nullable=False)
+    option_name = db.Column(db.String(50), nullable=False)
+    option_image = db.Column(db.String(300), nullable=True)
+    option_votes = db.Column(db.Integer,  default=0,nullable=True)
+    
     def __repr__(self) -> str:
-        return f"PollResponses('{self.option_detail}', '{self.option_vote_count}, '{self.image_file} ')"
-
+        return f"PollResponses('{self.poll_id}','{self.option_name}', '{self.option_image}, '{self.option_votes} ')"
 
 class PollUserResponse(db.Model):
     __tablename__ = 'poll_user_response'

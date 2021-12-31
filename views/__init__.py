@@ -2,7 +2,7 @@ from flask import Blueprint, redirect, render_template, flash, url_for, session,
 # from flask_mail import Mail, Message
 # from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from flask_wtf.csrf import CSRFProtect
-from models import adminss, Eventdemo, Eventdemo_details, Merchandise
+from models import adminss, Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, db
 import basicData as client_data
 
 # csrf
@@ -166,7 +166,6 @@ def merchandise(category):
 @ app_mbp.route("/merchandise/<string:category>/<string:id>")
 def get_merchandise_by_Id(category, id):
     merchandise_data = Merchandise.query.filter_by(id=id).first()
-
     res = {
         "type": True,
         "merchandise": [{
@@ -183,7 +182,7 @@ def get_merchandise_by_Id(category, id):
             "code": merchandise_data.code
         }]
     }
-    return render_template('user_merchandise.html', activeNav="Merchandise")
+    return render_template('user_merchandise_details.html', activeNav="Merchandise",merchandise_data=merchandise_data)
 
 
 #################################
@@ -193,6 +192,61 @@ def get_merchandise_by_Id(category, id):
 def hackathonDetails():
     return render_template('user_hackathon.html', activeNav='Hackathon', problem_statements=client_data.problem_statements)
 
+@app_mbp.route("/polls/<string:id>")
+def Poll_list(id):
+    pollsList=Poll.query.filter_by(poll_id=id)
+    pollsImages=PollResponses.query.filter_by(poll_id=id)
+    res = {"type": True,"polls": [],"images":[]}
+    for item in pollsList:
+        res["polls"].append({
+            "id": item.poll_id,
+            "question": item.question,
+            "status": item.status,
+            "total_votes": item.total_votes
+        })
+    for ele in pollsImages:
+        res["images"].append({
+            "id":ele.poll_id,
+            "poll_option_id":ele.poll_option_id,
+            "option_name":ele.option_name,
+            "image_url":ele.option_image,
+            "option_votes":ele.option_votes
+        })
+    return render_template('user_polls.html',activeNav='events',polls=res["polls"],images=res["images"],result='')
+
+@app_mbp.route("/polls/<string:id>/<string:option>")
+def Poll_result(id,option):
+    pollsList=Poll.query.filter_by(poll_id=id)
+    pollsImages=PollResponses.query.filter_by(poll_id=id)
+    result=''
+    votes=0
+    res = {"type": True,"polls": [],"images":[]}
+    poll = Poll.query.filter_by(poll_id=id).first()
+    poll_reponses = PollResponses.query.filter_by(poll_option_id=option).first()
+    poll.total_votes=poll.total_votes+1
+    db.session.commit()
+    poll_reponses.option_votes=poll_reponses.option_votes+1
+    db.session.commit()
+    for item in pollsList:
+        res["polls"].append({
+            "id": item.poll_id,
+            "question": item.question,
+            "status": item.status,
+            "total_votes": item.total_votes
+        })
+    for ele in pollsImages:
+        res["images"].append({
+            "id":ele.poll_id,
+            "poll_option_id":ele.poll_option_id,
+            "option_name":ele.option_name,
+            "image_url":ele.option_image,
+            "option_votes":ele.option_votes
+        })
+        if(votes<ele.option_votes):
+            votes=ele.option_votes
+            result=ele.poll_option_id
+            entry_id=ele.poll_id
+    return render_template('user_polls.html',activeNav='events',polls=res["polls"],images=res["images"],result=result)
 
 @app_mbp.errorhandler(404)
 def WrongLinkErrorHandler(e):
