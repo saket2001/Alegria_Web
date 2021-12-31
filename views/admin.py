@@ -3,14 +3,9 @@ from functools import wraps
 #from flask_mail import Mail, Message
 #from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from flask_wtf.csrf import CSRFProtect
-
-#from alegria_webp.models import db,Eventdemo,Eventdemo_details,Merchandise
-#from alegria_webp.forms import AddEventForm, AddPollForm, AddMerchandiseForm
-
-
-
-
-
+from datetime import datetime
+from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo
+from forms import AddEventForm, AddPollForm, AddMerchandiseForm
 
 
 def login_required(f):
@@ -25,7 +20,6 @@ def login_required(f):
     return decorated_function
 
 
-
 # csrf
 csrf = CSRFProtect()
 
@@ -33,11 +27,9 @@ csrf = CSRFProtect()
 #mail = Mail()
 
 
-
 # create blueprint to group views
-admin_bp = Blueprint('admin', __name__)
-
-
+admin_bp = Blueprint('admin', __name__, url_prefix="/admin",
+                     template_folder="/templates")
 
 
 #############################
@@ -69,7 +61,7 @@ def calcGreeting():
 # login route
 @admin_bp.route('/aleg-admin-login')
 def adminLogin():
-    return render_template('admin_login.html')
+    return render_template('/admin/admin_login.html')
 
 # dashboard routes
 
@@ -92,7 +84,7 @@ def home(username):
 def events(event_category):
     # form
     try:
-        form = forms.AddEventForm()
+        form = AddEventForm()
 
         filter_category_events = Eventdemo.query.filter_by(
             event_category_name=event_category).all()
@@ -280,7 +272,7 @@ def merchandise(category):
     try:
 
         # form
-        form = forms.AddMerchandiseForm()
+        form = AddMerchandiseForm()
 
         merchandise_List = Merchandise.query.filter_by(category=category).all()
 
@@ -436,12 +428,9 @@ def polls():
             "date": "19/12/2021",
         }
     ]
-    form = forms.AddPollForm()
+    form = AddPollForm()
 
     if form.validate_on_submit():
         return "You submitted data like {} and {}".format(form.name.data, form.description.data)
 
     return render_template('admin_polls.html', activeNav='polls', poll_list=poll_list, form=form)
-
-
-

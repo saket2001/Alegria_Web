@@ -1,31 +1,25 @@
 from flask import Blueprint, redirect, render_template, flash, url_for, session, request, current_app
-#from flask_mail import Mail, Message
-#from flask_login import LoginManager, current_user, login_required, login_user, logout_user
+# from flask_mail import Mail, Message
+# from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from flask_wtf.csrf import CSRFProtect
-
-from alegria_webp.models import adminss,Eventdemo,Eventdemo_details,Merchandise
-#from alegria_webp.forms import AddEventForm, AddPollForm, AddMerchandiseForm
-
-
-from alegria_webp import basicData as client_data
-
+from models import adminss, Eventdemo, Eventdemo_details, Merchandise
+import basicData as client_data
 
 # csrf
 csrf = CSRFProtect()
 
 # flask mail
-#mail = Mail()
-
+# mail = Mail()
 
 
 # create blueprint to group views
-app_mbp = Blueprint('app', __name__)
+app_mbp = Blueprint(
+    'app', __name__, template_folder="/templates/", url_prefix="/")
 
 
 @app_mbp.route('/')
 def landingPage():
-    return "1"
-    #return render_template('user_homepage.html', activeNav='Home')
+    return render_template('user_homepage.html', activeNav='Home')
 
 
 @app_mbp.route("/user-login")
@@ -40,17 +34,15 @@ def aboutUs():
 
 @app_mbp.route('/events/<event_category>', methods=['GET'])
 def events(event_category=None):
-    # form
-    filter_category_events = adminss.query.all()
-
-    print("Error Query !!!! :", filter_category_events)
+    filter_category_events = Eventdemo.query.filter_by(
+        event_category_name=event_category)
+    print(filter_category_events)
 
     res = {
         "type": True,
         "events": []
     }
 
-    return '1'
     for event in filter_category_events:
         event_details = Eventdemo_details.query.filter_by(
             event_id=event.id).first()
@@ -63,16 +55,18 @@ def events(event_category=None):
             "category_id": event.event_category_id,
             "icon_url": event_details.icon_url
         })
+
     events_arr = []
 
     if res['type'] and len(list(res['events'])) > 0:
         events_arr = res['events']
     else:
         events_arr = []
-    return render_template('user_events_list.html', activeNav='Events', events_list=events_arr)
+
+    return render_template('user_events_list.html', activeNav='Events', events_list=events_arr, category=event_category)
 
 
-@app_mbp.route("/event/<category_name>/<event_id>")
+@ app_mbp.route("/event/<category_name>/<event_id>")
 def EventDetails(category_name, event_id):
     # getting event detail
     event = Eventdemo.query.filter_by(id=event_id).first()
@@ -145,7 +139,7 @@ def EventDetails(category_name, event_id):
     return render_template('user_event_details.html', activeNav='Events', event_details=event_details, similar_events=similar_events)
 
 
-@app_mbp.route("/merchandise/<string:category>")
+@ app_mbp.route("/merchandise/<string:category>")
 def merchandise(category):
     try:
         merchandise_List = Merchandise.query.filter_by(category=category).all()
@@ -169,7 +163,7 @@ def merchandise(category):
         return render_template("404.html")
 
 
-@app_mbp.route("/merchandise/<string:category>/<string:id>")
+@ app_mbp.route("/merchandise/<string:category>/<string:id>")
 def get_merchandise_by_Id(category, id):
     merchandise_data = Merchandise.query.filter_by(id=id).first()
 
@@ -195,8 +189,11 @@ def get_merchandise_by_Id(category, id):
 #################################
 
 
-@app_mbp.route("/hackathon")
+@ app_mbp.route("/hackathon")
 def hackathonDetails():
     return render_template('user_hackathon.html', activeNav='Hackathon', problem_statements=client_data.problem_statements)
 
 
+@app_mbp.errorhandler(404)
+def WrongLinkErrorHandler(e):
+    return render_template('404.html')

@@ -1,0 +1,103 @@
+{% extends "admin_layout.html" %}
+
+{% block title %}
+Admin Dashboard
+{% endblock %}
+
+
+{% block content %}
+<div class="row p-4 px-2">
+    <div class="col-lg-6 col-sm-12 my-1">
+        <!-- greetings -->
+        <h1 class="fs-5 fw-bold text-brown mb-0">{{greeting}} Admin</h1>
+        <p class="fs-7 text-muted mb-0">Today is {{now_beautiful}}</p>
+    </div>
+    <div class="col-lg-6 col-sm-12 d-flex align-items-center my-1">
+        <div class="user-box rounded bg-teal">
+            <img src={{image}} alt="user image" class="img-responsive rounded" width="50px" height="50px">
+        </div>
+        <div class="d-flex align-items-center">
+            <p class="text-center text-brown fw-bold mb-0 px-2 fs-7">
+                {{username}}
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- stats div -->
+<div class="container rounded-3 bg-teal shadow-sm p-3 my-3 d-flex justify-content-center">
+    <div class="row w-100">
+        {% for event in eventsList%}
+        <div class="col d-flex flex-column py-1 px-3 ">
+            <p class="text-muted fw-bold fs-7 my-1">Total {{event.title}}</p>
+            <h2 class="display-6 text-brown fw-bolder my-1">{{event.total}}</h2>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- sales div -->
+<div class="container px-3 my-3">
+    <div class="row my-2 gap-4 pb-3">
+        <div class="col d-flex p-3 rounded-3 shadow-sm bg-teal">
+            <div class="col">
+                <p class="text-brown fw-bold fs-6 my-1">Tickets</p>
+                <span class="text-muted fs-7">Total Tickets Sold Today</span>
+                <h2 class="display-6 text-brown fw-bolder my-1">0</h2>
+            </div>
+            <div class="col d-flex align-items-center justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="text-brown" width="70px" height="70px" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+            </div>
+        </div>
+        <div class="col d-flex p-3 rounded-3 shadow-sm bg-teal">
+            <div class="col">
+                <p class="text-brown fw-bold fs-6 my-1">Ticket Sales</p>
+                <span class="text-muted fs-7">Total Profit Earned Today</span>
+                <h2 class="display-6 text-brown fw-bolder my-1">0</h2>
+            </div>
+            <div class="col d-flex align-items-center justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="text-brown" width="70px" height="70px" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div class="row my-2 gap-4">
+        <div class="col d-flex p-3 rounded-3 shadow-sm bg-teal">
+            <div class="col">
+                <p class="text-brown fw-bold fs-6 my-1">New Users</p>
+                <span class="text-muted fs-7">Total Users Joined Today</span>
+                <h2 class="display-6 text-brown fw-bolder my-1">0</h2>
+            </div>
+            <div class="col d-flex align-items-center justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="text-brown" width="70px" height="70px" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+            </div>
+        </div>
+        <div class="col d-flex p-3 rounded-3 shadow-sm bg-teal">
+            <div class="col">
+                <p class="text-brown fw-bold fs-6 my-1">Merchandise Sales</p>
+                <span class="text-muted fs-7">Sold Today</span>
+                <h2 class="display-6 text-brown fw-bolder my-1">0</h2>
+            </div>
+            <div class="col d-flex align-items-center justify-content-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="text-brown" width="70px" height="70px" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

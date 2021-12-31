@@ -1,0 +1,170 @@
+{% extends 'user_layout.html' %}
+
+{% block title %}
+{{event_details["event_name"]}} | Alegria 2022
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row min-w-100 min-vh-100 bg-gradient overflow-hidden sec-font">
+        <div class="col-lg-12 col-sm-12 p-3 bg-cover">
+            <!-- go back button -->
+            <div class="row">
+                <div class="col-lg-2 col-sm-3">
+                    <a href={{"/events/{}".format(event_details["event_category_name"])}} type="button"
+                        class="go_back_btn py-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"
+                            class="me-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        Go Back
+                    </a>
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col-lg-5 col-sm-12 d-flex justify-content-center">
+                    <img src={{event_details["icon_url"]}} alt="event image" height="220px" class="my-5">
+                </div>
+                <div class="col-lg-7 col-sm-12">
+                    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                        <ol class="breadcrumb fs-7 text-black">
+                            <li class="breadcrumb-item">
+                                All Events
+                            </li>
+                            <li class="breadcrumb-item" aria-current="page">
+                                <a class="text-black"
+                                    href={{"/user/events/{}".format(event_details["event_category_name"])}}>
+                                    {{event_details["event_category_name"]}}
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item text-red main-font" aria-current="page">
+                                {{event_details["event_name"]}}</li>
+                        </ol>
+                    </nav>
+                    <h1 class="text-red fs-3 mt-2">
+                        {{event_details["event_name"]}}
+                    </h1>
+                    <p class="text-black fs-7 fw-light mb-1">
+                        {{event_details["event_summary"]}}
+                    </p>
+                    <h2 class="text-red row my-2">
+                        {% if event_details["offline_cost"] != 0 %}
+                        <div class="col">
+                            <b>
+                                {{event_details["offline_cost"]}} ₹
+                                <span class="fs-7">(Offline)</span>
+                            </b>
+                        </div>
+                        {% endif %}
+                        {% if event_details["online_cost"] != 0 %}
+                        <div class="col">
+                            <b>
+                                {{event_details["online_cost"]}} ₹
+                                <span class="fs-7">(Online)</span>
+                            </b>
+                        </div>
+                        {% endif %}
+                    </h2>
+                    <button
+                        class="w-100 d-flex align-items-center justify-content-center border-0 bg-brown text-beige my-3 fs-6 py-1 px-3 rounded-3"
+                        style="max-width: 200px;">
+                        Add To Cart
+                    </button>
+                    <div style="background-color: black;height:2px;margin:10px 0;"></div>
+                    <p class="fs-7 mb-1 text-black fw-normal">
+                        Category: {{event_details["event_category_name"]}}
+                    </p>
+                    <p class="fs-7 mb-1 text-black fw-normal">
+                        Category Code: {{event_details["event_category_id"]}}
+                    </p>
+                    <p class="fs-7 mb-1 text-black fw-normal">
+                        Mode:
+                        {% if event_details["event_mode"] == '0' %}
+                        Offline
+                        {% endif %}
+                        {% if event_details["event_mode"] == '1' %}
+                        Online
+                        {% endif %}
+                    </p>
+                    <p class="fs-7 mb-1 text-black fw-normal">
+                        Contact 1: {{event_details["event_contact1"]}}
+                    </p>
+                    <p class="fs-7 mb-1 text-black fw-normal">
+                        Contact 2: {{event_details["event_contact2"]}}
+                    </p>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="d-flex">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1"
+                        aria-expanded="false" aria-controls="collapse1">
+                        + Details
+                    </button>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2"
+                        aria-expanded="false" aria-controls="collapse2">
+                        + Perks
+                    </button>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3"
+                        aria-expanded="false" aria-controls="collapse3">
+                        + Rules
+                    </button>
+                </div>
+                <div class="d-flex">
+                    <div class="collapse collapse-horizontal" id="collapse1">
+                        <div class="card collapse-card u-text-light-brown" style="width:70vw;max-width:500px">
+                            Date & Time: {{event_details["event_date"]}}<br>
+                            Criteria: {{event_details["event_criteria"]}}
+                        </div>
+                    </div>
+                    <div class="collapse collapse-horizontal" id="collapse2">
+                        <div class="card collapse-card u-text-light-brown" style="width:70vw;max-width:500px">
+                            <li class="fs-7 mb-1">
+                                1st prize : {{event_details["event_perks_1"]}}
+                            </li>
+                            <li class="fs-7 mb-1">2nd prize :{{event_details["event_perks_2"]}}</li>
+                            <li class="fs-7 mb-1">3rd prize:
+                                {{event_details["event_perks_3"]}}
+                            </li>
+                        </div>
+                    </div>
+                    <div class="collapse collapse-horizontal" id="collapse3">
+                        <div class="card collapse-card u-text-light-brown" style="width:70vw;max-width:500px">
+                            {{event_details["event_rules"]}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-3 w-100 d-flex justify-content-center">
+                <div style="background-color: black;height:2px;margin:10px 0;"></div>
+                <h5 class="fs-5 mt-2 m-1 main-font text-black">Events From Similar Category</h5>
+                <div class="row row-cols-md-4 row-cols-sm-1 g-4 my-1">
+                    {% for event in similar_events %}
+                    {% if event['event_name'] != event_details["event_name"] %}
+                    <div class="col d-flex flex-column align-items-center">
+                        <a href={{"/user/event/{}/{}".format(event['category'],event['event_id'])}}
+                            class="event-card-small p-1">
+                            <div class="event-circle">
+                                <img src={{event["icon_url"]}} alt="card-image" width="140px" height="140px">
+                            </div>
+                            <h3 class="fs-6 text-red text-center main-font px-2 my-1">{{event['event_name']}}</h3>
+                            <span class="fs-7 text-black sec-font px-2">{{event['category']}}</span>
+                            <p class="fs-5 text-red main-font px-2 mb-1">{% if event["event_offline_cost"] != 0 %}
+                                {{event["event_offline_cost"]}} ₹
+                                {% endif %}
+                                {% if event["event_online_cost"] != 0 %}
+                                {{event["event_online_cost"]}} ₹
+                                {% endif %}
+                            </p>
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

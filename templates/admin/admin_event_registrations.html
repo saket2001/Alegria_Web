@@ -1,0 +1,68 @@
+{% extends 'admin_layout.html' %}
+
+{% block title %}
+Event Registrations Page
+{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static',filename='main.css')}}">
+{% endblock head %}
+
+
+{% block content %}
+<div class="row p-4 px-2">
+    <!-- go back button -->
+    <div class="row my-2 gy-2">
+        <div class="col-lg-2 col-sm-3">
+            <a href="/admin/events" type="button" class="go_back_btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="me-2"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Go Back
+            </a>
+        </div>
+        <div class="col-lg-10 col-sm-12 d-flex justify-content-center align-items-center">
+            <h5 class="fs-4">Event Registrations</5>
+        </div>
+    </div>
+    <!--sort by category-->
+    <div class="d-flex justify-content-end align-items-center">
+        <select style="float:right" class="w-auto button outline_btn">
+            <option>--Choose Category--</option>
+            <option>Fine Arts</option>
+            <option>Informals</option>
+            <option>Literary Arts</option>
+            <option>Management</option>
+            <option>Technical</option>
+            <option>Gaming</option>
+            <option>Offline Sports</option>
+            <option>Online Sports</option>
+            <option>Performing Arts</option>
+        </select>
+    </div>
+
+    <!-- event registrations table -->
+    <table class="table table-hover table-borderless table-responsive bg-teal my-2 rounded-3">
+        <thead class="bg-brown text-teal">
+            <tr>
+                <th scope="col">Participant</th>
+                <th scope="col">Event ID</th>
+                <th scope="col">Mode</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ele in event_registrations %}
+            <tr class="tg-teal">
+                <td>{{ele["participant"]}}</td>
+                <td>{{ele["event_id"]}}</td>
+                <td>{{ele["event_mode"]}}</td>
+                <td>{{ele["status"]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
