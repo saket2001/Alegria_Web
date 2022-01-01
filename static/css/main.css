@@ -170,12 +170,8 @@ input[type='file']:focus {
 
 .nav-links {
     color: var(--beige);
-    transition: all .2s ease-in;
 }
 
-.nav-links:hover {
-    background-color: #353327;
-}
 
 .nav-button {
     padding: 0.4rem 0.6rem;

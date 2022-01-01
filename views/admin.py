@@ -1,10 +1,10 @@
 from flask import Blueprint, redirect, render_template, flash, url_for, session, request, current_app
 from functools import wraps
-#from flask_mail import Mail, Message
-#from flask_login import LoginManager, current_user, login_required, login_user, logout_user
+# from flask_mail import Mail, Message
+# from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from flask_wtf.csrf import CSRFProtect
-from datetime import datetime
-from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo
+import datetime
+from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses
 from forms import AddEventForm, AddPollForm, AddMerchandiseForm
 
 
@@ -24,7 +24,7 @@ def login_required(f):
 csrf = CSRFProtect()
 
 # flask mail
-#mail = Mail()
+# mail = Mail()
 
 
 # create blueprint to group views
@@ -66,21 +66,21 @@ def adminLogin():
 # dashboard routes
 
 
-@admin_bp.route('/<username>')
-@login_required
-def home(username):
+@admin_bp.route('/')
+# @login_required
+def home():
     eventsList = [{'title': 'Total Events', 'total': len(Eventdemo.query.all())},
                   {'title': 'Total Merchandise',
                       'total': len(Merchandise.query.all())},
                   {'title': 'Total Users', 'total': len(UserInfo.query.all())}
                   ]
-    return render_template('admin_dashboard.html', greeting=calcGreeting(), now_beautiful=getDateTime(), username=username, image=session.get('user_image'), eventsList=eventsList, activeNav='dashboard')
+    return render_template('/admin/admin_dashboard.html', greeting=calcGreeting(), now_beautiful=getDateTime(), username='', image=session.get('user_image'), eventsList=eventsList, activeNav='dashboard')
 
 # event routes
 
 
 @admin_bp.route('/events/<event_category>', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def events(event_category):
     # form
     try:
@@ -111,7 +111,7 @@ def events(event_category):
             events_arr = res['events']
         else:
             events_arr = []
-        return render_template('admin_events.html', activeNav='events', events_list=events_arr, form=form)
+        return render_template('/admin/admin_events.html', activeNav='events', events_list=events_arr, form=form)
 
     except:
         return render_template("404.html")
@@ -162,7 +162,7 @@ def addEvent():
 
 
 @admin_bp.route("/events/<category>/<event_id>/edit", methods=['GET', 'POST'])
-@login_required
+# @login_required
 def editEventDetails(category, event_id):
     try:
 
@@ -225,13 +225,13 @@ def editEventDetails(category, event_id):
             db.session.commit()
             return render_template('admin_editsuccessfull.html')
 
-        return render_template('admin_event_edit.html', activeNav='events', event_details=event_details)
+        return render_template('/admin/admin_event_edit.html', activeNav='events', event_details=event_details)
     except:
         return render_template('404.html',)
 
 
 @admin_bp.route("/events/<category>/<event_id>/delete", methods=['GET', 'POST'])
-@login_required
+# @login_required
 def deleteevent(category, event_id):
     try:
         post = Eventdemo.query.filter_by(id=event_id).first()
@@ -246,7 +246,7 @@ def deleteevent(category, event_id):
 
 
 @admin_bp.route("/events/event-registrations")
-@login_required
+# @login_required
 def eventRegistrations():
     # get info from api in List of Dictionaries format as below
 
@@ -267,10 +267,9 @@ def eventRegistrations():
 
 
 @admin_bp.route("/merchandise/<string:category>")
-@login_required
+# @login_required
 def merchandise(category):
     try:
-
         # form
         form = AddMerchandiseForm()
 
@@ -289,7 +288,7 @@ def merchandise(category):
                 "category": item.category
             })
 
-        return render_template('admin_merchandise.html', activeNav='merchandise', merchandise_List=res["merchandise_List"], form=form)
+        return render_template('/admin/admin_merchandise.html', activeNav='merchandise', merchandise_List=res["merchandise_List"], form=form)
     except:
         return render_template('404.html',)
 
@@ -328,7 +327,7 @@ def addMerchandise():
 
 
 @admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/edit", methods=["GET", "POST"])
-@login_required
+# @login_required
 def editMerchandiseDetails(merchandise_category, merchandise_id):
 
     if request.method == "GET":
@@ -376,7 +375,7 @@ def editMerchandiseDetails(merchandise_category, merchandise_id):
 
 
 @admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/delete", methods=["GET", "POST"])
-@login_required
+# @login_required
 def deletemerchandise(merchandise_category, merchandise_id):
     try:
         merch = Merchandise.query.filter_by(id=merchandise_id).first()
@@ -390,47 +389,52 @@ def deletemerchandise(merchandise_category, merchandise_id):
 
 # poll routes
 @admin_bp.route("/polls/<poll_id>/details")
-@login_required
+# @login_required
 def poll_details(poll_id):
-    polldetails = {
-        "question": "Whom do you want to see as a main actor in Alegria?",
-        "votes": "10",
-        "date": "12/12/2021",
+    pollsList = Poll.query.filter_by(poll_id=poll_id).first()
+
+    pollsImages = PollResponses.query.filter_by(poll_id=poll_id).first()
+
+    print(pollsList, pollsImages)
+
+    res = {"type": True, "polldetails": {}}
+
+    res["polldetails"] = {
+        "id": pollsList.poll_id,
+        "question": pollsList.question,
+        "status": pollsList.status,
+        "total_votes": pollsList.total_votes,
+        "poll_option_id": pollsImages.poll_option_id,
+        "option_name": pollsImages.option_name,
+        "image_url": pollsImages.option_image,
+        "option_votes": pollsImages.option_votes
     }
-    return render_template('admin_poll_details.html', activeNav='poll_details', polldetails=polldetails)
+
+    return render_template('/admin/admin_poll_details.html', activeNav='poll_details', polldetails=res["polldetails"])
 
 
-@admin_bp.route("/polls")
-@login_required
+@ admin_bp.route("/polls")
+# @login_required
 def polls():
-    poll_list = [
-        {
-            "p_id": "01",
-            "question": "Whom do you want to see as a main actor in Alegria?",
-            "status": "Closed",
-            "votes": "10",
-            "date": "12/12/2021",
-        },
+    try:
+        form = AddPollForm()
 
-        {
-            "p_id": "02",
-            "question": "Whom do you want to see as a main actor in Alegria?",
-            "status": "Active",
-            "votes": "8",
-            "date": "14/12/2021",
-        },
+        pollsList = Poll.query.all()
 
-        {
-            "p_id": "03",
-            "question": "Whom do you want to see as a main actor in Alegria?",
-            "status": "Active",
-            "votes": "4",
-            "date": "19/12/2021",
+        res = {
+            "type": True,
+            "polls_list": []
         }
-    ]
-    form = AddPollForm()
 
-    if form.validate_on_submit():
-        return "You submitted data like {} and {}".format(form.name.data, form.description.data)
+        for item in pollsList:
+            res["polls_list"].append({
+                "id": item.poll_id,
+                "question": item.question,
+                "status": item.status,
+                "total_votes": item.total_votes
+            })
 
-    return render_template('admin_polls.html', activeNav='polls', poll_list=poll_list, form=form)
+        return render_template('/admin/admin_polls.html', activeNav='polls', poll_list=res["polls_list"], form=form)
+
+    except:
+        return render_template('404.html')

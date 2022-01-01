@@ -1,4 +1,4 @@
-{% extends 'admin_layout.html' %}
+{% extends '/admin/admin_layout.html' %}
 
 {% block title %}
 All Merchandise
@@ -30,7 +30,7 @@ All Merchandise
     <div class='dropdown-toggle fs-7' id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Choose
       Category
     </div>
-    <ul class="dropdown-menu" style="background-color: #F1E3C8 !important;" aria-labelledby="dropdownMenuButton1">
+    <ul class="dropdown-menu main-bg" aria-labelledby="dropdownMenuButton1">
       <li>
         <a class="dropdown-item" href="/admin/merchandise/Tshirts">Tshirts</a>
       </li>
@@ -64,7 +64,8 @@ All Merchandise
           <a href={{"/admin/merchandise/{}/{}/edit".format(ele['category'],ele['id'])}}
             class="btn btn-dark text-teal sec-font">EDIT</a>
           &nbsp;&nbsp;
-          <a href="{{"/admin/merchandise/{}/{}/delete".format(ele['category'],ele['id'])}}" class="btn btn-outline-danger">DELETE</a>
+          <a href="{{" /admin/merchandise/{}/{}/delete".format(ele['category'],ele['id'])}}"
+            class="btn btn-outline-danger">DELETE</a>
         </div>
       </div>
     </div>
