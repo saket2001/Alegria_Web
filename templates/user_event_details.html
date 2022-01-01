@@ -45,7 +45,7 @@
                     <h1 class="text-red fs-3 mt-2">
                         {{event_details["event_name"]}}
                     </h1>
-                    <p class="text-black fs-7 fw-light mb-1">
+                    <p class="text-black fs-6 fw-light mb-1">
                         {{event_details["event_summary"]}}
                     </p>
                     <h2 class="text-red row my-2">
@@ -67,10 +67,16 @@
                         {% endif %}
                     </h2>
                     <button
-                        class="w-100 d-flex align-items-center justify-content-center border-0 bg-brown text-beige my-3 fs-6 py-1 px-3 rounded-3"
+                        class="w-100 d-flex align-items-center justify-content-center border-0 bg-brown my-3 mb-2 fs-6 py-1 px-3 rounded-3"
                         style="max-width: 200px;">
-                        Add To Cart
+                        <a href={{paymentLink}} target="_blank" rel="noopener noreferrer" class="text-beige w-100">
+                            Buy Event
+                        </a>
                     </button>
+                    <span class="fs-8 sec-font w-50">
+                        ( You will be redirected to razorpay payment page, choose your event and pay the required
+                        amount )
+                    </span>
                     <div style="background-color: black;height:2px;margin:10px 0;"></div>
                     <p class="fs-7 mb-1 text-black fw-normal">
                         Category: {{event_details["event_category_name"]}}
@@ -142,7 +148,7 @@
                     {% for event in similar_events %}
                     {% if event['event_name'] != event_details["event_name"] %}
                     <div class="col d-flex flex-column align-items-center">
-                        <a href={{"/user/event/{}/{}".format(event['category'],event['event_id'])}}
+                        <a href={{"/event/{}/{}".format(event['category'],event['event_id'])}}
                             class="event-card-small p-1">
                             <div class="event-circle">
                                 <img src={{event["icon_url"]}} alt="card-image" width="140px" height="140px">
