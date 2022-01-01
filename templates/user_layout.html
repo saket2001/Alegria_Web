@@ -84,10 +84,6 @@
                         <a href="/hackathon" class='navbar_links' {% if activeNav=='Hackathon' %}
                             style='color: #e8ff84;' {% endif %}>Hackathon</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="/sponsors" class='navbar_links' {% if activeNav=='Sponsors' %} style='color: #e8ff84;'
-                            {% endif %}>Sponsors</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a href="" class='navbar_links dropdown-toggle' id="dropdownMenuButton2"
                             data-bs-toggle="dropdown" aria-expanded="false">News</a>
@@ -102,6 +98,26 @@
                             </li>
                             <li>
                                 <a class="dropdown-item navbar_links" href="/events/fine-arts">Highlights</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class='navbar_links dropdown-toggle' id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                            aria-expanded="false" {% if activeNav=='News' %}
+                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>More</a>
+                        <ul class="dropdown-menu border-0" style="background-color: #681b0aec;"
+                            aria-labelledby="dropdownMenuButton2">
+                            <li>
+                                <a href="/polls" class="dropdown-item navbar_links" {% if activeNav=='Polls' %}
+                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Polls</a>
+                            </li>
+                            <li>
+                                <a href="/sponsors" class="dropdown-item navbar_links" {% if activeNav=='Sponsors' %}
+                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Sponsors</a>
+                            </li>
+                            <li>
+                                <a href="/developers" class="dropdown-item navbar_links" {% if activeNav=='Sponsors' %}
+                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Developers</a>
                             </li>
                         </ul>
                     </li>
