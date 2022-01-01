@@ -1,5 +1,6 @@
 import os
 from flask import Flask, flash, redirect, request
+from flask_restful import Api
 
 
 def create_app():
@@ -32,10 +33,18 @@ def create_app():
     from views import csrf, app_mbp
     from views.admin import admin_bp
     from views.client import client_bp
+    from views.api import IdFilterEventAPI, CategoryFilterEventAPI, AnnoucementsAPI, PollsAPI, MerchandiseAPI
 
     app.register_blueprint(app_mbp)
     app.register_blueprint(client_bp)
     app.register_blueprint(admin_bp)
+
+    api = Api(app, prefix="/api")
+    api.add_resource(IdFilterEventAPI, "/events/<string:id>")
+    api.add_resource(CategoryFilterEventAPI, "/events/categories")
+    api.add_resource(AnnoucementsAPI, "/announcements")
+    api.add_resource(PollsAPI, "/polls")
+    api.add_resource(MerchandiseAPI, "/merchandise")
 
     # enable csrf
     csrf.init_app(app)

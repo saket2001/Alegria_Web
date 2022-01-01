@@ -7,7 +7,7 @@ from datetime import datetime
 db = SQLAlchemy()
 
 
-#user model should come here
+# user model should come here
 class adminss(db.Model):
     __tablename__ = 'adminss'
     id = db.Column(db.Integer, primary_key=True)
@@ -15,8 +15,6 @@ class adminss(db.Model):
 
     def __repr__(self) -> str:
         return f"Event('{self.email_id}'')"
-
-
 
 
 class Eventdemo(db.Model):
@@ -40,9 +38,6 @@ class Eventdemo(db.Model):
 
     def __repr__(self) -> str:
         return f"Event('{self.event_name}','{self.event_code}','{self.event_summary}','{self.event_criteria}','{self.event_category_id}','{self.event_category_name}','{self.supports_online}','{self.online_cost}','{self.supports_offline}','{self.offline_cost}','{self.event_contact1}','{self.event_contact2}')"
-
-
-
 
 
 class UserInfo(db.Model):
@@ -114,16 +109,19 @@ class Poll(db.Model):
     def __repr__(self) -> str:
         return f"Poll('{self.poll_id}','{self.question}', '{self.status}','{self.total_votes})"
 
+
 class PollResponses(db.Model):
     __tablename__ = 'poll_options'
     poll_option_id = db.Column(db.Integer, primary_key=True)
-    poll_id = db.Column(db.Integer, nullable=False)
+    poll_id = db.Column(db.Integer, db.ForeignKey(
+        "polls.poll_id"), nullable=False)
     option_name = db.Column(db.String(50), nullable=False)
     option_image = db.Column(db.String(300), nullable=True)
-    option_votes = db.Column(db.Integer,  default=0,nullable=True)
-    
+    option_votes = db.Column(db.Integer,  default=0, nullable=True)
+
     def __repr__(self) -> str:
         return f"PollResponses('{self.poll_id}','{self.option_name}', '{self.option_image}, '{self.option_votes} ')"
+
 
 class PollUserResponse(db.Model):
     __tablename__ = 'poll_user_response'
