@@ -113,3 +113,16 @@ aboutus_2013 = [
     {"title": "Baichung Bhutia", "description": "The 'Sikkimese Sniper' was present to inaugrate the multipurpose Synthetic Turf of Pillai College on day 2 of Alegria 2013",
      "img": "https://alegria.co.in/wp-content/uploads/2020/02/860720_157801544371389_1690095924_o.jpg"}
 ]
+
+
+paymentLinks = {
+    "gaming": "https://pages.razorpay.com/Gaming-alegria-22",
+    "sports": "https://pages.razorpay.com/SPORTS-alegria-22",
+    "informals": "https://pages.razorpay.com/Informals-alegria-22",
+    "fine-arts": "https://pages.razorpay.com/fine-arts-alegria-22",
+    "performing-arts": "https://pages.razorpay.com/Performing-Arts-alegria-22",
+    "literary-arts": "https://pages.razorpay.com/Literary-Arts-alegria-22",
+    "Technical": "https://pages.razorpay.com/technical-events-alegria22",
+    "management": "https://pages.razorpay.com/management-events-alegria22",
+    "workshop": "https://pages.razorpay.com/Technical-Workshops-alegria22"
+}

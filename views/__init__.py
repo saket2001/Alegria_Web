@@ -136,7 +136,7 @@ def EventDetails(category_name, event_id):
     else:
         event_details = []
 
-    return render_template('user_event_details.html', activeNav='Events', event_details=event_details, similar_events=similar_events)
+    return render_template('user_event_details.html', activeNav='Events', event_details=event_details, similar_events=similar_events, paymentLink=client_data.paymentLinks[category_name.lower()])
 
 
 @ app_mbp.route("/merchandise/<string:category>")

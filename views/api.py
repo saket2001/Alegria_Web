@@ -1,4 +1,4 @@
-from models import Eventdemo, Eventdemo_details, Announcement, Poll, Merchandise, Categories
+from models import Eventdemo, Eventdemo_details, Announcement, Poll, Merchandise, Categories, PollResponses
 from flask_restful import Resource, Api
 from flask import jsonify, request
 
@@ -10,9 +10,9 @@ class IdFilterEventAPI(Resource):
         if not event:
             return jsonify(
                 {
-                    'length': 0, 
+                    'length': 0,
                     "event": "none"
-                    }
+                }
             )
 
         event_details = Eventdemo_details.query.filter_by(
@@ -63,9 +63,9 @@ class CategoryFilterEventAPI(Resource):
                     "iconUrl": category.img_url
                 }
             )
-        
+
         return jsonify(res)
-        
+
 
 class AnnoucementsAPI(Resource):
 
@@ -90,18 +90,19 @@ class AnnoucementsAPI(Resource):
 class PollsAPI(Resource):
 
     def get(self):
-        poll_queryset = Poll.query.order_by(Poll.id.desc()).all()
+        poll_queryset = Poll.query.order_by(Poll.poll_id.desc()).all()
         res = {
             "length": len(poll_queryset),
             "polls": []
         }
         for item in poll_queryset:
+            poll_details = PollResponses.query.filter_by(
+                poll_id=item.poll_id).all()
             res["polls"].append(
                 {
-                    "id": item.id,
+                    "id": item.poll_id,
                     "question": item.question,
-                    "description": item.desc,
-
+                    "options": [poll_option.option_name for poll_option in poll_details]
                 }
             )
 
@@ -134,11 +135,3 @@ class MerchandiseAPI(Resource):
             })
 
         return jsonify(res)
-
-
-api = Api(app, prefix="/api")
-api.add_resource(IdFilterEventAPI, "/events/<string:id>")
-api.add_resource(CategoryFilterEventAPI, "/events/categories")
-api.add_resource(AnnoucementsAPI, "/announcements")
-api.add_resource(PollsAPI, "/polls")
-api.add_resource(MerchandiseAPI, "/merchandise")
