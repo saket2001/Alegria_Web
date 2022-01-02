@@ -48,7 +48,7 @@ All Merchandise
   <div class="col rounded-3">
     <div class="card bg-teal shadow-sm">
       <div class="d-flex justify-content-center">
-        <img src="/static/images/tshirt.png" class="card-img-top" alt="cricket">
+        <img src={{ele['item_img1']}} class="card-img-top" alt="cricket">
       </div>
       <div class="d-flex flex-column">
         <div class="d-flex flex-column px-3 mt-2">
@@ -62,10 +62,10 @@ All Merchandise
         </div>
         <div class="d-flex px-2 my-2">
           <a href={{"/admin/merchandise/{}/{}/edit".format(ele['category'],ele['id'])}}
-            class="btn btn-dark text-teal sec-font">EDIT</a>
+            class="btn btn-dark text-teal sec-font fs-7">EDIT</a>
           &nbsp;&nbsp;
           <a href="{{" /admin/merchandise/{}/{}/delete".format(ele['category'],ele['id'])}}"
-            class="btn btn-outline-danger">DELETE</a>
+            class="btn btn-outline-danger fs-7">DELETE</a>
         </div>
       </div>
     </div>
@@ -81,32 +81,66 @@ All Merchandise
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form class="modal-body" action='/admin/add-merchandise' method="post">
-        {{form.id(class="input_value",placeholder="Merchandise ID")}}
-        {{form.name(class="input_value",placeholder="Merchandise Name")}}
-        {{form.description(class="input_value",placeholder="Merchandise Description")}}
+        {{form.csrf_token}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.id.label}}
+        </p>
+        {{form.id(class="input_value")}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.name.label}}
+        </p>
+        {{form.name(class="input_value")}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.description.label}}
+        </p>
+        {{form.description(class="input_value")}}
 
         <div class="row">
           <div class="col-lg-6 col-sm-12">
-            {{form.categoryName(class="input_value",placeholder="Merchandise Category")}}
-
+            <p class="mb-0 fs-7 main-font">
+              {{form.categoryName.label}}
+            </p>
+            {{form.categoryName(class="input_value")}}
           </div>
           <div class="col-lg-6 col-sm-12">
-            {{form.code(class="input_value",placeholder="Merchandise Code")}}
+            <p class="mb-0 fs-7 main-font">
+              {{form.code.label}}
+            </p>
+            {{form.code(class="input_value")}}
           </div>
         </div>
         <div class="row">
           <div class="col-lg-6 col-sm-12">
-            {{form.cost(class="input_value",placeholder="Merchandise Cost")}}
+            <p class="mb-0 fs-7 main-font">
+              {{form.cost.label}}
+            </p>
+            {{form.cost(class="input_value")}}
           </div>
           <div class="col-lg-6 col-sm-12">
-            {{form.quantity(class="input_value",placeholder="Merchandise Quantity")}}
+            <p class="mb-0 fs-7 main-font">
+              {{form.quantity.label}}
+            </p>
+            {{form.quantity(class="input_value")}}
           </div>
         </div>
-        {{form.colors(class="input_value",placeholder="Merchandise Colours")}}
-        {{form.image1(class="input_value",placeholder="Merchandise Image url 1")}}
-        {{form.image2(class="input_value",placeholder="Merchandise Image url 2")}}
-        {{form.sizes(class="input_value",placeholder="Merchandise Sizes Available")}}
-        <span class="fs-6 mt-1">Accepted sizes: XS,S,M,L,XL,XXL</span>
+        <p class="mb-0 fs-7 main-font">
+          {{form.colors.label}}
+        </p>
+        {{form.colors(class="input_value")}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.image1.label}}
+        </p>
+        {{form.image1(class="input_value")}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.image2.label}}
+        </p>
+        {{form.image2(class="input_value")}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.sizes.label}}
+        </p>
+        {{form.sizes(class="input_value")}}
+        <span class="fs-7 sec-font mt-1">Accepted sizes: XS,S,M,L,XL,XXL</span>
+        <br>
 
         <button type="submit" class="button w-100 my-2 bg-brown text-beige">Save Merchandise</button>
       </form>

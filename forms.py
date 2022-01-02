@@ -58,7 +58,7 @@ class AddMerchandiseForm(FlaskForm):
                        InputRequired(), length(min=6, max=40)])
     description = TextAreaField('Merchandise Description', validators=[
                                 InputRequired(), Length(min=10)])
-    categoryName = StringField('Merchandise Name', validators=[
+    categoryName = StringField('Category Name', validators=[
         InputRequired(), Length(min=5)])
     cost = IntegerField('Merchandise Cost', validators=[
         InputRequired(), NumberRange(min=0)])

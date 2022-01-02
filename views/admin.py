@@ -285,7 +285,8 @@ def merchandise(category):
                 "name": item.name,
                 "details": item.details,
                 "cost": item.cost,
-                "category": item.category
+                "category": item.category,
+                "item_img1": item.item_img1,
             })
 
         return render_template('/admin/admin_merchandise.html', activeNav='merchandise', merchandise_List=res["merchandise_List"], form=form)
@@ -298,9 +299,9 @@ def exceptionn():
     return render_template('exception.html')
 
 
-@admin_bp.route("/add-merchandise", methods=["POST"])
+@admin_bp.route("/add-merchandise", methods=["post"])
 def addMerchandise():
-    if request.method == "POST":
+    if request.method == "post":
         try:
             id = request.form.get('id')
             name = request.form.get("name")
@@ -323,7 +324,7 @@ def addMerchandise():
         except:
             return render_template("404.html")
 
-    return redirect("/admin/merchandise")
+    return redirect("/admin/merchandise/{}".format(category))
 
 
 @admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/edit", methods=["GET", "POST"])
@@ -345,6 +346,8 @@ def editMerchandiseDetails(merchandise_category, merchandise_id):
                 "code": merch.code,
                 "colors": merch.color,
                 "size": merch.size,
+                "img1": merch.item_img1,
+                "img2": merch.item_img2,
             }
         }
 
@@ -354,7 +357,7 @@ def editMerchandiseDetails(merchandise_category, merchandise_id):
         else:
             merchandise_details = []
 
-        return render_template("admin_merchandise_edit.html", merchandise_details=merchandise_details)
+        return render_template("/admin/admin_merchandise_edit.html", merchandise_details=merchandise_details)
 
     if request.method == "POST":
         try:

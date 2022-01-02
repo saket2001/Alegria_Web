@@ -109,13 +109,13 @@ li {
 
 .input_value {
     border: 1px solid var(--brown);
-    padding: 0.3rem 0.4rem;
+    padding: 0.2rem 0.4rem;
     margin: 0.2rem 0;
     background-color: transparent;
     width: 100%;
     outline: none;
     border-radius: 6px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     transition: all 0.3s ease-out;
 }
 
