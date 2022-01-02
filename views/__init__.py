@@ -115,21 +115,6 @@ def EventDetails(category_name, event_id):
             "category_id": event.event_category_id,
             "icon_url": event_details.icon_url
         })
-
-    similar_events = []
-    for event in filter_category_events:
-        event_details = Eventdemo_details.query.filter_by(
-            event_id=event.id).first()
-        similar_events.append({
-            "event_id": event.id,
-            "event_name": event.event_name,
-            "event_online_cost": event.online_cost,
-            "event_offline_cost": event.offline_cost,
-            "category": event.event_category_name,
-            "category_id": event.event_category_id,
-            "icon_url": event_details.icon_url
-        })
-
     if res['type'] and len(res['event']) > 0:
         event_details = res['event']
 
@@ -157,7 +142,7 @@ def merchandise(category):
                 "category": item.category
             })
 
-        return render_template('user_merchandise.html', activeNav="Merchandise", merchandise_list=res["merchandise_List"])
+        return render_template('user_merchandise.html', activeNav="Merchandise", merchandise_list=res["merchandise_List"], category=category)
 
     except:
         return render_template("404.html")
@@ -168,7 +153,7 @@ def get_merchandise_by_Id(category, id):
     merchandise_data = Merchandise.query.filter_by(id=id).first()
     res = {
         "type": True,
-        "merchandise": [{
+        "merchandise": {
             "id": merchandise_data.id,
             "name": merchandise_data.name,
             "details": merchandise_data.details,
@@ -180,9 +165,27 @@ def get_merchandise_by_Id(category, id):
             "color": merchandise_data.color,
             "category": merchandise_data.category,
             "code": merchandise_data.code
-        }]
+        }
+
     }
-    return render_template('user_merchandise_details.html', activeNav="Merchandise",merchandise_data=merchandise_data)
+
+    res['merchandise']['color'] = res['merchandise']['color'].split(",")
+
+    filter_category_merchandise = Merchandise.query.filter_by(
+        category=category).all()
+
+    similar_merchandise = []
+    for merchandise in filter_category_merchandise:
+        similar_merchandise.append({
+            "id": merchandise.id,
+            "name": merchandise.name,
+            "details": merchandise.details,
+            "cost": merchandise.cost,
+            "item_img1": merchandise.item_img1,
+            "item_img2": merchandise.item_img2,
+            "category": merchandise.category
+        })
+    return render_template('user_merchandise_details.html', activeNav="Merchandise", merchandise_data=res["merchandise"], similar_merchandise=similar_merchandise)
 
 
 #################################
@@ -192,11 +195,12 @@ def get_merchandise_by_Id(category, id):
 def hackathonDetails():
     return render_template('user_hackathon.html', activeNav='Hackathon', problem_statements=client_data.problem_statements)
 
+
 @app_mbp.route("/polls/<string:id>")
 def Poll_list(id):
-    pollsList=Poll.query.filter_by(poll_id=id)
-    pollsImages=PollResponses.query.filter_by(poll_id=id)
-    res = {"type": True,"polls": [],"images":[]}
+    pollsList = Poll.query.filter_by(poll_id=id)
+    pollsImages = PollResponses.query.filter_by(poll_id=id)
+    res = {"type": True, "polls": [], "images": []}
     for item in pollsList:
         res["polls"].append({
             "id": item.poll_id,
@@ -206,26 +210,28 @@ def Poll_list(id):
         })
     for ele in pollsImages:
         res["images"].append({
-            "id":ele.poll_id,
-            "poll_option_id":ele.poll_option_id,
-            "option_name":ele.option_name,
-            "image_url":ele.option_image,
-            "option_votes":ele.option_votes
+            "id": ele.poll_id,
+            "poll_option_id": ele.poll_option_id,
+            "option_name": ele.option_name,
+            "image_url": ele.option_image,
+            "option_votes": ele.option_votes
         })
-    return render_template('user_polls.html',activeNav='events',polls=res["polls"],images=res["images"],result='')
+    return render_template('user_polls.html', activeNav='events', polls=res["polls"], images=res["images"], result='')
+
 
 @app_mbp.route("/polls/<string:id>/<string:option>")
-def Poll_result(id,option):
-    pollsList=Poll.query.filter_by(poll_id=id)
-    pollsImages=PollResponses.query.filter_by(poll_id=id)
-    result=''
-    votes=0
-    res = {"type": True,"polls": [],"images":[]}
+def Poll_result(id, option):
+    pollsList = Poll.query.filter_by(poll_id=id)
+    pollsImages = PollResponses.query.filter_by(poll_id=id)
+    result = ''
+    votes = 0
+    res = {"type": True, "polls": [], "images": []}
     poll = Poll.query.filter_by(poll_id=id).first()
-    poll_reponses = PollResponses.query.filter_by(poll_option_id=option).first()
-    poll.total_votes=poll.total_votes+1
+    poll_reponses = PollResponses.query.filter_by(
+        poll_option_id=option).first()
+    poll.total_votes = poll.total_votes+1
     db.session.commit()
-    poll_reponses.option_votes=poll_reponses.option_votes+1
+    poll_reponses.option_votes = poll_reponses.option_votes+1
     db.session.commit()
     for item in pollsList:
         res["polls"].append({
@@ -236,17 +242,18 @@ def Poll_result(id,option):
         })
     for ele in pollsImages:
         res["images"].append({
-            "id":ele.poll_id,
-            "poll_option_id":ele.poll_option_id,
-            "option_name":ele.option_name,
-            "image_url":ele.option_image,
-            "option_votes":ele.option_votes
+            "id": ele.poll_id,
+            "poll_option_id": ele.poll_option_id,
+            "option_name": ele.option_name,
+            "image_url": ele.option_image,
+            "option_votes": ele.option_votes
         })
-        if(votes<ele.option_votes):
-            votes=ele.option_votes
-            result=ele.poll_option_id
-            entry_id=ele.poll_id
-    return render_template('user_polls.html',activeNav='events',polls=res["polls"],images=res["images"],result=result)
+        if(votes < ele.option_votes):
+            votes = ele.option_votes
+            result = ele.poll_option_id
+            entry_id = ele.poll_id
+    return render_template('user_polls.html', activeNav='events', polls=res["polls"], images=res["images"], result=result)
+
 
 @app_mbp.errorhandler(404)
 def WrongLinkErrorHandler(e):

@@ -187,7 +187,7 @@ class Merchandise(db.Model):
     item_img2 = db.Column(db.String(300), nullable=True)
     quantity = db.Column(db.Integer, nullable=False)
     size = db.Column(db.String(20), nullable=False)
-    color = db.Column(db.String(20), nullable=False)
+    color = db.Column(db.String(60), nullable=False)
     category = db.Column(db.String(20), nullable=False)
     code = db.Column(db.String(10), nullable=False)
 

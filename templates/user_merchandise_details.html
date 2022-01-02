@@ -1,26 +1,27 @@
 {% extends 'user_layout.html' %}
 
 {% block title %}
-Alegria 2022
+Alegria 2022 | {{merchandise_data["name"]}}
 {% endblock %}
 
 {% block content %}
 
 <style>
     .size {
-       display: block;
-       position: relative;
-       width:100px;
-       margin-bottom:30px;
+        display: block;
+        position: relative;
+        width: 3rem;
+        margin-bottom: 30px;
     }
+
     .size input {
         display: none;
     }
+
     .size span {
-        border: 1px solid #ccc;
-        background-color: #FFF7B6;
+        background-color: #feffd5;
         width: 40px;
-        height: 33px;
+        height: 40px;
         position: absolute;
         overflow: hidden;
         text-align: center;
@@ -28,74 +29,142 @@ Alegria 2022
         left: 0;
         top: 50%;
         margin-top: -8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
-    input:checked + span {
+
+    input:checked+span {
         background: black;
-        color:white;
+        color: white;
         border-color: #ccf;
     }
+
+    .merchandise-card-container {
+        height: auto;
+        border: 3px solid brown;
+        padding: 10px 10px 0 10px;
+        border-radius: 10px;
+    }
+
+    .merchandise-card-container img {
+        width: 100%;
+        border-radius: 10px;
+    }
 </style>
-<div class="row min-w-100 min-vh-100 bg-gradient overflow-hidden sec-font">
-    <div class="col-lg-12 col-sm-12 p-3 bg-cover d-flex">
-        <div class="col-lg-4 col-md-4 col-sm-12 my-5 mx-3">
-            <img src="/static/images/tshirt.png" alt="merchandise" style="width:90%;border-radius: 20px;">
+<div class="w-100 min-vh-100 overflow-hidden sec-font bg-cover">
+    <div class="row m-3">
+        <div class="col-lg-2 col-sm-3">
+            <a href={{"/merchandise/{}".format(merchandise_data["category"])}} type="button" class="go_back_btn py-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="me-2"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Go Back
+            </a>
         </div>
-        <div class="col-lg-4 col-md-8 col-sm-12 my-3">
+    </div>
+    <div class="row pt-2 m-2">
+        <div class="col-lg-4 col-sm-12 flex-column">
+            <img src={{merchandise_data["item_img1"]}} class="rounded-3" alt="merchandise-image" style="width:90%">
+        </div>
+        <div class="col-lg-4 col-md-7 col-sm-12 flex-column border-end border-1 border-dark">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb fs-7 text-black">
                     <li class="breadcrumb-item">
                         <a href="/" class="text-black">Home</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a class="text-black"
-                            href={{"/user/merchandise/{}".format(merchandise_data["category"])}}>
+                        <a class="text-black" href={{"/user/merchandise/{}".format(merchandise_data["category"])}}>
                             {{merchandise_data["category"]}}
                         </a>
                     </li>
                     <li class="breadcrumb-item text-red main-font" aria-current="page">
-                        {{merchandise_data["name"]}}</li>
+                        {{merchandise_data["name"]}}
+                    </li>
                 </ol>
             </nav>
-            <h1 class="text-red fs-3">{{merchandise_data["name"]}}</h1>
-            <h2 class="text-red">{{merchandise_data["cost"]}} ₹</h2>
-            <button
-                class="w-100 d-flex align-items-center justify-content-center border-0 bg-red text-beige my-3 fs-6 py-1 px-3 rounded-pill"
-                style="max-width: 200px;">
-                Add To Cart
-            </button>
-            <h4 class="text-red">Merchandise Info</h4>
-            <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
-            <p class="text-brown"></p>
+            <h1 class="text-red fs-3 main-font">
+                {{merchandise_data["name"]}}
+            </h1>
+            <p class="sec-font text-black fs-7">
+                {{merchandise_data["details"]}}
+            </p>
+            <h2 class="text-red fs-2 main-font">
+                {{merchandise_data["cost"]}} ₹
+            </h2>
             <hr>
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1"
-                aria-expanded="false" aria-controls="collapse1">
-                + Details
-            </button>
-            <div class="collapse" id="collapse1">
-                <div class="collapse-card u-text-light-brown">
-                    {{merchandise_data["details"]}}
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-md-6">
-                    <p>Choose Size</p>
-                    <div class="d-flex">
+            <form class="row" action="">
+                <div class="col-md-12">
+                    <p class="main-font fs-6">Choose Size</p>
+                    <div class="d-flex mb-4">
                         <label class="size"><input type="radio" name="size" /><span>XS</span></label>
                         <label class="size"><input type="radio" name="size" /><span>S</span></label>
                         <label class="size"><input type="radio" name="size" /><span>M</span></label>
                         <label class="size"><input type="radio" name="size" /><span>L</span></label>
                     </div>
-                    <p>Choose Color</p>
-                    <label><input type="radio">{{merchandise_data['color']}}</label>
+                    <p class="main-font fs-6 mb-1">Choose Color</p>
+                    <div class="d-flex flex-column w-100">
+                        {% for color in merchandise_data['color'] %}
+
+                        <div class="me-2 d-flex align-items-center">
+                            <input type="radio" name={{color}} id={{color}} class="p-2 me-1">
+                            {{color}}
+                        </div>
+
+                        {% endfor %}
+                    </div>
+                    <button
+                        class="w-100 d-flex align-items-center justify-content-center border-0 bg-red text-teal my-3 fs-6 py-1 px-3 rounded-3"
+                        style="max-width: 200px;">
+                        Add To Cart
+                    </button>
+                    <p class="sec-font text-black fs-7 mb-1">
+                        After Successful payment you need to collect this product from our campus because home delivery
+                        isn't
+                        supported.
+                    </p>
                 </div>
-            </div>
+            </form>
+            <hr>
+            <p class="sec-font text-black fs-7 mb-1">
+                Category: {{merchandise_data["category"]}}
+            </p>
+            <p class="sec-font text-black fs-7 mb-1">
+                Code: {{merchandise_data["code"]}}
+            </p>
         </div>
-        <div class="col-lg-4 col-md-8 col-sm-12 mx-4">
-            <p>Similar Products</p>
-            <img src="/static/images/tshirt.png" width='80%'>
-            <br><br>
-            <img src="/static/images/tshirt.png" width='80%'>
+        <div class="col g-4 my-1 mx-3 flex-column">
+            <h4 class="main-font fs-5">
+                Similar products
+            </h4>
+            {% for item in similar_merchandise %}
+
+            {% if merchandise_data['name'] != item["name"] %}
+            <div class="d-flex flex-column align-items-center">
+                <a href={{"/merchandise/{}/{}".format(item['category'],item['id'])}}
+                    class="d-flex flex-column justify-content-center py-2 m-2">
+                    <div class="merchandise-card-container">
+                        <div>
+                            <img src="/static/images/tshirt.png" height="160px" alt="merchandise-image">
+                        </div>
+                        <div>
+                            <h3 class="w-100 fs-6 text-brown mt-1 mb-1 px-2 main-font text-center">
+                                {{item['name']}}
+                            </h3>
+                        </div>
+                        <div class="col" style="display: flex;width:90%;margin:auto;justify-content: space-between;">
+                            <div class="text-red main-font fs-6">{{item['cost']}} ₹</div>
+                            <div class="text-black sec-font fs-7" style="text-transform: capitalize;">
+                                {{item['category']}}</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+
+            {% endfor %}
         </div>
     </div>
 </div>

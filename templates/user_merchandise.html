@@ -20,9 +20,9 @@ Alegria 2022 | Merchandise
         margin-bottom: 20px;
     }
 </style>
-<div class="containr-fluid overflow-hidden">
+<div class="containr-fluid overflow-hidden bg-cover">
     <div class="row">
-        <div class="col-lg-3 py-5 bg-navbar" style="height:100%;color:#f3efef">
+        <div class="col-lg-3 bg-navbar">
             <div class="p-5 px-3 mx-2">
                 <h3 class="fs-5 mb-3 text-light">Categories</h3>
                 <li class="u-text-light-brown my-1 fs-7">
@@ -81,7 +81,7 @@ Alegria 2022 | Merchandise
                 </div>
             </div>
         </div>
-        <div class="col-lg-9 bg-cover">
+        <div class="col-lg-9">
             <div class="d-flex align-items-center justify-content-between p-4">
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb sec-font">
@@ -127,7 +127,7 @@ Alegria 2022 | Merchandise
             <div class="row px-4">
                 <div id="admin-events" class="row row-cols-1 row-cols-sm-3 row-cols-md-3 gy-2 gx-3">
                     {% for ele in merchandise_list %}
-                    <div class="col col-sm-12">
+                    <div class="col">
                         <a href={{"/merchandise/{}/{}".format(ele['category'],ele['id'])}}
                             class="d-flex flex-column justify-content-center py-1 m-2">
                             <div class="merchandise-card-container">
