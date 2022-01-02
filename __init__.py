@@ -12,7 +12,7 @@ def create_app():
         SQLALCHEMY_POOL_RECYCLE=299,
         SQLALCHEMY_POOL_TIMEOUT=20,
         # SQLALCHEMY_DATABASE_URI='mysql://AlegriaTheFest:2022themeisvintwood@AlegriaTheFest.mysql.pythonanywhere-services.com/AlegriaTheFest$alegria2022',
-        SQLALCHEMY_DATABASE_URI='mysql://root:root@localhost/alegria_web',
+        SQLALCHEMY_DATABASE_URI='mysql://root:@localhost/alegria_web',
         MAIL_SERVER='smtp.gmail.com',
         MAIL_PORT=465,
         MAIL_USE_SSL=True,
@@ -33,7 +33,7 @@ def create_app():
     from views import csrf, app_mbp
     from views.admin import admin_bp
     from views.client import client_bp
-    from views.api import IdFilterEventAPI, CategoryFilterEventAPI, AnnoucementsAPI, PollsAPI, MerchandiseAPI
+    from views.api import IdFilterEventAPI, AllCategoryFilterEventAPI, AnnoucementsAPI, PollsAPI, MerchandiseAPI, CategoryEventFilter
 
     app.register_blueprint(app_mbp)
     app.register_blueprint(client_bp)
@@ -41,11 +41,11 @@ def create_app():
 
     api = Api(app, prefix="/api")
     api.add_resource(IdFilterEventAPI, "/events/<string:id>")
-    api.add_resource(CategoryFilterEventAPI, "/events/categories")
+    api.add_resource(AllCategoryFilterEventAPI, "/events/categories")
     api.add_resource(AnnoucementsAPI, "/announcements")
     api.add_resource(PollsAPI, "/polls")
     api.add_resource(MerchandiseAPI, "/merchandise")
-
+    api.add_resource(CategoryEventFilter, "/events/category/<string:category_id>")
     # enable csrf
     csrf.init_app(app)
     if __name__ == "__main__":

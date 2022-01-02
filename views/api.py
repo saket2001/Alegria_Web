@@ -2,6 +2,7 @@ from models import Eventdemo, Eventdemo_details, Announcement, Poll, Merchandise
 from flask_restful import Resource, Api
 from flask import jsonify, request
 
+# Add hashlib.sha256
 
 class IdFilterEventAPI(Resource):
 
@@ -43,10 +44,10 @@ class IdFilterEventAPI(Resource):
                 "event_perks_3": event_details.event_perks_3
             }
         }
-        return jsonify(res)
+        return res, 200, {"headers": "headers"}
 
 
-class CategoryFilterEventAPI(Resource):
+class AllCategoryFilterEventAPI(Resource):
 
     def get(self):
         categories = Categories.query.all()
@@ -66,6 +67,29 @@ class CategoryFilterEventAPI(Resource):
 
         return jsonify(res)
 
+
+class CategoryEventFilter(Resource):
+
+    def get(self, category_id):  
+        category_events =  Eventdemo.query.filter_by(event_category_id=category_id).all()
+
+        res = {
+            "length": len(category_events),
+            "events": []
+        }
+
+        # id, code, image_url, cost, name
+        for event in category_events:
+            event_details = Eventdemo_details.query.filter_by(event_id=event.id).first()
+            res["events"].append({
+                "event_id": event.id,
+                "event_name": event.event_name,
+                "event_code": event.event_code,
+                "event_image": event_details.icon_url,
+                "event_cost": event.offline_cost
+            })
+
+        return jsonify(res)
 
 class AnnoucementsAPI(Resource):
 
@@ -90,6 +114,7 @@ class AnnoucementsAPI(Resource):
 class PollsAPI(Resource):
 
     def get(self):
+        # headers: hashed_id in poll response, 
         poll_queryset = Poll.query.order_by(Poll.poll_id.desc()).all()
         res = {
             "length": len(poll_queryset),
