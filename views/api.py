@@ -1,20 +1,24 @@
-from models import Eventdemo, Eventdemo_details, Announcement, Poll, Merchandise, Categories, PollResponses
+from models import Eventdemo, Eventdemo_details, Announcement, Poll, Merchandise, Categories, PollResponses, PollUserResponse
 from flask_restful import Resource, Api
 from flask import jsonify, request
 
 # Add hashlib.sha256
+secret_api_key = "some key"
 
 class IdFilterEventAPI(Resource):
 
     def get(self, id):
+        API_key = request.headers.get("API-Key")
+        if not API_key or API_key != secret_api_key:
+            return {}, 401
+
         event = Eventdemo.query.filter_by(id=id).first()
         if not event:
-            return jsonify(
-                {
+            res = {
                     'length': 0,
                     "event": "none"
                 }
-            )
+            return res, 404
 
         event_details = Eventdemo_details.query.filter_by(
             event_id=event.id).first()
@@ -44,12 +48,16 @@ class IdFilterEventAPI(Resource):
                 "event_perks_3": event_details.event_perks_3
             }
         }
-        return res, 200, {"headers": "headers"}
+        return res, 200
 
 
 class AllCategoryFilterEventAPI(Resource):
 
     def get(self):
+        API_key = request.headers.get("API-Key")
+        if not API_key or API_key != secret_api_key:
+            return {}, 401
+
         categories = Categories.query.all()
         res = {
             "length": len(categories),
@@ -65,12 +73,16 @@ class AllCategoryFilterEventAPI(Resource):
                 }
             )
 
-        return jsonify(res)
+        return res, 200
 
 
 class CategoryEventFilter(Resource):
 
-    def get(self, category_id):  
+    def get(self, category_id):
+        API_key = request.headers.get("API-Key")
+        if not API_key or API_key != secret_api_key:
+            return {}, 401
+          
         category_events =  Eventdemo.query.filter_by(event_category_id=category_id).all()
 
         res = {
@@ -89,11 +101,15 @@ class CategoryEventFilter(Resource):
                 "event_cost": event.offline_cost
             })
 
-        return jsonify(res)
+        return res, 200
 
 class AnnoucementsAPI(Resource):
 
     def get(self):
+        API_key = request.headers.get("API-Key")
+        if not API_key or API_key != secret_api_key:
+            return {}, 401
+
         annoucements_queryset = Announcement.query.order_by(
             Announcement.id.desc()).all()
         res = {
@@ -108,13 +124,19 @@ class AnnoucementsAPI(Resource):
                     "description": item.title_desc
                 }
             )
-        return jsonify(res)
+        return res, 200
 
 
 class PollsAPI(Resource):
 
     def get(self):
-        # headers: hashed_id in poll response, 
+        API_key = request.headers.get("API-Key")
+        if not API_key or API_key != secret_api_key:
+            return {}, 401
+
+        # user_id = request.headers.get("hashed_user_id")
+        # user_response_details = PollUserResponse.query.filter_by(hashed_userid=user_id).all()
+
         poll_queryset = Poll.query.order_by(Poll.poll_id.desc()).all()
         res = {
             "length": len(poll_queryset),
@@ -123,20 +145,38 @@ class PollsAPI(Resource):
         for item in poll_queryset:
             poll_details = PollResponses.query.filter_by(
                 poll_id=item.poll_id).all()
+            
             res["polls"].append(
                 {
                     "id": item.poll_id,
                     "question": item.question,
-                    "options": [poll_option.option_name for poll_option in poll_details]
+                    "status": item.status,
+                    "date published": item.date_published, # might have to change
+                    "votes": item.total_votes,
+                    "poll_is_answered": "tbh",
+                    "poll_user_reponse_id": "tbh",
+                    "options": [
+                        {
+                            "poll_name": poll_option.option_name,
+                            "poll_option_id": poll_option.poll_option_id,
+                            "option_image": poll_option.option_image,
+                            "option_votes": poll_option.option_votes
+                        }
+                        for poll_option in poll_details
+                    ]
                 }
             )
 
-        return jsonify(res)
+        return res, 200
 
 
 class MerchandiseAPI(Resource):
 
     def get(self):
+        API_key = request.headers.get("API-Key")
+        if not API_key or API_key != secret_api_key:
+            return {}, 401
+        
         # /merchandise?category=<category>&price-range=<price-range>&size=<size>&color=<color>
         merch_queryset = Merchandise.query.all()
 
@@ -159,4 +199,4 @@ class MerchandiseAPI(Resource):
                 "code": item.code
             })
 
-        return jsonify(res)
+        return res, 200

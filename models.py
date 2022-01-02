@@ -128,7 +128,7 @@ class PollUserResponse(db.Model):
     hashed_userid = db.Column(db.String(50), primary_key=True)
     poll_id = db.Column(db.Integer, db.ForeignKey("poll.id"), primary_key=True)
     poll_response_id = db.Column(db.Integer, db.ForeignKey(
-        "poll_responses.id"), primary_key=True)
+        "poll_options.id"), primary_key=True)
 
 
 class CouponList(db.Model):
