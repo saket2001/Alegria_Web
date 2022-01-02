@@ -6,6 +6,26 @@ Poll Details
 
 
 {% block content %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+function display() {
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(function() {
+	var data = new google.visualization.DataTable();
+	data.addColumn('string', 'Option');
+	data.addColumn('number', 'Votes');
+  chartOptions='{{ polldetails|tojson }}';
+  var parsed = JSON.parse(chartOptions);
+  for(var i=0;i<parsed.length;i++){
+    data.addRows([[parsed[i]['option_name'],parsed[i]['option_votes']]]);
+  }
+	var options = {'title':'Poll Responses','width':screen.width, 'height':400,'width':'100%', vAxis: {title: 'Votes'}};
+	var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+	chart.draw(data, options);
+})
+}
+display();
+	</script>
 <div>
   <div class="row my-2 py-2 gy-2">
     <div class="col-lg-3 col-sm-3">
@@ -23,19 +43,16 @@ Poll Details
   </div>
 
   <div class="row p-2 my-5 g-3">
-    <div class="col-lg-5 col-sm-12">
-      <img src="/static/images/graph.png" alt="graph">
-    </div>
-
-    <div class="col-lg-7 col-sm-12">
-      <p class="sec-font fs-7 mb-0 text-black">Poll ID:{{polldetails['id']}}</p>
-      <h5 class="card-title main-font fs-5 text-red pb-1 mb-0">{{polldetails['question']}}</h5>
+    <div class="col-lg-6 col-sm-12" id="chart"></div>
+    <div class="col-lg-6 col-sm-12">
+      <p class="sec-font fs-7 mb-0 text-black">Poll ID: {{polldetails[0]['id']}}</p>
+      <h5 class="card-title main-font fs-5 text-red pb-1 mb-0">{{polldetails[0]['question']}}</h5>
       <p class="text-red sec-font mb-0">
-        Status: {{polldetails['status']}}
+        Status: {{polldetails[0]['status']}}
       </p>
       <p class="text-red sec-font">Total Votes
         <span class="main-font">
-          {{polldetails['total_votes']}}
+          {{polldetails[0]['total_votes']}}
         </span>
       </p>
 
