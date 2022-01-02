@@ -1,6 +1,5 @@
 {% extends 'user_layout.html' %}
 
-
 {% block headContent %}
 <style>
     .schedule {
@@ -17,7 +16,8 @@
     }
 
     .ps-img {
-        width: 28%;
+        width: 38%;
+        height: 100%;
     }
 
     .ps-content {
@@ -155,17 +155,16 @@ Alegria 2022 | Hackathon 2022
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-10 col-md-10 col-sm-10">
-            <hr>
-            <h4><b>Problem Statements</b></h4>
+    <hr>
+    <div class="row d-flex flex-column justify-content-center align-items-center">
+        <h4 class="main-font fs-4 text-center">Problem Statements</h4>
+
+        <div class="col-10 g-2">
             {% for ele in problem_statements %}
-            <div class="problem-statement u-text-beige reverse">
+            <div class="problem-statement text-beige reverse mb-3">
                 <div class="ps-img">
-                    <img src={{ele[4]}} alt="problem-statement" style="width:100%;border-radius: 50px 0;">
+                    <img src={{ele[4]}} alt="problem-statement" style="width:80%;border-radius: 50px 0;">
                 </div>
-                <div class="col"></div>
                 <div class="ps-content">
                     <h5 class="fs-6 text-teal"><b>{{ele[0]}}</b></h5>
                     <h3 class="fs-5 text-beige m-0 p-0">{{ele[1]}}</h3>
