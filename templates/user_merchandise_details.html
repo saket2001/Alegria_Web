@@ -34,13 +34,26 @@ Alegria 2022
         color:white;
         border-color: #ccf;
     }
+    .merchandise-card-container {
+        height: auto;
+        background-color: #FFF8EF;
+        border: 3px solid brown;
+        padding: 10px 10px 0 10px;
+        border-radius: 20px;
+    }
+
+    .merchandise-card-container img {
+        width: 100%;
+        border-radius: 20px;
+        margin-bottom: 20px;
+    }
 </style>
 <div class="row min-w-100 min-vh-100 bg-gradient overflow-hidden sec-font">
-    <div class="col-lg-12 col-sm-12 p-3 bg-cover d-flex">
-        <div class="col-lg-4 col-md-4 col-sm-12 my-5 mx-3">
+    <div class="col-lg-12 col-md-12 col-sm-12 p-3 bg-cover d-flex">
+        <div class="col-lg-5 col-md-5 col-sm-12 my-5 mx-3 flex-column">
             <img src="/static/images/tshirt.png" alt="merchandise" style="width:90%;border-radius: 20px;">
         </div>
-        <div class="col-lg-4 col-md-8 col-sm-12 my-3">
+        <div class="col-lg-4 col-md-7 col-sm-12 my-3 flex-column">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb fs-7 text-black">
                     <li class="breadcrumb-item">
@@ -91,11 +104,35 @@ Alegria 2022
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-8 col-sm-12 mx-4">
-            <p>Similar Products</p>
-            <img src="/static/images/tshirt.png" width='80%'>
-            <br><br>
-            <img src="/static/images/tshirt.png" width='80%'>
+        <div class="col g-4 my-1 mx-3 flex-column">
+            <h4>Similar products</h4>
+            {% for item in similar_merchandise %}
+            {% if merchandise_data['name'] != item["name"] %}
+            <div class="d-flex flex-column align-items-center">
+                <a href={{"/merchandise/{}/{}".format(item['category'],item['id'])}}
+                    class="d-flex flex-column justify-content-center py-1 m-2">
+                    <div class="merchandise-card-container">
+                        <div><img src="/static/images/tshirt.png" alt="merchandise-image"></div>
+                        <div style="border-top:3px solid brown;width:80%;margin: auto;">
+                            <h3 class="w-100 fs-5 text-brown mt-2 mb-0 px-2 main-font text-center fw-bold">{{item['name']}}</h3>
+                        </div>
+                        <div class="col"
+                            style="display: flex;width:90%;margin:auto;justify-content: space-between;">
+                            <div class="text-black sec-font fw-bold">{{item['cost']}} ₹</div>
+                            <div class="text-red sec-font" style="text-transform: capitalize;">
+                                {{item['category']}}</div>
+                        </div>
+                        <button
+                            class="w-100 d-flex align-items-center justify-content-center border-0 bg-navbar text-beige my-3 fs-6 py-2 rounded-3">
+                            Purchase
+                        </button>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+
+            {% endfor %}
+
         </div>
     </div>
 </div>

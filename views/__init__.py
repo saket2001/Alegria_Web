@@ -115,21 +115,6 @@ def EventDetails(category_name, event_id):
             "category_id": event.event_category_id,
             "icon_url": event_details.icon_url
         })
-
-    similar_events = []
-    for event in filter_category_events:
-        event_details = Eventdemo_details.query.filter_by(
-            event_id=event.id).first()
-        similar_events.append({
-            "event_id": event.id,
-            "event_name": event.event_name,
-            "event_online_cost": event.online_cost,
-            "event_offline_cost": event.offline_cost,
-            "category": event.event_category_name,
-            "category_id": event.event_category_id,
-            "icon_url": event_details.icon_url
-        })
-
     if res['type'] and len(res['event']) > 0:
         event_details = res['event']
 
@@ -168,7 +153,7 @@ def get_merchandise_by_Id(category, id):
     merchandise_data = Merchandise.query.filter_by(id=id).first()
     res = {
         "type": True,
-        "merchandise": [{
+        "merchandise": {
             "id": merchandise_data.id,
             "name": merchandise_data.name,
             "details": merchandise_data.details,
@@ -180,9 +165,21 @@ def get_merchandise_by_Id(category, id):
             "color": merchandise_data.color,
             "category": merchandise_data.category,
             "code": merchandise_data.code
-        }]
+        }
     }
-    return render_template('user_merchandise_details.html', activeNav="Merchandise",merchandise_data=merchandise_data)
+    filter_category_merchandise = Merchandise.query.filter_by(category=category).all()
+    similar_merchandise = []
+    for merchandise in filter_category_merchandise:
+        similar_merchandise.append({
+            "id": merchandise.id,
+            "name": merchandise.name,
+            "details": merchandise.details,
+            "cost": merchandise.cost,
+            "item_img1": merchandise.item_img1,
+            "item_img2": merchandise.item_img2,
+            "category": merchandise.category
+        })
+    return render_template('user_merchandise_details.html', activeNav="Merchandise",merchandise_data=res["merchandise"],similar_merchandise=similar_merchandise)
 
 
 #################################
