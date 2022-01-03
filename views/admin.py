@@ -395,24 +395,19 @@ def deletemerchandise(merchandise_category, merchandise_id):
 # @login_required
 def poll_details(poll_id):
     pollsList = Poll.query.filter_by(poll_id=poll_id).first()
-
-    pollsImages = PollResponses.query.filter_by(poll_id=poll_id).first()
-
-    print(pollsList, pollsImages)
-
-    res = {"type": True, "polldetails": {}}
-
-    res["polldetails"] = {
-        "id": pollsList.poll_id,
-        "question": pollsList.question,
-        "status": pollsList.status,
-        "total_votes": pollsList.total_votes,
-        "poll_option_id": pollsImages.poll_option_id,
-        "option_name": pollsImages.option_name,
-        "image_url": pollsImages.option_image,
-        "option_votes": pollsImages.option_votes
-    }
-
+    pollDetails = PollResponses.query.filter_by(poll_id=poll_id).all()
+    res = {"type": True, "polldetails": []}
+    for ele in pollDetails:
+        res["polldetails"].append({
+            "id": pollsList.poll_id,
+            "question": pollsList.question,
+            "status": pollsList.status,
+            "total_votes": pollsList.total_votes,
+            "poll_option_id": ele.poll_option_id,
+            "option_name": ele.option_name,
+            "image_url": ele.option_image,
+            "option_votes": ele.option_votes
+        })
     return render_template('/admin/admin_poll_details.html', activeNav='poll_details', polldetails=res["polldetails"])
 
 
@@ -421,14 +416,11 @@ def poll_details(poll_id):
 def polls():
     try:
         form = AddPollForm()
-
         pollsList = Poll.query.all()
-
         res = {
             "type": True,
             "polls_list": []
         }
-
         for item in pollsList:
             res["polls_list"].append({
                 "id": item.poll_id,
@@ -436,8 +428,6 @@ def polls():
                 "status": item.status,
                 "total_votes": item.total_votes
             })
-
         return render_template('/admin/admin_polls.html', activeNav='polls', poll_list=res["polls_list"], form=form)
-
     except:
         return render_template('404.html')
