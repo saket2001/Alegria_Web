@@ -196,6 +196,31 @@ def get_merchandise_by_Id(category, id):
 def hackathonDetails():
     return render_template('user_hackathon.html', activeNav='Hackathon', problem_statements=client_data.problem_statements)
 
+@app_mbp.route("/polls")
+def polls_main():
+    polls_cards=[
+        {
+            "id":"1",
+            "question":"Celebrity for Stand -Up Comedy?",
+            "image":"https://media.istockphoto.com/vectors/standup-stage-with-mic-red-curtains-and-comedy-show-logo-vector-id1251603742?k=20&m=1251603742&s=612x612&w=0&h=U2ofKd5416CnfsAXphDr3YZTyBhGOzVqM2qtGuyhIcY="
+        },
+        {
+            "id":"2",
+            "question":"Guest for Movie Promotion?",
+            "image":"https://graphicriver.img.customer.envatousercontent.com/files/265867849/preview.jpg?auto=compress%2Cformat&q=80&fit=crop&crop=top&max-h=8000&max-w=590&s=e9d8c2035d53240c3a32a002ea78e8a3"
+        },
+        {
+            "id":"3",
+            "question":"Who should be DJ for EDM Night?",
+            "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-8ZfICHmwKc1TZ2r3dIWXZ1CVap7uZbpxd4EJPNEfg0WppN8hbGhoAOqQ1lYiAIGWxh4&usqp=CAU"
+        },
+        {
+            "id":"4",
+            "question":"Chief Guest for Sports Events Prize Distribution?",
+            "image":"https://img.etimg.com/thumb/msid-77734860,width-650,imgsize-951020,,resizemode-4,quality-100/sports_istock.jpg"
+        }
+    ]
+    return render_template('user_polls_main.html',polls_cards=polls_cards)
 
 @app_mbp.route("/polls/<string:id>")
 def Poll_list(id):
