@@ -139,6 +139,9 @@ class PollsAPI(Resource):
             return {}, 401
 
         user_id = request.headers.get("hashed_user_id")
+        if not user_id:
+            return {}, 401
+            
         user_response_details = PollUserResponse.query.filter_by(hashed_user_id=user_id)
 
         poll_queryset = Poll.query.order_by(Poll.poll_id.desc()).all()
