@@ -263,95 +263,95 @@ Alegria 2022 | Homepage
                     <div class="carousel-inner p-3">
                         <div class="carousel-item active">
                             <div class="row g-4">
-                                <div class="col d-flex flex-column align-items-center">
-                                    <a href="/events/technical-events" class="event-card">
-                                        <h3 class="fs-5 text-red main-font py-1 px-2">Technical Events</h3>
-                                        <div class="event-circle">
-                                            <img src="../static/images/icons/Category Icons/Tech.png" alt="card-image"
-                                                width="170px" height="170px">
+                                {% for col in row1 %}
+                                <div class="col d-flex flex-column align-items-center event-card-container">
+                                    <div class="event-card">
+                                        <div class="event-card-front">
+                                            <h3 class="fs-5 text-red main-font py-1 px-2">
+                                                {{col["title"]}}
+                                            </h3>
+                                            <div class="event-circle">
+                                                <img src={{col["icon"]}} alt="card-image" width="170px" height="170px">
+                                            </div>
                                         </div>
-                                    </a>
-                                </div>
-                                <div class="col d-flex flex-column align-items-center">
-                                    <a href="/events/technical-workshop" class="event-card">
-                                        <h3 class="fs-5 text-red main-font py-1 px-2">Workshops</h3>
-                                        <div class="event-circle">
-                                            <img src="../static/images/icons//Category Icons/Technical_workshop.jpeg"
-                                                alt="card-image" width="170px" height="170px">
+                                        <div class="event-card-back">
+                                            <p class="sec-font fs-6">
+                                                {{col['content']}}
+                                            </p>
+                                            <div class="d-flex justify-content-center">
+                                                <a href={{col['link']}}
+                                                    class="w-100 text-center sec-font text-light fs-7 py-1 px-3 rounded-3 shadow"
+                                                    style="background-color: #bd2828;">
+                                                    View
+                                                    All
+                                                </a>
+                                            </div>
                                         </div>
-                                    </a>
+                                    </div>
                                 </div>
-                                <div class="col d-flex flex-column align-items-center">
-                                    <a href="/events/management" class="event-card">
-                                        <h3 class="fs-5 text-red main-font py-1 px-2">Management</h3>
-                                        <div class="event-circle">
-                                            <img src="../static/images/icons//Category Icons/management.png"
-                                                alt="card-image" width="170px" height="170px">
-                                        </div>
-                                    </a>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <div class="row gy-4">
-                                <div class="col d-flex flex-column align-items-center">
-                                    <a href="/events/fine-arts" class="event-card">
-                                        <h3 class="fs-5 text-red main-font py-1 px-2">Fine Arts</h3>
-                                        <div class="event-circle">
-                                            <img src="../static/images/icons/Category Icons/Fine Arts.png"
-                                                alt="card-image" width="170px" height="170px">
+                            <div class="row g-4">
+                                {% for col in row2 %}
+                                <div class="col d-flex flex-column align-items-center event-card-container">
+                                    <div class="event-card">
+                                        <div class="event-card-front">
+                                            <h3 class="fs-5 text-red main-font py-1 px-2">
+                                                {{col["title"]}}
+                                            </h3>
+                                            <div class="event-circle">
+                                                <img src={{col["icon"]}} alt="card-image" width="170px" height="170px">
+                                            </div>
                                         </div>
-                                    </a>
-                                </div>
-                                <div class="col d-flex flex-column align-items-center">
-                                    <a href="/events/literary-arts" class="event-card">
-                                        <h3 class="fs-5 text-red main-font py-1 px-2">Literary Arts</h3>
-                                        <div class="event-circle">
-                                            <img src="../static/images/icons//Category Icons/Literary Arts.png"
-                                                alt="card-image" width="170px" height="170px">
+                                        <div class="event-card-back">
+                                            <p class="sec-font fs-6">
+                                                {{col['content']}}
+                                            </p>
+                                            <div class="d-flex justify-content-center">
+                                                <a href={{col['link']}}
+                                                    class="w-100 text-center sec-font text-light fs-7 py-1 px-3 rounded-3 shadow"
+                                                    style="background-color: #bd2828;">
+                                                    View
+                                                    All
+                                                </a>
+                                            </div>
                                         </div>
-                                    </a>
+                                    </div>
                                 </div>
-                                <div class="col d-flex flex-column align-items-center">
-                                    <a href="/events/performing-arts" class="event-card">
-                                        <h3 class="fs-5 text-red main-font py-1 px-2">Performing Arts</h3>
-                                        <div class="event-circle">
-                                            <img src="../static/images/icons/Category Icons/Performing Arts.png"
-                                                alt="card-image" width="170px" height="170px">
-                                        </div>
-                                    </a>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <div class="row gy-4">
-                                <div class="col d-flex flex-column align-items-center">
-                                    <a href="/events/informals" class="event-card">
-                                        <h3 class="fs-5 text-red main-font py-1 px-2">Informals</h3>
-                                        <div class="event-circle">
-                                            <img src="../static/images/icons//Category Icons/Informals.png"
-                                                alt="card-image" width="170px" height="170px">
+                            <div class="row g-4">
+                                {% for col in row3 %}
+                                <div class="col d-flex flex-column align-items-center event-card-container">
+                                    <div class="event-card">
+                                        <div class="event-card-front">
+                                            <h3 class="fs-5 text-red main-font py-1 px-2">
+                                                {{col["title"]}}
+                                            </h3>
+                                            <div class="event-circle">
+                                                <img src={{col["icon"]}} alt="card-image" width="170px" height="170px">
+                                            </div>
                                         </div>
-                                    </a>
-                                </div>
-                                <div class="col d-flex flex-column align-items-center">
-                                    <a href="/events/gaming" class="event-card">
-                                        <h3 class="fs-5 text-red main-font py-1 px-2">Gaming</h3>
-                                        <div class="event-circle">
-                                            <img src="../static/images/icons/Category Icons/Gaming.png" alt="card-image"
-                                                width="170px" height="170px">
+                                        <div class="event-card-back">
+                                            <p class="sec-font fs-6">
+                                                {{col['content']}}
+                                            </p>
+                                            <div class="d-flex justify-content-center">
+                                                <a href={{col['link']}}
+                                                    class="w-100 text-center sec-font text-light fs-7 py-1 px-3 rounded-3 shadow"
+                                                    style="background-color: #bd2828;">
+                                                    View
+                                                    All
+                                                </a>
+                                            </div>
                                         </div>
-                                    </a>
+                                    </div>
                                 </div>
-                                <div class="col d-flex flex-column align-items-center">
-                                    <a href="/events/sports" class="event-card">
-                                        <h3 class="fs-5 text-red main-font py-1 px-2">Sports</h3>
-                                        <div class="event-circle">
-                                            <img src="../static/images/icons//Category Icons/Sports.png"
-                                                alt="card-image" width="170px" height="170px">
-                                        </div>
-                                    </a>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -739,7 +739,7 @@ Alegria 2022 | Homepage
                 </li>
                 <li class="my-1">
                     <a href="https://play.google.com/store/apps/details?id=com.mes.alegria" target="_blank"
-                        rel="noopener noreferrer" class="px-3 py-1 d-flex align-items-center rounded-3"
+                        rel="noopener noreferrer" class="px-3 py-1 d-flex align-items-center rounded-3 text-light"
                         style="background-color: black;width: 60%;height: 60%;">
                         <img src="/static/images/icons/playstore.png" alt="playstore icon" class="me-1">
                         <p class="sec-font mb-0" style="font-size: 0.7rem;">

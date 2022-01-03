@@ -126,3 +126,55 @@ paymentLinks = {
     "management": "https://pages.razorpay.com/management-events-alegria22",
     "workshop": "https://pages.razorpay.com/Technical-Workshops-alegria22"
 }
+
+
+events_row1 = [{
+    "title": "Technical Events",
+    "content": "Are you Tech Lover, If yes then our Tech events will make you go crazy Do participate for awesome gifts.",
+    "link": '/events/technical-events',
+    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Tech.png?token=ANBEQ2C6JRMVCRRGCYSMXTLB3PPEE'
+}, {
+    "title": "Technical Workshop",
+    "content": " At our Technical workshop you get chance to learn in demand skills at low prices. So don't miss this opportunity to learn new skills.",
+    "link": '/events/technical-workshops',
+    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Technical_workshop.jpeg?token=ANBEQ2EMP7UMXDDI7BCERA3B3PPGI'
+}, {
+    "title": "Management",
+    "content": " At our Technical workshop you get chance to learn in demand skills at low prices. So don't miss this opportunity to learn new skills.",
+    "link": '/events/management',
+    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/management.png?token=ANBEQ2BRH3WKSNGR5RCH62TB3PPHE'
+}]
+
+events_row2 = [{
+    "title": "Fine Arts",
+    "content": "Are you Tech Lover, If yes then our Tech events will make you go crazy Do participate for awesome gifts.",
+    "link": '/events/fine-arts',
+    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Fine%20Arts.png?token=ANBEQ2ANRWDANXBG7D6HP7DB3PPJG'
+}, {
+    "title": "Performing Arts",
+    "content": " At our Technical workshop you get chance to learn in demand skills at low prices. So don't miss this opportunity to learn new skills.",
+    "link": '/events/performing-arts',
+    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Performing%20Arts.png?token=ANBEQ2DQB3NP5LEDVZNHSV3B3PPLK'
+}, {
+    "title": "Literary Arts",
+    "content": " At our Technical workshop you get chance to learn in demand skills at low prices. So don't miss this opportunity to learn new skills.",
+    "link": '/events/literary-arts',
+    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Literary%20Arts.png?token=ANBEQ2EQB5JVHRIXOAJ5GMTB3PPKK'
+}]
+
+events_row3 = [{
+    "title": "Informals",
+    "content": "Are you Tech Lover, If yes then our Tech events will make you go crazy Do participate for awesome gifts.",
+    "link": '/events/informals',
+    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Informals.png?token=ANBEQ2FDVO76BEAEB6K7LELB3PPMK'
+}, {
+    "title": "Gaming",
+    "content": " At our Technical workshop you get chance to learn in demand skills at low prices. So don't miss this opportunity to learn new skills.",
+    "link": '/events/gaming',
+    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Gaming.png?token=ANBEQ2DPVV3PGRQX4UQDWRTB3PPOY'
+}, {
+    "title": "Sports",
+    "content": " At our Technical workshop you get chance to learn in demand skills at low prices. So don't miss this opportunity to learn new skills.",
+    "link": '/events/sports',
+    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Sports.png?token=ANBEQ2DSYVZL5KI7QUZQ5F3B3PPNK'
+}]

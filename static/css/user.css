@@ -134,6 +134,10 @@ body {
     background-size: cover;
 }
 
+.animation-float {
+    animation: float 4s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite alternate;
+}
+
 /* nav bar */
 .parallax_navbar {
     position: absolute;
@@ -249,6 +253,26 @@ body {
     box-shadow: 10px 10px 15px #38020449;
 }
 
+.event-card {
+    position: relative;
+    overflow: hidden;
+    transition: 0.5s;
+    transform-style: preserve-3d;
+}
+
+.event-card:hover {
+    transform: rotateY(180deg);
+    border: 0;
+}
+
+.event-card:hover .event-card-front {
+    opacity: 0;
+}
+
+.event-card:hover .event-card-back {
+    opacity: 1;
+}
+
 .event-card-small {
     width: 260px;
 }
@@ -257,6 +281,42 @@ body {
     padding: 0.4rem 0.6rem;
     border-radius: 100%;
 }
+
+.event-card-container {
+    perspective: 1000;
+}
+
+.event-card-front,
+.event-card-back {
+    backface-visibility: hidden;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 30px;
+    box-sizing: border-box;
+    transition-delay: 0.15s;
+    transition: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-card-front {
+    transform: rotateY(0deg);
+}
+
+.event-card-back {
+    transform: rotateY(180deg);
+    opacity: 0;
+    padding-top: 60px;
+    backface-visibility: visible;
+    background: var(--u_red);
+    color: white;
+}
+
 
 .event-description {
     opacity: 0;
@@ -271,45 +331,6 @@ body {
 
 .event-bg-brown {
     background-color: #472F19;
-}
-
-.slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 5px;
-    border-radius: 5px;
-    background: linear-gradient(to right, #fffbcb, #ff985c);
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-}
-
-.slider:hover {
-    opacity: 1;
-}
-
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    background: black;
-    cursor: pointer;
-    transform: rotate(45deg);
-}
-
-.slider::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: black;
-    cursor: pointer;
-    transform: rotate(45deg);
-}
-
-.slider::-webkit-slider-thumb:hover {
-    box-shadow: 0 0 6px white;
 }
 
 .event_card-container {
@@ -341,8 +362,14 @@ body {
     border-bottom: 3px dashed #271e1e;
 }
 
-.stars-rotate {
-    transform: rotateZ(-20deg);
+@keyframes float {
+    0% {
+        transform: translateZ(20px);
+    }
+
+    100% {
+        transform: translateY(-21px) translateX(-13px) translateZ(30px);
+    }
 }
 
 
