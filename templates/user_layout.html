@@ -120,12 +120,23 @@
                                     style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Polls</a>
                             </li>
                             <li>
+                                <a href="/announcements" class="dropdown-item navbar_links" {% if
+                                    activeNav=='Announcements' %}
+                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
+                                    %}>Announcements</a>
+                            </li>
+                            <li>
                                 <a href="/sponsors" class="dropdown-item navbar_links" {% if activeNav=='Sponsors' %}
                                     style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Sponsors</a>
                             </li>
                             <li>
                                 <a href="/developers" class="dropdown-item navbar_links" {% if activeNav=='Sponsors' %}
                                     style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Developers</a>
+                            </li>
+                            <li>
+                                <a href="/event-heads" class="dropdown-item navbar_links" {% if activeNav=='Event Heads'
+                                    %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Event
+                                    Heads</a>
                             </li>
                         </ul>
                     </li>

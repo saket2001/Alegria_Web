@@ -19,7 +19,8 @@ app_mbp = Blueprint(
 
 @app_mbp.route('/')
 def landingPage():
-    return render_template('user_homepage.html', activeNav='Home')
+    signed_in = False
+    return render_template('user_homepage.html', activeNav='Home', signed_in=signed_in)
 
 
 @app_mbp.route("/user-login")

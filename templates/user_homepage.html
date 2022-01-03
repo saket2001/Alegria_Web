@@ -4,7 +4,6 @@
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"
     integrity="sha512-cdV6j5t5o24hkSciVrb8Ki6FveC2SgwGfLE31+ZQRHAeSRxYhAQskLkq3dLm8ZcWe1N3vBOEYmmbhzf7NTtFFQ=="
     crossorigin="anonymous"></script>
-<!-- <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/ScrollTrigger.min.js"></script> -->
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.6/ScrollMagic.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.min.js"
     integrity="sha512-5/OHwmQzDSBS0Ous4/hlYoWLHd06/d2r7LdKZQVBXOA6PvOqWVXtdboiLTU7lQTGyVoKVTNkwi0ol4gHGlw5ww=="
@@ -22,8 +21,8 @@ Alegria 2022 | Homepage
     <div class="parallax_section">
         <!-- nav -->
         <!-- social icons -->
-        <div class="opacity-2 position-fixed top-50 end-0 px-2 py-3 rounded-3"
-            style="background-color: #ffde83cb;z-index: 10;">
+        <div class="opacity-2 position-absolute top-50 end-0 px-2 py-3 rounded-3"
+            style="background-color: #ffde83a9;z-index: 10;">
             <div class="d-flex flex-column justify-content-center align-items-center">
                 <a href="https://www.instagram.com/pillaisalegria/" target="_blank" rel="noopener noreferrer"
                     class="footer_link my-1 px-2 text-red social-icons">
@@ -157,6 +156,12 @@ Alegria 2022 | Homepage
                                             %}>Polls</a>
                                     </li>
                                     <li>
+                                        <a href="/announcements" class="dropdown-item navbar_links" {% if
+                                            activeNav=='Announcements' %}
+                                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
+                                            %}>Announcements</a>
+                                    </li>
+                                    <li>
                                         <a href="/sponsors" class="dropdown-item navbar_links" {% if
                                             activeNav=='Sponsors' %}
                                             style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
@@ -168,16 +173,26 @@ Alegria 2022 | Homepage
                                             style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
                                             %}>Developers</a>
                                     </li>
+                                    <li>
+                                        <a href="/event-heads" class="dropdown-item navbar_links" {% if activeNav=='Event
+                                            Heads' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
+                                            %}>Event
+                                            Heads</a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
+                        {% if signed_in==False %}
                         <a href="/user-login"
                             class="d-flex justify-content-center align-items-center rounded-3 text-red bg-white fs-7 px-5 py-1 me-2 main-font">
                             Sign In
                         </a>
+                        {% endif %}
+                        {% if signed_in %}
                         <a href="/user/cart" class="d-flex align-items-center text-red p-2 mx-1">
                             <i class="fas fa-shopping-bag fs-5"></i>
                         </a>
+                        {% endif %}
                     </div>
                 </div>
             </nav>
@@ -196,15 +211,16 @@ Alegria 2022 | Homepage
                 class="w-100 py-5 overflow-hidden position-relative d-flex align-items-center justify-content-center h-100">
                 <div class="row p-3 d-flex justify-content-center align-items-center">
                     <div class="about_img col-lg-5 col-sm-12 d-flex justify-content-center"
-                        style="border-radius: 33px;">
-                        <img src="../static/images/homepage/about.jpg" alt="about us image" class="aboutus_bg p-3"
-                            id="about-us-img" width="80%" height="70%" style="border-radius: 33px;">
+                        style="border-radius: 20px;">
+                        <img src="../static/images/homepage/about.jpg" alt="about us image"
+                            class="aboutus_bg p-2 shadow" id="about-us-img" width="90%" height="60%"
+                            style="border-radius: 30px;">
                     </div>
                     <div
                         class="about_text col-lg-7 col-sm-12 d-flex flex-column align-items-center justify-content-center px-3">
                         <h2 class="fs-3 main-font my-2 text-beige text-center">ALEGRIA 2022</h2>
 
-                        <p class="mt-1 sec-font fs-7 fst-light" style="text-align: justify;">
+                        <p class="m-1 mx-2 sec-font fs-7 fst-light" style="text-align: justify;">
                             Alegria - The Festival joy congregated by The Pillai Group Of Institutions. Alegria is
                             one
                             of
@@ -227,7 +243,8 @@ Alegria 2022 | Homepage
                             fail
                             to amaze us.
                         </p>
-                        <a href="/about-us" class="sec-font text-light bg-brown px-3 py-1 rounded-3 fs-7">
+                        <a href="/about-us" class="sec-font text-light px-3 py-1 rounded-3 fs-6 mt-3"
+                            style="background-color: #bd2828;">
                             Read More
                         </a>
                     </div>
@@ -391,11 +408,16 @@ Alegria 2022 | Homepage
                             <p class="fs-7 mb-1">Mode : Online </p>
                             <p class="fs-7 mb-1">Fees : 200(Per Team) </p>
                             <p class="fs-7 mb-1">Participants : 2-4 </p>
+                            <div class="mt-4">
+                                <a href="/hackathon" style="background-color: #bd2828;"
+                                    class="px-3 py-1 sec-font text-light rounded-3 fs-6">
+                                    View More
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6 d-flex justify-content-center p-2">
-                        <img style="width:100%; border-radius:10px" src="/static/images/hackathon/hackathon.png"
-                            class="hackathon-image responsive_images">
+                        <img src="/static/images/hackathon/hackathon.png" class="hackathon-image responsive_images">
                     </div>
                 </div>
                 <div class="row mx-3 my-3 d-flex justify-content-center hackathon">
