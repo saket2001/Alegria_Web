@@ -124,10 +124,10 @@ class PollResponses(db.Model):
 
 
 class PollUserResponse(db.Model):
-    __tablename__ = 'poll_user_response'
-    hashed_userid = db.Column(db.String(50), primary_key=True)
+    __tablename__ = 'poll_user_responses'
+    hashed_user_id = db.Column(db.String(50), primary_key=True)
     poll_id = db.Column(db.Integer, db.ForeignKey("poll.id"), primary_key=True)
-    poll_response_id = db.Column(db.Integer, db.ForeignKey(
+    poll_option_id = db.Column(db.Integer, db.ForeignKey(
         "poll_options.id"), primary_key=True)
 
 

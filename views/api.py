@@ -2,6 +2,7 @@ from models import Eventdemo, Eventdemo_details, Announcement, Poll, Merchandise
 from flask_restful import Resource, Api
 from flask import jsonify, request
 
+# A default rate limit of 200 per day, and 50 per hour applied to all routes.
 # Add hashlib.sha256
 secret_api_key = "some key"
 
@@ -38,6 +39,9 @@ class IdFilterEventAPI(Resource):
                 "offline_cost": event.offline_cost,
                 "event_contact1": event.event_contact1,
                 "event_contact2": event.event_contact2,
+                "event_contact3": event.event_contact3,
+                "event_contact4": event.event_contact4,
+                "pr_points": event.pr_points,
                 "event_date": event_details.event_date,
                 "event_mode": event_details.event_mode,
                 "event_duration": event_details.event_duration,
@@ -134,10 +138,11 @@ class PollsAPI(Resource):
         if not API_key or API_key != secret_api_key:
             return {}, 401
 
-        # user_id = request.headers.get("hashed_user_id")
-        # user_response_details = PollUserResponse.query.filter_by(hashed_userid=user_id).all()
+        user_id = request.headers.get("hashed_user_id")
+        user_response_details = PollUserResponse.query.filter_by(hashed_user_id=user_id)
 
         poll_queryset = Poll.query.order_by(Poll.poll_id.desc()).all()
+
         res = {
             "length": len(poll_queryset),
             "polls": []
@@ -145,16 +150,23 @@ class PollsAPI(Resource):
         for item in poll_queryset:
             poll_details = PollResponses.query.filter_by(
                 poll_id=item.poll_id).all()
-            
+            user_answered_data = user_response_details.filter_by(poll_id=item.poll_id).first()
+            if user_answered_data:
+                poll_answered = True
+                poll_user_reponse = user_answered_data.poll_option_id
+            else:
+                poll_answered = False
+                poll_user_reponse = None
+
             res["polls"].append(
                 {
                     "id": item.poll_id,
                     "question": item.question,
                     "status": item.status,
-                    "date published": item.date_published, # might have to change
+                    "date published": item.date_published,
                     "votes": item.total_votes,
-                    "poll_is_answered": "tbh",
-                    "poll_user_reponse_id": "tbh",
+                    "poll_is_answered": poll_answered,
+                    "poll_user_reponse_id": poll_user_reponse,
                     "options": [
                         {
                             "poll_name": poll_option.option_name,
