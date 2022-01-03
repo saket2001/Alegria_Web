@@ -1,10 +1,7 @@
 {% extends 'user_layout.html' %}
 
-{% block title %}
-Alegria 2022 | Merchandise
-{% endblock %}
 
-{% block content %}
+{% block headContent %}
 <style>
     .merchandise-card-container {
         height: auto;
@@ -20,7 +17,16 @@ Alegria 2022 | Merchandise
         margin-bottom: 20px;
     }
 </style>
-<div class="containr-fluid overflow-hidden bg-beige bg-cover">
+{% endblock headContent %}
+
+
+{% block title %}
+Alegria 2022 | Merchandise
+{% endblock %}
+
+{% block content %}
+
+<div class="containr-fluid overflow-hidden bg-teal bg-cover">
     <div class="row">
         <div class="col-lg-3 bg-navbar">
             <div class="p-5 px-3 mx-2">

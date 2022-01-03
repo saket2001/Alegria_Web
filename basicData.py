@@ -130,51 +130,51 @@ paymentLinks = {
 
 events_row1 = [{
     "title": "Technical Events",
-    "content": "Are you Tech Lover, If yes then our Tech events will make you go crazy Do participate for awesome gifts.",
+    "content": "Here is your opportunity to showcase your technical skills and get a chance to win in our technical events ",
     "link": '/events/technical-events',
     "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Tech.png?token=ANBEQ2C6JRMVCRRGCYSMXTLB3PPEE'
 }, {
     "title": "Technical Workshop",
-    "content": " At our Technical workshop you get chance to learn in demand skills at low prices. So don't miss this opportunity to learn new skills.",
+    "content": "Come here and get a chance  to explore and learn new technical skills at a reasonable price in our technical workshops.",
     "link": '/events/technical-workshops',
     "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Technical_workshop.jpeg?token=ANBEQ2EMP7UMXDDI7BCERA3B3PPGI'
 }, {
     "title": "Management",
-    "content": " At our Technical workshop you get chance to learn in demand skills at low prices. So don't miss this opportunity to learn new skills.",
+    "content": "The masterminds behind a successful company or event is the proper management, here is an opportunity awaiting for you in the form of management competitions",
     "link": '/events/management',
     "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/management.png?token=ANBEQ2BRH3WKSNGR5RCH62TB3PPHE'
 }]
 
 events_row2 = [{
     "title": "Fine Arts",
-    "content": "Are you Tech Lover, If yes then our Tech events will make you go crazy Do participate for awesome gifts.",
+    "content": "Creative strokes, dripping colours and creative mind is more than enough for the artist within you to express his talent,  so come and grab this opportunity to flaunt your art .",
     "link": '/events/fine-arts',
     "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Fine%20Arts.png?token=ANBEQ2ANRWDANXBG7D6HP7DB3PPJG'
 }, {
     "title": "Performing Arts",
-    "content": " At our Technical workshop you get chance to learn in demand skills at low prices. So don't miss this opportunity to learn new skills.",
+    "content": "Representing the true beauty of talent, we provide a way to display your amazing dancing, singing and acting skills in our intriguing events",
     "link": '/events/performing-arts',
     "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Performing%20Arts.png?token=ANBEQ2DQB3NP5LEDVZNHSV3B3PPLK'
 }, {
     "title": "Literary Arts",
-    "content": " At our Technical workshop you get chance to learn in demand skills at low prices. So don't miss this opportunity to learn new skills.",
+    "content": "If you have the creativity to express feelings through words then we have a platform for you to come and participate.",
     "link": '/events/literary-arts',
     "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Literary%20Arts.png?token=ANBEQ2EQB5JVHRIXOAJ5GMTB3PPKK'
 }]
 
 events_row3 = [{
     "title": "Informals",
-    "content": "Are you Tech Lover, If yes then our Tech events will make you go crazy Do participate for awesome gifts.",
+    "content": "Informals events are one's chance to change the definition of beauty through your immense inside talent by taking part in different informals events. ",
     "link": '/events/informals',
     "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Informals.png?token=ANBEQ2FDVO76BEAEB6K7LELB3PPMK'
 }, {
     "title": "Gaming",
-    "content": " At our Technical workshop you get chance to learn in demand skills at low prices. So don't miss this opportunity to learn new skills.",
+    "content": "If you are fond of crazy and adventure games then come and get a chance to showcase your talent and win.",
     "link": '/events/gaming',
     "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Gaming.png?token=ANBEQ2DPVV3PGRQX4UQDWRTB3PPOY'
 }, {
     "title": "Sports",
-    "content": " At our Technical workshop you get chance to learn in demand skills at low prices. So don't miss this opportunity to learn new skills.",
+    "content": "Sports is all about the spirit and sportsmanship of the player so if you posses the true spirit of sports then you stand a chance to win by taking part in our sports events.",
     "link": '/events/sports',
     "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Sports.png?token=ANBEQ2DSYVZL5KI7QUZQ5F3B3PPNK'
 }]
@@ -199,6 +199,7 @@ web_team_list = [
     {"img": "../static/images/developer/Tanishq.jpg", "name": "Tanishq Parkar", "role": "Back-end Developer", "call": "+91 9324343000",
             "gmail": "tanishqparkar@gmail.com", "github": "https://github.com/RevTpark", "linkedin": "https://www.linkedin.com/in/tanishq-parkar/"}
 ]
+
 app_team_list = [
     {"img": "../static/images/developer/Aditya.jpg", "name": "Aditya Cholayil", "role": "App Developer", "call": "+91 8291369867",
      "gmail": "cholayilaaditya@gmail.com", "github": "https://github.com/AadityaCholayil", "linkedin": "https://www.linkedin.com/in/aaditya-cholayil/"},

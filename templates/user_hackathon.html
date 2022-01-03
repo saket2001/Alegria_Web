@@ -6,36 +6,45 @@
         border-left: 2px solid black;
         padding-left: 50px;
     }
+
     .problem-statement {
         background-color: #631909;
         width: 100%;
         padding: 30px;
         border-radius: 50px 0;
     }
+
     .ps-img {
         height: 100%;
     }
+
     .ps-content {
         width: 70%;
-        margin:auto;
+        margin: auto;
     }
+
     .reverse {
         display: flex;
     }
+
     .reverse:nth-child(even) {
         flex-direction: row-reverse;
     }
+
     @media screen and (max-width:600px) {
         .problem-statement {
             width: 90%;
             display: block;
         }
+
         .ps-img {
             width: 100%;
         }
+
         .ps-content {
             width: 100%;
         }
+
         .schedule {
             border: none;
             padding-left: 15px;
@@ -50,11 +59,11 @@ Alegria 2022 | Hackathon 2022
 {% endblock %}
 
 {% block content %}
-<div class="d-flex flex-column justify-content-center min-w-100 min-vh-100 bg-beige overflow-hidden">
+<div class="d-flex flex-column justify-content-center min-w-100 min-vh-100 bg-teal bg-cover overflow-hidden">
     <div class="row m-2 py-2">
         <div class="col-lg-1"></div>
         <div class="col-lg-6 col-sm-12 my-4">
-            <h1 class="main-font text-red main-font">Hackathon 2022</h1>
+            <h1 class="main-font text-red">Hackathon 2022</h1>
             <p class="fs-7 lh-base text-black my-1 mb-0 sec-font">
                 Participants have to work on a given problem with their team to come up with the best solution they can.
                 The most feasible solution will be awarded.
@@ -101,15 +110,21 @@ Alegria 2022 | Hackathon 2022
                         <li class="fs-7 mb-1">4. Format for Idea file:</li>
                         <li class="fs-7 mb-1">-- PSID_TeamName_LeaderName</li>
                         <li class="fs-7 mb-1">-- For Eg. PS01_Enigma_AmitNaik</li>
-                        <li class="fs-7 mb-1">5. A team can submit idea in only one problem statement only. Multiple idea submission in this hackathon is not allowed.</li>
-                        <li class="fs-7 mb-1">6. For AI/ Machine learning, participants can either create or use any relevant dataset.</li>
+                        <li class="fs-7 mb-1">5. A team can submit idea in only one problem statement only. Multiple
+                            idea submission in this hackathon is not allowed.</li>
+                        <li class="fs-7 mb-1">6. For AI/ Machine learning, participants can either create or use any
+                            relevant dataset.</li>
                     </p>
                 </div>
             </div>
-            <a href='https://bit.ly/3e1QFnV' class="text-red" style="text-decoration: underline;">Sample Idea Format</a>
-            <button class="w-100 d-flex align-items-center justify-content-center border-0 bg-brown my-3 mb-2 fs-6 py-1 px-3 rounded-3"
+            <a href='https://bit.ly/3e1QFnV' target="_blank" rel="noopener noreferrer" class="text-red"
+                style="text-decoration: underline;">Sample Idea Format</a>
+
+            <button
+                class="w-100 d-flex align-items-center justify-content-center border-0 bg-brown my-3 mb-2 fs-6 py-1 px-3 rounded-3"
                 style="max-width: 200px;">
-                <a href='https://forms.gle/utWwxyJ7aX9dvQx98' target="_blank" rel="noopener noreferrer" class="text-beige w-100">
+                <a href='https://forms.gle/utWwxyJ7aX9dvQx98' target="_blank" rel="noopener noreferrer"
+                    class="text-beige w-100">
                     Participate
                 </a>
             </button>

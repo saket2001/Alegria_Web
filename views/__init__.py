@@ -257,9 +257,15 @@ def Poll_result(id, option):
 
 
 @app_mbp.route("/developers")
-def Developers():
+def DevelopersPage():
 
-    return render_template('developers.html', activeNav='events', web_team_list=client_data.web_team_list, app_team_list=client_data.app_team_list)
+    return render_template('developers.html', activeNav='Developers', web_team_list=client_data.web_team_list, app_team_list=client_data.app_team_list)
+
+
+@app_mbp.route("/event-heads")
+def eventHeadPage():
+
+    return render_template('event-head.html', activeNav='Event heads')
 
 
 @app_mbp.errorhandler(404)

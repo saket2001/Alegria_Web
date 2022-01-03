@@ -1,11 +1,7 @@
 {% extends 'user_layout.html' %}
 
-{% block title %}
-Alegria 2022 | {{merchandise_data["name"]}}
-{% endblock %}
 
-{% block content %}
-
+{% block headContent %}
 <style>
     .size {
         display: block;
@@ -14,9 +10,11 @@ Alegria 2022 | {{merchandise_data["name"]}}
         margin-bottom: 30px;
         cursor: pointer;
     }
+
     .size input {
         display: none;
     }
+
     .size span {
         background-color: #feffd5;
         width: 40px;
@@ -32,27 +30,32 @@ Alegria 2022 | {{merchandise_data["name"]}}
         justify-content: center;
         align-items: center;
     }
+
     .size input:hover+span {
         background-color: brown;
         color: white;
     }
+
     .size input:checked+span {
         background: rgb(75, 17, 17);
         color: white;
         border-color: #ccf;
     }
-    .color-radio{
-        padding:5px;
+
+    .color-radio {
+        padding: 5px;
         border-radius: 50px;
-        border:2px solid transparent;
+        border: 2px solid transparent;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
     }
-    .color-radio input{
+
+    .color-radio input {
         display: none;
     }
+
     .checkmark {
         position: relative;
         display: inline-block;
@@ -62,31 +65,36 @@ Alegria 2022 | {{merchandise_data["name"]}}
         width: 20px;
         background-color: #ccc;
         border-radius: 50%;
-        margin-right:10px;
+        margin-right: 10px;
     }
-    .color-radio:hover{
+
+    .color-radio:hover {
         cursor: pointer;
         background-color: #feffd5;
-        border:2px solid brown;
+        border: 2px solid brown;
     }
-    .color-radio:hover input ~ .checkmark {
+
+    .color-radio:hover input~.checkmark {
         background-color: brown;
     }
-    .color-radio input:checked ~ .checkmark {
-        background-color: rgb(75,17,17);
+
+    .color-radio input:checked~.checkmark {
+        background-color: rgb(75, 17, 17);
     }
-    .color-radio input:checked ~ .checkmark:after{
+
+    .color-radio input:checked~.checkmark:after {
         content: "";
         position: absolute;
         display: block;
-        top:50%;
-        left:50%;
-        transform: translate(-50%,-50%);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         width: 10px;
         height: 10px;
         border-radius: 50%;
         background: white;
     }
+
     .merchandise-card-container {
         height: auto;
         border: 3px solid brown;
@@ -98,16 +106,27 @@ Alegria 2022 | {{merchandise_data["name"]}}
         width: 100%;
         border-radius: 10px;
     }
-    .section-border{
+
+    .section-border {
         border-right: 1px solid black;
     }
-    @media screen and (max-width:768px){
-        .section-border{
+
+    @media screen and (max-width:768px) {
+        .section-border {
             border: none;
         }
     }
 </style>
-<div class="w-100 min-vh-100 overflow-hidden sec-font bg-cover">
+{% endblock headContent %}
+
+
+{% block title %}
+Alegria 2022 | {{merchandise_data["name"]}}
+{% endblock %}
+
+{% block content %}
+
+<div class="w-100 min-vh-100 overflow-hidden sec-font bg-teal bg-cover">
     <div class="row m-3">
         <div class="col-lg-2 col-sm-3">
             <a href={{"/merchandise/{}".format(merchandise_data["category"])}} type="button" class="go_back_btn py-1">
@@ -177,7 +196,8 @@ Alegria 2022 | {{merchandise_data["name"]}}
                         Add To Cart
                     </button>
                     <p class="sec-font text-black fs-7 mb-1">
-                        After Successful payment you need to collect this product from our campus because home delivery isn't supported.
+                        After Successful payment you need to collect this product from our campus because home delivery
+                        isn't supported.
                     </p>
                 </div>
             </form>
