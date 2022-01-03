@@ -1,98 +1,140 @@
 {% extends 'user_layout.html' %}
 
+
+{% block headContent %}
+<style>
+    /* .dev_page {
+                background-attachment: fixed;
+                background-image: url("../static/images/dev_bg.png");
+                background-size: cover;
+            } */
+
+    .team-card {
+        box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.2),
+            inset -3px -3px 3px rgba(255, 255, 255, 0.2),
+            3px 3px 3px rgba(0, 0, 0, 0.5),
+            -3px -3px 3px rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+    }
+
+    .team-box {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+        transition: 0.5s;
+    }
+
+    .team-card:hover .team-box {
+        transform: translateY(-50px);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
+        background-color: #a55c1b;
+        background-image: linear-gradient(315deg, #a55c1b 0%, #000000 74%);
+        color: #ffffffea;
+    }
+
+    .team-card:hover .team-box h5,
+    .team-card:hover .team-box a,
+    .team-card:hover .team-box i {
+        color: #ffffffea;
+    }
+
+    #team-row {
+        width: 96%;
+        margin-left: 2%;
+    }
+</style>
+{% endblock headContent %}
+
+
 {% block title %}
 Alegria 2022 | Developers
 {% endblock %}
+
+
 {% block content %}
+<div class="bg-cover">
 
-<head>
-    <style>
-        .dev_page{
-    background-attachment: fixed;
-    background-image: url("../static/images/dev_bg.png"); 
-    background-size: cover;   
-}
-        .team-card {
-
-            box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.2),
-                inset -3px -3px 3px rgba(255, 255, 255, 0.2),
-                3px 3px 3px rgba(0, 0, 0, 0.5),
-                -3px -3px 3px rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-
-        }
-
-        .team-box {
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 15px;
-            transition: 0.5s;
-        }
-
-        .team-card:hover .team-box {
-            transform: translateY(-50px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
-            background-color: #a55c1b;
-background-image: linear-gradient(315deg, #a55c1b 0%, #000000 74%);
-color:white;
-        }
-
-        #team-row {
-            width: 96%;
-            margin-left: 2%;
-        }
-       
-        
-    </style>
-</head>
-<div class="dev_page  pb-4 bg-cover"><br>
-    <h3 class=" mb-4 pb-3" style="text-align: center;">Web Team</h3>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 " id="team-row">
-    {% for ele in web_team_list %}
-    <div class="col">
-        <div class="card team-card p-2 mb-2">
-            <div class="team-box">
-                <div class="content p-3" style="text-align: center;">
-                    <img class="mb-3 mt-2"style="height:120px; width:120px; border-radius: 50%;" src="{{ele['img']}}">
-                    <h5 class="mb-2">{{ele['name']}}</h5>
-                    <p style="font-size: medium";">{{ele['role']}}</p>
-                    <p style="font-size: small"><i class="fas fa-phone-alt"></i>{{ele['call']}}</p>
-                    <p style="font-size: x-large;">
-                        <a href="{{ele['gmail']}}"><i class="fas fa-envelope-square"></i></a>
-                        <a href="{{ele['github']}}"><i class="fab fa-github"></i></a>
-                        <a href="{{ele['linkedin']}}"><i class="fab fa-linkedin"></i></a>
-                    </p>
+    <div class="dev_page pb-4">
+        <br>
+        <h3 class=" mb-4 pb-3 text-red main-font fs-3" style="text-align: center;">Web Team</h3>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 " id="team-row">
+            {% for ele in web_team_list %}
+            <div class="col">
+                <div class="main-bg border-0 team-card p-2 mb-2">
+                    <div class="team-box">
+                        <div class="content p-3" style="text-align: center;">
+                            <img class="mb-3 mt-2" style="height:120px; width:120px; border-radius: 50%;"
+                                src="{{ele['img']}}">
+                            <h5 class="mb-2 main-font fs-5 text-red">
+                                {{ele['name']}}
+                            </h5>
+                            <p class="fs-7 sec-font">{{ele['role']}}</p>
+                            <p class="fs-7 sec-font">
+                                <i class="fas fa-phone-alt me-1"></i>
+                                <a href="tel:{{ele['call']}}" class="text-black">
+                                    {{ele['call']}}
+                                </a>
+                            </p>
+                            <p class="fs-4">
+                                <a href="mailto:{{ele['gmail']}}" target="_blank" rel="noopener noreferrer"
+                                    class="me-1">
+                                    <i class="fas fa-envelope-square text-black"></i>
+                                </a>
+                                <a href="{{ele['github']}}" target="_blank" rel="noopener noreferrer" class="me-1">
+                                    <i class="fab fa-github text-black"></i>
+                                </a>
+                                <a href="{{ele['linkedin']}}" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-linkedin text-black"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
-    {% endfor %}
-</div>
-</div>
-<div class="dev_page  pb-4"><br>
-    <h3 class=" mb-4 pb-3" style="text-align: center;">App Team</h3>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 " id="team-row">
-    {% for ele in app_team_list %}
-    <div class="col">
-        <div class="card team-card p-2 mb-2">
-            <div class="team-box">
-                <div class="content p-3" style="text-align: center;">
-                    <img class="mb-3 mt-2"style="height:120px; width:120px; border-radius: 50%;" src="{{ele['img']}}">
-                    <h5 class="mb-2">{{ele['name']}}</h5>
-                    <p style="font-size:medium">{{ele['role']}}</p>
-                    <p style="font-size: small"><i class="fas fa-phone-alt"></i>{{ele['call']}}</p>
-                    <p style="font-size: x-large;">
-                        <a href="{{ele['gmail']}}"><i class="fas fa-envelope-square"></i></a>
-                        <a href="{{ele['github']}}"><i class="fab fa-github"></i></a>
-                        <a href="{{ele['linkedin']}}"><i class="fab fa-linkedin"></i></a>
-                    </p>
+    <div class="pb-4 ">
+        <br>
+        <h3 class=" mb-4 pb-3 main-font fs-3" style="text-align: center;">App Team</h3>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 " id="team-row">
+            {% for ele in app_team_list %}
+            <div class="col">
+                <div class="card main-bg border-0 team-card p-2 mb-2">
+                    <div class="team-box">
+                        <div class="content p-3" style="text-align: center;">
+                            <img class="mb-3 mt-2" style="height:120px; width:120px; border-radius: 50%;"
+                                src="{{ele['img']}}">
+                            <h5 class="mb-2 main-font fs-5 text-red">
+                                {{ele['name']}}
+                            </h5>
+                            <p class="fs-7 sec-font">{{ele['role']}}</p>
+                            <p class="fs-7 sec-font">
+                                <i class="fas fa-phone-alt me-1"></i>
+                                <a href="tel:{{ele['call']}}" class="text-black">
+                                    {{ele['call']}}
+                                </a>
+                            </p>
+                            <p class="fs-4">
+                                <a href="mailto:{{ele['gmail']}}" target="_blank" rel="noopener noreferrer"
+                                    class="me-1">
+                                    <i class="fas fa-envelope-square text-black"></i>
+                                </a>
+                                <a href="{{ele['github']}}" target="_blank" rel="noopener noreferrer" class="me-1">
+                                    <i class="fab fa-github text-black"></i>
+                                </a>
+                                <a href="{{ele['linkedin']}}" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-linkedin text-black"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
+            </div>
+            {% endfor %}
+        </div>
     </div>
-    {% endfor %}
 </div>
-</div> 
 
 
 {% endblock %}

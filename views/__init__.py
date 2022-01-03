@@ -255,26 +255,12 @@ def Poll_result(id, option):
             entry_id = ele.poll_id
     return render_template('user_polls.html', activeNav='events', polls=res["polls"], images=res["images"], result=result)
 
+
 @app_mbp.route("/developers")
 def Developers():
-    web_team_list=[
-        {"img":"../static/images/developer/Sanjana.jpg","name":"Sanjana Barhate","role":"Front-end Developer","call":"+91 9975566026","gmail":"sanju1234.barhate@gmail.com","github":"https://github.com/sanjana2417","linkedin":"https://www.linkedin.com/in/sanjana-b-b692651b4/"},
-        {"img":"../static/images/developer/Saket.jpg","name":"Saket Chandorkar","role":"Front-end Developer","call":"+91 7506553715","gmail":"saketchandorkar123@gmail.com","github":"https://github.com/saket2001","linkedin":"https://www.linkedin.com/in/saket-chandorkar-856783203/"},
-        {"img":"../static/images/developer/Atharva.jpg","name":"Atharva Golapkar","role":"Front-end Developer","call":"+91 7039324970","gmail":"atharvagolapkar@gmail.com","github":"https://github.com/Jotaro2401","linkedin":"https://www.linkedin.com/in/atharva-suryakant-golapkar-9b02281b3/"},
-        {"img":"../static/images/developer/Lina.jpg","name":"Lina Pawar","role":"Front-end Developer","call":"+91 9146850710","gmail":"lpawar2911@gmail.com","github":"https://github.com/Lina-Pawar","linkedin":"https://www.linkedin.com/in/lina-pawar-5289a0198/"},
-        {"img":"../static/images/developer/Amit.jpg","name":"Amit Naik","role":"Front-end Developer","call":"+91 8779624030","gmail":"amitnaik3108@gmail.com","github":"https://github.com/Amit3108","linkedin":"https://www.linkedin.com/in/amit-naik-0807331b2/"},
-        {"img":"../static/images/developer/Bhushan.jpg","name":"Bhushan Khot","role":"Back-end Developer","call":"+91 8652618353","gmail":"bhushan.khot22@gmail.com","github":"https://github.com/Bhushankhot","linkedin":"https://www.linkedin.com/in/bhushankhot08/"},
-        {"img":"../static/images/developer/Athul.jpg","name":"Athul Tulsidasan","role":"Back-end Developer","call":"+91 ","gmail":"sanju1234.barhate@gmail.com","github":"https://github.com/sanjana2417","linkedin":"https://www.linkedin.com/in/sanjana-b-b692651b4/"},
-        {"img":"../static/images/developer/Chandni.jpg","name":"Chandini Chentamara","role":"Back-end Developer","call":"+91 ","gmail":"sanju1234.barhate@gmail.com","github":"https://github.com/sanjana2417","linkedin":"https://www.linkedin.com/in/sanjana-b-b692651b4/"},
-        {"img":"../static/images/developer/Tanishq.jpg","name":"Tanishq Parkar","role":"Back-end Developer","call":"+91 9324343000","gmail":"tanishqparkar@gmail.com","github":"https://github.com/RevTpark","linkedin":"https://www.linkedin.com/in/tanishq-parkar/"}
-    ]
-    app_team_list=[
-        {"img":"../static/images/developer/Aditya.jpg","name":"Aditya Cholayil","role":"App Developer","call":"+91 8291369867","gmail":"cholayilaaditya@gmail.com","github":"https://github.com/AadityaCholayil","linkedin":"https://www.linkedin.com/in/aaditya-cholayil/"},
-        {"img":"../static/images/developer/Yash.jpg","name":"Yash Lalit","role":"App Developer","call":"+91 9136858108","gmail":"yashlalit.23@gmail.com","github":"https://github.com/happy-mammal","linkedin":"https://www.linkedin.com/in/yash-lalit-0a6a6320b"},
-        {"img":"../static/images/developer/x.jpg","name":"ABC XYZ","role":"App Developer","call":"+91 ","gmail":"sanju1234.barhate@gmail.com","github":"https://github.com/sanjana2417","linkedin":"https://www.linkedin.com/in/sanjana-b-b692651b4/"}
-    ]   
 
-    return render_template('developers.html', activeNav='events',web_team_list=web_team_list,app_team_list=app_team_list)
+    return render_template('developers.html', activeNav='events', web_team_list=client_data.web_team_list, app_team_list=client_data.app_team_list)
+
 
 @app_mbp.errorhandler(404)
 def WrongLinkErrorHandler(e):
