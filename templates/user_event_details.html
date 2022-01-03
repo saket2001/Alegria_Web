@@ -67,10 +67,16 @@
                         {% endif %}
                     </h2>
                     <button
-                        class="w-100 d-flex align-items-center justify-content-center border-0 bg-brown text-beige my-3 fs-6 py-1 px-3 rounded-3"
+                        class="w-100 d-flex align-items-center justify-content-center border-0 bg-brown my-3 mb-2 fs-6 py-1 px-3 rounded-3"
                         style="max-width: 200px;">
-                        Add To Cart
+                        <a href={{paymentLink}} target="_blank" rel="noopener noreferrer" class="text-beige w-100">
+                            Buy Event
+                        </a>
                     </button>
+                    <span class="fs-8 sec-font w-50">
+                        ( You will be redirected to razorpay payment page, choose your event and pay the required
+                        amount )
+                    </span>
                     <div style="background-color: black;height:2px;margin:10px 0;"></div>
                     <p class="fs-7 mb-1 text-black fw-normal">
                         Category: {{event_details["event_category_name"]}}
