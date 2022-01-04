@@ -12,7 +12,7 @@ def create_app():
         SQLALCHEMY_POOL_RECYCLE=299,
         SQLALCHEMY_POOL_TIMEOUT=20,
         # SQLALCHEMY_DATABASE_URI='mysql://AlegriaTheFest:2022themeisvintwood@AlegriaTheFest.mysql.pythonanywhere-services.com/AlegriaTheFest$alegria2022',
-        SQLALCHEMY_DATABASE_URI='mysql://root:root@localhost/alegria_web',
+        SQLALCHEMY_DATABASE_URI='mysql://root:root@localhost/alegria_web-new',
         MAIL_SERVER='smtp.gmail.com',
         MAIL_PORT=465,
         MAIL_USE_SSL=True,

@@ -45,7 +45,7 @@ def getDateTime():
         return now_beautiful
     except Exception as e:
         print(e)
-        return redirect(url_for('home'))
+        return redirect("/")
 
 
 def calcGreeting():
@@ -60,7 +60,7 @@ def calcGreeting():
             return "Good Evening"
     except Exception as e:
         print(e)
-        return redirect(url_for('home'))
+        return redirect("/")
 
 
 #############################
@@ -73,7 +73,7 @@ def adminLogin():
         return render_template('/admin/admin_login.html')
     except Exception as e:
         print(e)
-        return redirect(url_for('home'))
+        return redirect("/")
 
 # dashboard routes
 
@@ -91,7 +91,7 @@ def home():
         return render_template('/admin/admin_dashboard.html', greeting=calcGreeting(), now_beautiful=getDateTime(), username='', image=session.get('user_image'), eventsList=eventsList, activeNav='dashboard')
     except Exception as e:
         print(e)
-        return redirect(url_for('home'))
+        return redirect("/")
 
 # event routes
 
@@ -134,7 +134,7 @@ def events(event_category):
 
     except Exception as e:
         print(e)
-        return redirect(url_for('home'))
+        return redirect("/")
 
 
 @admin_bp.route('/add-event', methods=["POST"])
@@ -177,7 +177,7 @@ def addEvent():
 
         except Exception as e:
             print(e)
-            return redirect(url_for('home'))
+            return redirect("/")
 
     return redirect('/admin/events')
 
@@ -249,7 +249,7 @@ def editEventDetails(category, event_id):
         return render_template('/admin/admin_event_edit.html', activeNav='events', event_details=event_details)
     except Exception as e:
         print(e)
-        return redirect(url_for('home'))
+        return redirect("/")
 
 
 @ admin_bp.route("/events/<category>/<event_id>/delete", methods=['GET', 'POST'])
@@ -265,7 +265,7 @@ def deleteevent(category, event_id):
         return redirect('/admin/events')
     except Exception as e:
         print(e)
-        return redirect(url_for('home'))
+        return redirect("/")
 
 
 @ admin_bp.route("/events/event-registrations")
@@ -287,7 +287,7 @@ def eventRegistrations():
         return render_template('admin_event_registrations.html', activeNav='events', event_registrations=event_registrations)
     except Exception as e:
         print(e)
-        return redirect(url_for('home'))
+        return redirect("/")
 
 
 # merchandise routes
@@ -319,7 +319,7 @@ def merchandise(category):
         return render_template('/admin/admin_merchandise.html', activeNav='merchandise', merchandise_List=res["merchandise_List"], form=form)
     except Exception as e:
         print(e)
-        return redirect(url_for('home'))
+        return redirect("/")
 
 
 @ admin_bp.route("/exceptionn")
@@ -351,7 +351,7 @@ def addMerchandise():
 
         except Exception as e:
             print(e)
-            return redirect(url_for('home'))
+            return redirect("/")
 
     return redirect("/admin/merchandise/{}".format(category))
 
@@ -404,12 +404,12 @@ def editMerchandiseDetails(merchandise_category, merchandise_id):
 
             except Exception as e:
                 print(e)
-                return redirect(url_for('home'))
+                return redirect("/")
 
         return redirect("/admin/merchandise")
     except Exception as e:
         print(e)
-        return redirect(url_for('home'))
+        return redirect("/")
 
 
 @ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/delete", methods=["GET", "POST"])
@@ -423,7 +423,7 @@ def deletemerchandise(merchandise_category, merchandise_id):
         return redirect('/admin/merchandise')
     except Exception as e:
         print(e)
-        return redirect(url_for('home'))
+        return redirect("/")
 
 
 # poll routes
@@ -448,7 +448,7 @@ def poll_details(poll_id):
         return render_template('/admin/admin_poll_details.html', activeNav='poll_details', polldetails=res["polldetails"])
     except Exception as e:
         print(e)
-        return redirect(url_for('home'))
+        return redirect("/")
 
 
 @ admin_bp.route("/polls")
@@ -471,4 +471,4 @@ def polls():
         return render_template('/admin/admin_polls.html', activeNav='polls', poll_list=res["polls_list"], form=form)
     except Exception as e:
         print(e)
-        return redirect(url_for('home'))
+        return redirect("/")

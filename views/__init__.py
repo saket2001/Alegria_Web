@@ -19,12 +19,8 @@ app_mbp = Blueprint(
 
 @app_mbp.route('/')
 def landingPage():
-    try:
-        signed_in = False
-        return render_template('user_homepage.html', activeNav='Home', signed_in=signed_in, row1=client_data.events_row1, row2=client_data.events_row2, row3=client_data.events_row3)
-    except Exception as e:
-        print(e)
-        return redirect(url_for('landingPage'))
+    signed_in = False
+    return render_template('user_homepage.html', activeNav='Home', signed_in=signed_in, row1=client_data.events_row1, row2=client_data.events_row2, row3=client_data.events_row3)
 
 
 @app_mbp.route("/user-login")
@@ -33,7 +29,7 @@ def userLogin():
         return render_template('user_login.html')
     except Exception as e:
         print(e)
-        return redirect(url_for('landingPage'))
+        return redirect("/")
 
 
 @app_mbp.route("/about-us")
@@ -42,7 +38,7 @@ def aboutUs():
         return render_template('user_aboutus.html', aboutus_2019=client_data.aboutus_2019, aboutus_2018=client_data.aboutus_2018, aboutus_2017=client_data.aboutus_2017, aboutus_2016=client_data.aboutus_2016, aboutus_2015=client_data.aboutus_2015, aboutus_2014=client_data.aboutus_2014, aboutus_2013=client_data.aboutus_2013)
     except Exception as e:
         print(e)
-        return redirect(url_for('landingPage'))
+        return redirect("/")
 
 
 @app_mbp.route('/events/<event_category>', methods=['GET'])
@@ -79,7 +75,7 @@ def events(event_category=None):
         return render_template('user_events_list.html', activeNav='Events', events_list=events_arr, category=event_category)
     except Exception as e:
         print(e)
-        return redirect(url_for('landingPage'))
+        return redirect("/")
 
 
 @ app_mbp.route("/event/<category_name>/<event_id>")
@@ -141,7 +137,7 @@ def EventDetails(category_name, event_id):
         return render_template('user_event_details.html', activeNav='Events', event_details=event_details, similar_events=similar_events, paymentLink=client_data.paymentLinks[category_name.lower()])
     except Exception as e:
         print(e)
-        return redirect(url_for('landingPage'))
+        return redirect("/")
 
 
 @ app_mbp.route("/merchandise/<string:category>")
@@ -166,7 +162,7 @@ def merchandise(category):
 
     except Exception as e:
         print(e)
-        return redirect(url_for('landingPage'))
+        return redirect("/")
 
 
 @ app_mbp.route("/merchandise/<string:category>/<string:id>")
@@ -210,7 +206,7 @@ def get_merchandise_by_Id(category, id):
         return render_template('user_merchandise_details.html', activeNav="Merchandise", merchandise_data=res["merchandise"], similar_merchandise=similar_merchandise)
     except Exception as e:
         print(e)
-        return redirect(url_for('landingPage'))
+        return redirect("/")
 
 
 #################################
@@ -222,7 +218,7 @@ def hackathonDetails():
         return render_template('user_hackathon.html', activeNav='Hackathon', problem_statements=client_data.problem_statements)
     except Exception as e:
         print(e)
-        return redirect(url_for('landingPage'))
+        return redirect("/")
 
 
 @app_mbp.route("/polls")
@@ -231,7 +227,7 @@ def polls_main():
         return render_template('user_polls_main.html', polls_cards=client_data.polls_cards)
     except Exception as e:
         print(e)
-        return redirect(url_for('landingPage'))
+        return redirect("/")
 
 
 @app_mbp.route("/polls/<string:id>")
@@ -258,7 +254,7 @@ def Poll_list(id):
         return render_template('user_polls.html', activeNav='events', polls=res["polls"], images=res["images"], result='')
     except Exception as e:
         print(e)
-        return redirect(url_for('landingPage'))
+        return redirect("/")
 
 
 @app_mbp.route("/polls/<string:id>/<string:option>")
@@ -298,7 +294,7 @@ def Poll_result(id, option):
         return render_template('user_polls.html', activeNav='events', polls=res["polls"], images=res["images"], result=result)
     except Exception as e:
         print(e)
-        return redirect(url_for('landingPage'))
+        return redirect("/")
 
 
 # 3
@@ -310,7 +306,7 @@ def DevelopersPage():
         return render_template('developers.html', activeNav='Developers', web_team_list=client_data.web_team_list, app_team_list=client_data.app_team_list)
     except Exception as e:
         print(e)
-        return redirect(url_for('landingPage'))
+        return redirect("/")
 
 
 @app_mbp.route("/event-heads")
@@ -320,7 +316,7 @@ def eventHeadPage():
         return render_template('event-head.html', activeNav='Event heads')
     except Exception as e:
         print(e)
-        return redirect(url_for('landingPage'))
+        return redirect("/")
 
 
 @app_mbp.errorhandler(404)
