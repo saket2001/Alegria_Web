@@ -123,7 +123,7 @@
             <div class="row my-3 w-100 d-flex justify-content-center">
                 <div style="background-color: black;height:2px;margin:10px 0;"></div>
                 <h5 class="fs-5 mt-2 m-1 main-font text-black">Events From Similar Category</h5>
-                <div class="row row-cols-md-4 row-cols-sm-1 g-4 my-1">
+                <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1 g-4 my-1">
                     {% for event in similar_events %}
                     {% if event['event_name'] != event_details["event_name"] %}
                     <div class="col d-flex flex-column align-items-center">
