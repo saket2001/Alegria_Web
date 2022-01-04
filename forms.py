@@ -40,14 +40,8 @@ class AddEventForm(FlaskForm):
         InputRequired()])
     icon_url = StringField('Event Icon Url', validators=[
         InputRequired()])
-    onlineCost = IntegerField('Event Online Cost', validators=[
+    eventCost = IntegerField('Event Cost', validators=[
         InputRequired(), NumberRange(min=0)])
-    offlineCost = IntegerField('Event Offline Cost', validators=[
-        InputRequired(), NumberRange(min=0)])
-    supportsOnline = StringField('Event Supports Online', validators=[
-        InputRequired()])
-    supportsOffline = StringField('Event Supports Offline', validators=[
-        InputRequired()])
     pr_points = StringField('Event PR Points')
 
 
@@ -58,7 +52,7 @@ class AddMerchandiseForm(FlaskForm):
                        InputRequired(), length(min=6, max=40)])
     description = TextAreaField('Merchandise Description', validators=[
                                 InputRequired(), Length(min=10)])
-    categoryName = StringField('Merchandise Name', validators=[
+    categoryName = StringField('Category Name', validators=[
         InputRequired(), Length(min=5)])
     cost = IntegerField('Merchandise Cost', validators=[
         InputRequired(), NumberRange(min=0)])

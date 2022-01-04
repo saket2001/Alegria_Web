@@ -5,7 +5,7 @@ Alegria 2022 | Events
 {% endblock %}
 
 {% block content %}
-<div class="containr-fluid overflow-hidden bg-beige">
+<div class="containr-fluid overflow-hidden bg-teal">
     <div class="row">
         <div class="col-lg-3 col-sm-12 py-5 bg-navbar" style="color:#f3efef">
             <div class="p-3 mx-2 sec-font">
@@ -44,9 +44,6 @@ Alegria 2022 | Events
                     <li style="list-style: disc;">
                         <a href="/merchandise/tshirts">Tshirts</a>
                     </li>
-                    <li style="list-style: disc;">
-                        <a href="/merchandise/bags">Bags</a>
-                    </li>
                 </ul>
                 <br>
                 <hr>
@@ -80,7 +77,7 @@ Alegria 2022 | Events
                         </ol>
                     </nav>
                 </div>
-                <div class="col-lg-3 col-sm-2">
+                <div class="col-lg-3 col-sm-6">
                     <li class="filter_btn px-2 py-1 rounded d-flex align-items-center fs-7 dropdown fw-bold sec-font">
                         <div class='dropdown-toggle fs-7 u-text-brown' id="dropdownMenuButton1"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -171,12 +168,8 @@ Alegria 2022 | Events
                                         {{ele['category']}}
                                     </p>
                                     <p class="w-100 fs-5 fw-bolder text-red px-2 sec-font text-center mb-2">
-                                        {% if ele["event_offline_cost"] != 0 %}
-                                        {{ele["event_offline_cost"]}} ₹
-                                        {% endif %}
-                                        {% if ele["event_online_cost"] != 0 %}
-                                        {{ele["event_online_cost"]}} ₹
-                                        {% endif %}
+                                        {{ele["event_cost"]}} ₹
+
                                     </p>
                                 </div>
 

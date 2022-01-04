@@ -122,7 +122,112 @@ paymentLinks = {
     "fine-arts": "https://pages.razorpay.com/fine-arts-alegria-22",
     "performing-arts": "https://pages.razorpay.com/Performing-Arts-alegria-22",
     "literary-arts": "https://pages.razorpay.com/Literary-Arts-alegria-22",
-    "Technical": "https://pages.razorpay.com/technical-events-alegria22",
+    "technical": "https://pages.razorpay.com/technical-events-alegria22",
     "management": "https://pages.razorpay.com/management-events-alegria22",
     "workshop": "https://pages.razorpay.com/Technical-Workshops-alegria22"
 }
+
+
+events_row1 = [{
+    "title": "Technical Events",
+    "content": "Here is your opportunity to showcase your technical skills and get a chance to win in our technical events ",
+    "link": '/events/technical-events',
+    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Tech.png?token=ANBEQ2C6JRMVCRRGCYSMXTLB3PPEE'
+}, {
+    "title": "Technical Workshop",
+    "content": "Come here and get a chance  to explore and learn new technical skills at a reasonable price in our technical workshops.",
+    "link": '/events/technical-workshops',
+    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Technical_workshop.jpeg?token=ANBEQ2EMP7UMXDDI7BCERA3B3PPGI'
+}, {
+    "title": "Management",
+    "content": "The masterminds behind a successful company or event is the proper management, here is an opportunity awaiting for you in the form of management competitions",
+    "link": '/events/management',
+    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/management.png?token=ANBEQ2BRH3WKSNGR5RCH62TB3PPHE'
+}]
+
+events_row2 = [{
+    "title": "Fine Arts",
+    "content": "Creative strokes, dripping colours and creative mind is more than enough for the artist within you to express his talent,  so come and grab this opportunity to flaunt your art .",
+    "link": '/events/fine-arts',
+    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Fine%20Arts.png?token=ANBEQ2ANRWDANXBG7D6HP7DB3PPJG'
+}, {
+    "title": "Performing Arts",
+    "content": "Representing the true beauty of talent, we provide a way to display your amazing dancing, singing and acting skills in our intriguing events",
+    "link": '/events/performing-arts',
+    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Performing%20Arts.png?token=ANBEQ2DQB3NP5LEDVZNHSV3B3PPLK'
+}, {
+    "title": "Literary Arts",
+    "content": "If you have the creativity to express feelings through words then we have a platform for you to come and participate.",
+    "link": '/events/literary-arts',
+    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Literary%20Arts.png?token=ANBEQ2EQB5JVHRIXOAJ5GMTB3PPKK'
+}]
+
+events_row3 = [{
+    "title": "Informals",
+    "content": "Informals events are one's chance to change the definition of beauty through your immense inside talent by taking part in different informals events. ",
+    "link": '/events/informals',
+    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Informals.png?token=ANBEQ2FDVO76BEAEB6K7LELB3PPMK'
+}, {
+    "title": "Gaming",
+    "content": "If you are fond of crazy and adventure games then come and get a chance to showcase your talent and win.",
+    "link": '/events/gaming',
+    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Gaming.png?token=ANBEQ2DPVV3PGRQX4UQDWRTB3PPOY'
+}, {
+    "title": "Sports",
+    "content": "Sports is all about the spirit and sportsmanship of the player so if you posses the true spirit of sports then you stand a chance to win by taking part in our sports events.",
+    "link": '/events/sports',
+    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Sports.png?token=ANBEQ2DSYVZL5KI7QUZQ5F3B3PPNK'
+}]
+
+web_team_list = [
+    {"img": "../static/images/developer/Saket.jpg", "name": "Saket Chandorkar", "role": "Front-end Developer", "call": "+917506553715",
+            "gmail": "saketchandorkar123@gmail.com", "github": "https://github.com/saket2001", "linkedin": "https://www.linkedin.com/in/saket-chandorkar-856783203/"},
+    {"img": "../static/images/developer/Lina.jpg", "name": "Lina Pawar", "role": "Front-end Developer", "call": "+91 9146850710",
+            "gmail": "lpawar2911@gmail.com", "github": "https://github.com/Lina-Pawar", "linkedin": "https://www.linkedin.com/in/lina-pawar-5289a0198/"},
+    {"img": "../static/images/developer/Amit.jpg", "name": "Amit Naik", "role": "Front-end Developer", "call": "+91 8779624030",
+            "gmail": "amitnaik3108@gmail.com", "github": "https://github.com/Amit3108", "linkedin": "https://www.linkedin.com/in/amit-naik-0807331b2/"},
+    {"img": "../static/images/developer/Atharva.jpg", "name": "Atharva Golapkar", "role": "Front-end Developer", "call": "+91 7039324970",
+            "gmail": "atharvagolapkar@gmail.com", "github": "https://github.com/Jotaro2401", "linkedin": "https://www.linkedin.com/in/atharva-suryakant-golapkar-9b02281b3/"},
+    {"img": "../static/images/developer/Sanjana.jpg", "name": "Sanjana Barhate", "role": "Front-end Developer", "call": "+919975566026",
+     "gmail": "sanju1234.barhate@gmail.com", "github": "https://github.com/sanjana2417", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"},
+    {"img": "../static/images/developer/Bhushan.jpg", "name": "Bhushan Khot", "role": "Back-end Developer", "call": "+91 8652618353",
+            "gmail": "bhushan.khot22@gmail.com", "github": "https://github.com/Bhushankhot", "linkedin": "https://www.linkedin.com/in/bhushankhot08/"},
+    {"img": "../static/images/developer/Athul.jpg", "name": "Athul Tulsidasan", "role": "Back-end Developer", "call": "+91 ",
+            "gmail": "sanju1234.barhate@gmail.com", "github": "https://github.com/sanjana2417", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"},
+    {"img": "../static/images/developer/Chandni.jpg", "name": "Chandini Chentamara", "role": "Back-end Developer", "call": "+91 ",
+            "gmail": "sanju1234.barhate@gmail.com", "github": "https://github.com/sanjana2417", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"},
+    {"img": "../static/images/developer/Tanishq.jpg", "name": "Tanishq Parkar", "role": "Back-end Developer", "call": "+91 9324343000",
+            "gmail": "tanishqparkar@gmail.com", "github": "https://github.com/RevTpark", "linkedin": "https://www.linkedin.com/in/tanishq-parkar/"}
+]
+
+app_team_list = [
+    {"img": "../static/images/developer/Aditya.jpg", "name": "Aditya Cholayil", "role": "App Developer", "call": "+91 8291369867",
+     "gmail": "cholayilaaditya@gmail.com", "github": "https://github.com/AadityaCholayil", "linkedin": "https://www.linkedin.com/in/aaditya-cholayil/"},
+    {"img": "../static/images/developer/Yash.jpg", "name": "Yash Lalit", "role": "App Developer", "call": "+91 9136858108",
+     "gmail": "yashlalit.23@gmail.com", "github": "https://github.com/happy-mammal", "linkedin": "https://www.linkedin.com/in/yash-lalit-0a6a6320b"},
+    {"img": "../static/images/developer/x.jpg", "name": "ABC XYZ", "role": "App Developer", "call": "+91 ", "gmail": "sanju1234.barhate@gmail.com",
+     "github": "https://github.com/sanjana2417", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"}
+]
+
+polls_cards = [
+    {
+        "id": "1",
+        "question": "Celebrity for Stand -Up Comedy?",
+        "image": "https://media.istockphoto.com/vectors/standup-stage-with-mic-red-curtains-and-comedy-show-logo-vector-id1251603742?k=20&m=1251603742&s=612x612&w=0&h=U2ofKd5416CnfsAXphDr3YZTyBhGOzVqM2qtGuyhIcY="
+    },
+    {
+        "id": "2",
+        "question": "Guest for Movie Promotion?",
+        "image": "https://graphicriver.img.customer.envatousercontent.com/files/265867849/preview.jpg?auto=compress%2Cformat&q=80&fit=crop&crop=top&max-h=8000&max-w=590&s=e9d8c2035d53240c3a32a002ea78e8a3"
+    },
+    {
+        "id": "3",
+        "question": "Who should be DJ for EDM Night?",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-8ZfICHmwKc1TZ2r3dIWXZ1CVap7uZbpxd4EJPNEfg0WppN8hbGhoAOqQ1lYiAIGWxh4&usqp=CAU"
+    },
+    {
+        "id": "4",
+        "question": "Chief Guest for Sports Events Prize Distribution?",
+        "image": "https://img.etimg.com/thumb/msid-77734860,width-650,imgsize-951020,,resizemode-4,quality-100/sports_istock.jpg"
+    }
+]

@@ -1,6 +1,5 @@
 {% extends 'user_layout.html' %}
 
-
 {% block headContent %}
 <style>
     .schedule {
@@ -13,15 +12,15 @@
         width: 100%;
         padding: 30px;
         border-radius: 50px 0;
-        margin: 15px;
     }
 
     .ps-img {
-        width: 28%;
+        height: 100%;
     }
 
     .ps-content {
         width: 70%;
+        margin: auto;
     }
 
     .reverse {
@@ -60,17 +59,17 @@ Alegria 2022 | Hackathon 2022
 {% endblock %}
 
 {% block content %}
-<div class="d-flex flex-column justify-content-center min-w-100 min-vh-100 bg-beige overflow-hidden">
+<div class="d-flex flex-column justify-content-center min-w-100 min-vh-100 bg-teal bg-cover overflow-hidden">
     <div class="row m-2 py-2">
         <div class="col-lg-1"></div>
         <div class="col-lg-6 col-sm-12 my-4">
-            <h1 class="main-font text-red main-font">Hackathon</h1>
+            <h1 class="main-font text-red">Hackathon 2022</h1>
             <p class="fs-7 lh-base text-black my-1 mb-0 sec-font">
                 Participants have to work on a given problem with their team to come up with the best solution they can.
                 The most feasible solution will be awarded.
             </p>
         </div>
-        <div class="col-lg-3 col-sm-12 my-4">
+        <div class="col-lg-3 col-sm-12 my-4 d-flex justify-content-center">
             <img src="/static/images/hackathon/hackathon.png" alt='Hackathon logo' width="200px" height="200px">
         </div>
     </div>
@@ -83,7 +82,7 @@ Alegria 2022 | Hackathon 2022
             <p class="fs-7">Number of Participants: 2-4</p>
             <p>
                 <a data-bs-toggle="collapse" href="#collapse1" role="button" aria-expanded="false"
-                    aria-controls="collapse1">
+                    aria-controls="collapse1" class="main-font text-red">
                     Prizes +
                 </a>
             </p>
@@ -97,15 +96,38 @@ Alegria 2022 | Hackathon 2022
             </div>
             <p>
                 <a data-bs-toggle="collapse" href="#collapse2" role="button" aria-expanded="false"
-                    aria-controls="collapse2">
+                    aria-controls="collapse2" class="main-font text-red">
                     Rules +
                 </a>
             </p>
             <div class="collapse" id="collapse2">
                 <div class="card collapse-card">
-                    <li class="fs-7 mb-1">Will be updated soon</li>
+                    <p class="fs-7 mb-1">
+                        Round 1 (Idea Submission):
+                        <li class="fs-7 mb-1">1. Idea must be submitted by Team Leader Only.</li>
+                        <li class="fs-7 mb-1">2. The team must submit the Idea before the last date.</li>
+                        <li class="fs-7 mb-1">3. Upload the Idea Submission File in the prescribed format.</li>
+                        <li class="fs-7 mb-1">4. Format for Idea file:</li>
+                        <li class="fs-7 mb-1">-- PSID_TeamName_LeaderName</li>
+                        <li class="fs-7 mb-1">-- For Eg. PS01_Enigma_AmitNaik</li>
+                        <li class="fs-7 mb-1">5. A team can submit idea in only one problem statement only. Multiple
+                            idea submission in this hackathon is not allowed.</li>
+                        <li class="fs-7 mb-1">6. For AI/ Machine learning, participants can either create or use any
+                            relevant dataset.</li>
+                    </p>
                 </div>
             </div>
+            <a href='https://bit.ly/3e1QFnV' target="_blank" rel="noopener noreferrer" class="text-red"
+                style="text-decoration: underline;">Sample Idea Format</a>
+
+            <button
+                class="w-100 d-flex align-items-center justify-content-center border-0 bg-brown my-3 mb-2 fs-6 py-1 px-3 rounded-3"
+                style="max-width: 200px;">
+                <a href='https://forms.gle/utWwxyJ7aX9dvQx98' target="_blank" rel="noopener noreferrer"
+                    class="text-beige w-100">
+                    Participate
+                </a>
+            </button>
         </div>
         <div class="col-lg-6 d-flex flex-column justify-content-center schedule">
             <p>
@@ -155,17 +177,15 @@ Alegria 2022 | Hackathon 2022
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-10 col-md-10 col-sm-10">
-            <hr>
-            <h4><b>Problem Statements</b></h4>
+    <hr>
+    <div class="row d-flex flex-column justify-content-center align-items-center">
+        <h4 class="main-font fs-4 text-center">Problem Statements</h4>
+        <div class="col-10 g-2">
             {% for ele in problem_statements %}
-            <div class="problem-statement u-text-beige reverse">
+            <div class="problem-statement text-beige reverse mb-3">
                 <div class="ps-img">
-                    <img src={{ele[4]}} alt="problem-statement" style="width:100%;border-radius: 50px 0;">
+                    <img src={{ele[4]}} alt="problem-statement" style="width:90%;border-radius: 50px 0;margin:auto;">
                 </div>
-                <div class="col"></div>
                 <div class="ps-content">
                     <h5 class="fs-6 text-teal"><b>{{ele[0]}}</b></h5>
                     <h3 class="fs-5 text-beige m-0 p-0">{{ele[1]}}</h3>

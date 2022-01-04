@@ -6,7 +6,7 @@
 
 {% block content %}
 <div class="container-fluid">
-    <div class="row min-w-100 min-vh-100 bg-gradient overflow-hidden sec-font">
+    <div class="row min-w-100 min-vh-100 bg-teal overflow-hidden sec-font">
         <div class="col-lg-12 col-sm-12 p-3 bg-cover">
             <!-- go back button -->
             <div class="row">
@@ -34,7 +34,7 @@
                             </li>
                             <li class="breadcrumb-item" aria-current="page">
                                 <a class="text-black"
-                                    href={{"/user/events/{}".format(event_details["event_category_name"])}}>
+                                    href={{"/events/{}".format(event_details["event_category_name"])}}>
                                     {{event_details["event_category_name"]}}
                                 </a>
                             </li>
@@ -45,35 +45,20 @@
                     <h1 class="text-red fs-3 mt-2">
                         {{event_details["event_name"]}}
                     </h1>
-                    <p class="text-black fs-6 fw-light mb-1">
+                    <p class="text-black fs-7 fw-light mb-1">
                         {{event_details["event_summary"]}}
                     </p>
-                    <h2 class="text-red row my-2">
-                        {% if event_details["offline_cost"] != 0 %}
-                        <div class="col">
-                            <b>
-                                {{event_details["offline_cost"]}} ₹
-                                <span class="fs-7">(Offline)</span>
-                            </b>
-                        </div>
-                        {% endif %}
-                        {% if event_details["online_cost"] != 0 %}
-                        <div class="col">
-                            <b>
-                                {{event_details["online_cost"]}} ₹
-                                <span class="fs-7">(Online)</span>
-                            </b>
-                        </div>
-                        {% endif %}
+                    <h2 class="text-red my-2 main-font">
+                        {{event_details["event_cost"]}} ₹
                     </h2>
                     <button
                         class="w-100 d-flex align-items-center justify-content-center border-0 bg-brown my-3 mb-2 fs-6 py-1 px-3 rounded-3"
                         style="max-width: 200px;">
-                        <a href={{paymentLink}} target="_blank" rel="noopener noreferrer" class="text-beige w-100">
+                        <a href={{paymentLink}} target="_blank" rel="noopener noreferrer" class="text-light w-100">
                             Buy Event
                         </a>
                     </button>
-                    <span class="fs-8 sec-font w-50">
+                    <span class="fs-8 text-black sec-font w-50">
                         ( You will be redirected to razorpay payment page, choose your event and pay the required
                         amount )
                     </span>
@@ -85,13 +70,7 @@
                         Category Code: {{event_details["event_category_id"]}}
                     </p>
                     <p class="fs-7 mb-1 text-black fw-normal">
-                        Mode:
-                        {% if event_details["event_mode"] == '0' %}
-                        Offline
-                        {% endif %}
-                        {% if event_details["event_mode"] == '1' %}
-                        Online
-                        {% endif %}
+                        Mode: {{event_details["event_mode"]}}
                     </p>
                     <p class="fs-7 mb-1 text-black fw-normal">
                         Contact 1: {{event_details["event_contact1"]}}
@@ -104,27 +83,27 @@
             <div class="row my-3">
                 <div class="d-flex">
                     <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1"
-                        aria-expanded="false" aria-controls="collapse1">
+                        aria-expanded="false" aria-controls="collapse1" onclick="hideothers()">
                         + Details
                     </button>
                     <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2"
-                        aria-expanded="false" aria-controls="collapse2">
+                        aria-expanded="false" aria-controls="collapse2" onclick="hideothers()">
                         + Perks
                     </button>
                     <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3"
-                        aria-expanded="false" aria-controls="collapse3">
+                        aria-expanded="false" aria-controls="collapse3" onclick="hideothers()">
                         + Rules
                     </button>
                 </div>
                 <div class="d-flex">
                     <div class="collapse collapse-horizontal" id="collapse1">
-                        <div class="card collapse-card u-text-light-brown" style="width:70vw;max-width:500px">
+                        <div class="card collapse-card u-text-light-brown" style="width:90vw;max-width:500px">
                             Date & Time: {{event_details["event_date"]}}<br>
                             Criteria: {{event_details["event_criteria"]}}
                         </div>
                     </div>
                     <div class="collapse collapse-horizontal" id="collapse2">
-                        <div class="card collapse-card u-text-light-brown" style="width:70vw;max-width:500px">
+                        <div class="card collapse-card u-text-light-brown" style="width:90vw;max-width:500px">
                             <li class="fs-7 mb-1">
                                 1st prize : {{event_details["event_perks_1"]}}
                             </li>
@@ -135,7 +114,7 @@
                         </div>
                     </div>
                     <div class="collapse collapse-horizontal" id="collapse3">
-                        <div class="card collapse-card u-text-light-brown" style="width:70vw;max-width:500px">
+                        <div class="card collapse-card u-text-light-brown" style="width:90vw;max-width:500px">
                             {{event_details["event_rules"]}}
                         </div>
                     </div>
@@ -144,7 +123,7 @@
             <div class="row my-3 w-100 d-flex justify-content-center">
                 <div style="background-color: black;height:2px;margin:10px 0;"></div>
                 <h5 class="fs-5 mt-2 m-1 main-font text-black">Events From Similar Category</h5>
-                <div class="row row-cols-md-4 row-cols-sm-1 g-4 my-1">
+                <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1 g-4 my-1">
                     {% for event in similar_events %}
                     {% if event['event_name'] != event_details["event_name"] %}
                     <div class="col d-flex flex-column align-items-center">
@@ -155,12 +134,8 @@
                             </div>
                             <h3 class="fs-6 text-red text-center main-font px-2 my-1">{{event['event_name']}}</h3>
                             <span class="fs-7 text-black sec-font px-2">{{event['category']}}</span>
-                            <p class="fs-5 text-red main-font px-2 mb-1">{% if event["event_offline_cost"] != 0 %}
-                                {{event["event_offline_cost"]}} ₹
-                                {% endif %}
-                                {% if event["event_online_cost"] != 0 %}
-                                {{event["event_online_cost"]}} ₹
-                                {% endif %}
+                            <p class="fs-5 text-red main-font px-2 mb-1">
+                                {{event["event_cost"]}} ₹
                             </p>
                         </a>
                     </div>
@@ -173,4 +148,11 @@
         </div>
     </div>
 </div>
+<script>
+    function hideothers() {
+        document.getElementById('collapse1').classList.remove("show");
+        document.getElementById('collapse2').classList.remove("show");
+        document.getElementById('collapse3').classList.remove("show");
+    }
+</script>
 {% endblock %}

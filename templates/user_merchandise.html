@@ -5,24 +5,10 @@ Alegria 2022 | Merchandise
 {% endblock %}
 
 {% block content %}
-<style>
-    .merchandise-card-container {
-        height: auto;
-        background-color: #FFF8EF;
-        border: 3px solid brown;
-        padding: 10px 10px 0 10px;
-        border-radius: 20px;
-    }
 
-    .merchandise-card-container img {
-        width: 100%;
-        border-radius: 20px;
-        margin-bottom: 20px;
-    }
-</style>
-<div class="containr-fluid overflow-hidden">
+<div class="containr-fluid overflow-hidden bg-teal bg-cover">
     <div class="row">
-        <div class="col-lg-3 py-5 bg-navbar" style="height:100%;color:#f3efef">
+        <div class="col-lg-3 bg-navbar">
             <div class="p-5 px-3 mx-2">
                 <h3 class="fs-5 mb-3 text-light">Categories</h3>
                 <li class="u-text-light-brown my-1 fs-7">
@@ -59,9 +45,6 @@ Alegria 2022 | Merchandise
                     <li style="list-style: disc;">
                         <a href="/merchandise/tshirts">Tshirts</a>
                     </li>
-                    <li style="list-style: disc;">
-                        <a href="/merchandise/bags">Bags</a>
-                    </li>
                 </ul>
                 <br>
                 <hr>
@@ -81,8 +64,8 @@ Alegria 2022 | Merchandise
                 </div>
             </div>
         </div>
-        <div class="col-lg-9 bg-cover">
-            <div class="d-flex align-items-center justify-content-between p-4">
+        <div class="col-lg-9">
+            <div class="d-flex flex-wrap align-items-center justify-content-between p-4">
                 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb sec-font">
                         <li class="breadcrumb-item"><a class="text-brown" href="/">Home</a></li>
@@ -105,9 +88,6 @@ Alegria 2022 | Merchandise
                         <li>
                             <a class="dropdown-item fs-7" href="/merchandise/badges">Badges</a>
                         </li>
-                        <li>
-                            <a class="dropdown-item fs-7" href="/merchandise/bags">Bags</a>
-                        </li>
                     </ul>
                 </li>
             </div>
@@ -125,28 +105,32 @@ Alegria 2022 | Merchandise
                 </div>
             </div>
             <div class="row px-4">
-                <div id="admin-events" class="row row-cols-1 row-cols-sm-3 row-cols-md-3 gy-2 gx-3">
+                <div id="admin-events" class="row row-cols-1 row-cols-sm-3 row-cols-md-3 g-4">
                     {% for ele in merchandise_list %}
-                    <div class="col col-sm-12">
+                    <div class="col">
                         <a href={{"/merchandise/{}/{}".format(ele['category'],ele['id'])}}
-                            class="d-flex flex-column justify-content-center py-1 m-2">
-                            <div class="merchandise-card-container">
-                                <div><img src="/static/images/tshirt.png" alt="merchandise-image"></div>
-                                <div style="border-top:3px solid brown;width:80%;margin: auto;">
-                                    <h3 class="w-100 fs-5 text-brown mt-2 mb-0 px-2 main-font text-center fw-bold">
-                                        {{ele['name']}}</h3>
-                                </div>
-                                <div class="col"
-                                    style="display: flex;width:90%;margin:auto;justify-content: space-between;">
-                                    <div class="text-black sec-font fw-bold">{{ele['cost']}} ₹</div>
-                                    <div class="text-red sec-font" style="text-transform: capitalize;">
-                                        {{ele['category']}}</div>
-                                </div>
-                                <button
-                                    class="w-100 d-flex align-items-center justify-content-center border-0 bg-navbar text-beige my-3 fs-6 py-2 rounded-3">
-                                    Purchase
-                                </button>
+                            class="d-flex flex-column justify-content-center p-2 rounded-3 main-bg merch-card">
+                            {% if ele['category']=='Tshirts' %}
+                            <div class="w-100 d-flex justify-content-center overflow-hidden">
+                                <img src={{ele['img1']}} alt="merchandise-image" height="250px" width="100%"
+                                    class="rounded-3 mb-1">
                             </div>
+                            {% endif %}
+                            {% if ele['category']=='Badges' %}
+                            <div class="w-100 d-flex justify-content-center overflow-hidden">
+                                <img src={{ele['img1']}} alt="merchandise-image" height="200px" width="90%"
+                                    class="rounded-3 mb-1">
+                            </div>
+                            {% endif %}
+                            <h3 class="fs-5 text-red mt-2 mb-0 px-2 main-font text-center">
+                                {{ele['name']}}
+                            </h3>
+                            <p class="text-black sec-font text-center fs-6 mb-1">
+                                {{ele['category']}}
+                            </p>
+                            <h3 class="text-black main-font text-center fs-5">
+                                {{ele['cost']}} ₹
+                            </h3>
                         </a>
                     </div>
                     {% endfor %}

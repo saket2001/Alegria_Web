@@ -4,7 +4,6 @@
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"
     integrity="sha512-cdV6j5t5o24hkSciVrb8Ki6FveC2SgwGfLE31+ZQRHAeSRxYhAQskLkq3dLm8ZcWe1N3vBOEYmmbhzf7NTtFFQ=="
     crossorigin="anonymous"></script>
-<!-- <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/ScrollTrigger.min.js"></script> -->
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.6/ScrollMagic.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.min.js"
     integrity="sha512-5/OHwmQzDSBS0Ous4/hlYoWLHd06/d2r7LdKZQVBXOA6PvOqWVXtdboiLTU7lQTGyVoKVTNkwi0ol4gHGlw5ww=="
@@ -22,8 +21,8 @@ Alegria 2022 | Homepage
     <div class="parallax_section">
         <!-- nav -->
         <!-- social icons -->
-        <div class="opacity-2 position-fixed top-50 end-0 px-2 py-3 rounded-3"
-            style="background-color: #ffde83cb;z-index: 10;">
+        <div class="opacity-2 position-absolute top-50 end-0 px-2 py-3 rounded-3"
+            style="background-color: #ffde83a9;z-index: 10;">
             <div class="d-flex flex-column justify-content-center align-items-center">
                 <a href="https://www.instagram.com/pillaisalegria/" target="_blank" rel="noopener noreferrer"
                     class="footer_link my-1 px-2 text-red social-icons">
@@ -114,9 +113,6 @@ Alegria 2022 | Homepage
                                         <a class="dropdown-item navbar_links" href="/merchandise/Tshirts">Tshirts</a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item navbar_links" href="/merchandise/Bags">Bags</a>
-                                    </li>
-                                    <li>
                                         <a class="dropdown-item navbar_links" href="/merchandise/Badges">Badges</a>
                                     </li>
                                 </ul>
@@ -152,9 +148,21 @@ Alegria 2022 | Homepage
                                 <ul class="dropdown-menu border-0" style="background-color: #ffd04f;"
                                     aria-labelledby="dropdownMenuButton2">
                                     <li>
+                                        <a href="/about-us" class="dropdown-item navbar_links" {% if
+                                            activeNav=='About Us' %}
+                                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>About
+                                            Us</a>
+                                    </li>
+                                    <li>
                                         <a href="/polls" class="dropdown-item navbar_links" {% if activeNav=='Polls' %}
                                             style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
                                             %}>Polls</a>
+                                    </li>
+                                    <li>
+                                        <a href="/announcements" class="dropdown-item navbar_links" {% if
+                                            activeNav=='Announcements' %}
+                                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
+                                            %}>Announcements</a>
                                     </li>
                                     <li>
                                         <a href="/sponsors" class="dropdown-item navbar_links" {% if
@@ -168,16 +176,26 @@ Alegria 2022 | Homepage
                                             style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
                                             %}>Developers</a>
                                     </li>
+                                    <li>
+                                        <a href="/event-heads" class="dropdown-item navbar_links" {% if activeNav=='Event
+                                            Heads' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
+                                            %}>Event
+                                            Heads</a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
+                        {% if signed_in==False %}
                         <a href="/user-login"
                             class="d-flex justify-content-center align-items-center rounded-3 text-red bg-white fs-7 px-5 py-1 me-2 main-font">
                             Sign In
                         </a>
+                        {% endif %}
+                        {% if signed_in %}
                         <a href="/user/cart" class="d-flex align-items-center text-red p-2 mx-1">
                             <i class="fas fa-shopping-bag fs-5"></i>
                         </a>
+                        {% endif %}
                     </div>
                 </div>
             </nav>
@@ -196,15 +214,16 @@ Alegria 2022 | Homepage
                 class="w-100 py-5 overflow-hidden position-relative d-flex align-items-center justify-content-center h-100">
                 <div class="row p-3 d-flex justify-content-center align-items-center">
                     <div class="about_img col-lg-5 col-sm-12 d-flex justify-content-center"
-                        style="border-radius: 33px;">
-                        <img src="../static/images/homepage/about.jpg" alt="about us image" class="aboutus_bg p-3"
-                            id="about-us-img" width="80%" height="70%" style="border-radius: 33px;">
+                        style="border-radius: 20px;">
+                        <img src="../static/images/homepage/about.jpg" alt="about us image"
+                            class="aboutus_bg p-2 shadow" id="about-us-img" width="90%" height="60%"
+                            style="border-radius: 30px;">
                     </div>
                     <div
                         class="about_text col-lg-7 col-sm-12 d-flex flex-column align-items-center justify-content-center px-3">
                         <h2 class="fs-3 main-font my-2 text-beige text-center">ALEGRIA 2022</h2>
 
-                        <p class="mt-1 sec-font fs-7 fst-light" style="text-align: justify;">
+                        <p class="m-1 mx-2 sec-font fs-7 fst-light" style="text-align: justify;">
                             Alegria - The Festival joy congregated by The Pillai Group Of Institutions. Alegria is
                             one
                             of
@@ -227,7 +246,8 @@ Alegria 2022 | Homepage
                             fail
                             to amaze us.
                         </p>
-                        <a href="/about-us" class="sec-font text-light bg-brown px-3 py-1 rounded-3 fs-7">
+                        <a href="/about-us" class="sec-font text-light px-3 py-1 rounded-3 fs-6 mt-3"
+                            style="background-color: #bd2828;">
                             Read More
                         </a>
                     </div>
@@ -246,95 +266,95 @@ Alegria 2022 | Homepage
                     <div class="carousel-inner p-3">
                         <div class="carousel-item active">
                             <div class="row g-4">
-                                <div class="col d-flex flex-column align-items-center">
-                                    <a href="/events/technical-events" class="event-card">
-                                        <h3 class="fs-5 text-red main-font py-1 px-2">Technical Events</h3>
-                                        <div class="event-circle">
-                                            <img src="../static/images/icons/Category Icons/Tech.png" alt="card-image"
-                                                width="170px" height="170px">
+                                {% for col in row1 %}
+                                <div class="col d-flex flex-column align-items-center event-card-container">
+                                    <div class="event-card">
+                                        <div class="event-card-front">
+                                            <h3 class="fs-5 text-red main-font py-1 px-2">
+                                                {{col["title"]}}
+                                            </h3>
+                                            <div class="event-circle">
+                                                <img src={{col["icon"]}} alt="card-image" width="170px" height="170px">
+                                            </div>
                                         </div>
-                                    </a>
-                                </div>
-                                <div class="col d-flex flex-column align-items-center">
-                                    <a href="/events/technical-workshop" class="event-card">
-                                        <h3 class="fs-5 text-red main-font py-1 px-2">Workshops</h3>
-                                        <div class="event-circle">
-                                            <img src="../static/images/icons//Category Icons/Technical_workshop.jpeg"
-                                                alt="card-image" width="170px" height="170px">
+                                        <div class="event-card-back">
+                                            <p class="sec-font fs-6">
+                                                {{col['content']}}
+                                            </p>
+                                            <div class="d-flex justify-content-center">
+                                                <a href={{col['link']}}
+                                                    class="w-100 text-center sec-font text-light fs-7 py-1 px-3 rounded-3 shadow"
+                                                    style="background-color: #bd2828;">
+                                                    View
+                                                    All
+                                                </a>
+                                            </div>
                                         </div>
-                                    </a>
+                                    </div>
                                 </div>
-                                <div class="col d-flex flex-column align-items-center">
-                                    <a href="/events/management" class="event-card">
-                                        <h3 class="fs-5 text-red main-font py-1 px-2">Management</h3>
-                                        <div class="event-circle">
-                                            <img src="../static/images/icons//Category Icons/management.png"
-                                                alt="card-image" width="170px" height="170px">
-                                        </div>
-                                    </a>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <div class="row gy-4">
-                                <div class="col d-flex flex-column align-items-center">
-                                    <a href="/events/fine-arts" class="event-card">
-                                        <h3 class="fs-5 text-red main-font py-1 px-2">Fine Arts</h3>
-                                        <div class="event-circle">
-                                            <img src="../static/images/icons/Category Icons/Fine Arts.png"
-                                                alt="card-image" width="170px" height="170px">
+                            <div class="row g-4">
+                                {% for col in row2 %}
+                                <div class="col d-flex flex-column align-items-center event-card-container">
+                                    <div class="event-card">
+                                        <div class="event-card-front">
+                                            <h3 class="fs-5 text-red main-font py-1 px-2">
+                                                {{col["title"]}}
+                                            </h3>
+                                            <div class="event-circle">
+                                                <img src={{col["icon"]}} alt="card-image" width="170px" height="170px">
+                                            </div>
                                         </div>
-                                    </a>
-                                </div>
-                                <div class="col d-flex flex-column align-items-center">
-                                    <a href="/events/literary-arts" class="event-card">
-                                        <h3 class="fs-5 text-red main-font py-1 px-2">Literary Arts</h3>
-                                        <div class="event-circle">
-                                            <img src="../static/images/icons//Category Icons/Literary Arts.png"
-                                                alt="card-image" width="170px" height="170px">
+                                        <div class="event-card-back">
+                                            <p class="sec-font fs-6">
+                                                {{col['content']}}
+                                            </p>
+                                            <div class="d-flex justify-content-center">
+                                                <a href={{col['link']}}
+                                                    class="w-100 text-center sec-font text-light fs-7 py-1 px-3 rounded-3 shadow"
+                                                    style="background-color: #bd2828;">
+                                                    View
+                                                    All
+                                                </a>
+                                            </div>
                                         </div>
-                                    </a>
+                                    </div>
                                 </div>
-                                <div class="col d-flex flex-column align-items-center">
-                                    <a href="/events/performing-arts" class="event-card">
-                                        <h3 class="fs-5 text-red main-font py-1 px-2">Performing Arts</h3>
-                                        <div class="event-circle">
-                                            <img src="../static/images/icons/Category Icons/Performing Arts.png"
-                                                alt="card-image" width="170px" height="170px">
-                                        </div>
-                                    </a>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <div class="row gy-4">
-                                <div class="col d-flex flex-column align-items-center">
-                                    <a href="/events/informals" class="event-card">
-                                        <h3 class="fs-5 text-red main-font py-1 px-2">Informals</h3>
-                                        <div class="event-circle">
-                                            <img src="../static/images/icons//Category Icons/Informals.png"
-                                                alt="card-image" width="170px" height="170px">
+                            <div class="row g-4">
+                                {% for col in row3 %}
+                                <div class="col d-flex flex-column align-items-center event-card-container">
+                                    <div class="event-card">
+                                        <div class="event-card-front">
+                                            <h3 class="fs-5 text-red main-font py-1 px-2">
+                                                {{col["title"]}}
+                                            </h3>
+                                            <div class="event-circle">
+                                                <img src={{col["icon"]}} alt="card-image" width="170px" height="170px">
+                                            </div>
                                         </div>
-                                    </a>
-                                </div>
-                                <div class="col d-flex flex-column align-items-center">
-                                    <a href="/events/gaming" class="event-card">
-                                        <h3 class="fs-5 text-red main-font py-1 px-2">Gaming</h3>
-                                        <div class="event-circle">
-                                            <img src="../static/images/icons/Category Icons/Gaming.png" alt="card-image"
-                                                width="170px" height="170px">
+                                        <div class="event-card-back">
+                                            <p class="sec-font fs-6">
+                                                {{col['content']}}
+                                            </p>
+                                            <div class="d-flex justify-content-center">
+                                                <a href={{col['link']}}
+                                                    class="w-100 text-center sec-font text-light fs-7 py-1 px-3 rounded-3 shadow"
+                                                    style="background-color: #bd2828;">
+                                                    View
+                                                    All
+                                                </a>
+                                            </div>
                                         </div>
-                                    </a>
+                                    </div>
                                 </div>
-                                <div class="col d-flex flex-column align-items-center">
-                                    <a href="/events/sports" class="event-card">
-                                        <h3 class="fs-5 text-red main-font py-1 px-2">Sports</h3>
-                                        <div class="event-circle">
-                                            <img src="../static/images/icons//Category Icons/Sports.png"
-                                                alt="card-image" width="170px" height="170px">
-                                        </div>
-                                    </a>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -380,7 +400,7 @@ Alegria 2022 | Homepage
                             but most
                             people take part to better
                             themselves
-                            and have fun. Regardless of why you participate, make sure you’re upholding the spirit
+                            and have fun. Regardless of why you participate, make sure you're upholding the spirit
                             of
                             the
                             hackathon by
@@ -391,11 +411,17 @@ Alegria 2022 | Homepage
                             <p class="fs-7 mb-1">Mode : Online </p>
                             <p class="fs-7 mb-1">Fees : 200(Per Team) </p>
                             <p class="fs-7 mb-1">Participants : 2-4 </p>
+                            <div class="mt-4">
+                                <a href="/hackathon" style="background-color: #bd2828;"
+                                    class="px-3 py-1 sec-font text-light rounded-3 fs-6">
+                                    View More
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-sm-6 d-flex justify-content-center p-2">
-                        <img style="width:100%; border-radius:10px" src="/static/images/hackathon/hackathon.png"
-                            class="hackathon-image responsive_images">
+                        <img src="/static/images/hackathon/hackathon.png" class="hackathon-image responsive_images"
+                            style="width: 80%;height:80%">
                     </div>
                 </div>
                 <div class="row mx-3 my-3 d-flex justify-content-center hackathon">
@@ -491,7 +517,7 @@ Alegria 2022 | Homepage
                     <div class="carousel-inner p-3">
                         <div class="carousel-item active">
                             <div class="col d-flex flex-column align-items-center my-2">
-                                <div class="w-100 rounded-3 event-card testimonial-card p-3">
+                                <div class="w-100 rounded-3 testimonial-card p-3">
                                     <!-- artist image -->
                                     <img src="../static/images/testimonials/armaan-malik-hits-7-million-instagram-followers-920x518-1-200x200.jpg"
                                         class="my-2" width="170px" height="170px" alt="..."
@@ -511,7 +537,7 @@ Alegria 2022 | Homepage
                         <div class="carousel-item">
                             <div class="col d-flex flex-column align-items-center my-2">
                                 <div
-                                    class="h-100 w-100 d-flex flex-column align-items-center rounded-3 event-card testimonial-card p-3">
+                                    class="h-100 w-100 d-flex flex-column align-items-center rounded-3 testimonial-card p-3">
                                     <!-- artist image -->
                                     <img src="../static/images/testimonials/0521_dhvani3-200x200.jpg" class="my-2"
                                         width="160px" height="160px" alt="..." style="border-radius: 100%;">
@@ -533,7 +559,7 @@ Alegria 2022 | Homepage
                         </div>
                         <div class="carousel-item">
                             <div class="col d-flex flex-column align-items-center my-2">
-                                <div class="h-100 w-100 rounded-3 event-card testimonial-card p-3">
+                                <div class="h-100 w-100 rounded-3 testimonial-card p-3">
                                     <!-- artist image -->
                                     <img src="../static/images/testimonials/Farhan-Akhtar-Live-concert-at-Pillai-College-fest-Alegria-2014-1-200x200.jpeg"
                                         class="my-2" width="170px" height="170px" alt="..."
@@ -554,7 +580,7 @@ Alegria 2022 | Homepage
                         </div>
                         <div class="carousel-item">
                             <div class="col d-flex flex-column align-items-center my-2">
-                                <div class="h-100 w-100 rounded-3 event-card testimonial-card p-3">
+                                <div class="h-100 w-100 rounded-3 testimonial-card p-3">
                                     <!-- artist image -->
                                     <img src="../static/images/testimonials/sonam-1-200x200.jpg" class="my-2"
                                         width="170px" height="170px" alt="..." style="border-radius: 100%;">
@@ -572,7 +598,7 @@ Alegria 2022 | Homepage
                         </div>
                         <div class="carousel-item">
                             <div class="col d-flex flex-column align-items-center my-2">
-                                <div class="h-100 w-100 rounded-3 event-card testimonial-card p-3">
+                                <div class="h-100 w-100 rounded-3 testimonial-card p-3">
                                     <!-- artist image -->
                                     <img src="../static/images/testimonials/Siddharth-Malhotra-and-Rakul-preet-Singh-at-alegria-rock-200x200.jpg"
                                         class="my-2" width="170px" height="170px" alt="..."
@@ -591,7 +617,7 @@ Alegria 2022 | Homepage
                         </div>
                         <div class="carousel-item">
                             <div class="col d-flex flex-column align-items-center my-2">
-                                <div class="h-100 w-100 rounded-3 event-card testimonial-card p-3">
+                                <div class="h-100 w-100 rounded-3 testimonial-card p-3">
                                     <!-- artist image -->
                                     <img src="../static/images/testimonials/alegria-ayushmann-khurrana-live-band-300x300.jpg"
                                         class="my-2" width="170px" height="170px" alt="..."
@@ -717,7 +743,7 @@ Alegria 2022 | Homepage
                 </li>
                 <li class="my-1">
                     <a href="https://play.google.com/store/apps/details?id=com.mes.alegria" target="_blank"
-                        rel="noopener noreferrer" class="px-3 py-1 d-flex align-items-center rounded-3"
+                        rel="noopener noreferrer" class="px-3 py-1 d-flex align-items-center rounded-3 text-light"
                         style="background-color: black;width: 60%;height: 60%;">
                         <img src="/static/images/icons/playstore.png" alt="playstore icon" class="me-1">
                         <p class="sec-font mb-0" style="font-size: 0.7rem;">

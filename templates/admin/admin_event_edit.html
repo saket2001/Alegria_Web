@@ -1,4 +1,4 @@
-{% extends 'admin_layout.html' %}
+{% extends '/admin/admin_layout.html' %}
 
 {% block title %}
 Event Edit Page
@@ -55,26 +55,14 @@ Event Edit Page
                 value="{{event_details['event_date']}}">
             <div class="row my-1">
                 <div class="col-lg-6 col-sm-12">
-                    <label class="fs-7 mb-0 text-gray" for="event_offline_cost">Event Offline Cost</label>
-                    <input type="text" name="event_offline_cost" id="event_offline_cost" class="input_value"
-                        value="{{event_details['offline_cost']}}">
+                    <label class="fs-7 mb-0 text-gray" for="event_offline_cost">Event Cost</label>
+                    <input type="text" name="event_cost" id="event_cost" class="input_value"
+                        value="{{event_details['event_cost']}}">
                 </div>
                 <div class="col-lg-6 col-sm-12">
-                    <label class="fs-7 mb-0 text-gray" for="event_online_cost">Event Online Cost</label>
+                    <label class="fs-7 mb-0 text-gray" for="event_online_cost">Event Pr Points</label>
                     <input type="text" name="event_online_cost" id="event_online_cost" class="input_value"
-                        value="{{event_details['online_cost']}}">
-                </div>
-            </div>
-            <div class="row my-1">
-                <div class="col-lg-6 col-sm-12">
-                    <label class="fs-7 mb-0 text-gray" for="event_offline_cost">Event Supports Offline</label>
-                    <input type="text" name="supports_offline" id="supports_offline" class="input_value"
-                        value="{{event_details['supports_offline']}}">
-                </div>
-                <div class="col-lg-6 col-sm-12">
-                    <label class="fs-7 mb-0 text-gray" for="event_online_cost">Event Supports Online</label>
-                    <input type="text" name="supports_online" id="supports_online" class="input_value"
-                        value="{{event_details['supports_online']}}">
+                        value="{{event_details['pr_points']}}">
                 </div>
             </div>
             <div class="row my-1">
@@ -92,8 +80,8 @@ Event Edit Page
             <div class="row my-1">
                 <div class="col-lg-6 col-sm-12">
                     <label class="fs-7 mb-0 text-gray" for="event_type">Event Mode</label>
-                    <input type="text" name="event_type" id="event_type" class="input_value" value="{% if event_details['event_mode']=='0' %} Offline {% endif %} {% if
-                        event_details['event_mode']=='1' %} Online {% endif %}">
+                    <input type="text" name="event_type" id="event_type" class="input_value"
+                        value="{{event_details['event_mode']}}">
                 </div>
                 <div class="col-lg-6 col-sm-12">
                     <label class="fs-7 mb-0 text-gray" for="event_criteria">Event Criteria</label>
@@ -113,6 +101,20 @@ Event Edit Page
                         value="{{event_details['event_contact2']}}">
                 </div>
             </div>
+            {% if event_details['event_contact3'] or event_details['event_contact4'] %}
+            <div class="row my-1">
+                <div class="col-lg-6 col-sm-12">
+                    <label class="fs-7 mb-0 text-gray" for="event_type">Event Contact 3</label>
+                    <input type="text" name="event_contact_1" id="event_contact_1" class="input_value"
+                        value="{{event_details['event_contact3']}}">
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <label class="fs-7 mb-0 text-gray" for="event_criteria">Event Contact 4</label>
+                    <input type="text" name="event_contact_2" id="event_contact_2" class="input_value"
+                        value="{{event_details['event_contact4']}}">
+                </div>
+            </div>
+            {% endif %}
             <div class="row my-1">
                 <div class="col-lg-6 col-sm-12">
                     <label class="fs-7 mb-0 text-gray" for="event_type">Event Duration</label>

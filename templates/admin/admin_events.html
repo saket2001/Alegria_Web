@@ -1,4 +1,4 @@
-{% extends 'admin_layout.html' %}
+{% extends '/admin/admin_layout.html' %}
 
 {% block title %}
 All Events
@@ -32,7 +32,7 @@ All Events
     <div class='dropdown-toggle fs-7' id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Choose
       Category
     </div>
-    <ul class="dropdown-menu" style="background-color: #F1E3C8 !important;" aria-labelledby="dropdownMenuButton1">
+    <ul class="dropdown-menu main-bg" aria-labelledby="dropdownMenuButton1">
       <li>
         <a class="dropdown-item" href="/admin/events/informals">Informals</a>
       </li>
@@ -75,7 +75,7 @@ All Events
 <div id="admin-events" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
   {% for ele in events_list %}
   <div class="col rounded-3">
-    <div class="card bg-teal shadow-sm">
+    <div class="card border-0 bg-teal">
       <div class="d-flex justify-content-center border-bottom border-2 border-dark py-3 m-1">
         <img src={{ele['icon_url']}} height="170px" alt="event-image">
       </div>
@@ -85,22 +85,15 @@ All Events
         </h2>
         <p class="sec-font fs-7 mb-1 text-gray fw-bold">{{ele['category']}}</p>
         <p class="sec-font fs-5 text-brown mb-0 fw-bolder">
-          {% if ele["event_offline_cost"] != 0 %}
-          {{ele["event_offline_cost"]}} ₹
-          <span class="fs-7">(Offline)</span>
-          {% endif %}
-          {% if ele["event_online_cost"] != 0 %}
-          {{ele["event_online_cost"]}} ₹
-          <span class="fs-7">(Online)</span>
-          {% endif %}
+          {{ele["event_cost"]}} ₹
         </p>
       </div>
       <div class="d-flex p-3 mb-2">
         <a href={{"/admin/events/{}/{}/edit".format(ele['category'],ele['event_id'])}}
-          class="btn btn-dark text-teal sec-font">EDIT</a>
+          class="btn btn-dark text-teal fs-7 sec-font">EDIT</a>
         &nbsp;&nbsp;
         <a href={{"/admin/events/{}/{}/delete".format(ele['category'],ele['event_id'])}}
-          class="btn btn-outline-danger sec-font">DELETE</a>
+          class="btn btn-outline-danger fs-7 sec-font">DELETE</a>
       </div>
     </div>
   </div>
@@ -121,75 +114,124 @@ All Events
         {{form.csrf_token}}
         <div class="row">
           <div class="col-lg-6 col-sm-12">
-            {{form.id(class="input_value",placeholder="Event id")}}
+            <p class="mb-0 fs-7 main-font">
+              {{form.id.label}}
+            </p>
+            {{form.id(class="input_value")}}
           </div>
           <div class="col-lg-6 col-sm-12">
-            {{form.code(class="input_value",placeholder="Event Code")}}
-          </div>
-        </div>
-        {{form.name(class="input_value",placeholder="Event Name")}}
-        {{form.description(class="input_value",placeholder="Event Description")}}
-        {{form.rules(class="input_value",placeholder="Event Rules")}}
-        {{form.categoryName(class="input_value",placeholder="Category Name")}}
-        <div class="row">
-          <div class="col-lg-6 col-sm-12">
-            {{form.categoryId(class="input_value",placeholder="Category ID")}}
-          </div>
-          <div class="col-lg-6 col-sm-12">
-            {{form.pr_points(class="input_value",placeholder="Event PR Points")}}
+            <p class="mb-0 fs-7 main-font">
+              {{form.code.label}}
+            </p>
+            {{form.code(class="input_value")}}
           </div>
         </div>
+        <p class="mb-0 fs-7 main-font">
+          {{form.name.label}}
+        </p>
+        {{form.name(class="input_value")}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.description.label}}
+        </p>
+        {{form.description(class="input_value")}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.rules.label}}
+        </p>
+        {{form.rules(class="input_value")}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.categoryName.label}}
+        </p>
+        {{form.categoryName(class="input_value")}}
         <div class="row">
           <div class="col-lg-6 col-sm-12">
-            {{form.date(class="input_value",placeholder="Event Date")}}
+            <p class="mb-0 fs-7 main-font">
+              {{form.categoryId.label}}
+            </p>
+            {{form.categoryId(class="input_value")}}
           </div>
           <div class="col-lg-6 col-sm-12">
-            {{form.duration(class="input_value",placeholder="Event Duration")}}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6 col-sm-12">
-            {{form.criteria(class="input_value" ,placeholder="Event Criteria" )}} </div>
-          <div class="col-lg-6 col-sm-12">
-            {{form.mode(class="input_value",placeholder="Event Mode")}}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6 col-sm-12">
-            {{form.contact1(class="input_value",placeholder="Event Contact 1")}}
-          </div>
-          <div class="col-lg-6 col-sm-12">
-            {{form.contact2(class="input_value",placeholder="Event Contact 2")}}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6 col-sm-12">
-            {{form.contact3(class="input_value",placeholder="Event Contact 3")}}
-          </div>
-          <div class="col-lg-6 col-sm-12">
-            {{form.contact4(class="input_value",placeholder="Event Contact 4")}}
+            <p class="mb-0 fs-7 main-font">
+              {{form.pr_points.label}}
+            </p>
+            {{form.pr_points(class="input_value")}}
           </div>
         </div>
         <div class="row">
           <div class="col-lg-6 col-sm-12">
-            {{form.onlineCost(class="input_value",placeholder="Event Online Cost")}}
+            <p class="mb-0 fs-7 main-font">
+              {{form.date.label}}
+            </p>
+            {{form.date(class="input_value")}}
           </div>
           <div class="col-lg-6 col-sm-12">
-            {{form.offlineCost(class="input_value",placeholder="Event Offline Cost")}}
+            <p class="mb-0 fs-7 main-font">
+              {{form.duration.label}}
+            </p>
+            {{form.duration(class="input_value")}}
           </div>
         </div>
         <div class="row">
           <div class="col-lg-6 col-sm-12">
-            {{form.supportsOnline(class="input_value",placeholder="Event Supports Online")}}
+            <p class="mb-0 fs-7 main-font">
+              {{form.criteria.label}}
+            </p>
+            {{form.criteria(class="input_value" )}}
           </div>
           <div class="col-lg-6 col-sm-12">
-            {{form.supportsOffline(class="input_value",placeholder="Event Supports Offline")}}
+            <p class="mb-0 fs-7 main-font">
+              {{form.mode.label}}
+            </p>
+            {{form.mode(class="input_value")}}
           </div>
         </div>
-        {{form.perks1(class="input_value",placeholder="Event Perk 1")}}
-        {{form.perks2(class="input_value",placeholder="Event Perk 2")}}
-        {{form.perks3(class="input_value",placeholder="Event Perk 3")}}
-        {{form.icon_url(class="input_value",placeholder="Event Icon URL")}}
+        <div class="row">
+          <div class="col-lg-6 col-sm-12">
+            <p class="mb-0 fs-7 main-font">
+              {{form.contact1.label}}
+            </p>
+            {{form.contact1(class="input_value")}}
+          </div>
+          <div class="col-lg-6 col-sm-12">
+            <p class="mb-0 fs-7 main-font">
+              {{form.contact2.label}}
+            </p>
+            {{form.contact2(class="input_value")}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-sm-12">
+            <p class="mb-0 fs-7 main-font">
+              {{form.contact3.label}}
+            </p>
+            {{form.contact3(class="input_value")}}
+          </div>
+          <div class="col-lg-6 col-sm-12">
+            <p class="mb-0 fs-7 main-font">
+              {{form.contact4.label}}
+            </p>
+            {{form.contact4(class="input_value")}}
+          </div>
+        </div>
+        <p class="mb-0 fs-7 main-font">
+          {{form.eventCost.label}}
+        </p>
+        {{form.eventCost(class="input_value")}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.perks1.label}}
+        </p>
+        {{form.perks1(class="input_value")}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.perks2.label}}
+        </p>
+        {{form.perks2(class="input_value")}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.perks3.label}}
+        </p>
+        {{form.perks3(class="input_value")}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.icon_url.label}}
+        </p>
+        {{form.icon_url(class="input_value")}}
         <br />
 
         <button type="submit" class="button w-100 my-2 bg-brown text-teal">Save Event</button>

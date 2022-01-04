@@ -1,4 +1,4 @@
-{% extends "admin_layout.html" %}
+{% extends "/admin/admin_layout.html" %}
 
 {% block title %}
 Admin Dashboard
@@ -12,6 +12,7 @@ Admin Dashboard
         <h1 class="fs-5 fw-bold text-brown mb-0">{{greeting}} Admin</h1>
         <p class="fs-7 text-muted mb-0">Today is {{now_beautiful}}</p>
     </div>
+    {% if username %}
     <div class="col-lg-6 col-sm-12 d-flex align-items-center my-1">
         <div class="user-box rounded bg-teal">
             <img src={{image}} alt="user image" class="img-responsive rounded" width="50px" height="50px">
@@ -22,6 +23,7 @@ Admin Dashboard
             </p>
         </div>
     </div>
+    {% endif %}
 </div>
 
 <!-- stats div -->

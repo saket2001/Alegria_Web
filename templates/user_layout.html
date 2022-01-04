@@ -1,5 +1,13 @@
 {% extends 'layout.html' %}
 
+
+{% block head %}
+
+{% block headContent %}
+{% endblock headContent %}
+
+{% endblock head %}
+
 {% block body %}
 
 <body class="min-vh-100">
@@ -73,9 +81,6 @@
                                 <a class="dropdown-item navbar_links" href="/merchandise/Tshirts">Tshirts</a>
                             </li>
                             <li>
-                                <a class="dropdown-item navbar_links" href="/merchandise/Bags">Bags</a>
-                            </li>
-                            <li>
                                 <a class="dropdown-item navbar_links" href="/merchandise/Badges">Badges</a>
                             </li>
                         </ul>
@@ -108,8 +113,18 @@
                         <ul class="dropdown-menu border-0" style="background-color: #681b0aec;"
                             aria-labelledby="dropdownMenuButton2">
                             <li>
+                                <a href="/about-us" class="dropdown-item navbar_links" {% if activeNav=='About us' %}
+                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>About Us</a>
+                            </li>
+                            <li>
                                 <a href="/polls" class="dropdown-item navbar_links" {% if activeNav=='Polls' %}
                                     style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Polls</a>
+                            </li>
+                            <li>
+                                <a href="/announcements" class="dropdown-item navbar_links" {% if
+                                    activeNav=='Announcements' %}
+                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
+                                    %}>Announcements</a>
                             </li>
                             <li>
                                 <a href="/sponsors" class="dropdown-item navbar_links" {% if activeNav=='Sponsors' %}
@@ -118,6 +133,11 @@
                             <li>
                                 <a href="/developers" class="dropdown-item navbar_links" {% if activeNav=='Sponsors' %}
                                     style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Developers</a>
+                            </li>
+                            <li>
+                                <a href="/event-heads" class="dropdown-item navbar_links" {% if activeNav=='Event Heads'
+                                    %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Event
+                                    Heads</a>
                             </li>
                         </ul>
                     </li>

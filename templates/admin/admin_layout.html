@@ -5,7 +5,7 @@
 <body class='min-w-100 min-vh-100 sec-font'>
     <div class="row w-100 vh-100 gx-0">
         <!-- side nav -->
-        <div class="col-lg-3 col-sm-12 h-auto bg-brown p-4">
+        <div class="col-lg-3 col-sm-12 h-auto bg-red p-4">
             <nav class="d-flex flex-column shadow-sm">
                 <div class="d-flex justify-content-between align-items-center px-2">
                     <h1
@@ -24,7 +24,7 @@
                 <!-- desktop nav -->
                 <ul id="desktop-nav" class="h-100 d-grid gap-2 my-5 text-beige px-0">
                     <li class="nav-links p-2 rounded" {% if activeNav=='dashboard' %}
-                        style="background-color:  #353327;" {% endif %}>
+                        style="background-color:  #ac150a;" {% endif %}>
                         <a href="/admin" class="w-100 d-flex align-items-center fs-6 fw-normal">
                             <svg xmlns="http://www.w3.org/2000/svg" class="text-beige me-2" width="28px" height="28px"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -35,7 +35,7 @@
                         </a>
                     </li>
                     <li class="nav-links p-2 rounded d-flex align-items-center fs-6 dropdown" {% if activeNav=='events'
-                        %} style="background-color: #353327;" {% endif %}>
+                        %} style="background-color: #ac150a;" {% endif %}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="text-beige me-2" width="28px"
                             height="28px" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -86,7 +86,7 @@
 
                     </li>
                     <li class="nav-links p-2 rounded d-flex align-items-center fs-6 fw-normal" {% if
-                        activeNav=='merchandise' %} style="background-color:  #353327;" {% endif %}>
+                        activeNav=='merchandise' %} style="background-color:  #ac150a;" {% endif %}>
                         <svg xmlns="http://www.w3.org/2000/svg" class="text-beige me-2" width="28px" height="28px"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -109,7 +109,7 @@
                     </li>
                     </li>
                     <li class="nav-links p-2 rounded d-flex align-items-center fs-6 fw-normal" {% if activeNav=='polls'
-                        %} style="background-color:  #353327;" {% endif %}>
+                        %} style="background-color:  #ac150a;" {% endif %}>
                         <a href="/admin/polls" class="w-100 d-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="text-beige me-2" width="28px" height="28px"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -134,7 +134,7 @@
                 <!-- mobile nav -->
                 <ul id="mobile-nav" class="h-100 d-grid gap-2 my-5 text-beige px-0 hidden">
                     <li class="nav-links p-2 rounded" {% if activeNav=='dashboard' %}
-                        style="background-color:  #353327;" {% endif %}>
+                        style="background-color:  #ac150a;" {% endif %}>
                         <a href="/admin/saket-c" class="w-100 d-flex align-items-center fs-6">
                             <svg xmlns="http://www.w3.org/2000/svg" class="text-beige me-2" width="28px" height="28px"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -145,7 +145,7 @@
                         </a>
                     </li>
                     <li class="nav-links p-2 rounded d-flex align-items-center" {% if activeNav=='events' %}
-                        style="background-color:  #353327;" {% endif %}>
+                        style="background-color:  #ac150a;" {% endif %}>
                         <a href="/admin/events" class="w-100 d-flex align-items-center fs-6">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="text-beige me-2" width="28px"
                                 height="28px" viewBox="0 0 24 24" stroke="currentColor">
@@ -156,7 +156,7 @@
                         </a>
                     </li>
                     <li class="nav-links p-2 rounded d-flex align-items-center" {% if activeNav=='merchandise' %}
-                        style="background-color:  #353327;" {% endif %}>
+                        style="background-color:  #ac150a;" {% endif %}>
                         <a href="/admin/merchandise" class="w-100 d-flex align-items-center fs-7">
                             <svg xmlns="http://www.w3.org/2000/svg" class="text-beige me-2" width="28px" height="28px"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -167,7 +167,7 @@
                         </a>
                     </li>
                     <li class="nav-links p-2 rounded d-flex align-items-center fs-7 fw-normal" {% if activeNav=='polls'
-                        %} style="background-color:  #353327;" {% endif %}>
+                        %} style="background-color:  #ac150a;" {% endif %}>
                         <a href="/admin/polls/" class="w-100 d-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="text-beige me-2" width="28px" height="28px"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -191,15 +191,12 @@
             </nav>
         </div>
         <!-- content -->
-        <div class="col-lg-9 col-sm-12 bg-beige px-4">
+        <div class="col-lg-9 col-sm-12 main-bg px-4">
             <!--main content -->
             {% block content %}
 
             {% endblock %}
         </div>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
 </body>
 {% endblock %}

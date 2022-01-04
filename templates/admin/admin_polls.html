@@ -1,4 +1,4 @@
-{% extends 'admin_layout.html' %}
+{% extends '/admin/admin_layout.html' %}
 
 {% block title %}
 All Polls
@@ -11,13 +11,13 @@ All Polls
     <div class=" row d-flex align-items-center">
     <div class="col my-1">
         <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search by name or Code here"
+            <input class="form-control me-2 fs-7" type="search" placeholder="Search by name or Code here"
                 aria-label="Search">
-            <button class="button outline_btn" type="submit">Search</button>
+            <button class="button outline_btn fs-7" type="submit">Search</button>
         </form>
     </div>
     <div class="col-md-auto my-1">
-        <a href="#" class="button outline_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Add
+        <a href="#" class="button outline_btn fs-7" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Add
             Poll</a>
     </div>
 </div>
@@ -26,18 +26,17 @@ All Polls
 <h5 class="fs-5 fw-bold">All Public Polls</h5>
 {% for ele in poll_list %}
 <div class="card bg-teal shadow-sm" style="padding:2%;margin-top:3%">
-    <h1 class='text-gray fw-bolder'>{{ele["p_id"]}}</h1>
-    <h5><b>{{ele["question"]}}</b></h5>
+    <h1 class='text-black fw-bolder'>{{ele["id"]}}</h1>
+    <h5 class="fs-5 main-font text-red">{{ele["question"]}}</h5>
     <div class="d-flex my-1">
         <h6 class='text-danger'>{{ele["status"]}}</h6>&nbsp;&nbsp;&nbsp;&nbsp;
-        <h6 class='text-gray'>{{ele["votes"]}} Votes</h6>&nbsp;&nbsp;&nbsp;&nbsp;
-        <h6 class='text-gray'>Added On {{ele["date"]}}</h6>
+        <h6 class='text-black'>{{ele["total_votes"]}} Votes</h6>&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
     <div class="buttons" style="margin-top:2%">
-        <a href="/admin/polls/12312/details" class="btn bg-brown text-teal  ">VIEW
+        <a href={{"/admin/polls/{}/details".format(ele["id"])}} class="btn bg-brown text-teal py-1 px-2 fs-7">VIEW
         </a>
         &nbsp;
-        <a href="#" class="btn btn-outline-danger border-2">DELETE</a>
+        <a href="#" class="btn btn-outline-danger py-1 px-2 fs-7 border-2">DELETE</a>
     </div>
 </div>
 {% endfor %}
