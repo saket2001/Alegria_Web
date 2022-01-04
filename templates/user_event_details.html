@@ -48,17 +48,17 @@
                     <p class="text-black fs-7 fw-light mb-1">
                         {{event_details["event_summary"]}}
                     </p>
-                    <h2 class="text-red my-2">
+                    <h2 class="text-red my-2 main-font">
                         {{event_details["event_cost"]}} ₹
                     </h2>
                     <button
                         class="w-100 d-flex align-items-center justify-content-center border-0 bg-brown my-3 mb-2 fs-6 py-1 px-3 rounded-3"
                         style="max-width: 200px;">
-                        <a href={{paymentLink}} target="_blank" rel="noopener noreferrer" class="text-beige w-100">
+                        <a href={{paymentLink}} target="_blank" rel="noopener noreferrer" class="text-light w-100">
                             Buy Event
                         </a>
                     </button>
-                    <span class="fs-8 sec-font w-50">
+                    <span class="fs-8 text-black sec-font w-50">
                         ( You will be redirected to razorpay payment page, choose your event and pay the required
                         amount )
                     </span>
@@ -134,12 +134,8 @@
                             </div>
                             <h3 class="fs-6 text-red text-center main-font px-2 my-1">{{event['event_name']}}</h3>
                             <span class="fs-7 text-black sec-font px-2">{{event['category']}}</span>
-                            <p class="fs-5 text-red main-font px-2 mb-1">{% if event["event_offline_cost"] != 0 %}
-                                {{event["event_offline_cost"]}} ₹
-                                {% endif %}
-                                {% if event["event_online_cost"] != 0 %}
-                                {{event["event_online_cost"]}} ₹
-                                {% endif %}
+                            <p class="fs-5 text-red main-font px-2 mb-1">
+                                {{event["event_cost"]}} ₹
                             </p>
                         </a>
                     </div>

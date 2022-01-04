@@ -341,12 +341,14 @@ body {
     border-radius: 4px;
 }
 
-.event_card {
+.event_card,
+.merch-card {
     height: auto;
     transition: all .3s ease;
 }
 
-.event_card:hover {
+.event_card:hover,
+.merch-card:hover {
     transform: translateY(-7px);
 }
 

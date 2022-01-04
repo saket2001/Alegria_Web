@@ -35,93 +35,100 @@ def aboutUs():
 
 @app_mbp.route('/events/<event_category>', methods=['GET'])
 def events(event_category=None):
-    filter_category_events = Eventdemo.query.filter_by(
-        event_category_name=event_category)
+    try:
+        filter_category_events = Eventdemo.query.filter_by(
+            event_category_name=event_category)
 
-    res = {
-        "type": True,
-        "events": []
-    }
+        res = {
+            "type": True,
+            "events": []
+        }
 
-    for event in filter_category_events:
-        event_details = Eventdemo_details.query.filter_by(
-            event_id=event.id).first()
-        res["events"].append({
-            "event_id": event.id,
-            "event_name": event.event_name,
-            "event_cost": event.event_cost,
-            "event_mode": event_details.event_mode,
-            "category": event.event_category_name,
-            "category_id": event.event_category_id,
-            "icon_url": event_details.icon_url
-        })
+        for event in filter_category_events:
+            event_details = Eventdemo_details.query.filter_by(
+                event_id=event.id).first()
+            res["events"].append({
+                "event_id": event.id,
+                "event_name": event.event_name,
+                "event_cost": event.event_cost,
+                "event_mode": event_details.event_mode,
+                "category": event.event_category_name,
+                "category_id": event.event_category_id,
+                "icon_url": event_details.icon_url
+            })
 
-    events_arr = []
-
-    if res['type'] and len(list(res['events'])) > 0:
-        events_arr = res['events']
-    else:
         events_arr = []
 
-    return render_template('user_events_list.html', activeNav='Events', events_list=events_arr, category=event_category)
+        if res['type'] and len(list(res['events'])) > 0:
+            events_arr = res['events']
+        else:
+            events_arr = []
+
+        return render_template('user_events_list.html', activeNav='Events', events_list=events_arr, category=event_category)
+
+    except:
+        return redirect('/')
 
 
 @ app_mbp.route("/event/<category_name>/<event_id>")
 def EventDetails(category_name, event_id):
-    # getting event detail
-    event = Eventdemo.query.filter_by(id=event_id).first()
-    event_details = Eventdemo_details.query.filter_by(
-        event_id=event.id).first()
-    res = {
-        "type": True,
-        "event": {
-            "id": event.id,
-            "event_name": event.event_name,
-            "event_code": event.event_code,
-            "event_summary": event.event_summary,
-            "event_criteria": event.event_criteria,
-            "event_category_id": event.event_category_id,
-            "event_category_name": event.event_category_name,
-            "event_cost": event.event_cost,
-            "event_contact1": event.event_contact1,
-            "event_contact2": event.event_contact2,
-            "event_contact3": event.event_contact3,
-            "event_contact4": event.event_contact4,
-            "event_date": event_details.event_date,
-            "event_mode": event_details.event_mode,
-            "event_duration": event_details.event_duration,
-            "icon_url": event_details.icon_url,
-            "event_rules": event_details.event_rules,
-            "event_perks_1": event_details.event_perks_1,
-            "event_perks_2": event_details.event_perks_2,
-            "event_perks_3": event_details.event_perks_3,
-            "pr_points": event.pr_points
-        }
-    }
-
-    filter_category_events = Eventdemo.query.filter_by(
-        event_category_name=category_name).all()
-
-    similar_events = []
-    for event in filter_category_events:
+    try:
+        # getting event detail
+        event = Eventdemo.query.filter_by(id=event_id).first()
         event_details = Eventdemo_details.query.filter_by(
             event_id=event.id).first()
-        similar_events.append({
-            "event_id": event.id,
-            "event_name": event.event_name,
-            "event_cost": event.event_cost,
-            "category": event.event_category_name,
-            "category_id": event.event_category_id,
-            "icon_url": event_details.icon_url,
-            "event_mode": event_details.event_mode,
-        })
-    if res['type'] and len(res['event']) > 0:
-        event_details = res['event']
+        res = {
+            "type": True,
+            "event": {
+                "id": event.id,
+                "event_name": event.event_name,
+                "event_code": event.event_code,
+                "event_summary": event.event_summary,
+                "event_criteria": event.event_criteria,
+                "event_category_id": event.event_category_id,
+                "event_category_name": event.event_category_name,
+                "event_cost": event.event_cost,
+                "event_contact1": event.event_contact1,
+                "event_contact2": event.event_contact2,
+                "event_contact3": event.event_contact3,
+                "event_contact4": event.event_contact4,
+                "event_date": event_details.event_date,
+                "event_mode": event_details.event_mode,
+                "event_duration": event_details.event_duration,
+                "icon_url": event_details.icon_url,
+                "event_rules": event_details.event_rules,
+                "event_perks_1": event_details.event_perks_1,
+                "event_perks_2": event_details.event_perks_2,
+                "event_perks_3": event_details.event_perks_3,
+                "pr_points": event.pr_points
+            }
+        }
 
-    else:
-        event_details = []
+        filter_category_events = Eventdemo.query.filter_by(
+            event_category_name=category_name).all()
 
-    return render_template('user_event_details.html', activeNav='Events', event_details=event_details, similar_events=similar_events, paymentLink=client_data.paymentLinks[category_name.lower()])
+        similar_events = []
+        for event in filter_category_events:
+            event_details = Eventdemo_details.query.filter_by(
+                event_id=event.id).first()
+            similar_events.append({
+                "event_id": event.id,
+                "event_name": event.event_name,
+                "event_cost": event.event_cost,
+                "category": event.event_category_name,
+                "category_id": event.event_category_id,
+                "icon_url": event_details.icon_url,
+                "event_mode": event_details.event_mode,
+            })
+        if res['type'] and len(res['event']) > 0:
+            event_details = res['event']
+
+        else:
+            event_details = []
+
+        return render_template('user_event_details.html', activeNav='Events', event_details=event_details, similar_events=similar_events, paymentLink=client_data.paymentLinks[category_name.lower()])
+    except:
+        return redirect('/')
 
 
 @ app_mbp.route("/merchandise/<string:category>")
@@ -139,7 +146,8 @@ def merchandise(category):
                 "name": item.name,
                 "details": item.details,
                 "cost": item.cost,
-                "category": item.category
+                "category": item.category,
+                "img1": item.item_img1,
             })
 
         return render_template('user_merchandise.html', activeNav="Merchandise", merchandise_list=res["merchandise_List"], category=category)
@@ -195,10 +203,12 @@ def get_merchandise_by_Id(category, id):
 def hackathonDetails():
     return render_template('user_hackathon.html', activeNav='Hackathon', problem_statements=client_data.problem_statements)
 
+
 @app_mbp.route("/polls")
 def polls_main():
-    
+
     return render_template('user_polls_main.html', polls_cards=client_data.polls_cards)
+
 
 @app_mbp.route("/polls/<string:id>")
 def Poll_list(id):

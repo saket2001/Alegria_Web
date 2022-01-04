@@ -179,7 +179,7 @@ class Merchandise(db.Model):
     id = db.Column(db.String(10), primary_key=True)
     name = db.Column(db.String(20), nullable=False)
     details = db.Column(db.String(100), nullable=False)
-    cost = db.Column(db.Integer, nullable=True)
+    cost = db.Column(db.Integer, nullable=False)
     item_img1 = db.Column(db.String(300), nullable=False)
     item_img2 = db.Column(db.String(300), nullable=True)
     quantity = db.Column(db.Integer, nullable=False)

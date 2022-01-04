@@ -169,8 +169,10 @@ Alegria 2022 | {{merchandise_data["name"]}}
                 {{merchandise_data["cost"]}} ₹
             </h2>
             <hr>
+
             <form class="row" onsubmit="">
                 <div class="col-md-12">
+                    {% if merchandise_data['size'] != '' %}
                     <p class="main-font fs-6">Choose Size</p>
                     <div class="d-flex mb-4">
                         <label class="size"><input type="radio" name="size" value="XS" required><span>XS</span></label>
@@ -190,6 +192,7 @@ Alegria 2022 | {{merchandise_data["name"]}}
 
                         {% endfor %}
                     </div>
+                    {% endif %}
                     <button
                         class="w-100 d-flex align-items-center justify-content-center border-0 bg-red text-teal my-3 fs-6 py-1 px-3 rounded-3"
                         style="max-width: 200px;" type="submit">
@@ -216,24 +219,22 @@ Alegria 2022 | {{merchandise_data["name"]}}
             {% for item in similar_merchandise %}
 
             {% if merchandise_data['name'] != item["name"] %}
-            <div class="d-flex flex-column align-items-center">
+            <div class="col my-3">
                 <a href={{"/merchandise/{}/{}".format(item['category'],item['id'])}}
-                    class="d-flex flex-column justify-content-center py-2 m-2">
-                    <div class="merchandise-card-container">
-                        <div>
-                            <img src={{item["item_img1"]}} height="160px" alt="merchandise-image">
-                        </div>
-                        <div>
-                            <h3 class="w-100 fs-6 text-brown mt-1 mb-1 px-2 main-font text-center">
-                                {{item['name']}}
-                            </h3>
-                        </div>
-                        <div class="col" style="display: flex;width:90%;margin:auto;justify-content: space-between;">
-                            <div class="text-red main-font fs-6">{{item['cost']}} ₹</div>
-                            <div class="text-black sec-font fs-7" style="text-transform: capitalize;">
-                                {{item['category']}}</div>
-                        </div>
+                    class="d-flex flex-column justify-content-center py-2 rounded-3 main-bg" style="width: 90%;">
+                    <div class="d-flex justify-content-center overflow-hidden">
+                        <img src={{item['item_img1']}} alt="merchandise-image" height="180px" width="60%"
+                            class="rounded-3 mb-1">
                     </div>
+                    <h3 class="fs-6 text-red mt-2 mb-0 px-2 main-font text-center">
+                        {{item['name']}}
+                    </h3>
+                    <p class="text-black sec-font text-center fs-7 mb-1">
+                        {{item['category']}}
+                    </p>
+                    <h3 class="text-black main-font text-center fs-6">
+                        {{item['cost']}} ₹
+                    </h3>
                 </a>
             </div>
             {% endif %}

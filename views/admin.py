@@ -326,7 +326,7 @@ def addMerchandise():
         except:
             return render_template("404.html")
 
-    return redirect("/admin/merchandise/{}".format(category))
+    return redirect("/admin")
 
 
 @ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/edit", methods=["GET", "POST"])
