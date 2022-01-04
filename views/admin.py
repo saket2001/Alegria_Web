@@ -96,15 +96,17 @@ def events(event_category):
         for event in filter_category_events:
             event_details = Eventdemo_details.query.filter_by(
                 event_id=event.id).first()
+
             res["events"].append({
                 "event_id": event.id,
                 "event_name": event.event_name,
-                "event_online_cost": event.online_cost,
-                "event_offline_cost": event.offline_cost,
+                "event_cost": event.event_cost,
+                "event_mode": event_details.event_mode,
                 "category": event.event_category_name,
                 "category_id": event.event_category_id,
                 "icon_url": event_details.icon_url
             })
+
         events_arr = []
 
         if res['type'] and len(list(res['events'])) > 0:
@@ -179,12 +181,11 @@ def editEventDetails(category, event_id):
                 "event_criteria": event.event_criteria,
                 "event_category_id": event.event_category_id,
                 "event_category_name": event.event_category_name,
-                "supports_online": event.supports_online,
-                "online_cost": event.online_cost,
-                "supports_offline": event.supports_offline,
-                "offline_cost": event.offline_cost,
+                "event_cost": event.event_cost,
                 "event_contact1": event.event_contact1,
                 "event_contact2": event.event_contact2,
+                "event_contact3": event.event_contact3,
+                "event_contact4": event.event_contact4,
                 "event_date": event_details.event_date,
                 "event_mode": event_details.event_mode,
                 "event_duration": event_details.event_duration,
@@ -192,7 +193,8 @@ def editEventDetails(category, event_id):
                 "event_rules": event_details.event_rules,
                 "event_perks_1": event_details.event_perks_1,
                 "event_perks_2": event_details.event_perks_2,
-                "event_perks_3": event_details.event_perks_3
+                "event_perks_3": event_details.event_perks_3,
+                "pr_points": event.pr_points
             }
         }
         if res['type'] and len(res['event']) > 0:
@@ -230,7 +232,7 @@ def editEventDetails(category, event_id):
         return render_template('404.html',)
 
 
-@admin_bp.route("/events/<category>/<event_id>/delete", methods=['GET', 'POST'])
+@ admin_bp.route("/events/<category>/<event_id>/delete", methods=['GET', 'POST'])
 # @login_required
 def deleteevent(category, event_id):
     try:
@@ -245,7 +247,7 @@ def deleteevent(category, event_id):
         return render_template('404.html',)
 
 
-@admin_bp.route("/events/event-registrations")
+@ admin_bp.route("/events/event-registrations")
 # @login_required
 def eventRegistrations():
     # get info from api in List of Dictionaries format as below
@@ -266,7 +268,7 @@ def eventRegistrations():
 # merchandise routes
 
 
-@admin_bp.route("/merchandise/<string:category>")
+@ admin_bp.route("/merchandise/<string:category>")
 # @login_required
 def merchandise(category):
     try:
@@ -294,12 +296,12 @@ def merchandise(category):
         return render_template('404.html',)
 
 
-@admin_bp.route("/exceptionn")
+@ admin_bp.route("/exceptionn")
 def exceptionn():
     return render_template('exception.html')
 
 
-@admin_bp.route("/add-merchandise", methods=["post"])
+@ admin_bp.route("/add-merchandise", methods=["post"])
 def addMerchandise():
     if request.method == "post":
         try:
@@ -327,7 +329,7 @@ def addMerchandise():
     return redirect("/admin/merchandise/{}".format(category))
 
 
-@admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/edit", methods=["GET", "POST"])
+@ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/edit", methods=["GET", "POST"])
 # @login_required
 def editMerchandiseDetails(merchandise_category, merchandise_id):
 
@@ -377,7 +379,7 @@ def editMerchandiseDetails(merchandise_category, merchandise_id):
     return redirect("/admin/merchandise")
 
 
-@admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/delete", methods=["GET", "POST"])
+@ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/delete", methods=["GET", "POST"])
 # @login_required
 def deletemerchandise(merchandise_category, merchandise_id):
     try:
@@ -391,7 +393,7 @@ def deletemerchandise(merchandise_category, merchandise_id):
 
 
 # poll routes
-@admin_bp.route("/polls/<poll_id>/details")
+@ admin_bp.route("/polls/<poll_id>/details")
 # @login_required
 def poll_details(poll_id):
     pollsList = Poll.query.filter_by(poll_id=poll_id).first()

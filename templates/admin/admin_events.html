@@ -85,14 +85,7 @@ All Events
         </h2>
         <p class="sec-font fs-7 mb-1 text-gray fw-bold">{{ele['category']}}</p>
         <p class="sec-font fs-5 text-brown mb-0 fw-bolder">
-          {% if ele["event_offline_cost"] != 0 %}
-          {{ele["event_offline_cost"]}} ₹
-          <span class="fs-7">(Offline)</span>
-          {% endif %}
-          {% if ele["event_online_cost"] != 0 %}
-          {{ele["event_online_cost"]}} ₹
-          <span class="fs-7">(Online)</span>
-          {% endif %}
+          {{ele["event_cost"]}} ₹
         </p>
       </div>
       <div class="d-flex p-3 mb-2">
@@ -219,34 +212,10 @@ All Events
             {{form.contact4(class="input_value")}}
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-6 col-sm-12">
-            <p class="mb-0 fs-7 main-font">
-              {{form.onlineCost.label}}
-            </p>
-            {{form.onlineCost(class="input_value")}}
-          </div>
-          <div class="col-lg-6 col-sm-12">
-            <p class="mb-0 fs-7 main-font">
-              {{form.offlineCost.label}}
-            </p>
-            {{form.offlineCost(class="input_value")}}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-6 col-sm-12">
-            <p class="mb-0 fs-7 main-font">
-              {{form.supportsOnline.label}}
-            </p>
-            {{form.supportsOnline(class="input_value")}}
-          </div>
-          <div class="col-lg-6 col-sm-12">
-            <p class="mb-0 fs-7 main-font">
-              {{form.supportsOffline.label}}
-            </p>
-            {{form.supportsOffline(class="input_value")}}
-          </div>
-        </div>
+        <p class="mb-0 fs-7 main-font">
+          {{form.eventCost.label}}
+        </p>
+        {{form.eventCost(class="input_value")}}
         <p class="mb-0 fs-7 main-font">
           {{form.perks1.label}}
         </p>

@@ -48,23 +48,8 @@
                     <p class="text-black fs-7 fw-light mb-1">
                         {{event_details["event_summary"]}}
                     </p>
-                    <h2 class="text-red row my-2">
-                        {% if event_details["offline_cost"] != 0 %}
-                        <div class="col">
-                            <b>
-                                {{event_details["offline_cost"]}} ₹
-                                <span class="fs-7">(Offline)</span>
-                            </b>
-                        </div>
-                        {% endif %}
-                        {% if event_details["online_cost"] != 0 %}
-                        <div class="col">
-                            <b>
-                                {{event_details["online_cost"]}} ₹
-                                <span class="fs-7">(Online)</span>
-                            </b>
-                        </div>
-                        {% endif %}
+                    <h2 class="text-red my-2">
+                        {{event_details["event_cost"]}} ₹
                     </h2>
                     <button
                         class="w-100 d-flex align-items-center justify-content-center border-0 bg-brown my-3 mb-2 fs-6 py-1 px-3 rounded-3"
@@ -85,13 +70,7 @@
                         Category Code: {{event_details["event_category_id"]}}
                     </p>
                     <p class="fs-7 mb-1 text-black fw-normal">
-                        Mode:
-                        {% if event_details["event_mode"] == '0' %}
-                        Offline
-                        {% endif %}
-                        {% if event_details["event_mode"] == '1' %}
-                        Online
-                        {% endif %}
+                        Mode: {{event_details["event_mode"]}}
                     </p>
                     <p class="fs-7 mb-1 text-black fw-normal">
                         Contact 1: {{event_details["event_contact1"]}}
@@ -148,7 +127,7 @@
                     {% for event in similar_events %}
                     {% if event['event_name'] != event_details["event_name"] %}
                     <div class="col d-flex flex-column align-items-center">
-                        <a href={{"/user/event/{}/{}".format(event['category'],event['event_id'])}}
+                        <a href={{"/event/{}/{}".format(event['category'],event['event_id'])}}
                             class="event-card-small p-1">
                             <div class="event-circle">
                                 <img src={{event["icon_url"]}} alt="card-image" width="140px" height="140px">

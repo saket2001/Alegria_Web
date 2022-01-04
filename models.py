@@ -26,10 +26,7 @@ class Eventdemo(db.Model):
     event_criteria = db.Column(db.String(20), nullable=False)
     event_category_id = db.Column(db.String(10), nullable=False)
     event_category_name = db.Column(db.String(50), nullable=False)
-    supports_online = db.Column(db.String(5))
-    online_cost = db.Column(db.Integer, nullable=True)
-    supports_offline = db.Column(db.String(5))
-    offline_cost = db.Column(db.Integer, nullable=True)
+    event_cost = db.Column(db.Integer, nullable=False)
     event_contact1 = db.Column(db.String(50), nullable=False)
     event_contact2 = db.Column(db.String(50), nullable=False)
     event_contact3 = db.Column(db.String(50), nullable=True)
@@ -37,7 +34,7 @@ class Eventdemo(db.Model):
     pr_points = db.Column(db.String(50), nullable=True)
 
     def __repr__(self) -> str:
-        return f"Event('{self.event_name}','{self.event_code}','{self.event_summary}','{self.event_criteria}','{self.event_category_id}','{self.event_category_name}','{self.supports_online}','{self.online_cost}','{self.supports_offline}','{self.offline_cost}','{self.event_contact1}','{self.event_contact2}')"
+        return f"Event('{self.event_name}','{self.event_code}','{self.event_summary}','{self.event_criteria}','{self.event_category_id}','{self.event_category_name}','{self.event_cost}','{self.event_contact1}','{self.event_contact2}','{self.event_contact3}','{self.event_contact4}','{self.pr_points}')"
 
 
 class UserInfo(db.Model):

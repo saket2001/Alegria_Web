@@ -37,7 +37,6 @@ def aboutUs():
 def events(event_category=None):
     filter_category_events = Eventdemo.query.filter_by(
         event_category_name=event_category)
-    print(filter_category_events)
 
     res = {
         "type": True,
@@ -50,8 +49,8 @@ def events(event_category=None):
         res["events"].append({
             "event_id": event.id,
             "event_name": event.event_name,
-            "event_online_cost": event.online_cost,
-            "event_offline_cost": event.offline_cost,
+            "event_cost": event.event_cost,
+            "event_mode": event_details.event_mode,
             "category": event.event_category_name,
             "category_id": event.event_category_id,
             "icon_url": event_details.icon_url
@@ -83,12 +82,11 @@ def EventDetails(category_name, event_id):
             "event_criteria": event.event_criteria,
             "event_category_id": event.event_category_id,
             "event_category_name": event.event_category_name,
-            "supports_online": event.supports_online,
-            "online_cost": event.online_cost,
-            "supports_offline": event.supports_offline,
-            "offline_cost": event.offline_cost,
+            "event_cost": event.event_cost,
             "event_contact1": event.event_contact1,
             "event_contact2": event.event_contact2,
+            "event_contact3": event.event_contact3,
+            "event_contact4": event.event_contact4,
             "event_date": event_details.event_date,
             "event_mode": event_details.event_mode,
             "event_duration": event_details.event_duration,
@@ -96,7 +94,8 @@ def EventDetails(category_name, event_id):
             "event_rules": event_details.event_rules,
             "event_perks_1": event_details.event_perks_1,
             "event_perks_2": event_details.event_perks_2,
-            "event_perks_3": event_details.event_perks_3
+            "event_perks_3": event_details.event_perks_3,
+            "pr_points": event.pr_points
         }
     }
 
@@ -110,11 +109,11 @@ def EventDetails(category_name, event_id):
         similar_events.append({
             "event_id": event.id,
             "event_name": event.event_name,
-            "event_online_cost": event.online_cost,
-            "event_offline_cost": event.offline_cost,
+            "event_cost": event.event_cost,
             "category": event.event_category_name,
             "category_id": event.event_category_id,
-            "icon_url": event_details.icon_url
+            "icon_url": event_details.icon_url,
+            "event_mode": event_details.event_mode,
         })
     if res['type'] and len(res['event']) > 0:
         event_details = res['event']
@@ -196,6 +195,14 @@ def get_merchandise_by_Id(category, id):
 def hackathonDetails():
     return render_template('user_hackathon.html', activeNav='Hackathon', problem_statements=client_data.problem_statements)
 
+#################################
+
+
+@app_mbp.route('/polls')
+def pollsPage():
+
+    return render_template('user_polls.html', polls=[])
+
 
 @app_mbp.route("/polls/<string:id>")
 def Poll_list(id):
@@ -255,6 +262,8 @@ def Poll_result(id, option):
             entry_id = ele.poll_id
     return render_template('user_polls.html', activeNav='events', polls=res["polls"], images=res["images"], result=result)
 
+
+# 3
 
 @app_mbp.route("/developers")
 def DevelopersPage():

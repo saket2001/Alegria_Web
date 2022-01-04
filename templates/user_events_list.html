@@ -171,12 +171,8 @@ Alegria 2022 | Events
                                         {{ele['category']}}
                                     </p>
                                     <p class="w-100 fs-5 fw-bolder text-red px-2 sec-font text-center mb-2">
-                                        {% if ele["event_offline_cost"] != 0 %}
-                                        {{ele["event_offline_cost"]}} ₹
-                                        {% endif %}
-                                        {% if ele["event_online_cost"] != 0 %}
-                                        {{ele["event_online_cost"]}} ₹
-                                        {% endif %}
+                                        {{ele["event_cost"]}} ₹
+
                                     </p>
                                 </div>
 
