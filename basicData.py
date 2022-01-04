@@ -180,16 +180,16 @@ events_row3 = [{
 }]
 
 web_team_list = [
-    {"img": "../static/images/developer/Sanjana.jpg", "name": "Sanjana Barhate", "role": "Front-end Developer", "call": "+919975566026",
-     "gmail": "sanju1234.barhate@gmail.com", "github": "https://github.com/sanjana2417", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"},
     {"img": "../static/images/developer/Saket.jpg", "name": "Saket Chandorkar", "role": "Front-end Developer", "call": "+917506553715",
             "gmail": "saketchandorkar123@gmail.com", "github": "https://github.com/saket2001", "linkedin": "https://www.linkedin.com/in/saket-chandorkar-856783203/"},
-    {"img": "../static/images/developer/Atharva.jpg", "name": "Atharva Golapkar", "role": "Front-end Developer", "call": "+91 7039324970",
-            "gmail": "atharvagolapkar@gmail.com", "github": "https://github.com/Jotaro2401", "linkedin": "https://www.linkedin.com/in/atharva-suryakant-golapkar-9b02281b3/"},
     {"img": "../static/images/developer/Lina.jpg", "name": "Lina Pawar", "role": "Front-end Developer", "call": "+91 9146850710",
             "gmail": "lpawar2911@gmail.com", "github": "https://github.com/Lina-Pawar", "linkedin": "https://www.linkedin.com/in/lina-pawar-5289a0198/"},
     {"img": "../static/images/developer/Amit.jpg", "name": "Amit Naik", "role": "Front-end Developer", "call": "+91 8779624030",
             "gmail": "amitnaik3108@gmail.com", "github": "https://github.com/Amit3108", "linkedin": "https://www.linkedin.com/in/amit-naik-0807331b2/"},
+    {"img": "../static/images/developer/Atharva.jpg", "name": "Atharva Golapkar", "role": "Front-end Developer", "call": "+91 7039324970",
+            "gmail": "atharvagolapkar@gmail.com", "github": "https://github.com/Jotaro2401", "linkedin": "https://www.linkedin.com/in/atharva-suryakant-golapkar-9b02281b3/"},
+    {"img": "../static/images/developer/Sanjana.jpg", "name": "Sanjana Barhate", "role": "Front-end Developer", "call": "+919975566026",
+     "gmail": "sanju1234.barhate@gmail.com", "github": "https://github.com/sanjana2417", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"},
     {"img": "../static/images/developer/Bhushan.jpg", "name": "Bhushan Khot", "role": "Back-end Developer", "call": "+91 8652618353",
             "gmail": "bhushan.khot22@gmail.com", "github": "https://github.com/Bhushankhot", "linkedin": "https://www.linkedin.com/in/bhushankhot08/"},
     {"img": "../static/images/developer/Athul.jpg", "name": "Athul Tulsidasan", "role": "Back-end Developer", "call": "+91 ",
