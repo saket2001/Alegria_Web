@@ -195,14 +195,10 @@ def get_merchandise_by_Id(category, id):
 def hackathonDetails():
     return render_template('user_hackathon.html', activeNav='Hackathon', problem_statements=client_data.problem_statements)
 
-#################################
-
-
-@app_mbp.route('/polls')
-def pollsPage():
-
-    return render_template('user_polls.html', polls=[])
-
+@app_mbp.route("/polls")
+def polls_main():
+    
+    return render_template('user_polls_main.html', polls_cards=client_data.polls_cards)
 
 @app_mbp.route("/polls/<string:id>")
 def Poll_list(id):
