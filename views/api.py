@@ -100,7 +100,7 @@ class CategoryEventFilter(Resource):
                 "event_name": event.event_name,
                 "event_code": event.event_code,
                 "event_image": event_details.icon_url,
-                "event_cost": event.offline_cost
+                "event_cost": event.event_cost
             })
 
         return res, 200
