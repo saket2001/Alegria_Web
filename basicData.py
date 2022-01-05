@@ -122,7 +122,7 @@ paymentLinks = {
     "fine-arts": "https://pages.razorpay.com/fine-arts-alegria-22",
     "performing-arts": "https://pages.razorpay.com/Performing-Arts-alegria-22",
     "literary-arts": "https://pages.razorpay.com/Literary-Arts-alegria-22",
-    "technical": "https://pages.razorpay.com/technical-events-alegria22",
+    "technical-events": "https://pages.razorpay.com/technical-events-alegria22",
     "management": "https://pages.razorpay.com/management-events-alegria22",
     "workshop": "https://pages.razorpay.com/Technical-Workshops-alegria22"
 }
