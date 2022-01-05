@@ -73,6 +73,7 @@ def events(event_category=None):
             events_arr = []
 
         return render_template('user_events_list.html', activeNav='Events', events_list=events_arr, category=event_category)
+
     except Exception as e:
         print(e)
         return redirect("/")
