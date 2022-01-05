@@ -1,16 +1,11 @@
 from flask import Blueprint, redirect, render_template, flash, url_for, session, request, current_app
 from functools import wraps
-#from flask_mail import Mail, Message
-#from flask_login import LoginManager, current_user, login_required, login_user, logout_user
+# from flask_mail import Mail, Message
+# from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from flask_wtf.csrf import CSRFProtect
-
-#from alegria_webp.models import db,Eventdemo,Eventdemo_details,Merchandise
-#from alegria_webp.forms import AddEventForm, AddPollForm, AddMerchandiseForm
-
-
-
-
-
+import datetime
+from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses
+from forms import AddEventForm, AddPollForm, AddMerchandiseForm
 
 
 def login_required(f):
@@ -25,19 +20,16 @@ def login_required(f):
     return decorated_function
 
 
-
 # csrf
 csrf = CSRFProtect()
 
 # flask mail
-#mail = Mail()
-
+# mail = Mail()
 
 
 # create blueprint to group views
-admin_bp = Blueprint('admin', __name__)
-
-
+admin_bp = Blueprint('admin', __name__, url_prefix="/admin",
+                     template_folder="/templates")
 
 
 #############################
@@ -45,22 +37,30 @@ admin_bp = Blueprint('admin', __name__)
 
 
 def getDateTime():
-    now = datetime.datetime.now()
-    now_beautiful = now.strftime(
-        "%A")+", "+now.strftime(
-        "%d")+" "+now.strftime("%B") + " "+now.strftime("%Y")
-    return now_beautiful
+    try:
+        now = datetime.datetime.now()
+        now_beautiful = now.strftime(
+            "%A")+", "+now.strftime(
+            "%d")+" "+now.strftime("%B") + " "+now.strftime("%Y")
+        return now_beautiful
+    except Exception as e:
+        print(e)
+        return redirect("/")
 
 
 def calcGreeting():
-    now = datetime.datetime.now()
-    curTime = int(now.strftime('%X').split(':')[0])
-    if(curTime < 12):
-        return 'Good Morning'
-    elif(curTime < 18):
-        return "Good Afternoon"
-    else:
-        return "Good Evening"
+    try:
+        now = datetime.datetime.now()
+        curTime = int(now.strftime('%X').split(':')[0])
+        if(curTime < 12):
+            return 'Good Morning'
+        elif(curTime < 18):
+            return "Good Afternoon"
+        else:
+            return "Good Evening"
+    except Exception as e:
+        print(e)
+        return redirect("/")
 
 
 #############################
@@ -69,30 +69,39 @@ def calcGreeting():
 # login route
 @admin_bp.route('/aleg-admin-login')
 def adminLogin():
-    return render_template('admin_login.html')
+    try:
+        return render_template('/admin/admin_login.html')
+    except Exception as e:
+        print(e)
+        return redirect("/")
 
 # dashboard routes
 
 
-@admin_bp.route('/<username>')
-@login_required
-def home(username):
-    eventsList = [{'title': 'Total Events', 'total': len(Eventdemo.query.all())},
-                  {'title': 'Total Merchandise',
-                      'total': len(Merchandise.query.all())},
-                  {'title': 'Total Users', 'total': len(UserInfo.query.all())}
-                  ]
-    return render_template('admin_dashboard.html', greeting=calcGreeting(), now_beautiful=getDateTime(), username=username, image=session.get('user_image'), eventsList=eventsList, activeNav='dashboard')
+@admin_bp.route('/')
+# @login_required
+def home():
+    try:
+        eventsList = [{'title': 'Total Events', 'total': len(Eventdemo.query.all())},
+                      {'title': 'Total Merchandise',
+                       'total': len(Merchandise.query.all())},
+                      {'title': 'Total Users', 'total': len(
+                          UserInfo.query.all())}
+                      ]
+        return render_template('/admin/admin_dashboard.html', greeting=calcGreeting(), now_beautiful=getDateTime(), username='', image=session.get('user_image'), eventsList=eventsList, activeNav='dashboard')
+    except Exception as e:
+        print(e)
+        return redirect("/")
 
 # event routes
 
 
 @admin_bp.route('/events/<event_category>', methods=['GET', 'POST'])
-@login_required
+# @login_required
 def events(event_category):
     # form
     try:
-        form = forms.AddEventForm()
+        form = AddEventForm()
 
         filter_category_events = Eventdemo.query.filter_by(
             event_category_name=event_category).all()
@@ -104,25 +113,28 @@ def events(event_category):
         for event in filter_category_events:
             event_details = Eventdemo_details.query.filter_by(
                 event_id=event.id).first()
+
             res["events"].append({
                 "event_id": event.id,
                 "event_name": event.event_name,
-                "event_online_cost": event.online_cost,
-                "event_offline_cost": event.offline_cost,
+                "event_cost": event.event_cost,
+                "event_mode": event_details.event_mode,
                 "category": event.event_category_name,
                 "category_id": event.event_category_id,
                 "icon_url": event_details.icon_url
             })
+
         events_arr = []
 
         if res['type'] and len(list(res['events'])) > 0:
             events_arr = res['events']
         else:
             events_arr = []
-        return render_template('admin_events.html', activeNav='events', events_list=events_arr, form=form)
+        return render_template('/admin/admin_events.html', activeNav='events', events_list=events_arr, form=form)
 
-    except:
-        return render_template("404.html")
+    except Exception as e:
+        print(e)
+        return redirect("/")
 
 
 @admin_bp.route('/add-event', methods=["POST"])
@@ -163,14 +175,15 @@ def addEvent():
             db.session.add(entry2)
             db.session.commit()
 
-        except:
-            return render_template("404.html")
+        except Exception as e:
+            print(e)
+            return redirect("/")
 
     return redirect('/admin/events')
 
 
 @admin_bp.route("/events/<category>/<event_id>/edit", methods=['GET', 'POST'])
-@login_required
+# @login_required
 def editEventDetails(category, event_id):
     try:
 
@@ -187,12 +200,11 @@ def editEventDetails(category, event_id):
                 "event_criteria": event.event_criteria,
                 "event_category_id": event.event_category_id,
                 "event_category_name": event.event_category_name,
-                "supports_online": event.supports_online,
-                "online_cost": event.online_cost,
-                "supports_offline": event.supports_offline,
-                "offline_cost": event.offline_cost,
+                "event_cost": event.event_cost,
                 "event_contact1": event.event_contact1,
                 "event_contact2": event.event_contact2,
+                "event_contact3": event.event_contact3,
+                "event_contact4": event.event_contact4,
                 "event_date": event_details.event_date,
                 "event_mode": event_details.event_mode,
                 "event_duration": event_details.event_duration,
@@ -200,7 +212,8 @@ def editEventDetails(category, event_id):
                 "event_rules": event_details.event_rules,
                 "event_perks_1": event_details.event_perks_1,
                 "event_perks_2": event_details.event_perks_2,
-                "event_perks_3": event_details.event_perks_3
+                "event_perks_3": event_details.event_perks_3,
+                "pr_points": event.pr_points
             }
         }
         if res['type'] and len(res['event']) > 0:
@@ -233,13 +246,14 @@ def editEventDetails(category, event_id):
             db.session.commit()
             return render_template('admin_editsuccessfull.html')
 
-        return render_template('admin_event_edit.html', activeNav='events', event_details=event_details)
-    except:
-        return render_template('404.html',)
+        return render_template('/admin/admin_event_edit.html', activeNav='events', event_details=event_details)
+    except Exception as e:
+        print(e)
+        return redirect("/")
 
 
-@admin_bp.route("/events/<category>/<event_id>/delete", methods=['GET', 'POST'])
-@login_required
+@ admin_bp.route("/events/<category>/<event_id>/delete", methods=['GET', 'POST'])
+# @login_required
 def deleteevent(category, event_id):
     try:
         post = Eventdemo.query.filter_by(id=event_id).first()
@@ -249,38 +263,42 @@ def deleteevent(category, event_id):
         db.session.delete(post2)
         db.session.commit()
         return redirect('/admin/events')
-    except:
-        return render_template('404.html',)
+    except Exception as e:
+        print(e)
+        return redirect("/")
 
 
-@admin_bp.route("/events/event-registrations")
-@login_required
+@ admin_bp.route("/events/event-registrations")
+# @login_required
 def eventRegistrations():
     # get info from api in List of Dictionaries format as below
+    try:
 
-    event_registrations = [
-        {"participant": "Lina Pawar", "event_id": "TW10",
-            "event_mode": "Online", "status": "Completed"},
-        {"participant": "Saket Chandorkar", "event_id": "TW11",
-            "event_mode": "Offline", "status": "Not Completed"},
-        {"participant": "Lina Pawar", "event_id": "TW10",
-            "event_mode": "Online", "status": "Completed"},
-        {"participant": "Saket Chandorkar", "event_id": "TW11",
-            "event_mode": "Offline", "status": "Not Completed"}
-    ]
-    return render_template('admin_event_registrations.html', activeNav='events', event_registrations=event_registrations)
+        event_registrations = [
+            {"participant": "Lina Pawar", "event_id": "TW10",
+                "event_mode": "Online", "status": "Completed"},
+            {"participant": "Saket Chandorkar", "event_id": "TW11",
+                "event_mode": "Offline", "status": "Not Completed"},
+            {"participant": "Lina Pawar", "event_id": "TW10",
+                "event_mode": "Online", "status": "Completed"},
+            {"participant": "Saket Chandorkar", "event_id": "TW11",
+                "event_mode": "Offline", "status": "Not Completed"}
+        ]
+        return render_template('admin_event_registrations.html', activeNav='events', event_registrations=event_registrations)
+    except Exception as e:
+        print(e)
+        return redirect("/")
 
 
 # merchandise routes
 
 
-@admin_bp.route("/merchandise/<string:category>")
-@login_required
+@ admin_bp.route("/merchandise/<string:category>")
+# @login_required
 def merchandise(category):
     try:
-
         # form
-        form = forms.AddMerchandiseForm()
+        form = AddMerchandiseForm()
 
         merchandise_List = Merchandise.query.filter_by(category=category).all()
 
@@ -294,22 +312,24 @@ def merchandise(category):
                 "name": item.name,
                 "details": item.details,
                 "cost": item.cost,
-                "category": item.category
+                "category": item.category,
+                "item_img1": item.item_img1,
             })
 
-        return render_template('admin_merchandise.html', activeNav='merchandise', merchandise_List=res["merchandise_List"], form=form)
-    except:
-        return render_template('404.html',)
+        return render_template('/admin/admin_merchandise.html', activeNav='merchandise', merchandise_List=res["merchandise_List"], form=form)
+    except Exception as e:
+        print(e)
+        return redirect("/")
 
 
-@admin_bp.route("/exceptionn")
+@ admin_bp.route("/exceptionn")
 def exceptionn():
     return render_template('exception.html')
 
 
-@admin_bp.route("/add-merchandise", methods=["POST"])
+@ admin_bp.route("/add-merchandise", methods=["post"])
 def addMerchandise():
-    if request.method == "POST":
+    if request.method == "post":
         try:
             id = request.form.get('id')
             name = request.form.get("name")
@@ -329,62 +349,71 @@ def addMerchandise():
             db.session.add(new_merchandise)
             db.session.commit()
 
-        except:
-            return render_template("404.html")
+        except Exception as e:
+            print(e)
+            return redirect("/")
 
-    return redirect("/admin/merchandise")
+    return redirect("/admin")
 
 
-@admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/edit", methods=["GET", "POST"])
-@login_required
+@ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/edit", methods=["GET", "POST"])
+# @login_required
 def editMerchandiseDetails(merchandise_category, merchandise_id):
+    try:
 
-    if request.method == "GET":
-        merch = Merchandise.query.filter_by(id=merchandise_id).first()
+        if request.method == "GET":
+            merch = Merchandise.query.filter_by(id=merchandise_id).first()
 
-        res = {
-            "type": True,
-            "merch": {
-                "id": merch.id,
-                "title": merch.name,
-                "description": merch.details,
-                "price": merch.cost,
-                "category": merch.category,
-                "quantity": merch.quantity,
-                "code": merch.code,
-                "colors": merch.color,
-                "size": merch.size,
+            res = {
+                "type": True,
+                "merch": {
+                    "id": merch.id,
+                    "title": merch.name,
+                    "description": merch.details,
+                    "price": merch.cost,
+                    "category": merch.category,
+                    "quantity": merch.quantity,
+                    "code": merch.code,
+                    "colors": merch.color,
+                    "size": merch.size,
+                    "img1": merch.item_img1,
+                    "img2": merch.item_img2,
+                }
             }
-        }
 
-        if res['type'] and len(res['merch']) > 0:
-            merchandise_details = res['merch']
+            if res['type'] and len(res['merch']) > 0:
+                merchandise_details = res['merch']
 
-        else:
-            merchandise_details = []
+            else:
+                merchandise_details = []
 
-        return render_template("admin_merchandise_edit.html", merchandise_details=merchandise_details)
+            return render_template("/admin/admin_merchandise_edit.html", merchandise_details=merchandise_details)
 
-    if request.method == "POST":
-        try:
-            merch_edit = Merchandise.query.filter_by(id=merchandise_id).first()
+        if request.method == "POST":
+            try:
+                merch_edit = Merchandise.query.filter_by(
+                    id=merchandise_id).first()
 
-            merch_edit.name = request.form.get("title")
-            merch_edit.cost = request.form.get("price")
-            merch_edit.category = request.form.get("category")
-            merch_edit.quantity = request.form.get("quantity")
-            merch_edit.code = request.form.get("code")
-            # merch_edit.size = request.form.get("size")
-            db.session.commit()
+                merch_edit.name = request.form.get("title")
+                merch_edit.cost = request.form.get("price")
+                merch_edit.category = request.form.get("category")
+                merch_edit.quantity = request.form.get("quantity")
+                merch_edit.code = request.form.get("code")
+                # merch_edit.size = request.form.get("size")
+                db.session.commit()
 
-        except:
-            return render_template("404.html")
+            except Exception as e:
+                print(e)
+                return redirect("/")
 
-    return redirect("/admin/merchandise")
+        return redirect("/admin/merchandise")
+    except Exception as e:
+        print(e)
+        return redirect("/")
 
 
-@admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/delete", methods=["GET", "POST"])
-@login_required
+@ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/delete", methods=["GET", "POST"])
+# @login_required
 def deletemerchandise(merchandise_category, merchandise_id):
     try:
         merch = Merchandise.query.filter_by(id=merchandise_id).first()
@@ -392,56 +421,54 @@ def deletemerchandise(merchandise_category, merchandise_id):
         db.session.delete(merch)
         db.session.commit()
         return redirect('/admin/merchandise')
-    except:
-        return render_template('404.html',)
+    except Exception as e:
+        print(e)
+        return redirect("/")
 
 
 # poll routes
-@admin_bp.route("/polls/<poll_id>/details")
-@login_required
+@ admin_bp.route("/polls/<poll_id>/details")
+# @login_required
 def poll_details(poll_id):
-    polldetails = {
-        "question": "Whom do you want to see as a main actor in Alegria?",
-        "votes": "10",
-        "date": "12/12/2021",
-    }
-    return render_template('admin_poll_details.html', activeNav='poll_details', polldetails=polldetails)
+    try:
+        pollsList = Poll.query.filter_by(poll_id=poll_id).first()
+        pollDetails = PollResponses.query.filter_by(poll_id=poll_id).all()
+        res = {"type": True, "polldetails": []}
+        for ele in pollDetails:
+            res["polldetails"].append({
+                "id": pollsList.poll_id,
+                "question": pollsList.question,
+                "status": pollsList.status,
+                "total_votes": pollsList.total_votes,
+                "poll_option_id": ele.poll_option_id,
+                "option_name": ele.option_name,
+                "image_url": ele.option_image,
+                "option_votes": ele.option_votes
+            })
+        return render_template('/admin/admin_poll_details.html', activeNav='poll_details', polldetails=res["polldetails"])
+    except Exception as e:
+        print(e)
+        return redirect("/")
 
 
-@admin_bp.route("/polls")
-@login_required
+@ admin_bp.route("/polls")
+# @login_required
 def polls():
-    poll_list = [
-        {
-            "p_id": "01",
-            "question": "Whom do you want to see as a main actor in Alegria?",
-            "status": "Closed",
-            "votes": "10",
-            "date": "12/12/2021",
-        },
-
-        {
-            "p_id": "02",
-            "question": "Whom do you want to see as a main actor in Alegria?",
-            "status": "Active",
-            "votes": "8",
-            "date": "14/12/2021",
-        },
-
-        {
-            "p_id": "03",
-            "question": "Whom do you want to see as a main actor in Alegria?",
-            "status": "Active",
-            "votes": "4",
-            "date": "19/12/2021",
+    try:
+        form = AddPollForm()
+        pollsList = Poll.query.all()
+        res = {
+            "type": True,
+            "polls_list": []
         }
-    ]
-    form = forms.AddPollForm()
-
-    if form.validate_on_submit():
-        return "You submitted data like {} and {}".format(form.name.data, form.description.data)
-
-    return render_template('admin_polls.html', activeNav='polls', poll_list=poll_list, form=form)
-
-
-
+        for item in pollsList:
+            res["polls_list"].append({
+                "id": item.poll_id,
+                "question": item.question,
+                "status": item.status,
+                "total_votes": item.total_votes
+            })
+        return render_template('/admin/admin_polls.html', activeNav='polls', poll_list=res["polls_list"], form=form)
+    except Exception as e:
+        print(e)
+        return redirect("/")

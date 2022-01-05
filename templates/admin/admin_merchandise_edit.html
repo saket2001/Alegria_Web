@@ -1,0 +1,126 @@
+{% extends '/admin/admin_layout.html' %}
+
+{% block title %}
+Event Edit Page
+{% endblock title %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static',filename='main.css')}}">
+{% endblock head %}
+
+
+{% block content %}
+<div class="row p-4 px-2 justify-content-center h-100">
+    <!-- go back button -->
+    <div class="row my-2 gy-2">
+        <div class="col-lg-3 col-sm-3">
+            <a href={{"/admin/merchandise/{}".format(merchandise_details['category'])}} type="button"
+                class="go_back_btn fs-7">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="me-2"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Go Back
+            </a>
+        </div>
+        <div class="col-lg-9 col-sm-12 d-flex justify-content-center align-items-center">
+            <h5 class="fs-5 main-font">Edit Merchandise Details</h5>
+        </div>
+    </div>
+    <!-- form -->
+    <div class="row my-2 py-3">
+        <p class="fs-6 text-brown">Make changes in below inputs and save them.</p>
+        <!-- image -->
+        <div class="col-lg-5 col-sm-12 d-flex flex-column d-flex p-3">
+            <div class="row mb-2 rounded my-2">
+                <img src={{merchandise_details['img1']}} alt="event image" class='w-100 rounded-3'>
+            </div>
+            <div class="row mt-1">
+                <div class="col">
+                    <img src={{merchandise_details['img2']}} alt="event image" class='w-100 rounded-3'>
+                    <button class="w-100 p-1 border-0 bg-transparent text-start ">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"
+                            fill="none" class="" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="col">
+                </div>
+            </div>
+        </div>
+        <!-- details -->
+        <form class="col-lg-7 col-sm-12 my-2" action="/admin/event/save-edit" method="post">
+            <p class="mb-0 fs-7 main-font">
+                Merch Id
+            </p>
+            <input type="text" name="id" id="id" class="input_value" value="{{merchandise_details['id']}}">
+            <p class="mb-0 fs-7 main-font">
+                Merch Name
+            </p>
+            <input type="text" name="title" id="title" class="input_value" value="{{merchandise_details['title']}}">
+            <p class="mb-0 fs-7 main-font">
+                Merch Description
+            </p>
+            <textarea name="event_description" id="event_description" cols="30" rows="6" class="input_value">{{merchandise_details['description']}}
+            </textarea>
+            <div class="row">
+                <div class="col">
+                    <p class="mb-0 fs-7 main-font">
+                        Merch Cost
+                    </p>
+                    <input type="text" name="price" id="price" class="input_value"
+                        value="{{merchandise_details['price']}} Rs">
+                </div>
+                <div class="col">
+                    <p class="mb-0 fs-7 main-font">
+                        Merch Category
+                    </p>
+                    <input type="text" name="category" id="category" class="input_value"
+                        value="{{merchandise_details['category']}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="mb-0 fs-7 main-font">
+                        Merch Quantity Left
+                    </p>
+                    <input type="text" name="quantity" id="quantitty" class="input_value"
+                        value="{{merchandise_details['quantity']}}">
+                </div>
+                <div class="col">
+                    <p class="mb-0 fs-7 main-font">
+                        Merch Code
+                    </p>
+                    <input type="text" name="code" id="code" class="input_value"
+                        value="{{merchandise_details['code']}}">
+                </div>
+            </div>
+            <p class="mb-0 fs-7 main-font">
+                Merch Colors
+            </p>
+            <input type="text" name="colors" id="colors" class="input_value" value="{{merchandise_details['colors']}}">
+            <p class="mb-0 fs-7 main-font">
+                Merch Sizes
+            </p>
+            <input type="text" name="size" id="size" class="input_value" value="{{merchandise_details['size']}}">
+
+
+            <button type="submit" class="w-100 button bg-brown text-teal my-2">Save Changes</button>
+        </form>
+    </div>
+    <hr>
+    <div class="row my-2 rounded-3 shadow-sm bg-teal">
+        <div class="col-lg-6 col-sm-12 d-flex flex-column p-3">
+            <p class="text-muted fw-bold fs-6 my-1">Merchandise Sales</p>
+            <h2 class="display-5 text-brown fw-bolder my-1">0</h2>
+        </div>
+        <div class="col-lg-6 col-sm-12 d-flex flex-column p-3">
+            <p class="text-muted fw-bold fs-6 my-1">Merchandise Left</p>
+            <h2 class="display-5 text-brown fw-bolder my-1">0</h2>
+        </div>
+    </div>
+</div>
+{% endblock content %}

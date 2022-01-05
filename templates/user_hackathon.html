@@ -1,0 +1,200 @@
+{% extends 'user_layout.html' %}
+
+{% block headContent %}
+<style>
+    .schedule {
+        border-left: 2px solid black;
+        padding-left: 50px;
+    }
+
+    .problem-statement {
+        background-color: #631909;
+        width: 100%;
+        padding: 30px;
+        border-radius: 50px 0;
+    }
+
+    .ps-img {
+        height: 100%;
+    }
+
+    .ps-content {
+        width: 70%;
+        margin: auto;
+    }
+
+    .reverse {
+        display: flex;
+    }
+
+    .reverse:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+
+    @media screen and (max-width:600px) {
+        .problem-statement {
+            width: 90%;
+            display: block;
+        }
+
+        .ps-img {
+            width: 100%;
+        }
+
+        .ps-content {
+            width: 100%;
+        }
+
+        .schedule {
+            border: none;
+            padding-left: 15px;
+        }
+    }
+</style>
+{% endblock %}
+
+
+{% block title %}
+Alegria 2022 | Hackathon 2022
+{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-column justify-content-center min-w-100 min-vh-100 bg-teal bg-cover overflow-hidden">
+    <div class="row m-2 py-2">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-6 col-sm-12 my-4">
+            <h1 class="main-font text-red">Hackathon 2022</h1>
+            <p class="fs-7 lh-base text-black my-1 mb-0 sec-font">
+                Participants have to work on a given problem with their team to come up with the best solution they can.
+                The most feasible solution will be awarded.
+            </p>
+        </div>
+        <div class="col-lg-3 col-sm-12 my-4 d-flex justify-content-center">
+            <img src="/static/images/hackathon/hackathon.png" alt='Hackathon logo' width="200px" height="200px">
+        </div>
+    </div>
+    <div class="row m-2 py-2">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-5 col-sm-12 sec-font text-red">
+            <p class="fs-5 fw-bolder">₹ 200.00 (Per Team)</p>
+            <p class="fs-7 mb-0">Criteria: Semi-Open</p>
+            <p class="fs-7 mb-0">Mode: ONLINE</p>
+            <p class="fs-7">Number of Participants: 2-4</p>
+            <p>
+                <a data-bs-toggle="collapse" href="#collapse1" role="button" aria-expanded="false"
+                    aria-controls="collapse1" class="main-font text-red">
+                    Prizes +
+                </a>
+            </p>
+            <div class="collapse" id="collapse1">
+                <div class="card collapse-card">
+                    <li class="fs-7 mb-1">1st prize : Rs.3000 + Certificates</li>
+                    <li class="fs-7 mb-1">2nd prize :Rs.1500 + Certificates</li>
+                    <li class="fs-7 mb-1">3rd prize:
+                        Certificates</li>
+                </div>
+            </div>
+            <p>
+                <a data-bs-toggle="collapse" href="#collapse2" role="button" aria-expanded="false"
+                    aria-controls="collapse2" class="main-font text-red">
+                    Rules +
+                </a>
+            </p>
+            <div class="collapse" id="collapse2">
+                <div class="card collapse-card">
+                    <p class="fs-7 mb-1">
+                        Round 1 (Idea Submission):
+                        <li class="fs-7 mb-1">1. Idea must be submitted by Team Leader Only.</li>
+                        <li class="fs-7 mb-1">2. The team must submit the Idea before the last date.</li>
+                        <li class="fs-7 mb-1">3. Upload the Idea Submission File in the prescribed format.</li>
+                        <li class="fs-7 mb-1">4. Format for Idea file:</li>
+                        <li class="fs-7 mb-1">-- PSID_TeamName_LeaderName</li>
+                        <li class="fs-7 mb-1">-- For Eg. PS01_Enigma_AmitNaik</li>
+                        <li class="fs-7 mb-1">5. A team can submit idea in only one problem statement only. Multiple
+                            idea submission in this hackathon is not allowed.</li>
+                        <li class="fs-7 mb-1">6. For AI/ Machine learning, participants can either create or use any
+                            relevant dataset.</li>
+                    </p>
+                </div>
+            </div>
+            <a href='https://bit.ly/3e1QFnV' target="_blank" rel="noopener noreferrer" class="text-red"
+                style="text-decoration: underline;">Sample Idea Format</a>
+
+            <button
+                class="w-100 d-flex align-items-center justify-content-center border-0 bg-brown my-3 mb-2 fs-6 py-1 px-3 rounded-3"
+                style="max-width: 200px;">
+                <a href='https://forms.gle/utWwxyJ7aX9dvQx98' target="_blank" rel="noopener noreferrer"
+                    class="text-beige w-100">
+                    Participate
+                </a>
+            </button>
+        </div>
+        <div class="col-lg-6 d-flex flex-column justify-content-center schedule">
+            <p>
+            <h3 class="sec-font my-2">
+                Schedule
+            </h3>
+            <p class="py-1 sec-font mb-0 fs-7">
+                <b class="text-black">Round 1 (20 December 2021-10 January 2022):</b> Teams will submit their ideas.
+            </p>
+            <p class="py-1 sec-font mb-0 fs-7">
+                <b class="text-black">Round 2 (17 January 2022- 5 February 2022):</b> Selected teams will have to
+                submit prototype and demo video.
+            </p>
+            <p class="py-1 sec-font mb-0 fs-7">
+                <b class="text-black">Round 3 selection (8 February 2022):</b> Finalists will be declared.
+            </p>
+            <p class="py-1 u-text-orange sec-font mb-0 fs-7">
+                <b class="u-text-brown">Round 3 (12 February 2022):</b> Final presentation round which will be conducted
+                online.
+            </p>
+            </p>
+        </div>
+    </div>
+    <div class="row m-2 py-2">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10 col-md-10 col-sm-10">
+            <div class="row my-2">
+                <h4 class="fs-5 sec-font text-red">Problem Statement Domains:</h4>
+            </div>
+            <div class="row my-1">
+                <div class="domain col text-center">
+                    <img src="/static/images/hackathon/ai-icon-vector-23097736.jpg">
+                    <h4 class="fs-6 mt-2">Artificial Intelligence</h4>
+                </div>
+                <div class="domain col text-center">
+                    <img src="/static/images/hackathon/iot-vector-21463975.jpg">
+                    <h4 class="fs-6 mt-2">IOT</h4>
+                </div>
+                <div class="domain col text-center">
+                    <img src="/static/images/hackathon/virtual-reality-icon.jpg">
+                    <h4 class="fs-6 mt-2">AR/VR</h4>
+                </div>
+                <div class="domain col text-center">
+                    <img src="/static/images/hackathon/web-app.png">
+                    <h4 class="fs-6 mt-2">App (Web/Mobile)</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row d-flex flex-column justify-content-center align-items-center">
+        <h4 class="main-font fs-4 text-center">Problem Statements</h4>
+        <div class="col-10 g-2">
+            {% for ele in problem_statements %}
+            <div class="problem-statement text-beige reverse mb-3">
+                <div class="ps-img">
+                    <img src={{ele[4]}} alt="problem-statement" style="width:90%;border-radius: 50px 0;margin:auto;">
+                </div>
+                <div class="ps-content">
+                    <h5 class="fs-6 text-teal"><b>{{ele[0]}}</b></h5>
+                    <h3 class="fs-5 text-beige m-0 p-0">{{ele[1]}}</h3>
+                    <p class="fs-7 text-beige"><b>{{ele[2]}}</b></p>
+                    <p class="fs-7 text-teal">{{ele[3]}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

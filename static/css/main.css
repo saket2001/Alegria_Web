@@ -1,0 +1,258 @@
+@font-face {
+    font-family: 'gilroy-bold';
+    src: url('../font/Gilroy-Bold.ttf');
+}
+
+@font-face {
+    font-family: 'gilroy-medium';
+    src: url('../font/Gilroy-Medium.ttf');
+}
+
+:root {
+    --brown: #26251A;
+    --teal: #f5eee0e0;
+    --beige: #F1E3C8;
+    --black: #161515;
+    --gray: #696565;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 20px;
+}
+
+/* defaults & common css classes */
+.main-font {
+    font-family: 'gilroy-bold',
+        serif;
+}
+
+.sec-font {
+    font-family: 'gilroy-medium',
+        serif;
+}
+
+
+.navbar_links {
+    color: var(--beige);
+}
+
+.filter_btn {
+    background-color: transparent;
+    border: 2px solid var(--brown);
+    border-radius: 10px;
+    color: var(--brown);
+}
+
+.fs-7 {
+    font-size: 0.9rem;
+}
+
+a {
+    color: var(--beige);
+    text-decoration: none;
+    margin: 0;
+    transition: all .3s ease;
+}
+
+a:hover {
+    color: initial;
+}
+
+li {
+    list-style: none;
+}
+
+.button {
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    padding: 0.4rem 0.6rem;
+    background-color: transparent;
+    transition: all .5s ease-out;
+}
+
+.button:hover {
+    transform: scale(0.95);
+}
+
+.go_back_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 0.6rem;
+    outline: none;
+    border: 2px solid var(--brown);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: var(--brown);
+    font-weight: 700;
+    background-color: transparent;
+    transition: all .5s ease-out;
+}
+
+.go_back_btn:hover {
+    transform: scale(0.95);
+}
+
+.outline_btn {
+    border: 2px solid var(--brown);
+    color: var(--brown);
+    font-weight: 600;
+}
+
+.input_value {
+    border: 1px solid var(--brown);
+    padding: 0.2rem 0.4rem;
+    margin: 0.2rem 0;
+    background-color: transparent;
+    width: 100%;
+    outline: none;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    transition: all 0.3s ease-out;
+}
+
+input[type='file'] {
+    padding: 0.1rem 0.4rem;
+    border: none;
+}
+
+.input_value:focus {
+    border: 2px solid #131fcf;
+}
+
+input[type='file']:focus {
+    border: none;
+}
+
+/* colors */
+
+.bg-brown {
+    background-color: var(--brown);
+}
+
+.bg-beige {
+    background-color: var(--beige)
+}
+
+.bg-teal {
+    background-color: var(--teal);
+}
+
+.bg-gray {
+    background-color: var(--gray)
+}
+
+.text-brown {
+    color: var(--brown);
+}
+
+.text-teal {
+    color: var(--teal);
+}
+
+.text-beige {
+    color: var(--beige);
+}
+
+.text-gray {
+    color: var(--gray);
+}
+
+/* nav */
+
+.nav-links {
+    color: var(--beige);
+}
+
+
+.nav-button {
+    padding: 0.4rem 0.6rem;
+    background-color: transparent;
+    outline: none;
+    border: 2px solid var(--beige);
+    color: var(--beige);
+    transition: all .2s ease-in;
+}
+
+.nav-button:hover {
+    transform: scale(0.95);
+}
+
+.nav-menu-btn {
+    width: auto;
+    padding: 0.4rem 0.6rem;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: var(--beige);
+    transition: all .2s ease-in;
+    display: none !important;
+}
+
+.user-box {
+    width: 3rem;
+    height: 2.5rem;
+    display: grid;
+    place-items: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* event detail page css */
+
+/* event and merchandise page */
+#admin-events {
+    margin-bottom: 3vh;
+}
+
+.card {
+    border-radius: 10px;
+}
+
+.card-img-top {
+    height: 40vh;
+    margin: 3%;
+    width: 94%;
+    box-shadow: inset 0 0 7px #000000;
+    border-radius: 10px;
+}
+
+.des {
+    font-size: 14px;
+    color: #777674;
+}
+
+
+@media only screen and (max-width:900px) {
+    .nav-menu-btn {
+        display: block !important;
+    }
+
+    #desktop-nav {
+        display: none !important;
+    }
+}
+
+/* polls */
+.buttons a {
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
+/* poll details */
+@media screen and (min-device-width: 900px) {
+    .card-body {
+        position: absolute;
+        right: 5%;
+    }
+}

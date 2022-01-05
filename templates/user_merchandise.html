@@ -1,0 +1,143 @@
+{% extends 'user_layout.html' %}
+
+{% block title %}
+Alegria 2022 | Merchandise
+{% endblock %}
+
+{% block content %}
+
+<div class="containr-fluid overflow-hidden bg-teal bg-cover">
+    <div class="row">
+        <div class="col-lg-3 bg-navbar" style="background:#631909e8;">
+            <div class="p-5 px-3 mx-2">
+                <h3 class="fs-5 mb-3 text-light">Categories</h3>
+                <li class="u-text-light-brown my-1 fs-7">
+                    <a href="/events/fine-arts">Fine Arts</a>
+                </li>
+                <li class="u-text-light-brown my-1 fs-7">
+                    <a href="/events/informals">Informals</a>
+                </li>
+                <li class="u-text-light-brown my-1 fs-7">
+                    <a href="/events/literary-arts">Literary Arts</a>
+                </li>
+                <li class="u-text-light-brown my-1 fs-7">
+                    <a href="/events/management">Management</a>
+                </li>
+                <li class="u-text-light-brown my-1 fs-7">
+                    <a href="/events/technical">Technical</a>
+                </li>
+                <li class="u-text-light-brown my-1 fs-7">
+                    <a href="/events/gaming">Gaming</a>
+                </li>
+                <li class="u-text-light-brown my-1 fs-7">
+                    <a href="/events/sports"> Sports</a>
+                </li>
+                <li class="u-text-light-brown my-1 fs-7">
+                    <a href="/events/performing-arts">Performing Arts</a>
+                </li>
+                <li class="u-text-light-brown my-1 fs-7">
+                    <a href="/merchandise/tshirts">Merchandise</a>
+                </li>
+                <ul>
+                    <li style="list-style: disc;">
+                        <a href="/merchandise/badges">Badges</a>
+                    </li>
+                    <li style="list-style: disc;">
+                        <a href="/merchandise/tshirts">Tshirts</a>
+                    </li>
+                </ul>
+                <br>
+                <hr>
+                <div id="twitter" class="embed-item">
+                    <a class="twitter-timeline" href="https://twitter.com/PillaisAlegria?ref_src=twsrc%5Etfw">Tweets by
+                        PillaisAlegria</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+                <div id="facebook">
+                    <!-- <div class="fb-page" data-href="https://www.facebook.com/pillaisalegria/" data-tabs="timeline"
+                    data-width="" data-height="" data-small-header="false" data-adapt-container-width="true"
+                    data-hide-cover="false" data-show-facepile="true">
+                    <blockquote cite="https://www.facebook.com/pillaisalegria/" class="fb-xfbml-parse-ignore"><a
+                            href="https://www.facebook.com/pillaisalegria/">Alegría - The Festival of Joy</a>
+                    </blockquote>
+                </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="d-flex flex-wrap align-items-center justify-content-between p-4">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb sec-font">
+                        <li class="breadcrumb-item"><a class="text-brown" href="/">Home</a></li>
+                        <li class="breadcrumb-item" aria-current="page">Merchandise</li>
+                        <li class="breadcrumb-item active" aria-current="page" style="text-transform: capitalize;">
+                            {{category}}</li>
+                    </ol>
+                </nav>
+                <li class="filter_btn px-2 py-1 rounded d-flex align-items-center fs-7 dropdown fw-bold sec-font">
+                    <div class='dropdown-toggle' id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Choose
+                        Category
+                    </div>
+                    <ul class="dropdown-menu" style="background-color: #FFFFD1 !important;"
+                        aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <a class="dropdown-item fs-7" href="/merchandise/tshirts">Tshirts</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item fs-7" href="/merchandise/badges">Badges</a>
+                        </li>
+                    </ul>
+                </li>
+            </div>
+            <div class="row d-flex justify-content-center px-4">
+                <div class="col-lg-4">
+                    <svg width="100%" viewBox="0 0 526 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="37.7002" y="9" width="142.56" height="86" transform="rotate(26 37.7002 9)"
+                            fill="#734717" />
+                        <path d="M0 0H526L471 44L526 86H0V0Z" fill="#96642C" />
+                        <path
+                            d="M7 26V14.6667H8.5V10.488L12.9643 10.4523L12.9523 8.95238L24.857 8.85714L24.869 10.3571L36.7738 10.2619L36.7618 8.76191L48.6666 8.66667L48.6786 10.1666L60.5833 10.0714L60.5713 8.57143L72.4761 8.47619L72.4881 9.97614L84.3929 9.8809L84.3809 8.38095L96.2857 8.28571L96.2977 9.78567L108.202 9.69043L108.19 8.19048L120.095 8.09524L120.107 9.59519L132.012 9.49995L132 8L143.905 7.90476L143.917 9.40471L155.822 9.30948L155.81 7.80952L167.714 7.71429L167.726 9.21424L179.631 9.119L179.619 7.61905L191.524 7.52381L191.536 9.02376L203.441 8.92852L203.429 7.42857L215.333 7.33333L215.345 8.83329L227.25 8.73805L227.238 7.23809L239.143 7.14286L239.155 8.64281L251.06 8.54757L251.048 7.04762L262.952 6.95238L262.964 8.45233L274.869 8.35709L274.857 6.85714L286.762 6.7619L286.774 8.26186L298.679 8.16662L298.667 6.66667L310.571 6.57143L310.583 8.07138L322.488 7.97614L322.476 6.47619L334.381 6.38095L334.393 7.8809L346.298 7.78567L346.286 6.28571L358.19 6.19048L358.202 7.69043L370.107 7.59519L370.095 6.09524L382 6L382.012 7.49995L393.917 7.40471L393.905 5.90476L405.81 5.80952L405.822 7.30948L417.726 7.21424L417.714 5.71429L429.619 5.61905L429.631 7.119L441.536 7.02376L441.524 5.52381L453.429 5.42857L453.441 6.92852L465.345 6.83329L465.333 5.33333L477.238 5.2381L477.25 6.73805L489.155 6.64281L489.143 5.14286L501.048 5.04762L501.06 6.54757L502.817 6.53351L502.04 7.181L503 8.33333L495 15L494.04 13.8477L486.04 20.5143L487 21.6667L479 28.3333L478.04 27.181L470.04 33.8477L471 35L463 41.6667L462.04 40.5143L458.04 43.8477L456.496 45.1337L458.168 46.2481L464.168 50.2481L465 49L477 57L476.168 58.2481L488.168 66.2481L489 65L501 73L500.168 74.2481L502.046 75.5H501.047V77H489.143V75.5H477.238V77H465.333V75.5H453.428V77H441.524V75.5H429.619V77H417.714V75.5H405.809V77H393.905V75.5H382V77H370.095V75.5H358.19V77H346.286V75.5H334.381V77H322.476V75.5H310.571V77H298.667V75.5H286.762V77H274.857V75.5H262.952V77H251.048V75.5H239.143V77H227.238V75.5H215.333V77H203.429V75.5H191.524V77H179.619V75.5H167.714V77H155.81V75.5H143.905V77H132V75.5H120.095V77H108.19V75.5H96.2857V77H84.381V75.5H72.4762V77H60.5714V75.5H48.6667V77H36.7619V75.5H24.8571V77H12.9524V75.5H8.5V71.3333H7V60H8.5V48.6667H7V37.3333H8.5V26H7Z"
+                            fill="#96642C" stroke="#F9EF99" stroke-width="3" stroke-dasharray="12 12" />
+                        <text x="100" y="60" fill="white" class="main-font fs-1">Merchandise</text>
+                    </svg>
+                </div>
+            </div>
+            <div class="row px-4">
+                <div id="admin-events" class="row row-cols-1 row-cols-sm-3 row-cols-md-3 g-4">
+                    {% for ele in merchandise_list %}
+                    <div class="col">
+                        <a href={{"/merchandise/{}/{}".format(ele['category'],ele['id'])}}
+                            class="d-flex flex-column justify-content-center p-2 rounded-3 main-bg merch-card">
+                            {% if ele['category']=='Tshirts' %}
+                            <div class="w-100 d-flex justify-content-center overflow-hidden">
+                                <img src={{ele['img1']}} alt="merchandise-image" height="250px" width="100%"
+                                    class="rounded-3 mb-1">
+                            </div>
+                            {% endif %}
+                            {% if ele['category']=='Badges' %}
+                            <div class="w-100 d-flex justify-content-center overflow-hidden">
+                                <img src={{ele['img1']}} alt="merchandise-image" height="200px" width="90%"
+                                    class="rounded-3 mb-1">
+                            </div>
+                            {% endif %}
+                            <h3 class="fs-5 text-red mt-2 mb-0 px-2 main-font text-center">
+                                {{ele['name']}}
+                            </h3>
+                            <p class="text-black sec-font text-center fs-6 mb-1">
+                                {{ele['category']}}
+                            </p>
+                            <h3 class="text-black main-font text-center fs-5">
+                                {{ele['cost']}} ₹
+                            </h3>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

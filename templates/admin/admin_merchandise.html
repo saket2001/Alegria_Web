@@ -1,0 +1,150 @@
+{% extends '/admin/admin_layout.html' %}
+
+{% block title %}
+All Merchandise
+{% endblock %}
+
+
+{% block content %}
+<br>
+<div class="container">
+  <div class="row d-flex align-items-center">
+    <div class="col my-1">
+      <form class="d-flex">
+        <input class="form-control me-2 fs-7" type="search" placeholder="Search by name or Code here"
+          aria-label="Search">
+        <button class="button outline_btn fs-7" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="col-md-auto my-1 d-flex justify-content-end">
+      <a href="#" class="button outline_btn fs-7" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Add
+        Merchandise</a>
+    </div>
+  </div>
+</div>
+<br>
+<!-- List -->
+<div class="w-100 d-flex align-items-center justify-content-between py-2">
+  <h5 class="fs-5 fw-bold">All Merchandise</h5>
+  <li class="filter_btn p-2 rounded d-flex align-items-center fs-6 dropdown fw-bold">
+    <div class='dropdown-toggle fs-7' id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Choose
+      Category
+    </div>
+    <ul class="dropdown-menu main-bg" aria-labelledby="dropdownMenuButton1">
+      <li>
+        <a class="dropdown-item" href="/admin/merchandise/Tshirts">Tshirts</a>
+      </li>
+      <li>
+        <a class="dropdown-item" href="/admin/merchandise/Bags">Bags</a>
+      </li>
+      <li>
+        <a class="dropdown-item" href="/admin/merchandise/Badges">Badges</a>
+      </li>
+    </ul>
+  </li>
+</div>
+<div id="admin-events" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+  {% for ele in merchandise_List %}
+  <div class="col rounded-3">
+    <div class="card bg-teal shadow-sm">
+      <div class="d-flex justify-content-center">
+        <img src={{ele['item_img1']}} class="card-img-top" alt="cricket">
+      </div>
+      <div class="d-flex flex-column">
+        <div class="d-flex flex-column px-3 mt-2">
+          <h2 class="sec-font fs-5 my-0 text-brown fw-bold">
+            {{ele['name']}}
+          </h2>
+          <p class="sec-font fs-7 mb-1 text-gray fw-bold">{{ele['category']}}</p>
+          <p class="sec-font fs-5 text-brown mb-0 fw-bolder">
+            {{ele["cost"]}} ₹
+          </p>
+        </div>
+        <div class="d-flex px-2 my-2">
+          <a href={{"/admin/merchandise/{}/{}/edit".format(ele['category'],ele['id'])}}
+            class="btn btn-dark text-teal sec-font fs-7">EDIT</a>
+          &nbsp;&nbsp;
+          <a href="{{" /admin/merchandise/{}/{}/delete".format(ele['category'],ele['id'])}}"
+            class="btn btn-outline-danger fs-7">DELETE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add New Merchandise</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form class="modal-body" action='/admin/add-merchandise' method="post">
+        {{form.csrf_token}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.id.label}}
+        </p>
+        {{form.id(class="input_value")}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.name.label}}
+        </p>
+        {{form.name(class="input_value")}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.description.label}}
+        </p>
+        {{form.description(class="input_value")}}
+
+        <div class="row">
+          <div class="col-lg-6 col-sm-12">
+            <p class="mb-0 fs-7 main-font">
+              {{form.categoryName.label}}
+            </p>
+            {{form.categoryName(class="input_value")}}
+          </div>
+          <div class="col-lg-6 col-sm-12">
+            <p class="mb-0 fs-7 main-font">
+              {{form.code.label}}
+            </p>
+            {{form.code(class="input_value")}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-sm-12">
+            <p class="mb-0 fs-7 main-font">
+              {{form.cost.label}}
+            </p>
+            {{form.cost(class="input_value")}}
+          </div>
+          <div class="col-lg-6 col-sm-12">
+            <p class="mb-0 fs-7 main-font">
+              {{form.quantity.label}}
+            </p>
+            {{form.quantity(class="input_value")}}
+          </div>
+        </div>
+        <p class="mb-0 fs-7 main-font">
+          {{form.colors.label}}
+        </p>
+        {{form.colors(class="input_value")}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.image1.label}}
+        </p>
+        {{form.image1(class="input_value")}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.image2.label}}
+        </p>
+        {{form.image2(class="input_value")}}
+        <p class="mb-0 fs-7 main-font">
+          {{form.sizes.label}}
+        </p>
+        {{form.sizes(class="input_value")}}
+        <span class="fs-7 sec-font mt-1">Accepted sizes: XS,S,M,L,XL,XXL</span>
+        <br>
+
+        <button type="submit" class="button w-100 my-2 bg-brown text-beige">Save Merchandise</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

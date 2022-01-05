@@ -1,0 +1,464 @@
+{% extends 'user_layout.html' %}
+
+
+{% block headContent %}
+<link href='https://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+<style>
+  #hexGrid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 95%;
+    margin: 0 auto;
+    overflow: hidden;
+    font-family: 'Raleway', sans-serif;
+    font-size: 15px;
+    list-style-type: none;
+  }
+
+  .hex {
+    position: relative;
+    visibility: hidden;
+    outline: 1px solid transparent;
+    /* fix for jagged edges in FF on hover transition */
+  }
+
+  .hex::after {
+    content: '';
+    display: block;
+    padding-bottom: 86.602%;
+    /* =  100 / tan(60) * 1.5 */
+  }
+
+  .hexIn {
+    position: absolute;
+    width: 96%;
+    padding-bottom: 110.851%;
+    /* =  width / sin(60) */
+    margin: 0 2%;
+    overflow: hidden;
+    visibility: hidden;
+    outline: 1px solid transparent;
+    /* fix for jagged edges in FF on hover transition */
+    -webkit-transform: rotate3d(0, 0, 1, -60deg) skewY(30deg);
+    -ms-transform: rotate3d(0, 0, 1, -60deg) skewY(30deg);
+    transform: rotate3d(0, 0, 1, -60deg) skewY(30deg);
+  }
+
+  .hexIn * {
+    position: absolute;
+    visibility: visible;
+    outline: 1px solid transparent;
+    /* fix for jagged edges in FF on hover transition */
+  }
+
+  .hexLink {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+    -webkit-transform: skewY(-30deg) rotate3d(0, 0, 1, 60deg);
+    -ms-transform: skewY(-30deg) rotate3d(0, 0, 1, 60deg);
+    transform: skewY(-30deg) rotate3d(0, 0, 1, 60deg);
+  }
+
+  /*** HEX CONTENT **********************************************************************/
+  .hex img {
+    left: -100%;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    -webkit-transform: rotate3d(0, 0, 0, 0deg);
+    -ms-transform: rotate3d(0, 0, 0, 0deg);
+    transform: rotate3d(0, 0, 0, 0deg);
+  }
+
+  .hex h1,
+  .hex p {
+    width: 100%;
+    padding: 5%;
+    box-sizing: border-box;
+    background-color: rgba(96, 64, 32, 0.8);
+    font-weight: 300;
+    -webkit-transition: -webkit-transform .2s ease-out, opacity .3s ease-out;
+    transition: transform .2s ease-out, opacity .3s ease-out;
+  }
+
+  .hex h1 {
+    bottom: 50%;
+    padding-top: 50%;
+    font-size: 1.5em;
+    z-index: 1;
+    -webkit-transform: translate3d(0, -100%, 0);
+    -ms-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  .hex h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 45%;
+    width: 10%;
+    text-align: center;
+    border-bottom: 1px solid #fff;
+  }
+
+  .hex p {
+    top: 42%;
+    padding-bottom: 50%;
+    -webkit-transform: translate3d(0, 100%, 0);
+    -ms-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  /*  */
+  .ribbon {
+    font-size: 16px !important;
+    /* This ribbon is based on a 16px font side and a 24px vertical rhythm. I've used em's to position each element for scalability. If you want to use a different font size you may have to play with the position of the ribbon elements */
+
+    width: 50%;
+    height: 18vh;
+    position: relative;
+    background: #b45a15da;
+    color: #fff;
+    text-align: center;
+    font-family: 'rye';
+    src: url('../font/Rye-Regular.ttf');
+    padding: 1em 2em;
+    /* Adjust to suit */
+    margin: 2em auto 3em;
+    /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
+  }
+
+  .ribbon:before,
+  .ribbon:after {
+    content: "";
+    position: absolute;
+    display: block;
+    height: 18vh;
+    bottom: -1em;
+    border: 1.5em solid #5f3f20;
+    z-index: -1;
+  }
+
+  .ribbon:before {
+    left: -2em;
+    border-right-width: 1.5em;
+    border-left-color: transparent;
+  }
+
+  .ribbon:after {
+    right: -2em;
+    border-left-width: 1.5em;
+    border-right-color: transparent;
+  }
+
+  .ribbon .ribbon-content:before,
+  .ribbon .ribbon-content:after {
+    content: "";
+    position: absolute;
+    display: block;
+    border-style: solid;
+    border-color: #a36425 transparent transparent transparent;
+    bottom: -1em;
+  }
+
+  .ribbon .ribbon-content:before {
+    left: 0;
+    border-width: 1em 0 0 1em;
+  }
+
+  .ribbon .ribbon-content:after {
+    right: 0;
+    border-width: 1em 1em 0 0;
+  }
+
+  /*  */
+
+  /*** HOVER EFFECT  **********************************************************************/
+  .hexLink:hover h1,
+  .hexLink:focus h1,
+  .hexLink:hover p,
+  .hexLink:focus p {
+    -webkit-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    color: #fff;
+  }
+
+  /*** HEXAGON SIZING AND EVEN ROW INDENTATION *****************************************************************/
+  @media (min-width:1201px) {
+
+    /* <- 5-4  hexagons per row */
+    #hexGrid {
+      padding-bottom: 4.4%
+    }
+
+    .hex {
+      width: 20%;
+      /* = 100 / 5 */
+    }
+
+    .hex:nth-child(9n+6) {
+      /* first hexagon of even rows */
+      margin-left: 10%;
+      /* = width of .hex / 2  to indent even rows */
+    }
+  }
+
+  @media (max-width: 1200px) and (min-width:901px) {
+
+    /* <- 4-3  hexagons per row */
+    #hexGrid {
+      padding-bottom: 5.5%
+    }
+
+    .hex {
+      width: 25%;
+      /* = 100 / 4 */
+    }
+
+    .hex:nth-child(7n+5) {
+      /* first hexagon of even rows */
+      margin-left: 12.5%;
+      /* = width of .hex / 2  to indent even rows */
+    }
+  }
+
+  @media (max-width: 900px) and (min-width:601px) {
+
+    /* <- 3-2  hexagons per row */
+    #hexGrid {
+      padding-bottom: 7.4%
+    }
+
+    .hex {
+      width: 33.333%;
+      /* = 100 / 3 */
+    }
+
+    .hex:nth-child(5n+4) {
+      /* first hexagon of even rows */
+      margin-left: 16.666%;
+      /* = width of .hex / 2  to indent even rows */
+    }
+  }
+
+  @media (max-width: 600px) {
+
+    /* <- 2-1  hexagons per row */
+    #hexGrid {
+      padding-bottom: 11.2%
+    }
+
+    .hex {
+      width: 50%;
+      /* = 100 / 3 */
+    }
+
+    .hex:nth-child(3n+3) {
+      /* first hexagon of even rows */
+      margin-left: 25%;
+      /* = width of .hex / 2  to indent even rows */
+    }
+  }
+
+  @media (max-width: 400px) {
+    #hexGrid {
+      font-size: 13px;
+    }
+  }
+
+  .aboutus-content {
+    height: auto;
+    width: 100%;
+    background-image: url("../static/images/letter.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding: 17vh 18%;
+    font-family: 'rye';
+    src: url('../font/Rye-Regular.ttf');
+  }
+</style>
+{% endblock headContent %}
+
+
+{% block title %}
+Alegria 2022 | About-Us
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid bg-cover">
+  <div class="col text-center mx-4 px-4">
+    <h1 class="fs-2 monoton u-text-brown" style="margin-top: 15vh;">About Us</h1>
+  </div>
+  <!--  -->
+  <div class="aboutus-content">
+    <p class="" style="font-size: 16px; text-align: justify;">
+      <span style="font-weight: bold; font-size: xx-large;">Alegria</span> - The Festival of joy congregated by The
+      Pillai
+      Group Of Institutions. Alegria is one of the most phenomenal intercollegiate festivals of its kind. It is held in
+      February every year with a mob of more than 50,000 1to witness the flow of immense talent in the events. With fun
+      and joy this event also escorts the presence of splendid talent and star celebrities. This festival continues to
+      add
+      a pack of memories to everyone's life with each passing year and the dedicated team of students and faculty always
+      hold its back to add on to the astonishing experience. Be it the unique themes like the “Light The Night” from
+      last
+      year or the astounding performances, they never fail to amaze us. Star celebrities have always been one of the
+      emphasizing parts of the event, this festival has always been bestowed with the presence of some of the most
+      renowned celebrities in the entertainment industry. To name a few, Ranbir kapoor, Deepika Padukone, Ayushman
+      Khurrana, Siddharth Malhotra, Sonam Kapoor, Karthik Aryan, Nushrat Bharucha, Sunny Nijhar, Govinda, Elli Avram,
+      Saquib Salim, Zayed Khan, Rakul Preet Kaur, Lauren Gottlieb, Jackky Bhagani, Ranvijay Singha, Pallavi Sharda,
+      Warina
+      Hussain, Pushkar Jog, Sarah Jane Diad, Aaparshakti Khurrana, Varun Dhawan, Shraddha Kapoor, Aisha Sharma, Shama
+      Sikandar, Rinku Rajguru, Chinmay Udgirkar, Sonali Seygall, Adah Sharma, Rohan Mehra, Nibedita Pal, Chetna Pande
+      along with Indian beatbox sensation D cypher and dance guru Rahul Shetty and Dhanashree Varma and one of the best
+      standup comedian, Kenny Sebastian have blessed us with their presence on the platform that is Alegria to promote
+      their movies and upcoming projects to the magnificent crowd attending and also to judge those events. As it is
+      said,
+      music is a therapy for mind and heart and Alegria was overjoyed to hear the delightful performances for some of
+      the
+      spectacular music artist like Guru Randhawa, Divine, Yo Yo Honey Singh, Superstar Farhan Akhtar, award-winning
+      Romanian pop band Akcent, Dhvani Bhanushali, Armaan Malik and the Sabali Band. Sports world champions Bhaichung
+      Bhutiya, Sunil Chhetri, Ashwini Ponnappa, Sahil Khan, Sangram Chougule, Murali Kumar Syed Kirmani and Rushabh
+      Choksi
+      also visited to display their talent. Alegria experiences some of the finest DJs like Mariana Bo, Tomorrowland’s
+      resident DJ Yves V, DJs Sultan Shepard, DJ Mag’s 33rd ranked Quintino, Teri Miko, Mike Candys and Diego Miranda.
+      The
+      audience can never suppress the urge to trip, spin and sway on their amazing beats. The festival is the outcome of
+      the immense efforts of the students who manage, participate and organize the events taking place in the festival
+      and
+      handle it with great professionalism, spirit and care. Their enthusiasm adds into the festival making it a big
+      success every year. The festival commenced with an ambition of showcasing the power of the youth and has
+      persistently succeeded in doing so.
+    </p>
+  </div>
+  <!--  -->
+  <div class="ribbon">
+    <h2 class="fs-4">2019</h2>
+    <p class="fs-5">COSMOS</p>
+  </div>
+  <ul id="hexGrid">
+    {% for ele in aboutus_2019 %}
+    <li class="hex">
+      <div class="hexIn">
+        <a class="hexLink" href="#">
+          <img src='{{ele["img"]}}' alt="" />
+          <h1>{{ele["title"]}}</h1>
+          <p>{{ele['description']}}</p>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  <div class="ribbon">
+    <h2 class="fs-4">2018</h2>
+    <p class="fs-5">MUMBAI THE CITY OF DREAMS</p>
+  </div>
+  <ul id="hexGrid">
+    {% for ele in aboutus_2018 %}
+    <li class="hex">
+      <div class="hexIn">
+        <a class="hexLink" href="#">
+          <img src='{{ele["img"]}}' alt="" />
+          <h1>{{ele["title"]}}</h1>
+          <p>{{ele['description']}}</p>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  <div class="ribbon">
+    <h2 class="fs-4">2017</h2>
+    <p class="fs-5">KINGDOM OF GAMES</p>
+  </div>
+  <ul id="hexGrid">
+    {% for ele in aboutus_2017 %}
+    <li class="hex">
+      <div class="hexIn">
+        <a class="hexLink" href="#">
+          <img src='{{ele["img"]}}' alt="" />
+          <h1>{{ele["title"]}}</h1>
+          <p>{{ele['description']}}</p>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  <!--  -->
+  <div class="ribbon">
+    <h2 class="fs-4">2016</h2>
+    <p class="fs-5">WANDERLUST</p>
+  </div>
+  <ul id="hexGrid">
+    {% for ele in aboutus_2016 %}
+    <li class="hex">
+      <div class="hexIn">
+        <a class="hexLink" href="#">
+          <img src='{{ele["img"]}}' alt="" />
+          <h1>{{ele["title"]}}</h1>
+          <p>{{ele['description']}}</p>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  <div class="ribbon">
+    <h2 class="fs-4">2015</h2>
+    <p class="fs-5">100 YEARS OF HOLLYWOOD</p>
+  </div>
+  <ul id="hexGrid">
+    {% for ele in aboutus_2015 %}
+    <li class="hex">
+      <div class="hexIn">
+        <a class="hexLink" href="#">
+          <img src='{{ele["img"]}}' alt="" />
+          <h1>{{ele["title"]}}</h1>
+          <p>{{ele['description']}}</p>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  <!--  -->
+  <div class="ribbon">
+    <h2 class="fs-4">2014</h2>
+    <p class="fs-5">INDIE ISHTYLE</p>
+  </div>
+  <ul id="hexGrid">
+    {% for ele in aboutus_2014 %}
+    <li class="hex">
+      <div class="hexIn">
+        <a class="hexLink" href="#">
+          <img src='{{ele["img"]}}' alt="" />
+          <h1>{{ele["title"]}}</h1>
+          <p>{{ele['description']}}</p>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  <div class="ribbon">
+    <h2 class="fs-4">2013</h2>
+    <p class="fs-5">OUT OF THE BOX</p>
+  </div>
+  <ul id="hexGrid">
+    {% for ele in aboutus_2013 %}
+    <li class="hex">
+      <div class="hexIn">
+        <a class="hexLink" href="#">
+          <img src='{{ele["img"]}}' alt="" />
+          <h1>{{ele["title"]}}</h1>
+          <p>{{ele['description']}}</p>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  <br>
+</div>
+{% endblock %}

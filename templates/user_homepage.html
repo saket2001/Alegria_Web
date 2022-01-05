@@ -1,0 +1,789 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"
+    integrity="sha512-cdV6j5t5o24hkSciVrb8Ki6FveC2SgwGfLE31+ZQRHAeSRxYhAQskLkq3dLm8ZcWe1N3vBOEYmmbhzf7NTtFFQ=="
+    crossorigin="anonymous"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.6/ScrollMagic.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.min.js"
+    integrity="sha512-5/OHwmQzDSBS0Ous4/hlYoWLHd06/d2r7LdKZQVBXOA6PvOqWVXtdboiLTU7lQTGyVoKVTNkwi0ol4gHGlw5ww=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script defer src="/static/js/homepage.js"></script>
+{% endblock %}
+
+{% block title %}
+Alegria 2022 | Homepage
+{% endblock %}
+
+{% block body %}
+
+<body>
+    <div class="parallax_section">
+        <!-- nav -->
+        <!-- social icons -->
+        <div class="opacity-2 position-absolute top-50 end-0 px-2 py-3 rounded-3"
+            style="background-color: #ffde83a9;z-index: 10;">
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <a href="https://www.instagram.com/pillaisalegria/" target="_blank" rel="noopener noreferrer"
+                    class="footer_link my-1 px-2 text-red social-icons">
+                    <i class="fab fa-instagram fs-5 text-red"></i>
+                </a>
+                <a href="https://www.youtube.com/channel/UCfqP3NEaaXPsgHn8QX3qilw" target="_blank"
+                    rel="noopener noreferrer" class="footer_link my-1 px-2 text-white social-icons">
+                    <i class="fab fa-youtube fs-5 text-red"></i>
+                </a>
+                <a href="https://www.facebook.com/pillaisalegria" target="_blank" rel="noopener noreferrer"
+                    class="footer_link my-1 px-2 text-white social-icons">
+                    <i class="fab fa-facebook-square fs-5 text-red"></i>
+                </a>
+            </div>
+        </div>
+        <!-- theme banner -->
+        <section class="parallax-container">
+            <nav class="navbar navbar-expand-lg navbar-light p-2 py-3 position-relative parallax_navbar">
+                <div class="container-fluid">
+                    <a href="/">
+                        <img src="/static/images/AlegriaLogo.png" alt="alegria logo" width="75px" height="60px">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="ms-5 navbar-nav me-auto mt-1 mb-2 mb-lg-0 sec-font fw-bold gy-3">
+                            <li class="nav-item">
+                                <a href="/" class='navbar_links' {% if activeNav=='Home' %} style='color: #c74221;' {%
+                                    endif %}>Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class='navbar_links dropdown-toggle' id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false" {% if activeNav=='Events' %}
+                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Events</a>
+                                <ul class="dropdown-menu border-0" style="background-color: #ffd04f;"
+                                    aria-labelledby="dropdownMenuButton1">
+                                    <li>
+                                        <a class="dropdown-item navbar_links" href="/events/informals">Informals</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item navbar_links" href="/events/fine-arts">Fine
+                                            Arts</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item navbar_links" href="/events/performing-arts">Performing
+                                            Arts</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item navbar_links" href="/events/gaming">Gaming</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item navbar_links" href="/events/sports">Sports</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item navbar_links" href="/events/literary-arts">Literary
+                                            Arts</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item navbar_links" href="/events/technical-events">Technical
+                                            Events</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item navbar_links"
+                                            href="/events/technical-workshop">Technical
+                                            Workshops</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item navbar_links" href="/events/management">Management
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item navbar_links" href="/events/special-events">Special
+                                            Events
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class='navbar_links dropdown-toggle' id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false" {% if activeNav=='Merchandise' %}
+                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Merchandise</a>
+                                <ul class="dropdown-menu border-0" style="background-color: #ffd04f;"
+                                    aria-labelledby="dropdownMenuButton1">
+                                    <li>
+                                        <a class="dropdown-item navbar_links" href="/merchandise/Tshirts">Tshirts</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item navbar_links" href="/merchandise/Badges">Badges</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/hackathon" class='navbar_links' {% if activeNav=='Hackathon' %}
+                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Hackathon</a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class='navbar_links dropdown-toggle' id="dropdownMenuButton2"
+                                    data-bs-toggle="dropdown" aria-expanded="false" {% if activeNav=='News' %}
+                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>News</a>
+                                <ul class="dropdown-menu border-0" style="background-color: #ffd04f;"
+                                    aria-labelledby="dropdownMenuButton2">
+                                    <li>
+                                        <a class="dropdown-item navbar_links"
+                                            href="https://pillaialegria.wordpress.com/" target="_blank"
+                                            rel="noopener noreferrer">Blog</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item navbar_links" href="/news/buzz">Buzz</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item navbar_links" href="/news/highlights">Highlights</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class='navbar_links dropdown-toggle' id="dropdownMenuButton2"
+                                    data-bs-toggle="dropdown" aria-expanded="false" {% if activeNav=='News' %}
+                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>More</a>
+                                <ul class="dropdown-menu border-0" style="background-color: #ffd04f;"
+                                    aria-labelledby="dropdownMenuButton2">
+                                    <li>
+                                        <a href="/about-us" class="dropdown-item navbar_links" {% if
+                                            activeNav=='About Us' %}
+                                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>About
+                                            Us</a>
+                                    </li>
+                                    <li>
+                                        <a href="/polls" class="dropdown-item navbar_links" {% if activeNav=='Polls' %}
+                                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
+                                            %}>Polls</a>
+                                    </li>
+                                    <li>
+                                        <a href="/announcements" class="dropdown-item navbar_links" {% if
+                                            activeNav=='Announcements' %}
+                                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
+                                            %}>Announcements</a>
+                                    </li>
+                                    <li>
+                                        <a href="/sponsors" class="dropdown-item navbar_links" {% if
+                                            activeNav=='Sponsors' %}
+                                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
+                                            %}>Sponsors</a>
+                                    </li>
+                                    <li>
+                                        <a href="/developers" class="dropdown-item navbar_links" {% if
+                                            activeNav=='Sponsors' %}
+                                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
+                                            %}>Developers</a>
+                                    </li>
+                                    <li>
+                                        <a href="/event-heads" class="dropdown-item navbar_links" {% if activeNav=='Event
+                                            Heads' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
+                                            %}>Event
+                                            Heads</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        {% if signed_in==False %}
+                        <a href="/user-login"
+                            class="d-flex justify-content-center align-items-center rounded-3 text-red bg-white fs-7 px-5 py-1 me-2 main-font">
+                            Sign In
+                        </a>
+                        {% endif %}
+                        {% if signed_in %}
+                        <a href="/user/cart" class="d-flex align-items-center text-red p-2 mx-1">
+                            <i class="fas fa-shopping-bag fs-5"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+            <!-- main logo -->
+            <img class="parallax_images bg" src="/static/images/homepage/bg.png" alt="parallax image">
+            <img class="parallax_images mountains" src="/static/images/homepage/mountains.png"
+                alt="parallax mountain image">
+            <img src="/static/images/homepage/land2.png" class="parallax_images land" alt="parallax land image"
+                style="bottom: 0%;">
+            <img class="parallax_title title" src="/static/images/homepage/homepageCover.png" alt="Alegria logo">
+        </section>
+
+        <!-- about alegria 2022 -->
+        <div class="about_us">
+            <section
+                class="w-100 py-5 overflow-hidden position-relative d-flex align-items-center justify-content-center h-100">
+                <div class="row p-3 d-flex justify-content-center align-items-center">
+                    <div class="about_img col-lg-5 col-sm-12 d-flex justify-content-center"
+                        style="border-radius: 20px;">
+                        <img src="../static/images/homepage/about.jpg" alt="about us image"
+                            class="aboutus_bg p-2 shadow" id="about-us-img" width="90%" height="60%"
+                            style="border-radius: 30px;">
+                    </div>
+                    <div
+                        class="about_text col-lg-7 col-sm-12 d-flex flex-column align-items-center justify-content-center px-3">
+                        <h2 class="fs-3 main-font my-2 text-beige text-center">ALEGRIA 2022</h2>
+
+                        <p class="m-1 mx-2 sec-font fs-7 fst-light" style="text-align: justify;">
+                            Alegria - The Festival joy congregated by The Pillai Group Of Institutions. Alegria is
+                            one
+                            of
+                            the most phenomenal
+                            intercollegiate festivals of its kind. It is held in February every year with a mob of
+                            more
+                            than
+                            50,000 1to witness the
+                            flow of immense talent in the events. With fun and joy this event also escorts the
+                            presence
+                            of
+                            splendid talent and star
+                            celebrities. This festival continues to add a pack of memories to everyone's life with
+                            each
+                            passing year and the
+                            dedicated team of students and faculty always hold its back to add on to the astonishing
+                            experience. Be it the unique
+                            themes like the “Light The Night” from last year or the astounding performances, they
+                            never
+                            fail
+                            to amaze us.
+                        </p>
+                        <a href="/about-us" class="sec-font text-light px-3 py-1 rounded-3 fs-6 mt-3"
+                            style="background-color: #bd2828;">
+                            Read More
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- events -->
+    <section class="main-bg min-vh-100 overflow-hidden d-flex flex-column align-items-center justify-content-center">
+        <div class="row p-3 w-100 d-flex flex-column justify-content-center" id="events-section">
+            <div class="col-sm-12 d-flex justify-content-center text-center">
+                <h2 class="fs-1 main-font text-red">EVENTS</h2>
+            </div>
+            <div class="col-12">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner p-3">
+                        <div class="carousel-item active">
+                            <div class="row g-4">
+                                {% for col in row1 %}
+                                <div class="col d-flex flex-column align-items-center event-card-container">
+                                    <div class="event-card">
+                                        <div class="event-card-front">
+                                            <h3 class="fs-5 text-red main-font py-1 px-2">
+                                                {{col["title"]}}
+                                            </h3>
+                                            <div class="event-circle">
+                                                <img src={{col["icon"]}} alt="card-image" width="170px" height="170px">
+                                            </div>
+                                        </div>
+                                        <div class="event-card-back">
+                                            <p class="sec-font fs-6">
+                                                {{col['content']}}
+                                            </p>
+                                            <div class="d-flex justify-content-center">
+                                                <a href={{col['link']}}
+                                                    class="w-100 text-center sec-font text-light fs-7 py-1 px-3 rounded-3 shadow"
+                                                    style="background-color: #bd2828;">
+                                                    View
+                                                    All
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row g-4">
+                                {% for col in row2 %}
+                                <div class="col d-flex flex-column align-items-center event-card-container">
+                                    <div class="event-card">
+                                        <div class="event-card-front">
+                                            <h3 class="fs-5 text-red main-font py-1 px-2">
+                                                {{col["title"]}}
+                                            </h3>
+                                            <div class="event-circle">
+                                                <img src={{col["icon"]}} alt="card-image" width="170px" height="170px">
+                                            </div>
+                                        </div>
+                                        <div class="event-card-back">
+                                            <p class="sec-font fs-6">
+                                                {{col['content']}}
+                                            </p>
+                                            <div class="d-flex justify-content-center">
+                                                <a href={{col['link']}}
+                                                    class="w-100 text-center sec-font text-light fs-7 py-1 px-3 rounded-3 shadow"
+                                                    style="background-color: #bd2828;">
+                                                    View
+                                                    All
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row g-4">
+                                {% for col in row3 %}
+                                <div class="col d-flex flex-column align-items-center event-card-container">
+                                    <div class="event-card">
+                                        <div class="event-card-front">
+                                            <h3 class="fs-5 text-red main-font py-1 px-2">
+                                                {{col["title"]}}
+                                            </h3>
+                                            <div class="event-circle">
+                                                <img src={{col["icon"]}} alt="card-image" width="170px" height="170px">
+                                            </div>
+                                        </div>
+                                        <div class="event-card-back">
+                                            <p class="sec-font fs-6">
+                                                {{col['content']}}
+                                            </p>
+                                            <div class="d-flex justify-content-center">
+                                                <a href={{col['link']}}
+                                                    class="w-100 text-center sec-font text-light fs-7 py-1 px-3 rounded-3 shadow"
+                                                    style="background-color: #bd2828;">
+                                                    View
+                                                    All
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon bg-brown px-2" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon bg-brown px-2" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+    </section>
+
+    <!--hackathon-->
+    <section
+        class="homepage_section bg-red position-relative overflow-hidden py-4 px-2 d-flex flex-column align-items-center hackathon">
+        <div class="text-beige row py-3 px-2 w-100 min-vh-100 d-flex flex-column align-items-center">
+            <div class="col px-3">
+                <div class="row">
+                    <div style="position: relative;" class="container" id="hackathon-title">
+                        <svg width="100%" height="100%" style="max-width: 450px;max-height:100px" viewBox="0 0 526 149"
+                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="37.7002" y="9" width="142.56" height="86" transform="rotate(26 37.7002 9)"
+                                fill="#734717" />
+                            <path d="M0 0H526L471 44L526 86H0V0Z" fill="#96642C" />
+                            <path
+                                d="M7 26V14.6667H8.5V10.488L12.9643 10.4523L12.9523 8.95238L24.857 8.85714L24.869 10.3571L36.7738 10.2619L36.7618 8.76191L48.6666 8.66667L48.6786 10.1666L60.5833 10.0714L60.5713 8.57143L72.4761 8.47619L72.4881 9.97614L84.3929 9.8809L84.3809 8.38095L96.2857 8.28571L96.2977 9.78567L108.202 9.69043L108.19 8.19048L120.095 8.09524L120.107 9.59519L132.012 9.49995L132 8L143.905 7.90476L143.917 9.40471L155.822 9.30948L155.81 7.80952L167.714 7.71429L167.726 9.21424L179.631 9.119L179.619 7.61905L191.524 7.52381L191.536 9.02376L203.441 8.92852L203.429 7.42857L215.333 7.33333L215.345 8.83329L227.25 8.73805L227.238 7.23809L239.143 7.14286L239.155 8.64281L251.06 8.54757L251.048 7.04762L262.952 6.95238L262.964 8.45233L274.869 8.35709L274.857 6.85714L286.762 6.7619L286.774 8.26186L298.679 8.16662L298.667 6.66667L310.571 6.57143L310.583 8.07138L322.488 7.97614L322.476 6.47619L334.381 6.38095L334.393 7.8809L346.298 7.78567L346.286 6.28571L358.19 6.19048L358.202 7.69043L370.107 7.59519L370.095 6.09524L382 6L382.012 7.49995L393.917 7.40471L393.905 5.90476L405.81 5.80952L405.822 7.30948L417.726 7.21424L417.714 5.71429L429.619 5.61905L429.631 7.119L441.536 7.02376L441.524 5.52381L453.429 5.42857L453.441 6.92852L465.345 6.83329L465.333 5.33333L477.238 5.2381L477.25 6.73805L489.155 6.64281L489.143 5.14286L501.048 5.04762L501.06 6.54757L502.817 6.53351L502.04 7.181L503 8.33333L495 15L494.04 13.8477L486.04 20.5143L487 21.6667L479 28.3333L478.04 27.181L470.04 33.8477L471 35L463 41.6667L462.04 40.5143L458.04 43.8477L456.496 45.1337L458.168 46.2481L464.168 50.2481L465 49L477 57L476.168 58.2481L488.168 66.2481L489 65L501 73L500.168 74.2481L502.046 75.5H501.047V77H489.143V75.5H477.238V77H465.333V75.5H453.428V77H441.524V75.5H429.619V77H417.714V75.5H405.809V77H393.905V75.5H382V77H370.095V75.5H358.19V77H346.286V75.5H334.381V77H322.476V75.5H310.571V77H298.667V75.5H286.762V77H274.857V75.5H262.952V77H251.048V75.5H239.143V77H227.238V75.5H215.333V77H203.429V75.5H191.524V77H179.619V75.5H167.714V77H155.81V75.5H143.905V77H132V75.5H120.095V77H108.19V75.5H96.2857V77H84.381V75.5H72.4762V77H60.5714V75.5H48.6667V77H36.7619V75.5H24.8571V77H12.9524V75.5H8.5V71.3333H7V60H8.5V48.6667H7V37.3333H8.5V26H7Z"
+                                fill="#96642C" stroke="#F9EF99" stroke-width="3" stroke-dasharray="12 12" />
+                            <text x="50" y="60" fill="white" class="main-font fs-2">HACKATHON 2022</text>
+                        </svg>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8" style="padding:2% 5%;">
+                        <p class="fs-7 text-light sec-font lh-lg mb-4 hackathon-content">Hackathons are like
+                            marathons, only a few
+                            make
+                            it to the end
+                            but most
+                            people take part to better
+                            themselves
+                            and have fun. Regardless of why you participate, make sure you're upholding the spirit
+                            of
+                            the
+                            hackathon by
+                            collaborating with other teams, helping beginners and having fun in the competition.
+                        </p>
+                        <div class="d-flex flex-column text-light main-font hackathon-content">
+                            <p class="fs-7 mb-1">Criteria : Semi-open </p>
+                            <p class="fs-7 mb-1">Mode : Online </p>
+                            <p class="fs-7 mb-1">Fees : 200(Per Team) </p>
+                            <p class="fs-7 mb-1">Participants : 2-4 </p>
+                            <div class="mt-4">
+                                <a href="/hackathon" style="background-color: #bd2828;"
+                                    class="px-3 py-1 sec-font text-light rounded-3 fs-6">
+                                    View More
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 d-flex justify-content-center p-2">
+                        <img src="/static/images/hackathon/hackathon.png" class="hackathon-image responsive_images"
+                            style="width: 80%;height:80%">
+                    </div>
+                </div>
+                <div class="row mx-3 my-3 d-flex justify-content-center hackathon">
+                    <div class="col-12">
+                        <h2 class="main-font text-light text-center fs-3 px-0 mx-0 hackathon-prize">Prizes</h2>
+                    </div>
+                    <div
+                        class="col-lg-4 col-sm-12 d-flex flex-column align-items-center justify-content-center my-2 hackathon-prize">
+                        <div class="main-bg d-flex justify-content-center align-items-center mx-3 text-red fs-3 fw-bold main-font text-center"
+                            style="border-radius: 100px;width:4rem;height:4rem;">
+                            01
+                        </div>
+                        <p class="fs-6 sec-font my-2">3000 Rs Plus Certificates</p>
+                    </div>
+                    <div
+                        class="col-lg-4 col-sm-12 d-flex flex-column align-items-center justify-content-center my-2 hackathon-prize">
+                        <div class="main-bg d-flex justify-content-center align-items-center mx-3 text-red fs-3 fw-bold main-font text-center"
+                            style="border-radius: 100px;width:4rem;height:4rem;">
+                            02
+                        </div>
+                        <p class="fs-6 sec-font my-2">1500 Rs Plus Certificates</p>
+                    </div>
+                    <div
+                        class="col-lg-4 col-sm-12 d-flex flex-column align-items-center justify-content-center my-2 hackathon-prize">
+                        <div class="main-bg d-flex justify-content-center align-items-center mx-3 text-red fs-3 fw-bold main-font text-center"
+                            style="border-radius: 100px;width:4rem;height:4rem;">
+                            03
+                        </div>
+                        <p class="fs-6 sec-font my-2">Only Certificates</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- gallery -->
+    <section class="main-bg homepage_section main-bg position-relative overflow-hidden pb-4" id="gallery">
+        <div class="row py-3 px-2 min-vh-100 d-flex justofy-content-center align-items-center">
+            <div class="row text-center">
+                <h2 class="u-text-red fs-1">GALLERY</h2>
+            </div>
+            <div class="row">
+                <div class="col d-flex flex-column align-items-center">
+                    <div class="gallery">
+                        <div class="img">
+                            <img id="gallery-image1" src="/static/images/homepage/vintage.1.jpg">
+                        </div>
+                        <div class="img">
+                            <img class="gallery-image" src="/static/images/homepage/vinatege2.jpg">
+                        </div>
+                        <div class="img">
+                            <img class="gallery-image" src="/static/images/homepage/vintage3.jpg">
+                        </div>
+                        <div class="img">
+                            <img class="gallery-image" src="/static/images/homepage/vintage4.jpg">
+                        </div>
+                        <div class="img">
+                            <img class="gallery-image" src="/static/images/homepage/vintage5.jpg">
+                        </div>
+                        <div class="img">
+                            <img class="gallery-image" src="/static/images/homepage/vintage8.jpg">
+                        </div>
+                        <div class="img">
+                            <img class="gallery-image" src="/static/images/homepage/vintage9.jpg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <!-- testimonials -->
+    <section class="main-bg min-vh-100 position-relative overflow-hidden py-3">
+        <div class="row text-center mb-1">
+            <h2 class="text-red main-font fs-1">TESTIMONIALS.</h2>
+        </div>
+        <div class="row h-100 d-flex justify-content-center align-items-center">
+            <div class="col h-100 d-flex justify-content-center align-items-center">
+                <div id="carouselExampleIndicators" class="carousel slide py-2 testimonial-carousel"
+                    data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                            aria-label="Slide 4"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
+                            aria-label="Slide 5"></button>
+                        <button type="button bg-brown" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5"
+                            aria-label="Slide 6"></button>
+                    </div>
+                    <div class="carousel-inner p-3">
+                        <div class="carousel-item active">
+                            <div class="col d-flex flex-column align-items-center my-2">
+                                <div class="w-100 rounded-3 testimonial-card p-3">
+                                    <!-- artist image -->
+                                    <img src="../static/images/testimonials/armaan-malik-hits-7-million-instagram-followers-920x518-1-200x200.jpg"
+                                        class="my-2" width="170px" height="170px" alt="..."
+                                        style="border-radius: 100%;">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <!-- artist review -->
+                                        <p class="fs-6 text-black sec-font text-center">
+                                            Thank you @PillaiAlegria for such a beautiful night.
+                                        </p>
+                                        <h5 class="fs-7 text-red main-font mb-1">Armaan Malik</h5>
+                                        <p class="fs-7 text-red main-font mb-1">Singer</p>
+                                        <p class="fs-7 text-black sec-font mb-1">2019</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="col d-flex flex-column align-items-center my-2">
+                                <div
+                                    class="h-100 w-100 d-flex flex-column align-items-center rounded-3 testimonial-card p-3">
+                                    <!-- artist image -->
+                                    <img src="../static/images/testimonials/0521_dhvani3-200x200.jpg" class="my-2"
+                                        width="160px" height="160px" alt="..." style="border-radius: 100%;">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <!-- artist review -->
+                                        <p class="fs-6 text-black sec-font text-center">
+                                            Had a blast performing @PillaiAlegria. You guys had such insane
+                                            energy.
+                                            Thankyou @PillaiAlegria for giving me a chance to perform at
+                                            Alegria.
+                                            Sending all love back to you guys.
+                                        </p>
+                                        <h5 class="fs-7 text-red main-font mb-1">Dhvani Bhanushali</h5>
+                                        <p class="fs-7 text-red main-font mb-1">Singer</p>
+                                        <p class="fs-7 text-black sec-font mb-1">2019</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="col d-flex flex-column align-items-center my-2">
+                                <div class="h-100 w-100 rounded-3 testimonial-card p-3">
+                                    <!-- artist image -->
+                                    <img src="../static/images/testimonials/Farhan-Akhtar-Live-concert-at-Pillai-College-fest-Alegria-2014-1-200x200.jpeg"
+                                        class="my-2" width="170px" height="170px" alt="..."
+                                        style="border-radius: 100%;">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <!-- artist review -->
+                                        <p class="fs-6 text-black sec-font text-center">
+                                            To all at @PillaiAlegria thank you for having us over and all
+                                            the best for
+                                            all to come. Love and Respect
+                                        </p>
+                                        <h5 class="fs-7 u-text-brown fw-bold mb-1">Farhan Akhtar</h5>
+                                        <p class="fs-7 u-text-light-brown mb-1">Actor | Singer</p>
+                                        <p class="fs-7 u-text-light-brown mb-1">2018</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="col d-flex flex-column align-items-center my-2">
+                                <div class="h-100 w-100 rounded-3 testimonial-card p-3">
+                                    <!-- artist image -->
+                                    <img src="../static/images/testimonials/sonam-1-200x200.jpg" class="my-2"
+                                        width="170px" height="170px" alt="..." style="border-radius: 100%;">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <!-- artist review -->
+                                        <p class="fs-6 text-black sec-font text-center">
+                                            It's been amazing. Loved the campus and energy. Tons of love.
+                                        </p>
+                                        <h5 class="fs-7 u-text-brown fw-bold mb-1">Sonam Kapoor Ahuja</h5>
+                                        <p class="fs-7 u-text-light-brown mb-1">Actor</p>
+                                        <p class="fs-7 u-text-light-brown mb-1">2018</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="col d-flex flex-column align-items-center my-2">
+                                <div class="h-100 w-100 rounded-3 testimonial-card p-3">
+                                    <!-- artist image -->
+                                    <img src="../static/images/testimonials/Siddharth-Malhotra-and-Rakul-preet-Singh-at-alegria-rock-200x200.jpg"
+                                        class="my-2" width="170px" height="170px" alt="..."
+                                        style="border-radius: 100%;">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <!-- artist review -->
+                                        <p class="fs-6 text-black sec-font text-center">
+                                            Thank you for all the love.Big love and respect !!
+                                        </p>
+                                        <h5 class="fs-7 text-red main-font  mb-1">Sidharth Malhotra</h5>
+                                        <p class="fs-7 text-red main-font mb-1">Actor</p>
+                                        <p class="fs-7 text-black sec-font mb-1">2017</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="col d-flex flex-column align-items-center my-2">
+                                <div class="h-100 w-100 rounded-3 testimonial-card p-3">
+                                    <!-- artist image -->
+                                    <img src="../static/images/testimonials/alegria-ayushmann-khurrana-live-band-300x300.jpg"
+                                        class="my-2" width="170px" height="170px" alt="..."
+                                        style="border-radius: 100%;">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <!-- artist review -->
+                                        <p class="fs-6 text-black sec-font text-center">
+                                            What a sight and what a night! . @PillaiAlegria you were a
+                                            delight!!!
+                                        </p>
+                                        <h5 class="fs-7 text-red main-font mb-1">Ayushmaan khurrana</h5>
+                                        <p class="fs-7 utext-red main-font mb-1">Actor | Singer</p>
+                                        <p class="fs-7 text-black sec-font mb-1">2016</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon bg-brown rounded-3" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon bg-brown rounded-3" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="d-flex flex-column px-2 overflow-hidden u-text-beige" style="background-color: #272626;">
+        <div class="row d-flex justify-content-center g-4 p-4 pt-5">
+            <div class="col-lg-3 col-sm-6">
+                <p class="footer_link">Here's how you can reach us</p>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3772.6693193422207!2d73.12548141390256!3d18.990206059600766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7e866de88667f%3A0xc1c5d5badc610f5f!2sPillai%20College%20of%20Engineering%2C%20New%20Panvel!5e0!3m2!1sen!2sin!4v1639657181713!5m2!1sen!2sin"
+                    width="220" height="150" style="border:0;" allowfullscreen=true loading="lazy"
+                    class="rounded-3"></iframe>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <li>
+                    <a href="/events/fine-arts" class="footer_link mb-1">
+                        Fine Arts
+                    </a>
+                </li>
+                <li>
+                    <a href="/events/gaming" class="footer_link mb-1">
+                        Gaming
+                    </a>
+                </li>
+                <li>
+                    <a href="/events/informals" class="footer_link mb-1">
+                        Informals
+                    </a>
+                </li>
+                <li>
+                    <a href="/events/literary-arts" class="footer_link mb-1">
+                        Literary Arts
+                    </a>
+                </li>
+                <li>
+                    <a href="/events/management" class="footer_link mb-1">
+                        Management
+                    </a>
+                </li>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <li>
+                    <a href="/event/technical-events" class="footer_link mb-1">
+                        Technical Events
+                    </a>
+                </li>
+                <li>
+                    <a href="/events/technical-workshops" class="footer_link mb-1">
+                        Technical Workshops
+                    </a>
+                </li>
+                <li>
+                    <a href="/events/performing-arts" class="footer_link mb-1">
+                        Performing Arts
+                    </a>
+                </li>
+                <li>
+                    <a href="/events/sports" class="footer_link mb-1">
+                        Sports
+                    </a>
+                </li>
+                <li>
+                    <a href="/events/special-events" class="footer_link mb-1">
+                        Special Events
+                    </a>
+                </li>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <li>
+                    <a href="/" class="footer_link mb-1">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="/login" class="footer_link mb-1">
+                        Login
+                    </a>
+                </li>
+                <li>
+                    <a href="/hackathon" class="footer_link mb-1">
+                        Hackathon
+                    </a>
+                </li>
+                <li>
+                    <a href="/merchandise" class="footer_link mb-1">
+                        Merchandise
+                    </a>
+                </li>
+                <li>
+                    <a href="/developers" class="footer_link mb-1">
+                        Developers
+                    </a>
+                </li>
+                <li class="my-1">
+                    <a href="https://play.google.com/store/apps/details?id=com.mes.alegria" target="_blank"
+                        rel="noopener noreferrer" class="px-3 py-1 d-flex align-items-center rounded-3 text-light"
+                        style="background-color: black;width: 60%;height: 60%;">
+                        <img src="/static/images/icons/playstore.png" alt="playstore icon" class="me-1">
+                        <p class="sec-font mb-0" style="font-size: 0.7rem;">
+                            <span>
+                                Get It On
+                            </span>
+                            <br>
+                            <span>
+                                Google Play
+                            </span>
+                        </p>
+                    </a>
+                </li>
+            </div>
+        </div>
+        <div class="row py-2" style="background-color: #242121;">
+            <div class="col">
+                <p class="footer_link mb-1 text-center">Copyright 2022 Alegria</p>
+            </div>
+            <div class="col">
+                <div class="d-flex justify-content-center align-items-center">
+                    <a href="https://www.instagram.com/pillaisalegria/" target="_blank" rel="noopener noreferrer"
+                        class="footer_link mb-1 px-2 social-icons">
+                        <i class="fab fa-instagram fs-5"></i>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCfqP3NEaaXPsgHn8QX3qilw" target="_blank"
+                        rel="noopener noreferrer" class="footer_link mb-1 px-2 social-icons">
+                        <i class="fab fa-youtube fs-5"></i>
+                    </a>
+                    <a href="https://www.facebook.com/pillaisalegria" target="_blank" rel="noopener noreferrer"
+                        class="footer_link mb-1 px-2 social-icons">
+                        <i class="fab fa-facebook-square fs-5"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col">
+                <p class="footer_link mb-1 text-center">Powered by Alegria</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+{% endblock %}
