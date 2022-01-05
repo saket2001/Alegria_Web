@@ -32,6 +32,7 @@ class Eventdemo(db.Model):
     event_contact3 = db.Column(db.String(50), nullable=True)
     event_contact4 = db.Column(db.String(50), nullable=True)
     pr_points = db.Column(db.String(50), nullable=True)
+    event_is_expired = db.Column(db.String(20), nullable=True)
 
     def __repr__(self) -> str:
         return f"Event('{self.event_name}','{self.event_code}','{self.event_summary}','{self.event_criteria}','{self.event_category_id}','{self.event_category_name}','{self.event_cost}','{self.event_contact1}','{self.event_contact2}','{self.event_contact3}','{self.event_contact4}','{self.pr_points}')"
@@ -62,7 +63,7 @@ class Eventdemo_details(db.Model):
     event_mode = db.Column(db.String(10), default=False)
     event_duration = db.Column(db.String(60), nullable=False)
     icon_url = db.Column(db.String(200), nullable=False)
-    event_rules = db.Column(db.String(3000), nullable=False)
+    event_rules = db.Column(db.Text(3000), nullable=False)
     event_perks_1 = db.Column(db.String(25), nullable=False)
     event_perks_2 = db.Column(db.String(25), nullable=True)
     event_perks_3 = db.Column(db.String(25), nullable=True)

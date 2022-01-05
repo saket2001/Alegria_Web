@@ -1,5 +1,19 @@
 {% extends '/admin/admin_layout.html' %}
 
+
+{% block headContent %}
+
+<script defer src="/static/js/ckeditor/ckeditor.js"></script>
+
+<script defer>
+  window.onload = function () {
+    CKEDITOR.replace('editor');
+  };
+</script>
+
+{% endblock headContent %}
+
+
 {% block title %}
 All Events
 {% endblock %}
@@ -73,6 +87,7 @@ All Events
   </li>
 </div>
 <div id="admin-events" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+
   {% for ele in events_list %}
   <div class="col rounded-3">
     <div class="card border-0 bg-teal">
@@ -137,7 +152,7 @@ All Events
         <p class="mb-0 fs-7 main-font">
           {{form.rules.label}}
         </p>
-        {{form.rules(class="input_value")}}
+        {{form.rules(class="input_value",id="editor")}}
         <p class="mb-0 fs-7 main-font">
           {{form.categoryName.label}}
         </p>
@@ -239,4 +254,8 @@ All Events
     </div>
   </div>
 </div>
+
+<script defer>
+  CKEDITOR.replace('editor');
+</script>
 {% endblock %}
