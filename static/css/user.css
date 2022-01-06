@@ -109,15 +109,7 @@ body {
 }
 
 .responsive_images {
-    width: 80%;
-    height: 60%;
-}
-
-.filter_btn {
-    background-color: transparent;
-    border: 2px solid var(--brown);
-    border-radius: 10px;
-    color: var(--brown);
+    height: 50%;
 }
 
 .fs-7 {
@@ -158,13 +150,17 @@ body {
     margin: 0 0.2rem;
 }
 
-.navbar_links {
+.parallax_navbar .navbar_links {
     color: var(--u_red);
     padding: 0.2rem 0.6rem;
     margin: 0 0.2rem;
 }
 
 /* homepage */
+
+.parallax_section {
+    height: 100%;
+}
 
 .parallax-container {
     height: 100vh;
@@ -178,7 +174,8 @@ body {
 }
 
 .parallax-container .parallax_images .land {
-    height: 20vh;
+    /* height: 20vh; */
+    height: 30vh;
 }
 
 .parallax-container .parallax_title {
@@ -214,10 +211,6 @@ body {
 
 
 /* events homepage */
-
-#events-section {
-    z-index: 1;
-}
 
 .event-img {
     position: relative;
@@ -567,10 +560,10 @@ button:hover {
 
 @media screen and (max-width :600px) {
     .navbar-collapse {
-        min-height: auto;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
-        margin: 6rem 0 !important;
+        margin: 2rem 0 !important;
         padding-bottom: 1.5rem;
     }
 
@@ -589,6 +582,15 @@ button:hover {
 
     .parallax-container .parallax_title {
         width: 80%;
+    }
+
+    .about_us {
+        min-height: 100vh;
+        z-index: 1;
+    }
+
+    .homepage-gap {
+        min-height: 90vh;
     }
 
     .event-img {
@@ -612,8 +614,7 @@ button:hover {
     }
 
     .responsive_images {
-        width: 80% !important;
-        height: 80% !important;
+        height: 40% !important;
     }
 
     .testimonial-card {
