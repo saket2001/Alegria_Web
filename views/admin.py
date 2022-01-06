@@ -473,3 +473,16 @@ def polls():
     except Exception as e:
         print(e)
         return redirect("/")
+
+@admin_bp.route('/admin-announcement')
+def adminAnnouncement():
+    announcement =[
+    {"a_id":"01","date":"12th Jan 2022", "time":"10:00 am","announcement":"Sport Event Box Circket is been cancelled due to uprising covid cases and won’t be played this year. All the registration fees for this event can be collected later."},
+    {"a_id":"02","date":"13th Jan 2022", "time":"11:00 am","announcement":"Sport Event Box Circket is been cancelled due to uprising covid cases and won’t be played this year. All the registration fees for this event can be collected later."}
+    ]
+
+    event_announcement =[
+        {"date":"11/02/2022","event_name1":"Sports-Box Cricket","time1":"10:00 AM","event_name2":"Sports-Box Cricket","time2":"10:00 AM","event_name3":"Sports-Box Cricket","time3":"10:00 AM"},
+        {"date":"12/02/2022","event_name1":"Sports-Box Cricket","time1":"10:00 AM","event_name2":"Sports-Box Cricket","time2":"10:00 AM","event_name3":"Sports-Box Cricket","time3":"10:00 AM"},
+    ]
+    return render_template('/admin/admin_announcements.html',announcement=announcement,event_announcement=event_announcement)

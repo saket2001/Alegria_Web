@@ -1,0 +1,98 @@
+{% extends '/admin/admin_layout.html' %}
+
+{% block title %}
+All Announcements
+{% endblock %}
+
+
+{% block content %}
+<br>
+<div class="container">
+    <div class=" row d-flex align-items-center">
+    <div class="col my-1">
+        <div class="col-md-auto my-1">
+            <a href="#" class="button outline_btn fs-7" data-bs-toggle="modal" data-bs-target="#exampleModal">Add
+                New Announcement +</a>
+        </div>
+    </div>
+    <div class="col-md-auto my-1">
+        <a href="#" class="button outline_btn fs-7" data-bs-toggle="modal" data-bs-target="#exampleModal">Add
+            Event Details +</a>
+    </div>
+</div>
+</div>
+<div class="announcement_box">
+    <div class=" row d-flex ">
+        <div class="col my-1 ">
+            <h5><b>All Announcements</b></h5><br>
+            <a href="#" class="button outline_btn fs-7 " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Filter by Latest &nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
+            </a>
+            {% for ele in announcement %}
+            <div class="card bg-teal shadow-sm" style="padding:2%;margin-top:3%;margin-bottom: 3%;">
+                <h4 class='text-black fw-bolder'>{{ele["a_id"]}}</h4>
+                <h5 class="fs-5 main-font text-red">Alert Alegrians! Event Updates</h5>
+                <p class="fs-8">{{ele["date"]}},{{ele["time"]}}</p>
+                <p class="fs-7 " >{{ele["announcement"]}}</p>
+                    <a href="#" class="btn btn-outline-danger py-1 px-2 fs-7 border-2 w-25">Delete</a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-auto my-1">
+            <h5><b>Event Dates</b></h5><br>
+            <a href="#" class="button outline_btn fs-7" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Filter by Category &nbsp;&nbsp;<i class="fas fa-chevron-down"></i>
+            </a><br><br>
+           <label class="fs-8">From:&nbsp;<input type="date" id="from" name="from"></label> 
+           <label class="fs-8">To:&nbsp;    <input type="date" id="to" name="to"></label> <br><br>
+            <input class="button outline_btn fs-7" type="submit">
+
+            {% for ele in event_announcement %}
+            <div class="card bg-teal shadow-sm " style="padding:2%;margin-top:10%;margin-bottom: 3%;">
+                <h5 class='text-black fw-bolder'>{{ele["date"]}}</h5>
+                <p class="fs-8">{{ele["event_name1"]}},({{ele["time1"]}})</p>
+                <p class="fs-8">{{ele["event_name2"]}},({{ele["time2"]}})</p>
+                <p class="fs-8">{{ele["event_name3"]}},({{ele["time3"]}})</p>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Announcements</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form class="modal-body" action='' method="post">
+                {{form.question(class="input_value",placeholder="Announcement Title")}}
+                {{form.description(class="input_value",placeholder="Announcement Content")}}
+                {{form.dateTime(class="input_value")}}
+                <button type="submit" class="button w-100 my-2 bg-brown text-beige">Add Announcement +</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Event Date</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form class="modal-body" action='' method="post">
+                {{form.question(class="input_value",placeholder="Category Name")}}
+                {{form.description(class="input_value",placeholder="Event Name")}}
+                {{form.date(class="input_value")}}
+                {{form.time(class="input_value")}}
+                <button type="submit" class="button w-100 my-2 bg-brown text-beige">Add Event Date +</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
