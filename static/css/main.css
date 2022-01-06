@@ -12,7 +12,7 @@
     --brown: #26251A;
     --teal: #f5eee0e0;
     --beige: #F1E3C8;
-    --black: #161515;
+    --black: #3d3d3d;
     --gray: #696565;
 }
 
@@ -47,6 +47,8 @@ body {
     border: 2px solid var(--brown);
     border-radius: 10px;
     color: var(--brown);
+    display: flex;
+    justify-content: center;
 }
 
 .fs-7 {
@@ -61,7 +63,7 @@ a {
 }
 
 a:hover {
-    color: initial;
+    color: var(--beige);
 }
 
 li {
@@ -72,8 +74,9 @@ li {
     outline: none;
     border: none;
     border-radius: 6px;
-    font-size: 1rem;
-    padding: 0.4rem 0.6rem;
+    font-size: 0.9rem;
+    color: var(--black);
+    padding: 0.25rem 0.5rem;
     background-color: transparent;
     transition: all .5s ease-out;
 }
@@ -86,7 +89,7 @@ li {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.4rem 0.6rem;
+    padding: 0.25rem 0.6rem;
     outline: none;
     border: 2px solid var(--brown);
     border-radius: 6px;
@@ -119,10 +122,6 @@ li {
     transition: all 0.3s ease-out;
 }
 
-input[type='file'] {
-    padding: 0.1rem 0.4rem;
-    border: none;
-}
 
 .input_value:focus {
     border: 2px solid #131fcf;

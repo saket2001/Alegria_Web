@@ -10,38 +10,36 @@ All Merchandise
 <div class="container">
   <div class="row d-flex align-items-center">
     <div class="col my-1">
-      <form class="d-flex">
-        <input class="form-control me-2 fs-7" type="search" placeholder="Search by name or Code here"
-          aria-label="Search">
-        <button class="button outline_btn fs-7" type="submit">Search</button>
-      </form>
-    </div>
-    <div class="col-md-auto my-1 d-flex justify-content-end">
-      <a href="#" class="button outline_btn fs-7" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Add
+      <a class="button outline_btn fs-7" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Add
         Merchandise</a>
     </div>
   </div>
 </div>
 <br>
 <!-- List -->
-<div class="w-100 d-flex align-items-center justify-content-between py-2">
-  <h5 class="fs-5 fw-bold">All Merchandise</h5>
-  <li class="filter_btn p-2 rounded d-flex align-items-center fs-6 dropdown fw-bold">
-    <div class='dropdown-toggle fs-7' id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Choose
-      Category
-    </div>
-    <ul class="dropdown-menu main-bg" aria-labelledby="dropdownMenuButton1">
-      <li>
-        <a class="dropdown-item" href="/admin/merchandise/Tshirts">Tshirts</a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="/admin/merchandise/Bags">Bags</a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="/admin/merchandise/Badges">Badges</a>
-      </li>
-    </ul>
-  </li>
+<div class="row g-2 w-100 d-flex align-items-center justify-content-between py-2">
+  <div class="col-lg-auto col-sm-12">
+    <h5 class="fs-5 fw-bold">All Merchandise</h5>
+  </div>
+  <div class="col-lg-3 col-sm-12">
+
+    <li class="filter_btn p-2 py-1 rounded d-flex align-items-center fs-6 dropdown fw-bold">
+      <div class='dropdown-toggle fs-7' id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Choose
+        Category
+      </div>
+      <ul class="dropdown-menu main-bg" aria-labelledby="dropdownMenuButton1">
+        <li>
+          <a class="dropdown-item" href="/admin/merchandise/Tshirts">Tshirts</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/admin/merchandise/Bags">Bags</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/admin/merchandise/Badges">Badges</a>
+        </li>
+      </ul>
+    </li>
+  </div>
 </div>
 <div id="admin-events" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
   {% for ele in merchandise_List %}
