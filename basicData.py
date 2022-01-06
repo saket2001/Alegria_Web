@@ -193,9 +193,9 @@ web_team_list = [
     {"img": "../static/images/developer/Bhushan.jpg", "name": "Bhushan Khot", "role": "Back-end Developer", "call": "+91 8652618353",
             "gmail": "bhushan.khot22@gmail.com", "github": "https://github.com/Bhushankhot", "linkedin": "https://www.linkedin.com/in/bhushankhot08/"},
     {"img": "../static/images/developer/Athul.jpg", "name": "Athul Tulsidasan", "role": "Back-end Developer", "call": "+91 ",
-            "gmail": "sanju1234.barhate@gmail.com", "github": "https://github.com/sanjana2417", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"},
-    {"img": "../static/images/developer/Chandni.jpg", "name": "Chandini Chentamara", "role": "Back-end Developer", "call": "+91 ",
-            "gmail": "sanju1234.barhate@gmail.com", "github": "https://github.com/sanjana2417", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"},
+            "gmail": "athulrthulasidasan@gmail.com", "github": "https://github.com/Athul0491", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"},
+    {"img": "../static/images/developer/Chandini.jpg", "name": "Chandini Chentamara", "role": "Back-end Developer", "call": "+918291601569 ",
+            "gmail": "chandini.chent@gmail.com", "github": "https://github.com/chandinic10", "linkedin": "https://www.linkedin.com/in/chandini-chentamara-bb47ab1b8/"},
     {"img": "../static/images/developer/Tanishq.jpg", "name": "Tanishq Parkar", "role": "Back-end Developer", "call": "+91 9324343000",
             "gmail": "tanishqparkar@gmail.com", "github": "https://github.com/RevTpark", "linkedin": "https://www.linkedin.com/in/tanishq-parkar/"}
 ]
@@ -205,8 +205,8 @@ app_team_list = [
      "gmail": "cholayilaaditya@gmail.com", "github": "https://github.com/AadityaCholayil", "linkedin": "https://www.linkedin.com/in/aaditya-cholayil/"},
     {"img": "../static/images/developer/Yash.jpg", "name": "Yash Lalit", "role": "App Developer", "call": "+91 9136858108",
      "gmail": "yashlalit.23@gmail.com", "github": "https://github.com/happy-mammal", "linkedin": "https://www.linkedin.com/in/yash-lalit-0a6a6320b"},
-    {"img": "../static/images/developer/x.jpg", "name": "ABC XYZ", "role": "App Developer", "call": "+91 ", "gmail": "sanju1234.barhate@gmail.com",
-     "github": "https://github.com/sanjana2417", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"}
+    {"img": "../static/images/developer/x.jpg", "name": "Pranav Shegekar", "role": "App Developer", "call": "+91 ", "gmail": "pranav.shegekar@gmail.com",
+     "github": "https://github.com/PranavShegekar", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"}
 ]
 
 polls_cards = [
