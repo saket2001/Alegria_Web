@@ -1,11 +1,8 @@
 {% extends "layout.html" %}
 
-{% block head %}
-<link rel="stylesheet" href="{{url_for('static',filename='/css/user.css')}}">
-{% endblock head %}
 
 {% block title %}
-User Login
+Alegria 2022 | User Login
 {% endblock %}
 
 {% block body %}
@@ -23,9 +20,10 @@ User Login
     }
 </style>
 
-<body class="u-bg-beige min-vh-100 max-vh-100 overflow-hidden">
-    <div class="row w-100">
-        <div class="col-sm-12 col-lg-6 d-flex flex-column justify-content-center align-items-center p-5">
+<body class="bg-beige min-vh-100 max-vh-100 overflow-hidden">
+    <div class="row min-vw-100 min-vh-100 d-flex justify-content-center align-items-center m-0">
+        <div
+            class="col-lg-6 col-sm-12 min-vh-100 d-flex flex-column justify-content-center align-items-center py-5 px-3">
             {% for mess in get_flashed_messages() %}
             <div class="d-flex justify-content-center align-items-center p-3">
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -34,7 +32,7 @@ User Login
                 </div>
             </div>
             {% endfor %}
-            <h1 class="py-2 fs-2 sec-font text-red fw-normal">
+            <h1 class="py-2 fs-2 sec-font text-red text-center fw-normal">
                 Welcome To
                 <span class="text-red fw-bold main-font">
                     Alegria 2022
@@ -45,7 +43,7 @@ User Login
             </p>
             <!--google sign in button-->
             <a href="/user-login"
-                class="d-flex justify-content-center align-items-center fs-6 py-2 px-3 my-2 text-beige rounded-3 bg-red">
+                class="d-flex justify-content-center align-items-center fs-7 py-2 px-2 my-2 text-beige rounded-3 bg-red main-font">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32px" height="32px" class="me-2">
                     <path fill="#FFC107"
                         d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
@@ -56,9 +54,9 @@ User Login
                     <path fill="#1976D2"
                         d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
                 </svg>
-                Sign in using Mes Google Account
+                Sign in With Google Account
             </a>
-            <a href="/" class="text-red my-2 sec-font fs-6">
+            <a href="/" class="text-red my-2 sec-font fs-6" style="color:#842703;">
                 Go To Homepage
             </a>
         </div>

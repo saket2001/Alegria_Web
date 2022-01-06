@@ -7,25 +7,18 @@ All Polls
 
 {% block content %}
 <br>
-<div class="container" ">
-    <div class=" row d-flex align-items-center">
-    <div class="col my-1">
-        <form class="d-flex">
-            <input class="form-control me-2 fs-7" type="search" placeholder="Search by name or Code here"
-                aria-label="Search">
-            <button class="button outline_btn fs-7" type="submit">Search</button>
-        </form>
+<div class="container">
+    <div class="row d-flex align-items-center justify-content-end">
+        <div class="col-md-auto my-1">
+            <a href="#" class="button outline_btn fs-7" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Add
+                Poll</a>
+        </div>
     </div>
-    <div class="col-md-auto my-1">
-        <a href="#" class="button outline_btn fs-7" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Add
-            Poll</a>
-    </div>
-</div>
 </div>
 <br>
 <h5 class="fs-5 fw-bold">All Public Polls</h5>
 {% for ele in poll_list %}
-<div class="card bg-teal shadow-sm" style="padding:2%;margin-top:3%">
+<div class="card bg-teal shadow-sm p-3 my-2 mb-3">
     <h1 class='text-black fw-bolder'>{{ele["id"]}}</h1>
     <h5 class="fs-5 main-font text-red">{{ele["question"]}}</h5>
     <div class="d-flex my-1">

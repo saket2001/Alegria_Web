@@ -4,13 +4,9 @@
 Event Edit Page
 {% endblock title %}
 
-{% block head %}
-<link rel="stylesheet" href="{{url_for('static',filename='edit_detail.css')}}">
-{% endblock head %}
-
 
 {% block content %}
-<div class="row p-4 px-2">
+<div class="row d-flex flex-column align-items-center w-100 p-4 px-0">
     <!-- go back button -->
     <div class="row my-2 gy-2">
         <div class="col-lg-3 col-sm-3">
@@ -48,7 +44,7 @@ Event Edit Page
             <textarea name="event_description" id="event_description" class="input_value" rows="7">{{event_details['event_summary']}}
             </textarea>
             <label class="fs-7 mb-0 text-gray" for="event_rules">Event Rules</label>
-            <textarea name="event_rules" id="event_rules" class="input_value" rows="10">{{event_details['event_rules']}}
+            <textarea name="event_rules" id="event_rules" class="input_value" rows="10">{{event_details['event_rules']|safe }}
                         </textarea>
             <label class="fs-7 mb-0 text-gray" for="event_date">Event Date & Time</label>
             <input type="text" name="event_date" id="event_date" class="input_value"
@@ -139,22 +135,10 @@ Event Edit Page
                         value="{{event_details['event_perks_3']}}">
                 </div>
             </div>
-            <!-- <a href={{"/admin/events/{}/{}/saveit".format(event_details['event_category_name'],event_details['id'])}}
-                class="btn btn-dark text-teal sec-font">EDIT</a> -->
-            <!-- href={{"/admin/events/{}/{}/save-edit".format(event_details['category'],event_details['event_id'])}} -->
+
             <button type="submit" class="w-100 button bg-brown text-teal my-2">Save Changes</button>
         </form>
     </div>
-    <hr>
-    <div class="row my-2 rounded-3 shadow-sm bg-teal">
-        <div class="col-lg-6 col-sm-12 d-flex flex-column p-3">
-            <p class="text-muted fw-bold fs-6 my-1">Ticket Sales</p>
-            <h2 class="display-5 text-brown fw-bolder my-1">0</h2>
-        </div>
-        <div class="col-lg-6 col-sm-12 d-flex flex-column p-3">
-            <p class="text-muted fw-bold fs-6 my-1">Tickets Left</p>
-            <h2 class="display-5 text-brown fw-bolder my-1">0</h2>
-        </div>
-    </div>
+
 </div>
 {% endblock content %}

@@ -2,7 +2,6 @@
 
 
 {% block headContent %}
-<link href='https://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
 <style>
   #hexGrid {
     display: flex;
@@ -10,7 +9,7 @@
     width: 95%;
     margin: 0 auto;
     overflow: hidden;
-    font-family: 'Raleway', sans-serif;
+    /* font-family: 'Raleway', sans-serif; */
     font-size: 15px;
     list-style-type: none;
   }
@@ -287,178 +286,185 @@
 
 
 {% block title %}
-Alegria 2022 | About-Us
+Alegria 2022 | About Us
 {% endblock %}
 
 {% block content %}
 
-<div class="container-fluid bg-cover">
-  <div class="col text-center mx-4 px-4">
-    <h1 class="fs-2 monoton u-text-brown" style="margin-top: 15vh;">About Us</h1>
+<div class="container-fluid overflow-hidden be-beige bg-cover">
+  <div class="row px-3">
+    <div class="col text-center mx-4 p-4">
+      <h1 class="display-6 text-red main-font">About Us</h1>
+    </div>
+    <!--  -->
+    <div class="aboutus-content">
+      <p class="sec-font fs-7" style="font-size: 16px; text-align: justify;">
+        <span style="font-weight: bold; font-size: xx-large;">Alegria</span> - The Festival of joy congregated by The
+        Pillai
+        Group Of Institutions. Alegria is one of the most phenomenal intercollegiate festivals of its kind. It is held
+        in
+        February every year with a mob of more than 50,000 1to witness the flow of immense talent in the events. With
+        fun
+        and joy this event also escorts the presence of splendid talent and star celebrities. This festival continues to
+        add
+        a pack of memories to everyone's life with each passing year and the dedicated team of students and faculty
+        always
+        hold its back to add on to the astonishing experience. Be it the unique themes like the “Light The Night” from
+        last
+        year or the astounding performances, they never fail to amaze us. Star celebrities have always been one of the
+        emphasizing parts of the event, this festival has always been bestowed with the presence of some of the most
+        renowned celebrities in the entertainment industry. To name a few, Ranbir kapoor, Deepika Padukone, Ayushman
+        Khurrana, Siddharth Malhotra, Sonam Kapoor, Karthik Aryan, Nushrat Bharucha, Sunny Nijhar, Govinda, Elli Avram,
+        Saquib Salim, Zayed Khan, Rakul Preet Kaur, Lauren Gottlieb, Jackky Bhagani, Ranvijay Singha, Pallavi Sharda,
+        Warina
+        Hussain, Pushkar Jog, Sarah Jane Diad, Aaparshakti Khurrana, Varun Dhawan, Shraddha Kapoor, Aisha Sharma, Shama
+        Sikandar, Rinku Rajguru, Chinmay Udgirkar, Sonali Seygall, Adah Sharma, Rohan Mehra, Nibedita Pal, Chetna Pande
+        along with Indian beatbox sensation D cypher and dance guru Rahul Shetty and Dhanashree Varma and one of the
+        best
+        standup comedian, Kenny Sebastian have blessed us with their presence on the platform that is Alegria to promote
+        their movies and upcoming projects to the magnificent crowd attending and also to judge those events. As it is
+        said,
+        music is a therapy for mind and heart and Alegria was overjoyed to hear the delightful performances for some of
+        the
+        spectacular music artist like Guru Randhawa, Divine, Yo Yo Honey Singh, Superstar Farhan Akhtar, award-winning
+        Romanian pop band Akcent, Dhvani Bhanushali, Armaan Malik and the Sabali Band. Sports world champions Bhaichung
+        Bhutiya, Sunil Chhetri, Ashwini Ponnappa, Sahil Khan, Sangram Chougule, Murali Kumar Syed Kirmani and Rushabh
+        Choksi
+        also visited to display their talent. Alegria experiences some of the finest DJs like Mariana Bo, Tomorrowland’s
+        resident DJ Yves V, DJs Sultan Shepard, DJ Mag’s 33rd ranked Quintino, Teri Miko, Mike Candys and Diego Miranda.
+        The
+        audience can never suppress the urge to trip, spin and sway on their amazing beats. The festival is the outcome
+        of
+        the immense efforts of the students who manage, participate and organize the events taking place in the festival
+        and
+        handle it with great professionalism, spirit and care. Their enthusiasm adds into the festival making it a big
+        success every year. The festival commenced with an ambition of showcasing the power of the youth and has
+        persistently succeeded in doing so.
+      </p>
+    </div>
+    <!--  -->
+    <div class="ribbon">
+      <h2 class="fs-4">2019</h2>
+      <p class="fs-5">COSMOS</p>
+    </div>
+    <ul id="hexGrid">
+      {% for ele in aboutus_2019 %}
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src='{{ele["img"]}}' alt="" />
+            <h1>{{ele["title"]}}</h1>
+            <p>{{ele['description']}}</p>
+          </a>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    <div class="ribbon">
+      <h2 class="fs-4">2018</h2>
+      <p class="fs-5">MUMBAI THE CITY OF DREAMS</p>
+    </div>
+    <ul id="hexGrid">
+      {% for ele in aboutus_2018 %}
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src='{{ele["img"]}}' alt="" />
+            <h1>{{ele["title"]}}</h1>
+            <p>{{ele['description']}}</p>
+          </a>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    <div class="ribbon">
+      <h2 class="fs-4">2017</h2>
+      <p class="fs-5">KINGDOM OF GAMES</p>
+    </div>
+    <ul id="hexGrid">
+      {% for ele in aboutus_2017 %}
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src='{{ele["img"]}}' alt="" />
+            <h1>{{ele["title"]}}</h1>
+            <p>{{ele['description']}}</p>
+          </a>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    <!--  -->
+    <div class="ribbon">
+      <h2 class="fs-4">2016</h2>
+      <p class="fs-5">WANDERLUST</p>
+    </div>
+    <ul id="hexGrid">
+      {% for ele in aboutus_2016 %}
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src='{{ele["img"]}}' alt="" />
+            <h1>{{ele["title"]}}</h1>
+            <p>{{ele['description']}}</p>
+          </a>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    <div class="ribbon">
+      <h2 class="fs-4">2015</h2>
+      <p class="fs-5">100 YEARS OF HOLLYWOOD</p>
+    </div>
+    <ul id="hexGrid">
+      {% for ele in aboutus_2015 %}
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src='{{ele["img"]}}' alt="" />
+            <h1>{{ele["title"]}}</h1>
+            <p>{{ele['description']}}</p>
+          </a>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    <!--  -->
+    <div class="ribbon">
+      <h2 class="fs-4">2014</h2>
+      <p class="fs-5">INDIE ISHTYLE</p>
+    </div>
+    <ul id="hexGrid">
+      {% for ele in aboutus_2014 %}
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src='{{ele["img"]}}' alt="" />
+            <h1>{{ele["title"]}}</h1>
+            <p>{{ele['description']}}</p>
+          </a>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    <div class="ribbon">
+      <h2 class="fs-4">2013</h2>
+      <p class="fs-5">OUT OF THE BOX</p>
+    </div>
+    <ul id="hexGrid">
+      {% for ele in aboutus_2013 %}
+      <li class="hex">
+        <div class="hexIn">
+          <a class="hexLink" href="#">
+            <img src='{{ele["img"]}}' alt="" />
+            <h1>{{ele["title"]}}</h1>
+            <p>{{ele['description']}}</p>
+          </a>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    <br>
   </div>
-  <!--  -->
-  <div class="aboutus-content">
-    <p class="" style="font-size: 16px; text-align: justify;">
-      <span style="font-weight: bold; font-size: xx-large;">Alegria</span> - The Festival of joy congregated by The
-      Pillai
-      Group Of Institutions. Alegria is one of the most phenomenal intercollegiate festivals of its kind. It is held in
-      February every year with a mob of more than 50,000 1to witness the flow of immense talent in the events. With fun
-      and joy this event also escorts the presence of splendid talent and star celebrities. This festival continues to
-      add
-      a pack of memories to everyone's life with each passing year and the dedicated team of students and faculty always
-      hold its back to add on to the astonishing experience. Be it the unique themes like the “Light The Night” from
-      last
-      year or the astounding performances, they never fail to amaze us. Star celebrities have always been one of the
-      emphasizing parts of the event, this festival has always been bestowed with the presence of some of the most
-      renowned celebrities in the entertainment industry. To name a few, Ranbir kapoor, Deepika Padukone, Ayushman
-      Khurrana, Siddharth Malhotra, Sonam Kapoor, Karthik Aryan, Nushrat Bharucha, Sunny Nijhar, Govinda, Elli Avram,
-      Saquib Salim, Zayed Khan, Rakul Preet Kaur, Lauren Gottlieb, Jackky Bhagani, Ranvijay Singha, Pallavi Sharda,
-      Warina
-      Hussain, Pushkar Jog, Sarah Jane Diad, Aaparshakti Khurrana, Varun Dhawan, Shraddha Kapoor, Aisha Sharma, Shama
-      Sikandar, Rinku Rajguru, Chinmay Udgirkar, Sonali Seygall, Adah Sharma, Rohan Mehra, Nibedita Pal, Chetna Pande
-      along with Indian beatbox sensation D cypher and dance guru Rahul Shetty and Dhanashree Varma and one of the best
-      standup comedian, Kenny Sebastian have blessed us with their presence on the platform that is Alegria to promote
-      their movies and upcoming projects to the magnificent crowd attending and also to judge those events. As it is
-      said,
-      music is a therapy for mind and heart and Alegria was overjoyed to hear the delightful performances for some of
-      the
-      spectacular music artist like Guru Randhawa, Divine, Yo Yo Honey Singh, Superstar Farhan Akhtar, award-winning
-      Romanian pop band Akcent, Dhvani Bhanushali, Armaan Malik and the Sabali Band. Sports world champions Bhaichung
-      Bhutiya, Sunil Chhetri, Ashwini Ponnappa, Sahil Khan, Sangram Chougule, Murali Kumar Syed Kirmani and Rushabh
-      Choksi
-      also visited to display their talent. Alegria experiences some of the finest DJs like Mariana Bo, Tomorrowland’s
-      resident DJ Yves V, DJs Sultan Shepard, DJ Mag’s 33rd ranked Quintino, Teri Miko, Mike Candys and Diego Miranda.
-      The
-      audience can never suppress the urge to trip, spin and sway on their amazing beats. The festival is the outcome of
-      the immense efforts of the students who manage, participate and organize the events taking place in the festival
-      and
-      handle it with great professionalism, spirit and care. Their enthusiasm adds into the festival making it a big
-      success every year. The festival commenced with an ambition of showcasing the power of the youth and has
-      persistently succeeded in doing so.
-    </p>
-  </div>
-  <!--  -->
-  <div class="ribbon">
-    <h2 class="fs-4">2019</h2>
-    <p class="fs-5">COSMOS</p>
-  </div>
-  <ul id="hexGrid">
-    {% for ele in aboutus_2019 %}
-    <li class="hex">
-      <div class="hexIn">
-        <a class="hexLink" href="#">
-          <img src='{{ele["img"]}}' alt="" />
-          <h1>{{ele["title"]}}</h1>
-          <p>{{ele['description']}}</p>
-        </a>
-      </div>
-    </li>
-    {% endfor %}
-  </ul>
-  <div class="ribbon">
-    <h2 class="fs-4">2018</h2>
-    <p class="fs-5">MUMBAI THE CITY OF DREAMS</p>
-  </div>
-  <ul id="hexGrid">
-    {% for ele in aboutus_2018 %}
-    <li class="hex">
-      <div class="hexIn">
-        <a class="hexLink" href="#">
-          <img src='{{ele["img"]}}' alt="" />
-          <h1>{{ele["title"]}}</h1>
-          <p>{{ele['description']}}</p>
-        </a>
-      </div>
-    </li>
-    {% endfor %}
-  </ul>
-  <div class="ribbon">
-    <h2 class="fs-4">2017</h2>
-    <p class="fs-5">KINGDOM OF GAMES</p>
-  </div>
-  <ul id="hexGrid">
-    {% for ele in aboutus_2017 %}
-    <li class="hex">
-      <div class="hexIn">
-        <a class="hexLink" href="#">
-          <img src='{{ele["img"]}}' alt="" />
-          <h1>{{ele["title"]}}</h1>
-          <p>{{ele['description']}}</p>
-        </a>
-      </div>
-    </li>
-    {% endfor %}
-  </ul>
-  <!--  -->
-  <div class="ribbon">
-    <h2 class="fs-4">2016</h2>
-    <p class="fs-5">WANDERLUST</p>
-  </div>
-  <ul id="hexGrid">
-    {% for ele in aboutus_2016 %}
-    <li class="hex">
-      <div class="hexIn">
-        <a class="hexLink" href="#">
-          <img src='{{ele["img"]}}' alt="" />
-          <h1>{{ele["title"]}}</h1>
-          <p>{{ele['description']}}</p>
-        </a>
-      </div>
-    </li>
-    {% endfor %}
-  </ul>
-  <div class="ribbon">
-    <h2 class="fs-4">2015</h2>
-    <p class="fs-5">100 YEARS OF HOLLYWOOD</p>
-  </div>
-  <ul id="hexGrid">
-    {% for ele in aboutus_2015 %}
-    <li class="hex">
-      <div class="hexIn">
-        <a class="hexLink" href="#">
-          <img src='{{ele["img"]}}' alt="" />
-          <h1>{{ele["title"]}}</h1>
-          <p>{{ele['description']}}</p>
-        </a>
-      </div>
-    </li>
-    {% endfor %}
-  </ul>
-  <!--  -->
-  <div class="ribbon">
-    <h2 class="fs-4">2014</h2>
-    <p class="fs-5">INDIE ISHTYLE</p>
-  </div>
-  <ul id="hexGrid">
-    {% for ele in aboutus_2014 %}
-    <li class="hex">
-      <div class="hexIn">
-        <a class="hexLink" href="#">
-          <img src='{{ele["img"]}}' alt="" />
-          <h1>{{ele["title"]}}</h1>
-          <p>{{ele['description']}}</p>
-        </a>
-      </div>
-    </li>
-    {% endfor %}
-  </ul>
-  <div class="ribbon">
-    <h2 class="fs-4">2013</h2>
-    <p class="fs-5">OUT OF THE BOX</p>
-  </div>
-  <ul id="hexGrid">
-    {% for ele in aboutus_2013 %}
-    <li class="hex">
-      <div class="hexIn">
-        <a class="hexLink" href="#">
-          <img src='{{ele["img"]}}' alt="" />
-          <h1>{{ele["title"]}}</h1>
-          <p>{{ele['description']}}</p>
-        </a>
-      </div>
-    </li>
-    {% endfor %}
-  </ul>
-  <br>
 </div>
 {% endblock %}

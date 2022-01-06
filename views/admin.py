@@ -140,44 +140,45 @@ def events(event_category):
 @admin_bp.route('/add-event', methods=["POST"])
 def addEvent():
     if request.method == "POST":
-        try:
-            event_name = request.form.get('name')
-            event_id = request.form.get('id')
-            event_summary = request.form.get('description')
-            event_criteria = request.form.get('criteria')
-            event_category_id = request.form.get('categoryId')
-            event_category_name = request.form.get('categoryName')
+        # try:
+        event_name = request.form.get('name')
+        event_id = request.form.get('id')
+        event_summary = request.form.get('description')
+        event_criteria = request.form.get('criteria')
+        event_category_id = request.form.get('categoryId')
+        event_category_name = request.form.get('categoryName')
+        event_mode = request.form.get('mode')
+        event_code = request.form.get('code')
+        event_cost = request.form.get('eventCost')
+        event_date = request.form.get('dateTime ')
+        event_duration = request.form.get('duration')
 
-            event_code = request.form.get('code')
-            online_cost = request.form.get('onlineCost')
-            offlineCost = request.form.get('offlineCost')
-            supportsOnline = request.form.get('supportsOnline')
-            supportsOffline = request.form.get('supportsOffline')
-            event_date = request.form.get('dateTime ')
-            event_duration = request.form.get('duration')
+        event_contact1 = request.form.get('contact1')
+        event_contact2 = request.form.get('contact2')
+        event_contact3 = request.form.get('contact3')
+        event_contact4 = request.form.get('contact4')
+        event_rules = request.form.get('rules')
+        event_perks_1 = request.form.get('perks1')
+        event_perks_2 = request.form.get('perks2')
+        event_perks_3 = request.form.get('perks3')
+        icon_url = request.form.get('icon_url')
+        event_id = request.form.get('id')
+        entry = Eventdemo(event_name=event_name, id=event_id, event_code=event_code,
+                          event_summary=event_summary, event_criteria=event_criteria, event_category_id=event_category_id, event_category_name=event_category_name, event_cost=event_cost, event_contact1=event_contact1, event_contact2=event_contact2,
+                          event_contact3=event_contact3,
+                          event_contact4=event_contact4,
+                          event_is_expired=False)
 
-            event_contact1 = request.form.get('contact1')
-            event_contact2 = request.form.get('contact2')
-            event_rules = request.form.get('rules')
-            event_perks_1 = request.form.get('perks1')
-            event_perks_2 = request.form.get('perks2')
-            event_perks_3 = request.form.get('perks3')
-            icon_url = request.form.get('icon_url')
-            event_id = request.form.get('id')
-            entry = Eventdemo(event_name=event_name, id=event_id, event_code=event_code,
-                              event_summary=event_summary, event_criteria=event_criteria, event_category_id=event_category_id, event_category_name=event_category_name, online_cost=online_cost, event_contact1=event_contact1, event_contact2=event_contact2,  	offline_cost=offlineCost, supports_online=supportsOnline, 	supports_offline=supportsOffline,)
-            # supports_online=supportsOnline, 	supports_offline=supportsOffline,
-            entry2 = Eventdemo_details(
-                event_date=event_date, event_rules=event_rules, event_perks_1=event_perks_1, event_perks_2=event_perks_2, event_perks_3=event_perks_3, icon_url=icon_url, event_duration=event_duration, event_id=event_id)
-            # event_duration=event_duration, event_mode=event_mode)
-            db.session.add(entry)
-            db.session.commit()
-            db.session.add(entry2)
-            db.session.commit()
+        entry2 = Eventdemo_details(
+            event_date=event_date, event_rules=event_rules, event_perks_1=event_perks_1, event_perks_2=event_perks_2, event_perks_3=event_perks_3, icon_url=icon_url, event_duration=event_duration, event_id=event_id, event_mode=event_mode)
+        db.session.add(entry)
+        db.session.commit()
+        db.session.add(entry2)
+        db.session.commit()
 
-        except Exception as e:
-            print(e)
-            return redirect("/")
+        # except Exception as e:
+        # print(e)
+        # return redirect("/")
 
     return redirect('/admin/events')
 

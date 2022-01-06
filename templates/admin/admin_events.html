@@ -1,5 +1,19 @@
 {% extends '/admin/admin_layout.html' %}
 
+
+{% block headContent %}
+
+<script defer src="/static/js/ckeditor/ckeditor.js"></script>
+
+<script defer>
+  window.onload = function () {
+    CKEDITOR.replace('editor');
+  };
+</script>
+
+{% endblock headContent %}
+
+
 {% block title %}
 All Events
 {% endblock %}
@@ -7,72 +21,68 @@ All Events
 
 {% block content %}
 <br>
-<div class="container">
-  <div class="row d-flex align-items-center">
-    <div class="col my-1">
-      <form class="d-flex">
-        <input class="form-control me-2 fs-7" type="search" placeholder="Search by name or Code here"
-          aria-label="Search">
-        <button class="button outline_btn fs-7" type="submit">Search</button>
-      </form>
-    </div>
-    <div class="col-md-auto my-1 d-flex justify-content-end">
-      <a href="#" class="button outline_btn fs-7" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Add Event</a>
-    </div>
-    <div class="col-md-auto my-1 d-flex justify-content-end ">
-      <a href="/admin/events/event-registrations" class="button outline_btn fs-7">Event Registration</a>
-    </div>
+<div class="row gy-3 d-flex align-items-center my-2">
+  <div class="col-lg-auto col-sm-4 my-1">
+    <a href="#" class="button outline_btn fs-7" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Event +</a>
+  </div>
+  <div class="col-lg-auto col-sm-8 my-1">
+    <a href="/admin/events/event-registrations" class="button outline_btn fs-7">Event Registration</a>
   </div>
 </div>
-<br>
 <!-- List -->
-<div class="w-100 d-flex align-items-center justify-content-between py-3">
-  <h5 class="fs-5 fw-bold">All Events</h5>
-  <li class="filter_btn p-2 rounded d-flex align-items-center fs-6 dropdown fw-bold">
-    <div class='dropdown-toggle fs-7' id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Choose
-      Category
-    </div>
-    <ul class="dropdown-menu main-bg" aria-labelledby="dropdownMenuButton1">
-      <li>
-        <a class="dropdown-item" href="/admin/events/informals">Informals</a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="/admin/events/fine-arts">Fine Arts</a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="/admin/events/performing-arts">Performing
-          Arts</a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="/admin/events/gaming">Gaming</a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="/admin/events/sports">Sports</a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="/admin/events/literary-arts">Literary
-          Arts</a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="/admin/events/technical-events">Technical
-          Events</a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="/admin/events/technical-workshop">Technical
-          Workshops</a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="/admin/events/management-events">Managemnet
-        </a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="/admin/events/special-events">Special Events
-        </a>
-      </li>
-    </ul>
-  </li>
+<div class="row g-2 w-100 d-flex align-items-center justify-content-between py-3">
+  <div class="col-lg-4 col-sm-12">
+    <h5 class="fs-5 fw-bold">All Events</h5>
+  </div>
+  <div class="col-lg-3 col-sm-auto">
+    <li class="filter_btn p-2 py-1 rounded d-flex align-items-center fs-6 dropdown fw-bold">
+      <div class='dropdown-toggle fs-7' id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Choose
+        Category
+      </div>
+      <ul class="dropdown-menu main-bg" aria-labelledby="dropdownMenuButton1">
+        <li>
+          <a class="dropdown-item" href="/admin/events/informals">Informals</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/admin/events/fine-arts">Fine Arts</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/admin/events/performing-arts">Performing
+            Arts</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/admin/events/gaming">Gaming</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/admin/events/sports">Sports</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/admin/events/literary-arts">Literary
+            Arts</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/admin/events/technical-events">Technical
+            Events</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/admin/events/technical-workshop">Technical
+            Workshops</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/admin/events/management-events">Managemnet
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="/admin/events/special-events">Special Events
+          </a>
+        </li>
+      </ul>
+    </li>
+  </div>
+
 </div>
 <div id="admin-events" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+
   {% for ele in events_list %}
   <div class="col rounded-3">
     <div class="card border-0 bg-teal">
@@ -137,7 +147,7 @@ All Events
         <p class="mb-0 fs-7 main-font">
           {{form.rules.label}}
         </p>
-        {{form.rules(class="input_value")}}
+        {{form.rules(class="input_value",id="editor")}}
         <p class="mb-0 fs-7 main-font">
           {{form.categoryName.label}}
         </p>
@@ -239,4 +249,8 @@ All Events
     </div>
   </div>
 </div>
+
+<script defer>
+  CKEDITOR.replace('editor');
+</script>
 {% endblock %}

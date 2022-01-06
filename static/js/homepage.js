@@ -24,7 +24,7 @@ t1.fromTo(".bg", { y: -100 }, { y: 0, duration: 3 })
 
 let scene1 = new ScrollMagic.Scene({
   triggerElement: ".parallax_section",
-  duration: "300%",
+  duration: "200%",
   triggerHook: 0,
 })
   .setTween(t1)
