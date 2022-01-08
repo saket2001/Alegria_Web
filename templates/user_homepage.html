@@ -178,169 +178,6 @@ Alegria 2022 | Homepage
     <div class="parallax_section">
         <!-- theme banner -->
         <section class="parallax-container">
-            <!-- <nav class="w-100 navbar navbar-expand-lg navbar-light p-2 py-3 position-relative parallax_navbar">
-                <div class="container-fluid">
-                    <a href="/">
-                        <img src="/static/images/AlegriaLogo.png" alt="alegria logo" width="75px" height="60px">
-                    </a>
-                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="text-red" width="32px" height="32px" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="ms-2 navbar-nav me-auto mt-1 mb-2 mb-lg-0 sec-font fw-bold gy-3">
-                            <li class="nav-item">
-                                <a href="/" class='navbar_links' {% if activeNav=='Home' %} style='color: #c74221;' {%
-                                    endif %}>Home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class='navbar_links dropdown-toggle' id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false" {% if activeNav=='Events' %}
-                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Events</a>
-                                <ul class="dropdown-menu border-0" style="background-color: #ffd04f;"
-                                    aria-labelledby="dropdownMenuButton1">
-                                    <li>
-                                        <a class="dropdown-item navbar_links" href="/events/informals">Informals</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item navbar_links" href="/events/fine-arts">Fine
-                                            Arts</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item navbar_links" href="/events/performing-arts">Performing
-                                            Arts</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item navbar_links" href="/events/gaming">Gaming</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item navbar_links" href="/events/sports">Sports</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item navbar_links" href="/events/literary-arts">Literary
-                                            Arts</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item navbar_links" href="/events/technical-events">Technical
-                                            Events</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item navbar_links"
-                                            href="/events/technical-workshop">Technical
-                                            Workshops</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item navbar_links" href="/events/management">Management
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item navbar_links" href="/events/special-events">Special
-                                            Events
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class='navbar_links dropdown-toggle' id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false" {% if activeNav=='Merchandise' %}
-                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Merchandise</a>
-                                <ul class="dropdown-menu border-0" style="background-color: #ffd04f;"
-                                    aria-labelledby="dropdownMenuButton1">
-                                    <li>
-                                        <a class="dropdown-item navbar_links" href="/merchandise/Tshirts">Tshirts</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item navbar_links" href="/merchandise/Badges">Badges</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/hackathon" class='navbar_links' {% if activeNav=='Hackathon' %}
-                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Hackathon</a>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class='navbar_links dropdown-toggle' id="dropdownMenuButton2"
-                                    data-bs-toggle="dropdown" aria-expanded="false" {% if activeNav=='News' %}
-                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>News</a>
-                                <ul class="dropdown-menu border-0" style="background-color: #ffd04f;"
-                                    aria-labelledby="dropdownMenuButton2">
-                                    <li>
-                                        <a class="dropdown-item navbar_links"
-                                            href="https://pillaialegria.wordpress.com/" target="_blank"
-                                            rel="noopener noreferrer">Blog</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item navbar_links" href="/news/buzz">Buzz</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item navbar_links" href="/news/highlights">Highlights</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class='navbar_links dropdown-toggle' id="dropdownMenuButton2"
-                                    data-bs-toggle="dropdown" aria-expanded="false" {% if activeNav=='News' %}
-                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>More</a>
-                                <ul class="dropdown-menu border-0" style="background-color: #ffd04f;"
-                                    aria-labelledby="dropdownMenuButton2">
-                                    <li>
-                                        <a href="/about-us" class="dropdown-item navbar_links" {% if
-                                            activeNav=='About Us' %}
-                                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>About
-                                            Us</a>
-                                    </li>
-                                    <li>
-                                        <a href="/polls" class="dropdown-item navbar_links" {% if activeNav=='Polls' %}
-                                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
-                                            %}>Polls</a>
-                                    </li>
-                                    <li>
-                                        <a href="/announcements" class="dropdown-item navbar_links" {% if
-                                            activeNav=='Announcements' %}
-                                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
-                                            %}>Announcements</a>
-                                    </li>
-                                    <li>
-                                        <a href="/sponsors" class="dropdown-item navbar_links" {% if
-                                            activeNav=='Sponsors' %}
-                                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
-                                            %}>Sponsors</a>
-                                    </li>
-                                    <li>
-                                        <a href="/developers" class="dropdown-item navbar_links" {% if
-                                            activeNav=='Sponsors' %}
-                                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
-                                            %}>Developers</a>
-                                    </li>
-                                    <li>
-                                        <a href="/event-heads" class="dropdown-item navbar_links" {% if activeNav=='Event
-                                            Heads' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
-                                            %}>Event
-                                            Heads</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                        {% if signed_in==False %}
-                        <a href="/user-login"
-                            class="d-flex justify-content-center align-items-center rounded-3 text-red bg-white fs-7 px-5 py-1 me-2 main-font">
-                            Sign In
-                        </a>
-                        {% endif %}
-                        {% if signed_in %}
-                        <a href="/user/cart" class="d-flex align-items-center text-red p-2 mx-1">
-                            <i class="fas fa-shopping-bag fs-5"></i>
-                        </a>
-                        {% endif %}
-                    </div>
-                </div>
-            </nav> -->
             <!-- main logo -->
             <img class="parallax_images bg" src="/static/images/homepage/bg.png" alt="parallax image">
             <img class="parallax_images mountains" src="/static/images/homepage/mountains.png"
@@ -539,7 +376,8 @@ Alegria 2022 | Homepage
                 </div>
                 <div class="row mx-3 my-3 d-flex justify-content-center">
                     <div class="col-lg-8 col-sm-12">
-                        <p class="fs-7 text-light sec-font lh-lg mb-2 hackathon-content">Hackathons are like
+                        <p class="fs-7 text-light sec-font lh-lg mb-2 hackathon-content" style="text-align: justify;">
+                            Hackathons are like
                             marathons, only a few
                             make
                             it to the end
@@ -553,11 +391,12 @@ Alegria 2022 | Homepage
                             hackathon by
                             collaborating with other teams, helping beginners and having fun in the competition.
                         </p>
-                        <div class="d-flex flex-column align-items-center text-light sec-font hackathon-content mt-3">
-                            <p class="fs-7 mb-1">Criteria : Semi-open </p>
-                            <p class="fs-7 mb-1">Fees : 200(Per Team) </p>
-                            <p class="fs-7 mb-1">Participants : 2-4 </p>
-                            <p class="fs-7 mb-1">Mode : Online </p>
+                        <div class="d-flex flex-column align-items-center text-light sec-font hackathon-content mt-4"
+                            style="text-align: justify;">
+                            <p class="fs-7 mb-1" style="text-align: justify;">No Of Participants : 2-4 </p>
+                            <p class="fs-7 mb-1" style="text-align: justify;">Criteria : Semi-open </p>
+                            <p class="fs-7 mb-1" style="text-align: justify;">Fees : 200(Per Team) </p>
+                            <p class="fs-7 mb-1" style="text-align: justify;">Event Mode : Online </p>
                             <div class="mt-4">
                                 <a href="/hackathon" style="background-color: #bd2828;"
                                     class="px-3 py-1 sec-font text-light rounded-3 fs-6">
@@ -611,41 +450,51 @@ Alegria 2022 | Homepage
     <section class="main-bg homepage_section main-bg position-relative overflow-hidden pb-4" id="gallery">
         <div class="row py-3 px-2 min-vh-100 d-flex justofy-content-center align-items-center">
             <div class="row text-center">
-                <h2 class="u-text-red fs-1">GALLERY</h2>
+                <h2 class="text-red main-font fs-1">GALLERY</h2>
             </div>
             <div class="row">
                 <div class="col d-flex flex-column align-items-center">
                     <div class="gallery">
                         <div class="img">
-                            <img class="gallery-image" src="https://alegria.co.in/wp-content/uploads/2020/01/51369870_228660374753455_1411332535976243582_n.jpg">
-                            </div>
-                        <div class="img">
-                            <img id="gallery-image1" src="https://alegria.co.in/wp-content/uploads/2020/01/52755297_328798327767661_3478363029250924476_n.jpg">
-                        
+                            <img class="gallery-image"
+                                src="https://alegria.co.in/wp-content/uploads/2020/01/51369870_228660374753455_1411332535976243582_n.jpg">
                         </div>
                         <div class="img">
-                            <img class="gallery-image" src="https://alegria.co.in/wp-content/uploads/2020/01/16906853_1214014375319442_3286638850415263744_n.jpg">
+                            <img id="gallery-image1"
+                                src="https://alegria.co.in/wp-content/uploads/2020/01/52755297_328798327767661_3478363029250924476_n.jpg">
+
                         </div>
                         <div class="img">
-                            <img class="gallery-image" src="https://alegria.co.in/wp-content/uploads/2020/01/22708643_120917241938576_3320806380406833152_n.jpg">
+                            <img class="gallery-image"
+                                src="https://alegria.co.in/wp-content/uploads/2020/01/16906853_1214014375319442_3286638850415263744_n.jpg">
                         </div>
                         <div class="img">
-                            <img class="gallery-image" src="https://alegria.co.in/wp-content/uploads/2020/01/11165090_466491726835701_1457314546938452658_o.jpg">
+                            <img class="gallery-image"
+                                src="https://alegria.co.in/wp-content/uploads/2020/01/22708643_120917241938576_3320806380406833152_n.jpg">
                         </div>
                         <div class="img">
-                            <img class="gallery-image" src="https://alegria.co.in/wp-content/uploads/2020/02/201225_211189352365941_1832788236_o.jpg">
+                            <img class="gallery-image"
+                                src="https://alegria.co.in/wp-content/uploads/2020/01/11165090_466491726835701_1457314546938452658_o.jpg">
                         </div>
                         <div class="img">
-                            <img class="gallery-image" src="https://alegria.co.in/wp-content/uploads/2020/02/886933_166332770184933_1598087417_o.jpg">
+                            <img class="gallery-image"
+                                src="https://alegria.co.in/wp-content/uploads/2020/02/201225_211189352365941_1832788236_o.jpg">
                         </div>
                         <div class="img">
-                            <img class="gallery-image" src="https://alegria.co.in/wp-content/uploads/2020/01/54800736_124147688716617_7738250650258373737_n.jpg">
+                            <img class="gallery-image"
+                                src="https://alegria.co.in/wp-content/uploads/2020/02/886933_166332770184933_1598087417_o.jpg">
                         </div>
                         <div class="img">
-                            <img class="gallery-image" src="https://alegria.co.in/wp-content/uploads/2020/01/27579253_246877782519960_3378229028002463744_n.jpg">
+                            <img class="gallery-image"
+                                src="https://alegria.co.in/wp-content/uploads/2020/01/54800736_124147688716617_7738250650258373737_n.jpg">
                         </div>
                         <div class="img">
-                            <img src="https://alegria.co.in/wp-content/uploads/2020/01/27581525_1964397220480815_5794201960827584512_n.jpg" alt="" class="gallery-image">
+                            <img class="gallery-image"
+                                src="https://alegria.co.in/wp-content/uploads/2020/01/27579253_246877782519960_3378229028002463744_n.jpg">
+                        </div>
+                        <div class="img">
+                            <img src="https://alegria.co.in/wp-content/uploads/2020/01/27581525_1964397220480815_5794201960827584512_n.jpg"
+                                alt="" class="gallery-image">
                         </div>
                     </div>
                 </div>

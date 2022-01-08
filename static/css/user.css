@@ -591,7 +591,8 @@ button:hover {
     }
 
     .homepage-gap {
-        min-height: 75vh;
+        min-height: 60vh;
+        padding-bottom: 2rem;
     }
 
     .event-img {

@@ -48,10 +48,11 @@ def create_app():
                      "/events/category/<string:category_id>")
     # enable csrf
     csrf.init_app(app)
+
     if __name__ == "__main__":
-            app.run(debug=True)
-    # register flask mail
-    # mail.init_app(app)
+        app.run(debug=True)
 
     return app
+
+
 create_app()
