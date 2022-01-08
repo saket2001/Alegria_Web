@@ -140,47 +140,54 @@ def events(event_category):
 @admin_bp.route('/add-event', methods=["POST"])
 def addEvent():
     if request.method == "POST":
-        # try:
-        event_name = request.form.get('name')
-        event_id = request.form.get('id')
-        event_summary = request.form.get('description')
-        event_criteria = request.form.get('criteria')
-        event_category_id = request.form.get('categoryId')
-        event_category_name = request.form.get('categoryName')
-        event_mode = request.form.get('mode')
-        event_code = request.form.get('code')
-        event_cost = request.form.get('eventCost')
-        event_date = request.form.get('dateTime ')
-        event_duration = request.form.get('duration')
+        try:
 
-        event_contact1 = request.form.get('contact1')
-        event_contact2 = request.form.get('contact2')
-        event_contact3 = request.form.get('contact3')
-        event_contact4 = request.form.get('contact4')
-        event_rules = request.form.get('rules')
-        event_perks_1 = request.form.get('perks1')
-        event_perks_2 = request.form.get('perks2')
-        event_perks_3 = request.form.get('perks3')
-        icon_url = request.form.get('icon_url')
-        event_id = request.form.get('id')
-        entry = Eventdemo(event_name=event_name, id=event_id, event_code=event_code,
-                          event_summary=event_summary, event_criteria=event_criteria, event_category_id=event_category_id, event_category_name=event_category_name, event_cost=event_cost, event_contact1=event_contact1, event_contact2=event_contact2,
-                          event_contact3=event_contact3,
-                          event_contact4=event_contact4,
-                          event_is_expired=False)
+            event_id = request.form.get('id')
+            event_code = request.form.get('code')
+            event_name = request.form.get('name')
+            event_summary = request.form.get('description')
+            event_rules = request.form.get('rules')
+            event_category_name = request.form.get('categoryName')
+            event_category_id = request.form.get('categoryId')
+            pr_points = request.form.get('pr_points')
+            event_date = request.form.get('date')
+            event_duration = request.form.get('duration')
+            event_criteria = request.form.get('criteria')
+            event_mode = request.form.get('mode')
 
-        entry2 = Eventdemo_details(
-            event_date=event_date, event_rules=event_rules, event_perks_1=event_perks_1, event_perks_2=event_perks_2, event_perks_3=event_perks_3, icon_url=icon_url, event_duration=event_duration, event_id=event_id, event_mode=event_mode)
-        db.session.add(entry)
-        db.session.commit()
-        db.session.add(entry2)
-        db.session.commit()
+            # online_cost = request.form.get('onlineCost')
+            # offlineCost = request.form.get('offlineCost')
+            # supportsOnline = request.form.get('supportsOnline')
+            # supportsOffline = request.form.get('supportsOffline')
 
-        # except Exception as e:
-        # print(e)
-        # return redirect("/")
+            event_contact1 = request.form.get('contact1')
+            event_contact2 = request.form.get('contact2')
+            event_contact3 = request.form.get('contact3')
+            event_contact4 = request.form.get('contact4')
+            event_cost = request.form.get('eventCost')
 
-    return redirect('/admin/events')
+            event_perks_1 = request.form.get('perks1')
+            event_perks_2 = request.form.get('perks2')
+            event_perks_3 = request.form.get('perks3')
+            icon_url = request.form.get('icon_url')
+            event_id = request.form.get('id')
+            entry = Eventdemo(event_name=event_name, id=event_id, event_code=event_code,
+                              event_summary=event_summary, event_criteria=event_criteria, event_category_id=event_category_id, event_category_name=event_category_name, event_contact1=event_contact1, event_contact2=event_contact2,
+                              event_cost=event_cost, event_contact3=event_contact3, event_contact4=event_contact4, pr_points=pr_points)
+            # supports_online=supportsOnline, 	supports_offline=supportsOffline,
+            entry2 = Eventdemo_details(
+                event_date=event_date, event_rules=event_rules, event_perks_1=event_perks_1, event_perks_2=event_perks_2, event_perks_3=event_perks_3, icon_url=icon_url, event_duration=event_duration, event_id=event_id, event_mode=event_mode)
+            # event_duration=event_duration, event_mode=event_mode)
+            db.session.add(entry)
+            db.session.commit()
+            db.session.add(entry2)
+            db.session.commit()
+
+        except Exception as e:
+            print(e)
+            return redirect("/")
+
+    return redirect('/admin/')
 
 
 @admin_bp.route("/events/<category>/<event_id>/edit", methods=['GET', 'POST'])
@@ -224,26 +231,27 @@ def editEventDetails(category, event_id):
             event_details = []
 
         if request.method == "POST":
-            event.event_name = request.form.get('event_title')
-            event.event_code = request.form.get('event_id')
-            event.event_summary = request.form.get('event_description')
-            event.event_criteria = request.form.get('event_criteria')
-            event.event_category_id = request.form.get('event_category_id')
-            event.event_category_name = request.form.get('event_category')
-            event.supports_online = request.form.get('supports_online')
-            event.online_cost = request.form.get('event_online_cost')
-            event.supports_offline = request.form.get('supports_offline')
-            event.offline_cost = request.form.get('event_offline_cost')
-            event.event_contact1 = request.form.get('event_contact_1')
-            event.event_contact2 = request.form.get('event_contact_2')
-            event.event_date = request.form.get('event_date')
-            event.event_mode = request.form.get('event_type')
-            event.event_duration = request.form.get('event_duration')
-            event.icon_url = request.form.get('event_title')
-            event.event_rules = request.form.get('event_rules'),
-            event.event_perks_1 = request.form.get('event_perks_1'),
-            event.event_perks_2 = request.form.get('event_perks_2')
-            event.event_perks_3 = request.form.get('event_perks_3')
+
+            event.event_code = request.form.get('code')
+            event.event_name = request.form.get('name')
+            event.event_summary = request.form.get('description')
+            event.event_rules = request.form.get('rules')
+            event.event_category_name = request.form.get('categoryName')
+            event.event_category_id = request.form.get('categoryId')
+            event.pr_points = request.form.get('pr_points')
+            event.event_date = request.form.get('date')
+            event.event_duration = request.form.get('duration')
+            event.event_criteria = request.form.get('criteria')
+            event.event_mode = request.form.get('mode')
+            event.event_contact1 = request.form.get('contact1')
+            event.event_contact2 = request.form.get('contact2')
+            event.event_contact3 = request.form.get('contact3')
+            event.event_contact4 = request.form.get('contact4')
+            event.event_cost = request.form.get('eventCost')
+            event.event_perks_1 = request.form.get('perks1')
+            event.event_perks_2 = request.form.get('perks2')
+            event.event_perks_3 = request.form.get('perks3')
+            event.icon_url = request.form.get('icon_url')
             db.session.commit()
             return render_template('admin_editsuccessfull.html')
 
@@ -354,7 +362,7 @@ def addMerchandise():
             print(e)
             return redirect("/")
 
-    return redirect("/admin")
+    return redirect("/admin/merchandise/{}".format(category))
 
 
 @ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/edit", methods=["GET", "POST"])
