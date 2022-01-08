@@ -558,8 +558,92 @@ button:hover {
     overflow-y: scroll;
 }
 
+/* for tablets */
+@media screen and (max-width :900px) {
+
+    .navbar-main .navbar_links,
+    .navbar_links {
+        font-size: 1.6rem;
+    }
+
+    .navbar-collapse {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        margin: 2rem 0 !important;
+        padding-bottom: 1.5rem;
+    }
+
+    .navbar-collapse ul li {
+        margin: 10px 0;
+    }
+
+    .parallax-container .parallax_images {
+        width: 100%;
+        height: 100vh;
+    }
+
+    .parallax-container .parallax_images>.land {
+        height: 20vh !important;
+    }
+
+    .parallax-container .parallax_title {
+        width: 80%;
+    }
+
+    .about_us {
+        min-height: 100vh;
+        z-index: 1;
+    }
+
+    /* .homepage-gap {
+        min-height: 60vh;
+        padding-bottom: 2rem;
+    } */
+
+    .event-img {
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+    .testimonial-carousel {
+        width: 100%;
+    }
+
+    .testimonial-card {
+        width: auto;
+        height: 550px !important;
+    }
+
+    .event-card {
+        width: 300px;
+        height: 330px;
+    }
+
+    .responsive_images {
+        height: 40% !important;
+    }
+
+    .testimonial-card {
+        width: 90%;
+    }
+
+    .gallery {
+        grid-template-columns: auto;
+    }
+}
+
+
+/* for mobile screens */
 
 @media screen and (max-width :600px) {
+
+    .navbar-main .navbar_links,
+    .navbar_links {
+        font-size: 1.1rem;
+    }
+
     .navbar-collapse {
         min-height: 100vh;
         display: flex;

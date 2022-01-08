@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-lg-2 col-sm-3">
                     <a href={{"/events/{}".format(event_details["event_category_name"])}} type="button"
-                        class="go_back_btn py-1">
+                        class="go_back_btn py-1 text-dark">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"
                             class="me-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -51,12 +51,13 @@
                     <h2 class="text-red my-2 main-font">
                         {{event_details["event_cost"]}} Rs
                     </h2>
-                    <button
-                        class="w-100 d-flex align-items-center justify-content-center border-0 bg-red my-3 mb-2 fs-6 py-1 px-3 rounded-3"
-                        style="max-width: 200px;">
-                        <a href={{paymentLink}} target="_blank" rel="noopener noreferrer" class="text-light w-100">
+                    <button type="button"
+                        class="w-100 d-flex align-items-center justify-content-center border-0 bg-red my-3 mb-2 fs-6 py-1 px-3 rounded-3 text-light"
+                        style="max-width:12rem;" disabled>
+                        <!-- <a href={{paymentLink}} target="_blank" rel="noopener noreferrer" class="text-light w-100">
                             Buy Event
-                        </a>
+                        </a> -->
+                        Not Available
                     </button>
                     <span class="fs-8 text-black sec-font w-50">
                         ( You will be redirected to razorpay payment page, choose your event and pay the required
@@ -78,6 +79,16 @@
                     <p class="fs-7 mb-1 text-black fw-normal">
                         Contact 2: {{event_details["event_contact2"]}}
                     </p>
+                    {% if event_details["event_contact3"]%}
+                    <p class="fs-7 mb-1 text-black fw-normal">
+                        Contact 3: {{event_details["event_contact3"]}}
+                    </p>
+                    {% endif %}
+                    {% if event_details["event_contact4"]%}
+                    <p class="fs-7 mb-1 text-black fw-normal">
+                        Contact 4: {{event_details["event_contact4"]}}
+                    </p>
+                    {% endif %}
                 </div>
             </div>
             <div class="row my-3">
@@ -123,7 +134,7 @@
             <div class="row my-3 w-100 d-flex justify-content-center">
                 <div style="background-color: black;height:2px;margin:10px 0;"></div>
                 <h5 class="fs-5 mt-2 m-1 main-font text-black">Events From Similar Category</h5>
-                <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-1 g-4 my-1">
+                <div class="row row-cols-lg-4 row-cols-md-2 row-cols-sm-1 g-4 my-1">
                     {% for event in similar_events %}
                     {% if event['event_name'] != event_details["event_name"] %}
                     <div class="col d-flex flex-column align-items-center">
