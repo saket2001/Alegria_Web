@@ -129,7 +129,8 @@ Alegria 2022 | {{merchandise_data["name"]}}
 <div class="w-100 min-vh-100 overflow-hidden sec-font bg-teal bg-cover">
     <div class="row m-3">
         <div class="col-lg-2 col-sm-3">
-            <a href={{"/merchandise/{}".format(merchandise_data["category"])}} type="button" class="go_back_btn py-1">
+            <a href={{"/merchandise/{}".format(merchandise_data["category"])}} type="button"
+                class="go_back_btn text-dark py-1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="me-2"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -195,8 +196,8 @@ Alegria 2022 | {{merchandise_data["name"]}}
                     {% endif %}
                     <button
                         class="w-100 d-flex align-items-center justify-content-center border-0 bg-red text-teal my-3 fs-6 py-1 px-3 rounded-3"
-                        style="max-width: 200px;" type="submit">
-                        Add To Cart
+                        style="max-width: 12rem;" type="submit" disabled>
+                        Not Available
                     </button>
                     <p class="sec-font text-black fs-7 mb-1">
                         After Successful payment you need to collect this product from our campus because home delivery
