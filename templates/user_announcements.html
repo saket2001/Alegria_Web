@@ -1,0 +1,140 @@
+{% extends 'user_layout.html' %}
+
+
+{% block headContent %}
+{% endblock headContent %}
+
+{% block title %}
+Alegria 2022 | Announcements
+{% endblock %}
+
+{% block content %}
+<style>
+    .todays-events,.announcements{
+        display: block;
+        height: auto;
+        width: 100%;
+        border: double;
+        border-width: 10px;
+        position: relative;
+    }
+    .announcements{
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+    /*  */
+    .BL {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+}
+
+/* Top left text */
+.TL {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+/* Top right text */
+.TR {
+  position: absolute;
+  top: 8px;
+  right:8px;
+}
+
+/* Bottom right text */
+.BR {
+  position: absolute;
+  bottom: 8px;
+  right:8px;
+}
+
+.TOP{
+  position: absolute;
+  top: 8px;
+  left: 37%;
+  width: 26%;
+}
+.BOTTOM{
+  position: absolute;
+  bottom: 8px;
+  left: 37%;
+  width: 26%;
+}
+.eve-cat{
+  padding-left: 8%;
+}
+.eve-time{
+text-align: center;
+}
+.te{
+  border-right: solid 2px brown;
+}
+
+@media screen and (max-width:640px) {
+  .eve-cat{
+    text-align: center;
+    padding-left: 0;
+  }
+  .eve-time{
+    text-align: center;
+  }
+  .TOP,.BOTTOM{
+    width: 40%;
+    left:30%;
+  }
+  .te{
+    border-right: none;
+    border-bottom:solid 2px brown;;
+  }
+}
+    /*  */
+</style>
+<div class="bg-cover">
+    <br>
+    <h2 class="m-4 mt-0 text-brown" style="text-align: center;">Announcements</h2>
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-2 w-100">
+        <div class="col p-4 pt-2 te" >
+            <div class="todays-events">
+                <img class="TL" src="../static/images/cards/TL.png">
+                <img class="TOP" src="../static/images/cards/top.png">
+                <img class="TR" src="../static/images/cards/TR.png">
+                <h4 class="text-center" style="margin-top: 35px;">EVENTS HAPPENING TODAY</h4>
+                <div>
+                  {% for ele in day1 %}
+                  <div class="row row-cols-1 row-cols-sm-4 row-cols-md-4 mt-3 m-2 w-100 event-today" style="font-weight: bold;">
+                    <div class="col eve-cat"  >{{ele['category']}}</div>
+                    <div class="col-5" style="border-left: 1px solid brown;">{{ele['event']}}</div>
+                    <div class="col eve-time" style="border-left: 1px solid brown;">{{ele['time']}}</div>
+                  </div>
+                  <hr style="background-color:brown; border: 2px solid brown; width: 70%; margin-left: 15%;">
+                  {% endfor %}
+                  <br>
+                </div>
+                <img class="BL" src="../static/images/cards/BL.png">
+                <img class="BOTTOM" src="../static/images/cards/bottom.png">
+                <img class="BR" src="../static/images/cards/BR.png">
+            </div>
+            
+        </div>
+        <div class="col pt-2">
+          {% for ele2 in alerts_announcements %}
+          <div class="col p-4 pt-2" >
+            <div class="announcements text-center">
+                <img class="TL" src="../static/images/cards/TL.png">
+                <img class="TOP" src="../static/images/cards/top.png">
+                <img class="TR" src="../static/images/cards/TR.png">
+                <h5 class="text-center mt-4" style="font-weight: bold;">{{ele2['title']}}</h5>
+                <p style="font-size: small;">{{ele2['timestamp']}}</p>
+                <p class="mb-3" style="font-size: medium; text-align: justify;">{{ele2['description']}}</p>
+                <br>
+                <img class="BL" src="../static/images/cards/BL.png">
+                <img class="BOTTOM" src="../static/images/cards/bottom.png">
+                <img class="BR" src="../static/images/cards/BR.png">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+{% endblock %}
