@@ -3,6 +3,21 @@
 
 {% block headContent %}
 <style>
+  .aboutus-content {
+    height: auto;
+    width: 75%;
+    padding: 10px;
+    margin-bottom: 3vh;
+    background-color: rgb(248, 219, 180);
+    font-family: 'rye';
+    src: url('../font/Rye-Regular.ttf');
+    border-width: 10px;
+    border-style: double;
+    border-radius: 20px;
+    box-shadow: 0px 8px 10px 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
   #hexGrid {
     display: flex;
     flex-wrap: wrap;
@@ -12,12 +27,14 @@
     /* font-family: 'Raleway', sans-serif; */
     font-size: 15px;
     list-style-type: none;
+    margin-top: 2vh;
   }
 
   .hex {
     position: relative;
     visibility: hidden;
     outline: 1px solid transparent;
+    
     /* fix for jagged edges in FF on hover transition */
   }
 
@@ -115,64 +132,11 @@
 
   /*  */
   .ribbon {
-    font-size: 16px !important;
-    /* This ribbon is based on a 16px font side and a 24px vertical rhythm. I've used em's to position each element for scalability. If you want to use a different font size you may have to play with the position of the ribbon elements */
-
-    width: 50%;
-    height: 18vh;
-    position: relative;
-    background: #b45a15da;
-    color: #fff;
-    text-align: center;
-    font-family: 'rye';
-    src: url('../font/Rye-Regular.ttf');
-    padding: 1em 2em;
-    /* Adjust to suit */
-    margin: 2em auto 3em;
-    /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
+    width: 100%;
   }
-
-  .ribbon:before,
-  .ribbon:after {
-    content: "";
-    position: absolute;
-    display: block;
-    height: 18vh;
-    bottom: -1em;
-    border: 1.5em solid #5f3f20;
-    z-index: -1;
-  }
-
-  .ribbon:before {
-    left: -2em;
-    border-right-width: 1.5em;
-    border-left-color: transparent;
-  }
-
-  .ribbon:after {
-    right: -2em;
-    border-left-width: 1.5em;
-    border-right-color: transparent;
-  }
-
-  .ribbon .ribbon-content:before,
-  .ribbon .ribbon-content:after {
-    content: "";
-    position: absolute;
-    display: block;
-    border-style: solid;
-    border-color: #a36425 transparent transparent transparent;
-    bottom: -1em;
-  }
-
-  .ribbon .ribbon-content:before {
-    left: 0;
-    border-width: 1em 0 0 1em;
-  }
-
-  .ribbon .ribbon-content:after {
-    right: 0;
-    border-width: 1em 1em 0 0;
+  .ribbon img{
+    width: 500px;
+    height: 200px;
   }
 
   /*  */
@@ -208,26 +172,9 @@
     }
   }
 
-  @media (max-width: 1200px) and (min-width:901px) {
+  
 
-    /* <- 4-3  hexagons per row */
-    #hexGrid {
-      padding-bottom: 5.5%
-    }
-
-    .hex {
-      width: 25%;
-      /* = 100 / 4 */
-    }
-
-    .hex:nth-child(7n+5) {
-      /* first hexagon of even rows */
-      margin-left: 12.5%;
-      /* = width of .hex / 2  to indent even rows */
-    }
-  }
-
-  @media (max-width: 900px) and (min-width:601px) {
+  @media (max-width: 1200px) and (min-width:601px) {
 
     /* <- 3-2  hexagons per row */
     #hexGrid {
@@ -247,7 +194,10 @@
   }
 
   @media (max-width: 600px) {
-
+    .ribbon img{
+      width: 300px;
+      height: 125px;
+    }
     /* <- 2-1  hexagons per row */
     #hexGrid {
       padding-bottom: 11.2%
@@ -271,16 +221,7 @@
     }
   }
 
-  .aboutus-content {
-    height: auto;
-    width: 100%;
-    background-image: url("../static/images/letter.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    padding: 17vh 18%;
-    font-family: 'rye';
-    src: url('../font/Rye-Regular.ttf');
-  }
+  
 </style>
 {% endblock headContent %}
 
@@ -293,7 +234,7 @@ Alegria 2022 | About Us
 
 <div class="container-fluid overflow-hidden be-beige bg-cover">
   <div class="row px-3">
-    <div class="col text-center mx-4 p-4">
+    <div class="col text-center mx-2 p-4">
       <h1 class="display-6 text-red main-font">About Us</h1>
     </div>
     <!--  -->
@@ -303,7 +244,7 @@ Alegria 2022 | About Us
         Pillai
         Group Of Institutions. Alegria is one of the most phenomenal intercollegiate festivals of its kind. It is held
         in
-        February every year with a mob of more than 50,000 1to witness the flow of immense talent in the events. With
+        February every year with a mob of more than 50,000 to witness the flow of immense talent in the events. With
         fun
         and joy this event also escorts the presence of splendid talent and star celebrities. This festival continues to
         add
@@ -343,123 +284,117 @@ Alegria 2022 | About Us
       </p>
     </div>
     <!--  -->
-    <div class="ribbon">
-      <h2 class="fs-4">2019</h2>
-      <p class="fs-5">COSMOS</p>
+    <div class="ribbon" style="text-align: center;">
+      <img src="../static/images/aboutus-ribbons/2019.png" >
     </div>
+    
     <ul id="hexGrid">
       {% for ele in aboutus_2019 %}
       <li class="hex">
         <div class="hexIn">
-          <a class="hexLink" href="#">
+          <div class="hexLink">
             <img src='{{ele["img"]}}' alt="" />
             <h1>{{ele["title"]}}</h1>
             <p>{{ele['description']}}</p>
-          </a>
+          </div>
         </div>
       </li>
       {% endfor %}
     </ul>
-    <div class="ribbon">
-      <h2 class="fs-4">2018</h2>
-      <p class="fs-5">MUMBAI THE CITY OF DREAMS</p>
+    <div class="ribbon" style="text-align: center;">
+      <img src="../static/images/aboutus-ribbons/2018.png" >
     </div>
     <ul id="hexGrid">
       {% for ele in aboutus_2018 %}
       <li class="hex">
         <div class="hexIn">
-          <a class="hexLink" href="#">
+          <div class="hexLink">
             <img src='{{ele["img"]}}' alt="" />
             <h1>{{ele["title"]}}</h1>
             <p>{{ele['description']}}</p>
-          </a>
+          </div>
         </div>
       </li>
       {% endfor %}
     </ul>
-    <div class="ribbon">
-      <h2 class="fs-4">2017</h2>
-      <p class="fs-5">KINGDOM OF GAMES</p>
+    <div class="ribbon" style="text-align: center;">
+      <img src="../static/images/aboutus-ribbons/2017.png" >
     </div>
     <ul id="hexGrid">
       {% for ele in aboutus_2017 %}
       <li class="hex">
         <div class="hexIn">
-          <a class="hexLink" href="#">
+          <div class="hexLink">
             <img src='{{ele["img"]}}' alt="" />
             <h1>{{ele["title"]}}</h1>
             <p>{{ele['description']}}</p>
-          </a>
+          </div>
         </div>
       </li>
       {% endfor %}
     </ul>
     <!--  -->
-    <div class="ribbon">
-      <h2 class="fs-4">2016</h2>
-      <p class="fs-5">WANDERLUST</p>
+    <div class="ribbon" style="text-align: center;">
+      <img src="../static/images/aboutus-ribbons/2016.png" >
     </div>
     <ul id="hexGrid">
       {% for ele in aboutus_2016 %}
       <li class="hex">
         <div class="hexIn">
-          <a class="hexLink" href="#">
+          <div class="hexLink">
             <img src='{{ele["img"]}}' alt="" />
             <h1>{{ele["title"]}}</h1>
             <p>{{ele['description']}}</p>
-          </a>
+          </div>
         </div>
       </li>
       {% endfor %}
     </ul>
-    <div class="ribbon">
-      <h2 class="fs-4">2015</h2>
-      <p class="fs-5">100 YEARS OF HOLLYWOOD</p>
+    <div class="ribbon" style="text-align: center;">
+      <img src="../static/images/aboutus-ribbons/2015.png" >
     </div>
     <ul id="hexGrid">
       {% for ele in aboutus_2015 %}
       <li class="hex">
         <div class="hexIn">
-          <a class="hexLink" href="#">
+          <div class="hexLink">
             <img src='{{ele["img"]}}' alt="" />
             <h1>{{ele["title"]}}</h1>
             <p>{{ele['description']}}</p>
-          </a>
+          </div>
         </div>
       </li>
       {% endfor %}
     </ul>
     <!--  -->
-    <div class="ribbon">
-      <h2 class="fs-4">2014</h2>
-      <p class="fs-5">INDIE ISHTYLE</p>
+    <div class="ribbon" style="text-align: center;">
+      <img src="../static/images/aboutus-ribbons/2014.png" >
     </div>
     <ul id="hexGrid">
       {% for ele in aboutus_2014 %}
       <li class="hex">
         <div class="hexIn">
-          <a class="hexLink" href="#">
+          <div class="hexLink">
             <img src='{{ele["img"]}}' alt="" />
             <h1>{{ele["title"]}}</h1>
             <p>{{ele['description']}}</p>
-          </a>
+          </div>
         </div>
       </li>
       {% endfor %}
     </ul>
-    <div class="ribbon">
-      <h2 class="fs-4">2013</h2>
-      <p class="fs-5">OUT OF THE BOX</p>
+    <div class="ribbon" style="text-align: center;">
+      <img src="../static/images/aboutus-ribbons/2013.png" >
     </div>
-    <ul id="hexGrid">
+    <ul id="hexGrid" class="mb-4">
       {% for ele in aboutus_2013 %}
       <li class="hex">
         <div class="hexIn">
-          <a class="hexLink" href="#">
+          <div class="hexLink">
             <img src='{{ele["img"]}}' alt="" />
             <h1>{{ele["title"]}}</h1>
             <p>{{ele['description']}}</p>
-          </a>
+          </div>
         </div>
       </li>
       {% endfor %}
