@@ -1,4 +1,5 @@
 from flask import Blueprint, redirect, render_template, flash, url_for, session, request, current_app
+from functools import wraps
 # from flask_mail import Mail, Message
 # from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from flask_wtf.csrf import CSRFProtect
@@ -15,6 +16,20 @@ csrf = CSRFProtect()
 # create blueprint to group views
 app_mbp = Blueprint(
     'app', __name__, template_folder="/templates/", url_prefix="/")
+
+
+def user_login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        user = dict(session).get('profile', None)
+
+        # You would add a check here and usethe user id or something to fetch
+        # the other data for that user/check if they exist
+        if user:
+
+            return f(*args, **kwargs)
+        return render_template('401.html')
+    return decorated_function
 
 
 @app_mbp.route('/')

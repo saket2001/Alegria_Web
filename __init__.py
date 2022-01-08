@@ -116,6 +116,8 @@ def create_app():
                 session['user_name'] = user_info['family_name']
                 session['user_image'] = user_info['picture']
                 session['profile'] = user_info
+                session['username'] = 'admin'
+                session['power'] = 'admin_level'
 
                 return redirect('/admin/')
             else:
@@ -130,7 +132,7 @@ def create_app():
             # sub_id = sub_id
             name = name
             image_url = prof_pic
-            entry = UserInfo(email=email, sub_id=user_info.get('sub'), name=name,
+            entry = UserInfo(email=email, name=name,
                              image_url=image_url)
             db.session.add(entry)
             db.session.commit()
