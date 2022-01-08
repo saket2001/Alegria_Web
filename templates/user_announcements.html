@@ -117,7 +117,21 @@ text-align: center;
             </div>
             
         </div>
-        <div class="col pt-2">
+        <div class="col pt-2" >
+          <div class="col-lg-4 col-sm-6 m-4 mt-0 mb-2">
+            <li class="filter_btn px-2 py-1 rounded d-flex align-items-center fs-7 dropdown fw-bold sec-font">
+                <div class='dropdown-toggle fs-7 u-text-brown' id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Filter By Latest
+                </div>
+                <ul class="dropdown-menu" style="background-color: #F8E2B2;"
+                    aria-labelledby="dropdownMenuButton1">
+                    <li>
+                        <a class="dropdown-item fs-7" href="/announcements">Sort Ascending</a>
+                    </li>
+                </ul>
+            </li>
+        </div>
           {% for ele2 in alerts_announcements %}
           <div class="col p-4 pt-2" >
             <div class="announcements text-center">
