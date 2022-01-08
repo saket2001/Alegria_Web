@@ -86,57 +86,61 @@ def create_app():
 
     @app.route('/admin_authorize')
     def admin_authorize():
-        # create the google oauth client
-        google = oauth.create_client('google')
-        # Access token from google (needed to get user info)
-        token = google.authorize_access_token()
-        # userinfo contains stuff u specificed in the scrope
-        resp = google.get('userinfo')
-        user_info = resp.json()
-        user = oauth.google.userinfo()
-        print(user)
-        x = user_info.get('email')
-        prof_pic = user_info.get('picture')
-        name = user_info.get('name')
-        # sub_id = user_info.get('sub')
-        print(user_info.get('sub'))
-        valss = UserInfo.query.filter_by(email=x).first()
-        registered_emails = UserInfo.query.order_by(UserInfo.email).all()
+        try:
+            # create the google oauth client
+            google = oauth.create_client('google')
+            # Access token from google (needed to get user info)
+            token = google.authorize_access_token()
+            # userinfo contains stuff u specificed in the scrope
+            resp = google.get('userinfo')
+            user_info = resp.json()
+            user = oauth.google.userinfo()
+            print(user)
+            x = user_info.get('email')
+            prof_pic = user_info.get('picture')
+            name = user_info.get('name')
+            # sub_id = user_info.get('sub')
+            print(user_info.get('sub'))
+            valss = UserInfo.query.filter_by(email=x).first()
+            registered_emails = UserInfo.query.order_by(UserInfo.email).all()
 
-        email_list = []
-        for row in registered_emails:
-            email_list.append(
-                row.email)
-        print(email_list)
-        if x in email_list:
-            z = valss.email
-            y = valss.isadmin
+            email_list = []
+            for row in registered_emails:
+                email_list.append(
+                    row.email)
+            print(email_list)
+            if x in email_list:
+                z = valss.email
+                y = valss.isadmin
 
-            if y == 'Yes':
-                session['user_name'] = user_info['family_name']
-                session['user_image'] = user_info['picture']
-                session['profile'] = user_info
-                session['username'] = 'admin'
-                session['power'] = 'admin_level'
+                if y == 'Yes':
+                    session['user_name'] = user_info['family_name']
+                    session['user_image'] = user_info['picture']
+                    session['profile'] = user_info
+                    session['username'] = 'admin'
+                    session['power'] = 'admin_level'
 
-                return redirect('/admin/')
+                    return redirect('/admin/')
+                else:
+                    session['user_name'] = user_info['family_name']
+                    session['user_image'] = user_info['picture']
+                    session['profile'] = user_info
+
+                    return redirect('/')
+
             else:
-                session['user_name'] = user_info['family_name']
-                session['user_image'] = user_info['picture']
-                session['profile'] = user_info
-
+                email = x
+                # sub_id = sub_id
+                name = name
+                image_url = prof_pic
+                entry = UserInfo(email=email, name=name,
+                                 image_url=image_url)
+                db.session.add(entry)
+                db.session.commit()
                 return redirect('/')
-
-        else:
-            email = x
-            # sub_id = sub_id
-            name = name
-            image_url = prof_pic
-            entry = UserInfo(email=email, name=name,
-                             image_url=image_url)
-            db.session.add(entry)
-            db.session.commit()
-            return redirect('/')
+        except Exception as e:
+            print(e)
+            return render_template('401.html')
 
     @app.route('/admin-logout')
     def admin_logout():
