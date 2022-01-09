@@ -340,7 +340,7 @@ def AnnouncementsPage():
             },
 
         ]
-        return render_template('user_announcements.html', activeNav='Announcements',day1=day1,alerts_announcements=alerts_announcements)
+        return render_template('user_announcements.html', activeNav='Announcements',day1=day1,alerts_announcements=alerts_announcements,len=len)
     except Exception as e:
         print(e)
         return redirect("/")
