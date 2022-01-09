@@ -180,7 +180,7 @@ events_row3 = [{
 }]
 
 web_team_list = [
-    {"img": "../static/images/developer/Saket.jpg", "name": "Saket Chandorkar", "role": "Front-end Developer", "call": "+917506553715",
+    {"img": "../static/images/developer/Saket.jpg", "name": "Saket Chandorkar", "role": "Front-end Developer", "call": "+91 7506553715",
             "gmail": "saketchandorkar123@gmail.com", "github": "https://github.com/saket2001", "linkedin": "https://www.linkedin.com/in/saket-chandorkar-856783203/"},
     {"img": "../static/images/developer/Lina.jpg", "name": "Lina Pawar", "role": "Front-end Developer", "call": "+91 9146850710",
             "gmail": "lpawar2911@gmail.com", "github": "https://github.com/Lina-Pawar", "linkedin": "https://www.linkedin.com/in/lina-pawar-5289a0198/"},
@@ -192,7 +192,7 @@ web_team_list = [
      "gmail": "sanju1234.barhate@gmail.com", "github": "https://github.com/sanjana2417", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"},
     {"img": "../static/images/developer/Bhushan.jpg", "name": "Bhushan Khot", "role": "Back-end Developer", "call": "+91 8652618353",
             "gmail": "bhushan.khot22@gmail.com", "github": "https://github.com/Bhushankhot", "linkedin": "https://www.linkedin.com/in/bhushankhot08/"},
-    {"img": "../static/images/developer/blank1.png", "name": "Athul Tulasidasan", "role": "Back-end Developer", "call": "+91 788749405",
+    {"img": "../static/images/developer/Athul.jpeg", "name": "Athul Tulasidasan", "role": "Back-end Developer", "call": "+91 7887494095",
             "gmail": "athulrthulasidasan@gmail.com", "github": "https://github.com/Athul0491", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"},
     {"img": "../static/images/developer/Chandini.jpg", "name": "Chandini Chentamara", "role": "Back-end Developer", "call": "+91 8291601569 ",
             "gmail": "chandini.chent@gmail.com", "github": "https://github.com/chandinic10", "linkedin": "https://www.linkedin.com/in/chandini-chentamara-bb47ab1b8/"},
