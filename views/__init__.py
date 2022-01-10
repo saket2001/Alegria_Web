@@ -312,6 +312,39 @@ def DevelopersPage():
         print(e)
         return redirect("/")
 
+@app_mbp.route("/announcements")
+def AnnouncementsPage():
+    try:
+        day1=[
+            {"category":"Sports","event":"Box Cricket","time":"10:00 AM"},
+            {"category":"Sports","event":"Chess","time":"10:00 AM"},
+            {"category":"Fine Arts","event":"Sketching","time":"11:00 AM"},
+            {"category":"Fine Arts","event":"Canvas Painting","time":"11:00 AM"},
+            {"category":"Informals","event":"Face of Alegria","time":"12:00 PM"},
+        ]
+        alerts_announcements=[ 
+            {
+                "title":"Alert Alegrians ! Event Updates",
+                "timestamp":"12 th Jan 2022, 10.00 am",
+                "description":"Sport Event Box Circket is been cancelled due to uprising covid cases and won’t be played this year. All the registration fees for this event can be collected later."
+            },
+            {
+                "title":"Alert Alegrians ! Event Updates",
+                "timestamp":"12 th Jan 2022, 10.00 am",
+                "description":"Sport Event Box Circket is been cancelled due to uprising covid cases and won’t be played this year. All the registration fees for this event can be collected later."
+            },
+            {
+                "title":"Alert Alegrians ! Event Updates",
+                "timestamp":"12 th Jan 2022, 10.00 am",
+                "description":"Sport Event Box Circket is been cancelled due to uprising covid cases and won’t be played this year. All the registration fees for this event can be collected later."
+            },
+
+        ]
+        return render_template('user_announcements.html', activeNav='Announcements',day1=day1,alerts_announcements=alerts_announcements,len=len)
+    except Exception as e:
+        print(e)
+        return redirect("/")
+
 
 @app_mbp.route("/event-heads")
 def eventHeadPage():
