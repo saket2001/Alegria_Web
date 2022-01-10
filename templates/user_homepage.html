@@ -167,14 +167,20 @@ Alegria 2022 | Homepage
                 </a>
                 {% endif %}
                 {% if signed_in %}
-                <a href="/user/cart" class="d-flex align-items-center text-red p-2 mx-1">
+                <a href="/user/cart" class="d-flex align-items-center text-dark p-2 mx-1">
                     <i class="fas fa-shopping-bag fs-5"></i>
                 </a>
                 {% endif %}
             </div>
         </div>
     </nav>
-
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
     <div class="parallax_section">
         <!-- theme banner -->
         <section class="parallax-container">
@@ -496,7 +502,7 @@ Alegria 2022 | Homepage
                             <img class="gallery-image"
                                 src="https://alegria.co.in/wp-content/uploads/2020/01/40669850_230752934287684_2203215946495110325_n.jpg">
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
