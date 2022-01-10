@@ -1,7 +1,7 @@
 {% extends '/admin/admin_layout.html' %}
 
 {% block title %}
-All Polls
+Alegria 2022 | Admin Polls
 {% endblock %}
 
 
@@ -10,7 +10,8 @@ All Polls
 <div class="container">
     <div class="row d-flex align-items-center justify-content-end">
         <div class="col-md-auto my-1">
-            <a href="#" class="button outline_btn fs-7" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Add
+            <a href="#" class="button outline_btn text-dark fs-7" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">+ Add
                 Poll</a>
         </div>
     </div>
@@ -41,16 +42,32 @@ All Polls
                 <h5 class="modal-title" id="exampleModalLabel">Add New Poll</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="modal-body" action='' method="post">
+            <form class="modal-body" action='/admin/add-poll' method="post">
+                {{form.csrf_token}}
+                <p class="mb-0 fs-7 main-font">
+                    {{form.question.label}}
+                </p>
                 {{form.question(class="input_value",placeholder="Poll Question")}}
-                {{form.description(class="input_value",placeholder="Poll Description")}}
-                {{form.option1(class="input_value",placeholder="Poll option 1")}}
-                {{form.option2(class="input_value",placeholder="Poll option 2")}}
-                {{form.option3(class="input_value",placeholder="Poll option 3")}}
-                {{form.image1(class="input_value",placeholder="Poll image url 1")}}
-                {{form.image2(class="input_value",placeholder="Poll image url 2")}}
-                {{form.image3(class="input_value",placeholder="Poll image url 3")}}
-                {{form.dateTime(class="input_value")}}
+
+                <p class="mb-0 fs-7 main-font">
+                    Total No Of options poll will have
+                </p>
+                <div class="row d-flex align-items-center w-100 my-1">
+                    <div class="col-3 m-0 pe-0">
+                        <input type="number" id="optionsNumber" class="p-1 rounded-3"
+                            style="width: 90%;border: 1px solid lightgray;">
+                    </div>
+                    <div class="col-7 m-0 ps-0">
+                        <button type="button" class="button outline_btn text-dark fs-7 py-1" id="addNewPollOptionBtn">
+                            Add +
+                        </button>
+                    </div>
+                </div>
+
+                <!-- inputs will come from poll.js -->
+                <!-- Refer polls.js in static/js folder for input names -->
+                <div id="poll-form"></div>
+
                 <button type="submit" class="button w-100 my-2 bg-brown text-beige">Save Poll</button>
             </form>
         </div>

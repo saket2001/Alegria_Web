@@ -18,6 +18,7 @@ def admin_login_required(f):
         if admin:
             if admin2:
                 return f(*args, **kwargs)
+
         return render_template('401.html')
     return decorated_function
 
@@ -485,6 +486,34 @@ def polls():
     except Exception as e:
         print(e)
         return redirect("/")
+
+
+@admin_bp.route('/add-poll', methods=["post"])
+@admin_login_required
+def AddNewPoll():
+    try:
+        if request.method == "post":
+            question = request.form.get('question')
+            option1 = request.form.get('Option 1 Name')
+            image1 = request.form.get('Image url 1')
+
+            print(question)
+
+            # print(option1, image1)
+
+        # polls table data that will be generated on backend
+        # poll_id,date_published,status=Active,total_votes=0
+
+        # PollResponses table data that will be generated on backend
+        # poll_option_id,option_votes=0
+
+    except Exception as e:
+        print(e)
+        return redirect('/')
+
+    return redirect('/admin')
+
+############################
 
 
 @admin_bp.route('/announcements')

@@ -135,7 +135,7 @@ def create_app():
                 db.session.add(entry)
                 db.session.commit()
 
-                flash("You Logged in Successfully!!")
+                # flash("You Logged in Successfully!!")
 
                 return render_template('user_homepage.html', activeNav='Home', signed_in=True, row1=client_data.events_row1, row2=client_data.events_row2, row3=client_data.events_row3)
 
@@ -148,7 +148,7 @@ def create_app():
         for key in list(session.keys()):
             session.pop(key)
 
-        return redirect('/admin/aleg-admin-login')
+        return redirect('/user-login')
 
     # enable csrf
     csrf.init_app(app)
