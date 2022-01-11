@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 from authlib.integrations.flask_client import OAuth
 from models import UserInfo
 import os
-import basicData as client_data
 from flask_hashing import Hashing
 import helperFunc
 
@@ -18,8 +17,8 @@ def create_app():
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         SQLALCHEMY_POOL_RECYCLE=299,
         SQLALCHEMY_POOL_TIMEOUT=20,
-        # SQLALCHEMY_DATABASE_URI='mysql://AlegriaTheFest:2022themeisvintwood@AlegriaTheFest.mysql.pythonanywhere-services.com/AlegriaTheFest$alegria2022',
-        SQLALCHEMY_DATABASE_URI='mysql://root:root@localhost/alegria_web',
+        SQLALCHEMY_DATABASE_URI='mysql://AlegriaTheFest:2022themeisvintwood@AlegriaTheFest.mysql.pythonanywhere-services.com/AlegriaTheFest$alegria2022',
+        # SQLALCHEMY_DATABASE_URI='mysql://root:root@localhost/alegria_web',
         MAIL_SERVER='smtp.gmail.com',
         MAIL_PORT=465,
         MAIL_USE_SSL=True,
@@ -160,7 +159,6 @@ def create_app():
 
     @app.route('/session-logout')
     def admin_logout():
-        flash("You Logged Out Successfully")
         for key in list(session.keys()):
             session.pop(key)
 
@@ -168,10 +166,5 @@ def create_app():
 
     # enable csrf
     csrf.init_app(app)
-    if __name__ == "__main__":
-        app.run(debug=True)
 
     return app
-
-
-create_app()
