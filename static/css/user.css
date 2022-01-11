@@ -76,13 +76,20 @@ body {
     color: var(--u_black);
 }
 
-
 .event-bg-brown {
     background-color: #472F19;
 }
 
 .border-brown {
     border: 1px solid var(--u_brown);
+}
+
+.border-red {
+    border: 2px solid var(--u_red);
+}
+
+.border-beige {
+    border: 1px solid var(--u_beige);
 }
 
 .dashed-dark-btn,
@@ -129,6 +136,19 @@ body {
 
 .animation-float {
     animation: float 4s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite alternate;
+}
+
+/* fix for a color change on hover */
+a.text-red:hover {
+    color: var(--u_red);
+}
+
+a.text-beige:hover {
+    color: var(--u_beige);
+}
+
+a.text-black:hover {
+    color: var(--u_black);
 }
 
 /* nav bar */

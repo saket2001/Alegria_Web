@@ -6,6 +6,8 @@ from authlib.integrations.flask_client import OAuth
 from models import UserInfo
 import os
 import basicData as client_data
+from flask_hashing import Hashing
+import helperFunc
 
 
 def create_app():
@@ -32,6 +34,7 @@ def create_app():
 
     from models import db
     db.init_app(app)
+    hashing = Hashing(app)
 
     # register views
 
@@ -121,8 +124,14 @@ def create_app():
                     session['user_name'] = user_info['family_name']
                     session['user_image'] = user_info['picture']
                     session['profile'] = user_info
+                    # hasing user email as user id for session
+                    session['user_id'] = helperFunc.hashValue(
+                        user_info['email'])
 
-                    return render_template('user_homepage.html', activeNav='Home', signed_in=True, row1=client_data.events_row1, row2=client_data.events_row2, row3=client_data.events_row3)
+                    print("Hashed user id ="+session.get('user_id'))
+
+                    # return render_template('user_homepage.html', activeNav='Home', signed_in=True, row1=client_data.events_row1, row2=client_data.events_row2, row3=client_data.events_row3)
+                    return redirect('/')
 
             else:
                 # user entry
@@ -143,7 +152,7 @@ def create_app():
             print(e)
             return render_template('401.html')
 
-    @app.route('/admin-logout')
+    @app.route('/session-logout')
     def admin_logout():
         for key in list(session.keys()):
             session.pop(key)

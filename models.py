@@ -72,7 +72,7 @@ class Eventdemo_details(db.Model):
     event_perks_3 = db.Column(db.String(25), nullable=True)
 
     def __repr__(self) -> str:
-        return f"EventDetails('{self.event_date}','{self.event_mode}','{self.event_duration}','{self.icon_url}','{self.event_details_file_name}','{self.event_rules}','{self.event_perks_1}','{self.event_perks_2}','{self.event_perks_3}')"
+        return f"EventDetails('{self.event_date}','{self.event_mode}','{self.event_duration}','{self.icon_url}','{self.event_rules}','{self.event_perks_1}','{self.event_perks_2}','{self.event_perks_3}')"
 
 
 class RegisterEvent(db.Model):
