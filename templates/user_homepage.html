@@ -160,20 +160,60 @@ Alegria 2022 | Homepage
                         </ul>
                     </li>
                 </ul>
+
                 {% if signed_in==False %}
                 <a href="/user-login"
-                    class="d-flex justify-content-center align-items-center rounded-3 text-red bg-white fs-7 px-5 py-1 me-2 main-font">
-                    Sign In
+                    class="d-flex justify-content-center align-items-center  rounded-3 text-red bg-white fs-7 px-5 py-1 me-2 main-font">
+                    <p class="my-0 me-2">
+                        Sign In
+                    </p>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" class="text-beige ms-3" width="24px" height="24px">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                    </svg>
                 </a>
                 {% endif %}
-                {% if signed_in %}
-                <a href="/user/cart" class="d-flex align-items-center text-red p-2 mx-1">
-                    <i class="fas fa-shopping-bag fs-5"></i>
+                {% if signed_in==True %}
+                <a href="/user/cart" class="d-flex align-items-center text-black p-2 mx-1">
+                    <i class="fas fa-shopping-bag text-black fs-5"></i>
+                </a>
+                {% endif %}
+                {% if signed_in==True %}
+                <a href="/session-logout"
+                    class="d-flex justify-content-center align-items-center rounded-3 text-red border-red fs-7 px-3 py-1 me-2 main-font">
+                    <p class="my-0 me-2">
+                        Logout
+                    </p>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="text-red" width="24px" height="24px" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
                 </a>
                 {% endif %}
             </div>
         </div>
     </nav>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show d-flex align-items-center position-absolute main-font main-bg"
+        role="alert" style="z-index: 10;top: 1.3rem;left:2%;right:2%;width: 95%;">
+        <svg xmlns="http://www.w3.org/2000/svg" class="text-red me-2" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" width="30px" height="30px">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        <div>
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 
     <div class="parallax_section">
         <!-- theme banner -->
@@ -489,13 +529,14 @@ Alegria 2022 | Homepage
                                 src="https://alegria.co.in/wp-content/uploads/2020/01/54800736_124147688716617_7738250650258373737_n.jpg">
                         </div>
                         <div class="img">
-                            <img class="gallery-image"
-                                src="https://alegria.co.in/wp-content/uploads/2020/01/27579253_246877782519960_3378229028002463744_n.jpg">
-                        </div>
-                        <div class="img">
                             <img src="https://alegria.co.in/wp-content/uploads/2020/01/27581525_1964397220480815_5794201960827584512_n.jpg"
                                 alt="" class="gallery-image">
                         </div>
+                        <div class="img">
+                            <img class="gallery-image"
+                                src="https://alegria.co.in/wp-content/uploads/2020/01/40669850_230752934287684_2203215946495110325_n.jpg">
+                        </div>
+
                     </div>
                 </div>
             </div>

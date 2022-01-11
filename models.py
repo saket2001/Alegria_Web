@@ -1,10 +1,12 @@
 from flask_sqlalchemy import SQLAlchemy
-#from flask_login import UserMixin
 from datetime import datetime
 
 
 # initialize database
 db = SQLAlchemy()
+
+
+# user model should come here
 
 
 # user model should come here
@@ -40,19 +42,19 @@ class Eventdemo(db.Model):
 
 class UserInfo(db.Model):
     __tablename__ = 'userinfo'
-    id = db.Column(db.BigInteger, primary_key=True)
-    email = db.Column(db.String(25), unique=True, nullable=False)
-    name = db.Column(db.String(100), unique=True, nullable=False)
-    image_url = db.Column(db.String(100), unique=True, nullable=False)
-    phone_number = db.Column(db.BigInteger, unique=True, nullable=False)
-    college_name = db.Column(db.String(100), unique=True, nullable=False)
-    isAdmin = db.Column(db.Boolean, default=False)
-    registeruser_id = db.relationship(
-        'RegisterEvent', backref='RegisterUser', lazy=True)
-    cart_user_id = db.relationship('Cart', backref='CartUser', lazy=True)
+    id = db.Column(db.String(300), primary_key=True)
+    email = db.Column(db.String(60), unique=True, nullable=False)
+    name = db.Column(db.String(100))
+    image_url = db.Column(db.String(100), nullable=True)
+    phone_number = db.Column(db.String(10), nullable=True)
+    college_name = db.Column(db.String(100), nullable=True)
+    isAdmin = db.Column(db.String(10), default=False)
+    # registeruser_id = db.relationship(
+    #     'RegisterEvent', backref='RegisterUser', lazy=True)
+    # cart_user_id = db.relationship('Cart', backref='CartUser', lazy=True)
 
-    def __repr__(self, email, name, image_url, phone_number, college_name, isAdmin):
-        return f"UserInfo('{self.email}'-'{self.name}'-'{self.image_url}'-'{self.phone_number}'-'{self.college_name}'-'{self.isAdmin}')"
+    def __repr__(self, email, name, image_url, isAdmin):
+        return f"UserInfo('{self.email}'-'{self.name}'-'{self.image_url}'-'{self.phone_number}'-'{self.college_name}'-'{self.isadmin}')"
 
 
 class Eventdemo_details(db.Model):
@@ -69,7 +71,7 @@ class Eventdemo_details(db.Model):
     event_perks_3 = db.Column(db.String(25), nullable=True)
 
     def __repr__(self) -> str:
-        return f"EventDetails('{self.event_date}','{self.event_mode}','{self.event_duration}','{self.icon_url}','{self.event_details_file_name}','{self.event_rules}','{self.event_perks_1}','{self.event_perks_2}','{self.event_perks_3}')"
+        return f"EventDetails('{self.event_date}','{self.event_mode}','{self.event_duration}','{self.icon_url}','{self.event_rules}','{self.event_perks_1}','{self.event_perks_2}','{self.event_perks_3}')"
 
 
 class RegisterEvent(db.Model):

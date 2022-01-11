@@ -8,14 +8,17 @@ from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll
 from forms import AddEventForm, AddPollForm, AddMerchandiseForm
 
 
-def login_required(f):
+def admin_login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        user = dict(session).get('profile', None)
+        admin = dict(session).get('user_name', None)
+        admin2 = dict(session).get('power', None)
         # You would add a check here and usethe user id or something to fetch
         # the other data for that user/check if they exist
-        if user:
-            return f(*args, **kwargs)
+        if admin:
+            if admin2:
+                return f(*args, **kwargs)
+
         return render_template('401.html')
     return decorated_function
 
@@ -79,7 +82,7 @@ def adminLogin():
 
 
 @admin_bp.route('/')
-# @login_required
+@admin_login_required
 def home():
     try:
         eventsList = [{'title': 'Total Events', 'total': len(Eventdemo.query.all())},
@@ -88,7 +91,7 @@ def home():
                       {'title': 'Total Users', 'total': len(
                           UserInfo.query.all())}
                       ]
-        return render_template('/admin/admin_dashboard.html', greeting=calcGreeting(), now_beautiful=getDateTime(), username='', image=session.get('user_image'), eventsList=eventsList, activeNav='dashboard')
+        return render_template('/admin/admin_dashboard.html', greeting=calcGreeting(), now_beautiful=getDateTime(), admin_username=session.get('user_name'), admin_image=session.get('user_image'), eventsList=eventsList, activeNav='dashboard')
     except Exception as e:
         print(e)
         return redirect("/")
@@ -97,7 +100,7 @@ def home():
 
 
 @admin_bp.route('/events/<event_category>', methods=['GET', 'POST'])
-# @login_required
+@admin_login_required
 def events(event_category):
     # form
     try:
@@ -138,53 +141,61 @@ def events(event_category):
 
 
 @admin_bp.route('/add-event', methods=["POST"])
+@admin_login_required
 def addEvent():
     if request.method == "POST":
-        # try:
-        event_name = request.form.get('name')
-        event_id = request.form.get('id')
-        event_summary = request.form.get('description')
-        event_criteria = request.form.get('criteria')
-        event_category_id = request.form.get('categoryId')
-        event_category_name = request.form.get('categoryName')
-        event_mode = request.form.get('mode')
-        event_code = request.form.get('code')
-        event_cost = request.form.get('eventCost')
-        event_date = request.form.get('dateTime ')
-        event_duration = request.form.get('duration')
+        try:
 
-        event_contact1 = request.form.get('contact1')
-        event_contact2 = request.form.get('contact2')
-        event_contact3 = request.form.get('contact3')
-        event_contact4 = request.form.get('contact4')
-        event_rules = request.form.get('rules')
-        event_perks_1 = request.form.get('perks1')
-        event_perks_2 = request.form.get('perks2')
-        event_perks_3 = request.form.get('perks3')
-        icon_url = request.form.get('icon_url')
-        event_id = request.form.get('id')
-        entry = Eventdemo(event_name=event_name, id=event_id, event_code=event_code,
-                          event_summary=event_summary, event_criteria=event_criteria, event_category_id=event_category_id, event_category_name=event_category_name, event_cost=event_cost, event_contact1=event_contact1, event_contact2=event_contact2,
-                          event_contact3=event_contact3,
-                          event_contact4=event_contact4,
-                          event_is_expired=False)
+            event_id = request.form.get('id')
+            event_code = request.form.get('code')
+            event_name = request.form.get('name')
+            event_summary = request.form.get('description')
+            event_rules = request.form.get('rules')
+            event_category_name = request.form.get('categoryName')
+            event_category_id = request.form.get('categoryId')
+            pr_points = request.form.get('pr_points')
+            event_date = request.form.get('date')
+            event_duration = request.form.get('duration')
+            event_criteria = request.form.get('criteria')
+            event_mode = request.form.get('mode')
 
-        entry2 = Eventdemo_details(
-            event_date=event_date, event_rules=event_rules, event_perks_1=event_perks_1, event_perks_2=event_perks_2, event_perks_3=event_perks_3, icon_url=icon_url, event_duration=event_duration, event_id=event_id, event_mode=event_mode)
-        db.session.add(entry)
-        db.session.commit()
-        db.session.add(entry2)
-        db.session.commit()
+            # online_cost = request.form.get('onlineCost')
+            # offlineCost = request.form.get('offlineCost')
+            # supportsOnline = request.form.get('supportsOnline')
+            # supportsOffline = request.form.get('supportsOffline')
 
-        # except Exception as e:
-        # print(e)
-        # return redirect("/")
+            event_contact1 = request.form.get('contact1')
+            event_contact2 = request.form.get('contact2')
+            event_contact3 = request.form.get('contact3')
+            event_contact4 = request.form.get('contact4')
+            event_cost = request.form.get('eventCost')
 
-    return redirect('/admin/events')
+            event_perks_1 = request.form.get('perks1')
+            event_perks_2 = request.form.get('perks2')
+            event_perks_3 = request.form.get('perks3')
+            icon_url = request.form.get('icon_url')
+            event_id = request.form.get('id')
+            entry = Eventdemo(event_name=event_name, id=event_id, event_code=event_code,
+                              event_summary=event_summary, event_criteria=event_criteria, event_category_id=event_category_id, event_category_name=event_category_name, event_contact1=event_contact1, event_contact2=event_contact2,
+                              event_cost=event_cost, event_contact3=event_contact3, event_contact4=event_contact4, pr_points=pr_points)
+            # supports_online=supportsOnline, 	supports_offline=supportsOffline,
+            entry2 = Eventdemo_details(
+                event_date=event_date, event_rules=event_rules, event_perks_1=event_perks_1, event_perks_2=event_perks_2, event_perks_3=event_perks_3, icon_url=icon_url, event_duration=event_duration, event_id=event_id, event_mode=event_mode)
+            # event_duration=event_duration, event_mode=event_mode)
+            db.session.add(entry)
+            db.session.commit()
+            db.session.add(entry2)
+            db.session.commit()
+
+        except Exception as e:
+            print(e)
+            return redirect("/")
+
+    return redirect('/admin/')
 
 
 @admin_bp.route("/events/<category>/<event_id>/edit", methods=['GET', 'POST'])
-# @login_required
+@admin_login_required
 def editEventDetails(category, event_id):
     try:
 
@@ -224,26 +235,27 @@ def editEventDetails(category, event_id):
             event_details = []
 
         if request.method == "POST":
-            event.event_name = request.form.get('event_title')
-            event.event_code = request.form.get('event_id')
-            event.event_summary = request.form.get('event_description')
-            event.event_criteria = request.form.get('event_criteria')
-            event.event_category_id = request.form.get('event_category_id')
-            event.event_category_name = request.form.get('event_category')
-            event.supports_online = request.form.get('supports_online')
-            event.online_cost = request.form.get('event_online_cost')
-            event.supports_offline = request.form.get('supports_offline')
-            event.offline_cost = request.form.get('event_offline_cost')
-            event.event_contact1 = request.form.get('event_contact_1')
-            event.event_contact2 = request.form.get('event_contact_2')
-            event.event_date = request.form.get('event_date')
-            event.event_mode = request.form.get('event_type')
-            event.event_duration = request.form.get('event_duration')
-            event.icon_url = request.form.get('event_title')
-            event.event_rules = request.form.get('event_rules'),
-            event.event_perks_1 = request.form.get('event_perks_1'),
-            event.event_perks_2 = request.form.get('event_perks_2')
-            event.event_perks_3 = request.form.get('event_perks_3')
+
+            event.event_code = request.form.get('code')
+            event.event_name = request.form.get('name')
+            event.event_summary = request.form.get('description')
+            event.event_rules = request.form.get('rules')
+            event.event_category_name = request.form.get('categoryName')
+            event.event_category_id = request.form.get('categoryId')
+            event.pr_points = request.form.get('pr_points')
+            event.event_date = request.form.get('date')
+            event.event_duration = request.form.get('duration')
+            event.event_criteria = request.form.get('criteria')
+            event.event_mode = request.form.get('mode')
+            event.event_contact1 = request.form.get('contact1')
+            event.event_contact2 = request.form.get('contact2')
+            event.event_contact3 = request.form.get('contact3')
+            event.event_contact4 = request.form.get('contact4')
+            event.event_cost = request.form.get('eventCost')
+            event.event_perks_1 = request.form.get('perks1')
+            event.event_perks_2 = request.form.get('perks2')
+            event.event_perks_3 = request.form.get('perks3')
+            event.icon_url = request.form.get('icon_url')
             db.session.commit()
             return render_template('admin_editsuccessfull.html')
 
@@ -254,7 +266,7 @@ def editEventDetails(category, event_id):
 
 
 @ admin_bp.route("/events/<category>/<event_id>/delete", methods=['GET', 'POST'])
-# @login_required
+@admin_login_required
 def deleteevent(category, event_id):
     try:
         post = Eventdemo.query.filter_by(id=event_id).first()
@@ -270,7 +282,7 @@ def deleteevent(category, event_id):
 
 
 @ admin_bp.route("/events/event-registrations")
-# @login_required
+@admin_login_required
 def eventRegistrations():
     # get info from api in List of Dictionaries format as below
     try:
@@ -295,7 +307,7 @@ def eventRegistrations():
 
 
 @ admin_bp.route("/merchandise/<string:category>")
-# @login_required
+@admin_login_required
 def merchandise(category):
     try:
         # form
@@ -329,6 +341,7 @@ def exceptionn():
 
 
 @ admin_bp.route("/add-merchandise", methods=["post"])
+@admin_login_required
 def addMerchandise():
     if request.method == "post":
         try:
@@ -354,11 +367,11 @@ def addMerchandise():
             print(e)
             return redirect("/")
 
-    return redirect("/admin")
+    return redirect("/admin/merchandise/{}".format(category))
 
 
 @ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/edit", methods=["GET", "POST"])
-# @login_required
+@admin_login_required
 def editMerchandiseDetails(merchandise_category, merchandise_id):
     try:
 
@@ -414,7 +427,7 @@ def editMerchandiseDetails(merchandise_category, merchandise_id):
 
 
 @ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/delete", methods=["GET", "POST"])
-# @login_required
+@admin_login_required
 def deletemerchandise(merchandise_category, merchandise_id):
     try:
         merch = Merchandise.query.filter_by(id=merchandise_id).first()
@@ -429,12 +442,14 @@ def deletemerchandise(merchandise_category, merchandise_id):
 
 # poll routes
 @ admin_bp.route("/polls/<poll_id>/details")
-# @login_required
+@admin_login_required
 def poll_details(poll_id):
     try:
         pollsList = Poll.query.filter_by(poll_id=poll_id).first()
         pollDetails = PollResponses.query.filter_by(poll_id=poll_id).all()
+
         res = {"type": True, "polldetails": []}
+
         for ele in pollDetails:
             res["polldetails"].append({
                 "id": pollsList.poll_id,
@@ -446,6 +461,7 @@ def poll_details(poll_id):
                 "image_url": ele.option_image,
                 "option_votes": ele.option_votes
             })
+
         return render_template('/admin/admin_poll_details.html', activeNav='poll_details', polldetails=res["polldetails"])
     except Exception as e:
         print(e)
@@ -453,7 +469,7 @@ def poll_details(poll_id):
 
 
 @ admin_bp.route("/polls")
-# @login_required
+@admin_login_required
 def polls():
     try:
         form = AddPollForm()
@@ -473,6 +489,34 @@ def polls():
     except Exception as e:
         print(e)
         return redirect("/")
+
+
+@admin_bp.route('/add-poll', methods=["post"])
+@admin_login_required
+def AddNewPoll():
+    try:
+        if request.method == "post":
+            question = request.form.get('question')
+            option1 = request.form.get('Option 1 Name')
+            image1 = request.form.get('Image url 1')
+
+            print(question)
+
+            # print(option1, image1)
+
+        # polls table data that will be generated on backend
+        # poll_id,date_published,status=Active,total_votes=0
+
+        # PollResponses table data that will be generated on backend
+        # poll_option_id,option_votes=0
+
+    except Exception as e:
+        print(e)
+        return redirect('/')
+
+    return redirect('/admin')
+
+############################
 
 
 @admin_bp.route('/announcements')

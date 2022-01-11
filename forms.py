@@ -72,28 +72,17 @@ class AddMerchandiseForm(FlaskForm):
 class AddPollForm(FlaskForm):
     question = StringField("Poll Question", validators=[
         InputRequired(), Length(min=10, max=100)])
-    description = TextAreaField('Merchandise Description', validators=[
-        InputRequired(), Length(min=10)])
     status = StringField('Poll status', validators=[
         InputRequired(), AnyOf(values=['Active', 'Expired'])])
-    option1 = StringField('Poll option 1', validators=[
+    option = StringField('Poll option', validators=[
         InputRequired()])
-    option2 = StringField('Poll option 2', validators=[
+    image = StringField('Poll image', validators=[
         InputRequired()])
-    option3 = StringField('Poll option 3')
-    option1Count = IntegerField("Option 1 count", validators=[
-        InputRequired()])
-    option2Count = IntegerField("Option 2 count", validators=[
-        InputRequired()])
-    option3Count = IntegerField("Option 3 count", validators=[
-        InputRequired()])
-    totalVotes = IntegerField("Poll total count", validators=[
-        InputRequired()])
-    image1 = URLField('Poll image 1', validators=[
-        InputRequired()])
-    image2 = URLField('Poll image 2', validators=[
-        InputRequired()])
-    image3 = URLField('Poll image 3', validators=[
-        InputRequired()])
-    dateTime = DateTimeLocalField('Event Date Time', validators=[
-        InputRequired()])
+
+    # option2 = StringField('Poll option 2', validators=[
+    #     InputRequired()])
+    # option3 = StringField('Poll option 3')
+    # image2 = URLField('Poll image 2', validators=[
+    #     InputRequired()])
+    # image3 = URLField('Poll image 3', validators=[
+    #     InputRequired()])

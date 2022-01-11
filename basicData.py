@@ -115,72 +115,76 @@ aboutus_2013 = [
 ]
 
 
+# paymentLinks = {
+#     "gaming": "https://pages.razorpay.com/Gaming-alegria-22",
+#     "sports": "https://pages.razorpay.com/SPORTS-alegria-22",
+#     "informals": "https://pages.razorpay.com/Informals-alegria-22",
+#     "fine-arts": "https://pages.razorpay.com/fine-arts-alegria-22",
+#     "performing-arts": "https://pages.razorpay.com/Performing-Arts-alegria-22",
+#     "literary-arts": "https://pages.razorpay.com/Literary-Arts-alegria-22",
+#     "technical-events": "https://pages.razorpay.com/technical-events-alegria22",
+#     "management": "https://pages.razorpay.com/management-events-alegria22",
+#     "workshop": "https://pages.razorpay.com/Technical-Workshops-alegria22"
+# }
+
 paymentLinks = {
-    "gaming": "https://pages.razorpay.com/Gaming-alegria-22",
-    "sports": "https://pages.razorpay.com/SPORTS-alegria-22",
-    "informals": "https://pages.razorpay.com/Informals-alegria-22",
-    "fine-arts": "https://pages.razorpay.com/fine-arts-alegria-22",
-    "performing-arts": "https://pages.razorpay.com/Performing-Arts-alegria-22",
-    "literary-arts": "https://pages.razorpay.com/Literary-Arts-alegria-22",
     "technical-events": "https://pages.razorpay.com/technical-events-alegria22",
-    "management": "https://pages.razorpay.com/management-events-alegria22",
     "workshop": "https://pages.razorpay.com/Technical-Workshops-alegria22"
 }
-
 
 events_row1 = [{
     "title": "Technical Events",
     "content": "Here is your opportunity to showcase your technical skills and get a chance to win in our technical events ",
     "link": '/events/technical-events',
-    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Tech.png?token=ANBEQ2C6JRMVCRRGCYSMXTLB3PPEE'
+    "icon": 'https://drive.google.com/uc?export=view&id=1G_zcmX6w-blnRJYMtV8gmC7ZRRhVtLa3'
 }, {
     "title": "Technical Workshop",
     "content": "Come here and get a chance  to explore and learn new technical skills at a reasonable price in our technical workshops.",
     "link": '/events/technical-workshops',
-    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Technical_workshop.jpeg?token=ANBEQ2EMP7UMXDDI7BCERA3B3PPGI'
+    "icon": 'https://drive.google.com/uc?export=view&id=1EO_iqG45qZ-49OTeftICmAMuy4VjRBhN'
 }, {
     "title": "Management",
     "content": "The masterminds behind a successful company or event is the proper management, here is an opportunity awaiting for you in the form of management competitions",
     "link": '/events/management',
-    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/management.png?token=ANBEQ2BRH3WKSNGR5RCH62TB3PPHE'
+    "icon": 'https://drive.google.com/uc?export=view&id=1MB8QGQV1zp1ywEaq_6LnGRiQQ0msS2OG'
 }]
 
 events_row2 = [{
     "title": "Fine Arts",
     "content": "Creative strokes, dripping colours and creative mind is more than enough for the artist within you to express his talent,  so come and grab this opportunity to flaunt your art .",
     "link": '/events/fine-arts',
-    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Fine%20Arts.png?token=ANBEQ2ANRWDANXBG7D6HP7DB3PPJG'
+    "icon": 'https://drive.google.com/uc?export=view&id=1SmYW2YpLNEQgOqjXvBnW0pgUxAvBrmc-'
 }, {
     "title": "Performing Arts",
     "content": "Representing the true beauty of talent, we provide a way to display your amazing dancing, singing and acting skills in our intriguing events",
     "link": '/events/performing-arts',
-    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Performing%20Arts.png?token=ANBEQ2DQB3NP5LEDVZNHSV3B3PPLK'
+    "icon": 'https://drive.google.com/uc?export=view&id=18Pw9fIEWNwryZLijtTwGgzTqr64YzzLs'
 }, {
     "title": "Literary Arts",
     "content": "If you have the creativity to express feelings through words then we have a platform for you to come and participate.",
     "link": '/events/literary-arts',
-    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Literary%20Arts.png?token=ANBEQ2EQB5JVHRIXOAJ5GMTB3PPKK'
+    "icon": 'https://drive.google.com/uc?export=view&id=1IliaZijRor2EOWH3bcTgxJQYDgqjiOqE'
 }]
 
 events_row3 = [{
     "title": "Informals",
     "content": "Informals events are one's chance to change the definition of beauty through your immense inside talent by taking part in different informals events. ",
     "link": '/events/informals',
-    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Informals.png?token=ANBEQ2FDVO76BEAEB6K7LELB3PPMK'
+    "icon": 'https://drive.google.com/uc?export=view&id=1f2rT-86w8sjFW7ilE9NgPYsPxmJYmk81'
 }, {
     "title": "Gaming",
     "content": "If you are fond of crazy and adventure games then come and get a chance to showcase your talent and win.",
     "link": '/events/gaming',
-    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Gaming.png?token=ANBEQ2DPVV3PGRQX4UQDWRTB3PPOY'
+    "icon": 'https: // drive.google.com/uc?export = view & id = 1monOvKGe_J7rsvzvLfkv1N7Qo-zx-02R'
 }, {
     "title": "Sports",
     "content": "Sports is all about the spirit and sportsmanship of the player so if you posses the true spirit of sports then you stand a chance to win by taking part in our sports events.",
     "link": '/events/sports',
-    "icon": 'https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/icons/Category%20Icons/Sports.png?token=ANBEQ2DSYVZL5KI7QUZQ5F3B3PPNK'
+    "icon": 'https://drive.google.com/uc?export=view&id=1IRdtRDfNHHzOfWcjEGbRm3U8mrrmyhx_'
 }]
 
 web_team_list = [
-    {"img": "../static/images/developer/Saket.jpg", "name": "Saket Chandorkar", "role": "Front-end Developer", "call": "+917506553715",
+    {"img": "../static/images/developer/Saket.jpg", "name": "Saket Chandorkar", "role": "Front-end Developer", "call": "+91 7506553715",
             "gmail": "saketchandorkar123@gmail.com", "github": "https://github.com/saket2001", "linkedin": "https://www.linkedin.com/in/saket-chandorkar-856783203/"},
     {"img": "../static/images/developer/Lina.jpg", "name": "Lina Pawar", "role": "Front-end Developer", "call": "+91 9146850710",
             "gmail": "lpawar2911@gmail.com", "github": "https://github.com/Lina-Pawar", "linkedin": "https://www.linkedin.com/in/lina-pawar-5289a0198/"},
@@ -192,7 +196,7 @@ web_team_list = [
      "gmail": "sanju1234.barhate@gmail.com", "github": "https://github.com/sanjana2417", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"},
     {"img": "../static/images/developer/Bhushan.jpg", "name": "Bhushan Khot", "role": "Back-end Developer", "call": "+91 8652618353",
             "gmail": "bhushan.khot22@gmail.com", "github": "https://github.com/Bhushankhot", "linkedin": "https://www.linkedin.com/in/bhushankhot08/"},
-    {"img": "../static/images/developer/blank1.png", "name": "Athul Tulasidasan", "role": "Back-end Developer", "call": "+91 788749405",
+    {"img": "../static/images/developer/Athul.jpeg", "name": "Athul Tulasidasan", "role": "Back-end Developer", "call": "+91 7887494095",
             "gmail": "athulrthulasidasan@gmail.com", "github": "https://github.com/Athul0491", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"},
     {"img": "../static/images/developer/Chandini.jpg", "name": "Chandini Chentamara", "role": "Back-end Developer", "call": "+91 8291601569 ",
             "gmail": "chandini.chent@gmail.com", "github": "https://github.com/chandinic10", "linkedin": "https://www.linkedin.com/in/chandini-chentamara-bb47ab1b8/"},

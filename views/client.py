@@ -50,6 +50,7 @@ def cartPage():
     #     "size": "L",
     #     "img_url": "https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/tshirt.png?token=APU7JOLVT5ILVPBSFJJE6KDB232OC"
     # }]
+
     user_cart = []
 
     # cart details calculation
@@ -62,4 +63,5 @@ def cartPage():
 
     if len(user_cart) == 0:
         cart_msg = True
+
     return render_template('/client/user_cart.html', user_cart=user_cart, cart_details=cart_details, cart_msg=cart_msg)

@@ -1,0 +1,175 @@
+{% extends 'user_layout.html' %}
+
+
+{% block headContent %}
+{% endblock headContent %}
+
+{% block title %}
+Alegria 2022 | Announcements
+{% endblock %}
+
+{% block content %}
+<style>
+  .todays-events,
+  .announcements {
+    display: block;
+    height: auto;
+    width: 100%;
+    border: double;
+    border-width: 10px;
+    position: relative;
+  }
+
+  .announcements {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  /*  */
+  .BL {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+  }
+
+  /* Top left text */
+  .TL {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+  }
+
+  /* Top right text */
+  .TR {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+  }
+
+  /* Bottom right text */
+  .BR {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+  }
+
+  .TOP {
+    position: absolute;
+    top: 8px;
+    left: 37%;
+    width: 26%;
+  }
+
+  .BOTTOM {
+    position: absolute;
+    bottom: 8px;
+    left: 37%;
+    width: 26%;
+  }
+
+  .te {
+    border-right: solid 2px brown;
+  }
+
+  @media screen and (max-width:640px) {
+
+    .TOP,
+    .BOTTOM {
+      width: 40%;
+      left: 30%;
+    }
+
+    .te {
+      border-right: none;
+      border-bottom: solid 2px brown;
+      ;
+    }
+  }
+
+  /*  */
+</style>
+<div class="bg-cover">
+  <br>
+  <h2 class="m-4 mt-0 text-brown" style="text-align: center;">Announcements</h2>
+  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-2 w-100">
+    <div class="col p-4 pt-2 te">
+      <div class="todays-events">
+        <img class="TL" src="../static/images/cards/TL.png">
+        <img class="TOP" src="../static/images/cards/top.png">
+        <img class="TR" src="../static/images/cards/TR.png">
+        <div>
+          {% if len(day1)==0 %}
+          <h5 class="text-center" style="margin-top: 40px;">NO EVENTS TODAY</h5>
+          <br>
+          {% else %}
+          <div>
+            <h4 class="text-center sec-font fs-4 mt-5 mb-3">EVENTS HAPPENING TODAY</h4>
+            {% for ele in day1 %}
+            <div class="row row-cols-1 row-cols-sm-4 row-cols-md-4 m-2 px-4 py-1 d-flex align-items-center">
+              <h3 class="col-12 text-center text-red main-font p-0 m-0 mb-1 fs-5">
+                {{ele['event']}}
+              </h3>
+              <p class="col-12 text-center main-font text-black mb-1 fs-6">
+                {{ele['category']}}
+              </p>
+              <p class="col-12 text-center sec-font text-black eve-time mb-0 fs-6">
+                {{ele['time']}}
+              </p>
+            </div>
+            <hr style="background-color:brown; border: 2px solid brown; margin: 0 1rem;">
+            {% endfor %}
+            <br>
+          </div>
+          {% endif %}
+
+        </div>
+        <img class="BL" src="../static/images/cards/BL.png">
+        <img class="BOTTOM" src="../static/images/cards/bottom.png">
+        <img class="BR" src="../static/images/cards/BR.png">
+      </div>
+
+    </div>
+    <div class="col pt-2">
+      {% if len(alerts_announcements)==0 %}
+      <h5 class="text-center">No Announcements have been posted yet</h5>
+      {% else %}
+      <div class="col-lg-4 col-sm-6 m-4 mt-0 mb-2">
+        <li class="filter_btn px-2 py-1 rounded d-flex align-items-center fs-7 dropdown fw-bold sec-font">
+          <div class='dropdown-toggle fs-7 u-text-brown' id="dropdownMenuButton1" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Filter By Latest
+          </div>
+          <ul class="dropdown-menu" style="background-color: #F8E2B2;" aria-labelledby="dropdownMenuButton1">
+            <li>
+              <a class="dropdown-item fs-7" href="/announcements">Sort Ascending</a>
+            </li>
+          </ul>
+        </li>
+      </div>
+      {% for ele2 in alerts_announcements %}
+      <div class="col p-4 pt-2">
+        <div class="announcements text-center">
+          <img class="TL" src="../static/images/cards/TL.png">
+          <img class="TOP" src="../static/images/cards/top.png">
+          <img class="TR" src="../static/images/cards/TR.png">
+          <h5 class="text-center mt-4 fs-4 main-font text-red">
+            {{ele2['title']}}
+          </h5>
+          <p class="fs-6 sec-font text-black">
+            {{ele2['timestamp']}}
+          </p>
+          <p class="mb-3 fs-6 sec-font text-black" style="text-align: justify;">{{ele2['description']}}
+          </p>
+          <br>
+          <img class="BL" src="../static/images/cards/BL.png">
+          <img class="BOTTOM" src="../static/images/cards/bottom.png">
+          <img class="BR" src="../static/images/cards/BR.png">
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+
+  </div>
+  <br>
+  {% endblock %}
