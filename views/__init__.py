@@ -3,7 +3,7 @@ from functools import wraps
 # from flask_mail import Mail, Message
 # from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from flask_wtf.csrf import CSRFProtect
-from models import adminss, Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, db
+from models import Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, db
 import basicData as client_data
 
 # csrf
@@ -167,9 +167,11 @@ def EventDetails(category_name, event_id):
                 "event_mode": event_details.event_mode,
             })
 
-        print(res['event'])
+        paymentLink = ''
+        if client_data.paymentLinks.get(category_name.lower()) != None:
+            paymentLink = client_data.paymentLinks.get(category_name.lower())
 
-        return render_template('user_event_details.html', activeNav='Events', event_details=res['event'], similar_events=similar_events, paymentLink=client_data.paymentLinks[category_name.lower()], signed_in=signed_in)
+        return render_template('user_event_details.html', activeNav='Events', event_details=res['event'], similar_events=similar_events, paymentLink=paymentLink, signed_in=signed_in)
 
     except Exception as e:
         print(e)

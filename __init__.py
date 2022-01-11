@@ -117,36 +117,42 @@ def create_app():
                     session['profile'] = user_info
                     session['power'] = 'admin_level'
 
+                    flash("Admin Logged in Successfully!!")
                     return redirect('/admin/')
 
                 else:
+
                     # user session
                     session['user_name'] = user_info['family_name']
                     session['user_image'] = user_info['picture']
                     session['profile'] = user_info
+
                     # hasing user email as user id for session
                     session['user_id'] = helperFunc.hashValue(
                         user_info['email'])
 
-                    print("Hashed user id ="+session.get('user_id'))
+                    # print("Hashed user id ="+session.get('user_id'))
+                    flash("You Logged in Successfully!!")
 
-                    # return render_template('user_homepage.html', activeNav='Home', signed_in=True, row1=client_data.events_row1, row2=client_data.events_row2, row3=client_data.events_row3)
                     return redirect('/')
 
             else:
                 # user entry
+                user_id = helperFunc.hashValue(user_email)
                 email = user_email
-                # sub_id = sub_id
                 name = user_name
                 image_url = profile_pic
-                entry = UserInfo(email=email, name=name,
+                entry = UserInfo(id=user_id, email=email, name=name,
                                  image_url=image_url)
                 db.session.add(entry)
                 db.session.commit()
 
-                # flash("You Logged in Successfully!!")
+                # redirect to new page for phone no and college name form
 
-                return render_template('user_homepage.html', activeNav='Home', signed_in=True, row1=client_data.events_row1, row2=client_data.events_row2, row3=client_data.events_row3)
+                flash(
+                    "Your new account was created successfully and you are logged in now !!")
+
+                return redirect('/')
 
         except Exception as e:
             print(e)
@@ -154,6 +160,7 @@ def create_app():
 
     @app.route('/session-logout')
     def admin_logout():
+        flash("You Logged Out Successfully")
         for key in list(session.keys()):
             session.pop(key)
 

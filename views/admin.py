@@ -447,7 +447,9 @@ def poll_details(poll_id):
     try:
         pollsList = Poll.query.filter_by(poll_id=poll_id).first()
         pollDetails = PollResponses.query.filter_by(poll_id=poll_id).all()
+
         res = {"type": True, "polldetails": []}
+
         for ele in pollDetails:
             res["polldetails"].append({
                 "id": pollsList.poll_id,
@@ -459,6 +461,7 @@ def poll_details(poll_id):
                 "image_url": ele.option_image,
                 "option_votes": ele.option_votes
             })
+
         return render_template('/admin/admin_poll_details.html', activeNav='poll_details', polldetails=res["polldetails"])
     except Exception as e:
         print(e)

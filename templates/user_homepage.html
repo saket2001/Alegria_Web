@@ -195,13 +195,26 @@ Alegria 2022 | Homepage
             </div>
         </div>
     </nav>
-    <!-- {% with messages = get_flashed_messages() %}
+
+    {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for message in messages %}
-    {{ message }}
+    <div class="alert alert-success alert-dismissible fade show d-flex align-items-center position-absolute main-font main-bg"
+        role="alert" style="z-index: 10;top: 1.3rem;left:2%;right:2%;width: 95%;">
+        <svg xmlns="http://www.w3.org/2000/svg" class="text-red me-2" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" width="30px" height="30px">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        <div>
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
     {% endfor %}
     {% endif %}
-    {% endwith %} -->
+    {% endwith %}
+
     <div class="parallax_section">
         <!-- theme banner -->
         <section class="parallax-container">

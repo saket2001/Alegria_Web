@@ -42,12 +42,11 @@ class Eventdemo(db.Model):
 
 class UserInfo(db.Model):
     __tablename__ = 'userinfo'
-    id = db.Column(db.Integer, primary_key=True)
-    # sub_id = db.Column(db.String(25), unique=True, nullable=True)
-    email = db.Column(db.String(30), unique=True, nullable=False)
+    id = db.Column(db.String(300), primary_key=True)
+    email = db.Column(db.String(60), unique=True, nullable=False)
     name = db.Column(db.String(100))
     image_url = db.Column(db.String(100), nullable=True)
-    phone_number = db.Column(db.Integer, nullable=True)
+    phone_number = db.Column(db.String(10), nullable=True)
     college_name = db.Column(db.String(100), nullable=True)
     isAdmin = db.Column(db.String(10), default=False)
     # registeruser_id = db.relationship(
