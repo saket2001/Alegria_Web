@@ -51,6 +51,12 @@
                     <h2 class="text-red my-2 main-font">
                         {{event_details["event_cost"]}} Rs
                     </h2>
+                    {% if paymentLink==None %}
+                    <p class="text-black main-font mb-1 fs-6">
+                        Not Available At The Moment
+                    </p>
+                    {% endif %}
+                    {% if paymentLink!=None %}
                     <button type="button"
                         class="w-100 d-flex align-items-center justify-content-center border-0 bg-red my-3 mb-2 fs-6 py-1 px-3 rounded-3 text-light"
                         style="max-width:12rem;" disabled>
@@ -58,6 +64,7 @@
                             Buy Event
                         </a>
                     </button>
+                    {% endif %}
                     <span class="fs-8 text-black sec-font w-50">
                         ( You will be redirected to razorpay payment page, choose your event and pay the required
                         amount )
