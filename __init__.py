@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 from authlib.integrations.flask_client import OAuth
 from models import UserInfo
 import os
-import basicData as client_data
 from flask_hashing import Hashing
 import helperFunc
 

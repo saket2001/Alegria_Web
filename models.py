@@ -100,7 +100,7 @@ class Cart(db.Model):
 
 class Poll(db.Model):
     __tablename__ = 'polls'
-    poll_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    poll_id = db.Column(db.String(50), primary_key=True)
     question = db.Column(db.String(30), nullable=False)
     status = db.Column(db.Text(20), nullable=False)
     date_published = db.Column(db.Text(20), nullable=False)
@@ -112,8 +112,9 @@ class Poll(db.Model):
 
 class PollResponses(db.Model):
     __tablename__ = 'poll_options'
-    poll_option_id = db.Column(db.Integer, primary_key=True)
-    poll_id = db.Column(db.Integer, db.ForeignKey(
+    poll_option_id = db.Column(
+        db.Integer, autoincrement=True, primary_key=True)
+    poll_id = db.Column(db.String(50), db.ForeignKey(
         "polls.poll_id"), nullable=False)
     option_name = db.Column(db.String(50), nullable=False)
     option_image = db.Column(db.String(300), nullable=True)
