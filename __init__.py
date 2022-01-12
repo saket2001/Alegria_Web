@@ -59,8 +59,9 @@ def create_app():
     oauth = OAuth(app)
     google = oauth.register(
         name='google',
-        client_id=os.getenv('OAUTH_CLIENT_ID'),
-        client_secret=os.getenv('OAUTH_CLIENT_SECRET'),
+        # client_id=os.getenv('OAUTH_CLIENT_ID'),
+        client_id='391737203590-h2n6bbjhc2lkbpf5gkp0tpgbp6t35hgg.apps.googleusercontent.com',
+        client_secret='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',
         access_token_url='https://accounts.google.com/o/oauth2/token',
         access_token_params=None,
         authorize_url='https://accounts.google.com/o/oauth2/auth',
@@ -145,6 +146,15 @@ def create_app():
                                  image_url=image_url)
                 db.session.add(entry)
                 db.session.commit()
+
+                # user session
+                session['user_name'] = user_info['family_name']
+                session['user_image'] = user_info['picture']
+                session['profile'] = user_info
+
+                # hasing user email as user id for session
+                session['user_id'] = helperFunc.hashValue(
+                        user_info['email'])
 
                 # redirect to new page for phone no and college name form
 
