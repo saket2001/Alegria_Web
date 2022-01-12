@@ -1,11 +1,10 @@
-from flask import Blueprint, redirect, render_template, flash, url_for, session, request, current_app
+from flask import Blueprint, redirect, render_template, flash, url_for, session, request
 from functools import wraps
-# from flask_mail import Mail, Message
-# from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from flask_wtf.csrf import CSRFProtect
 import datetime
 from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses
-from forms import AddEventForm, AddPollForm, AddMerchandiseForm
+from forms import AddEventForm, AddMerchandiseForm, AddPollForm
+import uuid
 
 
 def admin_login_required(f):
@@ -435,6 +434,7 @@ def deletemerchandise(merchandise_category, merchandise_id):
         db.session.delete(merch)
         db.session.commit()
         return redirect('/admin/merchandise')
+
     except Exception as e:
         print(e)
         return redirect("/")
@@ -463,6 +463,7 @@ def poll_details(poll_id):
             })
 
         return render_template('/admin/admin_poll_details.html', activeNav='poll_details', polldetails=res["polldetails"])
+
     except Exception as e:
         print(e)
         return redirect("/")
@@ -473,6 +474,7 @@ def poll_details(poll_id):
 def polls():
     try:
         form = AddPollForm()
+
         pollsList = Poll.query.all()
         res = {
             "type": True,
@@ -485,7 +487,9 @@ def polls():
                 "status": item.status,
                 "total_votes": item.total_votes
             })
+
         return render_template('/admin/admin_polls.html', activeNav='polls', poll_list=res["polls_list"], form=form)
+
     except Exception as e:
         print(e)
         return redirect("/")
@@ -495,26 +499,38 @@ def polls():
 @admin_login_required
 def AddNewPoll():
     try:
-        if request.method == "post":
-            question = request.form.get('question')
-            option1 = request.form.get('Option 1 Name')
-            image1 = request.form.get('Image url 1')
+        poll_id = uuid.uuid1()
+        question = request.form.get('question')
+        date_published = datetime.datetime.now().strftime("%x")
+        # taking totalOptions attribute from form
+        totalOptions = request.form.get('optionsNumber')
 
-            print(question)
+        # adding to poll table
+        pollEntry = Poll(poll_id=poll_id, question=question, status="Active",
+                         date_published=date_published, total_votes=0)
 
-            # print(option1, image1)
+        db.session.add(pollEntry)
+        db.session.commit()
 
-        # polls table data that will be generated on backend
-        # poll_id,date_published,status=Active,total_votes=0
+        # looping totalOptions times to get all options input
+        for i in range(int(totalOptions)):
+            poll_id = poll_id
+            poll_option_id = int(i+1)
+            option_name = request.form.get('Option {} Name'.format(i+1))
+            option_image = request.form.get('Image url {}'.format(i+1))
 
-        # PollResponses table data that will be generated on backend
-        # poll_option_id,option_votes=0
+            pollOption = PollResponses(
+                poll_option_id=poll_option_id, poll_id=poll_id, option_name=option_name, option_image=option_image, option_votes=0)
+
+            db.session.add(pollOption)
+            db.session.commit()
 
     except Exception as e:
         print(e)
         return redirect('/')
 
-    return redirect('/admin')
+    return redirect('/admin/polls')
+
 
 ############################
 

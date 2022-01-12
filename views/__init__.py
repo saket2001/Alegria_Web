@@ -167,7 +167,7 @@ def EventDetails(category_name, event_id):
                 "event_mode": event_details.event_mode,
             })
 
-        paymentLink = ''
+        paymentLink = None
         if client_data.paymentLinks.get(category_name.lower()) != None:
             paymentLink = client_data.paymentLinks.get(category_name.lower())
 

@@ -1,7 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, IntegerField, DateTimeLocalField, URLField
-from wtforms.fields.datetime import DateField, TimeField
-from wtforms.fields.simple import BooleanField, FileField
+from wtforms import StringField, TextAreaField, IntegerField
 from wtforms.validators import InputRequired, Length, length, AnyOf, NumberRange
 
 
@@ -72,17 +70,3 @@ class AddMerchandiseForm(FlaskForm):
 class AddPollForm(FlaskForm):
     question = StringField("Poll Question", validators=[
         InputRequired(), Length(min=10, max=100)])
-    status = StringField('Poll status', validators=[
-        InputRequired(), AnyOf(values=['Active', 'Expired'])])
-    option = StringField('Poll option', validators=[
-        InputRequired()])
-    image = StringField('Poll image', validators=[
-        InputRequired()])
-
-    # option2 = StringField('Poll option 2', validators=[
-    #     InputRequired()])
-    # option3 = StringField('Poll option 3')
-    # image2 = URLField('Poll image 2', validators=[
-    #     InputRequired()])
-    # image3 = URLField('Poll image 3', validators=[
-    #     InputRequired()])

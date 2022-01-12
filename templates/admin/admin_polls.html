@@ -42,19 +42,19 @@ Alegria 2022 | Admin Polls
                 <h5 class="modal-title" id="exampleModalLabel">Add New Poll</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="modal-body" action='/admin/add-poll' method="post">
+            <form class="modal-body" id="pollForm" action='/admin/add-poll' method="post">
                 {{form.csrf_token}}
                 <p class="mb-0 fs-7 main-font">
-                    {{form.question.label}}
+                    Poll Question
                 </p>
-                {{form.question(class="input_value",placeholder="Poll Question")}}
+                <input type="text" class="input_value" placeholder="Poll Question" name="question">
 
                 <p class="mb-0 fs-7 main-font">
                     Total No Of options poll will have
                 </p>
                 <div class="row d-flex align-items-center w-100 my-1">
                     <div class="col-3 m-0 pe-0">
-                        <input type="number" id="optionsNumber" class="p-1 rounded-3"
+                        <input type="number" id="optionsNumber" name="optionsNumber" class="p-1 rounded-3"
                             style="width: 90%;border: 1px solid lightgray;">
                     </div>
                     <div class="col-7 m-0 ps-0">
@@ -65,7 +65,6 @@ Alegria 2022 | Admin Polls
                 </div>
 
                 <!-- inputs will come from poll.js -->
-                <!-- Refer polls.js in static/js folder for input names -->
                 <div id="poll-form"></div>
 
                 <button type="submit" class="button w-100 my-2 bg-brown text-beige">Save Poll</button>
