@@ -129,7 +129,7 @@ aboutus_2013 = [
 
 paymentLinks = {
     "technical-events": "https://pages.razorpay.com/technical-events-alegria22",
-    "workshop": "https://pages.razorpay.com/Technical-Workshops-alegria22"
+    "technical-workshop": "https://pages.razorpay.com/Technical-Workshops-alegria22"
 }
 
 events_row1 = [{
