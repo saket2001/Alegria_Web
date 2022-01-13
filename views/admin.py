@@ -550,7 +550,7 @@ def AddNewPoll():
         # looping totalOptions times to get all options input
         for i in range(int(totalOptions)):
             poll_id = poll_id
-            poll_option_id = int(i+1)
+            poll_option_id = uuid.uuid1()
             option_name = request.form.get('Option {} Name'.format(i+1))
             option_image = request.form.get('Image url {}'.format(i+1))
 
@@ -574,6 +574,7 @@ def deletepoll(poll_id):
         poll = Poll.query.filter_by(poll_id=poll_id).first()
         poll2 = PollResponses.query.filter_by(poll_id=poll_id).all()
 
+        print(poll2)
         db.session.delete(poll)
         db.session.commit()
 

@@ -104,7 +104,7 @@ class Poll(db.Model):
     poll_id = db.Column(db.String(50), primary_key=True)
     question = db.Column(db.String(30), nullable=False)
     status = db.Column(db.Text(20), nullable=False)
-    date_published = db.Column(db.DateTime, default=datetime.now())
+    date_published = db.Column(db.Text(20), nullable=False)
     total_votes = db.Column(db.Integer, nullable=False)
 
     def __repr__(self) -> str:
@@ -114,7 +114,7 @@ class Poll(db.Model):
 class PollResponses(db.Model):
     __tablename__ = 'poll_options'
     poll_option_id = db.Column(
-        db.Integer, autoincrement=True, primary_key=True)
+        db.String(60), primary_key=True)
     poll_id = db.Column(db.String(50), db.ForeignKey(
         "polls.poll_id"), nullable=False)
     option_name = db.Column(db.String(50), nullable=False)
