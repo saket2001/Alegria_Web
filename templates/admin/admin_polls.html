@@ -1,17 +1,10 @@
-{% extends '/admin/admin_layout.html' %}
-
-{% block title %}
-Alegria 2022 | Admin Polls
-{% endblock %}
-
-
-{% block content %}
+{% extends '/admin/admin_layout.html' %} {% block title %} Alegria 2022 | Admin Polls {% endblock %} {% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <br>
 <div class="container">
     <div class="row d-flex align-items-center justify-content-end">
         <div class="col-md-auto my-1">
-            <a href="#" class="button outline_btn text-dark fs-7" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">+ Add
+            <a href="#" class="button outline_btn text-dark fs-7" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Add
                 Poll</a>
         </div>
     </div>
@@ -27,10 +20,9 @@ Alegria 2022 | Admin Polls
         <h6 class='text-black'>{{ele["total_votes"]}} Votes</h6>&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
     <div class="buttons" style="margin-top:2%">
-        <a href={{"/admin/polls/{}/details".format(ele["id"])}} class="btn bg-brown text-teal py-1 px-2 fs-7">VIEW
-        </a>
-        &nbsp;
-        <a href="#" class="btn btn-outline-danger py-1 px-2 fs-7 border-2">DELETE</a>
+        <a href={{ "/admin/polls/{}/details".format(ele[ "id"])}} class="btn bg-brown text-teal py-1 px-2 fs-7">VIEW
+        </a> &nbsp;
+        <a href={{ "/admin/polls/{}/deletepoll".format(ele[ "id"])}} class="btn btn-outline-danger py-1 px-2 fs-7 border-2">DELETE</a>
     </div>
 </div>
 {% endfor %}
@@ -42,7 +34,7 @@ Alegria 2022 | Admin Polls
                 <h5 class="modal-title" id="exampleModalLabel">Add New Poll</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="modal-body" action='/admin/add-poll' method="post">
+            <form class="modal-body" action='/admin/add-poll' id='pollform' method="post">
                 {{form.csrf_token}}
                 <p class="mb-0 fs-7 main-font">
                     {{form.question.label}}
@@ -54,8 +46,7 @@ Alegria 2022 | Admin Polls
                 </p>
                 <div class="row d-flex align-items-center w-100 my-1">
                     <div class="col-3 m-0 pe-0">
-                        <input type="number" id="optionsNumber" class="p-1 rounded-3"
-                            style="width: 90%;border: 1px solid lightgray;">
+                        <input type="number" id="optionsNumber" class="p-1 rounded-3" style="width: 90%;border: 1px solid lightgray;">
                     </div>
                     <div class="col-7 m-0 ps-0">
                         <button type="button" class="button outline_btn text-dark fs-7 py-1" id="addNewPollOptionBtn">
@@ -67,7 +58,6 @@ Alegria 2022 | Admin Polls
                 <!-- inputs will come from poll.js -->
                 <!-- Refer polls.js in static/js folder for input names -->
                 <div id="poll-form"></div>
-
                 <button type="submit" class="button w-100 my-2 bg-brown text-beige">Save Poll</button>
             </form>
         </div>
