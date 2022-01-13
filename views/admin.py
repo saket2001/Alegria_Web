@@ -554,3 +554,11 @@ def adminAnnouncement():
             "time2": "10:00 AM", "event_name3": "Sports-Box Cricket", "time3": "10:00 AM"},
     ]
     return render_template('/admin/admin_announcements.html', announcement=announcement, event_announcement=event_announcement)
+
+@admin_bp.route("/admin_user")
+def admin_user():
+    admin_user_list = [
+        {"sr_no" : "01","p_image":"l","full_name":"Saket Chandorkar","email":"barhatesaso19it@student.mes.ac.in","is_admin":"yes"},
+        {"sr_no" : "02","p_image":"l","full_name":"Saket Chandorkar","email":"abc@gmail.com","is_admin":"no"}
+    ]
+    return render_template('/admin/admin_user.html',admin_user_list=admin_user_list)
