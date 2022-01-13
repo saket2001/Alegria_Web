@@ -48,6 +48,7 @@ class UserInfo(db.Model):
     image_url = db.Column(db.String(100), nullable=True)
     phone_number = db.Column(db.String(10), nullable=True)
     college_name = db.Column(db.String(100), nullable=True)
+    date_registered = db.Column(db.String(30), nullable=True)
     isAdmin = db.Column(db.String(10), default=False)
     # registeruser_id = db.relationship(
     #     'RegisterEvent', backref='RegisterUser', lazy=True)

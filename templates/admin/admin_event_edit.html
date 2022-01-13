@@ -34,7 +34,7 @@ Event Edit Page
         <!-- details -->
         <form class="col-lg-7 col-sm-12 my-2"
             action="/admin/events/{{event_details['event_category_name']}}/{{event_details['id']}}/edit"" method="
-            post">
+            POST">
             <label class="fs-7 mb-0 text-gray" for="event_id">Event ID</label>
             <input type="text" name="event_id" id="event_id" class="input_value" value="{{event_details['id']}}">
             <label class="fs-7 mb-0 text-gray" for="event_title">Event Name</label>

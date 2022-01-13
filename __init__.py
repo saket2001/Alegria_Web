@@ -4,6 +4,7 @@ from flask_restful import Api
 from dotenv import load_dotenv
 from authlib.integrations.flask_client import OAuth
 from models import UserInfo
+from datetime import datetime
 from flask_hashing import Hashing
 import helperFunc
 
@@ -104,7 +105,6 @@ def create_app():
                     row.email)
 
             if user_email in email_list:
-                z = adminList.email
                 isAdmin = adminList.isAdmin
 
                 # admin error flash
@@ -142,7 +142,8 @@ def create_app():
                 name = user_name
                 image_url = profile_pic
                 entry = UserInfo(id=user_id, email=email, name=name,
-                                 image_url=image_url)
+                                 image_url=image_url, date_registered=datetime.now())
+
                 db.session.add(entry)
                 db.session.commit()
 
@@ -164,7 +165,7 @@ def create_app():
 
         except Exception as e:
             print(e)
-            return render_template('401.html')
+            # return render_template('401.html')
 
     @app.route('/session-logout')
     def admin_logout():
