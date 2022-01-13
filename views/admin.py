@@ -5,9 +5,7 @@ import datetime
 from datetime import date
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
-# from flask import jsonify
 from flask import Blueprint, redirect, render_template, session, request
-from flask import Blueprint, redirect, render_template, flash, url_for, session, request
 
 
 def admin_login_required(f):

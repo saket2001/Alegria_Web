@@ -109,9 +109,15 @@ Alegria 2022 | Polls
                 </div>
                 {% endfor %}
             </div>
+            {% if (nextPoll!=0) %}
             <div class="d-flex w-100 justify-content-center p-2">
-                <a href={{"/polls/{}".format(ele["id"]+1)}}><button class="btn bg-brown text-teal">Next</button></a>
+                <a href={{"/polls/{}".format(nextPoll)}}><button class="btn bg-brown text-teal">Next</button></a>
             </div>
+            {% else %}
+            <div class="d-flex w-100 justify-content-center p-2">
+                <a href='/'><button class="btn bg-brown text-teal">Finish</button></a>
+            </div>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
