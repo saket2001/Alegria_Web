@@ -3,6 +3,7 @@ from functools import wraps
 # from flask_mail import Mail, Message
 # from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from flask_wtf.csrf import CSRFProtect
+from forms import UserContact
 from models import Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, db
 import basicData as client_data
 
@@ -49,6 +50,15 @@ def landingPage():
 def userLogin():
     try:
         return render_template('user_login.html')
+    except Exception as e:
+        print(e)
+        return redirect("/")
+
+@app_mbp.route("/user-details")
+def userDetails():
+    try:
+        form = UserContact()
+        return render_template('user_detail.html', form=form)
     except Exception as e:
         print(e)
         return redirect("/")

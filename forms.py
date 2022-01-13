@@ -70,3 +70,9 @@ class AddMerchandiseForm(FlaskForm):
 class AddPollForm(FlaskForm):
     question = StringField("Poll Question", validators=[
         InputRequired(), Length(min=10, max=100)])
+
+class UserContact(FlaskForm):
+    college_name = StringField("College Name:", validators=[
+        InputRequired(), Length(min=10, max=300)])
+    contact = StringField('Phone Number:', validators=[
+        InputRequired()])
