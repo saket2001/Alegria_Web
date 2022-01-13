@@ -19,7 +19,7 @@ All Merchandise
 <!-- List -->
 <div class="row g-2 w-100 d-flex align-items-center justify-content-between py-2">
   <div class="col-lg-auto col-sm-12">
-    <h5 class="fs-5 fw-bold">All Merchandise</h5>
+    <h5 class="fs-5 fw-bold text-black">All Merchandise</h5>
   </div>
   <div class="col-lg-3 col-sm-12">
 
@@ -32,9 +32,6 @@ All Merchandise
           <a class="dropdown-item" href="/admin/merchandise/Tshirts">Tshirts</a>
         </li>
         <li>
-          <a class="dropdown-item" href="/admin/merchandise/Bags">Bags</a>
-        </li>
-        <li>
           <a class="dropdown-item" href="/admin/merchandise/Badges">Badges</a>
         </li>
       </ul>
@@ -44,9 +41,9 @@ All Merchandise
 <div id="admin-events" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
   {% for ele in merchandise_List %}
   <div class="col rounded-3">
-    <div class="card bg-teal shadow-sm">
+    <div class="bg-teal shadow-sm">
       <div class="d-flex justify-content-center">
-        <img src={{ele['item_img1']}} class="card-img-top" alt="cricket">
+        <img src={{ele['item_img1']}} class="card-img-top border-0 shadow-none" alt="merchandise image">
       </div>
       <div class="d-flex flex-column">
         <div class="d-flex flex-column px-3 mt-2">
@@ -59,8 +56,8 @@ All Merchandise
           </p>
         </div>
         <div class="d-flex px-2 my-2">
-          <a href={{"/admin/merchandise/{}/{}/edit".format(ele['category'],ele['id'])}}
-            class="btn btn-dark text-teal sec-font fs-7">EDIT</a>
+          <a href={{"/admin/merchandise/{}/{}/view".format(ele['category'],ele['id'])}}
+            class="btn btn-dark text-teal sec-font fs-7">View</a>
           &nbsp;&nbsp;
           <a href="{{" /admin/merchandise/{}/{}/delete".format(ele['category'],ele['id'])}}"
             class="btn btn-outline-danger fs-7">DELETE</a>

@@ -202,8 +202,8 @@ def addEvent():
     return redirect('/admin/')
 
 
-@admin_bp.route("/events/<category>/<event_id>/edit", methods=['GET', 'POST'])
-# @admin_login_required
+@admin_bp.route("/events/<category>/<event_id>/view", methods=['GET', 'POST'])
+@admin_login_required
 def editEventDetails(category, event_id):
     try:
 
@@ -242,54 +242,8 @@ def editEventDetails(category, event_id):
         else:
             event_details = []
 
-        if request.method == "POST":
-
-            event.event_code = request.form.get('code')
-            event.event_name = request.form.get('name')
-            event.event_summary = request.form.get('description')
-            event.event_rules = request.form.get('rules')
-            event.event_category_name = request.form.get('categoryName')
-            event.event_category_id = request.form.get('categoryId')
-            event.pr_points = request.form.get('pr_points')
-            event.event_date = request.form.get('date')
-            event.event_duration = request.form.get('duration')
-            event.event_criteria = request.form.get('criteria')
-            event.event_mode = request.form.get('mode')
-            event.event_contact1 = request.form.get('contact1')
-            event.event_contact2 = request.form.get('contact2')
-            event.event_contact3 = request.form.get('contact3')
-            event.event_contact4 = request.form.get('contact4')
-            event.event_cost = request.form.get('eventCost')
-
-            event.event_perks_1 = request.form.get('perks1')
-            event.event_perks_2 = request.form.get('perks2')
-            event.event_perks_3 = request.form.get('perks3')
-            event.icon_url = request.form.get('icon_url')
-
-            # event.event_name = request.form.get('event_title')
-            # event.event_code = request.form.get('event_id')
-            # event.event_summary = request.form.get('event_description')
-            # event.event_criteria = request.form.get('event_criteria')
-            # event.event_category_id = request.form.get('event_category_id')
-            # event.event_category_name = request.form.get('event_category')
-            # event.supports_online = request.form.get('supports_online')
-            # event.online_cost = request.form.get('event_online_cost')
-            # event.supports_offline = request.form.get('supports_offline')
-            # event.offline_cost = request.form.get('event_offline_cost')
-            # event.event_contact1 = request.form.get('event_contact_1')
-            # event.event_contact2 = request.form.get('event_contact_2')
-            # event.event_date = request.form.get('event_date')
-            # event.event_mode = request.form.get('event_type')
-            # event.event_duration = request.form.get('event_duration')
-            # event.icon_url = request.form.get('event_title')
-            # event.event_rules = request.form.get('event_rules'),
-            # event.event_perks_1 = request.form.get('event_perks_1'),
-            # event.event_perks_2 = request.form.get('event_perks_2')
-            # event.event_perks_3 = request.form.get('event_perks_3')
-            db.session.commit()
-            return render_template('admin_editsuccessfull.html')
-
         return render_template('/admin/admin_event_edit.html', activeNav='events', event_details=event_details)
+
     except Exception as e:
         print(e)
         return redirect("/")
@@ -334,10 +288,8 @@ def eventRegistrations():
 
 
 # merchandise routes
-
-
 @ admin_bp.route("/merchandise/<string:category>")
-# @admin_login_required
+@admin_login_required
 def merchandise(category):
     try:
         # form
@@ -365,92 +317,66 @@ def merchandise(category):
         return redirect("/")
 
 
-@ admin_bp.route("/exceptionn")
-def exceptionn():
-    return render_template('exception.html')
-
-
-@ admin_bp.route("/add-merchandise", methods=["post"])
-# @admin_login_required
+@admin_bp.route("/add-merchandise", methods=["post"])
+@admin_login_required
 def addMerchandise():
-    if request.method == "post":
-        try:
-            id = request.form.get('id')
-            name = request.form.get("name")
-            cost = request.form.get("cost")
-            details = request.form.get('description')
-            category = request.form.get("categoryName")
-            quantity = request.form.get("quantity")
-            code = request.form.get("code")
-            sizes = request.form.get("sizes")
-            colors = request.form.get("colors")
-            item_img1 = request.form.get('image1')
-            item_img2 = request.form.get('image2')
+    try:
+        id = request.form.get('id')
+        name = request.form.get("name")
+        cost = request.form.get("cost")
+        details = request.form.get('description')
+        category = request.form.get("categoryName")
+        quantity = request.form.get("quantity")
+        code = request.form.get("code")
+        sizes = request.form.get("sizes")
+        colors = request.form.get("colors")
+        item_img1 = request.form.get('image1')
+        item_img2 = request.form.get('image2')
 
-            new_merchandise = Merchandise(id=id, name=name, details=details, cost=cost, item_img1=item_img1,
-                                          item_img2=item_img2, quantity=quantity, size=sizes, color=colors, category=category, code=code)
+        new_merchandise = Merchandise(id=id, name=name, details=details, cost=cost, item_img1=item_img1,
+                                      item_img2=item_img2, quantity=quantity, size=sizes, color=colors, category=category, code=code)
 
-            db.session.add(new_merchandise)
-            db.session.commit()
+        db.session.add(new_merchandise)
+        db.session.commit()
 
-        except Exception as e:
-            print(e)
-            return redirect("/")
+        return redirect("/admin/")
 
-    return redirect("/admin/merchandise/{}".format(category))
+    except Exception as e:
+        print(e)
+        return redirect("/")
 
 
-@ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/edit", methods=["GET", "POST"])
-# @admin_login_required
+@ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/view", methods=["GET"])
+@admin_login_required
 def editMerchandiseDetails(merchandise_category, merchandise_id):
     try:
+        merch = Merchandise.query.filter_by(id=merchandise_id).first()
 
-        if request.method == "GET":
-            merch = Merchandise.query.filter_by(id=merchandise_id).first()
-
-            res = {
-                "type": True,
-                "merch": {
-                    "id": merch.id,
-                    "title": merch.name,
-                    "description": merch.details,
-                    "price": merch.cost,
-                    "category": merch.category,
-                    "quantity": merch.quantity,
-                    "code": merch.code,
-                    "colors": merch.color,
-                    "size": merch.size,
-                    "img1": merch.item_img1,
-                    "img2": merch.item_img2,
-                }
+        res = {
+            "type": True,
+            "merch": {
+                "id": merch.id,
+                "title": merch.name,
+                "description": merch.details,
+                "price": merch.cost,
+                "category": merch.category,
+                "quantity": merch.quantity,
+                "code": merch.code,
+                "colors": merch.color,
+                "size": merch.size,
+                "img1": merch.item_img1,
+                "img2": merch.item_img2,
             }
+        }
 
-            if res['type'] and len(res['merch']) > 0:
-                merchandise_details = res['merch']
+        if res['type'] and len(res['merch']) > 0:
+            merchandise_details = res['merch']
 
-            else:
-                merchandise_details = []
+        else:
+            merchandise_details = []
 
-            return render_template("/admin/admin_merchandise_edit.html", merchandise_details=merchandise_details)
+        return render_template("/admin/admin_merchandise_edit.html", merchandise_details=merchandise_details)
 
-        if request.method == "POST":
-            try:
-                merch_edit = Merchandise.query.filter_by(
-                    id=merchandise_id).first()
-
-                merch_edit.name = request.form.get("title")
-                merch_edit.cost = request.form.get("price")
-                merch_edit.category = request.form.get("category")
-                merch_edit.quantity = request.form.get("quantity")
-                merch_edit.code = request.form.get("code")
-                # merch_edit.size = request.form.get("size")
-                db.session.commit()
-
-            except Exception as e:
-                print(e)
-                return redirect("/")
-
-        return redirect("/admin/merchandise")
     except Exception as e:
         print(e)
         return redirect("/")

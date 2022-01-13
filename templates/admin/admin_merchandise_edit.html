@@ -15,7 +15,7 @@ Event Edit Page
     <div class="row my-2 gy-2">
         <div class="col-lg-3 col-sm-3">
             <a href={{"/admin/merchandise/{}".format(merchandise_details['category'])}} type="button"
-                class="go_back_btn fs-7">
+                class="go_back_btn text-black fs-7">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="me-2"
                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -25,12 +25,11 @@ Event Edit Page
             </a>
         </div>
         <div class="col-lg-9 col-sm-12 d-flex justify-content-center align-items-center">
-            <h5 class="fs-5 main-font">Edit Merchandise Details</h5>
+            <h5 class="fs-5 main-font">Merchandise Details</h5>
         </div>
     </div>
     <!-- form -->
     <div class="row g-2 my-2 py-3">
-        <p class="fs-7 text-black">Make changes in below inputs and save them.</p>
         <!-- image -->
         <div class="col-lg-5 col-sm-12 d-flex flex-column d-flex p-3">
             <div class="row mb-2 rounded-3 my-2">
@@ -38,7 +37,7 @@ Event Edit Page
             </div>
         </div>
         <!-- details -->
-        <form class="col-lg-7 col-sm-12 my-2" action="/admin/event/save-edit" method="post">
+        <form class="col-lg-7 col-sm-12 my-2">
             <p class="mb-0 fs-7 main-font">
                 Merch Id
             </p>
@@ -92,9 +91,6 @@ Event Edit Page
                 Merch Sizes
             </p>
             <input type="text" name="size" id="size" class="input_value" value="{{merchandise_details['size']}}">
-
-
-            <button type="submit" class="w-100 button bg-brown text-teal my-2">Save Changes</button>
         </form>
     </div>
 </div>
