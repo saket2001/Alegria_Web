@@ -592,22 +592,16 @@ def deletepoll(poll_id):
 @admin_login_required
 def togglestatus(poll_id):
     try:
+        old_poll = Poll.query.filter_by(poll_id=poll_id).first()
         new_status = None
 
-        old_poll = Poll.query.filter_by(poll_id=poll_id).first()
-        old_status = old_poll['status']
-
-        if old_status == "Active":
+        if old_poll.status == "Active":
             new_status = "Expired"
 
-        if old_status == "Expired":
+        if old_poll.status == "Expired":
             new_status = "Active"
 
-        old_poll['status'] = new_status
-
-        print('new status')
-        print(old_poll['status'])
-
+        old_poll.status = new_status
         db.session.commit()
 
         return redirect("/admin/polls")
