@@ -7,23 +7,110 @@ Alegria 2022 | User Login
 
 {% block body %}
 <style>
-    .image {
-        height: 100vh;
-        position: relative;
-        left: 50px;
+    .login-page{
+        display: flex;
     }
+    .img1{
+        width: 70%;
+        height: 100vh;
+        background: url("../static/images/login/user-login-img.png");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        z-index: -2;
+        
+    }
+    .overlay{
+        position: fixed;
+        width: 70%;
+        height: 100vh;
+        z-index: -1;
+    }
+    .svg-wave{
+        width: 20%;
+        height: 100vh;
+        margin-left: -25%;
+    }
+    .login-content{
+        width: 50%;
+        min-height: 100vh;
+        height: 100vh;
+        background-color: #FCF2DF;
+        margin-left: -2px;
+        padding-top: 30vh;
+        
+    }
+    .svg-wave-mobile{
+        display: none;
+    }
+    .alg-logo{
 
+        z-index: 1;
+        position: absolute;
+        top: 50%;
+        left: 35%;
+        transform: translate(-50%, -50%);
+    }
     @media screen and (max-width:600px) {
-        .image {
-            display: none !important;
+        .login-page{
+            display: block; 
+        }
+        .img1{
+            width: 100%;
+            height: 40vh;
+            z-index: -2;
+            
+        }
+        .overlay{
+            position: fixed;
+            width: 100%;
+            height: 40vh;
+            z-index: 0;
+        }
+        .login-content{
+            width: 100%;
+            height:55vh;
+            min-height:55vh;
+            background-color: #FCF2DF;
+            padding-top: 0;
+            margin-top: -2px;
+            margin-left: 0px;
+        }
+        .alg-logo{
+            z-index: 1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height:150px;
+        }           
+        .svg-wave{
+            display: none;
+        }
+        .svg-wave-mobile{
+            display: block;
+            margin-top: -10vh;
+            
         }
     }
 </style>
-
-<body class="bg-beige min-vh-100 max-vh-100 overflow-hidden">
-    <div class="row min-vw-100 min-vh-100 d-flex justify-content-center align-items-center m-0">
+<div class="login-page">
+    <div class="overlay">
+        <img class="alg-logo" src="../static/images/login/logo-alegria.png" alt="">
+    </div>
+    <div class="img1" >
+        <!-- <img src="../static/images/login/login page.jpg"> --> 
+    </div>
+    
+    <div class="svg-wave">
+        <img src="../static/images/login/svg-vertical.png" style="width: 100%; height: 100vh;  ">
+    </div>
+    <div class="svg-wave-mobile">
+        <img src="../static/images/login/svg-phone.png" style="width: 100%; height: 15vh;">
+    </div>
+    <div class="login-content">
         <div
-            class="col-lg-6 col-sm-12 min-vh-100 d-flex flex-column justify-content-center align-items-center py-5 px-3">
+            class="d-flex flex-column justify-content-center align-items-center px-4">
             {% for mess in get_flashed_messages() %}
             <div class="d-flex justify-content-center align-items-center p-3">
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -32,14 +119,14 @@ Alegria 2022 | User Login
                 </div>
             </div>
             {% endfor %}
-            <h1 class="py-2 fs-2 sec-font text-red text-center fw-normal">
+            <h1 class="py-1 fs-2 sec-font text-red text-center fw-normal">
                 Welcome To
                 <span class="text-red fw-bold main-font">
                     Alegria 2022
                 </span>
             </h1>
             <p class="fs-6 text-center text-black">
-                The fun at alegria is waiting for you, so don't waste anytime and hop into Alegria 2022
+                The fun at alegria is waiting for you, so don't waste any time and hop into Alegria 2022
             </p>
             <!--google sign in button-->
             <a href="/admin-login"
@@ -56,13 +143,11 @@ Alegria 2022 | User Login
                 </svg>
                 Sign in With Google Account
             </a>
-            <a href="/" class="text-red my-2 sec-font fs-6" style="color:#842703;">
+            <a href="/" class="text-red my-2 sec-font fs-7 " style="color:#842703;">
                 Go To Homepage
             </a>
         </div>
-        <div class="col d-flex flex-row-reverse bd-highlight">
-            <img src={{ url_for('static', filename='images/login/user_login_image.png' ) }} class="img-fluid image">
-        </div>
     </div>
-</body>
+</div>
+
 {% endblock %}
