@@ -117,7 +117,7 @@ class PollResponses(db.Model):
         db.String(60), primary_key=True)
     poll_id = db.Column(db.String(50), db.ForeignKey(
         "polls.poll_id"), nullable=False)
-    option_name = db.Column(db.String(50), nullable=False, primary_key=True)
+    option_name = db.Column(db.String(50), nullable=False)
     option_image = db.Column(db.String(300), nullable=True)
     option_votes = db.Column(db.Integer,  default=0, nullable=True)
 

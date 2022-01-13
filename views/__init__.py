@@ -291,7 +291,7 @@ def polls_main():
             signed_in = True
 
         res = {"type": True, "polls":[]}
-        pollsList = Poll.query.all()
+        pollsList = Poll.query.filter_by(status='Active').all()
         for item in pollsList:
             res['polls'].append({
                 "id":item.poll_id,
@@ -314,7 +314,7 @@ def Poll_list(id):
             signed_in = True
 
         res = {"type": True, "polls": [], "images": []}
-        pollsList = Poll.query.all()
+        pollsList = Poll.query.filter_by(status='Active').all()
         nextPoll=0
         for i in range(len(pollsList)):
             if(pollsList[i].poll_id==id):
@@ -353,7 +353,7 @@ def Poll_result(id, option):
             signed_in = True
 
         res = {"type": True, "polls": [], "images": []}
-        pollsList = Poll.query.all()
+        pollsList = Poll.query.filter_by(status='Active').all()
         nextPoll=0
         pollsImages = PollResponses.query.filter_by(poll_id=id)
         result = ''
