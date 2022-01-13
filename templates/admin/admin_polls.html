@@ -27,7 +27,7 @@ Alegria 2022 | Admin Polls
         <h6 class='text-black'>{{ele["total_votes"]}} Votes</h6>&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
     <div class="buttons" style="margin-top:2%">
-        <a href={{"/admin/polls/{}/details".format(ele["id"])}} class="btn bg-brown text-teal py-1 px-2 fs-7">VIEW
+        <a href={{"/admin/polls/{}/details".format(ele["id"])}} class="btn bg-brown text-beige py-1 px-2 fs-7">VIEW
         </a>
         &nbsp;
         <a href="#" class="btn btn-outline-danger py-1 px-2 fs-7 border-2">DELETE</a>
@@ -54,7 +54,7 @@ Alegria 2022 | Admin Polls
                 </p>
                 <div class="row d-flex align-items-center w-100 my-1">
                     <div class="col-3 m-0 pe-0">
-                        <input type="number" id="optionsNumber" name="optionsNumber" class="p-1 rounded-3"
+                        <input type="number" id="optionsNumber" name="optionsNumber" required class="p-1 rounded-3"
                             style="width: 90%;border: 1px solid lightgray;">
                     </div>
                     <div class="col-7 m-0 ps-0">

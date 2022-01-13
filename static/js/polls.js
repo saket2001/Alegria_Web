@@ -16,6 +16,7 @@ function createElements(i = 0) {
   const optionInput = document.createElement("input");
   optionInput.setAttribute("placeholder", `Option ${i} Name`);
   optionInput.setAttribute("name", `Option ${i} Name`);
+  optionInput.required = true;
   optionInput.classList.add("input_value");
   pollFormDiv.insertAdjacentElement("beforeend", optionInput);
 
@@ -31,6 +32,7 @@ function createElements(i = 0) {
   const imageInput = document.createElement("input");
   imageInput.setAttribute("placeholder", `Image url ${i}`);
   imageInput.setAttribute("name", `Image url ${i}`);
+  imageInput.required = true;
   imageInput.classList.add("input_value");
   pollFormDiv.insertAdjacentElement("beforeend", imageInput);
 }

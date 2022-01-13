@@ -175,7 +175,7 @@ events_row3 = [{
     "title": "Gaming",
     "content": "If you are fond of crazy and adventure games then come and get a chance to showcase your talent and win.",
     "link": '/events/gaming',
-    "icon": 'https: // drive.google.com/uc?export = view & id = 1monOvKGe_J7rsvzvLfkv1N7Qo-zx-02R'
+    "icon": 'https://drive.google.com/uc?export=view&id=1monOvKGe_J7rsvzvLfkv1N7Qo-zx-02R'
 }, {
     "title": "Sports",
     "content": "Sports is all about the spirit and sportsmanship of the player so if you posses the true spirit of sports then you stand a chance to win by taking part in our sports events.",
