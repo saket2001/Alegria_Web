@@ -112,11 +112,10 @@ class Poll(db.Model):
 
 class PollResponses(db.Model):
     __tablename__ = 'poll_options'
-    poll_option_id = db.Column(
-        db.Integer, autoincrement=True, primary_key=True)
+    poll_option_id = db.Column(db.Integer)
     poll_id = db.Column(db.String(50), db.ForeignKey(
         "polls.poll_id"), nullable=False)
-    option_name = db.Column(db.String(50), nullable=False)
+    option_name = db.Column(db.String(50), nullable=False, primary_key=True)
     option_image = db.Column(db.String(300), nullable=True)
     option_votes = db.Column(db.Integer,  default=0, nullable=True)
 
@@ -197,4 +196,5 @@ class Categories(db.Model):
     __tablename__ = "categories"
     id = db.Column(db.String(10), primary_key=True)
     name = db.Column(db.String(50), nullable=False)
+    img_url = db.Column(db.String(300), nullable=False)
     img_url = db.Column(db.String(300), nullable=False)
