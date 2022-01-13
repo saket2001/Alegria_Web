@@ -104,7 +104,7 @@ class Poll(db.Model):
     poll_id = db.Column(db.String(50), primary_key=True)
     question = db.Column(db.String(30), nullable=False)
     status = db.Column(db.Text(20), nullable=False)
-    date_published = db.Column(db.Text(20), nullable=False)
+    date_published = db.Column(db.DateTime, default=datetime.now())
     total_votes = db.Column(db.Integer, nullable=False)
 
     def __repr__(self) -> str:

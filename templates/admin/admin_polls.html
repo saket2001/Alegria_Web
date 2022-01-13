@@ -6,13 +6,13 @@ Alegria 2022 | Admin Polls
 
 
 {% block content %}
-<br>
 <div class="container">
     <div class="row d-flex align-items-center justify-content-end">
-        <div class="col-md-auto my-1">
-            <a href="#" class="button outline_btn text-dark fs-7" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">+ Add
-                Poll</a>
+        <div class="col-md-auto my-1 mt-3">
+            <a href="#" class="button outline_btn text-dark fs-7" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                + Add
+                Poll
+            </a>
         </div>
     </div>
 </div>
@@ -20,7 +20,7 @@ Alegria 2022 | Admin Polls
 <h5 class="fs-5 fw-bold">All Public Polls</h5>
 {% for ele in poll_list %}
 <div class="card bg-teal shadow-sm p-3 my-2 mb-3">
-    <h1 class='text-black fw-bolder'>{{ele["id"]}}</h1>
+    <h1 class='text-black fs-6 fw-bold'>{{ele["id"]}}</h1>
     <h5 class="fs-5 main-font text-red">{{ele["question"]}}</h5>
     <div class="d-flex my-1">
         <h6 class='text-danger'>{{ele["status"]}}</h6>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -30,10 +30,12 @@ Alegria 2022 | Admin Polls
         <a href={{"/admin/polls/{}/details".format(ele["id"])}} class="btn bg-brown text-beige py-1 px-2 fs-7">VIEW
         </a>
         &nbsp;
-        <a href="#" class="btn btn-outline-danger py-1 px-2 fs-7 border-2">DELETE</a>
+        <a href={{ "/admin/polls/{}/deletepoll" .format(ele[ "id" ])}}
+            class="btn btn-outline-danger py-1 px-2 fs-7 border-2">DELETE</a>
     </div>
 </div>
 {% endfor %}
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -42,6 +44,7 @@ Alegria 2022 | Admin Polls
                 <h5 class="modal-title" id="exampleModalLabel">Add New Poll</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
             <form class="modal-body" id="pollForm" action='/admin/add-poll' method="post">
                 {{form.csrf_token}}
                 <p class="mb-0 fs-7 main-font">
@@ -66,7 +69,6 @@ Alegria 2022 | Admin Polls
 
                 <!-- inputs will come from poll.js -->
                 <div id="poll-form"></div>
-
                 <button type="submit" class="button w-100 my-2 bg-brown text-beige">Save Poll</button>
             </form>
         </div>

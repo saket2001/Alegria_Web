@@ -1,11 +1,13 @@
-from flask import Blueprint, redirect, render_template, flash, url_for, session, request
-from functools import wraps
-from flask_wtf.csrf import CSRFProtect
-from datetime import date
-import datetime
-from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses
-from forms import AddEventForm, AddMerchandiseForm, AddPollForm
 import uuid
+from forms import AddEventForm, AddMerchandiseForm, AddPollForm
+from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses
+import datetime
+from datetime import date
+from flask_wtf.csrf import CSRFProtect
+from functools import wraps
+# from flask import jsonify
+from flask import Blueprint, redirect, render_template, session, request
+from flask import Blueprint, redirect, render_template, flash, url_for, session, request
 
 
 def admin_login_required(f):
@@ -82,7 +84,7 @@ def adminLogin():
 
 
 @admin_bp.route('/')
-@admin_login_required
+# @admin_login_required
 def home():
     try:
         today = date.today()
@@ -107,7 +109,7 @@ def home():
 
 
 @admin_bp.route('/events/<event_category>', methods=['GET', 'POST'])
-@admin_login_required
+# @admin_login_required
 def events(event_category):
     # form
     try:
@@ -148,7 +150,7 @@ def events(event_category):
 
 
 @admin_bp.route('/add-event', methods=["POST"])
-@admin_login_required
+# @admin_login_required
 def addEvent():
     if request.method == "POST":
         try:
@@ -203,7 +205,7 @@ def addEvent():
 
 
 @admin_bp.route("/events/<category>/<event_id>/edit", methods=['GET', 'POST'])
-@admin_login_required
+# @admin_login_required
 def editEventDetails(category, event_id):
     try:
 
@@ -296,7 +298,7 @@ def editEventDetails(category, event_id):
 
 
 @ admin_bp.route("/events/<category>/<event_id>/delete", methods=['GET', 'POST'])
-@admin_login_required
+# @admin_login_required
 def deleteevent(category, event_id):
     try:
         post = Eventdemo.query.filter_by(id=event_id).first()
@@ -312,7 +314,7 @@ def deleteevent(category, event_id):
 
 
 @ admin_bp.route("/events/event-registrations")
-@admin_login_required
+# @admin_login_required
 def eventRegistrations():
     # get info from api in List of Dictionaries format as below
     try:
@@ -337,7 +339,7 @@ def eventRegistrations():
 
 
 @ admin_bp.route("/merchandise/<string:category>")
-@admin_login_required
+# @admin_login_required
 def merchandise(category):
     try:
         # form
@@ -371,7 +373,7 @@ def exceptionn():
 
 
 @ admin_bp.route("/add-merchandise", methods=["post"])
-@admin_login_required
+# @admin_login_required
 def addMerchandise():
     if request.method == "post":
         try:
@@ -401,7 +403,7 @@ def addMerchandise():
 
 
 @ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/edit", methods=["GET", "POST"])
-@admin_login_required
+# @admin_login_required
 def editMerchandiseDetails(merchandise_category, merchandise_id):
     try:
 
@@ -457,7 +459,7 @@ def editMerchandiseDetails(merchandise_category, merchandise_id):
 
 
 @ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/delete", methods=["GET", "POST"])
-@admin_login_required
+# @admin_login_required
 def deletemerchandise(merchandise_category, merchandise_id):
     try:
         merch = Merchandise.query.filter_by(id=merchandise_id).first()
@@ -479,10 +481,10 @@ def poll_details(poll_id):
         pollsList = Poll.query.filter_by(poll_id=poll_id).first()
         pollDetails = PollResponses.query.filter_by(poll_id=poll_id).all()
 
-        res = {"type": True, "polldetails": []}
+        res = {"type": True, "polldetails": {}}
 
         for ele in pollDetails:
-            res["polldetails"].append({
+            res["polldetails"] = {
                 "id": pollsList.poll_id,
                 "question": pollsList.question,
                 "status": pollsList.status,
@@ -491,13 +493,15 @@ def poll_details(poll_id):
                 "option_name": ele.option_name,
                 "image_url": ele.option_image,
                 "option_votes": ele.option_votes
-            })
+            }
+
+        print(res["polldetails"]['status'])
 
         return render_template('/admin/admin_poll_details.html', activeNav='poll_details', polldetails=res["polldetails"])
 
     except Exception as e:
         print(e)
-        return redirect("/")
+        # return redirect("/")
 
 
 @ admin_bp.route("/polls")
@@ -556,12 +560,61 @@ def AddNewPoll():
             db.session.add(pollOption)
             db.session.commit()
 
+        return redirect('/admin/polls')
+
     except Exception as e:
         print(e)
         return redirect('/')
 
-    return redirect('/admin/polls')
 
+@ admin_bp.route("/polls/<poll_id>/deletepoll", methods=["GET", "POST"])
+@admin_login_required
+def deletepoll(poll_id):
+    try:
+        poll = Poll.query.filter_by(poll_id=poll_id).first()
+        poll2 = PollResponses.query.filter_by(poll_id=poll_id).all()
+
+        db.session.delete(poll)
+        db.session.commit()
+
+        for ele in poll2:
+            db.session.delete(ele)
+            db.session.commit()
+
+        return redirect('/admin/polls')
+
+    except Exception as e:
+        print(e)
+        # return redirect("/")
+
+
+@ admin_bp.route("/polls/<poll_id>/details/togglestatus", methods=["GET", "POST"])
+@admin_login_required
+def togglestatus(poll_id):
+    try:
+        new_status = None
+
+        old_poll = Poll.query.filter_by(poll_id=poll_id).first()
+        old_status = old_poll['status']
+
+        if old_status == "Active":
+            new_status = "Expired"
+
+        if old_status == "Expired":
+            new_status = "Active"
+
+        old_poll['status'] = new_status
+
+        print('new status')
+        print(old_poll['status'])
+
+        db.session.commit()
+
+        return redirect("/admin/polls")
+
+    except Exception as e:
+        print(e)
+        # return redirect('/')
 
 ############################
 
@@ -570,9 +623,9 @@ def AddNewPoll():
 def adminAnnouncement():
     announcement = [
         {"a_id": "01", "date": "12th Jan 2022", "time": "10:00 am",
-            "announcement": "Sport Event Box Circket is been cancelled due to uprising covid cases and won’t be played this year. All the registration fees for this event can be collected later."},
+            "announcement": "Sport Event Box Circket is been cancelled due to uprising covid cases and won't be played this year. All the registration fees for this event can be collected later."},
         {"a_id": "02", "date": "13th Jan 2022", "time": "11:00 am",
-            "announcement": "Sport Event Box Circket is been cancelled due to uprising covid cases and won’t be played this year. All the registration fees for this event can be collected later."}
+            "announcement": "Sport Event Box Circket is been cancelled due to uprising covid cases and won't be played this year. All the registration fees for this event can be collected later."}
     ]
 
     event_announcement = [

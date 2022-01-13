@@ -104,6 +104,8 @@ def create_app():
                 email_list.append(
                     row.email)
 
+            print(email_list)
+
             if user_email in email_list:
                 isAdmin = adminList.isAdmin
 
@@ -130,7 +132,6 @@ def create_app():
                     session['user_id'] = helperFunc.hashValue(
                         user_info['email'])
 
-                    # print("Hashed user id ="+session.get('user_id'))
                     flash("You Logged in Successfully!!")
 
                     return redirect('/')
