@@ -17,7 +17,7 @@ All Announcements
         </div>
         <div class="col-md-auto my-1">
             <a href="#" class="button outline_btn text-dark fs-7" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">Add
+                data-bs-target="#exampleModal1">Add
                 Event Details +</a>
         </div>
     </div>
@@ -62,9 +62,9 @@ All Announcements
         </div>
     </div>
 </div>
-<!-- Modal -->
+<!-- Add Announcement Modal -->
 
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal1" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -72,16 +72,17 @@ All Announcements
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form class="modal-body" action='' method="post">
-                {{form.question(class="input_value",placeholder="Announcement Title")}}
+                {{form.title(class="input_value",placeholder="Announcement Title")}}
                 {{form.description(class="input_value",placeholder="Announcement Content")}}
-                {{form.dateTime(class="input_value")}}
                 <button type="submit" class="button w-100 my-2 bg-brown text-beige">Add Announcement +</button>
             </form>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Add Event Modal -->
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -89,14 +90,14 @@ All Announcements
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form class="modal-body" action='' method="post">
-                {{form.question(class="input_value",placeholder="Category Name")}}
-                {{form.description(class="input_value",placeholder="Event Name")}}
-                {{form.date(class="input_value")}}
-                {{form.time(class="input_value")}}
+                {{form2.category_name(class="input_value",placeholder="Category Name")}}
+                {{form2.event_name(class="input_value",placeholder="Event Name")}}
+                {{form2.date(class="input_value", type="date")}}
+                {{form2.time(class="input_value",placeholder="Event Time")}}
                 <button type="submit" class="button w-100 my-2 bg-brown text-beige">Add Event Date +</button>
             </form>
         </div>
     </div>
-</div> -->
+</div>
 
 {% endblock %}
