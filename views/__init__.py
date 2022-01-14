@@ -1,8 +1,8 @@
-from flask import Blueprint, redirect, render_template, flash, url_for, session
+from flask import Blueprint, redirect, render_template, flash, url_for, session, request
 from functools import wraps
 from flask_wtf.csrf import CSRFProtect
 from forms import UserContact
-from models import Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, db
+from models import Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, db, UserInfo
 import basicData as client_data
 
 # csrf
@@ -48,16 +48,6 @@ def landingPage():
 def userLogin():
     try:
         return render_template('user_login.html')
-    except Exception as e:
-        print(e)
-        return redirect("/")
-
-
-@app_mbp.route("/user-details")
-def userDetails():
-    try:
-        form = UserContact()
-        return render_template('user_detail.html', form=form)
     except Exception as e:
         print(e)
         return redirect("/")
@@ -483,6 +473,25 @@ def WrongLinkErrorHandler(e):
 
 
 @app_mbp.route('/new-user-login')
+@user_login_required
 def newUserLogin():
     form = UserContact()
     return render_template("user_detail.html", form=form)
+
+
+@app_mbp.route("/create-new-user", methods=['GET', 'POST'])
+@user_login_required
+def userDetails():
+    try:
+        form = UserContact()
+        phone_number = request.form.get('contact')
+        college_name = request.form.get('college_name')
+        print(phone_number)
+        Details = UserInfo(phone_number=phone_number,
+                           college_name=college_name)
+        db.session.add(Details)
+        db.session.commit()
+        return redirect('/')
+    except Exception as e:
+        print(e)
+        return redirect("/")
