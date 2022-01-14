@@ -1,0 +1,46 @@
+{% extends '/admin/admin_layout.html' %}
+
+{% block title %}
+Admin_User
+{% endblock %}
+{% block content %}
+<br>
+<div class="container" >
+    <div class=" row d-flex align-items-center">
+    <div class="col my-1">
+        <h5><b>All Registered Users</b></h5>
+    </div>
+    <div class="col-md-auto my-1">
+        <a href="#" class="button outline_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Filter by latest&nbsp;&nbsp;<i class="fas fa-chevron-down"></i></a>
+    </div>
+</div>
+</div>
+<br>
+
+<div class="card bg-teal shadow-sm p-1 table-responsive" style="text-align: center">
+    <table class="table  table-hover " style="border-bottom: brown;" >
+        <thead class="bg-brown" style="color:white">
+            <tr >
+            <th scope="col">Sr No</th>
+            <th scope="col">Profile Image</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">IsAdmin</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for ele in admin_user_list %}
+          <tr style="font-size: smaller;">
+            <th scope="row" >{{ele["sr_no"]}}</th>
+            <td><i class="fas fa-user-shield"></i>{{ele["p_image"]}}</td>
+            <td>{{ele["full_name"]}}</td>
+            <td>{{ele["email"]}}</td>
+            <td class="text-brown"><b>{{ele["is_admin"]}}</b></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</div>
+
+
+{% endblock %}
