@@ -83,7 +83,7 @@ def adminLogin():
 
 
 @admin_bp.route('/')
-# @admin_login_required
+# #@admin_login_required
 def home():
     try:
         today = date.today()
@@ -108,7 +108,7 @@ def home():
 
 
 @admin_bp.route('/events/<event_category>', methods=['GET', 'POST'])
-# @admin_login_required
+# #@admin_login_required
 def events(event_category):
     # form
     try:
@@ -149,7 +149,7 @@ def events(event_category):
 
 
 @admin_bp.route('/add-event', methods=["POST"])
-# @admin_login_required
+# #@admin_login_required
 def addEvent():
     if request.method == "POST":
         try:
@@ -204,7 +204,7 @@ def addEvent():
 
 
 @admin_bp.route("/events/<category>/<event_id>/view", methods=['GET', 'POST'])
-@admin_login_required
+#@admin_login_required
 def editEventDetails(category, event_id):
     try:
 
@@ -251,7 +251,7 @@ def editEventDetails(category, event_id):
 
 
 @ admin_bp.route("/events/<category>/<event_id>/delete", methods=['GET', 'POST'])
-# @admin_login_required
+# #@admin_login_required
 def deleteevent(category, event_id):
     try:
         post = Eventdemo.query.filter_by(id=event_id).first()
@@ -267,7 +267,7 @@ def deleteevent(category, event_id):
 
 
 @ admin_bp.route("/events/event-registrations")
-# @admin_login_required
+# #@admin_login_required
 def eventRegistrations():
     # get info from api in List of Dictionaries format as below
     try:
@@ -290,7 +290,7 @@ def eventRegistrations():
 
 # merchandise routes
 @ admin_bp.route("/merchandise/<string:category>")
-@admin_login_required
+#@admin_login_required
 def merchandise(category):
     try:
         # form
@@ -319,7 +319,7 @@ def merchandise(category):
 
 
 @admin_bp.route("/add-merchandise", methods=["post"])
-@admin_login_required
+#@admin_login_required
 def addMerchandise():
     try:
         id = request.form.get('id')
@@ -348,7 +348,7 @@ def addMerchandise():
 
 
 @ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/view", methods=["GET"])
-@admin_login_required
+#@admin_login_required
 def editMerchandiseDetails(merchandise_category, merchandise_id):
     try:
         merch = Merchandise.query.filter_by(id=merchandise_id).first()
@@ -384,7 +384,7 @@ def editMerchandiseDetails(merchandise_category, merchandise_id):
 
 
 @ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/delete", methods=["GET", "POST"])
-# @admin_login_required
+# #@admin_login_required
 def deletemerchandise(merchandise_category, merchandise_id):
     try:
         merch = Merchandise.query.filter_by(id=merchandise_id).first()
@@ -400,16 +400,16 @@ def deletemerchandise(merchandise_category, merchandise_id):
 
 # poll routes
 @ admin_bp.route("/polls/<poll_id>/details")
-@admin_login_required
+#@admin_login_required
 def poll_details(poll_id):
     try:
         pollsList = Poll.query.filter_by(poll_id=poll_id).first()
         pollDetails = PollResponses.query.filter_by(poll_id=poll_id).all()
 
-        res = {"type": True, "polldetails": {}}
+        res = {"type": True, "polldetails": []}
 
         for ele in pollDetails:
-            res["polldetails"] = {
+            res["polldetails"].append({
                 "id": pollsList.poll_id,
                 "question": pollsList.question,
                 "status": pollsList.status,
@@ -418,19 +418,17 @@ def poll_details(poll_id):
                 "option_name": ele.option_name,
                 "image_url": ele.option_image,
                 "option_votes": ele.option_votes
-            }
-
-        print(res["polldetails"]['status'])
+            })
 
         return render_template('/admin/admin_poll_details.html', activeNav='poll_details', polldetails=res["polldetails"])
 
     except Exception as e:
         print(e)
-        # return redirect("/")
+        return redirect("/")
 
 
 @ admin_bp.route("/polls")
-@admin_login_required
+#@admin_login_required
 def polls():
     try:
         form = AddPollForm()
@@ -456,7 +454,7 @@ def polls():
 
 
 @admin_bp.route('/add-poll', methods=["post"])
-@admin_login_required
+#@admin_login_required
 def AddNewPoll():
     try:
         poll_id = uuid.uuid1()
@@ -493,7 +491,7 @@ def AddNewPoll():
 
 
 @ admin_bp.route("/polls/<poll_id>/deletepoll", methods=["GET", "POST"])
-@admin_login_required
+#@admin_login_required
 def deletepoll(poll_id):
     try:
         poll = Poll.query.filter_by(poll_id=poll_id).first()
@@ -511,11 +509,11 @@ def deletepoll(poll_id):
 
     except Exception as e:
         print(e)
-        # return redirect("/")
+        return redirect("/")
 
 
 @ admin_bp.route("/polls/<poll_id>/details/togglestatus", methods=["GET", "POST"])
-@admin_login_required
+#@admin_login_required
 def togglestatus(poll_id):
     try:
         old_poll = Poll.query.filter_by(poll_id=poll_id).first()
@@ -534,13 +532,13 @@ def togglestatus(poll_id):
 
     except Exception as e:
         print(e)
-        # return redirect('/')
+        return redirect('/')
 
 ############################
 
 
 @admin_bp.route('/announcements')
-@admin_login_required
+#@admin_login_required
 def adminAnnouncement():
     try:
         form = AddAnnouncementForm()
@@ -561,10 +559,10 @@ def adminAnnouncement():
         return render_template('/admin/admin_announcements.html', announcement=announcement, event_announcement=event_announcement,form=form,form2=form2)
     except Exception as e:
         print(e)
-        # return redirect('/')
+        return redirect('/')
 
 @admin_bp.route("/users")
-@admin_login_required
+#@admin_login_required
 def allUsersPage():
     try:
         # by default show newest users first
