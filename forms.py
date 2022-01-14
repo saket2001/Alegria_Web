@@ -80,18 +80,20 @@ class UserContact(FlaskForm):
     contact = IntegerField('Phone Number', validators=[
         InputRequired(), Length(min=10, max=10)])
 
+
 class AddAnnouncementForm(FlaskForm):
     title = StringField("Title", validators=[
         InputRequired(), Length(min=10, max=100)])
-    description= StringField("Description", validators=[
+    description = TextAreaField("Description", validators=[
         InputRequired(), Length(min=10, max=100)])
+
 
 class AddEventDate(FlaskForm):
     category_name = StringField("Category Name", validators=[
         InputRequired(), Length(min=10, max=100)])
-    event_name= StringField("Event Name", validators=[
+    event_name = StringField("Event Name", validators=[
         InputRequired(), Length(min=10, max=100)])
     date = StringField("Date", validators=[
         InputRequired(), Length(min=10, max=100)])
-    time= StringField("Time", validators=[
+    time = StringField("Time", validators=[
         InputRequired(), Length(min=10, max=100)])
