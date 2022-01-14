@@ -2,6 +2,7 @@ import uuid
 from forms import AddEventForm, AddMerchandiseForm, AddPollForm
 from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses
 import datetime
+from sqlalchemy import asc, desc
 from datetime import date
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
@@ -539,6 +540,7 @@ def togglestatus(poll_id):
 
 
 @admin_bp.route('/announcements')
+@admin_login_required
 def adminAnnouncement():
     announcement = [
         {"a_id": "01", "date": "12th Jan 2022", "time": "10:00 am",
@@ -557,21 +559,36 @@ def adminAnnouncement():
 
 
 @admin_bp.route("/users")
+@admin_login_required
 def allUsersPage():
     try:
         # by default show newest users first
         filter_value = request.args['filter']
-        print(filter_value)
 
-        # route for filters too i.e ?filter=oldest and ?filter=newest
+        if filter_value == "newest":
+            user_List = UserInfo.query.order_by(desc("date_registered"))
+        else:
+            user_List = UserInfo.query.order_by(asc("date_registered"))
 
-        admin_user_list = [
-            {"sr_no": "01", "p_image": "https://lh3.googleusercontent.com/a-/AOh14GhY5zpkUNn0ShhsJlE8xKP_R3-BrRCKNH6GYa53xg=s96-c", "full_name": "Saket Chandorkar",
-             "email": "barhatesaso19it@student.mes.ac.in", "is_admin": "yes"},
-            {"sr_no": "02", "p_image": "https://lh3.googleusercontent.com/a-/AOh14GhY5zpkUNn0ShhsJlE8xKP_R3-BrRCKNH6GYa53xg=s96-c", "full_name": "Saket Chandorkar",
-             "email": "abc@gmail.com", "is_admin": "no"}
-        ]
-        return render_template('/admin/admin_user.html', admin_user_list=admin_user_list, activeNav='users')
+        res = {
+            "type": True,
+            "user_list": []
+        }
+
+        sr = 0
+        for item in user_List:
+            sr = sr+1
+            res["user_list"].append({
+                "sr_no": sr,
+                "p_image": item.image_url,
+                "full_name": item.name,
+                "email": item.email,
+                "is_admin": item.isAdmin
+            })
+
+        print(user_List)
+
+        return render_template('/admin/admin_user.html', user_list=res["user_list"], activeNav='users')
 
     except Exception as e:
         print(e)

@@ -95,6 +95,7 @@ def create_app():
             user_name = user_info.get('name')
 
             adminList = UserInfo.query.filter_by(email=user_email).first()
+            userList = UserInfo.query.filter_by(email=user_email).first()
 
             registered_emails = UserInfo.query.order_by(UserInfo.email).all()
 
@@ -122,6 +123,8 @@ def create_app():
                     return redirect('/admin/')
 
                 else:
+                    ph_number = userList.phone_number
+                    print(ph_number)
 
                     # user session
                     session['user_name'] = user_info['family_name']
@@ -131,8 +134,11 @@ def create_app():
                     # hasing user email as user id for session
                     session['user_id'] = helperFunc.hashValue(
                         user_info['email'])
+                    user_idd = helperFunc.hashValue(user_info['email'])
 
                     flash("You Logged in Successfully!!")
+                    if (ph_number == None):
+                        return redirect('/new-user-login')
 
                     return redirect('/')
 
