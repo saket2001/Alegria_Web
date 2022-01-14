@@ -1,3 +1,5 @@
+from calendar import c
+from unicodedata import category
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, IntegerField
 from wtforms.validators import InputRequired, Length, length, AnyOf, NumberRange
@@ -77,3 +79,19 @@ class UserContact(FlaskForm):
         InputRequired(), Length(min=10, max=300)])
     contact = IntegerField('Phone Number', validators=[
         InputRequired(), Length(min=10, max=10)])
+
+class AddAnnouncementForm(FlaskForm):
+    title = StringField("Title", validators=[
+        InputRequired(), Length(min=10, max=100)])
+    description= StringField("Description", validators=[
+        InputRequired(), Length(min=10, max=100)])
+
+class AddEventDate(FlaskForm):
+    category_name = StringField("Category Name", validators=[
+        InputRequired(), Length(min=10, max=100)])
+    event_name= StringField("Event Name", validators=[
+        InputRequired(), Length(min=10, max=100)])
+    date = StringField("Date", validators=[
+        InputRequired(), Length(min=10, max=100)])
+    time= StringField("Time", validators=[
+        InputRequired(), Length(min=10, max=100)])
