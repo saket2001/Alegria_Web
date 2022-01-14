@@ -587,6 +587,8 @@ def allUsersPage():
                 "p_image": item.image_url,
                 "full_name": item.name,
                 "email": item.email,
+                "phone_number": item.phone_number,
+                "college_name": item.college_name,
                 "is_admin": item.isAdmin
             })
 

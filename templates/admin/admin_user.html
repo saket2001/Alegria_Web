@@ -43,10 +43,11 @@ All Users
   <table class="table table-hover p-2 main-bg" style="border-bottom: brown;">
     <thead class="bg-red text-light rounded-3">
       <tr>
-        <th scope="col">Sr No</th>
-        <th scope="col">Profile Image</th>
+        <th scope="col">Profile</th>
         <th scope="col">Full Name</th>
         <th scope="col">Email</th>
+        <th scope="col">Contact</th>
+        <th scope="col">College</th>
         <th scope="col">IsAdmin</th>
       </tr>
     </thead>
@@ -54,16 +55,19 @@ All Users
       {% for ele in user_list %}
       <tr style="font-size: smaller;">
         <th scope="row">
-          {{ele["sr_no"]}}
+          <img src={{ele["p_image"]}} alt="user profile image" style="width: 60%;border-radius: 100%;">
         </th>
-        <td>
-          <img src={{ele["p_image"]}} alt="user profile image" style="width: 30%;border-radius: 100%;">
-        </td>
         <td>
           {{ele["full_name"]}}
         </td>
         <td>
           {{ele["email"]}}
+        </td>
+        <td>
+          {{ele["phone_number"]}}
+        </td>
+        <td>
+          {{ele["college_name"]}}
         </td>
         <td class="text-red main-font">
           {% if ele["is_admin"]== "0" %}
@@ -76,32 +80,6 @@ All Users
       {% endfor %}
     </tbody>
   </table>
-  <!--   
-  <div class="card bg-teal shadow-sm p-1 table-responsive" style="text-align: center">
-    <table class="table  table-hover " style="border-bottom: brown;">
-      <thead class="bg-brown" style="color:white">
-        <tr>
-          <th scope="col">Sr No</th>
-          <th scope="col">Profile Image</th>
-          <th scope="col">Full Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">IsAdmin</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for ele in user_list %}
-        <tr style="font-size: smaller;">
-          <th scope="row">{{ele["sr_no"]}}</th>
-          <td><i class="fas fa-user-shield"></i>{{ele["p_image"]}}</td>
-          <td>{{ele["full_name"]}}</td>
-          <td>{{ele["email"]}}</td>
-          <td class="text-brown"><b>{{ele["is_admin"]}}</b></td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div> -->
   {% endif %}
-
 
   {% endblock %}
