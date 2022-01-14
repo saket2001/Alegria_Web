@@ -1,7 +1,5 @@
-from flask import Blueprint, redirect, render_template, flash, url_for, session, request, current_app
+from flask import Blueprint, redirect, render_template, flash, url_for, session
 from functools import wraps
-# from flask_mail import Mail, Message
-# from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from flask_wtf.csrf import CSRFProtect
 from forms import UserContact
 from models import Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, db
@@ -53,6 +51,7 @@ def userLogin():
     except Exception as e:
         print(e)
         return redirect("/")
+
 
 @app_mbp.route("/user-details")
 def userDetails():
@@ -300,14 +299,14 @@ def polls_main():
         if session.get('user_id') != None:
             signed_in = True
 
-        res = {"type": True, "polls":[]}
+        res = {"type": True, "polls": []}
         pollsList = Poll.query.filter_by(status='Active').all()
         for item in pollsList:
             res['polls'].append({
-                "id":item.poll_id,
-                "question":item.question
+                "id": item.poll_id,
+                "question": item.question
             })
-        return render_template('user_polls_main.html',poll_cards=res['polls'], signed_in=signed_in)
+        return render_template('user_polls_main.html', poll_cards=res['polls'], signed_in=signed_in)
 
     except Exception as e:
         print(e)
@@ -325,17 +324,17 @@ def Poll_list(id):
 
         res = {"type": True, "polls": [], "images": []}
         pollsList = Poll.query.filter_by(status='Active').all()
-        nextPoll=0
+        nextPoll = 0
         for i in range(len(pollsList)):
-            if(pollsList[i].poll_id==id):
+            if(pollsList[i].poll_id == id):
                 res["polls"].append({
-                "id": pollsList[i].poll_id,
-                "question": pollsList[i].question,
-                "status": pollsList[i].status,
-                "total_votes": pollsList[i].total_votes
+                    "id": pollsList[i].poll_id,
+                    "question": pollsList[i].question,
+                    "status": pollsList[i].status,
+                    "total_votes": pollsList[i].total_votes
                 })
-                if(i<len(pollsList)-1):
-                   nextPoll=pollsList[i+1].poll_id
+                if(i < len(pollsList)-1):
+                    nextPoll = pollsList[i+1].poll_id
 
         pollsImages = PollResponses.query.filter_by(poll_id=id)
         for ele in pollsImages:
@@ -346,7 +345,7 @@ def Poll_list(id):
                 "image_url": ele.option_image,
                 "option_votes": ele.option_votes
             })
-        return render_template('user_polls.html', activeNav='events', polls=res["polls"], images=res["images"], result='',nextPoll=nextPoll,signed_in=signed_in)
+        return render_template('user_polls.html', activeNav='events', polls=res["polls"], images=res["images"], result='', nextPoll=nextPoll, signed_in=signed_in)
 
     except Exception as e:
         print(e)
@@ -364,24 +363,25 @@ def Poll_result(id, option):
 
         res = {"type": True, "polls": [], "images": []}
         pollsList = Poll.query.filter_by(status='Active').all()
-        nextPoll=0
+        nextPoll = 0
         pollsImages = PollResponses.query.filter_by(poll_id=id)
         result = ''
         votes = 0
         for i in range(len(pollsList)):
-            if(pollsList[i].poll_id==id):
+            if(pollsList[i].poll_id == id):
                 pollsList[i].total_votes = pollsList[i].total_votes+1
                 db.session.commit()
                 res["polls"].append({
-                "id": pollsList[i].poll_id,
-                "question": pollsList[i].question,
-                "status": pollsList[i].status,
-                "total_votes": pollsList[i].total_votes
+                    "id": pollsList[i].poll_id,
+                    "question": pollsList[i].question,
+                    "status": pollsList[i].status,
+                    "total_votes": pollsList[i].total_votes
                 })
-                if(i<len(pollsList)-1):
-                   nextPoll=pollsList[i+1].poll_id
-                   
-        poll_reponses = PollResponses.query.filter_by(poll_id=id,poll_option_id=option).first()
+                if(i < len(pollsList)-1):
+                    nextPoll = pollsList[i+1].poll_id
+
+        poll_reponses = PollResponses.query.filter_by(
+            poll_id=id, poll_option_id=option).first()
         poll_reponses.option_votes = poll_reponses.option_votes+1
         db.session.commit()
 
@@ -396,7 +396,7 @@ def Poll_result(id, option):
             if(votes < ele.option_votes):
                 votes = ele.option_votes
                 result = ele.poll_option_id
-        return render_template('user_polls.html', activeNav='events', polls=res["polls"], images=res["images"], result=result,nextPoll=nextPoll, signed_in=signed_in)
+        return render_template('user_polls.html', activeNav='events', polls=res["polls"], images=res["images"], result=result, nextPoll=nextPoll, signed_in=signed_in)
     except Exception as e:
         print(e)
         return redirect("/")
@@ -480,3 +480,9 @@ def eventHeadPage():
 @app_mbp.errorhandler(404)
 def WrongLinkErrorHandler(e):
     return render_template('404.html')
+
+
+@app_mbp.route('/new-user-login')
+def newUserLogin():
+    form = UserContact()
+    return render_template("user_detail.html", form=form)

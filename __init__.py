@@ -158,11 +158,7 @@ def create_app():
                     user_info['email'])
 
                 # redirect to new page for phone no and college name form
-
-                flash(
-                    "Your new account was created successfully and you are logged in now !!")
-
-                return redirect('/')
+                return redirect('/new-user-login')
 
         except Exception as e:
             print(e)
