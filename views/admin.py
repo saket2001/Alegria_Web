@@ -2,6 +2,7 @@ import uuid
 from forms import AddEventForm, AddMerchandiseForm, AddPollForm
 from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses
 import datetime
+from sqlalchemy import asc, desc
 from datetime import date
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
@@ -557,14 +558,30 @@ def adminAnnouncement():
 
 
 @admin_bp.route("/admin_user")
+@admin_login_required
 def admin_user():
-    admin_user_list = [
-        {"sr_no": "01", "p_image": "l", "full_name": "Saket Chandorkar",
-            "email": "barhatesaso19it@student.mes.ac.in", "is_admin": "yes"},
-        {"sr_no": "02", "p_image": "l", "full_name": "Saket Chandorkar",
-            "email": "abc@gmail.com", "is_admin": "no"}
-    ]
-    return render_template('/admin/admin_user.html', admin_user_list=admin_user_list)
+    try:
+        # form
+        user_List = UserInfo.query.order_by(desc("date_registered"))
+        res = {
+            "type": True,
+            "user_list": []
+        }
+        sr = 0
+        for item in user_List:
+            sr = sr+1
+            res["user_list"].append({
+                "sr_no": sr,
+                "pimage": item.image_url,
+                "full_name": item.name,
+                "email": item.email,
+                "is_admin": item.isAdmin
+            })
+
+        return render_template('/admin/admin_user.html', user_list=res["user_list"])
+    except Exception as e:
+        print(e)
+        return redirect("/")
 
 
 ###########################

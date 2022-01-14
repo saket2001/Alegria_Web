@@ -134,6 +134,7 @@ def create_app():
                     # hasing user email as user id for session
                     session['user_id'] = helperFunc.hashValue(
                         user_info['email'])
+                    user_idd = helperFunc.hashValue(user_info['email'])
 
                     flash("You Logged in Successfully!!")
                     if (ph_number == None):

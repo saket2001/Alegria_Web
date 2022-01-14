@@ -481,9 +481,10 @@ def newUserLogin():
 
 @app_mbp.route("/create-new-user", methods=['GET', 'POST'])
 @user_login_required
-def userDetails():
+def userDetails(user_idd):
     try:
         form = UserContact()
+        adminList = UserInfo.query.filter_by(id=user_idd).first()
         phone_number = request.form.get('contact')
         college_name = request.form.get('college_name')
         print(phone_number)

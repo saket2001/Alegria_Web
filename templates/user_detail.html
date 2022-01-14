@@ -210,8 +210,9 @@ Alegria 2022 | User Details
             </p>
             <!-- form -->
             <div class="contact-form p-4 mt-2" style="width: 80%;">
-                <form action="/create-new-user" method="post">
+                <form action="/create-new-user{{user_idd}}/" method="post">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                    <input type="hidden" name="user_idd" value="{{user_idd}}" />
                     <div class="input-container">
                         <input type="text" required class="input-value" />
                         {{form.college_name.label}}
