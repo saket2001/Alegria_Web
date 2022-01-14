@@ -211,27 +211,26 @@ Alegria 2022 | User Details
             </p>
             <!-- form -->
             <div class="contact-form p-4 mt-2" style="width: 80%;">
-                <form action="/create-new-user{{user_idd}}/" method="post">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                    <input type="hidden" name="user_idd" value="{{user_idd}}" />
+                <form action={{"/create-new-user/{}".format(user_id)}} method="post">
+                    {{form.csrf_token}}
                     <div class="input-container">
-                        <input type="text" required class="input-value" />
+                        <input type="text" required class="input-value" name="user_college_name" />
                         {{form.college_name.label}}
                     </div>
                     <div class="input-container">
-                        <input type="number" required min="10" maxlength="10" class="input-value" />
+                        <input type="number" required min="10" maxlength="10" class="input-value" name="user_contact" />
                         {{form.contact.label}}
                     </div>
                     <button type="submit"
                         class="button w-100 mt-1 my-1 text-teal rounded-3 border-0 main-font d-flex justify-content-center align-items-center"
                         style="background-color: #842703;">
-                        Log In
+                        Submit & Log In
                         <i class="fas fa-arrow-right ms-2"></i>
                     </button>
                 </form>
             </div>
-            <a href="/user-login" class="text-red my-2 sec-font fs-7 " style="color:#842703;">
-                Go To Homepage
+            <a href={{"/delete-user/{}".format(user_id)}} class="text-red my-2 sec-font fs-7 " style="color:#842703;">
+                Cancel & Go To Homepage
             </a>
         </div>
     </div>

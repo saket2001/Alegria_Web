@@ -164,18 +164,18 @@ def create_app():
                     user_info['email'])
 
                 # redirect to new page for phone no and college name form
-                return redirect('/new-user-login')
+                return redirect('/new-user-login/{}'.format(user_id))
 
         except Exception as e:
             print(e)
-            # return render_template('401.html')
+            return redirect('/')
 
     @app.route('/session-logout')
     def admin_logout():
         for key in list(session.keys()):
             session.pop(key)
 
-        return redirect('/user-login')
+        return redirect('/')
 
     # enable csrf
     csrf.init_app(app)

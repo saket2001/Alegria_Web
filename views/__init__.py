@@ -472,27 +472,41 @@ def WrongLinkErrorHandler(e):
     return render_template('404.html')
 
 
-@app_mbp.route('/new-user-login')
+@app_mbp.route('/new-user-login/<user_id>')
 @user_login_required
-def newUserLogin():
+def newUserLogin(user_id):
     form = UserContact()
-    return render_template("user_detail.html", form=form)
+    return render_template("user_detail.html", form=form, user_id=user_id)
 
 
-@app_mbp.route("/create-new-user", methods=['GET', 'POST'])
+@app_mbp.route("/create-new-user/<user_id>", methods=['GET', 'POST'])
 @user_login_required
-def userDetails(user_idd):
+def userDetails(user_id):
     try:
-        form = UserContact()
-        adminList = UserInfo.query.filter_by(id=user_idd).first()
-        phone_number = request.form.get('contact')
-        college_name = request.form.get('college_name')
-        print(phone_number)
-        Details = UserInfo(phone_number=phone_number,
-                           college_name=college_name)
-        db.session.add(Details)
+        adminList = UserInfo.query.filter_by(id=user_id).first()
+        phone_number = request.form.get('user_contact')
+        college_name = request.form.get('user_college_name')
+
+        adminList.phone_number = phone_number
+        adminList.college_name = college_name
+
         db.session.commit()
         return redirect('/')
+
     except Exception as e:
         print(e)
         return redirect("/")
+
+
+@app_mbp.route("/delete-user/<user_id>")
+def deleteUserOnCancel(user_id):
+    try:
+        user_details = UserInfo.query.filter_by(id=user_id).first()
+        db.session.delete(user_details)
+        db.session.commit()
+
+        return redirect('/session-logout')
+
+    except Exception as e:
+        print(e)
+        return redirect('/')
