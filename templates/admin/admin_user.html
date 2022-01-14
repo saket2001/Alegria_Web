@@ -1,46 +1,79 @@
 {% extends '/admin/admin_layout.html' %}
 
 {% block title %}
-Admin_User
+All Users
 {% endblock %}
+
 {% block content %}
-<br>
-<div class="container" >
-    <div class=" row d-flex align-items-center">
+<div class="container py-3">
+  <div class="row d-flex align-items-center my-1">
     <div class="col my-1">
-        <h5><b>All Registered Users</b></h5>
+      <h5 class="fs-5 main-font text-black">All Registered Users</h5>
     </div>
     <div class="col-md-auto my-1">
-        <a href="#" class="button outline_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Filter by latest&nbsp;&nbsp;<i class="fas fa-chevron-down"></i></a>
+      <li class="filter_btn p-2 py-1 rounded d-flex align-items-center fs-6 dropdown fw-bold">
+        <div class='dropdown-toggle fs-7' id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          Filter by
+          latest
+        </div>
+        <ul class="dropdown-menu main-bg" aria-labelledby="dropdownMenuButton1">
+          <li>
+            <a class="dropdown-item" href="/admin/users?filter=newest">By Newest</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="/admin/users?filter=oldest">By Oldest</a>
+          </li>
+        </ul>
+      </li>
     </div>
+  </div>
 </div>
-</div>
-<br>
 
-<div class="card bg-teal shadow-sm p-1 table-responsive" style="text-align: center">
-    <table class="table  table-hover " style="border-bottom: brown;" >
-        <thead class="bg-brown" style="color:white">
-            <tr >
-            <th scope="col">Sr No</th>
-            <th scope="col">Profile Image</th>
-            <th scope="col">Full Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">IsAdmin</th>
-          </tr>
-        </thead>
-        <tbody>
-            {% for ele in admin_user_list %}
-          <tr style="font-size: smaller;">
-            <th scope="row" >{{ele["sr_no"]}}</th>
-            <td><i class="fas fa-user-shield"></i>{{ele["p_image"]}}</td>
-            <td>{{ele["full_name"]}}</td>
-            <td>{{ele["email"]}}</td>
-            <td class="text-brown"><b>{{ele["is_admin"]}}</b></td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+{% if admin_user_list==[] %}
+<div class="container d-flex align-items-center justify-content-center py-5">
+  <h3 class="sec-font fs-4">
+    <i class="fa fa-exclamation-triangle text-black me-2" aria-hidden="true"></i>
+    No Users Found. Try Again Later
+  </h3>
 </div>
+{% endif %}
+
+{% if admin_user_list != [] %}
+<div class="shadow-md px-2 py-4 table-responsive rounded-2 main-bg" style="text-align: center">
+  <table class="table table-hover p-2 main-bg" style="border-bottom: brown;">
+    <thead class="bg-red text-light rounded-3">
+      <tr>
+        <th scope="col">Sr No</th>
+        <th scope="col">Profile Image</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">IsAdmin</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ele in admin_user_list %}
+      <tr style="font-size: smaller;">
+        <th scope="row">
+          {{ele["sr_no"]}}
+        </th>
+        <td>
+          <img src={{ele["p_image"]}} alt="user profile image" style="width: 30%;border-radius: 100%;">
+        </td>
+        <td>
+          {{ele["full_name"]}}
+        </td>
+        <td>
+          {{ele["email"]}}
+        </td>
+        <td class="text-red main-font">
+          {{ele["is_admin"]}}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
 
 
 {% endblock %}

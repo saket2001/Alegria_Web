@@ -556,15 +556,26 @@ def adminAnnouncement():
     return render_template('/admin/admin_announcements.html', announcement=announcement, event_announcement=event_announcement)
 
 
-@admin_bp.route("/admin_user")
-def admin_user():
-    admin_user_list = [
-        {"sr_no": "01", "p_image": "l", "full_name": "Saket Chandorkar",
-            "email": "barhatesaso19it@student.mes.ac.in", "is_admin": "yes"},
-        {"sr_no": "02", "p_image": "l", "full_name": "Saket Chandorkar",
-            "email": "abc@gmail.com", "is_admin": "no"}
-    ]
-    return render_template('/admin/admin_user.html', admin_user_list=admin_user_list)
+@admin_bp.route("/users")
+def allUsersPage():
+    try:
+        # by default show newest users first
+        filter_value = request.args['filter']
+        print(filter_value)
+
+        # route for filters too i.e ?filter=oldest and ?filter=newest
+
+        admin_user_list = [
+            {"sr_no": "01", "p_image": "https://lh3.googleusercontent.com/a-/AOh14GhY5zpkUNn0ShhsJlE8xKP_R3-BrRCKNH6GYa53xg=s96-c", "full_name": "Saket Chandorkar",
+             "email": "barhatesaso19it@student.mes.ac.in", "is_admin": "yes"},
+            {"sr_no": "02", "p_image": "https://lh3.googleusercontent.com/a-/AOh14GhY5zpkUNn0ShhsJlE8xKP_R3-BrRCKNH6GYa53xg=s96-c", "full_name": "Saket Chandorkar",
+             "email": "abc@gmail.com", "is_admin": "no"}
+        ]
+        return render_template('/admin/admin_user.html', admin_user_list=admin_user_list, activeNav='users')
+
+    except Exception as e:
+        print(e)
+        return redirect('/admin')
 
 
 ###########################
