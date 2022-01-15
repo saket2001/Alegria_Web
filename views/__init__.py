@@ -2,9 +2,9 @@ from flask import Blueprint, redirect, render_template, flash, url_for, session,
 from functools import wraps
 from flask_wtf.csrf import CSRFProtect
 from forms import UserContact
-from models import Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, db, UserInfo
+from models import Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, db, UserInfo, Announcement, EventsToday
 import basicData as client_data
-
+from datetime import datetime
 # csrf
 csrf = CSRFProtect()
 
@@ -432,33 +432,52 @@ def AnnouncementsPage():
         # checks if logged in
         if session.get('user_id') != None:
             signed_in = True
+        
+        today = datetime.now().strftime('%x')
+        # day1 = [
+        #     {"category": "Management",
+        #         "event": "Advertisement Making(Ace the Ad!)", "time": "10:00 AM"},
+        #     {"category": "Sports", "event": "Chess", "time": "10:00 AM"},
+        #     {"category": "Fine Arts", "event": "Sketching", "time": "11:00 AM"},
+        #     {"category": "Fine Arts", "event": "Canvas Painting", "time": "11:00 AM"},
+        #     {"category": "Informals", "event": "Face of Alegria", "time": "12:00 PM"},
+        # ]
+        day1 = []
+        events_today = EventsToday.query.filter_by(date=today).all()
+        for events in events_today:
+            res = {
+                "category": events.category,
+                "event": events.event,
+                "time": events.time,
+            }
+            day1.append(res)
+        # alerts_announcements = [
+        #     {
+        #         "title": "Alert Alegrians ! Event Updates",
+        #         "timestamp": "12 th Jan 2022, 10.00 am",
+        #         "description": "Sport Event Box Circket is been cancelled due to uprising covid cases and won’t be played this year. All the registration fees for this event can be collected later."
+        #     },
+        #     {
+        #         "title": "Alert Alegrians ! Event Updates",
+        #         "timestamp": "12 th Jan 2022, 10.00 am",
+        #         "description": "Sport Event Box Circket is been cancelled due to uprising covid cases and won’t be played this year. All the registration fees for this event can be collected later."
+        #     },
+        #     {
+        #         "title": "Alert Alegrians ! Event Updates",
+        #         "timestamp": "12 th Jan 2022, 10.00 am",
+        #         "description": "Sport Event Box Circket is been cancelled due to uprising covid cases and won’t be played this year. All the registration fees for this event can be collected later."
+        #     },
 
-        day1 = [
-            {"category": "Management",
-                "event": "Advertisement Making(Ace the Ad!)", "time": "10:00 AM"},
-            {"category": "Sports", "event": "Chess", "time": "10:00 AM"},
-            {"category": "Fine Arts", "event": "Sketching", "time": "11:00 AM"},
-            {"category": "Fine Arts", "event": "Canvas Painting", "time": "11:00 AM"},
-            {"category": "Informals", "event": "Face of Alegria", "time": "12:00 PM"},
-        ]
-        alerts_announcements = [
-            {
-                "title": "Alert Alegrians ! Event Updates",
-                "timestamp": "12 th Jan 2022, 10.00 am",
-                "description": "Sport Event Box Circket is been cancelled due to uprising covid cases and won’t be played this year. All the registration fees for this event can be collected later."
-            },
-            {
-                "title": "Alert Alegrians ! Event Updates",
-                "timestamp": "12 th Jan 2022, 10.00 am",
-                "description": "Sport Event Box Circket is been cancelled due to uprising covid cases and won’t be played this year. All the registration fees for this event can be collected later."
-            },
-            {
-                "title": "Alert Alegrians ! Event Updates",
-                "timestamp": "12 th Jan 2022, 10.00 am",
-                "description": "Sport Event Box Circket is been cancelled due to uprising covid cases and won’t be played this year. All the registration fees for this event can be collected later."
-            },
-
-        ]
+        # ]
+        alerts_announcements = []
+        announcements= Announcement.query.all()
+        for announcement in announcements:
+            res = {
+                "title" : announcement.title,
+                "timestamp": announcement.timestamp,
+                "description": announcement.title_desc
+            }
+            alerts_announcements.append(res)
         return render_template('user_announcements.html', activeNav='Announcements', day1=day1, alerts_announcements=alerts_announcements, len=len, signed_in=signed_in)
 
     except Exception as e:

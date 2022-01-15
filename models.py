@@ -174,11 +174,19 @@ class Celebrity(db.Model):
 
 class Announcement(db.Model):
     __tablename__ = 'announcement'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     title = db.Column(db.String(20), nullable=False)
     title_desc = db.Column(db.String(100), nullable=False)
+    timestamp = db.Column(db.String(50), nullable=True)
 
-
+class EventsToday(db.Model):
+    __tablename__ = 'events_today'
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    category = db.Column(db.String(50),nullable=False)
+    event = db.Column(db.String(100),nullable=False)
+    time = db.Column(db.String(50),nullable=False)
+    date = db.Column(db.String(50),nullable=False)
+    
 class Merchandise(db.Model):
     __tablename__ = 'merchandise'
     id = db.Column(db.String(10), primary_key=True)

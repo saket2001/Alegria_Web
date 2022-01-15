@@ -81,13 +81,23 @@ class UserContact(FlaskForm):
         InputRequired(), Length(min=10, max=10)])
 
 
-class AddAnnouncementForm(FlaskForm):
-    title = StringField("Title", validators=[
-        InputRequired(), Length(min=10, max=100)])
-    description = TextAreaField("Description", validators=[
-        InputRequired(), Length(min=10, max=100)])
+class AddAnnouncement(FlaskForm):
+    title = StringField('Announcement Title', validators=[
+        InputRequired()])
+    description = StringField('Announcement Description', validators=[
+        InputRequired()])
+    timestamp = StringField('Date and time', validators=[
+        InputRequired()])
+    
 
-
+class AddEventsToday(FlaskForm):
+    category = StringField('Event category', validators=[
+        InputRequired()])
+    event = StringField('Event name', validators=[
+        InputRequired()])
+    time = StringField('Event time', validators=[
+        InputRequired()])
+        
 class AddEventDate(FlaskForm):
     category_name = StringField("Category Name", validators=[
         InputRequired(), Length(min=10, max=100)])
