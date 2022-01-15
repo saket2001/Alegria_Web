@@ -1,0 +1,6 @@
+// hides loader
+
+window.onload = (e) => {
+  document.querySelector(".loading-bg").classList.add("hide");
+  document.querySelector(".loader").classList.add("hide");
+};

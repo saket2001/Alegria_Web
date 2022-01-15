@@ -10,6 +10,7 @@
     integrity="sha512-5/OHwmQzDSBS0Ous4/hlYoWLHd06/d2r7LdKZQVBXOA6PvOqWVXtdboiLTU7lQTGyVoKVTNkwi0ol4gHGlw5ww=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script defer src="/static/js/homepage.js"></script>
+<script defer src="/static/js/loading.js"></script>
 {% endblock %}
 
 {% block title %}
@@ -19,6 +20,14 @@ Alegria 2022 | Homepage
 {% block body %}
 
 <body>
+    <div class="loading-bg">
+    </div>
+    <div class="loader d-flex flex-column align-items-center justify-content-center">
+        <div class="loader-div d-flex align-items-center p-1 rounded-2">
+            <div class="loader-div__inner rounded-2" style="height: 1.3rem;"></div>
+        </div>
+        <p class="loader-div__text main-font fs-4 mt-2">Loading Alegria ...</p>
+    </div>
     <!-- nav -->
     <nav class="w-100 navbar navbar-expand-lg navbar-light p-2 py-3 parallax_navbar">
         <div class="container-fluid">

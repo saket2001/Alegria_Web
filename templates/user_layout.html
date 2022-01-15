@@ -3,12 +3,22 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{url_for('static',filename='/css/user.css')}}">
+<script src="/static/js/loading.js"></script>
+
 {% block headContent %}
 {% endblock headContent %}
 
 {% endblock head %}
 
 {% block body %}
+<div class="loading-bg">
+</div>
+<div class="loader d-flex flex-column align-items-center justify-content-center">
+    <div class="loader-div d-flex align-items-center p-1 rounded-2">
+        <div class="loader-div__inner rounded-2" style="height: 1.3rem;"></div>
+    </div>
+    <p class="loader-div__text main-font fs-4 mt-2">Loading Alegria ...</p>
+</div>
 
 <body class="min-vh-100">
     <nav class="navbar navbar-main navbar-expand-lg navbar-light p-2 position-relative">

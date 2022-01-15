@@ -16,6 +16,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 :root {
@@ -149,6 +150,70 @@ a.text-beige:hover {
 
 a.text-black:hover {
     color: var(--u_black);
+}
+
+/* loader */
+.loading-bg {
+    height: 100vh;
+    min-width: 100%;
+    z-index: 5;
+    position: fixed;
+    overflow-y: hidden;
+    background: #FAE5B1;
+    background: -webkit-linear-gradient(to bottom, #FAE5B1 10%, #FC9E2D);
+    background: linear-gradient(to bottom, #FAE5B1 2%, #FC9E2D 70%)
+}
+
+.loader {
+    width: 100%;
+    z-index: 6;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #f7f5f3;
+    transform: translate(-50%, -50%);
+    transition: opacity .3s linear;
+}
+
+.loader .loader-div {
+    width: 30%;
+    border: 1px solid #f7f5f3;
+}
+
+.loader-div .loader-div__inner {
+    background-color: #f7f5f3;
+}
+
+.loader .loader-div__inner {
+    width: 0%;
+    animation: load 3s ease infinite;
+}
+
+.hide {
+    opacity: 0;
+    display: none !important;
+}
+
+@keyframes load {
+    0% {
+        width: 10%;
+    }
+
+    25% {
+        width: 25%;
+    }
+
+    50% {
+        width: 50%;
+    }
+
+    75% {
+        width: 75%;
+    }
+
+    100% {
+        width: 100%;
+    }
 }
 
 /* nav bar */
@@ -658,6 +723,13 @@ button:hover {
 /* for mobile screens */
 
 @media screen and (max-width :600px) {
+    .loader .loader-div {
+        width: 70%;
+    }
+
+    .hide {
+        display: none !important;
+    }
 
     .navbar-main .navbar_links,
     .navbar_links {
