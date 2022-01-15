@@ -1,9 +1,9 @@
 import uuid
-from forms import AddAnnouncementForm, AddEventDate, AddEventForm, AddMerchandiseForm, AddPollForm
-from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses
+from forms import AddAnnouncement, AddEventDate, AddEventForm, AddMerchandiseForm, AddPollForm
+from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses, Announcement, EventsToday
 import datetime
 from sqlalchemy import asc, desc
-from datetime import date
+from datetime import date, datetime
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
 from flask import Blueprint, redirect, render_template, session, request
@@ -538,25 +538,69 @@ def togglestatus(poll_id):
 
 
 @admin_bp.route('/announcements')
-@admin_login_required
+# @admin_login_required
 def adminAnnouncement():
     try:
-        form = AddAnnouncementForm()
+        form = AddAnnouncement()
         form2 = AddEventDate()
-        announcement = [
-            {"a_id": "01", "date": "12th Jan 2022", "time": "10:00 am",
-                "announcement": "Sport Event Box Circket is been cancelled due to uprising covid cases and won't be played this year. All the registration fees for this event can be collected later."},
-            {"a_id": "02", "date": "13th Jan 2022", "time": "11:00 am",
-                "announcement": "Sport Event Box Circket is been cancelled due to uprising covid cases and won't be played this year. All the registration fees for this event can be collected later."}
-        ]
+        announcement = Announcement.query.all()
+
+        res = []
+        for item in announcement:
+            res.append({
+                "a_id": item.id,
+                
+                "announcement": item.title_desc,
+                "date": item.timestamp.split(',')[0],
+                "time": item.timestamp.split(',')[1]
+                
+            })
+        # announcement = [
+        #     {   
+        #         "a_id": "01", 
+        #         "date": "12th Jan 2022", 
+        #         "time": "10:00 am",
+        #         "announcement": "Sport Event Box Circket is been cancelled due to uprising covid cases and won't be played this year. All the registration fees for this event can be collected later."
+        #     },
+        #     {   
+        #         "a_id": "02", 
+        #         "date": "13th Jan 2022", 
+        #         "time": "11:00 am",
+        #         "announcement": "Sport Event Box Circket is been cancelled due to uprising covid cases and won't be played this year. All the registration fees for this event can be collected later."
+        #     }
+        # ]
 
         event_announcement = [
-            {"date": "11/02/2022", "event_name1": "Sports-Box Cricket", "time1": "10:00 AM", "event_name2": "Sports-Box Cricket",
-                "time2": "10:00 AM", "event_name3": "Sports-Box Cricket", "time3": "10:00 AM"},
-            {"date": "12/02/2022", "event_name1": "Sports-Box Cricket", "time1": "10:00 AM", "event_name2": "Sports-Box Cricket",
-                "time2": "10:00 AM", "event_name3": "Sports-Box Cricket", "time3": "10:00 AM"},
+            {
+                "date": "11/02/2022", 
+                "event_name1": "Sports-Box Cricket", 
+                "time1": "10:00 AM", 
+                "event_name2": "Sports-Box Cricket",
+                "time2": "10:00 AM", 
+                "event_name3": "Sports-Box Cricket", 
+                "time3": "10:00 AM"
+            },
+            {
+                "date": "12/02/2022", 
+                "event_name1": "Sports-Box Cricket", 
+                "time1": "10:00 AM", 
+                "event_name2": "Sports-Box Cricket",
+                "time2": "10:00 AM", 
+                "event_name3": "Sports-Box Cricket", 
+                "time3": "10:00 AM"
+            },
         ]
-        return render_template('/admin/admin_announcements.html', announcement=announcement, event_announcement=event_announcement, form=form, form2=form2)
+        event_announcement = []
+        today = datetime.now().strftime('%x')
+
+        events_today = EventsToday.query.filter_by(date=today).all()
+        for events in events_today:
+            event_announcement.append({
+                # "category": events.category,
+                "event": events.event,
+                "time": events.time,
+            })
+        return render_template('/admin/admin_announcements.html', announcement=res, event_announcement=event_announcement, form=form, form2=form2)
     except Exception as e:
         print(e)
         return redirect('/')
@@ -602,3 +646,66 @@ def allUsersPage():
 
 
 ###########################
+
+@admin_bp.route('/announcements', methods=["POST"])
+@admin_login_required
+def addAnnouncement():
+    if request.method == "POST":
+        try:
+            title = request.form.get('title')
+            title_desc = request.form.get('description')
+            timestamp = request.form.get('timestamp')
+            newAnnouncement = Announcement(title,title_desc,timestamp)
+            db.session.add(newAnnouncement)
+            db.session.commit()
+
+        except Exception as e:
+            print(e)
+            return redirect("/")
+    return redirect('/admin/')
+
+@admin_bp.route('/add-events-today', methods=["POST"])
+@admin_login_required
+def addEventsToday():
+    if request.method == "POST":
+        try:
+            category = request.form.get('category')
+            event = request.form.get('event')
+            time = request.form.get('time')
+            newEvent = EventsToday(category,event,time)
+            db.session.add(newEvent)
+            db.session.commit()
+
+        except Exception as e:
+            print(e)
+            return redirect("/")
+    return redirect('/admin/')
+
+@ admin_bp.route("/announcements/<announcement_id>/delete", methods=["GET", "POST"])
+@admin_login_required
+def deleteAnnouncement(announcement_id):
+    try:
+        announcement = Announcement.query.filter_by(id=announcement_id).first()
+
+        db.session.delete(announcement)
+        db.session.commit()
+        return redirect('/admin/announcements')
+
+    except Exception as e:
+        print(e)
+        return redirect("/")
+
+@ admin_bp.route("/events-today/<event_today_id>/delete", methods=["GET", "POST"])
+@admin_login_required
+def deleteEventToday(event_today_id):
+    try:
+        event = EventsToday.query.filter_by(id=event_today_id).first()
+
+        db.session.delete(event)
+        db.session.commit()
+        return redirect('/admin/announcements')
+
+    except Exception as e:
+        print(e)
+        return redirect("/")
+############################
