@@ -280,6 +280,20 @@ def hackathonDetails():
         return redirect("/")
 
 
+##########################
+
+@app_mbp.route("/sponsors")
+def sponsorsPage():
+    try:
+        return render_template('404.html')
+
+    except Exception as e:
+        print(e)
+        return redirect("/")
+
+##########################
+
+
 @app_mbp.route("/polls")
 def polls_main():
     try:

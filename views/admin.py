@@ -83,7 +83,7 @@ def adminLogin():
 
 
 @admin_bp.route('/')
-# @admin_login_required
+@admin_login_required
 def home():
     try:
         today = date.today()
@@ -108,7 +108,7 @@ def home():
 
 
 @admin_bp.route('/events/<event_category>', methods=['GET', 'POST'])
-# @admin_login_required
+@admin_login_required
 def events(event_category):
     # form
     try:
@@ -149,7 +149,7 @@ def events(event_category):
 
 
 @admin_bp.route('/add-event', methods=["POST"])
-# @admin_login_required
+@admin_login_required
 def addEvent():
     if request.method == "POST":
         try:
@@ -251,7 +251,7 @@ def editEventDetails(category, event_id):
 
 
 @ admin_bp.route("/events/<category>/<event_id>/delete", methods=['GET', 'POST'])
-# @admin_login_required
+@admin_login_required
 def deleteevent(category, event_id):
     try:
         post = Eventdemo.query.filter_by(id=event_id).first()
@@ -384,7 +384,7 @@ def editMerchandiseDetails(merchandise_category, merchandise_id):
 
 
 @ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/delete", methods=["GET", "POST"])
-# @admin_login_required
+@admin_login_required
 def deletemerchandise(merchandise_category, merchandise_id):
     try:
         merch = Merchandise.query.filter_by(id=merchandise_id).first()
