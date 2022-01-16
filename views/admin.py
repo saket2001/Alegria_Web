@@ -568,8 +568,8 @@ def adminAnnouncement():
         if dateToFilter == None or dateToFilter == "None":
             today = datetime.datetime.now().strftime('%x')
         else:
-            li=dateToFilter.split('-')
-            today=''+li[1]+'/'+li[2]+'/'+li[0][2:]
+            li = dateToFilter.split('-')
+            today = ''+li[1]+'/'+li[2]+'/'+li[0][2:]
         events_today = EventsToday.query.filter_by(date=str(today)).all()
 
         for events in events_today:
@@ -638,7 +638,7 @@ def deleteAnnouncement(announcement_id):
 
         db.session.delete(announcement)
         db.session.commit()
-        return redirect('/admin/announcements')
+        return redirect('/admin/announcements?filter=newest&date=None')
 
     except Exception as e:
         print(e)
@@ -653,21 +653,7 @@ def deleteEventToday(event_today_id):
 
         db.session.delete(event)
         db.session.commit()
-        return redirect('/admin/announcements')
-
-    except Exception as e:
-        print(e)
-        return redirect("/")
-
-
-@admin_bp.route("/events-today/<for_date>", methods=["GET", "POST"])
-@admin_login_required
-def filterEventsToday(for_date):
-    try:
-        print(for_date)
-        eventsList = EventsToday.query.filter_by(date=for_date).first()
-
-        return redirect('/admin/announcements')
+        return redirect('/admin/announcements?filter=newest&date=None')
 
     except Exception as e:
         print(e)
