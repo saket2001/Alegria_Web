@@ -432,7 +432,7 @@ def AnnouncementsPage():
         # checks if logged in
         if session.get('user_id') != None:
             signed_in = True
-
+        filter_value = request.args['filter']
         today = datetime.now().strftime('%x')
 
         day1 = []
@@ -454,6 +454,8 @@ def AnnouncementsPage():
                 "description": announcement.title_desc
             }
             alerts_announcements.append(res)
+        if filter_value=='latest':
+            alerts_announcements.reverse()
         return render_template('user_announcements.html', activeNav='Announcements', day1=day1, alerts_announcements=alerts_announcements, len=len, signed_in=signed_in)
 
     except Exception as e:

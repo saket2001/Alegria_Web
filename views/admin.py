@@ -565,13 +565,11 @@ def adminAnnouncement():
 
         event_announcements = []
         dateToFilter = request.args['date']
-        print(dateToFilter)
-
         if dateToFilter == None or dateToFilter == "None":
             today = datetime.datetime.now().strftime('%x')
         else:
-            today = dateToFilter
-
+            li=dateToFilter.split('-')
+            today=''+li[1]+'/'+li[2]+'/'+li[0][2:]
         events_today = EventsToday.query.filter_by(date=str(today)).all()
 
         for events in events_today:
@@ -582,9 +580,6 @@ def adminAnnouncement():
                 "date": events.date,
                 "time": events.time,
             })
-
-        print(event_announcements)
-
         return render_template('/admin/admin_announcements.html', activeNav="announcements", announcementsList=announcementsList, event_announcement=event_announcements, announcementForm=announcementForm, eventsTodayForm=eventsTodayForm)
 
     except Exception as e:

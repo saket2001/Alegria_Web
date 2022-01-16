@@ -105,6 +105,7 @@ Alegria 2022 | Announcements
           <div>
             <h4 class="text-center sec-font fs-4 mt-5 mb-3">EVENTS HAPPENING TODAY</h4>
             {% for ele in day1 %}
+            <hr style="background-color:brown; border: 1px solid brown; margin: 0 1rem;">
             <div class="row row-cols-1 row-cols-sm-4 row-cols-md-4 m-2 px-4 py-1 d-flex align-items-center">
               <h3 class="col-12 text-center text-red main-font p-0 m-0 mb-1 fs-5">
                 {{ele['event']}}
@@ -116,7 +117,6 @@ Alegria 2022 | Announcements
                 {{ele['time']}}
               </p>
             </div>
-            <hr style="background-color:brown; border: 2px solid brown; margin: 0 1rem;">
             {% endfor %}
             <br>
           </div>
@@ -141,7 +141,7 @@ Alegria 2022 | Announcements
           </div>
           <ul class="dropdown-menu" style="background-color: #F8E2B2;" aria-labelledby="dropdownMenuButton1">
             <li>
-              <a class="dropdown-item fs-7" href="/announcements">Sort Ascending</a>
+              <a class="dropdown-item fs-7" href="/announcements?filter=latest">Sort Ascending</a>
             </li>
           </ul>
         </li>
