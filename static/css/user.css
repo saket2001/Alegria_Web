@@ -236,6 +236,10 @@ a.text-black:hover {
     margin: 0 0.2rem;
 }
 
+.dropdown-item:hover {
+    color: var(--u_black);
+}
+
 .parallax_navbar .navbar_links {
     color: var(--u_red);
     padding: 0.2rem 0.6rem;
@@ -243,11 +247,6 @@ a.text-black:hover {
 }
 
 /* homepage */
-
-/* .parallax_section {
-    height: 100%;
-} */
-
 .parallax-container {
     height: 100vh;
 }
@@ -260,7 +259,6 @@ a.text-black:hover {
 }
 
 .parallax-container .parallax_images .land {
-    /* height: 20vh; */
     height: 30vh;
 }
 

@@ -2,7 +2,6 @@
 
 
 {% block head %}
-<link rel="stylesheet" href="{{url_for('static',filename='/css/user.css')}}">
 <script src="/static/js/loading.js"></script>
 
 {% block headContent %}
@@ -121,35 +120,27 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class='navbar_links dropdown-toggle' id="dropdownMenuButton2" data-bs-toggle="dropdown"
-                            aria-expanded="false" {% if activeNav=='News' %}
-                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>More</a>
+                            aria-expanded="false">More</a>
                         <ul class="dropdown-menu border-0" style="background-color: #681b0aec;"
                             aria-labelledby="dropdownMenuButton2">
                             <li>
-                                <a href="/about-us" class="dropdown-item navbar_links" {% if activeNav=='About us' %}
-                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>About Us</a>
+                                <a href="/about-us" class="dropdown-item navbar_links">About Us</a>
                             </li>
                             <li>
-                                <a href="/polls" class="dropdown-item navbar_links" {% if activeNav=='Polls' %}
-                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Polls</a>
+                                <a href="/polls" class="dropdown-item navbar_links">Polls</a>
                             </li>
                             <li>
-                                <a href="/announcements?filter=None" class="dropdown-item navbar_links" {% if
-                                    activeNav=='Announcements' %}
-                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
-                                    %}>Announcements</a>
+                                <a href="/announcements?filter=None"
+                                    class="dropdown-item navbar_links">Announcements</a>
                             </li>
                             <li>
-                                <a href="/sponsors" class="dropdown-item navbar_links" {% if activeNav=='Sponsors' %}
-                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Sponsors</a>
+                                <a href="/sponsors" class="dropdown-item navbar_links">Sponsors</a>
                             </li>
                             <li>
-                                <a href="/developers" class="dropdown-item navbar_links" {% if activeNav=='Sponsors' %}
-                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Developers</a>
+                                <a href="/developers" class="dropdown-item navbar_links">Developers</a>
                             </li>
                             <li>
-                                <a href="/event-heads" class="dropdown-item navbar_links" {% if activeNav=='Event Heads'
-                                    %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Event
+                                <a href="/event-heads" class="dropdown-item navbar_links">Event
                                     Heads</a>
                             </li>
                         </ul>
