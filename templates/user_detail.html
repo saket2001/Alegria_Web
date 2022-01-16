@@ -44,7 +44,6 @@
     }
 
     .alg-logo {
-
         z-index: 1;
         position: absolute;
         top: 50%;
@@ -60,19 +59,10 @@
         margin-bottom: 2vh;
     }
 
-    /*  */
+    /*     
     .input-container {
         position: relative;
         margin-bottom: 25px;
-    }
-
-    .input-container label {
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        font-size: 17px;
-        /* pointer-event: none; */
-        transition: all 0.5s ease-in-out;
     }
 
     .input-container input {
@@ -89,7 +79,7 @@
         border: none;
         outline: none;
         border-bottom: 1px solid #e74c3c;
-    }
+    }  */
 
     .btn {
         color: #fff;
@@ -105,20 +95,12 @@
         position: relative;
     }
 
-    /*.btn:after{
-    	content:"";
-    	position:absolute;
-    	background:rgba(0,0,0,0.50);
-    	top:0;
-    	right:0;
-    	width:100%;
-    	height:100%;
-    }*/
+    /*    
     .input-container input:focus~label,
     .input-container input:valid~label {
         top: -12px;
         font-size: 12px;
-    }
+    } */
 
     @media screen and (max-width:600px) {
         .login-page {
@@ -213,14 +195,16 @@ Alegria 2022 | User Details
             <div class="contact-form p-4 mt-2" style="width: 80%;">
                 <form action={{"/create-new-user/{}".format(user_id)}} method="post">
                     {{form.csrf_token}}
-                    <div class="input-container">
-                        <input type="text" required class="input-value" name="user_college_name" />
-                        {{form.college_name.label}}
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="user_college_name" id="floatingInput1">
+                        <label for="floatingInput1">College Name</label>
                     </div>
-                    <div class="input-container">
-                        <input type="number" required min="10" maxlength="10" class="input-value" name="user_contact" />
-                        {{form.contact.label}}
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" name="user_contact" id="floatingInput2">
+                        <label for="floatingInput2">Contact No</label>
                     </div>
+
                     <button type="submit"
                         class="button w-100 mt-1 my-1 text-teal rounded-3 border-0 main-font d-flex justify-content-center align-items-center"
                         style="background-color: #842703;">

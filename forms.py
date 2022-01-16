@@ -1,5 +1,6 @@
 from calendar import c
 from unicodedata import category
+from xmlrpc.client import DateTime
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, IntegerField
 from wtforms.validators import InputRequired, Length, length, AnyOf, NumberRange
@@ -84,26 +85,18 @@ class UserContact(FlaskForm):
 class AddAnnouncement(FlaskForm):
     title = StringField('Announcement Title', validators=[
         InputRequired()])
-    description = StringField('Announcement Description', validators=[
+    description = TextAreaField('Announcement Description', validators=[
         InputRequired()])
     timestamp = StringField('Date and time', validators=[
         InputRequired()])
-    
+
 
 class AddEventsToday(FlaskForm):
     category = StringField('Event category', validators=[
         InputRequired()])
     event = StringField('Event name', validators=[
         InputRequired()])
+    date = StringField('Event Date', validators=[
+        InputRequired()])
     time = StringField('Event time', validators=[
         InputRequired()])
-        
-class AddEventDate(FlaskForm):
-    category_name = StringField("Category Name", validators=[
-        InputRequired(), Length(min=10, max=100)])
-    event_name = StringField("Event Name", validators=[
-        InputRequired(), Length(min=10, max=100)])
-    date = StringField("Date", validators=[
-        InputRequired(), Length(min=10, max=100)])
-    time = StringField("Time", validators=[
-        InputRequired(), Length(min=10, max=100)])

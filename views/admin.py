@@ -1,9 +1,10 @@
 import uuid
-from forms import AddAnnouncement, AddEventDate, AddEventForm, AddMerchandiseForm, AddPollForm
+from forms import AddAnnouncement, AddEventsToday, AddEventForm, AddMerchandiseForm, AddPollForm
 from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses, Announcement, EventsToday
 import datetime
 from sqlalchemy import asc, desc
-from datetime import date, datetime
+import datetime
+from datetime import date
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
 from flask import Blueprint, redirect, render_template, session, request
@@ -538,72 +539,147 @@ def togglestatus(poll_id):
 
 
 @admin_bp.route('/announcements')
-# @admin_login_required
+@admin_login_required
 def adminAnnouncement():
     try:
-        form = AddAnnouncement()
-        form2 = AddEventDate()
-        announcement = Announcement.query.all()
+        announcementForm = AddAnnouncement()
+        eventsTodayForm = AddEventsToday()
 
-        res = []
-        for item in announcement:
-            res.append({
-                "a_id": item.id,
-                
-                "announcement": item.title_desc,
-                "date": item.timestamp.split(',')[0],
-                "time": item.timestamp.split(',')[1]
-                
-            })
-        # announcement = [
-        #     {   
-        #         "a_id": "01", 
-        #         "date": "12th Jan 2022", 
-        #         "time": "10:00 am",
-        #         "announcement": "Sport Event Box Circket is been cancelled due to uprising covid cases and won't be played this year. All the registration fees for this event can be collected later."
-        #     },
-        #     {   
-        #         "a_id": "02", 
-        #         "date": "13th Jan 2022", 
-        #         "time": "11:00 am",
-        #         "announcement": "Sport Event Box Circket is been cancelled due to uprising covid cases and won't be played this year. All the registration fees for this event can be collected later."
-        #     }
-        # ]
+        # by default show newest announcements first
+        filter_value = request.args['filter']
 
-        event_announcement = [
-            {
-                "date": "11/02/2022", 
-                "event_name1": "Sports-Box Cricket", 
-                "time1": "10:00 AM", 
-                "event_name2": "Sports-Box Cricket",
-                "time2": "10:00 AM", 
-                "event_name3": "Sports-Box Cricket", 
-                "time3": "10:00 AM"
-            },
-            {
-                "date": "12/02/2022", 
-                "event_name1": "Sports-Box Cricket", 
-                "time1": "10:00 AM", 
-                "event_name2": "Sports-Box Cricket",
-                "time2": "10:00 AM", 
-                "event_name3": "Sports-Box Cricket", 
-                "time3": "10:00 AM"
-            },
-        ]
-        event_announcement = []
-        today = datetime.now().strftime('%x')
+        announcementsList = []
+        if filter_value == "newest":
+            announcement = Announcement.query.order_by(desc("id")).all()
+        else:
+            announcement = Announcement.query.order_by(asc("id")).all()
 
-        events_today = EventsToday.query.filter_by(date=today).all()
+        if announcement:
+            for item in announcement:
+                announcementsList.append({
+                    "a_id": item.id,
+                    "title": item.title,
+                    "announcement": item.title_desc,
+                    "date_time": item.timestamp,
+                })
+
+        event_announcements = []
+        dateToFilter = request.args['date']
+        print(dateToFilter)
+
+        if dateToFilter == None or dateToFilter == "None":
+            today = datetime.datetime.now().strftime('%x')
+        else:
+            today = dateToFilter
+
+        events_today = EventsToday.query.filter_by(date=str(today)).all()
+
         for events in events_today:
-            event_announcement.append({
-                # "category": events.category,
+            event_announcements.append({
+                "id": events.id,
+                "category": events.category,
                 "event": events.event,
+                "date": events.date,
                 "time": events.time,
             })
-        return render_template('/admin/admin_announcements.html', announcement=res, event_announcement=event_announcement, form=form, form2=form2)
+
+        print(event_announcements)
+
+        return render_template('/admin/admin_announcements.html', activeNav="announcements", announcementsList=announcementsList, event_announcement=event_announcements, announcementForm=announcementForm, eventsTodayForm=eventsTodayForm)
+
     except Exception as e:
         print(e)
-        return redirect('/')
+        # return redirect('/')
+
+
+@admin_bp.route('/add-announcement', methods=["post"])
+@admin_login_required
+def addAnnouncement():
+    try:
+        title = request.form.get('title')
+        title_desc = request.form.get('description')
+        timestamp = request.form.get('timestamp')
+
+        newAnnouncement = Announcement(
+            title=title, title_desc=title_desc, timestamp=timestamp)
+
+        db.session.add(newAnnouncement)
+        db.session.commit()
+
+        return redirect('/admin/')
+
+    except Exception as e:
+        print(e)
+        # return redirect("/")
+
+
+@admin_bp.route('/add-events-today', methods=["POST"])
+@admin_login_required
+def addEventsToday():
+    if request.method == "POST":
+        try:
+            category = request.form.get('category')
+            event = request.form.get('event')
+            date = request.form.get('date')
+            time = request.form.get('time')
+
+            newEvent = EventsToday(
+                category=category, event=event, time=time, date=date)
+            db.session.add(newEvent)
+            db.session.commit()
+
+            return redirect('/admin/')
+
+        except Exception as e:
+            print(e)
+            # return redirect("/")
+
+
+@ admin_bp.route("/announcements/<announcement_id>/delete", methods=["GET", "POST"])
+@admin_login_required
+def deleteAnnouncement(announcement_id):
+    try:
+        announcement = Announcement.query.filter_by(id=announcement_id).first()
+
+        db.session.delete(announcement)
+        db.session.commit()
+        return redirect('/admin/announcements')
+
+    except Exception as e:
+        print(e)
+        return redirect("/")
+
+
+@ admin_bp.route("/events-today/<event_today_id>/delete", methods=["GET", "POST"])
+@admin_login_required
+def deleteEventToday(event_today_id):
+    try:
+        event = EventsToday.query.filter_by(id=event_today_id).first()
+
+        db.session.delete(event)
+        db.session.commit()
+        return redirect('/admin/announcements')
+
+    except Exception as e:
+        print(e)
+        return redirect("/")
+
+
+@admin_bp.route("/events-today/<for_date>", methods=["GET", "POST"])
+@admin_login_required
+def filterEventsToday(for_date):
+    try:
+        print(for_date)
+        eventsList = EventsToday.query.filter_by(date=for_date).first()
+
+        return redirect('/admin/announcements')
+
+    except Exception as e:
+        print(e)
+        return redirect("/")
+
+
+############################
 
 
 @admin_bp.route("/users")
@@ -636,76 +712,8 @@ def allUsersPage():
                 "is_admin": item.isAdmin
             })
 
-        print(user_List)
-
         return render_template('/admin/admin_user.html', user_list=res["user_list"], activeNav='users')
 
     except Exception as e:
         print(e)
         return redirect('/admin')
-
-
-###########################
-
-@admin_bp.route('/announcements', methods=["POST"])
-@admin_login_required
-def addAnnouncement():
-    if request.method == "POST":
-        try:
-            title = request.form.get('title')
-            title_desc = request.form.get('description')
-            timestamp = request.form.get('timestamp')
-            newAnnouncement = Announcement(title,title_desc,timestamp)
-            db.session.add(newAnnouncement)
-            db.session.commit()
-
-        except Exception as e:
-            print(e)
-            return redirect("/")
-    return redirect('/admin/')
-
-@admin_bp.route('/add-events-today', methods=["POST"])
-@admin_login_required
-def addEventsToday():
-    if request.method == "POST":
-        try:
-            category = request.form.get('category')
-            event = request.form.get('event')
-            time = request.form.get('time')
-            newEvent = EventsToday(category,event,time)
-            db.session.add(newEvent)
-            db.session.commit()
-
-        except Exception as e:
-            print(e)
-            return redirect("/")
-    return redirect('/admin/')
-
-@ admin_bp.route("/announcements/<announcement_id>/delete", methods=["GET", "POST"])
-@admin_login_required
-def deleteAnnouncement(announcement_id):
-    try:
-        announcement = Announcement.query.filter_by(id=announcement_id).first()
-
-        db.session.delete(announcement)
-        db.session.commit()
-        return redirect('/admin/announcements')
-
-    except Exception as e:
-        print(e)
-        return redirect("/")
-
-@ admin_bp.route("/events-today/<event_today_id>/delete", methods=["GET", "POST"])
-@admin_login_required
-def deleteEventToday(event_today_id):
-    try:
-        event = EventsToday.query.filter_by(id=event_today_id).first()
-
-        db.session.delete(event)
-        db.session.commit()
-        return redirect('/admin/announcements')
-
-    except Exception as e:
-        print(e)
-        return redirect("/")
-############################

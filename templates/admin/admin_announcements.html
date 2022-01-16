@@ -1,7 +1,24 @@
 {% extends '/admin/admin_layout.html' %}
 
+
+{% block headContent %}
+<script defer>
+    window.onload = () => {
+        filterBtn = document.querySelector('.submit-btn');
+
+        filterBtn.addEventListener('click', () => {
+            const filterValue = document.getElementById("todays-events").value;
+
+            window.location.replace(`/admin/announcements?filter=newest&date=${filterValue}`)
+        })
+    }
+
+</script>
+{% endblock headContent %}
+
+
 {% block title %}
-All Announcements
+All Announcements & Events Today
 {% endblock %}
 
 
@@ -21,10 +38,12 @@ All Announcements
     </div>
 </div>
 <div class="announcement_box">
-    <div class="row d-flex my-3">
-        <div class="col my-1">
-            <h5><b>All Announcements</b></h5><br>
-            <div class="col-lg-5 col-sm-auto">
+    <div class="row d-flex my-3 g-3">
+        <div class="col-lg-6 col-sm-12">
+            <h5 class="main-font text-black fs-5 mb-4">
+                All Announcements
+            </h5>
+            <div class="col-lg-5 col-sm-12">
                 <li class="filter_btn p-2 py-1 rounded d-flex align-items-center fs-6 dropdown fw-bold">
                     <div class='dropdown-toggle fs-7' id="dropdownMenuButton1" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -33,88 +52,68 @@ All Announcements
                     </div>
                     <ul class="dropdown-menu main-bg" aria-labelledby="dropdownMenuButton1">
                         <li>
-                            <a class="dropdown-item" href="/admin/announcement?filter=newest">By Newest</a>
+                            <a class="dropdown-item" href="/admin/announcements?filter=newest&date=None">By Newest</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/admin/announcement?filter=oldest">By Oldest</a>
+                            <a class="dropdown-item" href="/admin/announcements?filter=oldest&date=None">By Oldest</a>
                         </li>
                     </ul>
                 </li>
             </div>
-            {% for ele in announcement %}
-            <div class="card border-0 bg-teal shadow-sm" style="padding:2%;margin-top:3%;margin-bottom: 3%;">
-                <h4 class='text-black fw-bolder'>{{ele["a_id"]}}</h4>
-                <h5 class="fs-5 main-font text-red">Alert Alegrians! Event Updates</h5>
-                <p class="fs-8 text-black">{{ele["date"]}},{{ele["time"]}}</p>
-                <p class="fs-7 text-black">{{ele["announcement"]}}</p>
-                <a href="#" class="btn btn-outline-danger py-1 px-2 fs-7 border-2 w-25 sec-font">Delete</a>
+            <div class="col-lg-12 col-sm-12 my-2">
+                {% for ele in announcementsList %}
+                <div class="border-0 rounded-3 bg-teal shadow-md p-3 overflow-hidden my-3">
+                    <h4 class='text-black fw-bolder fs-5'>{{ele["a_id"]}}</h4>
+                    <h5 class="fs-4 main-font text-red">
+                        {{ele["title"]}}
+                    </h5>
+                    <p class="fs-7 text-black">{{ele["date_time"]}}</p>
+                    <p class="fs-7 text-black">{{ele["announcement"]}}</p>
+                    <a href={{"/admin/announcements/{}/delete".format(ele["a_id"])}}
+                        class="btn btn-outline-danger py-1 px-2 fs-7 border-2 w-25 sec-font">
+                        Delete
+                    </a>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
 
-        <div class="col-md-auto my-1">
-            <h5><b>Today's Events</b></h5><br>
-            <div class="col-lg-8 col-sm-auto">
-                <li class="filter_btn p-2 py-1 rounded d-flex align-items-center fs-6 dropdown fw-bold">
-                    <div class='dropdown-toggle fs-7' id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Choose
-                        Category
-                    </div>
-                    <ul class="dropdown-menu main-bg" aria-labelledby="dropdownMenuButton1">
-                        <li>
-                            <a class="dropdown-item" href="/admin/events/informals">Informals</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/admin/events/fine-arts">Fine Arts</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/admin/events/performing-arts">Performing
-                                Arts</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/admin/events/gaming">Gaming</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/admin/events/sports">Sports</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/admin/events/literary-arts">Literary
-                                Arts</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/admin/events/technical-events">Technical
-                                Events</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/admin/events/technical-workshop">Technical
-                                Workshops</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/admin/events/management-events">Managemnet
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/admin/events/special-events">Special Events
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+        <div class="col-lg-6 col-sm-12">
+            <h5 class="main-font text-black fs-5 mb-4">Today's Events</h5>
+            <div class="col-lg-8 col-sm-12">
+                <div class="d-flex align-items-center" style="gap: 1rem;width: 100%;">
+                    <input type="text" class="input_value fs-7" id="todays-events" name="filter-date"
+                        placeholder="MM/DD/YY">
+                    <button class="submit-btn btn btn-dark text-light fs-7 sec-font px-3 py-1">
+                        Filter
+                    </button>
+                    <a href="" id="filter-date-link"></a>
+                </div>
             </div>
-            <br><br>
-            <label class="fs-8">From:&nbsp;<input type="date" id="from" name="from"></label>
-            <label class="fs-8">To:&nbsp; <input type="date" id="to" name="to"></label> <br><br>
-            <input class="button outline_btn fs-7" type="submit">
+            <!-- <form action="/admin/events-today/" class="w-75 d-flex flex-column px-2 py-1" method="get">
+                <label class="sec-font fs-6 text-black">
+                    Filter By Date
+                </label>
+                <input type="date" class="input_value fs-7" id="from" name="filter-date">
+                <input class="w-100 button outline_btn fs-7 p-1" type="submit">
+            </form> -->
+            <div class="col-lg-12 col-sm-12 my-2">
+                {% for ele in event_announcement %}
+                <div class="bg-teal shadow-md rounded-3 p-3 my-3">
+                    <h5 class='text-red main-font fw-bolder fs-4 mb-0 p-0'>{{ele["event"]}}</h5>
+                    <p class="fs-6 text-black mb-1">{{ele["category"]}}</p>
+                    <p class="fs-6 main-font text-black">
+                        {{ele["date"]}}
+                        {{ele["time"]}}
+                    </p>
 
-            {% for ele in event_announcement %}
-            <div class="bg-teal shadow-md rounded-3" style="padding:2%;margin-top:10%;margin-bottom: 3%;">
-                <h5 class='text-red fw-bolder'>{{ele["date"]}}</h5>
-                <p class="fs-8 text-black">{{ele["event_name1"]}},({{ele["time1"]}})</p>
-                <p class="fs-8 text-black">{{ele["event_name2"]}},({{ele["time2"]}})</p>
-                <p class="fs-8 text-black">{{ele["event_name3"]}},({{ele["time3"]}})</p>
+                    <a href={{"/admin/events-today/{}/delete".format(ele["id"])}}
+                        class="btn btn-outline-danger py-1 px-2 fs-7 border-2 w-25 sec-font">
+                        Delete
+                    </a>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-
         </div>
     </div>
 </div>
@@ -124,12 +123,19 @@ All Announcements
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add New Announcements</h5>
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Add New Announcements
+                </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="modal-body" action='' method="post">
-                {{form.title(class="input_value",placeholder="Announcement Title")}}
-                {{form.description(class="input_value",placeholder="Announcement Content")}}
+            <form class="modal-body" action='/admin/add-announcement' method="post">
+                {{announcementForm.csrf_token}}
+
+                {{announcementForm.title(class="input_value",placeholder="Announcement Title")}}
+                {{announcementForm.description(class="input_value",placeholder="Announcement Content")}}
+                {{announcementForm.timestamp(class="input_value",placeholder="Announcement Date & Time")}}
+
+
                 <button type="submit" class="button w-100 my-2 bg-brown text-beige">Add Announcement +</button>
             </form>
         </div>
@@ -145,11 +151,14 @@ All Announcements
                 <h5 class="modal-title" id="exampleModalLabel">Add Event Date</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form class="modal-body" action='' method="post">
-                {{form2.category_name(class="input_value",placeholder="Category Name")}}
-                {{form2.event_name(class="input_value",placeholder="Event Name")}}
-                {{form2.date(class="input_value", type="date")}}
-                {{form2.time(class="input_value",placeholder="Event Time")}}
+            <form class="modal-body" action='/admin/add-events-today' method="post">
+                {{eventsTodayForm.csrf_token}}
+
+                {{eventsTodayForm.category(class="input_value",placeholder="Category Name")}}
+                {{eventsTodayForm.event(class="input_value",placeholder="Event Name")}}
+                {{eventsTodayForm.date(class="input_value",placeholder="MM/DD/YY")}}
+                {{eventsTodayForm.time(class="input_value",placeholder="HH:MM AM/PM")}}
+
                 <button type="submit" class="button w-100 my-2 bg-brown text-beige">Add Event Date +</button>
             </form>
         </div>
