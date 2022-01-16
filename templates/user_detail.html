@@ -36,7 +36,7 @@
         height: 100vh;
         background-color: #FCF2DF;
         margin-left: -2px;
-        padding-top: 20vh;
+        padding-top: 10vh;
     }
 
     .svg-wave-mobile {
@@ -59,10 +59,17 @@
         margin-bottom: 2vh;
     }
 
-    /*     
     .input-container {
         position: relative;
         margin-bottom: 25px;
+    }
+
+    .input-container label {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        font-size: 17px;
+        transition: all 0.5s ease-in-out;
     }
 
     .input-container input {
@@ -70,7 +77,8 @@
         border-bottom: 1px solid #555;
         background: transparent;
         width: 100%;
-        padding: 8px 0 5px 0;
+        /* padding: 8px 0 5px 0; */
+        padding: 10px 2px;
         font-size: 16px;
         color: #000;
     }
@@ -79,7 +87,7 @@
         border: none;
         outline: none;
         border-bottom: 1px solid #e74c3c;
-    }  */
+    }
 
     .btn {
         color: #fff;
@@ -95,12 +103,12 @@
         position: relative;
     }
 
-    /*    
+
     .input-container input:focus~label,
     .input-container input:valid~label {
         top: -12px;
         font-size: 12px;
-    } */
+    }
 
     @media screen and (max-width:600px) {
         .login-page {
@@ -196,13 +204,13 @@ Alegria 2022 | User Details
                 <form action={{"/create-new-user/{}".format(user_id)}} method="post">
                     {{form.csrf_token}}
 
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="user_college_name" id="floatingInput1">
-                        <label for="floatingInput1">College Name</label>
+                    <div class="input-container">
+                        <input type="text" required class="input-value" name="user_college_name" />
+                        {{form.college_name.label}}
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="number" class="form-control" name="user_contact" id="floatingInput2">
-                        <label for="floatingInput2">Contact No</label>
+                    <div class="input-container">
+                        <input type="number" required min="10" class="input-value" name="user_contact" />
+                        {{form.contact.label}}
                     </div>
 
                     <button type="submit"
