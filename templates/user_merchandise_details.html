@@ -1,7 +1,4 @@
-{% extends 'user_layout.html' %}
-
-
-{% block headContent %}
+{% extends 'user_layout.html' %} {% block headContent %}
 <style>
     .size {
         display: block;
@@ -10,11 +7,11 @@
         margin-bottom: 30px;
         cursor: pointer;
     }
-
+    
     .size input {
         display: none;
     }
-
+    
     .size span {
         background-color: #feffd5;
         width: 40px;
@@ -30,18 +27,18 @@
         justify-content: center;
         align-items: center;
     }
-
+    
     .size input:hover+span {
         background-color: brown;
         color: white;
     }
-
+    
     .size input:checked+span {
         background: rgb(75, 17, 17);
         color: white;
         border-color: #ccf;
     }
-
+    
     .color-radio {
         padding: 5px;
         border-radius: 50px;
@@ -51,11 +48,11 @@
         -ms-user-select: none;
         user-select: none;
     }
-
+    
     .color-radio input {
         display: none;
     }
-
+    
     .checkmark {
         position: relative;
         display: inline-block;
@@ -67,21 +64,21 @@
         border-radius: 50%;
         margin-right: 10px;
     }
-
+    
     .color-radio:hover {
         cursor: pointer;
         background-color: #feffd5;
         border: 2px solid brown;
     }
-
+    
     .color-radio:hover input~.checkmark {
         background-color: brown;
     }
-
+    
     .color-radio input:checked~.checkmark {
         background-color: rgb(75, 17, 17);
     }
-
+    
     .color-radio input:checked~.checkmark:after {
         content: "";
         position: absolute;
@@ -94,55 +91,45 @@
         border-radius: 50%;
         background: white;
     }
-
+    
     .merchandise-card-container {
         height: auto;
         border: 3px solid brown;
         padding: 10px 10px 0 10px;
         border-radius: 10px;
     }
-
+    
     .merchandise-card-container img {
         width: 100%;
         border-radius: 10px;
     }
-
+    
     .section-border {
         border-right: 1px solid black;
     }
-
+    
     @media screen and (max-width:768px) {
         .section-border {
             border: none;
         }
     }
 </style>
-{% endblock headContent %}
-
-
-{% block title %}
-Alegria 2022 | {{merchandise_data["name"]}}
-{% endblock %}
-
-{% block content %}
+{% endblock headContent %} {% block title %} Alegria 2022 | {{merchandise_data["name"]}} {% endblock %} {% block content %}
 
 <div class="w-100 min-vh-100 overflow-hidden sec-font bg-teal bg-cover">
     <div class="row m-3">
         <div class="col-lg-2 col-sm-3">
-            <a href={{"/merchandise/{}".format(merchandise_data["category"])}} type="button"
-                class="go_back_btn text-dark py-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="me-2"
-                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <a href={{ "/merchandise/{}".format(merchandise_data[ "category"])}} type="button" class="go_back_btn text-dark py-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="me-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                Go Back
+                </svg> Go Back
             </a>
         </div>
     </div>
     <div class="row pt-2 m-2">
         <div class="col-lg-4 col-sm-12 flex-column">
-            <img src={{merchandise_data["item_img1"]}} class="rounded-3" alt="merchandise-image" style="width:90%">
+            <img src={{merchandise_data[ "item_img1"]}} class="rounded-3" alt="merchandise-image" style="width:90%">
         </div>
         <div class="col-lg-4 col-md-7 col-sm-12 flex-column section-border">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -151,7 +138,7 @@ Alegria 2022 | {{merchandise_data["name"]}}
                         <a href="/" class="text-black">Home</a>
                     </li>
                     <li class="breadcrumb-item" aria-current="page">
-                        <a class="text-black" href={{"/merchandise/{}".format(merchandise_data["category"])}}>
+                        <a class="text-black" href={{ "/merchandise/{}".format(merchandise_data[ "category"])}}>
                             {{merchandise_data["category"]}}
                         </a>
                     </li>
@@ -170,10 +157,10 @@ Alegria 2022 | {{merchandise_data["name"]}}
                 {{merchandise_data["cost"]}} ₹
             </h2>
             <hr>
-
-            <form class="row" onsubmit="">
+            <form action="/user/addCart" method="post" class="row" onsubmit="">
                 <div class="col-md-12">
-                    {% if merchandise_data['size'] != '' %}
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                    <input type="hidden" name="merchandise_id" value="{{merchandise_data['id']}}"> {% if merchandise_data['size'] != '' %}
                     <p class="main-font fs-6">Choose Size</p>
                     <div class="d-flex mb-4">
                         <label class="size"><input type="radio" name="size" value="XS" required><span>XS</span></label>
@@ -194,14 +181,11 @@ Alegria 2022 | {{merchandise_data["name"]}}
                         {% endfor %}
                     </div>
                     {% endif %}
-                    <button
-                        class="w-100 d-flex align-items-center justify-content-center border-0 bg-red text-teal my-3 fs-6 py-1 px-3 rounded-3"
-                        style="max-width: 12rem;" type="submit" disabled>
-                        Not Available
+                    <button class="w-100 d-flex align-items-center justify-content-center border-0 bg-red text-teal my-3 fs-6 py-1 px-3 rounded-3 btncart" style="max-width: 12rem;" type="submit">
+                        Add to Cart
                     </button>
                     <p class="sec-font text-black fs-7 mb-1">
-                        After Successful payment you need to collect this product from our campus because home delivery
-                        isn't supported.
+                        After Successful payment you need to collect this product from our campus because home delivery isn't supported.
                     </p>
                 </div>
             </form>
@@ -217,15 +201,11 @@ Alegria 2022 | {{merchandise_data["name"]}}
             <h4 class="main-font fs-5">
                 Similar products
             </h4>
-            {% for item in similar_merchandise %}
-
-            {% if merchandise_data['name'] != item["name"] %}
+            {% for item in similar_merchandise %} {% if merchandise_data['name'] != item["name"] %}
             <div class="col my-3">
-                <a href={{"/merchandise/{}/{}".format(item['category'],item['id'])}}
-                    class="d-flex flex-column justify-content-center py-2 rounded-3 main-bg" style="width: 90%;">
+                <a href={{ "/merchandise/{}/{}".format(item[ 'category'],item[ 'id'])}} class="d-flex flex-column justify-content-center py-2 rounded-3 main-bg" style="width: 90%;">
                     <div class="d-flex justify-content-center overflow-hidden">
-                        <img src={{item['item_img1']}} alt="merchandise-image" height="180px" width="60%"
-                            class="rounded-3 mb-1">
+                        <img src={{item[ 'item_img1']}} alt="merchandise-image" height="180px" width="60%" class="rounded-3 mb-1">
                     </div>
                     <h3 class="fs-6 text-red mt-2 mb-0 px-2 main-font text-center">
                         {{item['name']}}
@@ -238,9 +218,7 @@ Alegria 2022 | {{merchandise_data["name"]}}
                     </h3>
                 </a>
             </div>
-            {% endif %}
-
-            {% endfor %}
+            {% endif %} {% endfor %}
         </div>
     </div>
 </div>

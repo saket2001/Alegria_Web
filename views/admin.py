@@ -1,13 +1,12 @@
-import uuid
-from forms import AddEventForm, AddMerchandiseForm, AddPollForm
-from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses
-import datetime
-from datetime import date
-from flask_wtf.csrf import CSRFProtect
+from flask import Blueprint, redirect, render_template, flash, url_for, session, request, current_app
+from flask import jsonify
 from functools import wraps
-# from flask import jsonify
-from flask import Blueprint, redirect, render_template, session, request
-from flask import Blueprint, redirect, render_template, flash, url_for, session, request
+# from flask_mail import Mail, Message
+# from flask_login import LoginManager, current_user, login_required, login_user, logout_user
+from flask_wtf.csrf import CSRFProtect
+import datetime
+from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses
+from forms import AddEventForm, AddPollForm, AddMerchandiseForm
 
 
 def admin_login_required(f):
@@ -84,23 +83,16 @@ def adminLogin():
 
 
 @admin_bp.route('/')
-# @admin_login_required
+#@admin_login_required
 def home():
     try:
-        today = date.today()
         eventsList = [{'title': 'Total Events', 'total': len(Eventdemo.query.all())},
                       {'title': 'Total Merchandise',
                        'total': len(Merchandise.query.all())},
                       {'title': 'Total Users', 'total': len(
-                          UserInfo.query.all())},
-                      {'newusers': 'New Users', 'newusertotal': len(
-                          UserInfo.query.filter_by(
-                              date_registered=today).all())}
+                          UserInfo.query.all())}
                       ]
-        eventSalesList = [{'newusers': 'New Users', 'newusertotal': len(
-                          UserInfo.query.filter_by(
-                              date_registered=today).all())}]
-        return render_template('/admin/admin_dashboard.html', greeting=calcGreeting(), now_beautiful=getDateTime(), admin_username=session.get('user_name'), admin_image=session.get('user_image'), eventsList=eventsList, eventSalesList=eventSalesList, activeNav='dashboard')
+        return render_template('/admin/admin_dashboard.html', greeting=calcGreeting(), now_beautiful=getDateTime(), admin_username=session.get('user_name'), admin_image=session.get('user_image'), eventsList=eventsList, activeNav='dashboard')
     except Exception as e:
         print(e)
         return redirect("/")
@@ -109,7 +101,7 @@ def home():
 
 
 @admin_bp.route('/events/<event_category>', methods=['GET', 'POST'])
-# @admin_login_required
+#@admin_login_required
 def events(event_category):
     # form
     try:
@@ -150,7 +142,7 @@ def events(event_category):
 
 
 @admin_bp.route('/add-event', methods=["POST"])
-# @admin_login_required
+#@admin_login_required
 def addEvent():
     if request.method == "POST":
         try:
@@ -167,7 +159,6 @@ def addEvent():
             event_duration = request.form.get('duration')
             event_criteria = request.form.get('criteria')
             event_mode = request.form.get('mode')
-            event_is_expired = "Flase"
 
             # online_cost = request.form.get('onlineCost')
             # offlineCost = request.form.get('offlineCost')
@@ -187,7 +178,7 @@ def addEvent():
             event_id = request.form.get('id')
             entry = Eventdemo(event_name=event_name, id=event_id, event_code=event_code,
                               event_summary=event_summary, event_criteria=event_criteria, event_category_id=event_category_id, event_category_name=event_category_name, event_contact1=event_contact1, event_contact2=event_contact2,
-                              event_cost=event_cost, event_contact3=event_contact3, event_contact4=event_contact4, pr_points=pr_points, event_is_expired=event_is_expired)
+                              event_cost=event_cost, event_contact3=event_contact3, event_contact4=event_contact4, pr_points=pr_points)
             # supports_online=supportsOnline, 	supports_offline=supportsOffline,
             entry2 = Eventdemo_details(
                 event_date=event_date, event_rules=event_rules, event_perks_1=event_perks_1, event_perks_2=event_perks_2, event_perks_3=event_perks_3, icon_url=icon_url, event_duration=event_duration, event_id=event_id, event_mode=event_mode)
@@ -205,7 +196,7 @@ def addEvent():
 
 
 @admin_bp.route("/events/<category>/<event_id>/edit", methods=['GET', 'POST'])
-# @admin_login_required
+#@admin_login_required
 def editEventDetails(category, event_id):
     try:
 
@@ -262,32 +253,10 @@ def editEventDetails(category, event_id):
             event.event_contact3 = request.form.get('contact3')
             event.event_contact4 = request.form.get('contact4')
             event.event_cost = request.form.get('eventCost')
-
             event.event_perks_1 = request.form.get('perks1')
             event.event_perks_2 = request.form.get('perks2')
             event.event_perks_3 = request.form.get('perks3')
             event.icon_url = request.form.get('icon_url')
-
-            # event.event_name = request.form.get('event_title')
-            # event.event_code = request.form.get('event_id')
-            # event.event_summary = request.form.get('event_description')
-            # event.event_criteria = request.form.get('event_criteria')
-            # event.event_category_id = request.form.get('event_category_id')
-            # event.event_category_name = request.form.get('event_category')
-            # event.supports_online = request.form.get('supports_online')
-            # event.online_cost = request.form.get('event_online_cost')
-            # event.supports_offline = request.form.get('supports_offline')
-            # event.offline_cost = request.form.get('event_offline_cost')
-            # event.event_contact1 = request.form.get('event_contact_1')
-            # event.event_contact2 = request.form.get('event_contact_2')
-            # event.event_date = request.form.get('event_date')
-            # event.event_mode = request.form.get('event_type')
-            # event.event_duration = request.form.get('event_duration')
-            # event.icon_url = request.form.get('event_title')
-            # event.event_rules = request.form.get('event_rules'),
-            # event.event_perks_1 = request.form.get('event_perks_1'),
-            # event.event_perks_2 = request.form.get('event_perks_2')
-            # event.event_perks_3 = request.form.get('event_perks_3')
             db.session.commit()
             return render_template('admin_editsuccessfull.html')
 
@@ -298,7 +267,7 @@ def editEventDetails(category, event_id):
 
 
 @ admin_bp.route("/events/<category>/<event_id>/delete", methods=['GET', 'POST'])
-# @admin_login_required
+#@admin_login_required
 def deleteevent(category, event_id):
     try:
         post = Eventdemo.query.filter_by(id=event_id).first()
@@ -307,14 +276,14 @@ def deleteevent(category, event_id):
         db.session.commit()
         db.session.delete(post2)
         db.session.commit()
-        return redirect('/admin/')
+        return redirect('/admin/events')
     except Exception as e:
         print(e)
         return redirect("/")
 
 
 @ admin_bp.route("/events/event-registrations")
-# @admin_login_required
+#@admin_login_required
 def eventRegistrations():
     # get info from api in List of Dictionaries format as below
     try:
@@ -339,7 +308,7 @@ def eventRegistrations():
 
 
 @ admin_bp.route("/merchandise/<string:category>")
-# @admin_login_required
+#@admin_login_required
 def merchandise(category):
     try:
         # form
@@ -352,7 +321,7 @@ def merchandise(category):
             "merchandise_List": []
         }
         for item in merchandise_List:
-            res["merchandise_List"].append({
+            res["merchandise_List"].append({ 
                 "id": item.id,
                 "name": item.name,
                 "details": item.details,
@@ -373,7 +342,7 @@ def exceptionn():
 
 
 @ admin_bp.route("/add-merchandise", methods=["post"])
-# @admin_login_required
+#@admin_login_required
 def addMerchandise():
     if request.method == "post":
         try:
@@ -403,7 +372,7 @@ def addMerchandise():
 
 
 @ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/edit", methods=["GET", "POST"])
-# @admin_login_required
+#@admin_login_required
 def editMerchandiseDetails(merchandise_category, merchandise_id):
     try:
 
@@ -459,7 +428,7 @@ def editMerchandiseDetails(merchandise_category, merchandise_id):
 
 
 @ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/delete", methods=["GET", "POST"])
-# @admin_login_required
+#@admin_login_required
 def deletemerchandise(merchandise_category, merchandise_id):
     try:
         merch = Merchandise.query.filter_by(id=merchandise_id).first()
@@ -467,7 +436,6 @@ def deletemerchandise(merchandise_category, merchandise_id):
         db.session.delete(merch)
         db.session.commit()
         return redirect('/admin/merchandise')
-
     except Exception as e:
         print(e)
         return redirect("/")
@@ -475,16 +443,14 @@ def deletemerchandise(merchandise_category, merchandise_id):
 
 # poll routes
 @ admin_bp.route("/polls/<poll_id>/details")
-@admin_login_required
+#@admin_login_required
 def poll_details(poll_id):
     try:
         pollsList = Poll.query.filter_by(poll_id=poll_id).first()
         pollDetails = PollResponses.query.filter_by(poll_id=poll_id).all()
-
-        res = {"type": True, "polldetails": {}}
-
+        res = {"type": True, "polldetails": []}
         for ele in pollDetails:
-            res["polldetails"] = {
+            res["polldetails"].append({
                 "id": pollsList.poll_id,
                 "question": pollsList.question,
                 "status": pollsList.status,
@@ -493,23 +459,18 @@ def poll_details(poll_id):
                 "option_name": ele.option_name,
                 "image_url": ele.option_image,
                 "option_votes": ele.option_votes
-            }
-
-        print(res["polldetails"]['status'])
-
+            })
         return render_template('/admin/admin_poll_details.html', activeNav='poll_details', polldetails=res["polldetails"])
-
     except Exception as e:
         print(e)
-        # return redirect("/")
+        return redirect("/")
 
 
 @ admin_bp.route("/polls")
-@admin_login_required
+#@admin_login_required
 def polls():
     try:
         form = AddPollForm()
-
         pollsList = Poll.query.all()
         res = {
             "type": True,
@@ -522,93 +483,76 @@ def polls():
                 "status": item.status,
                 "total_votes": item.total_votes
             })
-
         return render_template('/admin/admin_polls.html', activeNav='polls', poll_list=res["polls_list"], form=form)
-
     except Exception as e:
         print(e)
         return redirect("/")
 
 
 @admin_bp.route('/add-poll', methods=["post"])
-@admin_login_required
-def AddNewPoll():
-    try:
-        poll_id = uuid.uuid1()
-        question = request.form.get('question')
-        date_published = datetime.datetime.now().strftime("%x")
-        # taking totalOptions attribute from form
-        totalOptions = request.form.get('optionsNumber')
+#@admin_login_required
+def addPoll():
+    if request.method == "POST":
+        try:
+            poll_id= request.form.get('id')
+            question = request.form.get('question')
+            option1 = request.form.get('Option 1 Name')
+            image = request.form.get('Image Url 1')
+            
 
-        # adding to poll table
-        pollEntry = Poll(poll_id=poll_id, question=question, status="Active",
-                         date_published=date_published, total_votes=0)
-
-        db.session.add(pollEntry)
-        db.session.commit()
-
-        # looping totalOptions times to get all options input
-        for i in range(int(totalOptions)):
-            poll_id = poll_id
-            poll_option_id = int(i+1)
-            option_name = request.form.get('Option {} Name'.format(i+1))
-            option_image = request.form.get('Image url {}'.format(i+1))
-
-            pollOption = PollResponses(
-                poll_option_id=poll_option_id, poll_id=poll_id, option_name=option_name, option_image=option_image, option_votes=0)
-
-            db.session.add(pollOption)
+            new_poll = Poll(poll_id=poll_id, question=question, status='Active', date_published= '', total_votes=0)
+            new_poll2 = PollResponses(poll_id=poll_id,option_name=option1, option_image=image, option_votes=0)
+            db.session.add(new_poll)
             db.session.commit()
+            db.session.add(new_poll2)
+            db.session.commit()
+            
+            #print(option, image)
 
-        return redirect('/admin/polls')
+        # polls table data that will be generated on backend
+        # poll_id,date_published,status=Active,total_votes=0
 
-    except Exception as e:
-        print(e)
-        return redirect('/')
+        # PollResponses table data that will be generated on backend
+        # poll_option_id,option_votes=0
 
+        except Exception as e:
+            print(e)
+            # return redirect('/')
+
+    return redirect('/admin/polls')
 
 @ admin_bp.route("/polls/<poll_id>/deletepoll", methods=["GET", "POST"])
-@admin_login_required
 def deletepoll(poll_id):
     try:
         poll = Poll.query.filter_by(poll_id=poll_id).first()
         poll2 = PollResponses.query.filter_by(poll_id=poll_id).all()
-
+        print(poll2)
         db.session.delete(poll)
         db.session.commit()
-
         for ele in poll2:
             db.session.delete(ele)
             db.session.commit()
-
         return redirect('/admin/polls')
-
     except Exception as e:
         print(e)
-        # return redirect("/")
+        return redirect("/")
 
 
 @ admin_bp.route("/polls/<poll_id>/details/togglestatus", methods=["GET", "POST"])
-@admin_login_required
 def togglestatus(poll_id):
+    current_status = request.args.get('status')
+    print(current_status)
     try:
-        old_poll = Poll.query.filter_by(poll_id=poll_id).first()
-        new_status = None
-
-        if old_poll.status == "Active":
-            new_status = "Expired"
-
-        if old_poll.status == "Expired":
-            new_status = "Active"
-
-        old_poll.status = new_status
-        db.session.commit()
-
-        return redirect("/admin/polls")
-
+                new_status= Poll.query.filter_by(poll_id=poll_id).first()
+                new_status.status= 'Expired'
+                db.session.commit()
+                print(new_status)
+                #flash("Poll Status has been turned off")
+                return redirect("/admin/polls")
     except Exception as e:
-        print(e)
-        # return redirect('/')
+                print(e)
+    
+    return jsonify(current_status)
 
 ############################
 
@@ -617,9 +561,9 @@ def togglestatus(poll_id):
 def adminAnnouncement():
     announcement = [
         {"a_id": "01", "date": "12th Jan 2022", "time": "10:00 am",
-            "announcement": "Sport Event Box Circket is been cancelled due to uprising covid cases and won't be played this year. All the registration fees for this event can be collected later."},
+            "announcement": "Sport Event Box Circket is been cancelled due to uprising covid cases and won’t be played this year. All the registration fees for this event can be collected later."},
         {"a_id": "02", "date": "13th Jan 2022", "time": "11:00 am",
-            "announcement": "Sport Event Box Circket is been cancelled due to uprising covid cases and won't be played this year. All the registration fees for this event can be collected later."}
+            "announcement": "Sport Event Box Circket is been cancelled due to uprising covid cases and won’t be played this year. All the registration fees for this event can be collected later."}
     ]
 
     event_announcement = [

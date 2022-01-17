@@ -1,3 +1,4 @@
+from enum import unique
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -75,30 +76,6 @@ class Eventdemo_details(db.Model):
         return f"EventDetails('{self.event_date}','{self.event_mode}','{self.event_duration}','{self.icon_url}','{self.event_rules}','{self.event_perks_1}','{self.event_perks_2}','{self.event_perks_3}')"
 
 
-class RegisterEvent(db.Model):
-    userinfo_id = db.Column(db.BigInteger, db.ForeignKey(
-        "userinfo.id"), primary_key=True)
-    event_id = db.Column(db.String(10), db.ForeignKey(
-        "event.id"), primary_key=True)
-    order_id = db.Column(db.Integer, unique=True,
-                         primary_key=True, nullable=False)
-    registered_time = db.Column(db.DateTime, default=datetime.now)
-    paid_amount = db.Column(db.Integer, nullable=False)
-    coupon_id = db.Column(db.String(10), db.ForeignKey(
-        "coupon_list.id"), primary_key=True)
-
-    def __repr__(self) -> str:
-        return f"RegisterEvent('{self.registered_time}', '{self.paid_amount}')"
-
-
-class Cart(db.Model):
-    __tablename__ = 'cart'
-    userinfo_id = db.Column(db.BigInteger, db.ForeignKey(
-        "userinfo.id"), primary_key=True)
-    event_id = db.Column(db.String(10), db.ForeignKey(
-        "event.id"), primary_key=True)
-
-
 class Poll(db.Model):
     __tablename__ = 'polls'
     poll_id = db.Column(db.String(50), primary_key=True)
@@ -139,8 +116,7 @@ class CouponList(db.Model):
     coupon_name = db.Column(db.String(20), nullable=False)
     discount_percent = db.Column(db.Integer, nullable=False)
     coupon_details = db.Column(db.String(100), nullable=False)
-    coupon_id = db.relationship(
-        'RegisterEvent', backref='RegisterCoupon', lazy=True)
+    #coupon_id = db.relationship('RegisterEvent', backref='RegisterCoupon', lazy=True)
     transaction_id = db.Column(db.Integer, nullable=False)
 
 
@@ -194,6 +170,7 @@ class Merchandise(db.Model):
     code = db.Column(db.String(10), nullable=False)
 
 
+    
 class Categories(db.Model):
     __tablename__ = "categories"
     id = db.Column(db.String(10), primary_key=True)

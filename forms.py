@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, IntegerField
+from wtforms import StringField, TextAreaField, IntegerField, HiddenField
 from wtforms.validators import InputRequired, Length, length, AnyOf, NumberRange
 
 
@@ -70,3 +70,6 @@ class AddMerchandiseForm(FlaskForm):
 class AddPollForm(FlaskForm):
     question = StringField("Poll Question", validators=[
         InputRequired(), Length(min=10, max=100)])
+
+class AddToCart(FlaskForm):
+    id = HiddenField('ID')

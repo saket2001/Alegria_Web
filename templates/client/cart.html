@@ -1,8 +1,8 @@
 {% extends 'user_layout.html' %} {% block title %} Alegria 2022 | Cart Page {% endblock %} {% block content %}
 <main class="container-fluid bg-cover min-vh-100">
     <div class="row py-3 px-1 d-flex flex-column align-items-center">
-        <!-- {% if cart_msg %}
-         cart is empty div 
+        {% if cart_msg %}
+        <!-- cart is empty div -->
         <div class="row py-5 d-flex flex-column align-items-center">
             <img src="/static/images/undraw_empty_cart_co35.svg" alt="empty cart image" height="200px">
             <h2 class="text-center main-font text-red fs-3 py-1 mt-2">
@@ -12,11 +12,11 @@
                 Add some cool merchandise to your cart. You won't regret buying them.
             </p>
         </div>
-        {% endif %} {% if cart_msg==False %} -->
+        {% endif %} {% if cart_msg==False %}
         <div class="row mt-2">
             <h2 class="fs-3 main-font mb-0 text-red">
                 Your Shopping Cart
-                <span class="fs-7 sec-font mx-1">[Total Items ({{session['Shoppingcart']|length}}) ]</span>
+                <span class="fs-7 sec-font mx-1">[Total Items {{cart_details['total_items']}} ]</span>
             </h2>
         </div>
         <div class="row p-0 m-0">
@@ -29,36 +29,38 @@
         <div class="row g-3">
             <div class="col-lg-6 col-sm-12">
                 <!-- cart items -->
-                {% for product in session['Shoppingcart'].items() %}
+                {% for key ,product in session['Shoppingcart'].items() %}
+                <!--{% if item['type']=="Merchandise" %} -->
                 <!-- cart item (merchandise) -->
                 <div class="row p-3 g-1 me-1 border-2 border-bottom border-danger">
                     <div class="col-lg-5 col-sm-12 d-flex justify-content-center">
-                        <img src={{product.image}} alt="cart-item-image" class="rounded-3" width="200px" height="200px">
+                        <img src="{{product.image}}" alt="cart-item-image" class="rounded-3" width="200px" height="200px">
                     </div>
                     <div class="col-lg-7 col-sm-12 d-flex flex-column">
                         <h3 class="fs-5 main-font text-red mb-1">{{product.name}}</h3>
                         <div class="d-flex mb-1">
                             <p class="sec-font fs-7 pe-1 mb-0">{{product.category}}</p>
-                            <p class="sec-font fs-7 px-1 mb-0">{{product.merchandise_id}}</p>
-                            <!--<p class="sec-font fs-7 px-1 mb-0">Quantity: {{p}}</p>-->
+                            <!--<p class="sec-font fs-7 px-1 mb-0">{{item['id']}}</p>
+                            <p class="sec-font fs-7 px-1 mb-0">Quantity: {{item['quantity']}}</p> -->
                         </div>
                         <div class="d-flex mb-1">
                             <p class="sec-font fs-7 pe-1 mb-0">{{product.color}}</p>
                             <p class="sec-font fs-7 px-1 mb-0">Size: {{product.size}}</p>
                         </div>
                         <h3 class="fs-5 main-font text-red mb-1">{{product.cost}} ₹</h3>
-                        <form class="my-2" action={{ "/remove-from-cart/{}/{}".format(user_id,item[ 'id'])}}>
+                        <!-- <form class="my-2" action={{"/remove-from-cart/{}/{}".format(user_id,item['id'])}}>
                             <button type="submit" class="button main-bg text-red fs-6">
                                 Remove From Cart
                                 <i class="far fa-trash-alt ms-2"></i>
                             </button>
-                        </form>
+                        </form> -->
                     </div>
                 </div>
                 {% endfor %}
 
-                <!-- item cart {event} -->
-                <!-- <div class="row p-3 me-1 border-2 border-bottom border-danger">
+                <!-- {% else %} -->
+                <!-- item cart {event} 
+                <div class="row p-3 me-1 border-2 border-bottom border-danger">
                     <div class="col-lg-5 col-sm-12">
                         <img src={{item['img_url']}} alt="cart-item-image" class="rounded-3" width="200px"
                             height="200px">
@@ -80,7 +82,8 @@
                             </button>
                         </form>
                     </div>
-                </div> -->
+                </div>
+               {% endif %}  -->
 
 
             </div>
@@ -132,7 +135,7 @@
                 </div>
             </div>
         </div>
-        <!--{% endif %}-->
+        {% endif %}
     </div>
 </main>
 {% endblock %}
