@@ -33,7 +33,6 @@ def user_login_required(f):
 
 @app_mbp.route('/')
 def landingPage():
-    # print(session.get('user_id'))
     # by default signed_in is false
     signed_in = False
 
