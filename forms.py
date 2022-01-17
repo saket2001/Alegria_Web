@@ -2,7 +2,7 @@ from calendar import c
 from unicodedata import category
 from xmlrpc.client import DateTime
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, IntegerField
+from wtforms import StringField, TextAreaField, IntegerField, HiddenField
 from wtforms.validators import InputRequired, Length, length, AnyOf, NumberRange
 
 
@@ -100,3 +100,6 @@ class AddEventsToday(FlaskForm):
         InputRequired()])
     time = StringField('Event time', validators=[
         InputRequired()])
+        
+class AddToCart(FlaskForm):
+    id = HiddenField('ID')

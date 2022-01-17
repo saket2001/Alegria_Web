@@ -3,6 +3,8 @@ from functools import wraps
 #from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from flask_wtf.csrf import CSRFProtect
 
+from models import Merchandise
+
 #from alegria_webp.models import db,Eventdemo,Eventdemo_details,Merchandise
 #from alegria_webp.forms import AddEventForm, AddPollForm, AddMerchandiseForm
 
@@ -20,7 +22,7 @@ from flask_wtf.csrf import CSRFProtect
 
 
 # csrf
-csrf = CSRFProtect()
+#csrf = CSRFProtect()
 
 # create blueprint to group views
 client_bp = Blueprint('client', __name__,
@@ -32,12 +34,70 @@ client_bp = Blueprint('client', __name__,
 
 #############################
 # client page routes
+def MergeDict(dict1, dict2):
+    if isinstance(dict1, list) and isinstance(dict2, list):
+        return dict1 + dict2
+
+    elif isinstance (dict1, dict) and isinstance(dict2, dict):
+        return dict(list(dict1.items()) + list(dict2.items()))
+    return False
+
+@client_bp.route('/addCart', methods=['POST'])
+def AddCart():
+    if (request.method == 'POST'):
+        try:
+            merchandise_id = request.form.get('merchandise_id')
+            size = request.form.get('size')
+            color = request.form.get('color')
+            merch = Merchandise.query.filter_by(id=merchandise_id).first()
+            if merchandise_id and size and color and request.method == "POST":
+                DictItems = {merchandise_id:{'name':merch.name, 'cost':merch.cost, 
+                'size': size, 'color': color, 'image':merch.item_img1, 'category': merch.category, 'quantity': merch.quantity}}
+                print(DictItems)
+                if 'Shoppingcart' in session:
+                    print(session['Shoppingcart'])
+                    if merchandise_id in session['Shoppingcart']:
+                        print("This product is already in the cart.")
+
+                    else:
+                        session['Shoppingcart'] = MergeDict(session['Shoppingcart'], DictItems)
+                        return redirect(request.referrer)
+
+                else:
+                    session['Shoppingcart']=DictItems
+                    return redirect(request.referrer)
+        except Exception as e:
+            print(e)
+
+@client_bp.route('/getcart')
+def getCart():
+    if 'Shoppingcart' not in session:
+        return redirect(request.referrer)
+    return render_template('/client/user_cart.html')
+
+@client_bp.route('/deleteitem/<merchandise_id>')
+def deleteItem(merchandise_id):
+    if 'Shoppingcart' not in session and len(session['Shoppingcart']):
+        return redirect('/')
+    try:
+        session.modified = True
+        for key, item in session['Shoppingcart'].items():
+            if str(key) == merchandise_id:
+                session['Shoppingcart'].pop(key, None)
+        return redirect(url_for('client.getCart'))
+
+    except Exception as e:
+        print(e)
+        return redirect(url_for('client.getCart'))
+
+
+
 
 
 @client_bp.route('/cart')
 def cartPage():
-    # for showing empty cart message
-    cart_msg = False
+    #for showing empty cart message
+    cart_msg = True
 
     # will come from db
     # user_cart = [{
@@ -53,7 +113,6 @@ def cartPage():
 
     user_cart = []
 
-    # cart details calculation
     cart_details = {
         "total_items": len(user_cart),
         "subtotal": 200,
@@ -63,5 +122,5 @@ def cartPage():
 
     if len(user_cart) == 0:
         cart_msg = True
-
-    return render_template('/client/user_cart.html', user_cart=user_cart, cart_details=cart_details, cart_msg=cart_msg)
+        return render_template('/client/user_cart.html', user_cart=user_cart, cart_details=cart_details, cart_msg=cart_msg)
+ 

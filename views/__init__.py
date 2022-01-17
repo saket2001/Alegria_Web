@@ -6,7 +6,7 @@ from models import Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponse
 import basicData as client_data
 from datetime import datetime
 # csrf
-csrf = CSRFProtect()
+# csrf = CSRFProtect()
 
 # flask mail
 # mail = Mail()
@@ -523,3 +523,93 @@ def deleteUserOnCancel(user_id):
     except Exception as e:
         print(e)
         return redirect('/')
+
+def MergeDict(dict1, dict2):
+    if isinstance(dict1, list) and isinstance(dict2, list):
+        return dict1 + dict2
+
+    elif isinstance (dict1, dict) and isinstance(dict2, dict):
+        return dict(list(dict1.items()) + list(dict2.items()))
+    return False
+
+@app_mbp.route('/addCart', methods=['POST'])
+def AddCart():
+    try:
+        merchandise_id = request.form.get('merchandise_id')
+        size = request.form.get('size')
+        color = request.form.get('color')
+        merch = Merchandise.query.filter_by(id=merchandise_id).first()
+        if merchandise_id and size and color and request.method == "POST":
+            DictItems = {merchandise_id:{'name':merch.name, 'cost':merch.cost, 
+            'size': size, 'color': color, 'image':merch.item_img1, 'category': merch.category, 'quantity': merch.quantity}}
+            print(DictItems)
+            if 'Shoppingcart' in session:
+                print(session['Shoppingcart'])
+                if merchandise_id in session['Shoppingcart']:
+                    print("This product is already in the cart.")
+                    return redirect('/')
+                else:
+                    session['Shoppingcart'] = MergeDict(session['Shoppingcart'], DictItems)
+                    return redirect('/')
+
+            else:
+                session['Shoppingcart']=DictItems
+                return redirect('/')
+    except Exception as e:
+        print(e)
+
+@app_mbp.route('/getcart')
+def getCart():
+    if 'Shoppingcart' not in session:
+        return redirect('/')
+    return render_template('/client/user_cart.html')
+
+@app_mbp.route('/deleteitem/<merchandise_id>')
+def deleteItem(merchandise_id):
+    if 'Shoppingcart' not in session and len(session['Shoppingcart']):
+        return redirect('/')
+    try:
+        session.modified = True
+        for key, item in session['Shoppingcart'].items():
+            if str(key) == merchandise_id:
+                session['Shoppingcart'].pop(key, None)
+        return redirect(url_for('client.getCart'))
+
+    except Exception as e:
+        print(e)
+        return redirect(url_for('client.getCart'))
+
+
+
+
+
+@app_mbp.route('/cart')
+def cartPage():
+    #for showing empty cart message
+    cart_msg = True
+
+    # will come from db
+    # user_cart = [{
+    #     id: 'M01',
+    #     "name": "Alegria Doodle Tshirt",
+    #     "type": "Merchandise",
+    #     "category": "Tshirts",
+    #     "price": "200",
+    #     "color": "Classic Grey",
+    #     "size": "L",
+    #     "img_url": "https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/tshirt.png?token=APU7JOLVT5ILVPBSFJJE6KDB232OC"
+    # }]
+
+    user_cart = []
+
+    cart_details = {
+        "total_items": len(user_cart),
+        "subtotal": 200,
+        "coupon_discount": 0.0,
+        "to_pay": 200,
+    }
+
+    if len(user_cart) == 0:
+        cart_msg = True
+        return render_template('/client/user_cart.html', user_cart=user_cart, cart_details=cart_details, cart_msg=cart_msg)
+ 
