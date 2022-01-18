@@ -523,3 +523,11 @@ def deleteUserOnCancel(user_id):
     except Exception as e:
         print(e)
         return redirect('/')
+
+@app_mbp.route("/privacypolicy")
+def privacyPolicy():
+    return render_template('privacy_policy.html')
+
+@app_mbp.route("/publictermsofservice")
+def termsandconditions():
+    return render_template('terms_and_services.html')
