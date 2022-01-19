@@ -2,7 +2,7 @@ from flask import Blueprint, redirect, render_template, flash, url_for, session,
 from functools import wraps
 from flask_wtf.csrf import CSRFProtect
 from forms import UserContact
-from models import Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, db, UserInfo, Announcement, EventsToday
+from models import Cart, Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, db, UserInfo, Announcement, EventsToday
 import basicData as client_data
 from datetime import datetime
 # csrf
@@ -21,6 +21,8 @@ def user_login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         user = dict(session).get('profile', None)
+        user2 = dict(session).get('user_id', None)
+        print(user2)
 
         # You would add a check here and usethe user id or something to fetch
         # the other data for that user/check if they exist
@@ -218,6 +220,7 @@ def get_merchandise_by_Id(category, id):
             signed_in = True
 
         merchandise_data = Merchandise.query.filter_by(id=id).first()
+        products_in_stock = Merchandise.query.filter(Merchandise.quantity > 0).count()
         res = {
             "type": True,
             "merchandise": {
@@ -225,6 +228,7 @@ def get_merchandise_by_Id(category, id):
                 "name": merchandise_data.name,
                 "details": merchandise_data.details,
                 "cost": merchandise_data.cost,
+                "product_in_stock": products_in_stock,
                 "item_img1": merchandise_data.item_img1,
                 "item_img2": merchandise_data.item_img2,
                 "quantity": merchandise_data.quantity,
@@ -253,7 +257,7 @@ def get_merchandise_by_Id(category, id):
                 "category": merchandise.category
             })
 
-        return render_template('user_merchandise_details.html', activeNav="Merchandise", merchandise_data=res["merchandise"], similar_merchandise=similar_merchandise, signed_in=signed_in)
+        return render_template('user_merchandise_details.html', activeNav="Merchandise", products_in_stock=products_in_stock, merchandise_data=res["merchandise"], similar_merchandise=similar_merchandise, signed_in=signed_in)
 
     except Exception as e:
         print(e)
@@ -502,6 +506,7 @@ def userDetails(user_id):
 
         adminList.phone_number = phone_number
         adminList.college_name = college_name
+        print(session)
 
         db.session.commit()
         return redirect('/')
@@ -517,6 +522,7 @@ def deleteUserOnCancel(user_id):
         user_details = UserInfo.query.filter_by(id=user_id).first()
         db.session.delete(user_details)
         db.session.commit()
+        print(session)
 
         return redirect('/session-logout')
 
@@ -533,16 +539,22 @@ def MergeDict(dict1, dict2):
     return False
 
 @app_mbp.route('/addCart', methods=['POST'])
+@user_login_required
 def AddCart():
     try:
         merchandise_id = request.form.get('merchandise_id')
         size = request.form.get('size')
         color = request.form.get('color')
+        count = request.form.get('count')
+        products_in_stock = Merchandise.query.filter(Merchandise.quantity > 0).count()
         merch = Merchandise.query.filter_by(id=merchandise_id).first()
+        # user= UserInfo.query.filter_by(id=user_id).first()
+        user=session.get('profile')
+        print(user)
         if merchandise_id and size and color and request.method == "POST":
-            DictItems = {merchandise_id:{'name':merch.name, 'cost':merch.cost, 
+            DictItems = {merchandise_id:{'name':merch.name, 'cost':merch.cost, 'product_in_stock': products_in_stock, 'count': count,
             'size': size, 'color': color, 'image':merch.item_img1, 'category': merch.category, 'quantity': merch.quantity}}
-            print(DictItems)
+            #print(DictItems)
             if 'Shoppingcart' in session:
                 print(session['Shoppingcart'])
                 if merchandise_id in session['Shoppingcart']:
@@ -550,13 +562,15 @@ def AddCart():
                     return redirect('/')
                 else:
                     session['Shoppingcart'] = MergeDict(session['Shoppingcart'], DictItems)
+                    items= session.get(key= 'Shoppingcart')
                     return redirect('/')
 
             else:
                 session['Shoppingcart']=DictItems
-                return redirect('/')
+        return redirect('/')
     except Exception as e:
         print(e)
+    return redirect('/')
 
 @app_mbp.route('/getcart')
 def getCart():

@@ -111,7 +111,7 @@ def events(event_category):
         filter_category_events = Eventdemo.query.filter_by(
             event_category_name=event_category).all()
 
-        res = {
+        res = { 
             "type": True,
             "events": []
         }

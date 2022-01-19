@@ -1,9 +1,12 @@
+from itertools import product
+from tkinter.messagebox import YES
+from turtle import onkeyrelease
 from flask import Blueprint, redirect, render_template, flash, url_for, session, request, current_app
 from functools import wraps
 #from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from flask_wtf.csrf import CSRFProtect
 
-from models import Merchandise
+from models import Merchandise, UserInfo
 
 #from alegria_webp.models import db,Eventdemo,Eventdemo_details,Merchandise
 #from alegria_webp.forms import AddEventForm, AddPollForm, AddMerchandiseForm
@@ -41,28 +44,28 @@ def MergeDict(dict1, dict2):
     elif isinstance (dict1, dict) and isinstance(dict2, dict):
         return dict(list(dict1.items()) + list(dict2.items()))
     return False
-
+# you need to use return statement but it was working fine before
 @client_bp.route('/addCart', methods=['POST'])
 def AddCart():
     if (request.method == 'POST'):
         try:
             merchandise_id = request.form.get('merchandise_id')
+            type= request.form.get('type')
             size = request.form.get('size')
             color = request.form.get('color')
+            count = request.form.get('count')
             merch = Merchandise.query.filter_by(id=merchandise_id).first()
-            if merchandise_id and size and color and request.method == "POST":
-                DictItems = {merchandise_id:{'name':merch.name, 'cost':merch.cost, 
-                'size': size, 'color': color, 'image':merch.item_img1, 'category': merch.category, 'quantity': merch.quantity}}
+            if merchandise_id or type or size or color or count or request.method == "POST":
+                DictItems = {merchandise_id:{'name':merch.name, 'cost':merch.cost, 'type': type,
+                'size': size, 'color': color, 'count': count, 'image':merch.item_img1, 'category': merch.category, 'quantity': merch.quantity}}
                 print(DictItems)
                 if 'Shoppingcart' in session:
                     print(session['Shoppingcart'])
                     if merchandise_id in session['Shoppingcart']:
-                        print("This product is already in the cart.")
-
+                        flash("This product is already in the cart.")
                     else:
                         session['Shoppingcart'] = MergeDict(session['Shoppingcart'], DictItems)
                         return redirect(request.referrer)
-
                 else:
                     session['Shoppingcart']=DictItems
                     return redirect(request.referrer)
@@ -73,7 +76,12 @@ def AddCart():
 def getCart():
     if 'Shoppingcart' not in session:
         return redirect(request.referrer)
-    return render_template('/client/user_cart.html')
+    subtotal=0
+    grandtotal=0
+    for key, product in session['Shoppingcart'].items():
+        subtotal += float(product['cost']) * int(product['count'])
+        grandtotal = float("%.2f" % (subtotal))
+    return render_template('/client/user_cart.html', grandtotal=grandtotal)
 
 @client_bp.route('/deleteitem/<merchandise_id>')
 def deleteItem(merchandise_id):

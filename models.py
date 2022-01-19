@@ -1,4 +1,6 @@
+from flask import Flask, session
 from enum import unique
+from unicodedata import category
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -53,7 +55,7 @@ class UserInfo(db.Model):
     isAdmin = db.Column(db.String(10), default=False)
     # registeruser_id = db.relationship(
     #     'RegisterEvent', backref='RegisterUser', lazy=True)
-    # cart_user_id = db.relationship('Cart', backref='CartUser', lazy=True)
+    cart_user_id = db.relationship('Cart', backref='userinfo', lazy=True)
 
     def __repr__(self, email, name, image_url, isAdmin):
         return f"UserInfo('{self.email}'-'{self.name}'-'{self.image_url}'-'{self.phone_number}'-'{self.college_name}'-'{self.isadmin}')"
@@ -143,7 +145,7 @@ class Calendar(db.Model):
 class Celebrity(db.Model):
     __tablename__ = 'celebrity'
     event_id = db.Column(db.String(10), db.ForeignKey(
-        "event.id"), primary_key=True)
+        "eventdemo.id"), primary_key=True)
     celebrity_name = db.Column(db.String(20), nullable=False)
     celebrity_pic = db.Column(db.String(50), nullable=False)
 
@@ -164,6 +166,23 @@ class EventsToday(db.Model):
     time = db.Column(db.String(50), nullable=False)
     date = db.Column(db.String(50), nullable=False)
 
+class Cart(db.Model):
+    __tablename__ = 'cart'
+    order_id=db.Column(db.Integer, primary_key=True)
+    user_id=db.Column(db.String(300), (db.ForeignKey("userinfo.id")), primary_key=True)
+    product_id=db.Column(db.String(10), primary_key=True)
+    product_name=db.Column(db.String(250))
+    category= db.Column(db.String(50))
+    type= db.Column(db.String(50))
+    count=db.Column(db.Integer)
+    size=db.Column(db.String(10), nullable=True)
+    color=db.Column(db.String(50), nullable=True)
+    single_price=db.Column(db.Float)
+    subtotal=db.Column(db.Float)
+    discount=db.Column(db.Integer, nullable=True)
+    grandtotal=db.Column(db.Float)
+    image=db.Column(db.String(300))
+
 
 class Merchandise(db.Model):
     __tablename__ = 'merchandise'
@@ -178,6 +197,25 @@ class Merchandise(db.Model):
     color = db.Column(db.String(60), nullable=False)
     category = db.Column(db.String(20), nullable=False)
     code = db.Column(db.String(10), nullable=False)
+
+    def in_stock(self):
+        if session:
+            item = []
+            try:
+                item = session['Shoppingcart']
+            except:
+                pass
+            inde = 0
+            if len(item) > 0:
+                for ind, it in enumerate(item):
+                    if it.get('id') == self.id:
+                        inde = ind
+                return self.quantity - item[inde].get('quantity')
+            else:
+                return self.quantity
+        else:
+            return self.quantity
+
 
 
     

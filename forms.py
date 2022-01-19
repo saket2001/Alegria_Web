@@ -2,7 +2,7 @@ from calendar import c
 from unicodedata import category
 from xmlrpc.client import DateTime
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, IntegerField, HiddenField
+from wtforms import StringField, TextAreaField, IntegerField, HiddenField, FileField
 from wtforms.validators import InputRequired, Length, length, AnyOf, NumberRange
 
 
@@ -103,3 +103,11 @@ class AddEventsToday(FlaskForm):
         
 class AddToCart(FlaskForm):
     id = HiddenField('ID')
+    quantity= IntegerField('Quantity')
+
+class AddProduct(FlaskForm):
+    name = StringField('Name')
+    price = IntegerField('Price')
+    stock = IntegerField('Stock')
+    description = TextAreaField('Description')
+    image = FileField('Image')

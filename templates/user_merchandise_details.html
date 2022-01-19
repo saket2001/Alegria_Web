@@ -156,11 +156,17 @@
             <h2 class="text-red fs-2 main-font">
                 {{merchandise_data["cost"]}} ₹
             </h2>
+            <h4 class="text-red fs-2 main-font">
+                {% if merchandise_data['product_in_stock'] > 0 %}
+                <small>(In Stock)</small> {% else %}
+                <small>(Out of Stock)</small> {% endif %}
+            </h4>
             <hr>
             <form action="/user/addCart" method="post" class="row" onsubmit="">
                 <div class="col-md-12">
                     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-                    <input type="hidden" name="merchandise_id" value="{{merchandise_data['id']}}"> {% if merchandise_data['size'] != '' %}
+                    <input type="hidden" name="merchandise_id" value="{{merchandise_data['id']}}">
+                    <input type="hidden" name="type" value="Merchandise"> {% if merchandise_data['size'] != '' %}
                     <p class="main-font fs-6">Choose Size</p>
                     <div class="d-flex mb-4">
                         <label class="size"><input type="radio" name="size" value="XS" required><span>XS</span></label>
@@ -181,39 +187,48 @@
                         {% endfor %}
                     </div>
                     {% endif %}
-                    <button class="w-100 d-flex align-items-center justify-content-center border-0 bg-red text-teal my-3 fs-6 py-1 px-3 rounded-3 btncart" style="max-width: 12rem;" type="submit">
+                    <div class="me-2 d-flex align-items-center">
+                        <label class="color-radio">Quantity</label>
+                        <input type="number" name='count' value="1" min="1" max="{{merchandise_data['quantity']}}" class="p-2 me-1" required>
+
+
+                    </div>
+
+                    {% if merchandise_data['product_in_stock'] > 0 %}
+                    <button class="w-100 d-flex align-items-center justify-content-center border-0 bg-red text-teal my-3 fs-6 py-1 px-3 rounded-3 btncart " style="max-width: 12rem; " type="submit ">
                         Add to Cart
-                    </button>
-                    <p class="sec-font text-black fs-7 mb-1">
+                    </button> {% endif %}
+
+                    <p class="sec-font text-black fs-7 mb-1 ">
                         After Successful payment you need to collect this product from our campus because home delivery isn't supported.
                     </p>
                 </div>
             </form>
             <hr>
-            <p class="sec-font text-black fs-7 mb-1">
-                Category: {{merchandise_data["category"]}}
+            <p class="sec-font text-black fs-7 mb-1 ">
+                Category: {{merchandise_data["category "]}}
             </p>
-            <p class="sec-font text-black fs-7 mb-1">
-                Code: {{merchandise_data["code"]}}
+            <p class="sec-font text-black fs-7 mb-1 ">
+                Code: {{merchandise_data["code "]}}
             </p>
         </div>
-        <div class="col g-4 my-1 mx-3 flex-column">
-            <h4 class="main-font fs-5">
+        <div class="col g-4 my-1 mx-3 flex-column ">
+            <h4 class="main-font fs-5 ">
                 Similar products
             </h4>
-            {% for item in similar_merchandise %} {% if merchandise_data['name'] != item["name"] %}
-            <div class="col my-3">
-                <a href={{ "/merchandise/{}/{}".format(item[ 'category'],item[ 'id'])}} class="d-flex flex-column justify-content-center py-2 rounded-3 main-bg" style="width: 90%;">
-                    <div class="d-flex justify-content-center overflow-hidden">
-                        <img src={{item[ 'item_img1']}} alt="merchandise-image" height="180px" width="60%" class="rounded-3 mb-1">
+            {% for item in similar_merchandise %} {% if merchandise_data['name'] != item["name "] %}
+            <div class="col my-3 ">
+                <a href={{ "/merchandise/{}/{} ".format(item[ 'category'],item[ 'id'])}} class="d-flex flex-column justify-content-center py-2 rounded-3 main-bg " style="width: 90%; ">
+                    <div class="d-flex justify-content-center overflow-hidden ">
+                        <img src={{item[ 'item_img1']}} alt="merchandise-image " height="180px " width="60% " class="rounded-3 mb-1 ">
                     </div>
-                    <h3 class="fs-6 text-red mt-2 mb-0 px-2 main-font text-center">
+                    <h3 class="fs-6 text-red mt-2 mb-0 px-2 main-font text-center ">
                         {{item['name']}}
                     </h3>
-                    <p class="text-black sec-font text-center fs-7 mb-1">
+                    <p class="text-black sec-font text-center fs-7 mb-1 ">
                         {{item['category']}}
                     </p>
-                    <h3 class="text-black main-font text-center fs-6">
+                    <h3 class="text-black main-font text-center fs-6 ">
                         {{item['cost']}} ₹
                     </h3>
                 </a>
