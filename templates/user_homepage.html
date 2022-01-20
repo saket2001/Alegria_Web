@@ -1,6 +1,4 @@
-{% extends 'layout.html' %}
-
-{% block head %}
+{% extends 'layout.html' %} {% block head %}
 
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"
     integrity="sha512-cdV6j5t5o24hkSciVrb8Ki6FveC2SgwGfLE31+ZQRHAeSRxYhAQskLkq3dLm8ZcWe1N3vBOEYmmbhzf7NTtFFQ=="
@@ -11,13 +9,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script defer src="/static/js/homepage.js"></script>
 <script defer src="/static/js/loading.js"></script>
-{% endblock %}
-
-{% block title %}
-Alegria 2022 | Homepage
-{% endblock %}
-
-{% block body %}
+{% endblock %} {% block title %} Alegria 2022 | Homepage {% endblock %} {% block body %}
 
 <body>
     <div class="loading-bg">
@@ -167,12 +159,14 @@ Alegria 2022 | Homepage
                                     Heads</a>
                             </li>
                             <li>
-                                <a href="/privacypolicy" class="dropdown-item navbar_links" {% if activeNav=='Sponsors' %}
-                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Privacy Policy</a>
+                                <a href="/privacypolicy" class="dropdown-item navbar_links" {% if activeNav=='Sponsors'
+                                    %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Privacy
+                                    Policy</a>
                             </li>
                             <li>
-                                <a href="/publictermsofservice" class="dropdown-item navbar_links" {% if activeNav=='Sponsors' %}
-                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Terms and Conditions</a>
+                                <a href="/publictermsofservice" class="dropdown-item navbar_links" {% if
+                                    activeNav=='Sponsors' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {%
+                                    endif %}>Terms and Conditions</a>
                             </li>
                         </ul>
                     </li>
@@ -191,11 +185,13 @@ Alegria 2022 | Homepage
                     </svg>
                 </a>
                 {% endif %}
+
                 {% if signed_in==True %}
                 <a href="/user/cart" class="d-flex align-items-center text-black p-2 mx-1">
                     <i class="fas fa-shopping-bag text-black fs-5"></i>
                 </a>
                 {% endif %}
+
                 {% if signed_in==True %}
                 <a href="/session-logout"
                     class="d-flex justify-content-center align-items-center rounded-3 text-red border-red fs-7 px-3 py-1 me-2 main-font">
@@ -213,9 +209,7 @@ Alegria 2022 | Homepage
         </div>
     </nav>
 
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    {% for message in messages %}
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
     <div class="alert alert-success alert-dismissible fade show d-flex align-items-center position-absolute main-font main-bg"
         role="alert" style="z-index: 10;top: 1.3rem;left:2%;right:2%;width: 95%;">
         <svg xmlns="http://www.w3.org/2000/svg" class="text-red me-2" fill="none" viewBox="0 0 24 24"
@@ -228,9 +222,7 @@ Alegria 2022 | Homepage
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </div>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
+    {% endfor %} {% endif %} {% endwith %}
 
     <div class="parallax_section">
         <!-- theme banner -->
@@ -261,27 +253,15 @@ Alegria 2022 | Homepage
                         <h2 class="fs-3 main-font my-2 text-beige text-center">ALEGRIA 2022</h2>
 
                         <p class="m-1 mx-2 sec-font fs-7 fst-light" style="text-align: justify;">
-                            Alegria - The Festival joy congregated by The Pillai Group Of Institutions. Alegria is
-                            one
-                            of
-                            the most phenomenal
-                            intercollegiate festivals of its kind. It is held in February every year with a mob of
-                            more
-                            than
-                            50,000 1to witness the
-                            flow of immense talent in the events. With fun and joy this event also escorts the
-                            presence
-                            of
-                            splendid talent and star
-                            celebrities. This festival continues to add a pack of memories to everyone's life with
-                            each
-                            passing year and the
-                            dedicated team of students and faculty always hold its back to add on to the astonishing
-                            experience. Be it the unique
-                            themes like the “Light The Night” from last year or the astounding performances, they
-                            never
-                            fail
-                            to amaze us.
+                            Alegria - The Festival joy congregated by The Pillai Group Of Institutions. Alegria is one
+                            of the most phenomenal intercollegiate festivals of its kind. It is held in February every
+                            year with a mob of more than 50,000 1to witness the flow of immense talent
+                            in the events. With fun and joy this event also escorts the presence of splendid talent and
+                            star celebrities. This festival continues to add a pack of memories to everyone's life with
+                            each passing year and the dedicated team
+                            of students and faculty always hold its back to add on to the astonishing experience. Be it
+                            the unique themes like the “Light The Night” from last year or the astounding performances,
+                            they never fail to amaze us.
                         </p>
                         <a href="/about-us" class="sec-font text-light px-3 py-1 rounded-3 fs-6 mt-3"
                             style="background-color: #bd2828;">
@@ -312,7 +292,8 @@ Alegria 2022 | Homepage
                                                 {{col["title"]}}
                                             </h3>
                                             <div class="event-circle">
-                                                <img src={{col["icon"]}} alt="card-image" width="170px" height="170px">
+                                                <img src={{col[ "icon" ]}} alt="card-image" width="170px"
+                                                    height="170px">
                                             </div>
                                         </div>
                                         <div class="event-card-back">
@@ -320,7 +301,7 @@ Alegria 2022 | Homepage
                                                 {{col['content']}}
                                             </p>
                                             <div class="d-flex justify-content-center">
-                                                <a href={{col['link']}}
+                                                <a href={{col[ 'link' ]}}
                                                     class="w-100 text-center sec-font text-light fs-7 py-1 px-3 rounded-3 shadow"
                                                     style="background-color: #bd2828;">
                                                     View
@@ -343,7 +324,8 @@ Alegria 2022 | Homepage
                                                 {{col["title"]}}
                                             </h3>
                                             <div class="event-circle">
-                                                <img src={{col["icon"]}} alt="card-image" width="170px" height="170px">
+                                                <img src={{col[ "icon" ]}} alt="card-image" width="170px"
+                                                    height="170px">
                                             </div>
                                         </div>
                                         <div class="event-card-back">
@@ -351,7 +333,7 @@ Alegria 2022 | Homepage
                                                 {{col['content']}}
                                             </p>
                                             <div class="d-flex justify-content-center">
-                                                <a href={{col['link']}}
+                                                <a href={{col[ 'link' ]}}
                                                     class="w-100 text-center sec-font text-light fs-7 py-1 px-3 rounded-3 shadow"
                                                     style="background-color: #bd2828;">
                                                     View
@@ -374,7 +356,8 @@ Alegria 2022 | Homepage
                                                 {{col["title"]}}
                                             </h3>
                                             <div class="event-circle">
-                                                <img src={{col["icon"]}} alt="card-image" width="170px" height="170px">
+                                                <img src={{col[ "icon" ]}} alt="card-image" width="170px"
+                                                    height="170px">
                                             </div>
                                         </div>
                                         <div class="event-card-back">
@@ -382,7 +365,7 @@ Alegria 2022 | Homepage
                                                 {{col['content']}}
                                             </p>
                                             <div class="d-flex justify-content-center">
-                                                <a href={{col['link']}}
+                                                <a href={{col[ 'link' ]}}
                                                     class="w-100 text-center sec-font text-light fs-7 py-1 px-3 rounded-3 shadow"
                                                     style="background-color: #bd2828;">
                                                     View
@@ -434,19 +417,10 @@ Alegria 2022 | Homepage
                 <div class="row mx-3 my-3 d-flex justify-content-center">
                     <div class="col-lg-8 col-sm-12">
                         <p class="fs-7 text-light sec-font lh-lg mb-2 hackathon-content" style="text-align: justify;">
-                            Hackathons are like
-                            marathons, only a few
-                            make
-                            it to the end
-                            but most
-                            people take part to better
-                            themselves
-                            and have fun. Regardless of why you participate, make sure you're upholding the
-                            spirit
-                            of
-                            the
-                            hackathon by
-                            collaborating with other teams, helping beginners and having fun in the competition.
+                            Hackathons are like marathons, only a few make it to the end but most people take part to
+                            better themselves and have fun. Regardless of why you participate, make sure you're
+                            upholding the spirit of the hackathon by collaborating with other teams, helping
+                            beginners and having fun in the competition.
                         </p>
                         <div class="d-flex flex-column align-items-center text-light sec-font hackathon-content mt-4"
                             style="text-align: justify;">
@@ -610,10 +584,8 @@ Alegria 2022 | Homepage
                                     <div class="d-flex flex-column align-items-center">
                                         <!-- artist review -->
                                         <p class="fs-6 text-black sec-font text-center">
-                                            Had a blast performing @PillaiAlegria. You guys had such insane
-                                            energy.
-                                            Thankyou @PillaiAlegria for giving me a chance to perform at
-                                            Alegria.
+                                            Had a blast performing @PillaiAlegria. You guys had such insane energy.
+                                            Thankyou @PillaiAlegria for giving me a chance to perform at Alegria.
                                             Sending all love back to you guys.
                                         </p>
                                         <h5 class="fs-7 text-red main-font mb-1">Dhvani Bhanushali</h5>
@@ -632,8 +604,7 @@ Alegria 2022 | Homepage
                                     <div class="d-flex flex-column align-items-center">
                                         <!-- artist review -->
                                         <p class="fs-6 text-black sec-font text-center">
-                                            To all at @PillaiAlegria thank you for having us over and all
-                                            the best for
+                                            To all at @PillaiAlegria thank you for having us over and all the best for
                                             all to come. Love and Respect
                                         </p>
                                         <h5 class="fs-7 text-red main-font mb-1">Farhan Akhtar</h5>
@@ -688,8 +659,7 @@ Alegria 2022 | Homepage
                                     <div class="d-flex flex-column align-items-center">
                                         <!-- artist review -->
                                         <p class="fs-6 text-black sec-font text-center">
-                                            What a sight and what a night! . @PillaiAlegria you were a
-                                            delight!!!
+                                            What a sight and what a night! . @PillaiAlegria you were a delight!!!
                                         </p>
                                         <h5 class="fs-7 text-red main-font mb-1">Ayushmaan khurrana</h5>
                                         <p class="fs-7 text-black sec-font mb-1">Actor | Singer</p>

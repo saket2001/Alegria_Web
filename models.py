@@ -1,3 +1,6 @@
+from flask import Flask, session
+from enum import unique
+from unicodedata import category
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -52,7 +55,7 @@ class UserInfo(db.Model):
     isAdmin = db.Column(db.String(10), default=False)
     # registeruser_id = db.relationship(
     #     'RegisterEvent', backref='RegisterUser', lazy=True)
-    # cart_user_id = db.relationship('Cart', backref='CartUser', lazy=True)
+    cart_user_id = db.relationship('Cart', backref='userinfo', lazy=True)
 
     def __repr__(self, email, name, image_url, isAdmin):
         return f"UserInfo('{self.email}'-'{self.name}'-'{self.image_url}'-'{self.phone_number}'-'{self.college_name}'-'{self.isadmin}')"
@@ -73,30 +76,6 @@ class Eventdemo_details(db.Model):
 
     def __repr__(self) -> str:
         return f"EventDetails('{self.event_date}','{self.event_mode}','{self.event_duration}','{self.icon_url}','{self.event_rules}','{self.event_perks_1}','{self.event_perks_2}','{self.event_perks_3}')"
-
-
-class RegisterEvent(db.Model):
-    userinfo_id = db.Column(db.BigInteger, db.ForeignKey(
-        "userinfo.id"), primary_key=True)
-    event_id = db.Column(db.String(10), db.ForeignKey(
-        "event.id"), primary_key=True)
-    order_id = db.Column(db.Integer, unique=True,
-                         primary_key=True, nullable=False)
-    registered_time = db.Column(db.DateTime, default=datetime.now)
-    paid_amount = db.Column(db.Integer, nullable=False)
-    coupon_id = db.Column(db.String(10), db.ForeignKey(
-        "coupon_list.id"), primary_key=True)
-
-    def __repr__(self) -> str:
-        return f"RegisterEvent('{self.registered_time}', '{self.paid_amount}')"
-
-
-class Cart(db.Model):
-    __tablename__ = 'cart'
-    userinfo_id = db.Column(db.BigInteger, db.ForeignKey(
-        "userinfo.id"), primary_key=True)
-    event_id = db.Column(db.String(10), db.ForeignKey(
-        "event.id"), primary_key=True)
 
 
 class Poll(db.Model):
@@ -139,8 +118,7 @@ class CouponList(db.Model):
     coupon_name = db.Column(db.String(20), nullable=False)
     discount_percent = db.Column(db.Integer, nullable=False)
     coupon_details = db.Column(db.String(100), nullable=False)
-    coupon_id = db.relationship(
-        'RegisterEvent', backref='RegisterCoupon', lazy=True)
+    #coupon_id = db.relationship('RegisterEvent', backref='RegisterCoupon', lazy=True)
     transaction_id = db.Column(db.Integer, nullable=False)
 
 
@@ -167,7 +145,7 @@ class Calendar(db.Model):
 class Celebrity(db.Model):
     __tablename__ = 'celebrity'
     event_id = db.Column(db.String(10), db.ForeignKey(
-        "event.id"), primary_key=True)
+        "eventdemo.id"), primary_key=True)
     celebrity_name = db.Column(db.String(20), nullable=False)
     celebrity_pic = db.Column(db.String(50), nullable=False)
 
@@ -189,6 +167,21 @@ class EventsToday(db.Model):
     date = db.Column(db.String(50), nullable=False)
 
 
+class Cart(db.Model):
+    __tablename__ = 'cart'
+    user_id = db.Column(
+        db.String(300), (db.ForeignKey("userinfo.id")), primary_key=True)
+    product_id = db.Column(db.String(10), primary_key=True)
+    count = db.Column(db.Integer)
+    size = db.Column(db.String(10), nullable=True)
+    color = db.Column(db.String(50), nullable=True)
+    single_price = db.Column(db.Float)
+    # image = db.Column(db.String(300))
+    # subtotal = db.Column(db.Float)
+    # discount = db.Column(db.Float, nullable=True)
+    # grandtotal = db.Column(db.Float)
+
+
 class Merchandise(db.Model):
     __tablename__ = 'merchandise'
     id = db.Column(db.String(10), primary_key=True)
@@ -202,6 +195,24 @@ class Merchandise(db.Model):
     color = db.Column(db.String(60), nullable=False)
     category = db.Column(db.String(20), nullable=False)
     code = db.Column(db.String(10), nullable=False)
+
+    # def in_stock(self):
+    #     if session:
+    #         item = []
+    #         try:
+    #             item = session['Shoppingcart']
+    #         except:
+    #             pass
+    #         inde = 0
+    #         if len(item) > 0:
+    #             for ind, it in enumerate(item):
+    #                 if it.get('id') == self.id:
+    #                     inde = ind
+    #             return self.quantity - item[inde].get('quantity')
+    #         else:
+    #             return self.quantity
+    #     else:
+    #         return self.quantity
 
 
 class Categories(db.Model):

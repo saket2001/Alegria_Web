@@ -33,11 +33,13 @@ def create_app():
 
     from models import db
     db.init_app(app)
+    with app.app_context():
+        db.create_all()
     hashing = Hashing(app)
 
     # register views
 
-    from views import csrf, app_mbp
+    from views import app_mbp
     from views.admin import admin_bp
     from views.client import client_bp
     from views.api import IdFilterEventAPI, AllCategoryFilterEventAPI, AnnoucementsAPI, PollsAPI, MerchandiseAPI, CategoryEventFilter
@@ -45,6 +47,8 @@ def create_app():
     app.register_blueprint(app_mbp)
     app.register_blueprint(client_bp)
     app.register_blueprint(admin_bp)
+    with app.app_context():
+        db.create_all()
 
     api = Api(app, prefix="/api")
     api.add_resource(IdFilterEventAPI, "/events/<string:id>")
@@ -123,8 +127,8 @@ def create_app():
                     return redirect('/admin/')
 
                 else:
-                    ph_number = userList.phone_number
-                    print(ph_number)
+                    # ph_number = userList.phone_number
+                    # print(ph_number)
 
                     # user session
                     session['user_name'] = user_info['family_name']
@@ -137,8 +141,8 @@ def create_app():
                     user_idd = helperFunc.hashValue(user_info['email'])
 
                     flash("You Logged in Successfully!!")
-                    if (ph_number == None):
-                        return redirect('/new-user-login')
+                    # if (ph_number == None):
+                    #     return redirect('/new-user-login')
 
                     return redirect('/')
 
@@ -178,7 +182,7 @@ def create_app():
         return redirect('/')
 
     # enable csrf
-    csrf.init_app(app)
+    # csrf.init_app(app)
     if __name__ == "__main__":
         app.run(debug=True)
 

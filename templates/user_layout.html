@@ -1,15 +1,7 @@
-{% extends 'layout.html' %}
-
-
-{% block head %}
+{% extends 'layout.html' %} {% block head %}
 <script src="/static/js/loading.js"></script>
 
-{% block headContent %}
-{% endblock headContent %}
-
-{% endblock head %}
-
-{% block body %}
+{% block headContent %} {% endblock headContent %} {% endblock head %} {% block body %}
 <div class="loading-bg">
 </div>
 <div class="loader d-flex flex-column align-items-center justify-content-center">
@@ -140,14 +132,14 @@
                                 <a href="/developers" class="dropdown-item navbar_links">Developers</a>
                             </li>
                             <li>
-                                <a href="/event-heads" class="dropdown-item navbar_links">Event
-                                    Heads</a>
+                                <a href="/event-heads" class="dropdown-item navbar_links">Event Heads </a>
                             </li>
                             <li>
                                 <a href="/privacypolicy" class="dropdown-item navbar_links">Privacy Policy</a>
                             </li>
                             <li>
-                                <a href="/publictermsofservice" class="dropdown-item navbar_links">Terms and Conditions</a>
+                                <a href="/publictermsofservice" class="dropdown-item navbar_links">Terms and
+                                    Conditions</a>
                             </li>
                         </ul>
                     </li>
@@ -165,11 +157,13 @@
                     </svg>
                 </a>
                 {% endif %}
+
                 {% if signed_in==True %}
                 <a href="/user/cart" class="d-flex align-items-center text-beige p-2 mx-1">
                     <i class="fas fa-shopping-bag text-beige fs-5"></i>
                 </a>
                 {% endif %}
+
                 {% if signed_in==True %}
                 <a href="/session-logout"
                     class="d-flex justify-content-center align-items-center rounded-3 text-beige border-beige fs-7 px-3 py-1 me-2 main-font">
@@ -188,8 +182,7 @@
     </nav>
 
 
-    {% block content %}
-    {% endblock %}
+    {% block content %} {% endblock %}
 
     <!-- footer -->
     <footer class="d-flex flex-column px-2 overflow-hidden u-text-beige" style="background-color: #272626;">
