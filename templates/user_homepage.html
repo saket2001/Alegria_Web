@@ -5,13 +5,7 @@
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.min.js" integrity="sha512-5/OHwmQzDSBS0Ous4/hlYoWLHd06/d2r7LdKZQVBXOA6PvOqWVXtdboiLTU7lQTGyVoKVTNkwi0ol4gHGlw5ww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script defer src="/static/js/homepage.js"></script>
 <script defer src="/static/js/loading.js"></script>
-{% endblock %}
-
-{% block title %}
-Alegria 2022 | Homepage
-{% endblock %}
-
-{% block body %}
+{% endblock %} {% block title %} Alegria 2022 | Homepage {% endblock %} {% block body %}
 
 <body>
     <div class="loading-bg">
@@ -122,10 +116,7 @@ Alegria 2022 | Homepage
                                 <a href="/polls" class="dropdown-item navbar_links" {% if activeNav=='Polls' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Polls</a>
                             </li>
                             <li>
-                                <a href="/announcements?filter=None" class="dropdown-item navbar_links" {% if
-                                    activeNav=='Announcements' %}
-                                    style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif
-                                    %}>Announcements</a>
+                                <a href="/announcements?filter=None" class="dropdown-item navbar_links" {% if activeNav=='Announcements' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Announcements</a>
                             </li>
                             <li>
                                 <a href="/sponsors" class="dropdown-item navbar_links" {% if activeNav=='Sponsors' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Sponsors</a>
@@ -153,7 +144,7 @@ Alegria 2022 | Homepage
                     </svg>
                 </a>
                 {% endif %} {% if signed_in==True %}
-                <a href="/user/cart" class="d-flex align-items-center text-black p-2 mx-1">Cart ({{session['Shoppingcart']|length}})
+                <a href="{{url_for('client.getCart')}}" class="d-flex align-items-center text-black p-2 mx-1">({{session['Shoppingcart']|length}})
                     <i class="fas fa-shopping-bag text-black fs-5"></i>
                 </a> {% endif %} {% if signed_in==True %}
                 <a href="/session-logout" class="d-flex justify-content-center align-items-center rounded-3 text-red border-red fs-7 px-3 py-1 me-2 main-font">
@@ -462,8 +453,7 @@ Alegria 2022 | Homepage
                             <div class="col d-flex flex-column align-items-center my-2">
                                 <div class="w-100 rounded-3 testimonial-card p-3">
                                     <!-- artist image -->
-                                    <img src="../static/images/testimonials/armaan-malik-hits-7-million-instagram-followers-920x518-1-200x200.jpg"
-                                        class="my-2 mb-3 testimonial-circle" alt="testimonial image">
+                                    <img src="../static/images/testimonials/armaan-malik-hits-7-million-instagram-followers-920x518-1-200x200.jpg" class="my-2 mb-3 testimonial-circle" alt="testimonial image">
                                     <div class="d-flex flex-column align-items-center">
                                         <!-- artist review -->
                                         <p class="fs-6 text-black sec-font text-center">
@@ -480,8 +470,7 @@ Alegria 2022 | Homepage
                             <div class="col d-flex flex-column align-items-center my-2">
                                 <div class="h-100 w-100 d-flex flex-column align-items-center rounded-3 testimonial-card p-3">
                                     <!-- artist image -->
-                                    <img src="../static/images/testimonials/0521_dhvani3-200x200.jpg"
-                                        class="my-2 mb-3 testimonial-circle" alt="testimonial image">
+                                    <img src="../static/images/testimonials/0521_dhvani3-200x200.jpg" class="my-2 mb-3 testimonial-circle" alt="testimonial image">
                                     <div class="d-flex flex-column align-items-center">
                                         <!-- artist review -->
                                         <p class="fs-6 text-black sec-font text-center">
@@ -498,8 +487,7 @@ Alegria 2022 | Homepage
                             <div class="col d-flex flex-column align-items-center my-2">
                                 <div class="h-100 w-100 rounded-3 testimonial-card p-3">
                                     <!-- artist image -->
-                                    <img src="../static/images/testimonials/Farhan-Akhtar-Live-concert-at-Pillai-College-fest-Alegria-2014-1-200x200.jpeg"
-                                        class="my-2 mb-3 testimonial-circle" alt="testimonial image">
+                                    <img src="../static/images/testimonials/Farhan-Akhtar-Live-concert-at-Pillai-College-fest-Alegria-2014-1-200x200.jpeg" class="my-2 mb-3 testimonial-circle" alt="testimonial image">
                                     <div class="d-flex flex-column align-items-center">
                                         <!-- artist review -->
                                         <p class="fs-6 text-black sec-font text-center">
@@ -516,8 +504,7 @@ Alegria 2022 | Homepage
                             <div class="col d-flex flex-column align-items-center my-2">
                                 <div class="h-100 w-100 rounded-3 testimonial-card p-3">
                                     <!-- artist image -->
-                                    <img src="../static/images/testimonials/sonam-1-200x200.jpg"
-                                        class="my-2 mb-3 testimonial-circle" alt="testimonial image">
+                                    <img src="../static/images/testimonials/sonam-1-200x200.jpg" class="my-2 mb-3 testimonial-circle" alt="testimonial image">
                                     <div class="d-flex flex-column align-items-center">
                                         <!-- artist review -->
                                         <p class="fs-6 text-black sec-font text-center">
@@ -534,8 +521,7 @@ Alegria 2022 | Homepage
                             <div class="col d-flex flex-column align-items-center my-2">
                                 <div class="h-100 w-100 rounded-3 testimonial-card p-3">
                                     <!-- artist image -->
-                                    <img src="../static/images/testimonials/Siddharth-Malhotra-and-Rakul-preet-Singh-at-alegria-rock-200x200.jpg"
-                                        class="my-2 mb-3 testimonial-circle" alt="testimonial image">
+                                    <img src="../static/images/testimonials/Siddharth-Malhotra-and-Rakul-preet-Singh-at-alegria-rock-200x200.jpg" class="my-2 mb-3 testimonial-circle" alt="testimonial image">
                                     <div class="d-flex flex-column align-items-center">
                                         <!-- artist review -->
                                         <p class="fs-6 text-black sec-font text-center">
@@ -552,8 +538,7 @@ Alegria 2022 | Homepage
                             <div class="col d-flex flex-column align-items-center my-2">
                                 <div class="h-100 w-100 rounded-3 testimonial-card p-3">
                                     <!-- artist image -->
-                                    <img src="../static/images/testimonials/alegria-ayushmann-khurrana-live-band-300x300.jpg"
-                                        class="my-2 mb-3 testimonial-circle" alt="testimonial image">
+                                    <img src="../static/images/testimonials/alegria-ayushmann-khurrana-live-band-300x300.jpg" class="my-2 mb-3 testimonial-circle" alt="testimonial image">
                                     <div class="d-flex flex-column align-items-center">
                                         <!-- artist review -->
                                         <p class="fs-6 text-black sec-font text-center">

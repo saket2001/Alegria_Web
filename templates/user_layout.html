@@ -1,15 +1,7 @@
-{% extends 'layout.html' %}
-
-
-{% block head %}
+{% extends 'layout.html' %} {% block head %}
 <script src="/static/js/loading.js"></script>
 
-{% block headContent %}
-{% endblock headContent %}
-
-{% endblock head %}
-
-{% block body %}
+{% block headContent %} {% endblock headContent %} {% endblock head %} {% block body %}
 <div class="loading-bg">
 </div>
 <div class="loader d-flex flex-column align-items-center justify-content-center">
@@ -106,11 +98,8 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-<<<<<<< HEAD
-                        <a class='navbar_links dropdown-toggle' id="dropdownMenuButton2" data-bs-toggle="dropdown"
-                            aria-expanded="false">More</a>
-                        <ul class="dropdown-menu border-0" style="background-color: #681b0aec;"
-                            aria-labelledby="dropdownMenuButton2">
+                        <a class='navbar_links dropdown-toggle' id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">More</a>
+                        <ul class="dropdown-menu border-0" style="background-color: #681b0aec;" aria-labelledby="dropdownMenuButton2">
                             <li>
                                 <a href="/about-us" class="dropdown-item navbar_links">About Us</a>
                             </li>
@@ -118,8 +107,7 @@
                                 <a href="/polls" class="dropdown-item navbar_links">Polls</a>
                             </li>
                             <li>
-                                <a href="/announcements?filter=None"
-                                    class="dropdown-item navbar_links">Announcements</a>
+                                <a href="/announcements?filter=None" class="dropdown-item navbar_links">Announcements</a>
                             </li>
                             <li>
                                 <a href="/sponsors" class="dropdown-item navbar_links">Sponsors</a>
@@ -131,52 +119,50 @@
                                 <a href="/event-heads" class="dropdown-item navbar_links">Event
 =======
                         <a class='navbar_links dropdown-toggle' id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" {% if activeNav=='News' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>More</a>
-                        <ul class="dropdown-menu border-0" style="background-color: #681b0aec;" aria-labelledby="dropdownMenuButton2">
-                            <li>
-                                <a href="/about-us" class="dropdown-item navbar_links" {% if activeNav=='About us' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>About Us</a>
-                            </li>
-                            <li>
-                                <a href="/polls" class="dropdown-item navbar_links" {% if activeNav=='Polls' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Polls</a>
-                            </li>
-                            <li>
-                                <a href="/announcements" class="dropdown-item navbar_links" {% if activeNav=='Announcements' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Announcements</a>
-                            </li>
-                            <li>
-                                <a href="/sponsors" class="dropdown-item navbar_links" {% if activeNav=='Sponsors' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Sponsors</a>
-                            </li>
-                            <li>
-                                <a href="/developers" class="dropdown-item navbar_links" {% if activeNav=='Sponsors' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Developers</a>
-                            </li>
-                            <li>
-                                <a href="/event-heads" class="dropdown-item navbar_links" {% if activeNav=='Event Heads' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Event
->>>>>>> d6a0e90762ebc8fcfd6fd52176cca88d6719fb65
-                                    Heads</a>
+                                <ul class="dropdown-menu border-0" style="background-color: #681b0aec;" aria-labelledby="dropdownMenuButton2">
+                                    <li>
+                                        <a href="/about-us" class="dropdown-item navbar_links" {% if activeNav=='About us' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>About Us</a>
+                                    </li>
+                                    <li>
+                                        <a href="/polls" class="dropdown-item navbar_links" {% if activeNav=='Polls' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Polls</a>
+                                    </li>
+                                    <li>
+                                        <a href="/announcements" class="dropdown-item navbar_links" {% if activeNav=='Announcements' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Announcements</a>
+                                    </li>
+                                    <li>
+                                        <a href="/sponsors" class="dropdown-item navbar_links" {% if activeNav=='Sponsors' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Sponsors</a>
+                                    </li>
+                                    <li>
+                                        <a href="/developers" class="dropdown-item navbar_links" {% if activeNav=='Sponsors' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Developers</a>
+                                    </li>
+                                    <li>
+                                        <a href="/event-heads" class="dropdown-item navbar_links" {% if activeNav=='Event Heads' %} style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Event Heads</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
-                    </li>
-                </ul>
-                {% if signed_in==False %}
-                <a href="/user-login" class="d-flex justify-content-center align-items-center  rounded-3 text-red bg-white fs-7 px-5 py-1 me-2 main-font">
-                    <p class="my-0 me-2">
-                        Sign In
-                    </p>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="text-beige ms-3" width="24px" height="24px">
+                        {% if signed_in==False %}
+                        <a href="/user-login" class="d-flex justify-content-center align-items-center  rounded-3 text-red bg-white fs-7 px-5 py-1 me-2 main-font">
+                            <p class="my-0 me-2">
+                                Sign In
+                            </p>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="text-beige ms-3" width="24px" height="24px">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
                     </svg>
-                </a>
-                {% endif %} {% if signed_in==True %}
-                <a href="{{url_for('client.getCart')}}" class="d-flex align-items-center text-beige p-2 mx-1">Cart ({{session['Shoppingcart']|length}})<i class="fas fa-shopping-bag text-beige fs-5"></i></a> {% endif %} {% if signed_in==True %}
-                <a href="/session-logout" class="d-flex justify-content-center align-items-center rounded-3 text-beige border-beige fs-7 px-3 py-1 me-2 main-font">
-                    <p class="my-0 me-2">
-                        Logout
-                    </p>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="text-beige" width="24px" height="24px" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        </a>
+                        {% endif %} {% if signed_in==True %}
+                        <a href="{{url_for('client.getCart')}}" class="d-flex align-items-center text-beige p-2 mx-1">({{session['Shoppingcart']|length}})<i class="fas fa-shopping-bag text-beige fs-5"></i></a> {% endif %} {% if signed_in==True %}
+                        <a href="/session-logout" class="d-flex justify-content-center align-items-center rounded-3 text-beige border-beige fs-7 px-3 py-1 me-2 main-font">
+                            <p class="my-0 me-2">
+                                Logout
+                            </p>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="text-beige" width="24px" height="24px" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
-                </a>
-                {% endif %}
+                        </a>
+                        {% endif %}
             </div>
         </div>
     </nav>

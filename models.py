@@ -168,12 +168,10 @@ class EventsToday(db.Model):
 
 class Cart(db.Model):
     __tablename__ = 'cart'
-    order_id=db.Column(db.Integer, primary_key=True)
     user_id=db.Column(db.String(300), (db.ForeignKey("userinfo.id")), primary_key=True)
     product_id=db.Column(db.String(10), primary_key=True)
     product_name=db.Column(db.String(250))
     category= db.Column(db.String(50))
-    type= db.Column(db.String(50))
     count=db.Column(db.Integer)
     size=db.Column(db.String(10), nullable=True)
     color=db.Column(db.String(50), nullable=True)
