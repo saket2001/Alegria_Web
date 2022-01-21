@@ -531,3 +531,11 @@ def privacyPolicy():
 @app_mbp.route("/publictermsofservice")
 def termsandconditions():
     return render_template('terms_and_services.html')
+
+@app_mbp.route("/buzz")
+def buzz():
+    return render_template('404.html')
+
+@app_mbp.route("/highlights")
+def highlights():
+    return render_template('404.html')
