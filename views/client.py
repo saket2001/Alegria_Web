@@ -177,24 +177,24 @@ def cartPage():
 
 @client_bp.route('/remove-from-cart/<u_id>/<merchandise_id>')
 def deleteItem(u_id, merchandise_id):
-    if 'Shoppingcart' not in session and len(session['Shoppingcart']):
-        return redirect('/')
     try:
-        session.modified = True
-        for key, item in session['Shoppingcart'].items():
-            if str(key) == merchandise_id:
-                session['Shoppingcart'].pop(key, None)
-        return redirect(url_for('client.getCart'))
-
+        product = Cart.query.filter(Cart.user_id==u_id, Cart.product_id==merchandise_id).first()
+        if product:
+            db.session.delete(product)
+            db.session.commit()
+        
     except Exception as e:
         print(e)
         return redirect(url_for('client.getCart'))
 
 
-@client_bp.route('/clearCart')
-def clearcart():
+@client_bp.route('/<u_id>/clearCart')
+def clearcart(u_id):
     try:
-        session.pop('Shoppingcart', None)
+        cart = Cart.query.filter_by(user_id=u_id).first()
+        if cart:
+            db.session.delete(cart)
+            db.session.commit()
         return redirect('/')
     except Exception as e:
         print(e)
