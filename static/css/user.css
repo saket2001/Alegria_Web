@@ -217,6 +217,20 @@ a.text-black:hover {
 }
 
 /* nav bar */
+.cart_bubble {
+    background-color: var(--u_bg);
+    color: var(--u_red);
+    font-size: 0.8rem;
+    font-family: 'main-font';
+    padding: 0.2rem 0.4rem;
+    border-radius: 100%;
+    width: 1.3rem;
+    height: 1.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .parallax_navbar {
     position: absolute;
     background-color: transparent;
@@ -628,7 +642,7 @@ button {
 }
 
 button:hover {
-    transform: scale(0.95);
+    transform: scale(0.98);
 }
 
 .domain img {

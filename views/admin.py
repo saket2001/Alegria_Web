@@ -87,20 +87,13 @@ def adminLogin():
 @admin_login_required
 def home():
     try:
-        today = date.today()
         eventsList = [{'title': 'Total Events', 'total': len(Eventdemo.query.all())},
                       {'title': 'Total Merchandise',
                        'total': len(Merchandise.query.all())},
                       {'title': 'Total Users', 'total': len(
-                          UserInfo.query.all())},
-                      {'newusers': 'New Users', 'newusertotal': len(
-                          UserInfo.query.filter_by(
-                              date_registered=today).all())}
+                          UserInfo.query.all())}
                       ]
-        eventSalesList = [{'newusers': 'New Users', 'newusertotal': len(
-                          UserInfo.query.filter_by(
-                              date_registered=today).all())}]
-        return render_template('/admin/admin_dashboard.html', greeting=calcGreeting(), now_beautiful=getDateTime(), admin_username=session.get('user_name'), admin_image=session.get('user_image'), eventsList=eventsList, eventSalesList=eventSalesList, activeNav='dashboard')
+        return render_template('/admin/admin_dashboard.html', greeting=calcGreeting(), now_beautiful=getDateTime(), admin_username=session.get('user_name'), admin_image=session.get('user_image'), eventsList=eventsList, activeNav='dashboard')
     except Exception as e:
         print(e)
         return redirect("/")
@@ -118,7 +111,7 @@ def events(event_category):
         filter_category_events = Eventdemo.query.filter_by(
             event_category_name=event_category).all()
 
-        res = {
+        res = { 
             "type": True,
             "events": []
         }
@@ -167,7 +160,6 @@ def addEvent():
             event_duration = request.form.get('duration')
             event_criteria = request.form.get('criteria')
             event_mode = request.form.get('mode')
-            event_is_expired = "Flase"
 
             # online_cost = request.form.get('onlineCost')
             # offlineCost = request.form.get('offlineCost')
@@ -187,7 +179,7 @@ def addEvent():
             event_id = request.form.get('id')
             entry = Eventdemo(event_name=event_name, id=event_id, event_code=event_code,
                               event_summary=event_summary, event_criteria=event_criteria, event_category_id=event_category_id, event_category_name=event_category_name, event_contact1=event_contact1, event_contact2=event_contact2,
-                              event_cost=event_cost, event_contact3=event_contact3, event_contact4=event_contact4, pr_points=pr_points, event_is_expired=event_is_expired)
+                              event_cost=event_cost, event_contact3=event_contact3, event_contact4=event_contact4, pr_points=pr_points)
             # supports_online=supportsOnline, 	supports_offline=supportsOffline,
             entry2 = Eventdemo_details(
                 event_date=event_date, event_rules=event_rules, event_perks_1=event_perks_1, event_perks_2=event_perks_2, event_perks_3=event_perks_3, icon_url=icon_url, event_duration=event_duration, event_id=event_id, event_mode=event_mode)
@@ -261,14 +253,14 @@ def deleteevent(category, event_id):
         db.session.commit()
         db.session.delete(post2)
         db.session.commit()
-        return redirect('/admin/')
+        return redirect('/admin/events')
     except Exception as e:
         print(e)
         return redirect("/")
 
 
 @ admin_bp.route("/events/event-registrations")
-# @admin_login_required
+#@admin_login_required
 def eventRegistrations():
     # get info from api in List of Dictionaries format as below
     try:
@@ -304,7 +296,7 @@ def merchandise(category):
             "merchandise_List": []
         }
         for item in merchandise_List:
-            res["merchandise_List"].append({
+            res["merchandise_List"].append({ 
                 "id": item.id,
                 "name": item.name,
                 "details": item.details,
@@ -393,7 +385,6 @@ def deletemerchandise(merchandise_category, merchandise_id):
         db.session.delete(merch)
         db.session.commit()
         return redirect('/admin/merchandise')
-
     except Exception as e:
         print(e)
         return redirect("/")
@@ -401,7 +392,7 @@ def deletemerchandise(merchandise_category, merchandise_id):
 
 # poll routes
 @ admin_bp.route("/polls/<poll_id>/details")
-@admin_login_required
+#@admin_login_required
 def poll_details(poll_id):
     try:
         pollsList = Poll.query.filter_by(poll_id=poll_id).first()
@@ -420,20 +411,17 @@ def poll_details(poll_id):
                 "image_url": ele.option_image,
                 "option_votes": ele.option_votes
             })
-
         return render_template('/admin/admin_poll_details.html', activeNav='poll_details', polldetails=res["polldetails"])
-
     except Exception as e:
         print(e)
         return redirect("/")
 
 
 @ admin_bp.route("/polls")
-@admin_login_required
+#@admin_login_required
 def polls():
     try:
         form = AddPollForm()
-
         pollsList = Poll.query.all()
         res = {
             "type": True,
@@ -446,9 +434,7 @@ def polls():
                 "status": item.status,
                 "total_votes": item.total_votes
             })
-
         return render_template('/admin/admin_polls.html', activeNav='polls', poll_list=res["polls_list"], form=form)
-
     except Exception as e:
         print(e)
         return redirect("/")
@@ -483,54 +469,51 @@ def AddNewPoll():
 
             db.session.add(pollOption)
             db.session.commit()
+            db.session.add(new_poll2)
+            db.session.commit()
+            
+            #print(option, image)
 
-        return redirect('/admin/polls')
+        # polls table data that will be generated on backend
+        # poll_id,date_published,status=Active,total_votes=0
+
+        # PollResponses table data that will be generated on backend
+        # poll_option_id,option_votes=0
 
     except Exception as e:
         print(e)
         return redirect('/')
 
+    return redirect('/admin/polls')
 
 @ admin_bp.route("/polls/<poll_id>/deletepoll", methods=["GET", "POST"])
-@admin_login_required
 def deletepoll(poll_id):
     try:
         poll = Poll.query.filter_by(poll_id=poll_id).first()
         poll2 = PollResponses.query.filter_by(poll_id=poll_id).all()
-
         print(poll2)
         db.session.delete(poll)
         db.session.commit()
-
         for ele in poll2:
             db.session.delete(ele)
             db.session.commit()
-
         return redirect('/admin/polls')
-
     except Exception as e:
         print(e)
         return redirect("/")
 
 
 @ admin_bp.route("/polls/<poll_id>/details/togglestatus", methods=["GET", "POST"])
-@admin_login_required
 def togglestatus(poll_id):
+    current_status = request.args.get('status')
+    print(current_status)
     try:
-        old_poll = Poll.query.filter_by(poll_id=poll_id).first()
-        new_status = None
-
-        if old_poll.status == "Active":
-            new_status = "Expired"
-
-        if old_poll.status == "Expired":
-            new_status = "Active"
-
-        old_poll.status = new_status
-        db.session.commit()
-
-        return redirect("/admin/polls")
-
+                new_status= Poll.query.filter_by(poll_id=poll_id).first()
+                new_status.status= 'Expired'
+                db.session.commit()
+                print(new_status)
+                #flash("Poll Status has been turned off")
+                return redirect("/admin/polls")
     except Exception as e:
         print(e)
         return redirect('/')
