@@ -126,7 +126,9 @@ def cartPage():
             user_id=user_id).all()
 
         cartItemDetails = []
+        cart_total = 0
         for item in cartItems:
+            cart_total += item.single_price * item.count
             cartItemDetails.append({
                 "id": item.product_id,
                 "size": item.size,
@@ -154,12 +156,14 @@ def cartPage():
 
         # 3. cart details
         # by default
+        discount = 0 
+        discounted_total = cart_total - discount
         cart_details = {
             "total_items": len(cart_list),
-            "subtotal": 0,
-            "grandtotal": 0,
-            "coupon_discount": 0,
-            "to_pay": 0,
+            "subtotal": cart_total,
+            "grandtotal": discounted_total,
+            "coupon_discount": discount,
+            "to_pay": discounted_total,
         }
 
         return render_template('/client/cart.html', cart_details=cart_details, cart_list=cart_list, total_items=len(cart_list), signed_in=signed_in, cartLen=cartLen, user_id=user_id)
@@ -192,7 +196,10 @@ def deleteItem(u_id, merchandise_id):
 def editCartItem(u_id, merchandise_id):
     try:
         new_count = request.form.get('count')
-        # print(u_id, merchandise_id, new_count)
+        product = Cart.query.filter(Cart.user_id==u_id, Cart.product_id==merchandise_id).first()
+        if product:
+            product.count = new_count
+            db.session.commit()
         return redirect('/user/cart')
 
     except Exception as e:
@@ -209,7 +216,7 @@ def clearcart(u_id):
             for item in cart:
                 db.session.delete(item)
                 db.session.commit()
-                session['cartLength'] = 0
+            session['cartLength'] = 0
 
             flash('Cart Cleared Successfully')
 
