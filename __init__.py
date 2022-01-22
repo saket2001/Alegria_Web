@@ -7,6 +7,7 @@ from models import UserInfo
 from datetime import datetime
 from flask_hashing import Hashing
 import helperFunc
+from models import Cart
 
 
 def create_app():
@@ -139,6 +140,12 @@ def create_app():
                     session['user_id'] = helperFunc.hashValue(
                         user_info['email'])
                     user_idd = helperFunc.hashValue(user_info['email'])
+
+                    # getting cart len
+                    cartInfo = Cart.query.filter_by(
+                        user_id=session.get('user_id')).all()
+                    cartLen = len(cartInfo)
+                    session['cartLength'] = cartLen or None
 
                     flash("You Logged in Successfully!!")
                     # if (ph_number == None):

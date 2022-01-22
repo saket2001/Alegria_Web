@@ -11,9 +11,6 @@ from flask_wtf.csrf import CSRFProtect
 from models import Cart, Merchandise, UserInfo
 from views.admin import merchandise
 
-# from alegria_webp.models import db,Eventdemo,Eventdemo_details,Merchandise
-# from alegria_webp.forms import AddEventForm, AddPollForm, AddMerchandiseForm
-
 
 # def login_required(f):
 #     @wraps(f)
@@ -86,17 +83,28 @@ def AddToCart(id):
             merchandise = Merchandise.query.filter_by(
                 id=merchandise_id).first()
             single_price = merchandise.cost
+            # for redirect
+            category = merchandise.category
 
-            # 2. add this details to cart
+            # 2. add this details to cart if not present in cart
             # details= user_id,m_id,size,color,count
 
-            newCartItem = Cart(
-                user_id=user_id, product_id=merchandise_id, size=size, color=color, count=count, single_price=single_price)
+            isPresent = Cart.query.filter_by(
+                user_id=user_id, product_id=merchandise_id).first()
 
-            db.session.add(newCartItem)
-            db.session.commit()
+            print(isPresent != None)
+            if isPresent != None:
+                flash("Product already present in cart!!")
+                return redirect("/merchandise/{}/{}".format(category, id))
+            else:
 
-            flash('Cart Updated !!')
+                newCartItem = Cart(
+                    user_id=user_id, product_id=merchandise_id, size=size, color=color, count=count, single_price=single_price)
+
+                db.session.add(newCartItem)
+                db.session.commit()
+                flash('Cart Updated !!')
+                return redirect("/merchandise/{}/{}".format(category, id))
 
             # if merchandise_id or type or size or color or count or request.method == "POST":
             #     DictItems = {merchandise_id: {'name': merch.name, 'cost': merch.cost, 'type': type,
@@ -113,7 +121,6 @@ def AddToCart(id):
             #             return redirect(request.referrer)
             #     else:
             #         session['Shoppingcart'] = DictItems
-            return redirect("/user/cart")
 
         except Exception as e:
             print(e)
@@ -125,8 +132,12 @@ def AddToCart(id):
 @user_login_required
 def cartPage():
     try:
-
         user_id = session.get('user_id')
+        cartLen = None
+        # checks if logged in
+        if session.get('user_id') != None:
+            signed_in = True
+            cartLen = session.get('cartLength')
 
         # 1. fetch all cart items ids from cart table
         cartItems = Cart.query.filter_by(
@@ -169,10 +180,11 @@ def cartPage():
             "to_pay": 0,
         }
 
-        return render_template('/client/cart.html', cart_details=cart_details, cart_list=cart_list, total_items=len(cart_list), signed_in=True)
+        return render_template('/client/cart.html', cart_details=cart_details, cart_list=cart_list, total_items=len(cart_list), signed_in=signed_in, cartLen=cartLen)
 
     except Exception as e:
         print(e)
+        return redirect("/")
 
 
 @client_bp.route('/remove-from-cart/<u_id>/<merchandise_id>')
@@ -199,34 +211,3 @@ def clearcart():
     except Exception as e:
         print(e)
         return redirect(url_for('client.getCart'))
-
-
-# @client_bp.route('/cart')
-# def cartPage():
-#     # for showing empty cart message
-#     cart_msg = True
-
-#     # will come from db
-#     # user_cart = [{
-#     #     id: 'M01',
-#     #     "name": "Alegria Doodle Tshirt",
-#     #     "type": "Merchandise",
-#     #     "category": "Tshirts",
-#     #     "price": "200",
-#     #     "color": "Classic Grey",
-#     #     "size": "L",
-#     #     "img_url": "https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/tshirt.png?token=APU7JOLVT5ILVPBSFJJE6KDB232OC"
-#     # }]
-
-#     user_cart = []
-
-#     cart_details = {
-#         "total_items": len(user_cart),
-#         "subtotal": 200,
-#         "coupon_discount": 0.0,
-#         "to_pay": 200,
-#     }
-
-#     if len(user_cart) == 0:
-#         cart_msg = True
-#         return render_template('/client/user_cart.html', user_cart=user_cart, cart_details=cart_details, cart_msg=cart_msg)

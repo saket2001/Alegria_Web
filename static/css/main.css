@@ -1,13 +1,3 @@
-@font-face {
-    font-family: 'gilroy-bold';
-    src: url('../font/Gilroy-Bold.ttf');
-}
-
-@font-face {
-    font-family: 'gilroy-medium';
-    src: url('../font/Gilroy-Medium.ttf');
-}
-
 :root {
     --brown: #26251A;
     --teal: #f5eee0e0;
@@ -79,10 +69,6 @@ li {
     padding: 0.25rem 0.5rem;
     background-color: transparent;
     transition: all .5s ease-out;
-}
-
-.button:hover {
-    transform: scale(0.95);
 }
 
 .go_back_btn {

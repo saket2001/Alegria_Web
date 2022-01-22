@@ -159,8 +159,12 @@
                 {% endif %}
 
                 {% if signed_in==True %}
-                <a href="/user/cart" class="d-flex align-items-center text-beige p-2 mx-1">
-                    <i class="fas fa-shopping-bag text-beige fs-5"></i>
+                <a href="/user/cart"
+                    class="cart position-relative mx-3 d-flex align-items-center text-black p-2 mx-1 position-relative">
+                    <i class="fas fa-shopping-bag text-beige me-2 fs-5"></i>
+                    <div class="cart_bubble position-absolute top-0 end-0 ms-1">
+                        {{cartLen}}
+                    </div>
                 </a>
                 {% endif %}
 

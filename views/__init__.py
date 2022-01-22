@@ -37,12 +37,14 @@ def user_login_required(f):
 def landingPage():
     # by default signed_in is false
     signed_in = False
+    cartLen = None
 
     # checks if logged in
     if session.get('user_id') != None:
         signed_in = True
+        cartLen = session.get('cartLength')
 
-    return render_template('user_homepage.html', activeNav='Home', signed_in=signed_in, row1=client_data.events_row1, row2=client_data.events_row2, row3=client_data.events_row3)
+    return render_template('user_homepage.html', activeNav='Home', signed_in=signed_in, row1=client_data.events_row1, row2=client_data.events_row2, row3=client_data.events_row3, cartLen=cartLen)
 
 
 @app_mbp.route("/user-login")
@@ -57,7 +59,10 @@ def userLogin():
 @app_mbp.route("/about-us")
 def aboutUs():
     try:
-        return render_template('user_aboutus.html', aboutus_2019=client_data.aboutus_2019, aboutus_2018=client_data.aboutus_2018, aboutus_2017=client_data.aboutus_2017, aboutus_2016=client_data.aboutus_2016, aboutus_2015=client_data.aboutus_2015, aboutus_2014=client_data.aboutus_2014, aboutus_2013=client_data.aboutus_2013)
+        cartLen = session.get('cartLength')
+        cartLen = None
+
+        return render_template('user_aboutus.html', aboutus_2019=client_data.aboutus_2019, aboutus_2018=client_data.aboutus_2018, aboutus_2017=client_data.aboutus_2017, aboutus_2016=client_data.aboutus_2016, aboutus_2015=client_data.aboutus_2015, aboutus_2014=client_data.aboutus_2014, aboutus_2013=client_data.aboutus_2013, cartLen=cartLen)
     except Exception as e:
         print(e)
         return redirect("/")
@@ -67,10 +72,11 @@ def aboutUs():
 def events(event_category=None):
     try:
         signed_in = False
-
+        cartLen = None
         # checks if logged in
         if session.get('user_id') != None:
             signed_in = True
+            cartLen = session.get('cartLength')
 
         filter_category_events = Eventdemo.query.filter_by(
             event_category_name=event_category)
@@ -100,7 +106,7 @@ def events(event_category=None):
         else:
             events_arr = []
 
-        return render_template('user_events_list.html', activeNav='Events', events_list=events_arr, category=event_category, signed_in=signed_in)
+        return render_template('user_events_list.html', activeNav='Events', events_list=events_arr, category=event_category, signed_in=signed_in, cartLen=cartLen)
 
     except Exception as e:
         print(e)
@@ -111,10 +117,11 @@ def events(event_category=None):
 def EventDetails(category_name, event_id):
     try:
         signed_in = False
-
+        cartLen = None
         # checks if logged in
         if session.get('user_id') != None:
             signed_in = True
+            cartLen = session.get('cartLength')
 
         # getting event detail
         event = Eventdemo.query.filter_by(id=event_id).first()
@@ -171,21 +178,22 @@ def EventDetails(category_name, event_id):
         if client_data.paymentLinks.get(category_name.lower()) != None:
             paymentLink = client_data.paymentLinks.get(category_name.lower())
 
-        return render_template('user_event_details.html', activeNav='Events', event_details=res['event'], similar_events=similar_events, paymentLink=paymentLink, signed_in=signed_in)
+        return render_template('user_event_details.html', activeNav='Events', event_details=res['event'], similar_events=similar_events, paymentLink=paymentLink, signed_in=signed_in, cartLen=cartLen)
 
     except Exception as e:
         print(e)
-        # return redirect("/")
+        return redirect("/")
 
 
 @ app_mbp.route("/merchandise/<string:category>")
 def merchandise(category):
     try:
         signed_in = False
-
+        cartLen = None
         # checks if logged in
         if session.get('user_id') != None:
             signed_in = True
+            cartLen = session.get('cartLength')
 
         merchandise_List = Merchandise.query.filter_by(category=category).all()
 
@@ -204,7 +212,7 @@ def merchandise(category):
                 "img1": item.item_img1,
             })
 
-        return render_template('user_merchandise.html', activeNav="Merchandise", merchandise_list=res["merchandise_List"], category=category, signed_in=signed_in)
+        return render_template('user_merchandise.html', activeNav="Merchandise", merchandise_list=res["merchandise_List"], category=category, signed_in=signed_in, cartLen=cartLen)
 
     except Exception as e:
         print(e)
@@ -215,10 +223,11 @@ def merchandise(category):
 def get_merchandise_by_Id(category, id):
     try:
         signed_in = False
-
+        cartLen = None
         # checks if logged in
         if session.get('user_id') != None:
             signed_in = True
+            cartLen = session.get('cartLength')
 
         merchandise_data = Merchandise.query.filter_by(id=id).first()
         products_in_stock = Merchandise.query.filter(
@@ -262,11 +271,11 @@ def get_merchandise_by_Id(category, id):
                 "category": merchandise.category
             })
 
-        return render_template('user_merchandise_details.html', activeNav="Merchandise", products_in_stock=products_in_stock, merchandise_data=res["merchandise"], similar_merchandise=similar_merchandise, signed_in=signed_in, form=AddToCart())
+        return render_template('user_merchandise_details.html', activeNav="Merchandise", products_in_stock=products_in_stock, merchandise_data=res["merchandise"], similar_merchandise=similar_merchandise, signed_in=signed_in, form=AddToCart(), cartLen=cartLen)
 
     except Exception as e:
         print(e)
-        # return redirect("/")
+        return redirect("/")
 
 
 #################################
@@ -276,12 +285,13 @@ def get_merchandise_by_Id(category, id):
 def hackathonDetails():
     try:
         signed_in = False
-
+        cartLen = None
         # checks if logged in
         if session.get('user_id') != None:
             signed_in = True
+            cartLen = session.get('cartLength')
 
-        return render_template('user_hackathon.html', activeNav='Hackathon', problem_statements=client_data.problem_statements, signed_in=signed_in)
+        return render_template('user_hackathon.html', activeNav='Hackathon', problem_statements=client_data.problem_statements, signed_in=signed_in, cartLen=cartLen)
 
     except Exception as e:
         print(e)
@@ -294,7 +304,8 @@ def hackathonDetails():
 def sponsorsPage():
     try:
         return render_template('404.html')
-
+        cartLen = session.get('cartLength')
+        cartLen = None
     except Exception as e:
         print(e)
         return redirect("/")
@@ -306,10 +317,11 @@ def sponsorsPage():
 def polls_main():
     try:
         signed_in = False
-
+        cartLen = None
         # checks if logged in
         if session.get('user_id') != None:
             signed_in = True
+            cartLen = session.get('cartLength')
 
         res = {"type": True, "polls": []}
         pollsList = Poll.query.filter_by(status='Active').all()
@@ -318,7 +330,7 @@ def polls_main():
                 "id": item.poll_id,
                 "question": item.question
             })
-        return render_template('user_polls_main.html', poll_cards=res['polls'], signed_in=signed_in)
+        return render_template('user_polls_main.html', poll_cards=res['polls'], signed_in=signed_in, cartLen=cartLen)
 
     except Exception as e:
         print(e)
@@ -329,10 +341,11 @@ def polls_main():
 def Poll_list(id):
     try:
         signed_in = False
-
+        cartLen = None
         # checks if logged in
         if session.get('user_id') != None:
             signed_in = True
+            cartLen = session.get('cartLength')
 
         res = {"type": True, "polls": [], "images": []}
         pollsList = Poll.query.filter_by(status='Active').all()
@@ -357,7 +370,7 @@ def Poll_list(id):
                 "image_url": ele.option_image,
                 "option_votes": ele.option_votes
             })
-        return render_template('user_polls.html', activeNav='events', polls=res["polls"], images=res["images"], result='', nextPoll=nextPoll, signed_in=signed_in)
+        return render_template('user_polls.html', activeNav='events', polls=res["polls"], images=res["images"], result='', nextPoll=nextPoll, signed_in=signed_in, cartLen=cartLen)
 
     except Exception as e:
         print(e)
@@ -368,10 +381,11 @@ def Poll_list(id):
 def Poll_result(id, option):
     try:
         signed_in = False
-
+        cartLen = None
         # checks if logged in
         if session.get('user_id') != None:
             signed_in = True
+            cartLen = session.get('cartLength')
 
         res = {"type": True, "polls": [], "images": []}
         pollsList = Poll.query.filter_by(status='Active').all()
@@ -408,7 +422,9 @@ def Poll_result(id, option):
             if(votes < ele.option_votes):
                 votes = ele.option_votes
                 result = ele.poll_option_id
-        return render_template('user_polls.html', activeNav='events', polls=res["polls"], images=res["images"], result=result, nextPoll=nextPoll, signed_in=signed_in)
+
+        return render_template('user_polls.html', activeNav='events', polls=res["polls"], images=res["images"], result=result, nextPoll=nextPoll, signed_in=signed_in, cartLen=cartLen)
+
     except Exception as e:
         print(e)
         return redirect("/")
@@ -420,12 +436,13 @@ def Poll_result(id, option):
 def DevelopersPage():
     try:
         signed_in = False
-
+        cartLen = None
         # checks if logged in
         if session.get('user_id') != None:
             signed_in = True
+            cartLen = session.get('cartLength')
 
-        return render_template('developers.html', activeNav='Developers', web_team_list=client_data.web_team_list, app_team_list=client_data.app_team_list, signed_in=signed_in)
+        return render_template('developers.html', activeNav='Developers', web_team_list=client_data.web_team_list, app_team_list=client_data.app_team_list, signed_in=signed_in, cartLen=cartLen)
 
     except Exception as e:
         print(e)
@@ -436,10 +453,11 @@ def DevelopersPage():
 def AnnouncementsPage():
     try:
         signed_in = False
-
+        cartLen = None
         # checks if logged in
         if session.get('user_id') != None:
             signed_in = True
+            cartLen = session.get('cartLength')
 
         filter_value = request.args['filter']
         today = datetime.now().strftime('%x')
@@ -467,7 +485,7 @@ def AnnouncementsPage():
         if filter_value == 'latest':
             alerts_announcements.reverse()
 
-        return render_template('user_announcements.html', activeNav='Announcements', day1=day1, alerts_announcements=alerts_announcements, len=len, signed_in=signed_in)
+        return render_template('user_announcements.html', activeNav='Announcements', day1=day1, alerts_announcements=alerts_announcements, len=len, signed_in=signed_in, cartLen=cartLen)
 
     except Exception as e:
         print(e)
@@ -478,12 +496,13 @@ def AnnouncementsPage():
 def eventHeadPage():
     try:
         signed_in = False
-
+        cartLen = None
         # checks if logged in
         if session.get('user_id') != None:
             signed_in = True
+            cartLen = session.get('cartLength')
 
-        return render_template('event-head.html', activeNav='Event heads', signed_in=signed_in)
+        return render_template('event-head.html', activeNav='Event heads', signed_in=signed_in, cartLen=cartLen)
     except Exception as e:
         print(e)
         return redirect("/")
@@ -538,111 +557,23 @@ def deleteUserOnCancel(user_id):
 
 @app_mbp.route("/privacypolicy")
 def privacyPolicy():
-    return render_template('privacy_policy.html')
+    signed_in = False
+    cartLen = None
+    # checks if logged in
+    if session.get('user_id') != None:
+        signed_in = True
+        cartLen = session.get('cartLength')
+
+    return render_template('privacy_policy.html', cartLen=cartLen, signed_in=signed_in)
 
 
 @app_mbp.route("/publictermsofservice")
 def termsandconditions():
-    return render_template('terms_and_services.html')
+    signed_in = False
+    cartLen = None
+    # checks if logged in
+    if session.get('user_id') != None:
+        signed_in = True
+        cartLen = session.get('cartLength')
 
-
-def MergeDict(dict1, dict2):
-    if isinstance(dict1, list) and isinstance(dict2, list):
-        return dict1 + dict2
-
-    elif isinstance(dict1, dict) and isinstance(dict2, dict):
-        return dict(list(dict1.items()) + list(dict2.items()))
-    return False
-
-
-# @app_mbp.route('/addToCart', methods=['POST'])
-# @user_login_required
-# def AddCart():
-#     try:
-#         merchandise_id = request.form.get('merchandise_id')
-#         size = request.form.get('size')
-#         color = request.form.get('color')
-#         count = request.form.get('count')
-#         products_in_stock = Merchandise.query.filter(
-#             Merchandise.quantity > 0).count()
-#         merch = Merchandise.query.filter_by(id=merchandise_id).first()
-
-#         # user= UserInfo.query.filter_by(id=user_id).first()
-#         user = session.get('profile')
-#         print(user)
-
-#         if merchandise_id and size and color and request.method == "POST":
-#             DictItems = {merchandise_id: {'name': merch.name, 'cost': merch.cost, 'product_in_stock': products_in_stock, 'count': count,
-#                                           'size': size, 'color': color, 'image': merch.item_img1, 'category': merch.category, 'quantity': merch.quantity}}
-#             # print(DictItems)
-#             if 'Shoppingcart' in session:
-#                 print(session['Shoppingcart'])
-#                 if merchandise_id in session['Shoppingcart']:
-#                     print("This product is already in the cart.")
-#                     return redirect('/')
-#                 else:
-#                     session['Shoppingcart'] = MergeDict(
-#                         session['Shoppingcart'], DictItems)
-#                     items = session.get(key='Shoppingcart')
-#                     return redirect('/')
-
-#             else:
-#                 session['Shoppingcart'] = DictItems
-#         return redirect('/')
-#     except Exception as e:
-#         print(e)
-#     return redirect('/')
-
-
-# @app_mbp.route('/getcart')
-# def getCart():
-#     if 'Shoppingcart' not in session:
-#         return redirect('/')
-#     return render_template('/client/user_cart.html')
-
-
-@app_mbp.route('/deleteitem/<merchandise_id>')
-def deleteItem(merchandise_id):
-    if 'Shoppingcart' not in session and len(session['Shoppingcart']):
-        return redirect('/')
-    try:
-        session.modified = True
-        for key, item in session['Shoppingcart'].items():
-            if str(key) == merchandise_id:
-                session['Shoppingcart'].pop(key, None)
-        return redirect(url_for('client.getCart'))
-
-    except Exception as e:
-        print(e)
-        return redirect(url_for('client.getCart'))
-
-
-@app_mbp.route('/cart')
-def cartPage():
-    # for showing empty cart message
-    cart_msg = True
-
-    # will come from db
-    # user_cart = [{
-    #     id: 'M01',
-    #     "name": "Alegria Doodle Tshirt",
-    #     "type": "Merchandise",
-    #     "category": "Tshirts",
-    #     "price": "200",
-    #     "color": "Classic Grey",
-    #     "size": "L",
-    #     "img_url": "https://raw.githubusercontent.com/Athul0491/Alegria-Web/master/static/images/tshirt.png?token=APU7JOLVT5ILVPBSFJJE6KDB232OC"
-    # }]
-
-    user_cart = []
-
-    cart_details = {
-        "total_items": len(user_cart),
-        "subtotal": 200,
-        "coupon_discount": 0.0,
-        "to_pay": 200,
-    }
-
-    if len(user_cart) == 0:
-        cart_msg = True
-        return render_template('/client/user_cart.html', user_cart=user_cart, cart_details=cart_details, cart_msg=cart_msg)
+    return render_template('terms_and_services.html', cartLen=cartLen, signed_in=signed_in)

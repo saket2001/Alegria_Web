@@ -119,6 +119,16 @@
 
 <div class="w-100 min-vh-100 overflow-hidden sec-font bg-teal bg-cover">
     <div class="row m-3">
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show d-flex align-items-center position-absolute main-font main-bg"
+            role="alert" style="z-index: 10;top: 1.3rem;left:2%;right:2%;width: 95%;">
+            <i class="fas fa-exclamation-triangle fs-3 me-2"></i>
+            <div>
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
         <div class="col-lg-2 col-sm-3">
             <a href={{ "/merchandise/{}" .format(merchandise_data[ "category" ])}} type="button"
                 class="go_back_btn text-dark py-1">
