@@ -6,6 +6,17 @@ Alegria 2022 | Your Cart
 
 {% block content %}
 <main class="container-fluid bg-cover min-vh-100">
+  {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+  <div
+    class="alert alert-success alert-dismissible fade show d-flex align-items-center position-absolute main-font main-bg"
+    role="alert" style="z-index: 10;top: 1.3rem;left:2%;right:2%;width: 95%;">
+    <i class="far fa-check-circle fs-3 me-2"></i>
+    <div>
+      {{message}}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+  {% endfor %} {% endif %} {% endwith %}
   <div class="row py-3 px-1 d-flex flex-column align-items-center">
     {% if cart_details['total_items']==0 %}
     <!-- cart is empty div -->
@@ -29,7 +40,7 @@ Alegria 2022 | Your Cart
     </div>
 
     <div class="row p-0 m-0">
-      <form action="">
+      <form action={{"/user/{}/clearCart".format(user_id)}} method="post">
         <button type="submit" class="button fs-7 sec-font mx-1 text-decoration-underline">
           Clear Whole Cart
         </button>
@@ -40,7 +51,7 @@ Alegria 2022 | Your Cart
       <div class="col-lg-6 col-sm-12">
         <!-- cart items -->
         {% for product in cart_list %}
-        <div class="row p-3 g-1 me-1 border-2 border-bottom border-danger">
+        <div class="row p-3 gx-3 gy-2 me-1 border-2 border-bottom border-danger">
           <div class="col-lg-5 col-sm-12 d-flex justify-content-center">
             <img src="{{product.img}}" alt="cart-item-image" class="rounded-3" width="200px" height="200px" />
           </div>
@@ -71,9 +82,21 @@ Alegria 2022 | Your Cart
               {{product.cost}} ₹
             </h3>
 
-            <form class="my-2" action={{"/remove-from-cart/{}/{}".format(user_id,product['id'])}}>
-              <button type="submit" class="button bg-beige text-red fs-6">
-                Remove From Cart
+            <div class="d-flex-align-items-center my-1" style="gap: 0.4rem;">
+              <form action={{"/user/edit-cart-merchandise/{}/{}".format(user_id,product['id'])}} method="post">
+                <input type="number" name='count' value={{product['count']}} min="1" class="p-1 me-1 input_value"
+                  style="width: 3rem;" required>
+                <button type="submit" class="button py-1 px-3 bg-brown text-beige">
+                  Update
+                </button>
+              </form>
+            </div>
+
+            <form class="my-1 text-black" action={{"/user/remove-from-cart/{}/{}".format(user_id,product['id'])}}
+              method="post">
+              <button type="submit" class="d-flex justify-content-center align-items-center button main-font fs-6"
+                style="border: 1px solid #3D3D3D;">
+                Remove
                 <i class="far fa-trash-alt ms-2"></i>
               </button>
             </form>

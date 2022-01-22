@@ -642,7 +642,7 @@ button {
 }
 
 button:hover {
-    transform: translateY(-2px);
+    transform: scale(0.98);
 }
 
 .domain img {

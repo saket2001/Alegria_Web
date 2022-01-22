@@ -1,7 +1,4 @@
-from itertools import product
 from flask.helpers import flash
-from tkinter.messagebox import YES
-from turtle import onkeyrelease
 from flask import Blueprint, redirect, render_template, url_for, session, request, current_app
 from functools import wraps
 from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses, Announcement, EventsToday
@@ -92,38 +89,23 @@ def AddToCart(id):
             isPresent = Cart.query.filter_by(
                 user_id=user_id, product_id=merchandise_id).first()
 
-            print(isPresent != None)
             if isPresent != None:
-                flash("Product already present in cart!!")
+                flash("Product already present in cart!!", category="error")
                 return redirect("/merchandise/{}/{}".format(category, id))
             else:
-
                 newCartItem = Cart(
                     user_id=user_id, product_id=merchandise_id, size=size, color=color, count=count, single_price=single_price)
 
                 db.session.add(newCartItem)
                 db.session.commit()
-                flash('Cart Updated !!')
-                return redirect("/merchandise/{}/{}".format(category, id))
+                flash('Cart Updated !!', category="success")
+                session['cartLength'] = session['cartLength']+1
 
-            # if merchandise_id or type or size or color or count or request.method == "POST":
-            #     DictItems = {merchandise_id: {'name': merch.name, 'cost': merch.cost, 'type': type,
-            #                                   'size': size, 'color': color, 'count': count, 'image': merch.item_img1, 'category': merch.category, 'quantity': merch.quantity}}
-            #     print(DictItems)
-            #     if 'Shoppingcart' in session:
-            #         print(session['Shoppingcart'])
-            #         if merchandise_id in session['Shoppingcart']:
-            #             flash("You've already added that item in your cart.")
-            #             return redirect('/')
-            #         else:
-            #             session['Shoppingcart'] = MergeDict(
-            #                 session['Shoppingcart'], DictItems)
-            #             return redirect(request.referrer)
-            #     else:
-            #         session['Shoppingcart'] = DictItems
+                return redirect("/merchandise/{}/{}".format(category, id))
 
         except Exception as e:
             print(e)
+            return redirect('/')
 
 # fetch cart logic
 
@@ -180,34 +162,59 @@ def cartPage():
             "to_pay": 0,
         }
 
-        return render_template('/client/cart.html', cart_details=cart_details, cart_list=cart_list, total_items=len(cart_list), signed_in=signed_in, cartLen=cartLen)
+        return render_template('/client/cart.html', cart_details=cart_details, cart_list=cart_list, total_items=len(cart_list), signed_in=signed_in, cartLen=cartLen, user_id=user_id)
 
     except Exception as e:
         print(e)
         return redirect("/")
 
 
-@client_bp.route('/remove-from-cart/<u_id>/<merchandise_id>')
+@client_bp.route('/remove-from-cart/<u_id>/<merchandise_id>', methods=["post"])
 def deleteItem(u_id, merchandise_id):
-    if 'Shoppingcart' not in session and len(session['Shoppingcart']):
-        return redirect('/')
     try:
-        session.modified = True
-        for key, item in session['Shoppingcart'].items():
-            if str(key) == merchandise_id:
-                session['Shoppingcart'].pop(key, None)
-        return redirect(url_for('client.getCart'))
+        product = Cart.query.filter(
+            Cart.user_id == u_id, Cart.product_id == merchandise_id).first()
+
+        if product:
+            db.session.delete(product)
+            db.session.commit()
+            session['cartLength'] = session['cartLength']-1
+
+        flash("Product removed successfully !!")
+        return redirect('/user/cart')
 
     except Exception as e:
         print(e)
-        return redirect(url_for('client.getCart'))
+        return redirect("/")
 
 
-@client_bp.route('/clearCart')
-def clearcart():
+@client_bp.route('/edit-cart-merchandise/<u_id>/<merchandise_id>', methods=["post"])
+def editCartItem(u_id, merchandise_id):
     try:
-        session.pop('Shoppingcart', None)
-        return redirect('/')
+        new_count = request.form.get('count')
+        # print(u_id, merchandise_id, new_count)
+        return redirect('/user/cart')
+
     except Exception as e:
         print(e)
-        return redirect(url_for('client.getCart'))
+        return redirect("/")
+
+
+@client_bp.route('/<u_id>/clearCart', methods=['post'])
+def clearcart(u_id):
+    try:
+        cart = Cart.query.filter_by(user_id=u_id).all()
+        print(cart)
+        if cart:
+            for item in cart:
+                db.session.delete(item)
+                db.session.commit()
+                session['cartLength'] = 0
+
+            flash('Cart Cleared Successfully')
+
+        return redirect('/user/cart')
+
+    except Exception as e:
+        print(e)
+        return redirect('/')

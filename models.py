@@ -176,10 +176,16 @@ class Cart(db.Model):
     size = db.Column(db.String(10), nullable=True)
     color = db.Column(db.String(50), nullable=True)
     single_price = db.Column(db.Float)
-    # image = db.Column(db.String(300))
-    # subtotal = db.Column(db.Float)
-    # discount = db.Column(db.Float, nullable=True)
-    # grandtotal = db.Column(db.Float)
+
+
+class CartRecords(db.Model):
+    __tablename__ = 'cart_record'
+    user_id = db.Column(
+        db.String(300), (db.ForeignKey("userinfo.id")), primary_key=True, nullable=False)
+    total_items = db.Column(db.Integer, nullable=False)
+    subtotal = db.Column(db.Integer, nullable=False)
+    discount = db.Column(db.Float, nullable=True)
+    total = db.Column(db.Float, nullable=False)
 
 
 class Merchandise(db.Model):

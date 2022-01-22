@@ -145,7 +145,7 @@ def create_app():
                     cartInfo = Cart.query.filter_by(
                         user_id=session.get('user_id')).all()
                     cartLen = len(cartInfo)
-                    session['cartLength'] = cartLen or None
+                    session['cartLength'] = cartLen
 
                     flash("You Logged in Successfully!!")
                     # if (ph_number == None):
