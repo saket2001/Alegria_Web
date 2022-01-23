@@ -7,42 +7,48 @@ Alegria 2022 | User Login
 
 {% block body %}
 <style>
-    .login-page{
+    .login-page {
         display: flex;
     }
-    .img1{
+
+    .img1 {
         width: 70%;
         height: 100vh;
         background: url("../static/images/login/user-login-img.png");
         background-size: 100% 100%;
         background-repeat: no-repeat;
         z-index: -2;
-        
+
     }
-    .overlay{
+
+    .overlay {
         position: fixed;
         width: 70%;
         height: 100vh;
         z-index: -1;
     }
-    .svg-wave{
+
+    .svg-wave {
         width: 20%;
         height: 100vh;
         margin-left: -25%;
     }
-    .login-content{
+
+    .login-content {
         width: 50%;
         min-height: 100vh;
         height: 100vh;
         background-color: #FCF2DF;
         margin-left: -2px;
         padding-top: 30vh;
-        
+
     }
-    .svg-wave-mobile{
+
+    .svg-wave-mobile {
         display: none;
     }
-    .alg-logo{
+
+    .alg-logo {
 
         z-index: 1;
         position: absolute;
@@ -50,48 +56,55 @@ Alegria 2022 | User Login
         left: 35%;
         transform: translate(-50%, -50%);
     }
+
     @media screen and (max-width:600px) {
-        .login-page{
-            display: block; 
+        .login-page {
+            display: block;
         }
-        .img1{
+
+        .img1 {
             width: 100%;
             height: 40vh;
             z-index: -2;
-            
+
         }
-        .overlay{
+
+        .overlay {
             position: absolute;
             width: 100%;
             height: 40vh;
             z-index: 0;
         }
-        .login-content{
+
+        .login-content {
             width: 100%;
-            height:auto;
-            min-height:55vh;
+            height: auto;
+            min-height: 55vh;
             background-color: #FCF2DF;
             padding-top: 0;
             margin-top: -2px;
             margin-left: 0px;
             padding-bottom: 2vh;
         }
-        .alg-logo{
+
+        .alg-logo {
             z-index: 1;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 180px;
-            height:150px;
-        }           
-        .svg-wave{
+            height: 150px;
+        }
+
+        .svg-wave {
             display: none;
         }
-        .svg-wave-mobile{
+
+        .svg-wave-mobile {
             display: block;
             margin-top: -10vh;
-            
+
         }
     }
 </style>
@@ -99,10 +112,10 @@ Alegria 2022 | User Login
     <div class="overlay">
         <img class="alg-logo" src="../static/images/login/logo-alegria.png" alt="">
     </div>
-    <div class="img1" >
-        <!-- <img src="../static/images/login/login page.jpg"> --> 
+    <div class="img1">
+        <!-- <img src="../static/images/login/login page.jpg"> -->
     </div>
-    
+
     <div class="svg-wave">
         <img src="../static/images/login/svg-vertical.png" style="width: 100%; height: 100vh;  ">
     </div>
@@ -110,8 +123,7 @@ Alegria 2022 | User Login
         <img src="../static/images/login/svg-phone.png" style="width: 100%; height: 15vh;">
     </div>
     <div class="login-content">
-        <div
-            class="d-flex flex-column justify-content-center align-items-center px-4">
+        <div class="d-flex flex-column justify-content-center align-items-center px-4">
             {% for mess in get_flashed_messages() %}
             <div class="d-flex justify-content-center align-items-center p-3">
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -131,7 +143,7 @@ Alegria 2022 | User Login
             </p>
             <!--google sign in button-->
             <a href="/admin-login"
-                class="d-flex justify-content-center align-items-center fs-7 py-2 px-2 my-2 text-beige rounded-3 bg-red main-font">
+                class="d-flex justify-content-center align-items-center fs-7 py-1 px-3 my-2 text-black rounded-3 border-black border-2 main-font">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32px" height="32px" class="me-2">
                     <path fill="#FFC107"
                         d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />

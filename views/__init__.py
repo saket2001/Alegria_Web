@@ -577,3 +577,13 @@ def termsandconditions():
         cartLen = session.get('cartLength')
 
     return render_template('terms_and_services.html', cartLen=cartLen, signed_in=signed_in)
+
+
+@app_mbp.route("/buzz")
+def buzz():
+    return render_template('404.html')
+
+
+@app_mbp.route("/highlights")
+def highlights():
+    return render_template('404.html')

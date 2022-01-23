@@ -93,6 +93,10 @@ body {
     border: 1px solid var(--u_beige);
 }
 
+.border-black {
+    border: 2px solid var(--u_black);
+}
+
 .dashed-dark-btn,
 .dashed-light-btn {
     padding: 0.2rem 0.5rem;
