@@ -119,21 +119,7 @@
 
 <div class="w-100 min-vh-100 overflow-hidden sec-font bg-teal bg-cover">
     <div class="row m-3">
-        {% with messages = get_flashed_messages(with_categories,category_filter) %} {% if messages %} {% for message in
-        messages %}
-        <div class="alert alert-success alert-dismissible fade show d-flex align-items-center position-absolute main-font main-bg"
-            role="alert" style="z-index: 10;top: 1.3rem;left:2%;right:2%;width: 95%;">
-            {% if category_filter=="success" %}
-            <i class="far fa-check-circle fs-3 me-2"></i>
-            {% else %}
-            <i class="fas fa-exclamation-circle fs-3 me-2"></i>
-            {% endif %}
-            <div>
-                {{message}}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        </div>
-        {% endfor %} {% endif %} {% endwith %}
+
         <div class="col-lg-2 col-sm-3">
             <a href={{ "/merchandise/{}" .format(merchandise_data[ "category" ])}} type="button"
                 class="go_back_btn text-dark py-1">
@@ -248,7 +234,7 @@
             <h4 class="main-font fs-5 ">
                 Similar products
             </h4>
-            {% for item in similar_merchandise %} {% if merchandise_data['name'] != item["name "] %}
+            {% for item in similar_merchandise %} {% if merchandise_data['name'] != item["name"] %}
             <div class="col my-3 ">
                 <a href={{"/merchandise/{}/{}".format(item[ 'category' ],item['id'])}}
                     class="d-flex flex-column justify-content-center py-2 rounded-3 main-bg" style="width: 90%;">

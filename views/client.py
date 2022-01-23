@@ -101,7 +101,8 @@ def AddToCart(id):
                 flash('Cart Updated !!', category="success")
                 session['cartLength'] = session['cartLength']+1
 
-                return redirect("/merchandise/{}/{}".format(category, id))
+                # return redirect("/merchandise/{}/{}".format(category, id))
+                return redirect("/user/cart")
 
         except Exception as e:
             print(e)
@@ -156,7 +157,7 @@ def cartPage():
 
         # 3. cart details
         # by default
-        discount = 0 
+        discount = 0
         discounted_total = cart_total - discount
         cart_details = {
             "total_items": len(cart_list),
@@ -196,7 +197,8 @@ def deleteItem(u_id, merchandise_id):
 def editCartItem(u_id, merchandise_id):
     try:
         new_count = request.form.get('count')
-        product = Cart.query.filter(Cart.user_id==u_id, Cart.product_id==merchandise_id).first()
+        product = Cart.query.filter(
+            Cart.user_id == u_id, Cart.product_id == merchandise_id).first()
         if product:
             product.count = new_count
             db.session.commit()
