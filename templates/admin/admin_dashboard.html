@@ -63,12 +63,12 @@ Admin Dashboard
     <div class="row my-2 gap-4">
         <div class="col d-flex p-3 rounded-3 shadow-sm bg-teal">
         {% for eventsale in eventSalesList%}
-            <div class="col">
-                <p class="text-brown fw-bold fs-6 my-1">{{eventsale.newusers}}</p>
-                <span class="text-muted fs-7">Total new users joined today</span>
-                <h2 class="display-6 text-brown fw-bolder my-1">{{eventsale.newusertotal}}</h2>
-            </div>
-            {% endfor %}
+        <div class="col">
+            <p class="text-brown fw-bold fs-6 my-1">{{eventsale.newusers}}</p>
+            <span class="text-muted fs-7">Total new users joined today</span>
+            <h2 class="display-6 text-brown fw-bolder my-1">{{eventsale.newusertotal}}</h2>
+        </div>
+        {% endfor %}
            
             <div class="col d-flex align-items-center justify-content-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="text-brown" width="70px" height="70px" fill="none"

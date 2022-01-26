@@ -87,13 +87,20 @@ def adminLogin():
 @admin_login_required
 def home():
     try:
+        today = date.today()
         eventsList = [{'title': 'Total Events', 'total': len(Eventdemo.query.all())},
                       {'title': 'Total Merchandise',
                        'total': len(Merchandise.query.all())},
                       {'title': 'Total Users', 'total': len(
-                          UserInfo.query.all())}
+                          UserInfo.query.all())},
+                      {'newusers': 'New Users', 'newusertotal': len(
+                          UserInfo.query.filter_by(
+                              date_registered=today).all())}
                       ]
-        return render_template('/admin/admin_dashboard.html', greeting=calcGreeting(), now_beautiful=getDateTime(), admin_username=session.get('user_name'), admin_image=session.get('user_image'), eventsList=eventsList, activeNav='dashboard')
+        eventSalesList = [{'newusers': 'New Users', 'newusertotal': len(
+                          UserInfo.query.filter_by(
+                              date_registered=today).all())}]
+        return render_template('/admin/admin_dashboard.html', greeting=calcGreeting(), now_beautiful=getDateTime(), admin_username=session.get('user_name'), admin_image=session.get('user_image'), eventsList=eventsList, eventSalesList=eventSalesList, activeNav='dashboard')
     except Exception as e:
         print(e)
         return redirect("/")
