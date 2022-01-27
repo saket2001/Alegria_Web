@@ -82,7 +82,7 @@
                     <p class="fs-7 mb-1 text-black fw-normal">
                         Contact 1: {{event_details["event_contact1"]}}
                     </p>
-                    {% if event_details["event_contact2"]%}
+                    {% if event_details["event_contact2"] and event_details["event_contact2"]!="" %}
                     <p class="fs-7 mb-1 text-black fw-normal">
                         Contact 2: {{event_details["event_contact2"]}}
                     </p>
@@ -123,13 +123,19 @@
                     </div>
                     <div class="collapse collapse-horizontal" id="collapse2">
                         <div class="card collapse-card u-text-light-brown" style="width:90vw;max-width:500px">
+                            {% if event_details["event_perks_1"]!="-" or event_details["event_perks_1"]!="" %}
                             <li class="fs-7 mb-1">
                                 1st prize : {{event_details["event_perks_1"]}}
                             </li>
+                            {% endif %}
+                            {% if event_details["event_perks_2"]!="-" or event_details["event_perks_1"]!="" %}
                             <li class="fs-7 mb-1">2nd prize :{{event_details["event_perks_2"]}}</li>
+                             {% endif %}
+                            {% if event_details["event_perks_3"]!="-" or event_details["event_perks_1"]!="" %}
                             <li class="fs-7 mb-1">3rd prize:
                                 {{event_details["event_perks_3"]}}
                             </li>
+                             {% endif %}
                         </div>
                     </div>
                     <div class="collapse collapse-horizontal" id="collapse3">
