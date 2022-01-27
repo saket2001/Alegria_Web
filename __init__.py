@@ -18,8 +18,8 @@ def create_app():
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         SQLALCHEMY_POOL_RECYCLE=299,
         SQLALCHEMY_POOL_TIMEOUT=20,
-        # SQLALCHEMY_DATABASE_URI='mysql://AlegriaTheFest:2022themeisvintwood@AlegriaTheFest.mysql.pythonanywhere-services.com/AlegriaTheFest$alegria2022',
-        SQLALCHEMY_DATABASE_URI='mysql://root:root@localhost/alegria_web',
+        SQLALCHEMY_DATABASE_URI='mysql://AlegriaTheFest:2022themeisvintwood@AlegriaTheFest.mysql.pythonanywhere-services.com/AlegriaTheFest$alegria2022',
+        # SQLALCHEMY_DATABASE_URI='mysql://root:root@localhost/alegria_web',
         MAIL_SERVER='smtp.gmail.com',
         MAIL_PORT=465,
         MAIL_USE_SSL=True,
@@ -64,7 +64,6 @@ def create_app():
     oauth = OAuth(app)
     google = oauth.register(
         name='google',
-        # client_id=os.getenv('OAUTH_CLIENT_ID'),
         client_id='391737203590-h2n6bbjhc2lkbpf5gkp0tpgbp6t35hgg.apps.googleusercontent.com',
         client_secret='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',
         access_token_url='https://accounts.google.com/o/oauth2/token',
@@ -191,9 +190,5 @@ def create_app():
 
     # enable csrf
     # csrf.init_app(app)
-    app.run(debug=True)
 
     return app
-
-
-create_app()
