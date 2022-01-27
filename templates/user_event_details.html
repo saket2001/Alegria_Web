@@ -82,9 +82,11 @@
                     <p class="fs-7 mb-1 text-black fw-normal">
                         Contact 1: {{event_details["event_contact1"]}}
                     </p>
+                    {% if event_details["event_contact2"]%}
                     <p class="fs-7 mb-1 text-black fw-normal">
                         Contact 2: {{event_details["event_contact2"]}}
                     </p>
+                    {% endif %}
                     {% if event_details["event_contact3"]%}
                     <p class="fs-7 mb-1 text-black fw-normal">
                         Contact 3: {{event_details["event_contact3"]}}

@@ -1,7 +1,13 @@
 {% extends 'user_layout.html' %}
 
+
+{% block headContent %}
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v12.0"
+    nonce="wutfUaiR"></script>
+{% endblock headContent %}
+
 {% block title %}
-Alegria 2022 | Events
+Alegria 2022 | Events | {{category}}
 {% endblock %}
 
 {% block content %}
@@ -50,19 +56,19 @@ Alegria 2022 | Events
                 </ul>
                 <br>
                 <hr>
-                <div id="twitter" class="embed-item">
+                <div id="twitter" class="embed-item my-4">
                     <a class="twitter-timeline" href="https://twitter.com/PillaisAlegria?ref_src=twsrc%5Etfw">Tweets by
                         PillaisAlegria</a>
                     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 </div>
-                <div id="facebook">
-                    <!-- <div class="fb-page" data-href="https://www.facebook.com/pillaisalegria/" data-tabs="timeline"
-                    data-width="" data-height="" data-small-header="false" data-adapt-container-width="true"
-                    data-hide-cover="false" data-show-facepile="true">
-                    <blockquote cite="https://www.facebook.com/pillaisalegria/" class="fb-xfbml-parse-ignore"><a
-                            href="https://www.facebook.com/pillaisalegria/">Alegría - The Festival of Joy</a>
-                    </blockquote>
-                </div> -->
+                <div id="fb-root" class="my-2">
+                    <div class="fb-page" data-href="https://www.facebook.com/pillaisalegria" data-tabs="timeline"
+                        data-width="" data-height="" data-small-header="false" data-adapt-container-width="true"
+                        data-hide-cover="false" data-show-facepile="true">
+                        <blockquote cite="https://www.facebook.com/pillaisalegria" class="fb-xfbml-parse-ignore"><a
+                                href="https://www.facebook.com/pillaisalegria">Alegría - The Festival of Joy</a>
+                        </blockquote>
+                    </div>
                 </div>
             </div>
         </div>
@@ -131,7 +137,7 @@ Alegria 2022 | Events
             </div>
             <div class="row d-flex justify-content-center px-4">
                 <div class="col-lg-5 py-2">
-                    <svg width="100%" viewBox="0 0 526 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- <svg width="100%" viewBox="0 0 526 149" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="37.7002" y="9" width="142.56" height="86" transform="rotate(26 37.7002 9)"
                             fill="#734717" />
                         <path d="M0 0H526L471 44L526 86H0V0Z" fill="#96642C" />
@@ -140,7 +146,7 @@ Alegria 2022 | Events
                             fill="#96642C" stroke="#F9EF99" stroke-width="3" stroke-dasharray="12 12" />
                         <text class="text-center sec-font display-6 text-capitalize py-1" x="130" y="60"
                             fill="white">Events</text>
-                    </svg>
+                    </svg> -->
                 </div>
             </div>
             <div class="px-4 d-flex justify-content-center">
