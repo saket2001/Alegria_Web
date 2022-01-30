@@ -1,6 +1,8 @@
+from dis import disco
 from flask.helpers import flash
 from flask import Blueprint, redirect, render_template, url_for, session, request, current_app
 from functools import wraps
+from Alegria_Web.models import CartRecords
 from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses, Announcement, EventsToday
 # from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from flask_wtf.csrf import CSRFProtect
@@ -166,6 +168,19 @@ def cartPage():
             "coupon_discount": discount,
             "to_pay": discounted_total,
         }
+
+        cart_record_exists = Cart.query.filter_by(user_id=user_id).first()
+        if cart_record_exists:
+            cart_record_exists.total_items = len(cart_list)
+            cart_record_exists.subtotal = cart_total
+            cart_record_exists.total = discounted_total
+            cart_record_exists.discount = discount
+            db.session.commit()
+        else:
+            cart_record = CartRecords(user_id=user_id, total_items=len(cart_list), subtotal=cart_total, 
+                                    total=discounted_total, discount=discount)
+            db.session.add(cart_record)
+            db.session.commit()
 
         return render_template('/client/cart.html', cart_details=cart_details, cart_list=cart_list, total_items=len(cart_list), signed_in=signed_in, cartLen=cartLen, user_id=user_id)
 
