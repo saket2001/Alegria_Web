@@ -191,9 +191,5 @@ def create_app():
 
     # enable csrf
     # csrf.init_app(app)
-    app.run(debug=True)
 
     return app
-
-
-create_app()
