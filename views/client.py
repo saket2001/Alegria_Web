@@ -1,10 +1,8 @@
 from dis import disco
 from flask.helpers import flash
-from flask import Blueprint, redirect, render_template, url_for, session, request, current_app
+from flask import Blueprint, redirect, render_template, url_for, session, request
 from functools import wraps
-from Alegria_Web.models import CartRecords
-from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses, Announcement, EventsToday
-# from flask_login import LoginManager, current_user, login_required, login_user, logout_user
+from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses, Announcement, EventsToday, CartRecords
 from flask_wtf.csrf import CSRFProtect
 
 from models import Cart, Merchandise, UserInfo
@@ -51,15 +49,6 @@ def user_login_required(f):
             return f(*args, **kwargs)
         return render_template('401.html')
     return decorated_function
-
-
-def MergeDict(dict1, dict2):
-    if isinstance(dict1, list) and isinstance(dict2, list):
-        return dict1 + dict2
-
-    elif isinstance(dict1, dict) and isinstance(dict2, dict):
-        return dict(list(dict1.items()) + list(dict2.items()))
-    return False
 
 # you need to use return statement but it was working fine before
 
@@ -162,25 +151,36 @@ def cartPage():
         discount = 0
         discounted_total = cart_total - discount
         cart_details = {
-            "total_items": len(cart_list),
-            "subtotal": cart_total,
-            "grandtotal": discounted_total,
-            "coupon_discount": discount,
-            "to_pay": discounted_total,
+            "total_items": int(len(cart_list)),
+            "subtotal": float(cart_total),
+            "grandtotal": float(discounted_total),
+            "coupon_discount": float(discount),
+            "to_pay": float(discounted_total),
         }
 
-        cart_record_exists = Cart.query.filter_by(user_id=user_id).first()
+        # for razorpay
+        session['cart_total'] = cart_details['to_pay']
+
+        cart_record_exists = CartRecords.query.filter_by(
+            user_id=user_id).first()
+
         if cart_record_exists:
-            cart_record_exists.total_items = len(cart_list)
-            cart_record_exists.subtotal = cart_total
-            cart_record_exists.total = discounted_total
-            cart_record_exists.discount = discount
-            db.session.commit()
+            if(int(cart_record_exists.total) == 0):
+                db.session.delete(cart_record_exists)
+                db.session.commit()
+
+            else:
+                cart_record_exists.total_items = cart_details['total_items']
+                cart_record_exists.subtotal = cart_details['subtotal']
+                cart_record_exists.discount = cart_details['coupon_discount']
+                cart_record_exists.total = cart_details['to_pay']
+                db.session.commit()
         else:
-            cart_record = CartRecords(user_id=user_id, total_items=len(cart_list), subtotal=cart_total, 
-                                    total=discounted_total, discount=discount)
-            db.session.add(cart_record)
-            db.session.commit()
+            if(cart_details['total_items']):
+                cart_record = CartRecords(user_id=user_id, total_items=cart_details['total_items'], subtotal=cart_details['subtotal'],
+                                          total=cart_details['to_pay'], discount=cart_details['coupon_discount'])
+                db.session.add(cart_record)
+                db.session.commit()
 
         return render_template('/client/cart.html', cart_details=cart_details, cart_list=cart_list, total_items=len(cart_list), signed_in=signed_in, cartLen=cartLen, user_id=user_id)
 
@@ -228,10 +228,13 @@ def editCartItem(u_id, merchandise_id):
 def clearcart(u_id):
     try:
         cart = Cart.query.filter_by(user_id=u_id).all()
-        print(cart)
+        cart_record = CartRecords.query.filter(
+            CartRecords.user_id == u_id).first()
         if cart:
             for item in cart:
                 db.session.delete(item)
+                db.session.commit()
+                db.session.delete(cart_record)
                 db.session.commit()
             session['cartLength'] = 0
 
