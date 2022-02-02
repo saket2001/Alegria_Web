@@ -3,31 +3,26 @@
 
 {% block headContent %}
 <style>
-    /* .dev_page {
-                background-attachment: fixed;
-                background-image: url("../static/images/dev_bg.png");
-                background-size: cover;
-            } */
-
     .team-card {
-        box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.2),
+        /* box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.2),
             inset -3px -3px 3px rgba(255, 255, 255, 0.2),
             3px 3px 3px rgba(0, 0, 0, 0.5),
-            -3px -3px 3px rgba(255, 255, 255, 0.2);
+            -3px -3px 3px rgba(255, 255, 255, 0.2); */
+        border: 6px double var(--u_red);
         border-radius: 15px;
     }
 
     .team-box {
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); */
         border-radius: 15px;
         transition: 0.5s;
     }
 
     .team-card:hover .team-box {
-        transform: translateY(-50px);
+        transform: translateY(-30px);
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
-        background-color: #a55c1b;
-        background-image: linear-gradient(315deg, #a55c1b 0%, #000000 74%);
+        background-color: #631909;
+        /* background-image: linear-gradient(315deg, #a55c1b 0%, #000000 74%); */
         color: #ffffffea;
     }
 
@@ -46,7 +41,7 @@
 
 
 {% block title %}
-Alegria 2022 | Developers
+Alegria 2022 | Our Developers
 {% endblock %}
 
 
@@ -59,7 +54,7 @@ Alegria 2022 | Developers
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 " id="team-row">
             {% for ele in web_team_list %}
             <div class="col">
-                <div class="bg-transparent border-0 team-card p-2 mb-2">
+                <div class="bg-transparent team-card p-2 mb-2">
                     <div class="team-box">
                         <div class="content p-3" style="text-align: center;">
                             <img class="mb-3 mt-2" style="height:120px; width:120px; border-radius: 50%;"
@@ -95,11 +90,11 @@ Alegria 2022 | Developers
     </div>
     <div class="pb-4 ">
         <br>
-        <h3 class=" mb-4 pb-3 main-font fs-3" style="text-align: center;">App Team</h3>
+        <h3 class="mb-4 pb-3 text-red main-font fs-3" style="text-align: center;">App Team</h3>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 " id="team-row">
             {% for ele in app_team_list %}
             <div class="col">
-                <div class="bg-transparent main-bg border-0 team-card p-2 mb-2">
+                <div class="bg-transparent main-bg team-card p-2 mb-2">
                     <div class="team-box">
                         <div class="content p-3" style="text-align: center;">
                             <img class="mb-3 mt-2" style="height:120px; width:120px; border-radius: 50%;"
