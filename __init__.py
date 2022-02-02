@@ -127,8 +127,9 @@ def create_app():
                     return redirect('/admin/')
 
                 else:
-                    # ph_number = userList.phone_number
-                    # print(ph_number)
+                    ph_number = userList.phone_number
+                    college_name = userList.college_name
+                    print(ph_number, college_name)
 
                     # user session
                     session['user_name'] = user_info['family_name']
@@ -146,9 +147,13 @@ def create_app():
                     cartLen = len(cartInfo)
                     session['cartLength'] = cartLen
 
-                    flash("You Logged in Successfully!!")
-                    # if (ph_number == None):
-                    #     return redirect('/new-user-login')
+                    if (ph_number != None or college_name != None):
+                        flash("You Logged in Successfully!!")
+
+                    if (ph_number == None or college_name == None):
+                        flash(
+                            "You need to provide your phone number and college name for survey purpose!")
+                        return redirect('/new-user-login/{}'.format(user_idd))
 
                     return redirect('/')
 
