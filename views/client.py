@@ -1,12 +1,14 @@
 from dis import disco
 from flask.helpers import flash
-from flask import Blueprint, redirect, render_template, url_for, session, request
+from flask import Blueprint, redirect, render_template, url_for, session, request, jsonify
 from functools import wraps
 from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses, Announcement, EventsToday, CartRecords
 from flask_wtf.csrf import CSRFProtect
-
+import razorpay
 from models import Cart, Merchandise, UserInfo
 from views.admin import merchandise
+import shortuuid
+
 
 
 # def login_required(f):
@@ -242,6 +244,34 @@ def clearcart(u_id):
 
         return redirect('/user/cart')
 
+    except Exception as e:
+        print(e)
+        return redirect('/')
+
+client = razorpay.Client(auth=("rzp_test_rNYpEpdAPPGVGI", "4SrfFeKq4jX5vRsw1XLkSqPy"))
+@client_bp.route("/razorpay", methods=["POST"])
+@user_login_required
+def razorpay():
+    try:
+        user_id = session.get('user_id')
+        # checks if logged in
+        # if session.get('user_id') != None:
+        #     print(user_id)
+            
+
+        # 1. fetch all cart items ids from cart table
+        cart_details = CartRecords.query.filter_by(user_id=user_id).first()
+        print(cart_details)
+        currency = 'INR'
+        options = { "amount": session.get('cart_total')*100, "currency": currency, "receipt": shortuuid.ShortUUID().random(length=22)}
+        payment = client.order.create(options)
+        data = {
+                'id': payment['id'],
+                'currency': payment['currency'],
+                'amount': payment['amount']
+            }
+        # print(data)
+        return jsonify(data)
     except Exception as e:
         print(e)
         return redirect('/')

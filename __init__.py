@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, session, render_template
+from flask import Flask, redirect, url_for, session, jsonify, request
 from flask.helpers import flash
 from flask_restful import Api
 from dotenv import load_dotenv
@@ -8,7 +8,9 @@ from datetime import datetime
 from flask_hashing import Hashing
 import helperFunc
 from models import Cart
-
+from flask_cors import CORS
+import hmac
+import hashlib
 
 def create_app():
     # create and configure the app
@@ -191,6 +193,30 @@ def create_app():
             session.pop(key)
 
         return redirect('/')
+    @app.route('/verification',methods=["POST"])
+    def verification():
+        try:
+
+            secret = 'alegriaisfun'
+            print(request.data)
+            digest = hmac.new(bytes(secret, 'UTF-8'),request.data, hashlib.sha256)
+            signature = digest.hexdigest()
+            print(signature)
+            print(request.headers['X-Razorpay-Signature'])
+            if(signature == request.headers['X-Razorpay-Signature']):
+                print('req is legit')
+
+                
+                return jsonify({'status':'ok'})
+            else:
+                return jsonify({'status': 502})
+        except Exception as e:
+            print(e)
+            return redirect('/')
+
+    if __name__ == "__main__":
+        
+        app.run(debug=True)
 
     # csrf.init_app(app)
 
