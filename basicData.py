@@ -30,7 +30,7 @@ aboutus_2020= [
      "img": "../static/images/aboutus-ribbons/armaan.JPG"},
      {"title": "EDM night", "description": "EDM night at Pillai's Alegria 2020",
      "img": "../static/images/aboutus-ribbons/edm_night.jpg"}
-]
+] 
 
 aboutus_2019 = [
     {"title": "Alegria Banner", "description": "Alegria 2019 Banner Unveiling Ceremony",
