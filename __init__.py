@@ -18,8 +18,8 @@ def create_app():
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         SQLALCHEMY_POOL_RECYCLE=299,
         SQLALCHEMY_POOL_TIMEOUT=20,
-        SQLALCHEMY_DATABASE_URI='mysql://AlegriaTheFest:2022themeisvintwood@AlegriaTheFest.mysql.pythonanywhere-services.com/AlegriaTheFest$alegria2022',
-        # SQLALCHEMY_DATABASE_URI='mysql://root:root@localhost/alegria_web',
+        # SQLALCHEMY_DATABASE_URI='mysql://AlegriaTheFest:2022themeisvintwood@AlegriaTheFest.mysql.pythonanywhere-services.com/AlegriaTheFest$alegria2022',
+        SQLALCHEMY_DATABASE_URI='mysql://root:@localhost/alegria_web',
         MAIL_SERVER='smtp.gmail.com',
         MAIL_PORT=465,
         MAIL_USE_SSL=True,
@@ -43,7 +43,7 @@ def create_app():
     from views import app_mbp
     from views.admin import admin_bp
     from views.client import client_bp
-    from views.api import IdFilterEventAPI, AllCategoryFilterEventAPI, AnnoucementsAPI, PollsAPI, MerchandiseAPI, CategoryEventFilter
+    from views.api import IdFilterEventAPI, AllCategoryFilterEventAPI, AnnoucementsAPI, PollsAPI, MerchandiseAPI, CategoryEventFilter, VerifyEmail, RegisterEmail
 
     app.register_blueprint(app_mbp)
     app.register_blueprint(client_bp)
@@ -59,6 +59,8 @@ def create_app():
     api.add_resource(MerchandiseAPI, "/merchandise")
     api.add_resource(CategoryEventFilter,
                      "/events/category/<string:category_id>")
+    api.add_resource(VerifyEmail, "/verify-email/<string:hashed_id>")
+    api.add_resource(RegisterEmail, "/register-user")
 
     load_dotenv()
     oauth = OAuth(app)
@@ -192,9 +194,13 @@ def create_app():
 
         return redirect('/')
 
+    app.run(debug=True)
     # csrf.init_app(app)
 
     # enable csrf
     # csrf.init_app(app)
 
     return app
+
+
+create_app()

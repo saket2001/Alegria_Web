@@ -1,10 +1,19 @@
-from models import Eventdemo, Eventdemo_details, Announcement, Poll, Merchandise, Categories, PollResponses, PollUserResponse
+from datetime import datetime
+from email.policy import strict
+import hashlib
+from Alegria_Web.models import APIKeys
+from models import Eventdemo, Eventdemo_details, Announcement, Poll, Merchandise, Categories, PollResponses, PollUserResponse, UserInfo
 from flask_restful import Resource, Api
 from flask import jsonify, request
+import helperFunc
+from models import db
+from flask_hashing import Hashing
+import random, string
 
 # A default rate limit of 200 per day, and 50 per hour applied to all routes.
 # Add hashlib.sha256
 secret_api_key = "some key"
+hashing = Hashing()
 
 class IdFilterEventAPI(Resource):
 
@@ -213,3 +222,57 @@ class MerchandiseAPI(Resource):
             })
 
         return res, 200
+
+
+class VerifyEmail(Resource):
+
+    def get(self, hashed_id):
+        API_key = request.headers.get("API-Key")
+        if not API_key or API_key != secret_api_key:
+            return {}, 401
+        
+        user = UserInfo.query.filter_by(id=hashed_id).first()
+        api_key = APIKeys.query.filter_by(user_id=hashed_id).first()
+        if user:
+            data = {
+                "id": user.id,
+                "email": user.email,
+                "name": user.name,
+                "image_url": user.image_url,
+                "phone_number": user.phone_number,
+                "college_name": user.college_name,
+                "date_registered": user.date_registered,
+                "api_key": api_key,
+            }
+            return data, 200
+        else:
+            return {}, 404
+
+
+class RegisterEmail(Resource):
+
+    def post(self):
+        API_key = request.headers.get("API-Key")
+        if not API_key or API_key != secret_api_key:
+            return {}, 401
+
+        try:
+            data = request.get_json()
+            user_id = data["user_id"]
+            email = data["email"]
+            name = data["name"]
+            phone_no = data["phone_number"]
+            college_name = data["college_name"]
+            new_user = UserInfo(id=user_id, email=email, name=name, 
+            phone_number=phone_no, college_name=college_name, date_registered=datetime.now())
+            db.session.add(new_user)
+
+            new_api_key = hashing.hash_value(user_id, salt="".join(random.choice(string.ascii_letters) for _ in range(10)))
+            new_obj = APIKeys(user_id=user_id, api_key=new_api_key)
+            db.session.add(new_obj)
+
+            return { "api_key": new_api_key }, 201
+
+        except Exception as e:
+            print(e)
+            return {}, 400
