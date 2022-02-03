@@ -63,7 +63,7 @@ def aboutUs():
         cartLen = session.get('cartLength')
         cartLen = None
 
-        return render_template('user_aboutus.html', aboutus_2019=client_data.aboutus_2019, aboutus_2018=client_data.aboutus_2018, aboutus_2017=client_data.aboutus_2017, aboutus_2016=client_data.aboutus_2016, aboutus_2015=client_data.aboutus_2015, aboutus_2014=client_data.aboutus_2014, aboutus_2013=client_data.aboutus_2013, cartLen=cartLen)
+        return render_template('user_aboutus.html',aboutus_2020=client_data.aboutus_2020, aboutus_2019=client_data.aboutus_2019, aboutus_2018=client_data.aboutus_2018, aboutus_2017=client_data.aboutus_2017, aboutus_2016=client_data.aboutus_2016, aboutus_2015=client_data.aboutus_2015, aboutus_2014=client_data.aboutus_2014, aboutus_2013=client_data.aboutus_2013, cartLen=cartLen)
     except Exception as e:
         print(e)
         return redirect("/")

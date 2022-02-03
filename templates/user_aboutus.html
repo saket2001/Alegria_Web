@@ -99,7 +99,7 @@
   .hex h1 {
     bottom: 50%;
     padding-top: 50%;
-    font-size: 1.5em;
+    font-size: 1.2em;
     z-index: 1;
     -webkit-transform: translate3d(0, -100%, 0);
     -ms-transform: translate3d(0, -100%, 0);
@@ -278,6 +278,23 @@ Alegria 2022 | About Us
       </p>
     </div>
     <!--  -->
+    <div class="ribbon" style="text-align: center;">
+      <img src="../static/images/aboutus-ribbons/2020.png">
+    </div>
+
+    <ul id="hexGrid">
+      {% for ele in aboutus_2020 %}
+      <li class="hex">
+        <div class="hexIn">
+          <div class="hexLink">
+            <img src='{{ele["img"]}}' alt="" />
+            <h1>{{ele["title"]}}</h1>
+            <p>{{ele['description']}}</p>
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
     <div class="ribbon" style="text-align: center;">
       <img src="../static/images/aboutus-ribbons/2019.png">
     </div>
