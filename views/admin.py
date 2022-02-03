@@ -476,9 +476,6 @@ def AddNewPoll():
 
             db.session.add(pollOption)
             db.session.commit()
-            db.session.add(new_poll2)
-            db.session.commit()
-            
             #print(option, image)
 
         # polls table data that will be generated on backend
