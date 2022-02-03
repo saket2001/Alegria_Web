@@ -107,9 +107,8 @@ class PollResponses(db.Model):
 class PollUserResponse(db.Model):
     __tablename__ = 'poll_user_responses'
     hashed_user_id = db.Column(db.String(50), primary_key=True)
-    poll_id = db.Column(db.Integer, db.ForeignKey("poll.id"), primary_key=True)
-    poll_option_id = db.Column(db.Integer, db.ForeignKey(
-        "poll_options.id"), primary_key=True)
+    poll_id = db.Column(db.Integer, primary_key=True)
+    poll_option_id = db.Column(db.Integer, primary_key=True)
 
 
 class CouponList(db.Model):
