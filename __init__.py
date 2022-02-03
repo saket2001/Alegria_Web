@@ -21,7 +21,7 @@ def create_app():
         SQLALCHEMY_POOL_RECYCLE=299,
         SQLALCHEMY_POOL_TIMEOUT=20,
         # SQLALCHEMY_DATABASE_URI='mysql://AlegriaTheFest:2022themeisvintwood@AlegriaTheFest.mysql.pythonanywhere-services.com/AlegriaTheFest$alegria2022',
-        SQLALCHEMY_DATABASE_URI='mysql://root:root@localhost/alegria_web',
+        SQLALCHEMY_DATABASE_URI='mysql://root:Athul0491@localhost/alegria_web',
         MAIL_SERVER='smtp.gmail.com',
         MAIL_PORT=465,
         MAIL_USE_SSL=True,
@@ -203,9 +203,28 @@ def create_app():
             signature = digest.hexdigest()
             print(signature)
             print(request.headers['X-Razorpay-Signature'])
+            output = {}
             if(signature == request.headers['X-Razorpay-Signature']):
                 print('req is legit')
+                data = request.data
+                payment_id = data["payload"]['payment']['entity']['id']
+                amount = data["payload"]['payment']['entity']['amount']
+                currency = data["payload"]['payment']['entity']['currency']
+                email = data["payload"]['payment']['entity']['email']
+                contact = data["payload"]['payment']['entity']['contact']
+                product_id = data["payload"]['payment']['entity']['notes']
 
+                output['payment_id'] = payment_id
+                output['amount']= amount
+                output['currency']=currency
+                output['email']=email
+                output['contact']= contact
+                output['product_id']= product_id
+
+                # @chandini tera code yaha ayega
+                # output dict mei paymentid, amount, currency, email, contact, product_id ye sab hai
+                # size colour bhi uthana hai, vo cart mei se uthaa sktiye tu and
+                # ye function ke end mei cart ka table clear karde
                 
                 return jsonify({'status':'ok'})
             else:

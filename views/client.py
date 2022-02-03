@@ -260,16 +260,62 @@ def razorpay():
             
 
         # 1. fetch all cart items ids from cart table
-        cart_details = CartRecords.query.filter_by(user_id=user_id).first()
-        print(cart_details)
+        
         currency = 'INR'
-        options = { "amount": session.get('cart_total')*100, "currency": currency, "receipt": shortuuid.ShortUUID().random(length=22)}
+        # product_id 
+        # count
+        # size
+        # color
+        cart = Cart.query.filter_by(user_id=user_id).all()
+        
+        # print('cart',cart)
+        notes = {}
+        if cart:
+            count = 0
+            for item in cart:
+                # item = [dict(row) for row in item]
+                
+                notes = {count:item.product_id,**notes}
+                count +=1
+                temp = item.count
+                if(item.count>1):
+                    while (temp > 1):
+                        notes = {count:item.product_id,**notes}
+                        temp -= 1
+                        count+=1
+                # dummy = item.count * {count:item.product_id}
+                # print('item',item)
+                # print('typee',type(item))
+                
+                # notes[count] = {
+                #     "id": item.product_id,
+                #     "count": item.count,
+                    
+                # }
+                # print(notes)
+                # notes[count]["id"] = '{}'.format(item.product_id) ,
+                # notes[count]["count"]= item.count,
+                # if(item.size):
+                #     notes[count] = {**notes[count],"size": item.size},
+                #     notes[count] = notes[count][0]
+                # print(notes)
+                # if(item.color):
+                #     notes[count] = {**notes[count],"color": item.color},
+                #     notes[count] = notes[count][0]
+                # print(notes)
+        print('notes',notes)
+        
+        # notes = [r for (r,) in notes]
+        options = { "amount": session.get('cart_total')*100, "currency": currency, "receipt": shortuuid.ShortUUID().random(length=22), "notes":notes}
         payment = client.order.create(options)
         data = {
-                'id': payment['id'],
-                'currency': payment['currency'],
-                'amount': payment['amount']
-            }
+            # product id
+            # product name
+            'notes':notes,
+            'id': payment['id'],
+            'currency': payment['currency'],
+            'amount': payment['amount']
+        }
         # print(data)
         return jsonify(data)
     except Exception as e:
