@@ -215,11 +215,19 @@ def create_app():
                 product_id = data["payload"]['payment']['entity']['notes']
 
                 output['payment_id'] = payment_id
+                # payment_id ka dummy value = "pay_IrcieDntLHN83I"
                 output['amount']= amount
                 output['currency']=currency
                 output['email']=email
                 output['contact']= contact
+                # "contact": "+917887494094"
                 output['product_id']= product_id
+                # "product_id": {
+                #     "0": "M01",
+                #     "1": "M01",
+                #     "2": "M01",
+                #     "3": "M08"
+                # }
 
                 # @chandini tera code yaha ayega
                 # output dict mei paymentid, amount, currency, email, contact, product_id ye sab hai
