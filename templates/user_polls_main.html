@@ -47,6 +47,9 @@ position: absolute;
     <div class="p-4 pt-0">
         <div class="poll-card card p-4 ">
             <div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 g-4 justify-content-center">
+                {% if count==0 %}
+                <i class='fs-3 main-font my-3 text-beige text-center'>Coming Soon</i>
+                {% else %}
                 {% for ele in poll_cards %}
                 <a href="polls/{{ele['id']}}">
                     <div class="col">
@@ -57,6 +60,7 @@ position: absolute;
                     </div>
                 </a>
                 {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>

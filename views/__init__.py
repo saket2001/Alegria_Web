@@ -333,7 +333,7 @@ def polls_main():
                 "id": item.poll_id,
                 "question": item.question
             })
-        return render_template('user_polls_main.html', poll_cards=res['polls'], signed_in=signed_in, cartLen=cartLen)
+        return render_template('user_polls_main.html', poll_cards=res['polls'],count=len(res["polls"]), signed_in=signed_in, cartLen=cartLen)
 
     except Exception as e:
         print(e)
