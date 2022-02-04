@@ -328,6 +328,7 @@ def razorpay():
             'currency': payment['currency'],
             'amount': payment['amount']
         }
+        #final hosted waale site pe ye code daalne se pehle ye niche ka pura comment kardena.
         product = Cart.query.filter_by(user_id=user_id).first()
         product_name= product.product_name
         size= product.size
