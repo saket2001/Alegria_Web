@@ -1,16 +1,19 @@
 from flask import Flask, redirect, url_for, session, jsonify, request
+from flask_mail import Message
 from flask.helpers import flash
 from flask_restful import Api
 from dotenv import load_dotenv
 from authlib.integrations.flask_client import OAuth
-from models import UserInfo
+from models import Merchandise, UserInfo, CartRecords
 from datetime import datetime
 from flask_hashing import Hashing
 import helperFunc
-from models import Cart
+from models import Cart, Transaction
 from flask_cors import CORS
 import hmac
 import hashlib
+
+from views import user_login_required
 
 def create_app():
     # create and configure the app
@@ -21,21 +24,24 @@ def create_app():
         SQLALCHEMY_POOL_RECYCLE=299,
         SQLALCHEMY_POOL_TIMEOUT=20,
         # SQLALCHEMY_DATABASE_URI='mysql://AlegriaTheFest:2022themeisvintwood@AlegriaTheFest.mysql.pythonanywhere-services.com/AlegriaTheFest$alegria2022',
-        SQLALCHEMY_DATABASE_URI='mysql://root:root@localhost/alegria_web',
+        SQLALCHEMY_DATABASE_URI='mysql://root:''@localhost/alegria_web',
         MAIL_SERVER='smtp.gmail.com',
         MAIL_PORT=465,
         MAIL_USE_SSL=True,
         MAIL_USE_TLS=False,
-        MAIL_USERNAME='',
-        MAIL_PASSWORD='',
-        MAIL_DEFAULT_SENDER='"Alegria" <noreply@alegria.in>',
-        USER_APP_NAME='Alegria Web',
-        USER_EMAIL_SENDER_NAME='Alegria',
-        USER_EMAIL_SENDER_EMAIL='alegria@mes.in'
+        MAIL_USERNAME='alegria2022pillai@gmail.com',
+        MAIL_PASSWORD='pillai@1234',
+        MAIL_DEFAULT_SENDER='alegria2022pillai@gmail.com'
+        #MAIL_DEFAULT_SENDER='"Alegria" <noreply@alegria.in>',
+        #USER_APP_NAME='Alegria Web',
+        # USER_EMAIL_SENDER_NAME='Alegria',
+        # USER_EMAIL_SENDER_EMAIL='alegria@mes.in'
     )
 
     from models import db
     db.init_app(app)
+    from mail import mail
+    mail.init_app(app)
     with app.app_context():
         db.create_all()
     hashing = Hashing(app)
@@ -194,6 +200,7 @@ def create_app():
 
         return redirect('/')
     @app.route('/verification',methods=["POST"])
+    @user_login_required
     def verification():
         try:
 
@@ -214,6 +221,11 @@ def create_app():
                 contact = data["payload"]['payment']['entity']['contact']
                 product_id = data["payload"]['payment']['entity']['notes']
 
+                user_id= session.get('user_id')
+                user = UserInfo.query.filter_by(id=user_id).first()
+                user_email= user.email
+                name= user.name
+                
                 output['payment_id'] = payment_id
                 # payment_id ka dummy value = "pay_IrcieDntLHN83I"
                 output['amount']= amount
@@ -228,14 +240,50 @@ def create_app():
                 #     "2": "M01",
                 #     "3": "M08"
                 # }
+                product = Cart.query.filter_by(user_id=user_id).first()
+                product_name= product.product_name
+                size= product.size
+                color= product.color
 
-                # @chandini tera code yaha ayega
-                # output dict mei paymentid, amount, currency, email, contact, product_id ye sab hai
-                # size colour bhi uthana hai, vo cart mei se uthaa sktiye tu and
-                # ye function ke end mei cart ka table clear karde
+                new_transaction = Transaction(payment_id= output['payment_id'], user_id=user_id, product_id= output['product_id'][0], 
+                           total=output['amount'], size=size, color=color)
+        
+                db.session.add(new_transaction)
+                db.session.commit()
+                print(new_transaction)
+
+                #Sending email on successful payment
+                money = output['amount'] / 100
+                message = "Dear " + name +  " your Payment of ₹" + str(money) + " for " + product_name + " is successfully done. Thank-you for shopping with us."
+                msg = Message("Payment successful!", recipients=[user_email])
+                msg.body= message
                 
+                #Clearing all the cart items after payment
+                cart = Cart.query.filter_by(user_id=user_id).all()
+                cart_record = CartRecords.query.filter(CartRecords.user_id == user_id).first()
+                db.session.delete(cart)
+                db.session.commit()
+                db.session.delete(cart_record)
+                db.session.commit()
+                session['cartLength'] = 0
+
                 return jsonify({'status':'ok'})
+
             else:
+                user_id= session.get('user_id')
+                user = UserInfo.query.filter_by(id=user_id).first()
+                user_email = user.email
+                name= user.name
+                
+                product = Cart.query.filter_by(user_id=user_id).first()
+                product_name= product.product_name
+
+                #Sending failed payment status mail
+                message = "Dear " + name +  " your Payment for " + product_name + " has failed. Please Try again later."
+                message = "Your Payment for " + product_name + "is failed. Please try again later."
+                msg = Message("Payment Failed!", recipients=[user_email])
+                msg.body= message
+                
                 return jsonify({'status': 502})
         except Exception as e:
             print(e)

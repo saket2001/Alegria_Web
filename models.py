@@ -1,8 +1,10 @@
+from email.policy import default
 from flask import Flask, session
 from enum import unique
 from unicodedata import category
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import datetime
 
 
 # initialize database
@@ -126,7 +128,7 @@ class SpecialEvents(db.Model):
     __tablename__ = 'special_events'
     id = db.Column(db.String(10), primary_key=True)
     special_event_name = db.Column(db.String(20), nullable=False)
-    date = db.Column(db.DateTime, default=datetime.now)
+    # date = db.Column(db.DateTime, default=datetime.utcnow())
     description = db.Column(db.String(100), nullable=False)
 
 
@@ -135,11 +137,11 @@ class Calendar(db.Model):
     event_id = db.Column(db.String(10), db.ForeignKey(
         "event.id"), primary_key=True)
     name = db.Column(db.String(20), nullable=False)
-    date = db.Column(db.DateTime, default=datetime.now)
+    # date = db.Column(db.DateTime, default=datetime.utcnow())
     is_Special = db.Column(db.Boolean, nullable=False, default=False)
     is_Celebrity = db.Column(db.Boolean, nullable=False, default=False)
     venue = db.Column(db.String(30), nullable=False)
-    event_time = db.Column(db.Time(), nullable=False, default=datetime.now)
+    # event_time = db.Column(db.Time(), nullable=False, default=datetime.utcnow())
 
 
 class Celebrity(db.Model):
@@ -172,11 +174,22 @@ class Cart(db.Model):
     user_id = db.Column(
         db.String(300), (db.ForeignKey("userinfo.id")), primary_key=True)
     product_id = db.Column(db.String(10), primary_key=True)
+    product_name = db.Column(db.String(100))
     count = db.Column(db.Integer)
     size = db.Column(db.String(10), nullable=True)
     color = db.Column(db.String(50), nullable=True)
     single_price = db.Column(db.Float)
 
+class Transaction(db.Model):
+    __tablename__ = 'transaction'
+    payment_id = db.Column(db.String(200), primary_key=True, unique=True)
+    user_id = db.Column(db.String(300),unique=False, nullable=False)
+    product_id = db.Column(db.String(50))
+    payment_date= db.Column(db.DateTime, default=datetime.datetime.utcnow())
+    total = db.Column(db.Float, nullable=False)
+    coupon_used= db.Column(db.String(100), nullable=True)
+    size = db.Column(db.String(10), nullable=True)
+    color = db.Column(db.String(50), nullable=True)
 
 class CartRecords(db.Model):
     __tablename__ = 'cart_record'

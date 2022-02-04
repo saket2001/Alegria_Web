@@ -1,10 +1,14 @@
 from dis import disco
+from math import prod
 from flask.helpers import flash
 from flask import Blueprint, redirect, render_template, url_for, session, request, jsonify
 from functools import wraps
-from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses, Announcement, EventsToday, CartRecords
+from models import Transaction, db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses, Announcement, EventsToday, CartRecords
 from flask_wtf.csrf import CSRFProtect
 import razorpay
+from authlib.integrations.flask_client import OAuth
+from flask_mail import Message
+from mail import mail
 from models import Cart, Merchandise, UserInfo
 from views.admin import merchandise
 import shortuuid
@@ -42,7 +46,10 @@ def user_login_required(f):
     def decorated_function(*args, **kwargs):
         user = dict(session).get('profile', None)
         user_id = dict(session).get('user_id', None)
-        print(user_id)
+        user = UserInfo.query.filter_by(id=user_id).first()
+        user_email= user.email
+        print(user_email)
+        
 
         # You would add a check here and usethe user id or something to fetch
         # the other data for that user/check if they exist
@@ -75,7 +82,8 @@ def AddToCart(id):
             single_price = merchandise.cost
             # for redirect
             category = merchandise.category
-
+            product_name= merchandise.name
+            print(product_name)
             # 2. add this details to cart if not present in cart
             # details= user_id,m_id,size,color,count
 
@@ -87,7 +95,7 @@ def AddToCart(id):
                 return redirect("/merchandise/{}/{}".format(category, id))
             else:
                 newCartItem = Cart(
-                    user_id=user_id, product_id=merchandise_id, size=size, color=color, count=count, single_price=single_price)
+                    user_id=user_id, product_id=merchandise_id, product_name=product_name, size=size, color=color, count=count, single_price=single_price)
 
                 db.session.add(newCartItem)
                 db.session.commit()
@@ -254,6 +262,10 @@ client = razorpay.Client(auth=("rzp_test_rNYpEpdAPPGVGI", "4SrfFeKq4jX5vRsw1XLkS
 def razorpay():
     try:
         user_id = session.get('user_id')
+        user = UserInfo.query.filter_by(id=user_id).first()
+        user_email= user.email
+        name= user.name
+        #print(user_email)
         # checks if logged in
         # if session.get('user_id') != None:
         #     print(user_id)
@@ -316,7 +328,25 @@ def razorpay():
             'currency': payment['currency'],
             'amount': payment['amount']
         }
-        # print(data)
+        product = Cart.query.filter_by(user_id=user_id).first()
+        product_name= product.product_name
+        size= product.size
+        color= product.color
+        money = data['amount'] / 100
+
+        new_transaction = Transaction(payment_id= data['id'], user_id=user_id, product_id= data['notes'][0], 
+                           total=money, size=size, color=color)
+        
+        db.session.add(new_transaction)
+        db.session.commit()
+        # print(new_transaction)
+
+        #Sending payment successful email
+        message = "Dear " + name +  " your Payment of ₹" + str(money) + " for " + product_name + " is successfully done. Thank-you for shopping with us."
+        msg = Message("Payment successful!", recipients=[user_email])
+        msg.body= message
+        mail.send(msg)
+        print("Mail sent successfully!!")
         return jsonify(data)
     except Exception as e:
         print(e)
