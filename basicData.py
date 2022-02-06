@@ -19,6 +19,18 @@ problem_statements = [
     ["PS10", "Management System for Old Age Home/NGO",
      "App(Web/Mobile)", "To have a management system that aims to replace the traditional record keeping logbooks. The system will be able to track and keep records for categories like health, personal information,  food, and other necessary information. The system should have a clean user interface, easy to use with an easily searchable interface.", "/static/images/hackathon/ps10.png"]
 ]
+aboutus_2020= [
+    {"title": "Alegria Banner", "description": "Alegria 2020 Banner Unveiling Ceremony",
+     "img": "../static/images/aboutus-ribbons/alegria_banner.JPG"},
+     {"title": "Varun Dhawan & Shraddha Kapoor", "description": "Promotion of their film SD3",
+     "img": "../static/images/aboutus-ribbons/varunandshraddha.JPG"},
+     {"title": "Adah Sharma", "description": "Face of Alegria Judge at Pillai's Alegria 2020",
+     "img": "../static/images/aboutus-ribbons/adah_sharma.PNG"},
+     {"title": "Armaan Malik", "description": "Live in concert at Pillai's alegria 2020",
+     "img": "../static/images/aboutus-ribbons/armaan.JPG"},
+     {"title": "EDM night", "description": "EDM night at Pillai's Alegria 2020",
+     "img": "../static/images/aboutus-ribbons/edm_night.jpg"}
+] 
 
 aboutus_2019 = [
     {"title": "Alegria Banner", "description": "Alegria 2019 Banner Unveiling Ceremony",
@@ -34,7 +46,7 @@ aboutus_2019 = [
 ]
 
 aboutus_2018 = [
-    {"title": "Siddharth Malhotra & Rakul Preet", "description": "For the shooting and promotion of their movie Aiyaary",
+    {"title": "Siddharth & Rakul", "description": "For the shooting and promotion of their movie Aiyaary",
      "img": "https://alegria.co.in/wp-content/uploads/2020/01/40669850_230752934287684_2203215946495110325_n.jpg"},
     {"title": "Evelyn Sharma", "description": "Face of Alegria Judge at Pillai's Alegria 2018",
      "img": "https://alegria.co.in/wp-content/uploads/2020/01/30052338_987051811446354_787657953053930432_o-1.jpg"},
@@ -102,13 +114,13 @@ aboutus_2014 = [
 aboutus_2013 = [
     {"title": "The Beginning", "description": "Banner Unveiling Ceremony of Pillai's Alegria 2013",
      "img": "https://alegria.co.in/wp-content/uploads/2020/02/201225_211189352365941_1832788236_o.jpg"},
-    {"title": "Akcent", "description": "They came. They performed. They conquered every heart at Pillai's Alegria 2013.",
+    {"title": "Akcent", "description": "They came. They performed. They conquered every heart.",
      "img": "https://alegria.co.in/wp-content/uploads/2020/02/894905_167916496693227_507812245_o.jpg"},
     {"title": "Jakcy Bhagnani", "description": "A star-studded night at Pillai's Alegria 2013",
      "img": "https://alegria.co.in/wp-content/uploads/2020/02/886933_166332770184933_1598087417_o.jpg"},
-    {"title": "Parvathy Omanakuttan", "description": "The gorgeous & beautiful Miss India, Miss World had come to Pillai's Alegria 2013 to judge the Personality Contest",
+    {"title": "Parvathy Omanakuttan", "description": "Judge for Personality Contest",
      "img": "https://alegria.co.in/wp-content/uploads/2020/02/1040387_205662939585249_662025069_o.jpg"},
-    {"title": "Baichung Bhutia", "description": "The 'Sikkimese Sniper' was present to inaugrate the multipurpose Synthetic Turf of Pillai College on day 2 of Alegria 2013",
+    {"title": "Baichung Bhutia", "description": "'Sikkimese Sniper' to inaugrate the Synthetic Turf",
      "img": "https://alegria.co.in/wp-content/uploads/2020/02/860720_157801544371389_1690095924_o.jpg"}
 ]
 
