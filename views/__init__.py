@@ -323,8 +323,6 @@ def polls_main():
         if session.get('user_id') != None:
             signed_in = True
             cartLen = session.get('cartLength')
-        else:
-            return redirect('/user-login')
 
         res = {"type": True, "polls": []}
         pollsList = Poll.query.filter_by(status='Active').all()
