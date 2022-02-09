@@ -1,19 +1,32 @@
 from datetime import datetime
 from email.policy import strict
 import hashlib
-from Alegria_Web.models import APIKeys
+from models import APIKeys
 from models import Eventdemo, Eventdemo_details, Announcement, Poll, Merchandise, Categories, PollResponses, PollUserResponse, UserInfo
 from flask_restful import Resource, Api
 from flask import jsonify, request
-import helperFunc
 from models import db
 from flask_hashing import Hashing
 import random, string
+from functools import wraps
 
 # A default rate limit of 200 per day, and 50 per hour applied to all routes.
 # Add hashlib.sha256
 secret_api_key = "some key"
 hashing = Hashing()
+
+def api_key_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        Global_API_key = request.headers.get("Global-API-Key")
+        user_api_key = request.headers.get("User-API-Key")
+        if (not Global_API_key) or (Global_API_key != secret_api_key) or (not APIKeys.query.filter_by(api_key=user_api_key).first()):
+            return {}, 401
+        else:
+            return f(*args, **kwargs)
+
+    return wrap
+
 
 class IdFilterEventAPI(Resource):
 
@@ -64,10 +77,11 @@ class IdFilterEventAPI(Resource):
 
 class AllCategoryFilterEventAPI(Resource):
 
+    @api_key_required
     def get(self):
-        API_key = request.headers.get("API-Key")
-        if not API_key or API_key != secret_api_key:
-            return {}, 401
+        # API_key = request.headers.get("API-Key")
+        # if not API_key or API_key != secret_api_key:
+        #     return {}, 401
 
         categories = Categories.query.all()
         res = {
@@ -255,7 +269,7 @@ class RegisterEmail(Resource):
         API_key = request.headers.get("API-Key")
         if not API_key or API_key != secret_api_key:
             return {}, 401
-
+        
         try:
             data = request.get_json()
             user_id = data["user_id"]
