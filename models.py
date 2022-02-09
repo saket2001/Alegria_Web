@@ -107,9 +107,8 @@ class PollResponses(db.Model):
 class PollUserResponse(db.Model):
     __tablename__ = 'poll_user_responses'
     hashed_user_id = db.Column(db.String(50), primary_key=True)
-    poll_id = db.Column(db.Integer, db.ForeignKey("poll.id"), primary_key=True)
-    poll_option_id = db.Column(db.Integer, db.ForeignKey(
-        "poll_options.id"), primary_key=True)
+    poll_id = db.Column(db.Integer, primary_key=True)
+    poll_option_id = db.Column(db.Integer, primary_key=True)
 
 
 class CouponList(db.Model):
@@ -183,7 +182,7 @@ class CartRecords(db.Model):
     user_id = db.Column(
         db.String(300), (db.ForeignKey("userinfo.id")), primary_key=True, nullable=False)
     total_items = db.Column(db.Integer, nullable=False)
-    subtotal = db.Column(db.Integer, nullable=False)
+    subtotal = db.Column(db.Float, nullable=False)
     discount = db.Column(db.Float, nullable=True)
     total = db.Column(db.Float, nullable=False)
 
@@ -201,24 +200,6 @@ class Merchandise(db.Model):
     color = db.Column(db.String(60), nullable=False)
     category = db.Column(db.String(20), nullable=False)
     code = db.Column(db.String(10), nullable=False)
-
-    # def in_stock(self):
-    #     if session:
-    #         item = []
-    #         try:
-    #             item = session['Shoppingcart']
-    #         except:
-    #             pass
-    #         inde = 0
-    #         if len(item) > 0:
-    #             for ind, it in enumerate(item):
-    #                 if it.get('id') == self.id:
-    #                     inde = ind
-    #             return self.quantity - item[inde].get('quantity')
-    #         else:
-    #             return self.quantity
-    #     else:
-    #         return self.quantity
 
 
 class Categories(db.Model):

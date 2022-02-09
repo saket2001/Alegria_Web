@@ -19,8 +19,18 @@ problem_statements = [
     ["PS10", "Management System for Old Age Home/NGO",
      "App(Web/Mobile)", "To have a management system that aims to replace the traditional record keeping logbooks. The system will be able to track and keep records for categories like health, personal information,  food, and other necessary information. The system should have a clean user interface, easy to use with an easily searchable interface.", "/static/images/hackathon/ps10.png"]
 ]
-
-#
+aboutus_2020 = [
+    {"title": "Alegria Banner", "description": "Alegria 2020 Banner Unveiling Ceremony",
+     "img": "../static/images/aboutus-ribbons/alegria_banner.JPG"},
+    {"title": "Varun Dhawan & Shraddha Kapoor", "description": "Promotion of their film SD3",
+     "img": "../static/images/aboutus-ribbons/varunandshraddha.JPG"},
+    {"title": "Adah Sharma", "description": "Face of Alegria Judge at Pillai's Alegria 2020",
+     "img": "../static/images/aboutus-ribbons/adah_sharma.PNG"},
+    {"title": "Armaan Malik", "description": "Live in concert at Pillai's alegria 2020",
+     "img": "../static/images/aboutus-ribbons/armaan.JPG"},
+    {"title": "EDM night", "description": "EDM night at Pillai's Alegria 2020",
+     "img": "../static/images/aboutus-ribbons/edm_night.jpg"}
+]
 
 aboutus_2019 = [
     {"title": "Alegria Banner", "description": "Alegria 2019 Banner Unveiling Ceremony",
@@ -36,7 +46,7 @@ aboutus_2019 = [
 ]
 
 aboutus_2018 = [
-    {"title": "Siddharth Malhotra & Rakul Preet", "description": "For the shooting and promotion of their movie Aiyaary",
+    {"title": "Siddharth & Rakul", "description": "For the shooting and promotion of their movie Aiyaary",
      "img": "https://alegria.co.in/wp-content/uploads/2020/01/40669850_230752934287684_2203215946495110325_n.jpg"},
     {"title": "Evelyn Sharma", "description": "Face of Alegria Judge at Pillai's Alegria 2018",
      "img": "https://alegria.co.in/wp-content/uploads/2020/01/30052338_987051811446354_787657953053930432_o-1.jpg"},
@@ -104,33 +114,29 @@ aboutus_2014 = [
 aboutus_2013 = [
     {"title": "The Beginning", "description": "Banner Unveiling Ceremony of Pillai's Alegria 2013",
      "img": "https://alegria.co.in/wp-content/uploads/2020/02/201225_211189352365941_1832788236_o.jpg"},
-    {"title": "Akcent", "description": "They came. They performed. They conquered every heart at Pillai's Alegria 2013.",
+    {"title": "Akcent", "description": "They came. They performed. They conquered every heart.",
      "img": "https://alegria.co.in/wp-content/uploads/2020/02/894905_167916496693227_507812245_o.jpg"},
     {"title": "Jakcy Bhagnani", "description": "A star-studded night at Pillai's Alegria 2013",
      "img": "https://alegria.co.in/wp-content/uploads/2020/02/886933_166332770184933_1598087417_o.jpg"},
-    {"title": "Parvathy Omanakuttan", "description": "The gorgeous & beautiful Miss India, Miss World had come to Pillai's Alegria 2013 to judge the Personality Contest",
+    {"title": "Parvathy Omanakuttan", "description": "Judge for Personality Contest",
      "img": "https://alegria.co.in/wp-content/uploads/2020/02/1040387_205662939585249_662025069_o.jpg"},
-    {"title": "Baichung Bhutia", "description": "The 'Sikkimese Sniper' was present to inaugrate the multipurpose Synthetic Turf of Pillai College on day 2 of Alegria 2013",
+    {"title": "Baichung Bhutia", "description": "'Sikkimese Sniper' to inaugrate the Synthetic Turf",
      "img": "https://alegria.co.in/wp-content/uploads/2020/02/860720_157801544371389_1690095924_o.jpg"}
 ]
 
 
-# paymentLinks = {
-#     "gaming": "https://pages.razorpay.com/Gaming-alegria-22",
-#     "sports": "https://pages.razorpay.com/SPORTS-alegria-22",
-#     "informals": "https://pages.razorpay.com/Informals-alegria-22",
-#     "fine-arts": "https://pages.razorpay.com/fine-arts-alegria-22",
-#     "performing-arts": "https://pages.razorpay.com/Performing-Arts-alegria-22",
-#     "literary-arts": "https://pages.razorpay.com/Literary-Arts-alegria-22",
-#     "technical-events": "https://pages.razorpay.com/technical-events-alegria22",
-#     "management": "https://pages.razorpay.com/management-events-alegria22",
-#     "workshop": "https://pages.razorpay.com/Technical-Workshops-alegria22"
-# }
-
 paymentLinks = {
+    "gaming": "https://pages.razorpay.com/Gaming-alegria-22",
+    "sports": "https://pages.razorpay.com/SPORTS-alegria-22",
+    "informals": "https://pages.razorpay.com/Informals-alegria-22",
+    "fine-arts": "https://pages.razorpay.com/fine-arts-alegria-22",
+    "performing-arts": "https://pages.razorpay.com/Performing-Arts-alegria-22",
+    "literary-arts": "https://pages.razorpay.com/Literary-Arts-alegria-22",
     "technical-events": "https://pages.razorpay.com/technical-events-alegria22",
-    "technical-workshop": "https://pages.razorpay.com/Technical-Workshops-alegria22"
+    "management": "https://pages.razorpay.com/management-events-alegria22",
+    "workshop": "https://pages.razorpay.com/Technical-Workshops-alegria22"
 }
+
 
 events_row1 = [{
     "title": "Technical Events",
@@ -184,31 +190,31 @@ events_row3 = [{
 }]
 
 web_team_list = [
-    {"img": "../static/images/developer/Saket.jpg", "name": "Saket Chandorkar", "role": "Front-end Developer", "call": "+91 7506553715",
+    {"img": "../static/images/developer/Saket.jpg", "name": "Saket Chandorkar", "role": "Frontend Developer", "call": "+91 7506553715",
             "gmail": "saketchandorkar123@gmail.com", "github": "https://github.com/saket2001", "linkedin": "https://www.linkedin.com/in/saket-chandorkar-856783203/"},
-    {"img": "../static/images/developer/Lina.jpg", "name": "Lina Pawar", "role": "Front-end Developer", "call": "+91 9146850710",
+    {"img": "../static/images/developer/Lina.jpg", "name": "Lina Pawar", "role": "Frontend Developer", "call": "+91 9146850710",
             "gmail": "lpawar2911@gmail.com", "github": "https://github.com/Lina-Pawar", "linkedin": "https://www.linkedin.com/in/lina-pawar-5289a0198/"},
-    {"img": "../static/images/developer/Amit.jpg", "name": "Amit Naik", "role": "Front-end Developer", "call": "+91 8779624030",
+    {"img": "../static/images/developer/Amit.jpg", "name": "Amit Naik", "role": "Frontend Developer", "call": "+91 8779624030",
             "gmail": "amitnaik3108@gmail.com", "github": "https://github.com/Amit3108", "linkedin": "https://www.linkedin.com/in/amit-naik-0807331b2/"},
-    {"img": "../static/images/developer/Atharva.jpg", "name": "Atharva Golapkar", "role": "Front-end Developer", "call": "+91 7039324970",
+    {"img": "../static/images/developer/Atharva.jpg", "name": "Atharva Golapkar", "role": "Frontend Developer", "call": "+91 7039324970",
             "gmail": "atharvagolapkar@gmail.com", "github": "https://github.com/Jotaro2401", "linkedin": "https://www.linkedin.com/in/atharva-suryakant-golapkar-9b02281b3/"},
-    {"img": "../static/images/developer/Sanjana.jpg", "name": "Sanjana Barhate", "role": "Front-end Developer", "call": "+91 9975566026",
+    {"img": "../static/images/developer/Sanjana.jpg", "name": "Sanjana Barhate", "role": "Frontend Developer", "call": "+91 9975566026",
      "gmail": "sanju1234.barhate@gmail.com", "github": "https://github.com/sanjana2417", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"},
-    {"img": "../static/images/developer/Bhushan.jpg", "name": "Bhushan Khot", "role": "Back-end Developer", "call": "+91 8652618353",
+    {"img": "../static/images/developer/Bhushan.jpg", "name": "Bhushan Khot", "role": "Backend Developer", "call": "+91 8652618353",
             "gmail": "bhushan.khot22@gmail.com", "github": "https://github.com/Bhushankhot", "linkedin": "https://www.linkedin.com/in/bhushankhot08/"},
-    {"img": "../static/images/developer/Athul.jpeg", "name": "Athul Tulasidasan", "role": "Back-end Developer", "call": "+91 7887494095",
+    {"img": "../static/images/developer/Athul.jpeg", "name": "Athul Tulasidasan", "role": "Backend Developer", "call": "+91 7887494095",
             "gmail": "athulrthulasidasan@gmail.com", "github": "https://github.com/Athul0491", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"},
-    {"img": "../static/images/developer/Chandini.jpg", "name": "Chandini Chentamara", "role": "Back-end Developer", "call": "+91 8291601569 ",
+    {"img": "../static/images/developer/Chandini.jpg", "name": "Chandini Chentamara", "role": "Backend Developer", "call": "+91 8291601569 ",
             "gmail": "chandini.chent@gmail.com", "github": "https://github.com/chandinic10", "linkedin": "https://www.linkedin.com/in/chandini-chentamara-bb47ab1b8/"},
-    {"img": "../static/images/developer/Tanishq.jpg", "name": "Tanishq Parkar", "role": "Back-end Developer", "call": "+91 9324343000",
+    {"img": "../static/images/developer/Tanishq.jpg", "name": "Tanishq Parkar", "role": "Backend Developer", "call": "+91 9324343000",
             "gmail": "tanishqparkar@gmail.com", "github": "https://github.com/RevTpark", "linkedin": "https://www.linkedin.com/in/tanishq-parkar/"}
 ]
 
 app_team_list = [
-    {"img": "../static/images/developer/Aditya.jpg", "name": "Aditya Cholayil", "role": "App Developer", "call": "+91 8291369867",
+    {"img": "../static/images/developer/Aditya.jpg", "name": "Aaditya Cholayil", "role": "App Developer", "call": "+91 8291369867",
      "gmail": "cholayilaaditya@gmail.com", "github": "https://github.com/AadityaCholayil", "linkedin": "https://www.linkedin.com/in/aaditya-cholayil/"},
     {"img": "../static/images/developer/Yash.jpg", "name": "Yash Lalit", "role": "App Developer", "call": "+91 9136858108",
      "gmail": "yashlalit.23@gmail.com", "github": "https://github.com/happy-mammal", "linkedin": "https://www.linkedin.com/in/yash-lalit-0a6a6320b"},
-    {"img": "../static/images/developer/blank1.png", "name": "Pranav Shegekar", "role": "App Developer", "call": "+91 9324530205", "gmail": "pranav.shegekar@gmail.com",
-     "github": "https://github.com/PranavShegekar", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"}
+    {"img": "../static/images/developer/Pranav.jpg", "name": "Pranav Shegekar", "role": "App Developer", "call": "+91 9324530205", "gmail": "pranav.shegekar@gmail.com",
+     "github": "https://github.com/PranavShegekar", "linkedin": "https://www.linkedin.com/in/pranav-shegekar"}
 ]

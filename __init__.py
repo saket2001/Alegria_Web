@@ -64,7 +64,6 @@ def create_app():
     oauth = OAuth(app)
     google = oauth.register(
         name='google',
-        # client_id=os.getenv('OAUTH_CLIENT_ID'),
         client_id='391737203590-h2n6bbjhc2lkbpf5gkp0tpgbp6t35hgg.apps.googleusercontent.com',
         client_secret='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',
         access_token_url='https://accounts.google.com/o/oauth2/token',
@@ -128,8 +127,9 @@ def create_app():
                     return redirect('/admin/')
 
                 else:
-                    # ph_number = userList.phone_number
-                    # print(ph_number)
+                    ph_number = userList.phone_number
+                    college_name = userList.college_name
+                    print(ph_number, college_name)
 
                     # user session
                     session['user_name'] = user_info['family_name']
@@ -147,9 +147,13 @@ def create_app():
                     cartLen = len(cartInfo)
                     session['cartLength'] = cartLen
 
-                    flash("You Logged in Successfully!!")
-                    # if (ph_number == None):
-                    #     return redirect('/new-user-login')
+                    if (ph_number != None or college_name != None):
+                        flash("You Logged in Successfully!!")
+
+                    if (ph_number == None or college_name == None):
+                        flash(
+                            "You need to provide your phone number and college name for survey purpose!")
+                        return redirect('/new-user-login/{}'.format(user_idd))
 
                     return redirect('/')
 
@@ -187,10 +191,14 @@ def create_app():
             session.pop(key)
 
         return redirect('/')
+
     # csrf.init_app(app)
 
     # enable csrf
     # csrf.init_app(app)
 
     return app
+<<<<<<< HEAD
 
+=======
+>>>>>>> c55894357debbbf18922746fcf33bf0eaa0529ec

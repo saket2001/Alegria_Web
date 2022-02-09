@@ -476,9 +476,6 @@ def AddNewPoll():
 
             db.session.add(pollOption)
             db.session.commit()
-            db.session.add(new_poll2)
-            db.session.commit()
-            
             #print(option, image)
 
         # polls table data that will be generated on backend
@@ -515,12 +512,12 @@ def togglestatus(poll_id):
     current_status = request.args.get('status')
     print(current_status)
     try:
-                new_status= Poll.query.filter_by(poll_id=poll_id).first()
-                new_status.status= 'Expired'
-                db.session.commit()
-                print(new_status)
-                #flash("Poll Status has been turned off")
-                return redirect("/admin/polls")
+        new_status= Poll.query.filter_by(poll_id=poll_id).first()
+        new_status.status= 'Expired'
+        db.session.commit()
+        print(new_status)
+        #flash("Poll Status has been turned off")
+        return redirect("/admin/polls")
     except Exception as e:
         print(e)
         return redirect('/')
