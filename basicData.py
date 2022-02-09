@@ -19,18 +19,18 @@ problem_statements = [
     ["PS10", "Management System for Old Age Home/NGO",
      "App(Web/Mobile)", "To have a management system that aims to replace the traditional record keeping logbooks. The system will be able to track and keep records for categories like health, personal information,  food, and other necessary information. The system should have a clean user interface, easy to use with an easily searchable interface.", "/static/images/hackathon/ps10.png"]
 ]
-aboutus_2020= [
+aboutus_2020 = [
     {"title": "Alegria Banner", "description": "Alegria 2020 Banner Unveiling Ceremony",
      "img": "../static/images/aboutus-ribbons/alegria_banner.JPG"},
-     {"title": "Varun Dhawan & Shraddha Kapoor", "description": "Promotion of their film SD3",
+    {"title": "Varun Dhawan & Shraddha Kapoor", "description": "Promotion of their film SD3",
      "img": "../static/images/aboutus-ribbons/varunandshraddha.JPG"},
-     {"title": "Adah Sharma", "description": "Face of Alegria Judge at Pillai's Alegria 2020",
+    {"title": "Adah Sharma", "description": "Face of Alegria Judge at Pillai's Alegria 2020",
      "img": "../static/images/aboutus-ribbons/adah_sharma.PNG"},
-     {"title": "Armaan Malik", "description": "Live in concert at Pillai's alegria 2020",
+    {"title": "Armaan Malik", "description": "Live in concert at Pillai's alegria 2020",
      "img": "../static/images/aboutus-ribbons/armaan.JPG"},
-     {"title": "EDM night", "description": "EDM night at Pillai's Alegria 2020",
+    {"title": "EDM night", "description": "EDM night at Pillai's Alegria 2020",
      "img": "../static/images/aboutus-ribbons/edm_night.jpg"}
-] 
+]
 
 aboutus_2019 = [
     {"title": "Alegria Banner", "description": "Alegria 2019 Banner Unveiling Ceremony",
@@ -211,10 +211,10 @@ web_team_list = [
 ]
 
 app_team_list = [
-    {"img": "../static/images/developer/Aditya.jpg", "name": "Aditya Cholayil", "role": "App Developer", "call": "+91 8291369867",
+    {"img": "../static/images/developer/Aditya.jpg", "name": "Aaditya Cholayil", "role": "App Developer", "call": "+91 8291369867",
      "gmail": "cholayilaaditya@gmail.com", "github": "https://github.com/AadityaCholayil", "linkedin": "https://www.linkedin.com/in/aaditya-cholayil/"},
     {"img": "../static/images/developer/Yash.jpg", "name": "Yash Lalit", "role": "App Developer", "call": "+91 9136858108",
      "gmail": "yashlalit.23@gmail.com", "github": "https://github.com/happy-mammal", "linkedin": "https://www.linkedin.com/in/yash-lalit-0a6a6320b"},
     {"img": "../static/images/developer/Pranav.jpg", "name": "Pranav Shegekar", "role": "App Developer", "call": "+91 9324530205", "gmail": "pranav.shegekar@gmail.com",
-     "github": "https://github.com/PranavShegekar", "linkedin": "https://www.linkedin.com/in/sanjana-b-b692651b4/"}
+     "github": "https://github.com/PranavShegekar", "linkedin": "https://www.linkedin.com/in/pranav-shegekar"}
 ]
