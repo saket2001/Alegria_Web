@@ -1,9 +1,7 @@
 from datetime import datetime
-from models import APIKeys
-from models import Eventdemo, Eventdemo_details, Announcement, Poll, Merchandise, Categories, PollResponses, PollUserResponse, UserInfo
+from models import db, Eventdemo, Eventdemo_details, Announcement, Poll, Merchandise, Categories, PollResponses, PollUserResponse, UserInfo, APIKeys
 from flask_restful import Resource
 from flask import request
-from models import db
 from flask_hashing import Hashing
 import random, string
 from functools import wraps

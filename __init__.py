@@ -3,11 +3,12 @@ from flask.helpers import flash
 from flask_restful import Api
 from dotenv import load_dotenv
 from authlib.integrations.flask_client import OAuth
-from models import UserInfo
+from models import UserInfo, APIKeys
 from datetime import datetime
 from flask_hashing import Hashing
 import helperFunc
 from models import Cart
+import random, string
 
 
 def create_app():
@@ -168,9 +169,14 @@ def create_app():
                 image_url = profile_pic
                 entry = UserInfo(id=user_id, email=email, name=name,
                                  image_url=image_url, date_registered=datetime.now())
-
                 db.session.add(entry)
                 db.session.commit()
+
+                new_api_key = hashing.hash_value(user_id, salt="".join(
+                random.choice(string.ascii_letters) for _ in range(10)))
+                new_obj = APIKeys(user_id=user_id, api_key=new_api_key)
+                db.session.add(new_obj)
+                db.session.commit()                
 
                 # user session
                 session['user_name'] = user_info.get("family_name", user_info.get("given_name"))
