@@ -145,12 +145,7 @@ Alegria 2022 | Your Cart
             name: "Alegria 2022",
             description: "Test Transaction",
             image: "https://example.com/your_logo",
-            callback_url: "https://eneqd3r9zrjok.x.pipedream.net/",
-            handler: function (response) {
-              alert(response.razorpay_payment_id);
-              alert(response.razorpay_order_id);
-              alert(response.razorpay_signature);
-            },
+            callback_url: "https://alegria.co.in/",
           };
           const paymentObject = new Razorpay(options);
           paymentObject.open();
@@ -200,9 +195,9 @@ Alegria 2022 | Your Cart
               <p class="fs-4 main-font mb-0">{{cart_details['to_pay']}} ₹</p>
             </div>
           </div>
-          <div class="row w-100 my-2">
-            <!-- <form class="my-2" action=""> -->
-            <button onClick="displayRazorpay()" target="_blank" rel="noopener noreferrer" class="w-100 button text-beige fs-6" style="background-color: #631909;" >
+          <div class="row w-100 my-2" >
+            <!-- <form class="my-2" action="{{url_for('app.landingPage')}}"> -->
+            <button type="submit" onClick="displayRazorpay()" target="_blank" rel="noopener noreferrer" class="w-100 button text-beige fs-6" style="background-color: #631909;" >
               Proceed To Pay {{cart_details['to_pay']}} ₹
               <i class="fas fa-arrow-right ms-2"></i>
             </button>

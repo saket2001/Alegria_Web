@@ -12,6 +12,9 @@ from models import Cart, Transaction
 from flask_cors import CORS
 import hmac
 import hashlib
+from flask_mail import Message
+from mail import mail
+import json
 
 from views import user_login_required
 
@@ -24,7 +27,7 @@ def create_app():
         SQLALCHEMY_POOL_RECYCLE=299,
         SQLALCHEMY_POOL_TIMEOUT=20,
         # SQLALCHEMY_DATABASE_URI='mysql://AlegriaTheFest:2022themeisvintwood@AlegriaTheFest.mysql.pythonanywhere-services.com/AlegriaTheFest$alegria2022',
-        SQLALCHEMY_DATABASE_URI='mysql://root:''@localhost/alegria_web',
+        SQLALCHEMY_DATABASE_URI='mysql://root:root@localhost/alegria_web',
         MAIL_SERVER='smtp.gmail.com',
         MAIL_PORT=465,
         MAIL_USE_SSL=True,
@@ -200,94 +203,126 @@ def create_app():
 
         return redirect('/')
     @app.route('/verification',methods=["POST"])
-    @user_login_required
     def verification():
-        try:
+        if(request.method=="POST"):
 
-            secret = 'alegriaisfun'
-            print(request.data)
-            digest = hmac.new(bytes(secret, 'UTF-8'),request.data, hashlib.sha256)
-            signature = digest.hexdigest()
-            print(signature)
-            print(request.headers['X-Razorpay-Signature'])
-            output = {}
-            if(signature == request.headers['X-Razorpay-Signature']):
-                print('req is legit')
-                data = request.data
-                payment_id = data["payload"]['payment']['entity']['id']
-                amount = data["payload"]['payment']['entity']['amount']
-                currency = data["payload"]['payment']['entity']['currency']
-                email = data["payload"]['payment']['entity']['email']
-                contact = data["payload"]['payment']['entity']['contact']
-                product_id = data["payload"]['payment']['entity']['notes']
+            try:
+                print('verification')
+                secret = 'alegriaisfun'
+                # print(request.data)
+                digest = hmac.new(bytes(secret, 'UTF-8'),request.data, hashlib.sha256)
+                signature = digest.hexdigest()
+                # print(signature)
+                # print(request.headers['X-Razorpay-Signature'])
+                output = {}
+                # print('cheeck')
+                if(signature == request.headers['X-Razorpay-Signature']):
+                    print('req is legit')
+                    data = request.data
+                    # print(type(data))
+                    data = str(data, 'utf-8')
+                    # print(type(data))
+                    # print(data,'efore')
+                    data = json.loads(data)
+                    # print(data)
+                    payment_id = data["payload"]['payment']['entity']['id']
+                    amount = data["payload"]['payment']['entity']['amount']
+                    currency = data["payload"]['payment']['entity']['currency']
+                    email = data["payload"]['payment']['entity']['email']
+                    contact = data["payload"]['payment']['entity']['contact']
+                    user_email= data["payload"]['payment']['entity']['notes']['0']
+                    data["payload"]['payment']['entity']['notes'].pop('0')
+                    # print('after popping')
+                    product_id = data["payload"]['payment']['entity']['notes']
+                    user = UserInfo.query.filter_by(email=user_email).all()[0]
+                    user_email= user.email
+                    print('55555555')
+                    user_id = user.id
+                    name= user.name
+                    print('444444444444444')
+                    output['payment_id'] = payment_id
+                    # payment_id ka dummy value = "pay_IrcieDntLHN83I"
+                    print(amount,'33333333333333')
+                    output['amount']= amount
+                    output['currency']=currency
+                    output['email']=user_email
+                    output['contact']= contact
+                    # "contact": "+917887494094"
+                    output['product_id']= product_id
+                    print('22222222222')
+                    # "product_id": {
+                    #     "0": "M01",
+                    #     "1": "M01",
+                    #     "2": "M01",
+                    #     "3": "M08"
+                    # }
+                    product = Cart.query.filter_by(user_id=user_id).first()
+                    print(product,'aaaaaaaaaaaa')
+                    product_name= product.product_name
+                    size= product.size
+                    color= product.color
+                    print(user_email,'11111111111')
+                    for i in range(len(output['product_id'])):
+                        new_transaction = Transaction(payment_id= output['payment_id'], user_id=user_id, product_id= output['product_id'][str(i+1)], 
+                                total=output['amount'], size=size, color=color)
 
-                user_id= session.get('user_id')
-                user = UserInfo.query.filter_by(id=user_id).first()
-                user_email= user.email
-                name= user.name
-                
-                output['payment_id'] = payment_id
-                # payment_id ka dummy value = "pay_IrcieDntLHN83I"
-                output['amount']= amount
-                output['currency']=currency
-                output['email']=email
-                output['contact']= contact
-                # "contact": "+917887494094"
-                output['product_id']= product_id
-                # "product_id": {
-                #     "0": "M01",
-                #     "1": "M01",
-                #     "2": "M01",
-                #     "3": "M08"
-                # }
-                product = Cart.query.filter_by(user_id=user_id).first()
-                product_name= product.product_name
-                size= product.size
-                color= product.color
+            
+                    print(product_id,'999999999')
+                    db.session.add(new_transaction)
+                    db.session.commit()
+                    print(new_transaction,'new_transaction')
 
-                new_transaction = Transaction(payment_id= output['payment_id'], user_id=user_id, product_id= output['product_id'][0], 
-                           total=output['amount'], size=size, color=color)
-        
-                db.session.add(new_transaction)
-                db.session.commit()
-                print(new_transaction)
+                    print(user,'6666666666666')
+                    #Sending email on successful payment
+                    money = output['amount'] / 100
+                    message = "Dear " + name +  " your Payment of ₹" + str(money) + " for " + product_name + " is successfully done. Thank-you for shopping with us."
+                    msg = Message("Payment successful!", recipients=[user_email])
+                    msg.body= message
+                    
+                    #Clearing all the cart items after payment
+                    cart = Cart.query.filter(Cart.user_id==user_id).all()
+                    cart_record = CartRecords.query.filter(CartRecords.user_id == user_id).first()
+                    print('check1')
+                    if cart:
+                        for item in cart:
+                            db.session.delete(item)
+                            db.session.commit()
+                    print('check2')
+                    # db.session.delete(cart)
+                    # db.session.commit()
+                    if cart_record:
+                        db.session.delete(cart_record)
+                        db.session.commit()
+                    print('check3')
+                    session['cartLength'] = 0
+                    message = "Dear " + name +  " your Payment of ₹" + str(money) + " for " + product_name + " is successfully done. Thank-you for shopping with us."
+                    msg = Message("Payment successful!", recipients=[user_email])
+                    msg.body= message
+                    mail.send(msg)
+                    print('check4')
+                    print("Mail sent successfully!!")
 
-                #Sending email on successful payment
-                money = output['amount'] / 100
-                message = "Dear " + name +  " your Payment of ₹" + str(money) + " for " + product_name + " is successfully done. Thank-you for shopping with us."
-                msg = Message("Payment successful!", recipients=[user_email])
-                msg.body= message
-                
-                #Clearing all the cart items after payment
-                cart = Cart.query.filter_by(user_id=user_id).all()
-                cart_record = CartRecords.query.filter(CartRecords.user_id == user_id).first()
-                db.session.delete(cart)
-                db.session.commit()
-                db.session.delete(cart_record)
-                db.session.commit()
-                session['cartLength'] = 0
+                    return jsonify({'status':'ok'})
 
-                return jsonify({'status':'ok'})
+                else:
+                    user_id= session.get('user_id')
+                    user = UserInfo.query.filter_by(id=user_id).first()
+                    user_email = user.email
+                    name= user.name
+                    
+                    product = Cart.query.filter_by(user_id=user_id).first()
+                    product_name= product.product_name
 
-            else:
-                user_id= session.get('user_id')
-                user = UserInfo.query.filter_by(id=user_id).first()
-                user_email = user.email
-                name= user.name
-                
-                product = Cart.query.filter_by(user_id=user_id).first()
-                product_name= product.product_name
-
-                #Sending failed payment status mail
-                message = "Dear " + name +  " your Payment for " + product_name + " has failed. Please Try again later."
-                message = "Your Payment for " + product_name + "is failed. Please try again later."
-                msg = Message("Payment Failed!", recipients=[user_email])
-                msg.body= message
-                
-                return jsonify({'status': 502})
-        except Exception as e:
-            print(e)
-            return redirect('/')
+                    #Sending failed payment status mail
+                    message = "Dear " + name +  " your Payment for " + product_name + " has failed. Please Try again later."
+                    message = "Your Payment for " + product_name + "is failed. Please try again later."
+                    msg = Message("Payment Failed!", recipients=[user_email])
+                    msg.body= message
+                   
+                    return jsonify({'status': 502})
+            except Exception as e:
+                print(e)
+                return redirect('/')
 
     if __name__ == "__main__":
         

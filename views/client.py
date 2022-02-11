@@ -7,8 +7,6 @@ from models import Transaction, db, Eventdemo, Eventdemo_details, Merchandise, U
 from flask_wtf.csrf import CSRFProtect
 import razorpay
 from authlib.integrations.flask_client import OAuth
-from flask_mail import Message
-from mail import mail
 from models import Cart, Merchandise, UserInfo
 from views.admin import merchandise
 import shortuuid
@@ -283,7 +281,7 @@ def razorpay():
         # print('cart',cart)
         notes = {}
         if cart:
-            count = 0
+            count = 1
             for item in cart:
                 # item = [dict(row) for row in item]
                 
@@ -315,6 +313,7 @@ def razorpay():
                 #     notes[count] = {**notes[count],"color": item.color},
                 #     notes[count] = notes[count][0]
                 # print(notes)
+        notes[0] = user_email
         print('notes',notes)
         
         # notes = [r for (r,) in notes]
@@ -329,25 +328,21 @@ def razorpay():
             'amount': payment['amount']
         }
         #final hosted waale site pe ye code daalne se pehle ye niche ka pura comment kardena.
-        product = Cart.query.filter_by(user_id=user_id).first()
-        product_name= product.product_name
-        size= product.size
-        color= product.color
-        money = data['amount'] / 100
+        # product = Cart.query.filter_by(user_id=user_id).first()
+        # size= product.size
+        # color= product.color
+        # money = data['amount'] / 100
 
-        new_transaction = Transaction(payment_id= data['id'], user_id=user_id, product_id= data['notes'][0], 
-                           total=money, size=size, color=color)
+        # new_transaction = Transaction(payment_id= data['id'], user_id=user_id, product_id= data['notes'][0], 
+        #                    total=money, size=size, color=color)
         
-        db.session.add(new_transaction)
-        db.session.commit()
+        # db.session.add(new_transaction)
+        # db.session.commit()
         # print(new_transaction)
 
         #Sending payment successful email
-        message = "Dear " + name +  " your Payment of ₹" + str(money) + " for " + product_name + " is successfully done. Thank-you for shopping with us."
-        msg = Message("Payment successful!", recipients=[user_email])
-        msg.body= message
-        mail.send(msg)
-        print("Mail sent successfully!!")
+        
+        
         return jsonify(data)
     except Exception as e:
         print(e)

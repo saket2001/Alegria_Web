@@ -59,8 +59,8 @@ class UserInfo(db.Model):
     #     'RegisterEvent', backref='RegisterUser', lazy=True)
     cart_user_id = db.relationship('Cart', backref='userinfo', lazy=True)
 
-    def __repr__(self, email, name, image_url, isAdmin):
-        return f"UserInfo('{self.email}'-'{self.name}'-'{self.image_url}'-'{self.phone_number}'-'{self.college_name}'-'{self.isadmin}')"
+    # def __repr__(self, email, name, image_url, isAdmin):
+    #     return f"UserInfo('{self.email}'-'{self.name}'-'{self.image_url}'-'{self.phone_number}'-'{self.college_name}'-'{self.isadmin}')"
 
 
 class Eventdemo_details(db.Model):
