@@ -8,7 +8,8 @@ from datetime import datetime
 from flask_hashing import Hashing
 import helperFunc
 from models import Cart
-import random, string
+import random
+import string
 
 
 def create_app():
@@ -20,7 +21,7 @@ def create_app():
         SQLALCHEMY_POOL_RECYCLE=299,
         SQLALCHEMY_POOL_TIMEOUT=20,
         # SQLALCHEMY_DATABASE_URI='mysql://AlegriaTheFest:2022themeisvintwood@AlegriaTheFest.mysql.pythonanywhere-services.com/AlegriaTheFest$alegria2022',
-        SQLALCHEMY_DATABASE_URI='mysql://root:@localhost/alegria_web',
+        SQLALCHEMY_DATABASE_URI='mysql://root:root@localhost/alegria_web',
         MAIL_SERVER='smtp.gmail.com',
         MAIL_PORT=465,
         MAIL_USE_SSL=True,
@@ -122,7 +123,8 @@ def create_app():
 
                 if isAdmin == 'Yes':
                     # admin session
-                    session['user_name'] = user_info.get("family_name", user_info.get("given_name"))
+                    session['user_name'] = user_info.get(
+                        "family_name", user_info.get("given_name"))
                     session['user_image'] = user_info['picture']
                     session['profile'] = user_info
                     session['power'] = 'admin_level'
@@ -136,7 +138,8 @@ def create_app():
                     # print(ph_number, college_name)
 
                     # user session
-                    session['user_name'] = user_info.get("family_name", user_info.get("given_name"))
+                    session['user_name'] = user_info.get(
+                        "family_name", user_info.get("given_name"))
                     session['user_image'] = user_info['picture']
                     session['profile'] = user_info
 
@@ -149,7 +152,7 @@ def create_app():
                     cartInfo = Cart.query.filter_by(
                         user_id=session.get('user_id')).all()
                     cartLen = len(cartInfo)
-                    session['cartLength'] = cartLen
+                    session['cartLength'] = cartLen or 0
 
                     if (ph_number != None or college_name != None):
                         flash("You Logged in Successfully!!")
@@ -173,13 +176,14 @@ def create_app():
                 db.session.commit()
 
                 new_api_key = hashing.hash_value(user_id, salt="".join(
-                random.choice(string.ascii_letters) for _ in range(10)))
+                    random.choice(string.ascii_letters) for _ in range(10)))
                 new_obj = APIKeys(user_id=user_id, api_key=new_api_key)
                 db.session.add(new_obj)
-                db.session.commit()                
+                db.session.commit()
 
                 # user session
-                session['user_name'] = user_info.get("family_name", user_info.get("given_name"))
+                session['user_name'] = user_info.get(
+                    "family_name", user_info.get("given_name"))
                 session['user_image'] = user_info['picture']
                 session['profile'] = user_info
 
