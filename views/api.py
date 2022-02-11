@@ -1,24 +1,38 @@
-from models import Eventdemo, Eventdemo_details, Announcement, Poll, Merchandise, Categories, PollResponses, PollUserResponse
-from flask_restful import Resource, Api
-from flask import jsonify, request
+from datetime import datetime
+from models import db, Eventdemo, Eventdemo_details, Announcement, Poll, Merchandise, Categories, PollResponses, PollUserResponse, UserInfo, APIKeys
+from flask_restful import Resource
+from flask import request
+from flask_hashing import Hashing
+import random, string
+from functools import wraps
 
 # A default rate limit of 200 per day, and 50 per hour applied to all routes.
 # Add hashlib.sha256
 secret_api_key = "some key"
+hashing = Hashing()
+
+def api_key_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        Global_API_key = request.headers.get("Global-API-Key")
+        user_api_key = request.headers.get("User-API-Key")
+        if (not Global_API_key) or (Global_API_key != secret_api_key) or (not APIKeys.query.filter_by(api_key=user_api_key).first()):
+            return {}, 401
+        else:
+            return f(*args, **kwargs)
+    return wrap
+
 
 class IdFilterEventAPI(Resource):
 
+    @api_key_required
     def get(self, id):
-        API_key = request.headers.get("API-Key")
-        if not API_key or API_key != secret_api_key:
-            return {}, 401
-
         event = Eventdemo.query.filter_by(id=id).first()
         if not event:
             res = {
-                    'length': 0,
-                    "event": "none"
-                }
+                'length': 0,
+                "event": "none"
+            }
             return res, 404
 
         event_details = Eventdemo_details.query.filter_by(
@@ -55,11 +69,8 @@ class IdFilterEventAPI(Resource):
 
 class AllCategoryFilterEventAPI(Resource):
 
+    @api_key_required
     def get(self):
-        API_key = request.headers.get("API-Key")
-        if not API_key or API_key != secret_api_key:
-            return {}, 401
-
         categories = Categories.query.all()
         res = {
             "length": len(categories),
@@ -80,12 +91,10 @@ class AllCategoryFilterEventAPI(Resource):
 
 class CategoryEventFilter(Resource):
 
+    @api_key_required
     def get(self, category_id):
-        API_key = request.headers.get("API-Key")
-        if not API_key or API_key != secret_api_key:
-            return {}, 401
-          
-        category_events =  Eventdemo.query.filter_by(event_category_id=category_id).all()
+        category_events = Eventdemo.query.filter_by(
+            event_category_id=category_id).all()
 
         res = {
             "length": len(category_events),
@@ -94,7 +103,8 @@ class CategoryEventFilter(Resource):
 
         # id, code, image_url, cost, name
         for event in category_events:
-            event_details = Eventdemo_details.query.filter_by(event_id=event.id).first()
+            event_details = Eventdemo_details.query.filter_by(
+                event_id=event.id).first()
             res["events"].append({
                 "event_id": event.id,
                 "event_name": event.event_name,
@@ -105,13 +115,11 @@ class CategoryEventFilter(Resource):
 
         return res, 200
 
+
 class AnnoucementsAPI(Resource):
 
+    @api_key_required
     def get(self):
-        API_key = request.headers.get("API-Key")
-        if not API_key or API_key != secret_api_key:
-            return {}, 401
-
         annoucements_queryset = Announcement.query.order_by(
             Announcement.id.desc()).all()
         res = {
@@ -131,16 +139,14 @@ class AnnoucementsAPI(Resource):
 
 class PollsAPI(Resource):
 
+    @api_key_required
     def get(self):
-        API_key = request.headers.get("API-Key")
-        if not API_key or API_key != secret_api_key:
-            return {}, 401
-
         user_id = request.headers.get("hashed_user_id")
         if not user_id:
             return {}, 401
-            
-        user_response_details = PollUserResponse.query.filter_by(hashed_user_id=user_id)
+
+        user_response_details = PollUserResponse.query.filter_by(
+            hashed_user_id=user_id)
 
         poll_queryset = Poll.query.order_by(Poll.poll_id.desc()).all()
 
@@ -151,7 +157,8 @@ class PollsAPI(Resource):
         for item in poll_queryset:
             poll_details = PollResponses.query.filter_by(
                 poll_id=item.poll_id).all()
-            user_answered_data = user_response_details.filter_by(poll_id=item.poll_id).first()
+            user_answered_data = user_response_details.filter_by(
+                poll_id=item.poll_id).first()
             if user_answered_data:
                 poll_answered = True
                 poll_user_reponse = user_answered_data.poll_option_id
@@ -185,11 +192,8 @@ class PollsAPI(Resource):
 
 class MerchandiseAPI(Resource):
 
+    @api_key_required
     def get(self):
-        API_key = request.headers.get("API-Key")
-        if not API_key or API_key != secret_api_key:
-            return {}, 401
-        
         # /merchandise?category=<category>&price-range=<price-range>&size=<size>&color=<color>
         merch_queryset = Merchandise.query.all()
 
@@ -213,3 +217,60 @@ class MerchandiseAPI(Resource):
             })
 
         return res, 200
+
+
+class VerifyEmail(Resource):
+
+    def get(self, hashed_id):
+        API_key = request.headers.get("Global-API-Key")
+        if not API_key or API_key != secret_api_key:
+            return {}, 401
+
+        user = UserInfo.query.filter_by(id=hashed_id).first()
+        api_key = APIKeys.query.filter_by(user_id=hashed_id).first()
+        if user:
+            data = {
+                "id": user.id,
+                "email": user.email,
+                "name": user.name,
+                "image_url": user.image_url,
+                "phone_number": user.phone_number,
+                "college_name": user.college_name,
+                "date_registered": datetime.strptime(user.date_registered, "%Y-%m-%d %H:%M:%S.%f").strftime("%Y-%m-%d"),
+                "api_key": api_key,
+            }
+            return data, 200
+        else:
+            return {}, 404
+
+
+class RegisterEmail(Resource):
+
+    def post(self):
+        API_key = request.headers.get("Global-API-Key")
+        if not API_key or API_key != secret_api_key:
+            return {}, 401
+        
+        try:
+            data = request.get_json()
+            user_id = data["user_id"]
+            email = data["email"]
+            name = data["name"]
+            phone_no = data["phone_number"]
+            college_name = data["college_name"]
+            new_user = UserInfo(id=user_id, email=email, name=name,
+                                phone_number=phone_no, college_name=college_name, date_registered=datetime.now())
+            db.session.add(new_user)
+            db.session.commit()
+
+            new_api_key = hashing.hash_value(user_id, salt="".join(
+                random.choice(string.ascii_letters) for _ in range(10)))
+            new_obj = APIKeys(user_id=user_id, api_key=new_api_key)
+            db.session.add(new_obj)
+            db.session.commit()
+
+            return {"api_key": new_api_key}, 201
+
+        except Exception as e:
+            print(e)
+            return {}, 400
