@@ -1,9 +1,8 @@
 from datetime import datetime
-from email.policy import strict
 from models import APIKeys
 from models import Eventdemo, Eventdemo_details, Announcement, Poll, Merchandise, Categories, PollResponses, PollUserResponse, UserInfo
-from flask_restful import Resource, Api
-from flask import jsonify, request
+from flask_restful import Resource
+from flask import request
 from models import db
 from flask_hashing import Hashing
 import random, string
@@ -23,7 +22,6 @@ def api_key_required(f):
             return {}, 401
         else:
             return f(*args, **kwargs)
-
     return wrap
 
 
@@ -240,7 +238,7 @@ class VerifyEmail(Resource):
                 "image_url": user.image_url,
                 "phone_number": user.phone_number,
                 "college_name": user.college_name,
-                "date_registered": user.date_registered.strftime("%Y-%m-%d"),
+                "date_registered": datetime.strptime(user.date_registered, "%Y-%m-%d %H:%M:%S.%f").strftime("%Y-%m-%d"),
                 "api_key": api_key,
             }
             return data, 200
@@ -265,11 +263,13 @@ class RegisterEmail(Resource):
             new_user = UserInfo(id=user_id, email=email, name=name,
                                 phone_number=phone_no, college_name=college_name, date_registered=datetime.now())
             db.session.add(new_user)
+            db.session.commit()
 
             new_api_key = hashing.hash_value(user_id, salt="".join(
                 random.choice(string.ascii_letters) for _ in range(10)))
             new_obj = APIKeys(user_id=user_id, api_key=new_api_key)
             db.session.add(new_obj)
+            db.session.commit()
 
             return {"api_key": new_api_key}, 201
 

@@ -95,6 +95,7 @@ def create_app():
             resp = google.get('userinfo')
             user_info = resp.json()
             user = oauth.google.userinfo()
+            print("---------------------------", user)
 
             user_email = user_info.get('email')
             profile_pic = user_info.get('picture')
@@ -111,7 +112,7 @@ def create_app():
                 email_list.append(
                     row.email)
 
-            print(email_list)
+            # print(email_list)
 
             if user_email in email_list:
                 isAdmin = adminList.isAdmin
@@ -120,7 +121,7 @@ def create_app():
 
                 if isAdmin == 'Yes':
                     # admin session
-                    session['user_name'] = user_info['family_name']
+                    session['user_name'] = user_info.get("family_name", user_info.get("given_name"))
                     session['user_image'] = user_info['picture']
                     session['profile'] = user_info
                     session['power'] = 'admin_level'
@@ -131,10 +132,10 @@ def create_app():
                 else:
                     ph_number = userList.phone_number
                     college_name = userList.college_name
-                    print(ph_number, college_name)
+                    # print(ph_number, college_name)
 
                     # user session
-                    session['user_name'] = user_info['family_name']
+                    session['user_name'] = user_info.get("family_name", user_info.get("given_name"))
                     session['user_image'] = user_info['picture']
                     session['profile'] = user_info
 
@@ -172,7 +173,7 @@ def create_app():
                 db.session.commit()
 
                 # user session
-                session['user_name'] = user_info['family_name']
+                session['user_name'] = user_info.get("family_name", user_info.get("given_name"))
                 session['user_image'] = user_info['picture']
                 session['profile'] = user_info
 
@@ -185,7 +186,7 @@ def create_app():
 
         except Exception as e:
             print(e)
-            return redirect('/')
+            # return redirect('/')
 
     @app.route('/session-logout')
     def admin_logout():
