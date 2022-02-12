@@ -1,4 +1,5 @@
-from flask import Flask, redirect, url_for, session, render_template
+from venv import create
+from flask import Flask, redirect, url_for, session
 from flask.helpers import flash
 from flask_restful import Api
 from authlib.integrations.flask_client import OAuth
@@ -9,6 +10,7 @@ import helperFunc
 from models import Cart
 import random
 import string
+from decouple import config
 
 
 def create_app():
@@ -19,8 +21,8 @@ def create_app():
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         SQLALCHEMY_POOL_RECYCLE=299,
         SQLALCHEMY_POOL_TIMEOUT=20,
-        SQLALCHEMY_DATABASE_URI='mysql://AlegriaTheFest:2022themeisvintwood@AlegriaTheFest.mysql.pythonanywhere-services.com/AlegriaTheFest$alegria2022',
-        # SQLALCHEMY_DATABASE_URI='mysql://root:root@localhost/alegria_web',
+        SQLALCHEMY_DATABASE_URI=config('ALEGRIA_SERVER_LINK'),
+        # SQLALCHEMY_DATABASE_URI=config('ALEGRIA_LOCALHOST_LINK'),
         MAIL_SERVER='smtp.gmail.com',
         MAIL_PORT=465,
         MAIL_USE_SSL=True,
@@ -194,7 +196,7 @@ def create_app():
 
         except Exception as e:
             print(e)
-            # return redirect('/')
+            return redirect('/')
 
     @app.route('/session-logout')
     def admin_logout():
@@ -204,9 +206,9 @@ def create_app():
         return redirect('/')
 
     # csrf.init_app(app)
+    app.run(debug=True)
 
     # enable csrf
     # csrf.init_app(app)
-
     return app
 
