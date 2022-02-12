@@ -608,7 +608,7 @@ def highlights():
     return render_template('404.html')
 
 
-@app_mbp.route("/Alegria-brochure-2022")
+@app_mbp.route("/Alegria-Brochure-2022")
 def BrochurePage():
     workingdir = os.path.abspath(os.getcwd())
     filepath = workingdir + '/static/files/'
