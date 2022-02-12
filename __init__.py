@@ -206,7 +206,6 @@ def create_app():
         return redirect('/')
 
     # csrf.init_app(app)
-    app.run(debug=True)
 
     # enable csrf
     # csrf.init_app(app)

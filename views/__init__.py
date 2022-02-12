@@ -617,8 +617,5 @@ def BrochurePage():
         return send_from_directory(exactPath, "sample-brochure-2022.pdf")
     except Exception as e:
         print(e)
-<<<<<<< HEAD
         return redirect("/")
-=======
-        return redirect("/")
->>>>>>> 1a609f440c999708fe7e04024c250104c1d3b000
+
