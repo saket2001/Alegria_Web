@@ -1,11 +1,11 @@
-from urllib import response
-from flask import Blueprint, redirect, render_template, flash, url_for, session, request
+from flask import Blueprint, redirect, render_template, flash, session, request, send_from_directory
 from functools import wraps
 from flask_wtf.csrf import CSRFProtect
 from forms import UserContact, AddToCart
 from models import Cart, Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, PollUserResponse, db, UserInfo, Announcement, EventsToday
 import basicData as client_data
 from datetime import datetime
+import os
 # csrf
 # csrf = CSRFProtect()
 
@@ -63,7 +63,7 @@ def aboutUs():
         cartLen = session.get('cartLength')
         cartLen = None
 
-        return render_template('user_aboutus.html',aboutus_2020=client_data.aboutus_2020, aboutus_2019=client_data.aboutus_2019, aboutus_2018=client_data.aboutus_2018, aboutus_2017=client_data.aboutus_2017, aboutus_2016=client_data.aboutus_2016, aboutus_2015=client_data.aboutus_2015, aboutus_2014=client_data.aboutus_2014, aboutus_2013=client_data.aboutus_2013, cartLen=cartLen)
+        return render_template('user_aboutus.html', aboutus_2020=client_data.aboutus_2020, aboutus_2019=client_data.aboutus_2019, aboutus_2018=client_data.aboutus_2018, aboutus_2017=client_data.aboutus_2017, aboutus_2016=client_data.aboutus_2016, aboutus_2015=client_data.aboutus_2015, aboutus_2014=client_data.aboutus_2014, aboutus_2013=client_data.aboutus_2013, cartLen=cartLen)
     except Exception as e:
         print(e)
         return redirect("/")
@@ -331,7 +331,7 @@ def polls_main():
                 "id": item.poll_id,
                 "question": item.question
             })
-        return render_template('user_polls_main.html', poll_cards=res['polls'],count=len(res["polls"]), signed_in=signed_in, cartLen=cartLen)
+        return render_template('user_polls_main.html', poll_cards=res['polls'], count=len(res["polls"]), signed_in=signed_in, cartLen=cartLen)
 
     except Exception as e:
         print(e)
@@ -347,12 +347,13 @@ def Poll_list(id):
         if session.get('user_id') != None:
             signed_in = True
             cartLen = session.get('cartLength')
-            user_idd=session.get('user_id')
+            user_idd = session.get('user_id')
         else:
             return redirect('/user-login')
 
-        poll_response=PollUserResponse.query.filter_by(hashed_user_id=user_idd,poll_id=id).first()
-        if(poll_response==None):
+        poll_response = PollUserResponse.query.filter_by(
+            hashed_user_id=user_idd, poll_id=id).first()
+        if(poll_response == None):
             res = {"type": True, "polls": [], "images": []}
             pollsList = Poll.query.filter_by(status='Active').all()
             nextPoll = 0
@@ -378,7 +379,7 @@ def Poll_list(id):
                 })
             return render_template('user_polls.html', activeNav='events', polls=res["polls"], images=res["images"], result='', nextPoll=nextPoll, signed_in=signed_in, cartLen=cartLen)
         else:
-            userresponse_id=poll_response.poll_option_id
+            userresponse_id = poll_response.poll_option_id
             return redirect('/polls/'+id+'/'+userresponse_id)
     except Exception as e:
         print(e)
@@ -394,10 +395,11 @@ def Poll_result(id, option):
         if session.get('user_id') != None:
             signed_in = True
             cartLen = session.get('cartLength')
-            user_idd=session.get('user_id')
+            user_idd = session.get('user_id')
         else:
             return redirect('/user-login')
-        poll_response=PollUserResponse.query.filter_by(hashed_user_id=user_idd,poll_id=id).first()
+        poll_response = PollUserResponse.query.filter_by(
+            hashed_user_id=user_idd, poll_id=id).first()
         res = {"type": True, "polls": [], "images": []}
         pollsList = Poll.query.filter_by(status='Active').all()
         nextPoll = 0
@@ -406,7 +408,7 @@ def Poll_result(id, option):
         votes = 0
         for i in range(len(pollsList)):
             if(pollsList[i].poll_id == id):
-                if(poll_response==None):
+                if(poll_response == None):
                     pollsList[i].total_votes = pollsList[i].total_votes+1
                     db.session.commit()
                 res["polls"].append({
@@ -417,13 +419,14 @@ def Poll_result(id, option):
                 })
                 if(i < len(pollsList)-1):
                     nextPoll = pollsList[i+1].poll_id
-        
-        if(poll_response==None):
+
+        if(poll_response == None):
             poll_responses = PollResponses.query.filter_by(
                 poll_id=id, poll_option_id=option).first()
             poll_responses.option_votes = poll_responses.option_votes+1
             db.session.commit()
-            userResponse = PollUserResponse(hashed_user_id=user_idd,poll_id=id,poll_option_id=option)
+            userResponse = PollUserResponse(
+                hashed_user_id=user_idd, poll_id=id, poll_option_id=option)
             db.session.add(userResponse)
             db.session.commit()
 
@@ -603,3 +606,10 @@ def buzz():
 @app_mbp.route("/highlights")
 def highlights():
     return render_template('404.html')
+
+
+@app_mbp.route("/Alegria-brochure-2022")
+def BrochurePage():
+    workingdir = os.path.abspath(os.getcwd())
+    filepath = workingdir + '/static/files/'
+    return send_from_directory(filepath, 'sample-brochure-2022.pdf')
