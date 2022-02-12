@@ -6,6 +6,7 @@ from models import Cart, Eventdemo, Eventdemo_details, Merchandise, Poll, PollRe
 import basicData as client_data
 from datetime import datetime
 import os
+from pathlib import Path
 # csrf
 # csrf = CSRFProtect()
 
@@ -610,6 +611,10 @@ def highlights():
 
 @app_mbp.route("/Alegria-Brochure-2022")
 def BrochurePage():
-    workingdir = os.path.abspath(os.getcwd())
-    filepath = workingdir + '/static/files/'
-    return send_from_directory(filepath, 'sample-brochure-2022.pdf')
+    try:
+        BASE_DIR = Path(__file__).resolve().parent.parent
+        exactPath = str(BASE_DIR) + "/static" + "/" + "files/"
+        return send_from_directory(exactPath, "sample-brochure-2022.pdf")
+    except Exception as e:
+        print(e)
+        return redirect("/")
