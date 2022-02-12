@@ -3,11 +3,13 @@ from flask.helpers import flash
 from flask_restful import Api
 from dotenv import load_dotenv
 from authlib.integrations.flask_client import OAuth
-from models import UserInfo
+from models import UserInfo, APIKeys
 from datetime import datetime
 from flask_hashing import Hashing
 import helperFunc
 from models import Cart
+import random
+import string
 
 
 def create_app():
@@ -18,8 +20,8 @@ def create_app():
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         SQLALCHEMY_POOL_RECYCLE=299,
         SQLALCHEMY_POOL_TIMEOUT=20,
-        SQLALCHEMY_DATABASE_URI='mysql://AlegriaTheFest:2022themeisvintwood@AlegriaTheFest.mysql.pythonanywhere-services.com/AlegriaTheFest$alegria2022',
-        # SQLALCHEMY_DATABASE_URI='mysql://root:root@localhost/alegria_web',
+        # SQLALCHEMY_DATABASE_URI='mysql://AlegriaTheFest:2022themeisvintwood@AlegriaTheFest.mysql.pythonanywhere-services.com/AlegriaTheFest$alegria2022',
+        SQLALCHEMY_DATABASE_URI='mysql://root:root@localhost/alegria_web',
         MAIL_SERVER='smtp.gmail.com',
         MAIL_PORT=465,
         MAIL_USE_SSL=True,
@@ -43,7 +45,7 @@ def create_app():
     from views import app_mbp
     from views.admin import admin_bp
     from views.client import client_bp
-    from views.api import IdFilterEventAPI, AllCategoryFilterEventAPI, AnnoucementsAPI, PollsAPI, MerchandiseAPI, CategoryEventFilter
+    from views.api import IdFilterEventAPI, AllCategoryFilterEventAPI, AnnoucementsAPI, PollsAPI, MerchandiseAPI, CategoryEventFilter, VerifyEmail, RegisterEmail
 
     app.register_blueprint(app_mbp)
     app.register_blueprint(client_bp)
@@ -59,6 +61,8 @@ def create_app():
     api.add_resource(MerchandiseAPI, "/merchandise")
     api.add_resource(CategoryEventFilter,
                      "/events/category/<string:category_id>")
+    api.add_resource(VerifyEmail, "/verify-email/<string:hashed_id>")
+    api.add_resource(RegisterEmail, "/register-user")
 
     load_dotenv()
     oauth = OAuth(app)
@@ -93,6 +97,7 @@ def create_app():
             resp = google.get('userinfo')
             user_info = resp.json()
             user = oauth.google.userinfo()
+            print("---------------------------", user)
 
             user_email = user_info.get('email')
             profile_pic = user_info.get('picture')
@@ -109,7 +114,7 @@ def create_app():
                 email_list.append(
                     row.email)
 
-            print(email_list)
+            # print(email_list)
 
             if user_email in email_list:
                 isAdmin = adminList.isAdmin
@@ -118,7 +123,8 @@ def create_app():
 
                 if isAdmin == 'Yes':
                     # admin session
-                    session['user_name'] = user_info['family_name']
+                    session['user_name'] = user_info.get(
+                        "family_name", user_info.get("given_name"))
                     session['user_image'] = user_info['picture']
                     session['profile'] = user_info
                     session['power'] = 'admin_level'
@@ -129,10 +135,11 @@ def create_app():
                 else:
                     ph_number = userList.phone_number
                     college_name = userList.college_name
-                    print(ph_number, college_name)
+                    # print(ph_number, college_name)
 
                     # user session
-                    session['user_name'] = user_info['family_name']
+                    session['user_name'] = user_info.get(
+                        "family_name", user_info.get("given_name"))
                     session['user_image'] = user_info['picture']
                     session['profile'] = user_info
 
@@ -145,7 +152,7 @@ def create_app():
                     cartInfo = Cart.query.filter_by(
                         user_id=session.get('user_id')).all()
                     cartLen = len(cartInfo)
-                    session['cartLength'] = cartLen
+                    session['cartLength'] = cartLen or 0
 
                     if (ph_number != None or college_name != None):
                         flash("You Logged in Successfully!!")
@@ -165,12 +172,18 @@ def create_app():
                 image_url = profile_pic
                 entry = UserInfo(id=user_id, email=email, name=name,
                                  image_url=image_url, date_registered=datetime.now())
-
                 db.session.add(entry)
                 db.session.commit()
 
+                new_api_key = hashing.hash_value(user_id, salt="".join(
+                    random.choice(string.ascii_letters) for _ in range(10)))
+                new_obj = APIKeys(user_id=user_id, api_key=new_api_key)
+                db.session.add(new_obj)
+                db.session.commit()
+
                 # user session
-                session['user_name'] = user_info['family_name']
+                session['user_name'] = user_info.get(
+                    "family_name", user_info.get("given_name"))
                 session['user_image'] = user_info['picture']
                 session['profile'] = user_info
 
@@ -183,7 +196,7 @@ def create_app():
 
         except Exception as e:
             print(e)
-            return redirect('/')
+            # return redirect('/')
 
     @app.route('/session-logout')
     def admin_logout():
@@ -192,9 +205,13 @@ def create_app():
 
         return redirect('/')
 
+    app.run(debug=True)
     # csrf.init_app(app)
 
     # enable csrf
     # csrf.init_app(app)
 
     return app
+
+
+create_app()

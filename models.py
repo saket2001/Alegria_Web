@@ -61,6 +61,12 @@ class UserInfo(db.Model):
         return f"UserInfo('{self.email}'-'{self.name}'-'{self.image_url}'-'{self.phone_number}'-'{self.college_name}'-'{self.isadmin}')"
 
 
+class APIKeys(db.Model):
+    __tablename__ = "apikeys"
+    user_id = db.Column(db.String(300), primary_key=True)
+    api_key = db.Column(db.String(300))
+
+
 class Eventdemo_details(db.Model):
     __tablename__ = 'eventdemo_details'
     event_id = db.Column(db.String(50), primary_key=True)
@@ -208,3 +214,4 @@ class Categories(db.Model):
     name = db.Column(db.String(50), nullable=False)
     img_url = db.Column(db.String(300), nullable=False)
     img_url = db.Column(db.String(300), nullable=False)
+
