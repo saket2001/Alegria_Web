@@ -1,7 +1,6 @@
 from flask import Flask, redirect, url_for, session, render_template
 from flask.helpers import flash
 from flask_restful import Api
-from dotenv import load_dotenv
 from authlib.integrations.flask_client import OAuth
 from models import UserInfo, APIKeys
 from datetime import datetime
@@ -10,6 +9,7 @@ import helperFunc
 from models import Cart
 import random
 import string
+# from decouple import config
 
 
 def create_app():
@@ -20,8 +20,10 @@ def create_app():
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         SQLALCHEMY_POOL_RECYCLE=299,
         SQLALCHEMY_POOL_TIMEOUT=20,
+        # SQLALCHEMY_DATABASE_URI=config('ALEGRIA_SERVER_LINK'),
+        # SQLALCHEMY_DATABASE_URI=config('ALEGRIA_LOCALHOST_LINK'),
         SQLALCHEMY_DATABASE_URI='mysql://AlegriaTheFest:2022themeisvintwood@AlegriaTheFest.mysql.pythonanywhere-services.com/AlegriaTheFest$alegria2022',
-        # SQLALCHEMY_DATABASE_URI='mysql://root:root@localhost/alegria_web',
+        SQLALCHEMY_DATABASE_URI='mysql://root:root@localhost/alegria_web',
         MAIL_SERVER='smtp.gmail.com',
         MAIL_PORT=465,
         MAIL_USE_SSL=True,
@@ -64,7 +66,6 @@ def create_app():
     api.add_resource(VerifyEmail, "/verify-email/<string:hashed_id>")
     api.add_resource(RegisterEmail, "/register-user")
 
-    load_dotenv()
     oauth = OAuth(app)
     google = oauth.register(
         name='google',
