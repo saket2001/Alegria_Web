@@ -236,8 +236,8 @@ class VerifyEmail(Resource):
                 "image_url": user.image_url,
                 "phone_number": user.phone_number,
                 "college_name": user.college_name,
-                "date_registered": datetime.strptime(user.date_registered, "%Y-%m-%d %H:%M:%S.%f").strftime("%Y-%m-%d"),
-                "api_key": api_key,
+                "date_registered": user.date_registered.strftime("%Y-%m-%d"),
+                "api_key": api_key.api_key,
             }
             return data, 200
         else:
@@ -258,8 +258,14 @@ class RegisterEmail(Resource):
             name = data["name"]
             phone_no = data["phone_number"]
             college_name = data["college_name"]
+            user = UserInfo.query.filter(user_id=user_id)
+            if user:
+                return {
+                    "message": "User already exists"
+                }, 400
             new_user = UserInfo(id=user_id, email=email, name=name,
-                                phone_number=phone_no, college_name=college_name, date_registered=datetime.now())
+                                phone_number=phone_no, college_name=college_name, 
+                                date_registered=datetime.now(), image_url="")
             db.session.add(new_user)
             db.session.commit()
 
