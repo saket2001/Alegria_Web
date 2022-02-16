@@ -177,10 +177,22 @@ class Cart(db.Model):
     user_id = db.Column(
         db.String(300), (db.ForeignKey("userinfo.id")), primary_key=True)
     product_id = db.Column(db.String(10), primary_key=True)
+    product_name = db.Column(db.String(100))
     count = db.Column(db.Integer)
     size = db.Column(db.String(10), nullable=True)
     color = db.Column(db.String(50), nullable=True)
     single_price = db.Column(db.Float)
+
+class Transaction(db.Model):
+    __tablename__ = 'transaction'
+    payment_id = db.Column(db.String(200))
+    user_id = db.Column(db.String(300), nullable=False)
+    product_id = db.Column(db.String(50))
+    payment_date= db.Column(db.DateTime, primary_key=True, default=datetime.datetime.utcnow())
+    total = db.Column(db.Float, nullable=False)
+    coupon_used= db.Column(db.String(100), nullable=True)
+    size = db.Column(db.String(10), nullable=True)
+    color = db.Column(db.String(50), nullable=True)
 
 
 class CartRecords(db.Model):

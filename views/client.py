@@ -1,11 +1,15 @@
 from dis import disco
 from flask.helpers import flash
+from flask_mail import Message
 from flask import Blueprint, redirect, render_template, url_for, session, request
 from functools import wraps
 from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses, Announcement, EventsToday, CartRecords
 from flask_wtf.csrf import CSRFProtect
-
-from models import Cart, Merchandise, UserInfo
+from mail import mail
+import shortuuid
+import razorpay
+from flask import jsonify
+from models import Cart, Merchandise, UserInfo, Transaction
 from views.admin import merchandise
 
 
@@ -242,6 +246,113 @@ def clearcart(u_id):
 
         return redirect('/user/cart')
 
+    except Exception as e:
+        print(e)
+        return redirect('/')
+
+client = razorpay.Client(auth=("rzp_test_rNYpEpdAPPGVGI", "4SrfFeKq4jX5vRsw1XLkSqPy"))
+@client_bp.route("/razorpay", methods=["POST"])
+@user_login_required
+def razorpay():
+    try:
+        user_id = session.get('user_id')
+        user = UserInfo.query.filter_by(id=user_id).first()
+        user_email= user.email
+        name= user.name
+        #print(user_email)
+        # checks if logged in
+        # if session.get('user_id') != None:
+        #     print(user_id)
+            
+
+        # 1. fetch all cart items ids from cart table
+        
+        currency = 'INR'
+        # product_id 
+        # count
+        # size
+        # color
+        cart = Cart.query.filter_by(user_id=user_id).all()
+        
+        # print('cart',cart)
+        notes = {}
+        if cart:
+            count = 0
+            for item in cart:
+                # item = [dict(row) for row in item]
+                
+                notes = {count:item.product_id,**notes}
+                count +=1
+                temp = item.count
+                if(item.count>1):
+                    while (temp > 1):
+                        notes = {count:item.product_id,**notes}
+                        temp -= 1
+                        count+=1
+                # dummy = item.count * {count:item.product_id}
+                # print('item',item)
+                # print('typee',type(item))
+                
+                # notes[count] = {
+                #     "id": item.product_id,
+                #     "count": item.count,
+                    
+                # }
+                # print(notes)
+                # notes[count]["id"] = '{}'.format(item.product_id) ,
+                # notes[count]["count"]= item.count,
+                # if(item.size):
+                #     notes[count] = {**notes[count],"size": item.size},
+                #     notes[count] = notes[count][0]
+                # print(notes)
+                # if(item.color):
+                #     notes[count] = {**notes[count],"color": item.color},
+                #     notes[count] = notes[count][0]
+                # print(notes)
+        print('notes',notes)
+        
+        # notes = [r for (r,) in notes]
+        options = { "amount": session.get('cart_total')*100, "currency": currency, "receipt": shortuuid.ShortUUID().random(length=22), "notes":notes}
+        payment = client.order.create(options)
+        data = {
+            # product id
+            # product name
+            'notes':notes,
+            'id': payment['id'],
+            'currency': payment['currency'],
+            'amount': payment['amount']
+        }
+        #final hosted waale site pe ye code daalne se pehle ye niche ka pura comment kardena.
+        
+        product = Cart.query.filter_by(user_id=user_id).all()
+        money = data['amount'] / 100
+        product_list=""
+        
+        for each in product:
+            product_id = each.product_id
+            product_name= each.product_name
+            price = each.single_price
+            size= each.size
+            color= each.color
+            product_list+=product_name 
+            product_list+=" ₹"
+            product_list+=str(price)
+            product_list+=", "
+          
+            new_transaction = Transaction(payment_id= data['id'], user_id=user_id, product_id= product_id, 
+                           total=price, size=size, color=color)
+        
+            db.session.add(new_transaction)
+            db.session.commit()
+        product_list= product_list[:-1]
+        product_final_list=product_list[:-1]
+        product_final_list+="."
+        message = "Dear " + name + ","+  "\nYour Payment of ₹" + str(money) +" is successfully done.\n" + "You've purchased " + product_final_list + "\r \nThankyou, Alegria Team."
+        msg = Message("Payment successful!", recipients=[user_email])
+        msg.body= message
+        mail.send(msg)
+        print("Mail sent successfully!!")
+        return jsonify(data)
     except Exception as e:
         print(e)
         return redirect('/')
