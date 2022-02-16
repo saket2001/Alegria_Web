@@ -1,7 +1,7 @@
 from datetime import datetime
 from models import db, Eventdemo, Eventdemo_details, Announcement, Poll, Merchandise, Categories, PollResponses, PollUserResponse, UserInfo, APIKeys
 from flask_restful import Resource
-from flask import request
+from flask import request, json
 from flask_hashing import Hashing
 import random, string
 from functools import wraps
@@ -236,8 +236,8 @@ class VerifyEmail(Resource):
                 "image_url": user.image_url,
                 "phone_number": user.phone_number,
                 "college_name": user.college_name,
-                "date_registered": datetime.strptime(user.date_registered, "%Y-%m-%d %H:%M:%S.%f").strftime("%Y-%m-%d"),
-                "api_key": api_key,
+                "date_registered": user.date_registered.strftime("%Y-%m-%d"),
+                "api_key": api_key.api_key,
             }
             return data, 200
         else:
@@ -250,15 +250,21 @@ class RegisterEmail(Resource):
         API_key = request.headers.get("Global-API-Key")
         if not API_key or API_key != secret_api_key:
             return {}, 401
-        
+
         try:
-            data = request.get_json()
+            data = json.loads(request.data)
             user_id = data["user_id"]
             email = data["email"]
             name = data["name"]
             phone_no = data["phone_number"]
             college_name = data["college_name"]
-            new_user = UserInfo(id=user_id, email=email, name=name,
+            image_url = data["image_url"]
+            user = UserInfo.query.filter_by(id=user_id).first()
+            if user:
+                return {
+                    "message": "User already exists"
+                }, 400
+            new_user = UserInfo(id=user_id, email=email, name=name,image_url=image_url,
                                 phone_number=phone_no, college_name=college_name, date_registered=datetime.now())
             db.session.add(new_user)
             db.session.commit()
@@ -273,4 +279,6 @@ class RegisterEmail(Resource):
 
         except Exception as e:
             print(e)
-            return {}, 400
+            return {
+                "error": e
+                }, 400
