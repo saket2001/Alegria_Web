@@ -1,0 +1,89 @@
+{% extends 'user_layout.html' %}
+
+{% block title %}
+Alegria 2022 | Quiz Leaderboard
+{% endblock %}
+
+{% block content %}
+<div class="bg-cover min-vh-100">
+    <div class="container py-3">
+        <div class="row my-2">
+            <div class="col-sm-auto col-lg-2">
+                <a href="/quiz" class="sec-font text-black go_back_btn py-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="me-2"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    Go Back
+                </a>
+            </div>
+        </div>
+        <div class="row d-flex align-items-center my-1">
+            <div class="col d-flex align-items-center my-1">
+                <h5 class="fs-4 my-0 mx-2 main-font text-black">
+                    Quiz Leaderboard
+                </h5>
+            </div>
+            <div class="col-md-auto my-1">
+                <li class="filter_btn p-2 py-1 rounded d-flex align-items-center fs-6 dropdown fw-bold">
+                    <div class='dropdown-toggle fs-7' id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Filter by
+                        latest
+                    </div>
+                    <ul class="dropdown-menu main-bg" aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <a class="dropdown-item" href="/quiz-leaderboard?filter=asc">By Asc</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/quiz-leaderboard?filter=desc">By Desc</a>
+                        </li>
+                    </ul>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    {% if leaderboard_list != [] %}
+    <div class="shadow-md px-4 py-4 table-responsive rounded-2" style="text-align: center">
+        <table class="table table-hover p-2 main-bg" style="border-bottom: brown;">
+            <thead class="bg-red text-light rounded-3">
+                <tr>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Profile</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">College</th>
+                    <th scope="col">Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ele in leaderboard_list %}
+                <tr style="font-size: smaller;">
+                    <th scope="row">
+                        {{ele["rank"]}}
+                    </th>
+                    <td>
+                        {% if ele["p_image"]== "" %}
+                        <i class="fa-solid fa-circle-user fs-4"></i>
+                        {% else %}
+                        <img src={{ele["p_image"]}} alt="user profile image" style="width: 60%;border-radius: 100%;">
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ele["full_name"]}}
+                    </td>
+                    <td>
+                        {{ele["college_name"]}}
+                    </td>
+                    <td class="text-red main-font">
+                        {{ele["score"]}}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

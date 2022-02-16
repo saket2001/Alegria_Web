@@ -21,8 +21,8 @@ def create_app():
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         SQLALCHEMY_POOL_RECYCLE=299,
         SQLALCHEMY_POOL_TIMEOUT=20,
-        SQLALCHEMY_DATABASE_URI=config('ALEGRIA_SERVER_LINK'),
-        # SQLALCHEMY_DATABASE_URI=config('ALEGRIA_LOCALHOST_LINK'),
+        # SQLALCHEMY_DATABASE_URI=config('ALEGRIA_SERVER_LINK'),
+        SQLALCHEMY_DATABASE_URI=config('ALEGRIA_LOCALHOST_LINK'),
         MAIL_SERVER='smtp.gmail.com',
         MAIL_PORT=465,
         MAIL_USE_SSL=True,
@@ -206,8 +206,10 @@ def create_app():
         return redirect('/')
 
     # csrf.init_app(app)
+    app.run(debug=True)
 
     # enable csrf
     # csrf.init_app(app)
     return app
 
+create_app()

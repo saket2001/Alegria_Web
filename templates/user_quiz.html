@@ -1,0 +1,92 @@
+{% extends 'user_layout.html' %}
+
+
+{% block headContent %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock headContent %}
+
+
+{% block title %}
+Alegria 2022 | Alegria Quiz 2022
+{% endblock %}
+
+{% block content %}
+<div class="bg-cover min-vh-100">
+    <div class="container py-2 h-100">
+        <div class="row my-2">
+            <div class="col text-center">
+                <h2 class="main-font text-red fs-4">
+                    Alegria Quiz 2022
+                </h2>
+            </div>
+        </div>
+        <div class="row my-2 mt-4">
+            <div class="col-lg-3">
+                <a href="/quiz-leaderboard" class="sec-font text-black go_back_btn py-1">
+                    View Leaderboard
+                </a>
+            </div>
+        </div>
+        <div class="row my-4 g-2">
+            <!-- quiz questions -->
+            <div class="col-lg-7 col-sm-12 pe-1">
+                {% if questions_list==[] %}
+                <h4 class="main-font text-black fs-5">
+                    <i class="fas-solid fa-block-question"></i>
+                    No Quiz Questions Yet....
+                </h4>
+                {% endif %}
+                <!-- card -->
+                {% for ques in questions_list %}
+                <div class="col p-4 rounded-3 main-bg shadow mb-3">
+                    <!-- question -->
+                    <h4 class="main-font text-black fs-5">
+                        Q.
+                        {{ques["question"]}}
+                    </h4>
+                    <!-- score points -->
+                    <p class="sec-font text-black fs-7">
+                        Points-
+                        {{ques["points"]}}
+                    </p>
+                    <!-- answer button -->
+                    <button
+                        class="button main-font text-black fs-6 border border-1 border-dark d-flex align-items-center">
+                        Answer Quiz >>
+                        <i class="fa-solid fa-right"></i>
+                    </button>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- user stats -->
+            <div class="col-lg-5 col-sm-12">
+                {% if signed_in==False %}
+                <div class="main-bg p-3 rounded-3">
+                    <h2 class="text-center main-font text-black fs-5 mb-2">
+                        <i class="fa-solid fa-lock-keyhole"></i>
+                        Sign in to view your quiz stats
+                    </h2>
+                </div>
+                {% else %}
+                <!-- will show only if signed in -->
+                <div class="main-bg p-3 shadow rounded-3">
+                    <h2 class="text-center main-font text-black fs-5 mb-2">Your Stats</h2>
+                    <div class="row py-2">
+                        <div class="col d-flex flex-column align-items-center">
+                            <h4 class="text-center sec-font text-black fs-6">Questions Answered</h4>
+                            <p class="fw-bold fs-4 text-red">{{user_stats["total_answered"]}}</p>
+                        </div>
+                        <div class="col d-flex flex-column align-items-center">
+                            <h4 class="text-center sec-font text-black fs-6">Your Score</h4>
+                            <p class="fw-bold fs-4 text-red">{{user_stats["total_score"]}}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

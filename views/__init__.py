@@ -1,12 +1,11 @@
-from flask import Blueprint, redirect, render_template, flash, session, request, send_from_directory
+from flask import Blueprint, redirect, render_template, session, request, send_from_directory
 from functools import wraps
-from flask_wtf.csrf import CSRFProtect
 from forms import UserContact, AddToCart
-from models import Cart, Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, PollUserResponse, db, UserInfo, Announcement, EventsToday
+from models import  Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, PollUserResponse, db, UserInfo, Announcement, EventsToday
 import basicData as client_data
 from datetime import datetime
-import os
 from pathlib import Path
+
 # csrf
 # csrf = CSRFProtect()
 
@@ -619,3 +618,75 @@ def BrochurePage():
         print(e)
         return redirect("/")
 
+
+##################################
+
+#quiz routes
+# fetches all quiz questions and stats
+@app_mbp.route('/quiz')
+def QuizPage():
+    try:
+        signed_in = False
+        cartLen = None
+        # checks if logged in
+        if session.get('user_id') != None:
+            signed_in = True
+            cartLen = session.get('cartLength')
+        
+        questions_list=[{
+        "question":"Where is python lab located in S wing?",
+        "points":30,
+        },{
+        "question":"Where is python lab located in S wing?",
+        "points":30,
+        }]
+    
+        # user stats
+        user_stats={
+            "total_score":10,
+            "total_answered":1,
+        }
+        
+        return render_template('user_quiz.html',questions_list=questions_list,user_stats=user_stats,cartLen=cartLen, signed_in=signed_in)
+    
+    except Exception as e:
+        print(e)
+        return redirect('/')
+
+# fetches single quiz question 
+# @app_mbp.route('/quiz')
+# def AnswerQuizPage():
+#     return render_template('user_quiz_question.html')
+
+# leaderboard page
+@app_mbp.route('/quiz-leaderboard')
+def leaderboardPage():
+    try:
+        signed_in = False
+        cartLen = None
+        # checks if logged in
+        if session.get('user_id') != None:
+            signed_in = True
+            cartLen = session.get('cartLength')
+        
+        # dummy data
+        # sort the values by asc by default
+        leaderboard_list=[{
+        "rank":1,
+        "p_image":"",
+        "full_name":"Saket Chandorkar",
+        "college_name":"PCE",
+        "score":20,
+        },{
+        "rank":2,
+        "p_image":"",
+        "full_name":"Saket Chandorkar",
+        "college_name":"PCE",
+        "score":15,
+        }]
+    
+        return render_template('user_leaderboard.html',leaderboard_list=leaderboard_list,cartLen=cartLen, signed_in=signed_in)
+    
+    except Exception as e:
+        print(e)
+        return redirect('/')
