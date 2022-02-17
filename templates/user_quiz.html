@@ -25,6 +25,11 @@ Alegria 2022 | Alegria Quiz 2022
         <div class="row my-2 mt-4">
             <div class="col-lg-3">
                 <a href="/quiz-leaderboard" class="sec-font text-black go_back_btn py-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="text-black me-2" width="24px" height="24px"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
                     View Leaderboard
                 </a>
             </div>
@@ -52,11 +57,12 @@ Alegria 2022 | Alegria Quiz 2022
                         {{ques["points"]}}
                     </p>
                     <!-- answer button -->
-                    <button
-                        class="button main-font text-black fs-6 border border-1 border-dark d-flex align-items-center">
-                        Answer Quiz >>
-                        <i class="fa-solid fa-right"></i>
-                    </button>
+                    <a href={{"/user/quiz/{}".format(ques["question_id"])}}
+                        class="button main-font text-black fs-6 border border-1 border-dark d-flex align-items-center"
+                        style="width: fit-content;">
+                        Answer Quiz
+                        <i class="ms-2 fa fa-arrow-right" aria-hidden="true"></i>
+                    </a>
                 </div>
                 {% endfor %}
             </div>

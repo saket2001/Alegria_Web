@@ -1,0 +1,126 @@
+{% extends 'user_layout.html' %}
+
+
+{% block headContent %}
+<style>
+    .timer {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        border: 15px solid #ccc;
+        border-top: 15px solid var(--navbar);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: 800;
+    }
+
+    .custom_input {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        width: 100%;
+        height: 100%;
+        border-radius: 30px;
+        border: 2px solid #300330;
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+        font-weight: normal;
+        color: var(--black);
+        background-color: transparent;
+    }
+
+    .custom_input:hover {
+        transform: none;
+        background-color: var(--navbar);
+        color: var(--beige);
+    }
+
+    .custom_input-active {
+        background-color: var(--navbar);
+        color: var(--beige);
+        border: 2px solid var(--navbar);
+    }
+
+    .custom_input_label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.4rem;
+        width: 2rem;
+        height: 90%;
+        border-radius: 50%;
+        color: var(--black);
+        background-color: #ffbfa6;
+    }
+</style>
+<script defer src="/static/js/quiz.js"></script>
+{% endblock headContent %}
+
+
+{% block title %}
+Alegria 2022 | Alegria Quiz 2022
+{% endblock %}
+
+{% block content %}
+<div class="bg-beige bg-cover min-vh-100">
+    <div class="container py-2 h-100">
+        <!-- go back -->
+        <div class="row my-3">
+            <div class="col-lg-2 col-sm-3">
+                <a href="/quiz" class="go_back_btn text-dark py-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="me-2"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg> Go Back
+                </a>
+            </div>
+        </div>
+        <!-- timer -->
+        <!-- form -->
+        <div class="quiz-container row my-3">
+            <form action={{"/user/submit-quiz/{}".format(quiz['question_id'])}} method="POST"
+                class="col d-flex flex-column align-items-center main-bg shadow p-4 m-3 form"
+                style="border-radius: 30px;border: 3px solid var(--navbar);width: 70%;">
+                <div class="row w-100 d-flex flex-column align-items-center">
+                    <div class="col-12 d-flex flex-column align-items-center">
+                        <h2 class="main-font fs-4 text-red">
+                            {{quiz['question']}}
+                        </h2>
+                    </div>
+                    <div class="col-12 d-flex align-items-center justify-content-center gap-2">
+                        <p class="fs-6 sec-font border-end border-dark px-3">
+                            {{quiz['points']}} Points
+                        </p>
+                        <p class="fs-6 main-font text-red ps-2">
+                            Time Left: 30
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row my-3 g-3">
+                    {% for option in quiz["options"] %}
+                    <div class="col-lg-6 col-sm-12 main-font text-black rounded-3 d-flex justify-content-center">
+                        <div class="custom_input">
+                            <input type="hidden" value={{option["option_id"]}}>
+                            <div class="custom_input_label">
+                                {{option["label"]}}
+                            </div>
+                            {{option["option_name"]}}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button type="submit" class="button border-bottom border-1 border-dark main-font text-black mt-3"
+                    style="border-radius: 0;">
+                    Submit Your
+                    Answer
+                    <i class="ms-2 fa fa-arrow-right" aria-hidden="true"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

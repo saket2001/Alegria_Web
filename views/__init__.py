@@ -374,7 +374,7 @@ def Poll_list(id):
                     "id": ele.poll_id,
                     "poll_option_id": ele.poll_option_id,
                     "option_name": ele.option_name,
-                    "image_url": ele.option_image,
+                    "image_ url": ele.option_image,
                     "option_votes": ele.option_votes
                 })
             return render_template('user_polls.html', activeNav='events', polls=res["polls"], images=res["images"], result='', nextPoll=nextPoll, signed_in=signed_in, cartLen=cartLen)
@@ -634,11 +634,13 @@ def QuizPage():
             cartLen = session.get('cartLength')
         
         questions_list=[{
-        "question":"Where is python lab located in S wing?",
-        "points":30,
+            "question_id":121212,
+            "question":"Where is python lab located in S wing?",
+            "points":30,
         },{
-        "question":"Where is python lab located in S wing?",
-        "points":30,
+            "question_id":1212,
+            "question":"Where is PCE admission cell located in campus?",
+            "points":10,
         }]
     
         # user stats
@@ -652,11 +654,6 @@ def QuizPage():
     except Exception as e:
         print(e)
         return redirect('/')
-
-# fetches single quiz question 
-# @app_mbp.route('/quiz')
-# def AnswerQuizPage():
-#     return render_template('user_quiz_question.html')
 
 # leaderboard page
 @app_mbp.route('/quiz-leaderboard')
@@ -672,17 +669,17 @@ def leaderboardPage():
         # dummy data
         # sort the values by asc by default
         leaderboard_list=[{
-        "rank":1,
-        "p_image":"",
-        "full_name":"Saket Chandorkar",
-        "college_name":"PCE",
-        "score":20,
+            "rank":1,
+            "p_image":"",
+            "full_name":"Saket Chandorkar",
+            "college_name":"PCE",
+            "score":20,
         },{
-        "rank":2,
-        "p_image":"",
-        "full_name":"Saket Chandorkar",
-        "college_name":"PCE",
-        "score":15,
+            "rank":2,
+            "p_image":"",
+            "full_name":"Saket Chandorkar",
+            "college_name":"PCE",
+            "score":15,
         }]
     
         return render_template('user_leaderboard.html',leaderboard_list=leaderboard_list,cartLen=cartLen, signed_in=signed_in)

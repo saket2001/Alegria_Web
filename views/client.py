@@ -1,12 +1,8 @@
-from dis import disco
 from flask.helpers import flash
-from flask import Blueprint, redirect, render_template, url_for, session, request
+from flask import Blueprint, redirect, render_template, session, request
 from functools import wraps
-from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses, Announcement, EventsToday, CartRecords
-from flask_wtf.csrf import CSRFProtect
-
+from models import db,  Merchandise, CartRecords
 from models import Cart, Merchandise, UserInfo
-from views.admin import merchandise
 
 
 # def login_required(f):
@@ -50,15 +46,72 @@ def user_login_required(f):
         return render_template('401.html')
     return decorated_function
 
-# you need to use return statement but it was working fine before
 
+
+# fetches single quiz question 
+@client_bp.route('/quiz/<string:question_id>')
+# @user_login_required
+def AnswerQuizPage(question_id):
+    try:
+        signed_in = False
+        cartLen = None
+        # checks if logged in
+        if session.get('user_id') != None:
+            signed_in = True
+            cartLen = session.get('cartLength')
+        # fetch quiz based on id
+        quiz={
+            "question_id":1212,
+            "question":"Where is PCE admission cell located in campus?",
+            "points":10,
+            "options":[
+                {
+                    "option_id":'1sj12012',
+                    "option_name":"S302",    
+                },{
+                    "option_id":'1sj12012',
+                    "option_name":"S300",    
+                },{
+                    "option_id":'1sj12012',
+                    "option_name":"L302",    
+                },{
+                    "option_id":'1sj12012',
+                    "option_name":"L102",    
+                },],
+            }
+        
+        input_labels=['A','B','C','D','E']
+        for i,option in enumerate(quiz['options']):
+            option['label']=input_labels[i]
+        
+        return render_template('/client/user_quiz_question.html',quiz=quiz,cartLen=cartLen, signed_in=signed_in,input_labels=input_labels)
+    
+    except Exception as e:
+        print(e)
+        # return redirect('/')
+
+#quiz submit route
+@client_bp.route('/submit-quiz/<string:quiz_id>',methods=["POST"])
+# @user_login_required
+def submitQuizResponse(quiz_id):
+    try:
+        # gets the selected option's value
+        selected_answer=request.form.get('selected-answer')
+        print(selected_answer)
+        # redirect to same page with correct answer shown
+        return redirect('/user/quiz/{}'.format(quiz_id))
+    except Exception as e:
+        print(e)
+        return redirect('/')
+
+
+######################################
 
 @client_bp.route('/addToCart/<string:id>', methods=['POST'])
 @user_login_required
 def AddToCart(id):
     if session.get('user_id') == None:
         flash("You haven't logged in to your account!")
-        return redirect('/')
     else:
         try:
             # 1. take current item details
