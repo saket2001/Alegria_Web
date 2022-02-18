@@ -3,7 +3,7 @@ from flask import Blueprint, redirect, render_template, session, request
 from functools import wraps
 from models import db,  Merchandise, CartRecords
 from models import Cart, Merchandise, UserInfo
-
+import time
 
 # def login_required(f):
 #     @wraps(f)
@@ -28,7 +28,7 @@ client_bp = Blueprint('client', __name__,
 
 #############################
 # helper functions
-
+        
 #############################
 # client page routes
 def user_login_required(f):
@@ -59,6 +59,9 @@ def AnswerQuizPage(question_id):
         if session.get('user_id') != None:
             signed_in = True
             cartLen = session.get('cartLength')
+        
+        #start timer
+        
         # fetch quiz based on id
         quiz={
             "question_id":1212,

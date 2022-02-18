@@ -71,7 +71,6 @@ aboutus_2017 = [
      "img": "https://alegria.co.in/wp-content/uploads/2020/01/22708643_120917241938576_3320806380406833152_n.jpg"}
 ]
 
-
 aboutus_2016 = [
     {"title": "Sonam Kapoor Ahuja", "description": "FOr the promotion of her movie Neerja",
      "img": "https://alegria.co.in/wp-content/uploads/2020/01/bUc4Z6L.jpg"},
@@ -124,7 +123,6 @@ aboutus_2013 = [
      "img": "https://alegria.co.in/wp-content/uploads/2020/02/860720_157801544371389_1690095924_o.jpg"}
 ]
 
-
 paymentLinks = {
     "gaming": "https://pages.razorpay.com/Gaming-alegria-22",
     "sports": "https://pages.razorpay.com/SPORTS-alegria-22",
@@ -136,7 +134,6 @@ paymentLinks = {
     "management": "https://pages.razorpay.com/management-events-alegria22",
     "workshop": "https://pages.razorpay.com/Technical-Workshops-alegria22"
 }
-
 
 events_row1 = [{
     "title": "Technical Events",
@@ -217,4 +214,160 @@ app_team_list = [
      "gmail": "yashlalit.23@gmail.com", "github": "https://github.com/happy-mammal", "linkedin": "https://www.linkedin.com/in/yash-lalit-0a6a6320b"},
     {"img": "../static/images/developer/Pranav.jpg", "name": "Pranav Shegekar", "role": "App Developer", "call": "+91 9324530205", "gmail": "pranav.shegekar@gmail.com",
      "github": "https://github.com/PranavShegekar", "linkedin": "https://www.linkedin.com/in/pranav-shegekar"}
+]
+
+event_heads_row1=[
+    {
+            "label":"Technical",
+            "logo":'/static/images/icons/Category%20Icons/Tech.png',
+            "details":[
+            {
+                "name": "Athul Tulasidasan",
+                "phone_number": "7887494095",
+                "role": "Technical"        
+            } ,{
+                "name": "Amit Naik",
+                "phone_number": "8779624030",
+                "role": "Technical"        
+            }   
+            ]
+    },
+    {
+            "label":"Management",
+            "logo":"/static/images/icons/Category%20Icons/management.png",
+            "details":[
+            {
+                "name": "Janesh Shetty",
+                "phone_number": "7887494095",
+                "role": "Management"   
+            },
+            {
+                "name": "Sreelakshmi Priyan",
+                "phone_number": "810841100",
+                "role": "Management"       
+            }
+            ]
+    }
+]
+event_heads_row2=[
+     {  
+        "label":"Fine Arts",
+        "logo":"/static/images/icons/Category%20Icons/Fine%20Arts.png",
+        "details":[
+            {
+                "name": "Teejal Singh",
+                "phone_number": "9768000278",
+                "role": "Fine Arts"       
+            },
+            {
+                "name": "Tushar Surve",
+                "phone_number": "8268182173",
+                "role": "Fine Arts"       
+            },
+            {
+                "name": "Avanti Salwatkar",
+                "phone_number": "9689655699",
+                "role": "Fine Arts"       
+            },
+            # {
+            #     "name": "Renuka Chavan",
+            #     "phone_number": "9930575106",
+            #     "role": "Fine Arts"       
+            # }
+            ]
+    },
+     { 
+        "label":"Performing",
+        "logo":"/static/images/icons/Category%20Icons/Performing%20Arts.png",
+        "details":[{
+                "name": "Yog Agarwal",
+                "phone_number": "9987071544",
+                "role": "Performing"       
+            },
+            {
+                "name": "Dishad Koli",
+                "phone_number": "7021555531",
+                "role": "Performing"       
+            },
+            {
+                "name": "Parth Balsaraf",
+                "phone_number": "9869541542",
+                "role": "Performing"       
+            },
+            # {
+            #     "name": "Deepesh Gaikar",
+            #     "phone_number": "808231294",
+            #     "role": "Performing"
+            # }
+            ]
+    }
+]
+event_heads_row3=[
+    {
+        "label":"Literary",
+        "logo":"/static/images/icons/Category%20Icons/Literary%20Arts.png",
+        "details":[ 
+            {
+                "name": "Paree Gadhe",
+                "phone_number": "9309871554",
+                "role": "Literary"       
+            },
+            {
+                "name": "Emaan Qureshi",
+                "phone_number": "9820409717",
+                "role": "Literary"       
+            }]
+    }
+    ,{
+        "label":"Informals",
+        "logo":"/static/images/icons/Category%20Icons/Informals.png",
+        "details":[
+            {
+                "name": "Nupur Kelkar",
+                "phone_number": "9082683799",
+                "role": "Informals"
+            },
+            {
+                "name": "Sejal Hadkar",
+                "phone_number": "9137516163",
+                "role": "Informals"
+            },
+            {
+                "name": "Mehroz Chiwan",
+                "phone_number": "7977723755",
+                "role": "Informals"
+            }
+        ]
+    }
+]
+event_heads_row4=[
+    { 
+        "label":"Gaming",
+        "logo":"/static/images/icons/Category%20Icons/Gaming.png",
+        "details":[{
+                "name": "Atharva Kale",
+                "phone_number": "9834634592",
+                "role": "Gaming"
+            },
+            {
+                "name": "Mihir Deshmukh",
+                "phone_number": "9768378344",
+                "role": "Gaming"
+            }]
+    },
+    {
+        "label":"Sports",
+        "logo":"/static/images/icons/Category%20Icons/Sports.png",
+        "details":[
+            {
+                "name": "Soham Bhujbal",
+                "phone_number": "9860377037",
+                "role": "Sports"
+            },
+            {
+                "name": "Faraz Raza",
+                "phone_number": "7900019313",
+                "role": "Sports"
+            }]
+    }
 ]

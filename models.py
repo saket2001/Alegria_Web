@@ -13,15 +13,6 @@ db = SQLAlchemy()
 
 
 # user model should come here
-class adminss(db.Model):
-    __tablename__ = 'adminss'
-    id = db.Column(db.Integer, primary_key=True)
-    email_id = db.Column(db.String(50), unique=True, nullable=False)
-
-    def __repr__(self) -> str:
-        return f"Event('{self.email_id}'')"
-
-
 class Eventdemo(db.Model):
     __tablename__ = 'eventdemo'
     id = db.Column(db.Integer, primary_key=True)
@@ -53,9 +44,7 @@ class UserInfo(db.Model):
     college_name = db.Column(db.String(100), nullable=True)
     date_registered = db.Column(db.String(30), nullable=True)
     isAdmin = db.Column(db.String(10), default=False)
-    # registeruser_id = db.relationship(
-    #     'RegisterEvent', backref='RegisterUser', lazy=True)
-    cart_user_id = db.relationship('Cart', backref='userinfo', lazy=True)
+    # cart_user_id = db.relationship('Cart', backref='userinfo', lazy=True)
 
     def __repr__(self, email, name, image_url, isAdmin):
         return f"UserInfo('{self.email}'-'{self.name}'-'{self.image_url}'-'{self.phone_number}'-'{self.college_name}'-'{self.isadmin}')"
@@ -212,6 +201,5 @@ class Categories(db.Model):
     __tablename__ = "categories"
     id = db.Column(db.String(10), primary_key=True)
     name = db.Column(db.String(50), nullable=False)
-    img_url = db.Column(db.String(300), nullable=False)
     img_url = db.Column(db.String(300), nullable=False)
 

@@ -132,6 +132,11 @@ body {
     font-size: 0.7rem;
 }
 
+.slide:hover,
+.slide:focus {
+    box-shadow: inset 6.5em 0 0 0 var(--hover);
+}
+
 .bg-cover {
     background-color: var(--u_beige);
     background-image: url("/static/images/cover.png");
