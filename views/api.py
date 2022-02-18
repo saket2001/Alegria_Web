@@ -37,31 +37,42 @@ class IdFilterEventAPI(Resource):
 
         event_details = Eventdemo_details.query.filter_by(
             event_id=event.id).first()
+        event_raw_rules = event_details.event_rules.replace("<ol>", "").replace("</ol>","").replace("<li>", "").replace("</li>","").replace("\r","").split("\n")
+        event_rules = [rule for rule in event_raw_rules if rule != ""]
+
+        event_raw_contacts = [event.event_contact1, event.event_contact2, event.event_contact3, event.event_contact4]
+        event_contacts = [contact for contact in event_raw_contacts if contact != None]
+
+        event_raw_perks = [event_details.event_perks_1,event_details.event_perks_2,event_details.event_perks_3]
+        event_perks = [perk for perk in event_raw_perks if perk != None]
         res = {
             "length": 1,
             "event": {
-                "id": event.id,
+                "event_id": event.id,
                 "event_name": event.event_name,
                 "event_code": event.event_code,
                 "event_summary": event.event_summary,
                 "event_criteria": event.event_criteria,
                 "event_category_id": event.event_category_id,
                 "event_category_name": event.event_category_name,
-                "event_cost": event.event_cost,
-                "event_contact1": event.event_contact1,
-                "event_contact2": event.event_contact2,
-                "event_contact3": event.event_contact3,
-                "event_contact4": event.event_contact4,
-                "pr_points": event.pr_points,
+                "event_cost": str(event.event_cost),
+                # "event_contact1": event.event_contact1,
+                # "event_contact2": event.event_contact2,
+                # "event_contact3": event.event_contact3,
+                # "event_contact4": event.event_contact4,
+                "event_contacts": event_contacts,
+                "pr_points": str(event.pr_points),
                 "event_date": event_details.event_date,
                 "event_time": event_details.event_time,
-                "event_mode": event_details.event_mode,
+                "event_mode": event_details.event_mode.capitalize(),
                 "event_duration": event_details.event_duration,
                 "icon_url": event_details.icon_url,
-                "event_rules": event_details.event_rules,
-                "event_perks_1": event_details.event_perks_1,
-                "event_perks_2": event_details.event_perks_2,
-                "event_perks_3": event_details.event_perks_3
+                "event_rules": event_rules,
+                # "event_perks_1": event_details.event_perks_1,
+                # "event_perks_2": event_details.event_perks_2,
+                # "event_perks_3": event_details.event_perks_3,
+                "event_perks": event_perks,
+                "event_is_expired": event.event_is_expired=="true"
             }
         }
         return res, 200
@@ -110,7 +121,7 @@ class CategoryEventFilter(Resource):
                 "event_name": event.event_name,
                 "event_code": event.event_code,
                 "event_image": event_details.icon_url,
-                "event_cost": event.event_cost
+                "event_cost": str(event.event_cost)
             })
 
         return res, 200
@@ -282,3 +293,25 @@ class RegisterEmail(Resource):
             return {
                 "error": e
                 }, 400
+
+
+class DeleteUser(Resource):
+
+    @api_key_required
+    def delete(self):
+        user_api_key = request.headers.get("User-API-Key")
+        user_api_key = APIKeys.query.filter_by(api_key=user_api_key).first()
+        user_id = user_api_key.user_id
+        user = UserInfo.query.filter_by(id=user_id).first()
+        if user:
+            db.session.delete(user)
+            db.session.commit()
+
+            db.session.delete(user_api_key)
+            db.session.commit()
+
+            return {
+                "message": "User deleted successfully"
+            }, 204
+        else:
+            return {}, 404
