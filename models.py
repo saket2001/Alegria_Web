@@ -103,7 +103,7 @@ class PollUserResponse(db.Model):
     __tablename__ = 'poll_user_responses'
     hashed_user_id = db.Column(db.String(50), primary_key=True)
     poll_id = db.Column(db.Integer, primary_key=True)
-    poll_option_id = db.Column(db.Integer, primary_key=True)
+    poll_option_id = db.Column(db.Integer)
 
 
 class CouponList(db.Model):

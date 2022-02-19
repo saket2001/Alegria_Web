@@ -419,6 +419,7 @@ def poll_details(poll_id):
                 "option_votes": ele.option_votes
             })
         return render_template('/admin/admin_poll_details.html', activeNav='poll_details', polldetails=res["polldetails"])
+    
     except Exception as e:
         print(e)
         return redirect("/")
