@@ -11,12 +11,23 @@ from functools import wraps
 secret_api_key = "some key"
 hashing = Hashing()
 
-def api_key_required(f):
+
+def global_api_key_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
         Global_API_key = request.headers.get("Global-API-Key")
+        if (not Global_API_key) or (Global_API_key != secret_api_key):
+            return {}, 401
+        else:
+            return f(*args, **kwargs)
+    return wrap
+
+
+def user_api_key_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
         user_api_key = request.headers.get("User-API-Key")
-        if (not Global_API_key) or (Global_API_key != secret_api_key) or (not APIKeys.query.filter_by(api_key=user_api_key).first()):
+        if not APIKeys.query.filter_by(api_key=user_api_key).first():
             return {}, 401
         else:
             return f(*args, **kwargs)
@@ -25,7 +36,8 @@ def api_key_required(f):
 
 class IdFilterEventAPI(Resource):
 
-    @api_key_required
+    @global_api_key_required
+    @user_api_key_required
     def get(self, id):
         event = Eventdemo.query.filter_by(id=id).first()
         if not event:
@@ -56,10 +68,6 @@ class IdFilterEventAPI(Resource):
                 "event_category_id": event.event_category_id,
                 "event_category_name": event.event_category_name,
                 "event_cost": str(event.event_cost),
-                # "event_contact1": event.event_contact1,
-                # "event_contact2": event.event_contact2,
-                # "event_contact3": event.event_contact3,
-                # "event_contact4": event.event_contact4,
                 "event_contacts": event_contacts,
                 "pr_points": str(event.pr_points),
                 "event_date": event_details.event_date,
@@ -68,9 +76,6 @@ class IdFilterEventAPI(Resource):
                 "event_duration": event_details.event_duration,
                 "icon_url": event_details.icon_url,
                 "event_rules": event_rules,
-                # "event_perks_1": event_details.event_perks_1,
-                # "event_perks_2": event_details.event_perks_2,
-                # "event_perks_3": event_details.event_perks_3,
                 "event_perks": event_perks,
                 "event_is_expired": event.event_is_expired=="true"
             }
@@ -80,7 +85,8 @@ class IdFilterEventAPI(Resource):
 
 class AllCategoryFilterEventAPI(Resource):
 
-    @api_key_required
+    @global_api_key_required
+    @user_api_key_required
     def get(self):
         categories = Categories.query.all()
         res = {
@@ -102,7 +108,8 @@ class AllCategoryFilterEventAPI(Resource):
 
 class CategoryEventFilter(Resource):
 
-    @api_key_required
+    @global_api_key_required
+    @user_api_key_required
     def get(self, category_id):
         category_events = Eventdemo.query.filter_by(
             event_category_id=category_id).all()
@@ -129,7 +136,8 @@ class CategoryEventFilter(Resource):
 
 class AnnoucementsAPI(Resource):
 
-    @api_key_required
+    @global_api_key_required
+    @user_api_key_required
     def get(self):
         annoucements_queryset = Announcement.query.order_by(
             Announcement.id.desc()).all()
@@ -150,11 +158,10 @@ class AnnoucementsAPI(Resource):
 
 class PollsAPI(Resource):
 
-    @api_key_required
+    @global_api_key_required
+    @user_api_key_required
     def get(self):
-        user_id = request.headers.get("hashed_user_id")
-        if not user_id:
-            return {}, 401
+        user_id = APIKeys.query.filter_by(api_key=request.headers.get("User-API-Key")).first().user_id
 
         user_response_details = PollUserResponse.query.filter_by(
             hashed_user_id=user_id)
@@ -203,7 +210,8 @@ class PollsAPI(Resource):
 
 class MerchandiseAPI(Resource):
 
-    @api_key_required
+    @global_api_key_required
+    @user_api_key_required
     def get(self):
         # /merchandise?category=<category>&price-range=<price-range>&size=<size>&color=<color>
         merch_queryset = Merchandise.query.all()
@@ -232,11 +240,8 @@ class MerchandiseAPI(Resource):
 
 class VerifyEmail(Resource):
 
+    @global_api_key_required
     def get(self, hashed_id):
-        API_key = request.headers.get("Global-API-Key")
-        if not API_key or API_key != secret_api_key:
-            return {}, 401
-
         user = UserInfo.query.filter_by(id=hashed_id).first()
         api_key = APIKeys.query.filter_by(user_id=hashed_id).first()
         if user:
@@ -257,11 +262,8 @@ class VerifyEmail(Resource):
 
 class RegisterEmail(Resource):
 
+    @global_api_key_required
     def post(self):
-        API_key = request.headers.get("Global-API-Key")
-        if not API_key or API_key != secret_api_key:
-            return {}, 401
-
         try:
             data = json.loads(request.data)
             user_id = data["user_id"]
@@ -297,7 +299,8 @@ class RegisterEmail(Resource):
 
 class DeleteUser(Resource):
 
-    @api_key_required
+    @global_api_key_required
+    @user_api_key_required
     def delete(self):
         user_api_key = request.headers.get("User-API-Key")
         user_api_key = APIKeys.query.filter_by(api_key=user_api_key).first()
