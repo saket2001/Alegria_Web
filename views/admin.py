@@ -84,7 +84,7 @@ def adminLogin():
 
 
 @admin_bp.route('/')
-@admin_login_required
+#@admin_login_required
 def home():
     try:
         today = date.today()
@@ -109,7 +109,7 @@ def home():
 
 
 @admin_bp.route('/events/<event_category>', methods=['GET', 'POST'])
-@admin_login_required
+#@admin_login_required
 def events(event_category):
     # form
     try:
@@ -150,7 +150,7 @@ def events(event_category):
 
 
 @admin_bp.route('/add-event', methods=["POST"])
-@admin_login_required
+#@admin_login_required
 def addEvent():
     if request.method == "POST":
         try:
@@ -204,7 +204,7 @@ def addEvent():
 
 
 @admin_bp.route("/events/<category>/<event_id>/view", methods=['GET', 'POST'])
-@admin_login_required
+#@admin_login_required
 def editEventDetails(category, event_id):
     try:
 
@@ -251,7 +251,7 @@ def editEventDetails(category, event_id):
 
 
 @ admin_bp.route("/events/<category>/<event_id>/delete", methods=['GET', 'POST'])
-@admin_login_required
+#@admin_login_required
 def deleteevent(category, event_id):
     try:
         post = Eventdemo.query.filter_by(id=event_id).first()
@@ -267,7 +267,7 @@ def deleteevent(category, event_id):
 
 
 @ admin_bp.route("/events/event-registrations")
-#@admin_login_required
+##@admin_login_required
 def eventRegistrations():
     # get info from api in List of Dictionaries format as below
     try:
@@ -290,7 +290,7 @@ def eventRegistrations():
 
 # merchandise routes
 @ admin_bp.route("/merchandise/<string:category>")
-@admin_login_required
+#@admin_login_required
 def merchandise(category):
     try:
         # form
@@ -319,7 +319,7 @@ def merchandise(category):
 
 
 @admin_bp.route("/add-merchandise", methods=["post"])
-@admin_login_required
+#@admin_login_required
 def addMerchandise():
     try:
         id = request.form.get('id')
@@ -348,7 +348,7 @@ def addMerchandise():
 
 
 @ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/view", methods=["GET"])
-@admin_login_required
+#@admin_login_required
 def editMerchandiseDetails(merchandise_category, merchandise_id):
     try:
         merch = Merchandise.query.filter_by(id=merchandise_id).first()
@@ -384,7 +384,7 @@ def editMerchandiseDetails(merchandise_category, merchandise_id):
 
 
 @ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/delete", methods=["GET", "POST"])
-@admin_login_required
+#@admin_login_required
 def deletemerchandise(merchandise_category, merchandise_id):
     try:
         merch = Merchandise.query.filter_by(id=merchandise_id).first()
@@ -399,7 +399,7 @@ def deletemerchandise(merchandise_category, merchandise_id):
 
 # poll routes
 @ admin_bp.route("/polls/<poll_id>/details")
-#@admin_login_required
+##@admin_login_required
 def poll_details(poll_id):
     try:
         pollsList = Poll.query.filter_by(poll_id=poll_id).first()
@@ -426,7 +426,7 @@ def poll_details(poll_id):
 
 
 @ admin_bp.route("/polls")
-#@admin_login_required
+##@admin_login_required
 def polls():
     try:
         form = AddPollForm()
@@ -449,7 +449,7 @@ def polls():
 
 
 @admin_bp.route('/add-poll', methods=["post"])
-@admin_login_required
+#@admin_login_required
 def AddNewPoll():
     try:
         poll_id = uuid.uuid1()
@@ -527,7 +527,7 @@ def togglestatus(poll_id):
 
 
 @admin_bp.route('/announcements')
-@admin_login_required
+#@admin_login_required
 def adminAnnouncement():
     try:
         announcementForm = AddAnnouncement()
@@ -576,7 +576,7 @@ def adminAnnouncement():
 
 
 @admin_bp.route('/add-announcement', methods=["post"])
-@admin_login_required
+#@admin_login_required
 def addAnnouncement():
     try:
         title = request.form.get('title')
@@ -597,7 +597,7 @@ def addAnnouncement():
 
 
 @admin_bp.route('/add-events-today', methods=["POST"])
-@admin_login_required
+#@admin_login_required
 def addEventsToday():
     if request.method == "POST":
         try:
@@ -619,7 +619,7 @@ def addEventsToday():
 
 
 @ admin_bp.route("/announcements/<announcement_id>/delete", methods=["GET", "POST"])
-@admin_login_required
+#@admin_login_required
 def deleteAnnouncement(announcement_id):
     try:
         announcement = Announcement.query.filter_by(id=announcement_id).first()
@@ -634,7 +634,7 @@ def deleteAnnouncement(announcement_id):
 
 
 @ admin_bp.route("/events-today/<event_today_id>/delete", methods=["GET", "POST"])
-@admin_login_required
+#@admin_login_required
 def deleteEventToday(event_today_id):
     try:
         event = EventsToday.query.filter_by(id=event_today_id).first()
@@ -652,7 +652,7 @@ def deleteEventToday(event_today_id):
 
 
 @admin_bp.route("/users")
-@admin_login_required
+#@admin_login_required
 def allUsersPage():
     try:
         # by default show newest users first
@@ -690,7 +690,7 @@ def allUsersPage():
 
 ####################
 @admin_bp.route('/quiz')
-@admin_login_required
+#@admin_login_required
 def adminQuizzes():
     quizform = QuizForm()
     quizList = Quiz.query.all()
@@ -701,9 +701,37 @@ def adminQuizzes():
             quizzes.append(ele)
     return render_template("/admin/admin_quizzes.html",activeNav="quiz",quizform=quizform,quizzes=quizzes)
 
+@admin_bp.route('/add-quiz', methods=["post"])
+#@admin_login_required
+def AddNewQuiz():
+    try:
+        quiz_id = uuid.uuid1()
+        ques_id = uuid.uuid1()
+        question = request.form.get('question')
+        date = datetime.datetime.now().strftime("%x")
+        correct_answer = request.form.get('Option 1 Name (Correct Option)')
+        print(correct_answer)
+        totalOptions = request.form.get('optionsNumber')
+        newQuiz = Quiz(quiz_id=quiz_id,ques_id=ques_id, question=question, date=date, correct_answer=correct_answer)
+        db.session.add(newQuiz)
+        db.session.commit()
+        option_id = uuid.uuid1()
+        option_add= QuizOptions(quiz_id=quiz_id,ques_id=ques_id, option_id=option_id, option_name=correct_answer)
+        db.session.add(option_add)
+        db.session.commit()
+        for i in range(2,int(totalOptions)+1):
+            ques_id=ques_id
+            option_id = uuid.uuid1()
+            option_name = request.form.get('Option {} Name'.format(i))
+            quizOption = QuizOptions(quiz_id=quiz_id,ques_id=ques_id, option_id=option_id, option_name= option_name)
+            db.session.add(quizOption)
+            db.session.commit()
+        return redirect('/admin/quiz')
+    except Exception as e:
+        print(e)
 
 @admin_bp.route('/quiz/<quiz_id>/deletequiz')
-@admin_login_required
+#@admin_login_required
 def deleteQuiz(quiz_id):
     try:
         quiz = Quiz.query.filter_by(quiz_id=quiz_id).all()
@@ -720,14 +748,16 @@ def deleteQuiz(quiz_id):
         return redirect("/")
 
 @admin_bp.route('/quiz/<quiz_id>/details')
-@admin_login_required
+#@admin_login_required
 def QuizDetails(quiz_id):
     quizdetails=[]
     quizzes=Quiz.query.filter_by(quiz_id=quiz_id).all()
     for item in quizzes:
-        quiz_options=QuizOptions.query.filter_by(ques_id=item.ques_id).all()
+        quiz_options=QuizOptions.query.filter_by(quiz_id=quiz_id).all()
         li=[]
         for option in quiz_options:
+            print(option.option_name)
             li.append(option.option_name)
         quizdetails.append({'quiz_id':quiz_id,'question':item.question,'options':li})
+        print(quizdetails)
     return render_template('/admin/admin_quiz_details.html',quizdetails=quizdetails)
