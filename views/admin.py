@@ -1,6 +1,6 @@
 import uuid
-from forms import AddAnnouncement, AddEventsToday, AddEventForm, AddMerchandiseForm, AddPollForm
-from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses, Announcement, EventsToday
+from forms import AddAnnouncement, AddEventsToday, AddEventForm, AddMerchandiseForm, AddPollForm, QuizForm
+from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses, Announcement, EventsToday, Quiz, QuizOptions
 import datetime
 from sqlalchemy import asc, desc
 import datetime
@@ -685,3 +685,48 @@ def allUsersPage():
     except Exception as e:
         print(e)
         return redirect('/admin')
+
+
+####################
+@admin_bp.route('/quiz')
+@admin_login_required
+def adminQuizzes():
+    quizform = QuizForm()
+    quizList = Quiz.query.all()
+    quizzes=[]
+    for item in quizList:
+        ele={'quiz_id':item.quiz_id,"date":item.date}
+        if ele not in quizzes:
+            quizzes.append(ele)
+    return render_template("/admin/admin_quizzes.html",activeNav="quiz",quizform=quizform,quizzes=quizzes)
+
+
+@admin_bp.route('/quiz/<quiz_id>/deletequiz')
+@admin_login_required
+def deleteQuiz(quiz_id):
+    try:
+        quiz = Quiz.query.filter_by(quiz_id=quiz_id).all()
+        quiz_options = QuizOptions.query.filter_by(quiz_id=quiz_id).all()
+        for ele in quiz:
+            db.session.delete(ele)
+            db.session.commit()
+        for ele in quiz_options:
+            db.session.delete(ele)
+            db.session.commit()
+        return redirect('/admin/quiz')
+    except Exception as e:
+        print(e)
+        return redirect("/")
+
+@admin_bp.route('/quiz/<quiz_id>/details')
+@admin_login_required
+def QuizDetails(quiz_id):
+    quizdetails=[]
+    quizzes=Quiz.query.filter_by(quiz_id=quiz_id).all()
+    for item in quizzes:
+        quiz_options=QuizOptions.query.filter_by(ques_id=item.ques_id).all()
+        li=[]
+        for option in quiz_options:
+            li.append(option.option_name)
+        quizdetails.append({'quiz_id':quiz_id,'question':item.question,'options':li})
+    return render_template('/admin/admin_quiz_details.html',quizdetails=quizdetails)

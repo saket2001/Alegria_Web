@@ -203,3 +203,17 @@ class Categories(db.Model):
     name = db.Column(db.String(50), nullable=False)
     img_url = db.Column(db.String(300), nullable=False)
 
+class Quiz(db.Model):
+    __tablename__ = 'quizzes'
+    quiz_id = db.Column(db.Integer)
+    question = db.Column(db.String(300), nullable=False)
+    ques_id = db.Column(db.String(30), nullable=False, primary_key=True)
+    correct_answer = db.Column(db.String(50), nullable=False)
+    date = db.Column(db.Text(10), nullable=False)
+
+class QuizOptions(db.Model):
+    __tablename__ = 'quiz_options'
+    quiz_id = db.Column(db.Integer)
+    ques_id = db.Column(db.String(30),nullable=False)
+    option_id = db.Column(db.String(30), nullable=False, primary_key=True)
+    option_name = db.Column(db.String(50), nullable=False)

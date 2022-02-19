@@ -111,3 +111,8 @@ class AddProduct(FlaskForm):
     stock = IntegerField('Stock')
     description = TextAreaField('Description')
     image = FileField('Image')
+
+class QuizForm(FlaskForm):
+    title = StringField('Title')
+    question = StringField('Question')
+    date = StringField('Date')

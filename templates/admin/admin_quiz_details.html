@@ -1,0 +1,44 @@
+{% extends '/admin/admin_layout.html' %}
+
+{% block title %}
+Quiz Details
+{% endblock %}
+
+{% block content %}
+<div>
+    <div class="row my-2 py-2 gy-2">
+        <div class="col-lg-3 col-sm-3">
+            <a href="/admin/quiz" type="button" class="go_back_btn text-black fs-7">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="me-2"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg> Go Back
+            </a>
+        </div>
+        <div class="col-lg-9 col-sm-12 d-flex justify-content-center align-items-center">
+            <h5 class="fs-4 main-font text-red">Quiz Details</h5>
+        </div>
+    </div>
+    <div class="row p-2 my-5 g-3">
+        <div class="col-12">
+            <p class="sec-font fs-7 mb-0 text-black">Quiz ID: {{quizdetails[0].quiz_id}}</p>
+            {% for ques in quizdetails %}
+            <h5 class="card-title main-font fs-5 text-red pb-1 mb-0">Question: {{ques.question}}</h5>
+            <h5 class="card-title main-font fs-5 text-red pb-1 mb-0">Options:</h5>
+            <p class="sec-font fs-7 mb-0 text-black">
+            {% for option in ques.options %}
+            <p>{{option}}</p>
+            {% endfor %}
+            {% endfor %}
+            </p>
+            <div class="buttons">
+                <a href={{"/admin/quiz/{}/deletequiz".format(quizdetails[0].quiz_id)}} class="btn btn-outline-danger">
+                    Delete
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
