@@ -701,16 +701,16 @@ def adminQuizzes():
             quizzes.append(ele)
     return render_template("/admin/admin_quizzes.html",activeNav="quiz",quizform=quizform,quizzes=quizzes)
 
-@admin_bp.route('/add-quiz', methods=["post"])
+@admin_bp.route('/add-quiz/<quiz_id>', methods=["post"])
 #@admin_login_required
-def AddNewQuiz():
+def AddNewQuiz(quiz_id):
     try:
-        quiz_id = uuid.uuid1()
+        if quiz_id=='new':
+            quiz_id = uuid.uuid1()
         ques_id = uuid.uuid1()
         question = request.form.get('question')
         date = datetime.datetime.now().strftime("%x")
         correct_answer = request.form.get('Option 1 Name (Correct Option)')
-        print(correct_answer)
         totalOptions = request.form.get('optionsNumber')
         newQuiz = Quiz(quiz_id=quiz_id,ques_id=ques_id, question=question, date=date, correct_answer=correct_answer)
         db.session.add(newQuiz)
@@ -726,7 +726,7 @@ def AddNewQuiz():
             quizOption = QuizOptions(quiz_id=quiz_id,ques_id=ques_id, option_id=option_id, option_name= option_name)
             db.session.add(quizOption)
             db.session.commit()
-        return redirect('/admin/quiz')
+        return redirect('/admin/quiz/'+str(quiz_id)+'/details')
     except Exception as e:
         print(e)
 
@@ -753,11 +753,27 @@ def QuizDetails(quiz_id):
     quizdetails=[]
     quizzes=Quiz.query.filter_by(quiz_id=quiz_id).all()
     for item in quizzes:
-        quiz_options=QuizOptions.query.filter_by(quiz_id=quiz_id).all()
+        quiz_options=QuizOptions.query.filter_by(ques_id=item.ques_id).all()
         li=[]
         for option in quiz_options:
-            print(option.option_name)
             li.append(option.option_name)
-        quizdetails.append({'quiz_id':quiz_id,'question':item.question,'options':li})
-        print(quizdetails)
-    return render_template('/admin/admin_quiz_details.html',quizdetails=quizdetails)
+        quizdetails.append({'quiz_id':quiz_id,'question':item.question,'ques_id':item.ques_id,'options':li})
+    quizform=QuizForm()
+    return render_template('/admin/admin_quiz_details.html',quizdetails=quizdetails,quizform=quizform)
+
+@admin_bp.route('/quiz/<ques_id>/deleteQuestion')
+#@admin_login_required
+def deleteQues(ques_id):
+    try:
+        quiz = Quiz.query.filter_by(ques_id=ques_id).all()
+        quiz_options = QuizOptions.query.filter_by(ques_id=ques_id).all()
+        for ele in quiz:
+            db.session.delete(ele)
+            db.session.commit()
+        for ele in quiz_options:
+            db.session.delete(ele)
+            db.session.commit()
+        return redirect('/admin/quiz')
+    except Exception as e:
+        print(e)
+        return redirect("/")

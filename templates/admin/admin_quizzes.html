@@ -1,8 +1,6 @@
 {% extends '/admin/admin_layout.html' %}{% block title %}
 Quizzes
 {% endblock %}
-
-
 {% block content %}
 <div class="container">
     <div class="row my-2 d-flex align-items-center">
@@ -46,7 +44,7 @@ Quizzes
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
     
-                <form class="modal-body" id="QuizForm" action='/admin/add-quiz' method="post">
+                <form class="modal-body" id="QuizForm" action='/admin/add-quiz/new' method="post">
                     {{quizform.csrf_token}}
                     <p class="mb-0 fs-7 main-font">
                         Quiz Question
@@ -70,7 +68,7 @@ Quizzes
     
                     <!-- inputs will come from quiz.js -->
                     <div id="quiz-form"></div>
-                    <button type="submit" class="button w-100 my-2 bg-brown text-beige">Save Quiz</button>
+                    <button type="submit" class="button w-100 my-2 bg-brown text-beige">Save & Add next Question</button>
                 </form>
             </div>
         </div>
