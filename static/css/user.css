@@ -290,6 +290,15 @@ a.text-black:hover {
     display: none !important;
 }
 
+.flash {
+    z-index: 10;
+    top: 1.3rem;
+    left: 2%;
+    right: 2%;
+    width: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
 /* nav bar */
 .cart_bubble {
@@ -725,23 +734,20 @@ h1 {
     font-size: 45px;
 }
 
-button {
+/* button {
     outline: none;
-    transition: .5s ease-in-out;
+    transition: transform .5s ease-out;
 }
 
 button:hover {
     transform: scale(0.98);
-}
+} */
 
 .domain img {
     width: 200px;
     height: 170px;
     border-radius: 100px 0 100px 0;
 }
-
-
-
 
 /*  */
 
@@ -833,6 +839,10 @@ button:hover {
 
     .loader {
         font-size: 1.5rem;
+    }
+
+    .flash {
+        width: 90%;
     }
 
     .hide {

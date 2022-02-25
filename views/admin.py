@@ -449,7 +449,7 @@ def polls():
 
 
 @admin_bp.route('/add-poll', methods=["post"])
-#@admin_login_required
+@admin_login_required
 def AddNewPoll():
     try:
         poll_id = uuid.uuid1()
@@ -527,7 +527,7 @@ def togglestatus(poll_id):
 
 
 @admin_bp.route('/announcements')
-#@admin_login_required
+@admin_login_required
 def adminAnnouncement():
     try:
         announcementForm = AddAnnouncement()
@@ -572,11 +572,11 @@ def adminAnnouncement():
 
     except Exception as e:
         print(e)
-        # return redirect('/')
+        return redirect('/')
 
 
 @admin_bp.route('/add-announcement', methods=["post"])
-#@admin_login_required
+@admin_login_required
 def addAnnouncement():
     try:
         title = request.form.get('title')
@@ -597,7 +597,7 @@ def addAnnouncement():
 
 
 @admin_bp.route('/add-events-today', methods=["POST"])
-#@admin_login_required
+@admin_login_required
 def addEventsToday():
     if request.method == "POST":
         try:
@@ -619,7 +619,7 @@ def addEventsToday():
 
 
 @ admin_bp.route("/announcements/<announcement_id>/delete", methods=["GET", "POST"])
-#@admin_login_required
+@admin_login_required
 def deleteAnnouncement(announcement_id):
     try:
         announcement = Announcement.query.filter_by(id=announcement_id).first()
@@ -634,7 +634,7 @@ def deleteAnnouncement(announcement_id):
 
 
 @ admin_bp.route("/events-today/<event_today_id>/delete", methods=["GET", "POST"])
-#@admin_login_required
+@admin_login_required
 def deleteEventToday(event_today_id):
     try:
         event = EventsToday.query.filter_by(id=event_today_id).first()
@@ -652,7 +652,7 @@ def deleteEventToday(event_today_id):
 
 
 @admin_bp.route("/users")
-#@admin_login_required
+@admin_login_required
 def allUsersPage():
     try:
         # by default show newest users first
@@ -690,7 +690,7 @@ def allUsersPage():
 
 ####################
 @admin_bp.route('/quiz')
-#@admin_login_required
+@admin_login_required
 def adminQuizzes():
     quizform = QuizForm()
     quizList = Quiz.query.all()
@@ -702,7 +702,7 @@ def adminQuizzes():
     return render_template("/admin/admin_quizzes.html",activeNav="quiz",quizform=quizform,quizzes=quizzes)
 
 @admin_bp.route('/add-quiz/<quiz_id>', methods=["post"])
-#@admin_login_required
+@admin_login_required
 def AddNewQuiz(quiz_id):
     try:
         if quiz_id=='new':
@@ -715,10 +715,12 @@ def AddNewQuiz(quiz_id):
         newQuiz = Quiz(quiz_id=quiz_id,ques_id=ques_id, question=question, date=date, correct_answer=correct_answer)
         db.session.add(newQuiz)
         db.session.commit()
+        
         option_id = uuid.uuid1()
         option_add= QuizOptions(quiz_id=quiz_id,ques_id=ques_id, option_id=option_id, option_name=correct_answer)
         db.session.add(option_add)
         db.session.commit()
+        
         for i in range(2,int(totalOptions)+1):
             ques_id=ques_id
             option_id = uuid.uuid1()
@@ -726,12 +728,13 @@ def AddNewQuiz(quiz_id):
             quizOption = QuizOptions(quiz_id=quiz_id,ques_id=ques_id, option_id=option_id, option_name= option_name)
             db.session.add(quizOption)
             db.session.commit()
+            
         return redirect('/admin/quiz/'+str(quiz_id)+'/details')
     except Exception as e:
         print(e)
 
 @admin_bp.route('/quiz/<quiz_id>/deletequiz')
-#@admin_login_required
+@admin_login_required
 def deleteQuiz(quiz_id):
     try:
         quiz = Quiz.query.filter_by(quiz_id=quiz_id).all()

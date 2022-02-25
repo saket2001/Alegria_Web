@@ -27,7 +27,6 @@ body {
         serif;
 }
 
-
 .navbar_links {
     color: var(--beige);
 }
@@ -58,17 +57,6 @@ a:hover {
 
 li {
     list-style: none;
-}
-
-.button {
-    outline: none;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    color: var(--black);
-    padding: 0.25rem 0.5rem;
-    background-color: transparent;
-    transition: all .5s ease-out;
 }
 
 .go_back_btn {
@@ -156,7 +144,6 @@ input[type='file']:focus {
 .nav-links {
     color: var(--beige);
 }
-
 
 .nav-button {
     padding: 0.4rem 0.6rem;
