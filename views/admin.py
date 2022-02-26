@@ -696,9 +696,15 @@ def adminQuizzes():
     quizList = Quiz.query.all()
     quizzes=[]
     for item in quizList:
-        ele={'quiz_id':item.quiz_id,"date":item.date}
+        ele={
+                'quiz_id':item.quiz_id,
+                "question":item.question,
+                "ques_point":item.ques_point,
+                "date":item.date,
+            }
         if ele not in quizzes:
             quizzes.append(ele)
+            
     return render_template("/admin/admin_quizzes.html",activeNav="quiz",quizform=quizform,quizzes=quizzes)
 
 @admin_bp.route('/add-quiz/<quiz_id>', methods=["post"])
@@ -707,15 +713,17 @@ def AddNewQuiz(quiz_id):
     try:
         if quiz_id=='new':
             quiz_id = uuid.uuid1()
+            
         ques_id = uuid.uuid1()
         question = request.form.get('question')
-        date = datetime.datetime.now().strftime("%x")
+        ques_point=request.form.get("ques_point")
         correct_answer = request.form.get('Option 1 Name (Correct Option)')
-        totalOptions = request.form.get('optionsNumber')
-        newQuiz = Quiz(quiz_id=quiz_id,ques_id=ques_id, question=question, date=date, correct_answer=correct_answer)
+        date = datetime.datetime.now().strftime("%x")
+        newQuiz = Quiz(quiz_id=quiz_id,ques_id=ques_id, question=question, date=date, correct_answer=correct_answer,ques_point=ques_point)
         db.session.add(newQuiz)
         db.session.commit()
         
+        totalOptions = request.form.get('optionsNumber')
         option_id = uuid.uuid1()
         option_add= QuizOptions(quiz_id=quiz_id,ques_id=ques_id, option_id=option_id, option_name=correct_answer)
         db.session.add(option_add)

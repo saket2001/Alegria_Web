@@ -206,9 +206,10 @@ class Categories(db.Model):
 class Quiz(db.Model):
     __tablename__ = 'quizzes'
     quiz_id = db.Column(db.String(50))
-    question = db.Column(db.String(300), nullable=False)
     ques_id = db.Column(db.String(50), nullable=False, primary_key=True)
+    question = db.Column(db.String(300), nullable=False)
     correct_answer = db.Column(db.String(50), nullable=False)
+    ques_point = db.Column(db.Integer, nullable=False)
     date = db.Column(db.Text(10), nullable=False)
 
 class QuizOptions(db.Model):
