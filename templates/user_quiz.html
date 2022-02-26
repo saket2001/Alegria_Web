@@ -2,9 +2,19 @@
 
 
 {% block headContent %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    .quiz_instructions {
+        padding: 1rem 2rem;
+    }
+
+    @media screen and (max-width:600px) {
+        .quiz_instructions {
+            padding: 1rem 1.2rem;
+        }
+    }
+</style>
+
+
 {% endblock headContent %}
 
 
@@ -43,37 +53,49 @@ Alegria 2022 | Alegria Quiz 2022
                     No Quiz Questions Yet....
                 </h4>
                 {% endif %}
-                <!-- card -->
-                {% for ques in questions_list %}
-                <div class="col p-4 rounded-3 main-bg shadow mb-3">
-                    <!-- question -->
-                    <h4 class="main-font text-black fs-5">
-                        Q.
-                        {{ques["question"]}}
-                    </h4>
-                    <!-- score points -->
-                    <p class="sec-font text-black fs-7">
-                        Points-
-                        {{ques["points"]}}
-                    </p>
-                    <!-- answer button -->
-                    <a href={{"/user/quiz/{}".format(ques["question_id"])}}
-                        class="button main-font text-black fs-6 border border-1 border-dark d-flex align-items-center"
-                        style="width: fit-content;">
-                        Answer Quiz
-                        <i class="ms-2 fa fa-arrow-right" aria-hidden="true"></i>
-                    </a>
+
+                <div class="col p-4 py-2 rounded-3 main-bg shadow mb-3">
+                    <!-- quiz instructions -->
+                    <h3 class="main-font text-black fs-4 py-1 my-1 text-center">
+                        Instructions
+                    </h3>
+                    <ul class="quiz_instructions fs-6 text-black sec-font">
+                        <li style="list-style-type:upper-roman;" class="p-1">
+                            For every correct answer you would be rewarded 2 points & 0 points if incorrect.
+                        </li>
+                        <li style="list-style-type:upper-roman;" class="p-1">
+                            If you change tab while answering quiz, your quiz will be ended and no points would be
+                            given.
+                        </li>
+                        <li style="list-style-type:upper-roman;" class="p-1">
+                            This quiz is intended only for fun & entertainment and not for any prize money.
+                        </li>
+                        <li style="list-style-type:upper-roman;" class="p-1">
+                            For every question, you will be provided with 2-4 options.
+                        </li>
+                        <li style="list-style-type:upper-roman;" class="p-1">
+                            The quiz is valid for all students.
+                        </li>
+                        <li style="list-style-type:upper-roman;" class="p-1">
+                            The quiz is only accessible once.
+                        </li>
+                    </ul>
+                    <div class="d-flex justify-content-center my-1 pb-3">
+                        <button class="buttons" style="width:60%">
+                            <a href="/user/quiz/1212?ques_no=1" class="button_top w-100 text-black"> Proceed To Quiz
+                            </a>
+                        </button>
+                    </div>
                 </div>
-                {% endfor %}
             </div>
             <!-- user stats -->
             <div class="col-lg-5 col-sm-12">
                 {% if signed_in==False %}
-                <div class="main-bg p-3 rounded-3">
-                    <h2 class="text-center main-font text-black fs-5 mb-2">
+                <div class="main-bg p-3 rounded-3 shadow">
+                    <h3 class="text-center main-font text-black fs-4 mb-2">
                         <i class="fa-solid fa-lock-keyhole"></i>
                         Sign in to view your quiz stats
-                    </h2>
+                    </h3>
                 </div>
                 {% else %}
                 <!-- will show only if signed in -->
@@ -94,5 +116,24 @@ Alegria 2022 | Alegria Quiz 2022
             </div>
         </div>
     </div>
+    {% endblock %}
+
+
+    <!-- question 
+                {% for ques in questions_list %}
+<h4 class="main-font text-black fs-5">
+    Q.
+    {{ques["question"]}}
+</h4>
+<p class="sec-font text-black fs-7">
+    Points-
+    {{ques["points"]}}
+</p>
+<a href={{"/user/quiz/{}".format(ques["question_id"])}}
+    class="button main-font text-black fs-6 border border-1 border-dark d-flex align-items-center"
+    style="width: fit-content;">
+    Answer Quiz
+    <i class="ms-2 fa fa-arrow-right" aria-hidden="true"></i>
+</a>
 </div>
-{% endblock %}
+{% endfor %} -->

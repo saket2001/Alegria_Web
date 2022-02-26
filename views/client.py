@@ -49,9 +49,9 @@ def user_login_required(f):
 
 
 # fetches single quiz question 
-@client_bp.route('/quiz/<string:question_id>')
+@client_bp.route('/quiz/<string:quiz_id>')
 # @user_login_required
-def AnswerQuizPage(question_id):
+def AnswerQuizPage(quiz_id):
     try:
         signed_in = False
         cartLen = None
@@ -60,52 +60,92 @@ def AnswerQuizPage(question_id):
             signed_in = True
             cartLen = session.get('cartLength')
         
-        #start timer
-        
         # fetch quiz based on id
-        quiz={
-            "question_id":1212,
-            "question":"Where is PCE admission cell located in campus?",
-            "points":10,
-            "options":[
-                {
-                    "option_id":'1sj12012',
-                    "option_name":"S302",    
-                },{
-                    "option_id":'1sj12012',
-                    "option_name":"S300",    
-                },{
-                    "option_id":'1sj12012',
-                    "option_name":"L302",    
-                },{
-                    "option_id":'1sj12012',
-                    "option_name":"L102",    
-                },],
-            }
+        quiz=[
+            {
+                "sr_no":1,
+                "quiz_id":1212,
+                "question_id":1,
+                "question":"Where is PCE admission cell located in campus?",
+                "points":10,
+                "options":[
+                    {
+                        "option_id":'1sj12012',
+                        "option_name":"S302",    
+                    },{
+                        "option_id":'1sj12012',
+                        "option_name":"S300",    
+                    },{
+                        "option_id":'1sj12012',
+                        "option_name":"L302",    
+                    },{
+                        "option_id":'1sj12012',
+                        "option_name":"L102",    
+                    }
+                    ],
+            },
+            {   
+                "sr_no":1,
+                "quiz_id":1212,
+                "question_id":2,
+                "question":"Where is PCE office located in campus?",
+                "points":10,
+                "options":[
+                    {
+                        "option_id":'1sj12012',
+                        "option_name":"S302",    
+                    },{
+                        "option_id":'1sj12012',
+                        "option_name":"S300",    
+                    },{
+                        "option_id":'1sj12012',
+                        "option_name":"L302",    
+                    },{
+                        "option_id":'1sj12012',
+                        "option_name":"L102",    
+                    }
+                    ],
+            },
+        ]
+        
+        #send quiz question one by one
+        current_question=int(request.args.get("ques_no"));
+        quiz_question=quiz[current_question-1]
         
         input_labels=['A','B','C','D','E']
-        for i,option in enumerate(quiz['options']):
+        for i,option in enumerate(quiz_question["options"]):
             option['label']=input_labels[i]
+            
+        print("###########")
+        print(current_question)
         
-        return render_template('/client/user_quiz_question.html',quiz=quiz,cartLen=cartLen, signed_in=signed_in,input_labels=input_labels)
+        return render_template('/client/user_quiz_question.html',quiz=quiz_question,cartLen=cartLen, signed_in=signed_in,total_questions=len(quiz)-1,enumerate=enumerate,current_question=current_question-1)
     
     except Exception as e:
         print(e)
         # return redirect('/')
 
 #quiz submit route
-@client_bp.route('/submit-quiz/<string:quiz_id>',methods=["POST"])
+@client_bp.route('/quiz/check-answer/<string:quiz_id>/<int:ques_no>',methods=["POST"])
 # @user_login_required
-def submitQuizResponse(quiz_id):
+def submitQuizResponse(quiz_id,ques_no):
     try:
         # gets the selected option's value
         selected_answer=request.form.get('selected-answer')
-        print(selected_answer)
-        # redirect to same page with correct answer shown
-        return redirect('/user/quiz/{}'.format(quiz_id))
+        
+        #check ques_no===quiz total questions for ending quiz
+        
+        if(selected_answer==None):
+            print(ques_no)
+            flash("Please select a answer for getting points !!")
+            return redirect('/user/quiz/{}?ques_no={}'.format(quiz_id,ques_no+1))
+        else:
+            return redirect('/user/quiz/{}?ques_no={}'.format(quiz_id,ques_no+2))
+
+    
     except Exception as e:
         print(e)
-        return redirect('/')
+        # return redirect('/')
 
 
 ######################################

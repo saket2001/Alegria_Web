@@ -524,7 +524,7 @@ def eventHeadPage():
         return render_template('event-head.html', activeNav='Event heads', signed_in=signed_in, cartLen=cartLen,event_heads_row1=client_data.event_heads_row1,event_heads_row2=client_data.event_heads_row2,event_heads_row3=client_data.event_heads_row3,event_heads_row4=client_data.event_heads_row4)
     except Exception as e:
         print(e)
-        # return redirect("/")
+        return redirect("/")
 
 
 @app_mbp.errorhandler(404)

@@ -53,10 +53,6 @@ body {
     background-color: var(--u_beige);
 }
 
-.bg-gradient {
-    background: #F8F1B6;
-}
-
 .bg-navbar {
     background-color: var(--navbar);
 }
@@ -141,11 +137,7 @@ body {
     background-color: var(--u_beige);
     background-image: url("/static/images/cover.png");
     background-position: center;
-    background-size: cover;
-}
-
-.animation-float {
-    animation: float 4s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite alternate;
+    background-size: contain;
 }
 
 /* fix for a color change on hover */
@@ -275,21 +267,21 @@ a.text-black:hover {
     }
 }
 
-@keyframes spin {
-    0% {
-        transform: rotate(10deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
 
 .hide {
     opacity: 0;
     display: none !important;
 }
 
+.flash {
+    z-index: 10;
+    top: 1.3rem;
+    left: 2%;
+    right: 2%;
+    width: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
 /* nav bar */
 .cart_bubble {
@@ -513,12 +505,21 @@ a.text-black:hover {
     background-color: #472F19;
 }
 
-.event_card-container {
-    padding: 0.2rem;
+.event_card-container,
+.merch-card {
+    padding: 0.4rem;
     margin: 0.2rem 0.25rem;
-    border: 6px double var(--u_red);
+    border: 5px solid var(--u_red);
     border-spacing: 2rem;
     border-radius: 4px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all .2s;
+    box-shadow: 8px 8px 2px 1px #611e0d70;
+}
+
+.event_card-container:hover {
+    box-shadow: none;
 }
 
 .event_card,
@@ -527,9 +528,17 @@ a.text-black:hover {
     transition: all .3s ease;
 }
 
+.merch-card {
+    border: none;
+    background-color: var(--u_bg);
+    padding: 0;
+}
+
+
 .event_card:hover,
 .merch-card:hover {
     transform: translateY(-7px);
+    box-shadow: none;
 }
 
 .event_card-left {
@@ -542,16 +551,6 @@ a.text-black:hover {
 
 .event_card-lower {
     border-bottom: 3px dashed #271e1e;
-}
-
-@keyframes float {
-    0% {
-        transform: translateZ(20px);
-    }
-
-    100% {
-        transform: translateY(-21px) translateX(-13px) translateZ(30px);
-    }
 }
 
 
@@ -725,23 +724,12 @@ h1 {
     font-size: 45px;
 }
 
-button {
-    outline: none;
-    transition: .5s ease-in-out;
-}
-
-button:hover {
-    transform: scale(0.98);
-}
 
 .domain img {
     width: 200px;
     height: 170px;
     border-radius: 100px 0 100px 0;
 }
-
-
-
 
 /*  */
 
@@ -833,6 +821,10 @@ button:hover {
 
     .loader {
         font-size: 1.5rem;
+    }
+
+    .flash {
+        width: 90%;
     }
 
     .hide {

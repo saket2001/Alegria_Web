@@ -1,4 +1,3 @@
-from venv import create
 from flask import Flask, redirect, url_for, session
 from flask.helpers import flash
 from flask_restful import Api

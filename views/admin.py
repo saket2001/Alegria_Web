@@ -84,7 +84,7 @@ def adminLogin():
 
 
 @admin_bp.route('/')
-@admin_login_required
+#@admin_login_required
 def home():
     try:
         today = date.today()
@@ -109,7 +109,7 @@ def home():
 
 
 @admin_bp.route('/events/<event_category>', methods=['GET', 'POST'])
-@admin_login_required
+#@admin_login_required
 def events(event_category):
     # form
     try:
@@ -150,7 +150,7 @@ def events(event_category):
 
 
 @admin_bp.route('/add-event', methods=["POST"])
-@admin_login_required
+#@admin_login_required
 def addEvent():
     if request.method == "POST":
         try:
@@ -204,7 +204,7 @@ def addEvent():
 
 
 @admin_bp.route("/events/<category>/<event_id>/view", methods=['GET', 'POST'])
-@admin_login_required
+#@admin_login_required
 def editEventDetails(category, event_id):
     try:
 
@@ -251,7 +251,7 @@ def editEventDetails(category, event_id):
 
 
 @ admin_bp.route("/events/<category>/<event_id>/delete", methods=['GET', 'POST'])
-@admin_login_required
+#@admin_login_required
 def deleteevent(category, event_id):
     try:
         post = Eventdemo.query.filter_by(id=event_id).first()
@@ -267,7 +267,7 @@ def deleteevent(category, event_id):
 
 
 @ admin_bp.route("/events/event-registrations")
-#@admin_login_required
+##@admin_login_required
 def eventRegistrations():
     # get info from api in List of Dictionaries format as below
     try:
@@ -290,7 +290,7 @@ def eventRegistrations():
 
 # merchandise routes
 @ admin_bp.route("/merchandise/<string:category>")
-@admin_login_required
+#@admin_login_required
 def merchandise(category):
     try:
         # form
@@ -319,7 +319,7 @@ def merchandise(category):
 
 
 @admin_bp.route("/add-merchandise", methods=["post"])
-@admin_login_required
+#@admin_login_required
 def addMerchandise():
     try:
         id = request.form.get('id')
@@ -348,7 +348,7 @@ def addMerchandise():
 
 
 @ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/view", methods=["GET"])
-@admin_login_required
+#@admin_login_required
 def editMerchandiseDetails(merchandise_category, merchandise_id):
     try:
         merch = Merchandise.query.filter_by(id=merchandise_id).first()
@@ -384,7 +384,7 @@ def editMerchandiseDetails(merchandise_category, merchandise_id):
 
 
 @ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/delete", methods=["GET", "POST"])
-@admin_login_required
+#@admin_login_required
 def deletemerchandise(merchandise_category, merchandise_id):
     try:
         merch = Merchandise.query.filter_by(id=merchandise_id).first()
@@ -399,7 +399,7 @@ def deletemerchandise(merchandise_category, merchandise_id):
 
 # poll routes
 @ admin_bp.route("/polls/<poll_id>/details")
-#@admin_login_required
+##@admin_login_required
 def poll_details(poll_id):
     try:
         pollsList = Poll.query.filter_by(poll_id=poll_id).first()
@@ -426,7 +426,7 @@ def poll_details(poll_id):
 
 
 @ admin_bp.route("/polls")
-#@admin_login_required
+##@admin_login_required
 def polls():
     try:
         form = AddPollForm()
@@ -572,7 +572,7 @@ def adminAnnouncement():
 
     except Exception as e:
         print(e)
-        # return redirect('/')
+        return redirect('/')
 
 
 @admin_bp.route('/add-announcement', methods=["post"])
@@ -696,11 +696,50 @@ def adminQuizzes():
     quizList = Quiz.query.all()
     quizzes=[]
     for item in quizList:
-        ele={'quiz_id':item.quiz_id,"date":item.date}
+        ele={
+                'quiz_id':item.quiz_id,
+                "question":item.question,
+                "ques_point":item.ques_point,
+                "date":item.date,
+            }
         if ele not in quizzes:
             quizzes.append(ele)
+            
     return render_template("/admin/admin_quizzes.html",activeNav="quiz",quizform=quizform,quizzes=quizzes)
 
+@admin_bp.route('/add-quiz/<quiz_id>', methods=["post"])
+@admin_login_required
+def AddNewQuiz(quiz_id):
+    try:
+        if quiz_id=='new':
+            quiz_id = uuid.uuid1()
+            
+        ques_id = uuid.uuid1()
+        question = request.form.get('question')
+        ques_point=request.form.get("ques_point")
+        correct_answer = request.form.get('Option 1 Name (Correct Option)')
+        date = datetime.datetime.now().strftime("%x")
+        newQuiz = Quiz(quiz_id=quiz_id,ques_id=ques_id, question=question, date=date, correct_answer=correct_answer,ques_point=ques_point)
+        db.session.add(newQuiz)
+        db.session.commit()
+        
+        totalOptions = request.form.get('optionsNumber')
+        option_id = uuid.uuid1()
+        option_add= QuizOptions(quiz_id=quiz_id,ques_id=ques_id, option_id=option_id, option_name=correct_answer)
+        db.session.add(option_add)
+        db.session.commit()
+        
+        for i in range(2,int(totalOptions)+1):
+            ques_id=ques_id
+            option_id = uuid.uuid1()
+            option_name = request.form.get('Option {} Name'.format(i))
+            quizOption = QuizOptions(quiz_id=quiz_id,ques_id=ques_id, option_id=option_id, option_name= option_name)
+            db.session.add(quizOption)
+            db.session.commit()
+            
+        return redirect('/admin/quiz/'+str(quiz_id)+'/details')
+    except Exception as e:
+        print(e)
 
 @admin_bp.route('/quiz/<quiz_id>/deletequiz')
 @admin_login_required
@@ -720,7 +759,7 @@ def deleteQuiz(quiz_id):
         return redirect("/")
 
 @admin_bp.route('/quiz/<quiz_id>/details')
-@admin_login_required
+#@admin_login_required
 def QuizDetails(quiz_id):
     quizdetails=[]
     quizzes=Quiz.query.filter_by(quiz_id=quiz_id).all()
@@ -729,5 +768,23 @@ def QuizDetails(quiz_id):
         li=[]
         for option in quiz_options:
             li.append(option.option_name)
-        quizdetails.append({'quiz_id':quiz_id,'question':item.question,'options':li})
-    return render_template('/admin/admin_quiz_details.html',quizdetails=quizdetails)
+        quizdetails.append({'quiz_id':quiz_id,'question':item.question,'ques_id':item.ques_id,'options':li})
+    quizform=QuizForm()
+    return render_template('/admin/admin_quiz_details.html',quizdetails=quizdetails,quizform=quizform)
+
+@admin_bp.route('/quiz/<ques_id>/deleteQuestion')
+#@admin_login_required
+def deleteQues(ques_id):
+    try:
+        quiz = Quiz.query.filter_by(ques_id=ques_id).all()
+        quiz_options = QuizOptions.query.filter_by(ques_id=ques_id).all()
+        for ele in quiz:
+            db.session.delete(ele)
+            db.session.commit()
+        for ele in quiz_options:
+            db.session.delete(ele)
+            db.session.commit()
+        return redirect('/admin/quiz')
+    except Exception as e:
+        print(e)
+        return redirect("/")

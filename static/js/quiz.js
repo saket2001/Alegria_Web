@@ -4,7 +4,7 @@ inputBtnList.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     if (e.target.classList.contains("custom_input-active")) {
       e.target.classList.remove("custom_input-active");
-      e.target.removeAttribute("name");
+      if (e.target.children[0]) e.target.children[0].removeAttribute("name");
       return;
     }
     // first removing active class from all buttons
@@ -16,6 +16,8 @@ inputBtnList.forEach((btn) => {
     e.target.classList.add("custom_input-active");
   });
 });
+
+// window.addEventListener("blur", () => window.location.replace("/quiz"));
 
 // quiz logic
 // window.onload = () => {

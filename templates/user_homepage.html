@@ -15,25 +15,26 @@
     <div class="loading-bg">
     </div>
     <div class="loader-div d-flex flex-column justify-content-center align-items-center">
-        <!-- <div class=" loader-border"></div> -->
-        <div class="loader d-flex align-items-center justify-content-center px-3 main-font">
-            <p id="loader-l">L</p>
-            <p id="loader-o">o</p>
-            <p id="loader-a">a</p>
-            <p id="loader-d">d</p>
-            <p id="loader-i">i</p>
-            <p id="loader-n">n</p>
-            <p id="loader-g">g</p>
-            <div class="px-2"></div>
-            <p id="loader-A">A</p>
-            <p id="loader-L">l</p>
-            <p id="loader-E">e</p>
-            <p id="loader-G">g</p>
-            <p id="loader-R">r</p>
-            <p id="loader-I">i</p>
-            <p id="loader-Aa">a</p>
+        <div class="d-flex flex-column align-items-center">
+            <img src="/static/images/AlegriaLogo.png" alt="alegria-logo" id="loader-logo" height="150px">
+            <div class="loader d-flex align-items-center justify-content-center px-3 sec-font fs-1 my-2">
+                <p id="loader-l">L</p>
+                <p id="loader-o">o</p>
+                <p id="loader-a">a</p>
+                <p id="loader-d">d</p>
+                <p id="loader-i">i</p>
+                <p id="loader-n">n</p>
+                <p id="loader-g">g</p>
+                <!-- <div class="px-2"></div>
+                <p id="loader-A">A</p>
+                <p id="loader-L">l</p>
+                <p id="loader-E">e</p>
+                <p id="loader-G">g</p>
+                <p id="loader-R">r</p>
+                <p id="loader-I">i</p>
+                <p id="loader-Aa">a</p> -->
+            </div>
         </div>
-        <!-- <div class="loader-border"></div> -->
     </div>
 
     <!-- nav -->
@@ -181,43 +182,45 @@
                 </ul>
 
                 {% if signed_in==False %}
-                <a href="/user-login"
-                    class="d-flex justify-content-center align-items-center  rounded-3 text-red bg-white fs-7 px-5 py-1 me-2 main-font">
-                    <p class="my-0 me-2">
-                        Sign In
-                    </p>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" class="text-beige ms-3" width="24px" height="24px">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
-                    </svg>
-                </a>
-                {% endif %}
-
-                {% if signed_in==True %}
-                <a href="/user/cart"
-                    class="cart position-relative mx-3 d-flex align-items-center text-black p-2 mx-1 position-relative">
-                    <i class="fas fa-shopping-bag text-red me-2 fs-5"></i>
-                    <div class="cart_bubble position-absolute top-0 end-0 ms-1">
-                        {{cartLen}}
-                    </div>
-                </a>
-                {% endif %}
-
-                {% if signed_in==True %}
-                <a href="/session-logout"
-                    class="d-flex justify-content-center align-items-center rounded-3 text-red border-red fs-7 px-3 py-1 me-2 main-font">
-                    <p class="my-0 me-2">
-                        Logout
-                    </p>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="text-red" width="24px" height="24px" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
-                </a>
-                {% endif %}
+                <button class="normal-button d-flex justify-content-center align-items-center fs-7 rounded-3 py-2 px-4">
+                    <a href="/user-login" class="d-flex">
+                        <p class="my-0 me-2 main-font">
+                            Sign In
+                        </p>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            class="text-light ms-1" width="24px" height="24px">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                        </svg>
+                    </a>
+                </button>
             </div>
+            {% endif %}
+
+            {% if signed_in==True %}
+            <a href="/user/cart"
+                class="cart position-relative mx-3 d-flex align-items-center text-black p-2 mx-1 position-relative">
+                <i class="fas fa-shopping-bag text-red me-2 fs-5"></i>
+                <div class="cart_bubble position-absolute top-0 end-0 ms-1">
+                    {{cartLen}}
+                </div>
+            </a>
+            {% endif %}
+
+            {% if signed_in==True %}
+            <a href="/session-logout"
+                class="d-flex justify-content-center align-items-center rounded-3 text-red border-red fs-7 px-3 py-1 me-2 main-font">
+                <p class="my-0 me-2">
+                    Logout
+                </p>
+                <svg xmlns="http://www.w3.org/2000/svg" class="text-red" width="24px" height="24px" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+            </a>
+            {% endif %}
+        </div>
         </div>
     </nav>
 
@@ -275,10 +278,11 @@
                             the unique themes like the “Light The Night” from last year or the astounding performances,
                             they never fail to amaze us.
                         </p>
-                        <a href="/about-us" class="sec-font text-light px-3 py-1 rounded-3 fs-6 mt-3"
-                            style="background-color: #bd2828;">
-                            Read More
-                        </a>
+                        <button class="up-button mt-3" style="background-color: #bd2828;">
+                            <a href="/about-us" class="sec-font text-light fs-6">
+                                Read More
+                            </a>
+                        </button>
                     </div>
                 </div>
             </section>
@@ -440,12 +444,11 @@
                             <p class="fs-7 mb-1" style="text-align: justify;">Criteria : Semi-open </p>
                             <p class="fs-7 mb-1" style="text-align: justify;">Fees : 200(Per Team) </p>
                             <p class="fs-7 mb-1" style="text-align: justify;">Event Mode : Online </p>
-                            <div class="mt-4">
-                                <a href="/hackathon" style="background-color: #bd2828;"
-                                    class="px-3 py-1 sec-font text-light rounded-3 fs-6">
+                            <button class="up-button mt-4" style="background-color: #bd2828;">
+                                <a href="/hackathon" class=" sec-font text-light fs-6">
                                     View More
                                 </a>
-                            </div>
+                            </button>
                         </div>
 
                     </div>
