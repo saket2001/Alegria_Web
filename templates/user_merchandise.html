@@ -114,10 +114,10 @@ Alegria 2022 | Merchandise | {{category}}
                     {% for ele in merchandise_list %}
                     <div class="col">
                         <a href={{"/merchandise/{}/{}".format(ele['category'],ele['id'])}}
-                            class="d-flex flex-column justify-content-center p-2 rounded-3 main-bg merch-card">
+                            class="d-flex flex-column justify-content-center merch-card">
                             {% if ele['category']=='Tshirts' %}
                             <div class="w-100 d-flex justify-content-center overflow-hidden">
-                                <img src={{ele['img1']}} alt="merchandise-image" height="250px" width="100%"
+                                <img src={{ele['img1']}} alt="merchandise-image" height="220px" width="100%"
                                     class="rounded-3 mb-1">
                             </div>
                             {% endif %}
@@ -127,15 +127,17 @@ Alegria 2022 | Merchandise | {{category}}
                                     class="rounded-3 mb-1">
                             </div>
                             {% endif %}
-                            <h3 class="fs-5 text-red mt-2 mb-0 px-2 main-font text-center">
-                                {{ele['name']}}
-                            </h3>
-                            <p class="text-black sec-font text-center fs-6 mb-1">
-                                {{ele['category']}}
-                            </p>
-                            <h3 class="text-black main-font text-center fs-5">
-                                {{ele['cost']}} ₹
-                            </h3>
+                            <div class="p-2">
+                                <h3 class="fs-5 text-red mt-2 mb-0 px-2 main-font text-center">
+                                    {{ele['name']}}
+                                </h3>
+                                <p class="text-black sec-font text-center fs-7 mb-1">
+                                    {{ele['category']}}
+                                </p>
+                                <h3 class="text-black main-font text-center fs-6">
+                                    {{ele['cost']}} ₹
+                                </h3>
+                            </div>
                         </a>
                     </div>
                     {% endfor %}

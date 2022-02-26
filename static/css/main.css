@@ -6,26 +6,8 @@
     --gray: #696565;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-size: 20px;
-}
 
 /* defaults & common css classes */
-.main-font {
-    font-family: 'gilroy-bold',
-        serif;
-}
-
-.sec-font {
-    font-family: 'gilroy-medium',
-        serif;
-}
 
 .navbar_links {
     color: var(--beige);
@@ -38,10 +20,6 @@ body {
     color: var(--brown);
     display: flex;
     justify-content: center;
-}
-
-.fs-7 {
-    font-size: 0.9rem;
 }
 
 a {
@@ -96,47 +74,12 @@ li {
     transition: all 0.3s ease-out;
 }
 
-
 .input_value:focus {
     border: 2px solid #131fcf;
 }
 
 input[type='file']:focus {
     border: none;
-}
-
-/* colors */
-
-.bg-brown {
-    background-color: var(--brown);
-}
-
-.bg-beige {
-    background-color: var(--beige)
-}
-
-.bg-teal {
-    background-color: var(--teal);
-}
-
-.bg-gray {
-    background-color: var(--gray)
-}
-
-.text-brown {
-    color: var(--brown);
-}
-
-.text-teal {
-    color: var(--teal);
-}
-
-.text-beige {
-    color: var(--beige);
-}
-
-.text-gray {
-    color: var(--gray);
 }
 
 /* nav */
