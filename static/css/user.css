@@ -46,7 +46,7 @@ body {
 }
 
 .bg-red {
-    background-color: var(--u_red);
+    background-color: var(--u_red) !important;
 }
 
 .bg-beige {

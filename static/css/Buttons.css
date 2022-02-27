@@ -149,3 +149,9 @@ button.up-button:hover {
     box-shadow: inset 0px 0.1em 0.6em #842703;
     transform: translateY(0em);
 }
+
+@media screen and (max-width:600px) {
+    .normal-button {
+        font-size: 16px;
+    }
+}

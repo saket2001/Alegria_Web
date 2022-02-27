@@ -2,10 +2,10 @@
 
 {% block title %}
 Quiz Details
-{% endblock %}
+{% endblock title %}
 
 {% block content %}
-<div>
+<div class="container">
     <div class="row my-2 py-2 gy-2">
         <div class="col-lg-3 col-sm-3">
             <a href="/admin/quiz" type="button" class="go_back_btn text-black fs-7">
@@ -13,43 +13,61 @@ Quiz Details
                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg> Go Back
+                </svg>
+                Go Back
             </a>
         </div>
         <div class="col-lg-9 col-sm-12 d-flex justify-content-center align-items-center">
             <h5 class="fs-4 main-font text-red">Quiz Details</h5>
         </div>
     </div>
+
     <div class="row p-2 my-5 g-3">
         <div class="col-12">
             <div class="p-3 my-1 bg-teal shadow rounded-3" style="border: 3px solid var(--navbar);">
-                <h2 class="sec-font fs-7 text-black">
-                    Quiz ID: {{quizdetails[0].quiz_id}}
-                </h2>
-                <!-- <a class="btn outline_btn text-dark fs-7" data-bs-toggle="modal" data-bs-target="#quizmodal">Add Question +</a><hr> -->
-
-                {% for ques in quizdetails %}
-                <h5 class="main-font fs-5 text-red pb-1 ">
-                    Q.{{loop.index}} {{ques.question}}
-                </h5>
-                <h5 class="sec-font fs-6 text-black">
-                    Options:
-                </h5>
                 <p class="sec-font fs-6 text-black mb-1">
-                    {% for option in ques.options %}
-                    {{loop.index}}) {{option}}
+                    To Add Multiple Questions To Quiz, Click on Following Button
                 </p>
-
-                {% endfor %}
-                <a href={{"/admin/quiz/{}/deleteQuestion".format(ques.ques_id)}} class="btn btn-outline-danger">
-                    Delete Question
+                <a class="btn outline_btn text-dark fs-7" data-bs-toggle="modal" data-bs-target="#quizModal">
+                    Add New Question +
                 </a>
+                <hr>
+
+                <h2 class="sec-font fs-7 text-black">
+                    ID: {{quizDetails[0].quiz_id}}
+                </h2>
+
+                {% for ques in quizDetails %}
+                <div class="my-2">
+                    <h5 class="main-font fs-5 text-red pb-1 ">
+                        Q.{{loop.index}} {{ques.question}}
+                    </h5>
+                    <p class="sec-font fs-6 text-black mb-1">
+                        Point: {{ques.ques_point}}
+                    </p>
+                    <p class="sec-font fs-6 text-black mb-1">
+                        Correct Answer: {{ques.correct_answer}}
+                    </p>
+                    <p class="sec-font fs-6 text-black mb-1">
+                        Options:
+                    </p>
+                    {% for option in ques.options %}
+                    <p class="sec-font fs-6 text-black mb-1">
+                        {{loop.index}}) {{option}}
+                    </p>
+                    {% endfor %}
+
+                    <a href={{"/admin/quiz/{}/deleteQuestion".format(ques.ques_id)}}
+                        class="btn btn-outline-danger p-1 px-2 my-1">
+                        Delete Question
+                    </a>
+                </div>
+                {% endfor %}
             </div>
         </div>
-        {% endfor %}
-        </p>
+
         <div class="buttons">
-            <div class="modal fade" id="quizmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="quizModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -58,15 +76,20 @@ Quiz Details
                         </div>
 
                         <form class="modal-body" id="QuizForm"
-                            action={{"/admin/add-quiz/{}".format(quizdetails[0].quiz_id)}} method="post">
-                            {{quizform.csrf_token}}
+                            action={{"/admin/add-quiz/{}".format(quizDetails[0].quiz_id)}} method="post">
+                            {{quizForm.csrf_token}}
                             <p class="mb-0 fs-7 main-font">
                                 Quiz Question
                             </p>
                             <input type="text" class="input_value" placeholder="Quiz Question" name="question">
 
                             <p class="mb-0 fs-7 main-font">
-                                Total No. Of options quiz will have
+                                Quiz Question Point
+                            </p>
+                            <input type="text" class="input_value" placeholder="Quiz Question Point" name="ques_point">
+
+                            <p class="mb-0 fs-7 main-font pt-1">
+                                Total No. Of options question will have
                             </p>
                             <div class="row d-flex align-items-center w-100 my-1">
                                 <div class="col-3 m-0 pe-0">
@@ -75,7 +98,7 @@ Quiz Details
                                         style="width: 90%;border: 1px solid lightgray;">
                                 </div>
                                 <div class="col-7 m-0 ps-0">
-                                    <button type="button" class="button outline_btn text-dark fs-7 py-1"
+                                    <button type="button" class=" up-button border border-dark text-black fs-7 py-1"
                                         id="addNewQuizOptionBtn">
                                         Add +
                                     </button>
@@ -84,7 +107,9 @@ Quiz Details
 
                             <!-- inputs will come from quiz.js -->
                             <div id="quiz-form"></div>
-                            <button type="submit" class="button w-100 my-2 bg-brown text-beige">Save</button>
+                            <button type="submit" class="up-button w-100 my-2 bg-red  text-light">
+                                Save Question
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -92,6 +117,4 @@ Quiz Details
         </div>
     </div>
 </div>
-</div>
-
-{% endblock %}
+{% endblock content %}
