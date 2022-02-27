@@ -1,10 +1,11 @@
 from flask import Blueprint, redirect, render_template, session, request, send_from_directory
 from functools import wraps
 from forms import UserContact, AddToCart
-from models import  Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, PollUserResponse, db, UserInfo, Announcement, EventsToday
+from models import  Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, PollUserResponse, Quiz, QuizUserResponse, db, UserInfo, Announcement, EventsToday
 import basicData as client_data
 from datetime import datetime
 from pathlib import Path
+import helperFunc
 
 # csrf
 # csrf = CSRFProtect()
@@ -620,40 +621,6 @@ def BrochurePage():
 
 
 ##################################
-
-#quiz routes
-# fetches all quiz questions and stats
-@app_mbp.route('/quiz')
-def QuizPage():
-    try:
-        signed_in = False
-        cartLen = None
-        # checks if logged in
-        if session.get('user_id') != None:
-            signed_in = True
-            cartLen = session.get('cartLength')
-        
-        questions_list=[{
-            "question_id":121212,
-            "question":"Where is python lab located in S wing?",
-            "points":30,
-        },{
-            "question_id":1212,
-            "question":"Where is PCE admission cell located in campus?",
-            "points":10,
-        }]
-    
-        # user stats
-        user_stats={
-            "total_score":10,
-            "total_answered":1,
-        }
-        
-        return render_template('user_quiz.html',questions_list=questions_list,user_stats=user_stats,cartLen=cartLen, signed_in=signed_in)
-    
-    except Exception as e:
-        print(e)
-        return redirect('/')
 
 # leaderboard page
 @app_mbp.route('/quiz-leaderboard')

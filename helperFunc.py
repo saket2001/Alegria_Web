@@ -20,3 +20,17 @@ def compareHashValues(hashed_value, value):
         return True
     else:
         return False
+
+# filter values
+def filterList(arr):
+    filteredArr=set(arr)
+    return list(filteredArr)
+
+# compare values across lists
+def compareLists(list1,list2):
+    list3=[]
+    for x in list1:
+        if x not in list2:
+            list3.append(x)
+    
+    return list3

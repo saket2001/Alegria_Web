@@ -1,16 +1,9 @@
-from flask import Flask, session
-from enum import unique
-from unicodedata import category
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 
 # initialize database
 db = SQLAlchemy()
-
-
-# user model should come here
-
 
 # user model should come here
 class Eventdemo(db.Model):
@@ -218,3 +211,10 @@ class QuizOptions(db.Model):
     ques_id = db.Column(db.String(50),nullable=False)
     option_id = db.Column(db.String(50), nullable=False, primary_key=True)
     option_name = db.Column(db.String(50), nullable=False)
+    
+class QuizUserResponse(db.Model):
+    __tablename__ = 'quiz_user_responses'
+    hashed_user_id = db.Column(db.String(50), primary_key=True)
+    quiz_id = db.Column(db.Integer,nullable=False)
+    ques_id = db.Column(db.Integer, primary_key=True)
+    ques_option_id = db.Column(db.String(50),nullable=False)

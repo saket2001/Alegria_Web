@@ -47,13 +47,6 @@ Alegria 2022 | Alegria Quiz 2022
         <div class="row my-4 g-2">
             <!-- quiz questions -->
             <div class="col-lg-7 col-sm-12 pe-1">
-                {% if questions_list==[] %}
-                <h4 class="main-font text-black fs-5">
-                    <i class="fas-solid fa-block-question"></i>
-                    No Quiz Questions Yet....
-                </h4>
-                {% endif %}
-
                 <div class="col p-4 py-2 rounded-3 main-bg shadow mb-3">
                     <!-- quiz instructions -->
                     <h3 class="main-font text-black fs-4 py-1 my-1 text-center">
@@ -80,12 +73,15 @@ Alegria 2022 | Alegria Quiz 2022
                             The quiz is only accessible once.
                         </li>
                     </ul>
+                    {% for quiz_id in quizIds %}
                     <div class="d-flex justify-content-center my-1 pb-3">
                         <button class="buttons" style="width:60%">
-                            <a href="/user/quiz/7f5900a6-979c-11ec-9779-0897987624dc?" class="button_top w-100 text-black"> Proceed To Quiz
+                            <a href={{"/user/quiz/{}?ques_no=1".format(quiz_id)}} class="button_top w-100 text-dark">
+                                Proceed To Quiz {{loop.index}}
                             </a>
                         </button>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
             <!-- user stats -->

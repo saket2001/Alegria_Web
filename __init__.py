@@ -95,7 +95,7 @@ def create_app():
             resp = google.get('userinfo')
             user_info = resp.json()
             user = oauth.google.userinfo()
-            print("---------------------------", user)
+            # s("---------------------------", user)
 
             user_email = user_info.get('email')
             profile_pic = user_info.get('picture')

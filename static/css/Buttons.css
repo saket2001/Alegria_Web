@@ -36,7 +36,6 @@ button.up-button:hover {
     border-radius: var(--button_radius);
     padding: 0.4rem 1rem;
     background: var(--button_color);
-    color: var(--button_outline_color);
     transform: translateY(-0.3em);
     transition: transform 0.1s ease;
 }

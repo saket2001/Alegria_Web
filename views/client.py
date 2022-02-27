@@ -1,9 +1,8 @@
 from flask.helpers import flash
 from flask import Blueprint, redirect, render_template, session, request
 from functools import wraps
-from models import db,  Merchandise, CartRecords
-from models import Cart, Merchandise, UserInfo, Quiz, QuizOptions
-import time
+from models import db,Cart, Merchandise, Quiz, QuizOptions,QuizUserResponse
+import helperFunc
 
 # def login_required(f):
 #     @wraps(f)
@@ -47,12 +46,58 @@ def user_login_required(f):
     return decorated_function
 
 
-# fetches single quiz question
+#quiz routes
+# fetches all quiz questions and stats
+@client_bp.route('/quiz')
+@user_login_required
+def QuizPage():
+    try:
+        signed_in = False
+        cartLen = None
+        # checks if logged in
+        user_id=session.get("user_id")
+        if session.get('user_id') != None:
+            signed_in = True
+            cartLen = session.get('cartLength')
+            
+        # getting quizzes which aren't answered by user
+        quizIds=[]
+        allQuizIDs=[]
+        quizIDsAnswered=[]
+        temp_list1=[]
+        temp_list2=[]
+        
+        # getting unique ids
+        allQuizIDsRaw=Quiz.query.distinct(Quiz.quiz_id)
+        for item in allQuizIDsRaw:
+            temp_list1.append(item.quiz_id)
+        allQuizIDs=helperFunc.filterList(temp_list1)
+        
+        # getting all quiz ids answered by user 
+        quizIDsAnsweredRaw=QuizUserResponse.query.filter_by(hashed_user_id=user_id).all()
+        for item in quizIDsAnsweredRaw:
+            temp_list2.append(item.quiz_id)
+        quizIDsAnswered=helperFunc.filterList(temp_list2)
+        
+        # next add quiz_ids which are not answered by user
+        quizIds=helperFunc.compareLists(allQuizIDs,quizIDsAnswered)
+        
+        # user stats
+        user_stats={
+            "total_score":10,
+            "total_answered":1,
+        }
+        
+        return render_template('user_quiz.html',questions_list=[],user_stats=user_stats,cartLen=cartLen, signed_in=signed_in,quizIds=quizIds)
+    
+    except Exception as e:
+        print(e)
+        return redirect('/')
+
+# fetches single quiz questions
 @client_bp.route('/quiz/<string:quiz_id>')
-# @user_login_required
+@user_login_required
 def AnswerQuizPage(quiz_id):
-    print("Finally inside function")
-    print(quiz_id)
     try:
         signed_in = False
         cartLen = None
@@ -60,76 +105,40 @@ def AnswerQuizPage(quiz_id):
         if session.get('user_id') != None:
             signed_in = True
             cartLen = session.get('cartLength')
-        # questions_list = []
-        # quizop = Quiz.query.all()
-        # print(quizop.quiz_id)
-        # quizopt = QuizOptions.query.all()
-        # quiz = []
-        # sr = 0
-        quiz_data = Quiz.query.filter_by(quiz_id=quiz_id).first()
-        quiz_opt = QuizOptions.query.filter_by(
-            quiz_id=quiz_id).first()
-
-        # res = {
-        #     "type": True,
-        #     "quiz": {
-        #         "sr_no": 1,
-        #         "quiz_id": quiz_data.quiz_id,
-        #         "question_id": quiz_data.ques_id,
-        #         "question": quiz_data.question,
-        #         "points": quiz_data.ques_point,
-        #         "options": [
-        #             {
-        #                 "option_id": quiz_opt.option_id,
-        #                 "option_name": quiz_opt.option_name,
-        #             }, {
-        #                 "option_id": quiz_opt.option_id,
-        #                 "option_name": quiz_opt.option_name,
-        #             }, {
-        #                 "option_id": quiz_opt.option_id,
-        #                 "option_name": quiz_opt.option_name,
-        #             }, {
-        #                 "option_id": quiz_opt.option_id,
-        #                 "option_name": quiz_opt.option_name,
-        #             }
-        #         ],
-        #     }
-
-        # }
-        # print(res)
-        quiz = [
-            {
-                "sr_no": 1,
-                "quiz_id": quiz_data.quiz_id,
-                "question_id": quiz_data.ques_id,
-                "question": quiz_data.question,
-                "points": quiz_data.ques_point,
-                "options": [
-                    {
-                        "option_id": quiz_opt.option_id,
-                        "option_name": quiz_opt.option_name,
-                    }, {
-                        "option_id": quiz_opt.option_id,
-                        "option_name": quiz_opt.option_name,
-                    }, {
-                        "option_id": quiz_opt.option_id,
-                        "option_name": quiz_opt.option_name,
-                    }, {
-                        "option_id": quiz_opt.option_id,
-                        "option_name": quiz_opt.option_name,
-                    }
-                ],
-            },
-        ]
+            
+        # getting quiz data
+        quiz=[]
+        quizData = Quiz.query.filter_by(quiz_id=quiz_id).all()
+        
+        for details in quizData:
+            quiz_question={
+                "quiz_id":details.quiz_id,
+                "ques_id":details.ques_id,
+                "question":details.question,
+                "ques_point":details.ques_point,
+                "options":[]
+            }
+            
+            # fetch options of the current question
+            quesOptions=QuizOptions.query.filter_by(
+            ques_id=details.ques_id).all()
+            
+            for option in quesOptions:
+                quiz_question['options'].append({
+                    "option_id":option.option_id,
+                    "option_name":option.option_name,
+                })
+            
+            quiz.append(quiz_question)
+            
+        print(quiz)
+        
         current_question = int(request.args.get("ques_no"))
         quiz_question = quiz[current_question-1]
 
         input_labels = ['A', 'B', 'C', 'D', 'E']
         for i, option in enumerate(quiz_question["options"]):
             option['label'] = input_labels[i]
-
-        print("###########")
-        print(current_question)
 
         return render_template('/client/user_quiz_question.html', quiz=quiz_question, cartLen=cartLen, signed_in=signed_in, total_questions=len(quiz)-1, enumerate=enumerate, current_question=current_question-1)
 
@@ -138,8 +147,6 @@ def AnswerQuizPage(quiz_id):
         # return redirect('/')
 
 # quiz submit route
-
-
 @ client_bp.route('/quiz/check-answer/<string:quiz_id>/<int:ques_no>', methods=["POST"])
 # @user_login_required
 def submitQuizResponse(quiz_id, ques_no):
