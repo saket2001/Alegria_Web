@@ -2,7 +2,7 @@ from flask.helpers import flash
 from flask import Blueprint, redirect, render_template, session, request
 from functools import wraps
 from models import db,  Merchandise, CartRecords
-from models import Cart, Merchandise, UserInfo
+from models import Cart, Merchandise, UserInfo, Quiz, QuizOptions
 import time
 
 # def login_required(f):
@@ -28,7 +28,7 @@ client_bp = Blueprint('client', __name__,
 
 #############################
 # helper functions
-        
+
 #############################
 # client page routes
 def user_login_required(f):
@@ -47,11 +47,12 @@ def user_login_required(f):
     return decorated_function
 
 
-
-# fetches single quiz question 
+# fetches single quiz question
 @client_bp.route('/quiz/<string:quiz_id>')
 # @user_login_required
 def AnswerQuizPage(quiz_id):
+    print("Finally inside function")
+    print(quiz_id)
     try:
         signed_in = False
         cartLen = None
@@ -59,90 +60,102 @@ def AnswerQuizPage(quiz_id):
         if session.get('user_id') != None:
             signed_in = True
             cartLen = session.get('cartLength')
-        
-        # fetch quiz based on id
-        quiz=[
+        # questions_list = []
+        # quizop = Quiz.query.all()
+        # print(quizop.quiz_id)
+        # quizopt = QuizOptions.query.all()
+        # quiz = []
+        # sr = 0
+        quiz_data = Quiz.query.filter_by(quiz_id=quiz_id).first()
+        quiz_opt = QuizOptions.query.filter_by(
+            quiz_id=quiz_id).first()
+
+        # res = {
+        #     "type": True,
+        #     "quiz": {
+        #         "sr_no": 1,
+        #         "quiz_id": quiz_data.quiz_id,
+        #         "question_id": quiz_data.ques_id,
+        #         "question": quiz_data.question,
+        #         "points": quiz_data.ques_point,
+        #         "options": [
+        #             {
+        #                 "option_id": quiz_opt.option_id,
+        #                 "option_name": quiz_opt.option_name,
+        #             }, {
+        #                 "option_id": quiz_opt.option_id,
+        #                 "option_name": quiz_opt.option_name,
+        #             }, {
+        #                 "option_id": quiz_opt.option_id,
+        #                 "option_name": quiz_opt.option_name,
+        #             }, {
+        #                 "option_id": quiz_opt.option_id,
+        #                 "option_name": quiz_opt.option_name,
+        #             }
+        #         ],
+        #     }
+
+        # }
+        # print(res)
+        quiz = [
             {
-                "sr_no":1,
-                "quiz_id":1212,
-                "question_id":1,
-                "question":"Where is PCE admission cell located in campus?",
-                "points":10,
-                "options":[
+                "sr_no": 1,
+                "quiz_id": quiz_data.quiz_id,
+                "question_id": quiz_data.ques_id,
+                "question": quiz_data.question,
+                "points": quiz_data.ques_point,
+                "options": [
                     {
-                        "option_id":'1sj12012',
-                        "option_name":"S302",    
-                    },{
-                        "option_id":'1sj12012',
-                        "option_name":"S300",    
-                    },{
-                        "option_id":'1sj12012',
-                        "option_name":"L302",    
-                    },{
-                        "option_id":'1sj12012',
-                        "option_name":"L102",    
+                        "option_id": quiz_opt.option_id,
+                        "option_name": quiz_opt.option_name,
+                    }, {
+                        "option_id": quiz_opt.option_id,
+                        "option_name": quiz_opt.option_name,
+                    }, {
+                        "option_id": quiz_opt.option_id,
+                        "option_name": quiz_opt.option_name,
+                    }, {
+                        "option_id": quiz_opt.option_id,
+                        "option_name": quiz_opt.option_name,
                     }
-                    ],
-            },
-            {   
-                "sr_no":1,
-                "quiz_id":1212,
-                "question_id":2,
-                "question":"Where is PCE office located in campus?",
-                "points":10,
-                "options":[
-                    {
-                        "option_id":'1sj12012',
-                        "option_name":"S302",    
-                    },{
-                        "option_id":'1sj12012',
-                        "option_name":"S300",    
-                    },{
-                        "option_id":'1sj12012',
-                        "option_name":"L302",    
-                    },{
-                        "option_id":'1sj12012',
-                        "option_name":"L102",    
-                    }
-                    ],
+                ],
             },
         ]
-        
-        #send quiz question one by one
-        current_question=int(request.args.get("ques_no"));
-        quiz_question=quiz[current_question-1]
-        
-        input_labels=['A','B','C','D','E']
-        for i,option in enumerate(quiz_question["options"]):
-            option['label']=input_labels[i]
-            
+        current_question = int(request.args.get("ques_no"))
+        quiz_question = quiz[current_question-1]
+
+        input_labels = ['A', 'B', 'C', 'D', 'E']
+        for i, option in enumerate(quiz_question["options"]):
+            option['label'] = input_labels[i]
+
         print("###########")
         print(current_question)
-        
-        return render_template('/client/user_quiz_question.html',quiz=quiz_question,cartLen=cartLen, signed_in=signed_in,total_questions=len(quiz)-1,enumerate=enumerate,current_question=current_question-1)
-    
+
+        return render_template('/client/user_quiz_question.html', quiz=quiz_question, cartLen=cartLen, signed_in=signed_in, total_questions=len(quiz)-1, enumerate=enumerate, current_question=current_question-1)
+
     except Exception as e:
         print(e)
         # return redirect('/')
 
-#quiz submit route
-@client_bp.route('/quiz/check-answer/<string:quiz_id>/<int:ques_no>',methods=["POST"])
+# quiz submit route
+
+
+@ client_bp.route('/quiz/check-answer/<string:quiz_id>/<int:ques_no>', methods=["POST"])
 # @user_login_required
-def submitQuizResponse(quiz_id,ques_no):
+def submitQuizResponse(quiz_id, ques_no):
     try:
         # gets the selected option's value
-        selected_answer=request.form.get('selected-answer')
-        
-        #check ques_no===quiz total questions for ending quiz
-        
-        if(selected_answer==None):
+        selected_answer = request.form.get('selected-answer')
+
+        # check ques_no===quiz total questions for ending quiz
+
+        if(selected_answer == None):
             print(ques_no)
             flash("Please select a answer for getting points !!")
-            return redirect('/user/quiz/{}?ques_no={}'.format(quiz_id,ques_no+1))
+            return redirect('/user/quiz/{}?ques_no={}'.format(quiz_id, ques_no+1))
         else:
-            return redirect('/user/quiz/{}?ques_no={}'.format(quiz_id,ques_no+2))
+            return redirect('/user/quiz/{}?ques_no={}'.format(quiz_id, ques_no+2))
 
-    
     except Exception as e:
         print(e)
         # return redirect('/')
@@ -150,8 +163,8 @@ def submitQuizResponse(quiz_id,ques_no):
 
 ######################################
 
-@client_bp.route('/addToCart/<string:id>', methods=['POST'])
-@user_login_required
+@ client_bp.route('/addToCart/<string:id>', methods=['POST'])
+@ user_login_required
 def AddToCart(id):
     if session.get('user_id') == None:
         flash("You haven't logged in to your account!")
@@ -198,8 +211,8 @@ def AddToCart(id):
 # fetch cart logic
 
 
-@client_bp.route('/cart')
-@user_login_required
+@ client_bp.route('/cart')
+@ user_login_required
 def cartPage():
     try:
         user_id = session.get('user_id')

@@ -2,7 +2,7 @@ from flask import Flask, redirect, url_for, session
 from flask.helpers import flash
 from flask_restful import Api
 from authlib.integrations.flask_client import OAuth
-from models import UserInfo, APIKeys,Cart
+from models import UserInfo, APIKeys, Cart
 from datetime import datetime
 from flask_hashing import Hashing
 import helperFunc
@@ -209,5 +209,6 @@ def create_app():
     # enable csrf
     # csrf.init_app(app)
     return app
+
 
 create_app()
