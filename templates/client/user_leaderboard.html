@@ -9,7 +9,7 @@ Alegria 2022 | Quiz Leaderboard
     <div class="container py-3">
         <div class="row my-2">
             <div class="col-sm-auto col-lg-2">
-                <a href="/quiz" class="sec-font text-black go_back_btn py-1">
+                <a href="/user/quiz" class="sec-font text-dark go_back_btn py-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="me-2"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -30,14 +30,18 @@ Alegria 2022 | Quiz Leaderboard
                     <div class='dropdown-toggle fs-7' id="dropdownMenuButton1" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Filter by
-                        latest
+                        Rank
                     </div>
                     <ul class="dropdown-menu main-bg" aria-labelledby="dropdownMenuButton1">
                         <li>
-                            <a class="dropdown-item" href="/quiz-leaderboard?filter=asc">By Asc</a>
+                            <a class="dropdown-item fs-6" href="/user/quiz-leaderboard?order=highest">
+                                By High
+                            </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/quiz-leaderboard?filter=desc">By Desc</a>
+                            <a class="dropdown-item fs-6" href="/user/quiz-leaderboard?order=lowest">
+                                By Low
+                            </a>
                         </li>
                     </ul>
                 </li>
@@ -67,7 +71,8 @@ Alegria 2022 | Quiz Leaderboard
                         {% if ele["p_image"]== "" %}
                         <i class="fa-solid fa-circle-user fs-4"></i>
                         {% else %}
-                        <img src={{ele["p_image"]}} alt="user profile image" style="width: 60%;border-radius: 100%;">
+                        <img src={{ele["p_image"]}} alt="user profile image"
+                            style="width: 20%;height:20%;border-radius: 100%;">
                         {% endif %}
                     </td>
                     <td>

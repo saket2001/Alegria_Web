@@ -163,13 +163,13 @@ def create_app():
                     return redirect('/')
 
             else:
-                # user entry
+                # user entry (sign up)
                 user_id = helperFunc.hashValue(user_email)
                 email = user_email
                 name = user_name
                 image_url = profile_pic
                 entry = UserInfo(id=user_id, email=email, name=name,
-                                 image_url=image_url, date_registered=datetime.now())
+                                 image_url=image_url, date_registered=datetime.now(),quizzes_score=0)
                 db.session.add(entry)
                 db.session.commit()
 

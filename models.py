@@ -37,7 +37,7 @@ class UserInfo(db.Model):
     college_name = db.Column(db.String(100), nullable=True)
     date_registered = db.Column(db.String(30), nullable=True)
     isAdmin = db.Column(db.String(10), default=False)
-    # cart_user_id = db.relationship('Cart', backref='userinfo', lazy=True)
+    quizzes_score=db.Column(db.Integer,nullable=False)
 
     def __repr__(self, email, name, image_url, isAdmin):
         return f"UserInfo('{self.email}'-'{self.name}'-'{self.image_url}'-'{self.phone_number}'-'{self.college_name}'-'{self.isadmin}')"

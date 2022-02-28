@@ -1,7 +1,8 @@
 from flask.helpers import flash
 from flask import Blueprint, redirect, render_template, session, request
 from functools import wraps
-from models import db,Cart, Merchandise, Quiz, QuizOptions,QuizUserResponse
+from models import UserInfo, db,Cart, Merchandise, Quiz, QuizOptions,QuizUserResponse,CartRecords
+from sqlalchemy import asc, desc
 import helperFunc
 
 # def login_required(f):
@@ -165,13 +166,49 @@ def submitQuizResponse(quiz_id, ques_no):
 
     except Exception as e:
         print(e)
-        # return redirect('/')
+        return redirect('/')
+        
+#####################
+# leaderboard page
+@client_bp.route('/quiz-leaderboard')
+def leaderboardPage():
+    try:
+        signed_in = False
+        cartLen = None
+        # checks if logged in
+        if session.get('user_id') != None:
+            signed_in = True
+            cartLen = session.get('cartLength')
+        
+        # by default show newest announcements first
+        leaderboard_list=[]
+        filter_value = request.args['order']
+        if filter_value == "highest":
+            usersData = UserInfo.query.order_by(desc("quizzes_score")).all()
+        else:
+            usersData = UserInfo.query.order_by(asc("quizzes_score")).all()
+
+        if usersData:
+            for i,item in enumerate(usersData):
+                leaderboard_list.append({
+                "rank":i+1,
+                "p_image":item.image_url,
+                "full_name":item.name,
+                "college_name":item.college_name,
+                "score":item.quizzes_score,
+            })
+    
+        return render_template('/client/user_leaderboard.html',leaderboard_list=leaderboard_list,cartLen=cartLen, signed_in=signed_in)
+    
+    except Exception as e:
+        print(e)
+        return redirect('/')
 
 
 ######################################
 
-@ client_bp.route('/addToCart/<string:id>', methods=['POST'])
-@ user_login_required
+@client_bp.route('/addToCart/<string:id>', methods=['POST'])
+@user_login_required
 def AddToCart(id):
     if session.get('user_id') == None:
         flash("You haven't logged in to your account!")
@@ -215,9 +252,8 @@ def AddToCart(id):
             print(e)
             return redirect('/')
 
+
 # fetch cart logic
-
-
 @ client_bp.route('/cart')
 @ user_login_required
 def cartPage():
