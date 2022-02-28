@@ -5,10 +5,12 @@ from flask import request, json
 from flask_hashing import Hashing
 import random, string
 from functools import wraps
+from helperFunc import generate_global_api_key
+import re
 
 # A default rate limit of 200 per day, and 50 per hour applied to all routes.
 # Add hashlib.sha256
-secret_api_key = "some key"
+secret_api_key = generate_global_api_key()
 hashing = Hashing()
 
 
@@ -49,9 +51,10 @@ class IdFilterEventAPI(Resource):
 
         event_details = Eventdemo_details.query.filter_by(
             event_id=event.id).first()
-        event_raw_rules = event_details.event_rules.replace("<ol>", "").replace("</ol>","").replace("<li>", "").replace("</li>","").replace("\r","").split("\n")
+        CLEANR = re.compile('<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});')
+        cleantext = re.sub(CLEANR, '', event_details.event_rules)
+        event_raw_rules = cleantext.split("#015#012")[0].replace("\r","").split("\n")
         event_rules = [rule for rule in event_raw_rules if rule != ""]
-
         event_raw_contacts = [event.event_contact1, event.event_contact2, event.event_contact3, event.event_contact4]
         event_contacts = [contact for contact in event_raw_contacts if contact != None]
 
@@ -318,3 +321,25 @@ class DeleteUser(Resource):
             }, 204
         else:
             return {}, 404
+
+
+class UpdateUserAPI(Resource):
+
+    @global_api_key_required
+    @user_api_key_required
+    def put(self):
+        user_api_key = request.headers.get("User-API-Key")
+        user_api_key = APIKeys.query.filter_by(api_key=user_api_key).first()
+        user_id = user_api_key.user_id
+        user = UserInfo.query.filter_by(id=user_id).first()
+
+        data = json.loads(request.data)
+        name = data["name"]
+        phone_number = data["phone_number"]
+        college_name = data["college_name"]
+        user.name = name
+        user.phone_number = phone_number
+        user.college_name = college_name
+        db.session.commit()
+
+        return {},200

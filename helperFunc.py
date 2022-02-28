@@ -1,7 +1,7 @@
 # This file contains all the helper functions needed in backend
 ######################
 from flask_hashing import Hashing
-
+from decouple import config
 
 hashing = Hashing()
 ######################
@@ -20,3 +20,8 @@ def compareHashValues(hashed_value, value):
         return True
     else:
         return False
+
+
+def generate_global_api_key():
+    api_key = hashing.hash_value(config("SESSION_KEY"), salt="alegriahashkey")
+    return api_key

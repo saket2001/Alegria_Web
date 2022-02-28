@@ -3,6 +3,7 @@ from flask.helpers import flash
 from flask_restful import Api
 from dotenv import load_dotenv
 from authlib.integrations.flask_client import OAuth
+from Alegria_Web.views.api import UpdateUserAPI
 from models import UserInfo, APIKeys
 from datetime import datetime
 from flask_hashing import Hashing
@@ -63,6 +64,7 @@ def create_app():
     api.add_resource(VerifyEmail, "/verify-email/<string:hashed_id>")
     api.add_resource(RegisterEmail, "/register-user")
     api.add_resource(DeleteUser, "/user/delete")
+    api.add_resource(UpdateUserAPI, "/user/update-user")
 
     load_dotenv()
     oauth = OAuth(app)
