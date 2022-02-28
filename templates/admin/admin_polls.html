@@ -1,5 +1,11 @@
 {% extends '/admin/admin_layout.html' %}
 
+
+{% block headContent %}
+<script defer src="/static/js/polls.js"></script>
+{% endblock headContent %}
+
+
 {% block title %}
 Alegria 2022 | Admin Polls
 {% endblock %}
@@ -9,10 +15,10 @@ Alegria 2022 | Admin Polls
 <div class="container">
     <div class="row d-flex align-items-center">
         <div class="col-md-auto my-1 mt-3">
-            <a href="#" class="spl-button fs-7" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button class="normal-button fs-7" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <span></span>
                 Add Poll +
-            </a>
+            </button>
         </div>
     </div>
 </div>
@@ -26,12 +32,14 @@ Alegria 2022 | Admin Polls
         <h6 class='text-danger'>{{ele["status"]}}</h6>&nbsp;&nbsp;&nbsp;&nbsp;
         <h6 class='text-black'>{{ele["total_votes"]}} Votes</h6>&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
-    <div class="buttons" style="margin-top:2%">
+    <div style="margin-top:2%">
         <a href={{"/admin/polls/{}/details".format(ele["id"])}} class="btn bg-brown text-beige py-1 px-2 fs-7">VIEW
         </a>
         &nbsp;
         <a href={{ "/admin/polls/{}/deletepoll" .format(ele[ "id" ])}}
-            class="btn btn-outline-danger py-1 px-2 fs-7 border-2">DELETE</a>
+            class="btn btn-outline-danger py-1 px-2 fs-7 border-2">
+            DELETE
+        </a>
     </div>
 </div>
 {% endfor %}
@@ -61,7 +69,8 @@ Alegria 2022 | Admin Polls
                             style="width: 90%;border: 1px solid lightgray;">
                     </div>
                     <div class="col-7 m-0 ps-0">
-                        <button type="button" class="button outline_btn text-dark fs-7 py-1" id="addNewPollOptionBtn">
+                        <button type="button" class="btn text-dark border border-dark rounded-2 fs-7 p-1 px-2"
+                            id="addNewPollOptionBtn">
                             Add +
                         </button>
                     </div>
@@ -69,7 +78,7 @@ Alegria 2022 | Admin Polls
 
                 <!-- inputs will come from poll.js -->
                 <div id="poll-form"></div>
-                <button type="submit" class="button w-100 my-2 bg-brown text-beige">Save Poll</button>
+                <button type="submit" class="normal-button w-100 my-2">Save Poll</button>
             </form>
         </div>
     </div>
