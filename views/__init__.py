@@ -614,7 +614,7 @@ def BrochurePage():
     try:
         BASE_DIR = Path(__file__).resolve().parent.parent
         exactPath = str(BASE_DIR) + "/static" + "/" + "files/"
-        return send_from_directory(exactPath, "sample-brochure-2022.pdf")
+        return send_from_directory(exactPath, "EBrochure2022.pdf")
     except Exception as e:
         print(e)
         return redirect("/")

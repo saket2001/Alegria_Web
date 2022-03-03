@@ -10,7 +10,8 @@ button.up-button {
 }
 
 button.up-button:hover {
-    transform: translateY(-4px) !important;
+    /* transform: translateY(-4px) !important; */
+    transform: scale(0.95) !important;
 }
 
 

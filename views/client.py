@@ -132,7 +132,7 @@ def AnswerQuizPage(quiz_id):
             
             quiz.append(quiz_question)
             
-        print(quiz)
+        # print(quiz)
         
         current_question = int(request.args.get("ques_no"))
         quiz_question = quiz[current_question-1]

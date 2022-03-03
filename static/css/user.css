@@ -134,10 +134,11 @@ body {
 }
 
 .bg-cover {
-    background-color: var(--u_beige);
+    background-color: var(--u_bg);
     background-image: url("/static/images/cover.png");
     background-position: center;
-    background-size: contain;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 /* fix for a color change on hover */
@@ -316,6 +317,10 @@ a.text-black:hover {
     color: var(--u_beige);
     padding: 0.3rem 0.6rem;
     margin: 0 0.2rem;
+}
+
+.dropdown-item a {
+    font-size: 0.9rem !important;
 }
 
 /* 
@@ -834,6 +839,10 @@ h1 {
     .navbar-main .navbar_links,
     .navbar_links {
         font-size: 1.1rem;
+    }
+
+    .dropdown-item a {
+        font-size: 0.9rem !important;
     }
 
     .navbar-collapse {

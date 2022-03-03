@@ -49,17 +49,17 @@ li {
     justify-content: center;
     padding: 0.25rem 0.6rem;
     outline: none;
-    border: 2px solid var(--brown);
-    border-radius: 6px;
+    border-radius: 8px;
+    border: 2px solid transparent;
     font-size: 0.9rem;
-    color: var(--brown);
-    font-weight: 700;
+    color: var(--black);
+    font-weight: 600;
     background-color: transparent;
     transition: all .5s ease-out;
 }
 
 .go_back_btn:hover {
-    transform: scale(0.95);
+    border: 2px solid var(--black);
 }
 
 .input_value {
