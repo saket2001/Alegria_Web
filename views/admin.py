@@ -8,6 +8,8 @@ from datetime import date
 from flask_wtf.csrf import CSRFProtect
 from functools import wraps
 from flask import Blueprint, redirect, render_template, session, request
+from flask_hashing import Hashing
+import helperFunc
 
 
 def admin_login_required(f):
@@ -84,7 +86,7 @@ def adminLogin():
 
 
 @admin_bp.route('/')
-#@admin_login_required
+# @admin_login_required
 def home():
     try:
         today = date.today()
@@ -109,7 +111,7 @@ def home():
 
 
 @admin_bp.route('/events/<event_category>', methods=['GET', 'POST'])
-#@admin_login_required
+# @admin_login_required
 def events(event_category):
     # form
     try:
@@ -118,7 +120,7 @@ def events(event_category):
         filter_category_events = Eventdemo.query.filter_by(
             event_category_name=event_category).all()
 
-        res = { 
+        res = {
             "type": True,
             "events": []
         }
@@ -150,7 +152,7 @@ def events(event_category):
 
 
 @admin_bp.route('/add-event', methods=["POST"])
-#@admin_login_required
+# @admin_login_required
 def addEvent():
     if request.method == "POST":
         try:
@@ -204,7 +206,7 @@ def addEvent():
 
 
 @admin_bp.route("/events/<category>/<event_id>/view", methods=['GET', 'POST'])
-#@admin_login_required
+# @admin_login_required
 def editEventDetails(category, event_id):
     try:
 
@@ -251,7 +253,7 @@ def editEventDetails(category, event_id):
 
 
 @ admin_bp.route("/events/<category>/<event_id>/delete", methods=['GET', 'POST'])
-#@admin_login_required
+# @admin_login_required
 def deleteevent(category, event_id):
     try:
         post = Eventdemo.query.filter_by(id=event_id).first()
@@ -267,7 +269,7 @@ def deleteevent(category, event_id):
 
 
 @ admin_bp.route("/events/event-registrations")
-##@admin_login_required
+# @admin_login_required
 def eventRegistrations():
     # get info from api in List of Dictionaries format as below
     try:
@@ -290,7 +292,7 @@ def eventRegistrations():
 
 # merchandise routes
 @ admin_bp.route("/merchandise/<string:category>")
-#@admin_login_required
+# @admin_login_required
 def merchandise(category):
     try:
         # form
@@ -303,7 +305,7 @@ def merchandise(category):
             "merchandise_List": []
         }
         for item in merchandise_List:
-            res["merchandise_List"].append({ 
+            res["merchandise_List"].append({
                 "id": item.id,
                 "name": item.name,
                 "details": item.details,
@@ -319,7 +321,7 @@ def merchandise(category):
 
 
 @admin_bp.route("/add-merchandise", methods=["post"])
-#@admin_login_required
+# @admin_login_required
 def addMerchandise():
     try:
         id = request.form.get('id')
@@ -348,7 +350,7 @@ def addMerchandise():
 
 
 @ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/view", methods=["GET"])
-#@admin_login_required
+# @admin_login_required
 def editMerchandiseDetails(merchandise_category, merchandise_id):
     try:
         merch = Merchandise.query.filter_by(id=merchandise_id).first()
@@ -384,7 +386,7 @@ def editMerchandiseDetails(merchandise_category, merchandise_id):
 
 
 @ admin_bp.route("/merchandise/<merchandise_category>/<merchandise_id>/delete", methods=["GET", "POST"])
-#@admin_login_required
+# @admin_login_required
 def deletemerchandise(merchandise_category, merchandise_id):
     try:
         merch = Merchandise.query.filter_by(id=merchandise_id).first()
@@ -399,7 +401,7 @@ def deletemerchandise(merchandise_category, merchandise_id):
 
 # poll routes
 @ admin_bp.route("/polls/<poll_id>/details")
-##@admin_login_required
+# @admin_login_required
 def poll_details(poll_id):
     try:
         pollsList = Poll.query.filter_by(poll_id=poll_id).first()
@@ -419,14 +421,14 @@ def poll_details(poll_id):
                 "option_votes": ele.option_votes
             })
         return render_template('/admin/admin_poll_details.html', activeNav='poll_details', polldetails=res["polldetails"])
-    
+
     except Exception as e:
         print(e)
         return redirect("/")
 
 
 @ admin_bp.route("/polls")
-##@admin_login_required
+# @admin_login_required
 def polls():
     try:
         form = AddPollForm()
@@ -491,6 +493,7 @@ def AddNewPoll():
 
     return redirect('/admin/polls')
 
+
 @ admin_bp.route("/polls/<poll_id>/deletepoll", methods=["GET", "POST"])
 def deletepoll(poll_id):
     try:
@@ -513,8 +516,8 @@ def togglestatus(poll_id):
     current_status = request.args.get('status')
     print(current_status)
     try:
-        new_status= Poll.query.filter_by(poll_id=poll_id).first()
-        new_status.status= 'Expired'
+        new_status = Poll.query.filter_by(poll_id=poll_id).first()
+        new_status.status = 'Expired'
         db.session.commit()
         print(new_status)
         #flash("Poll Status has been turned off")
@@ -694,52 +697,58 @@ def allUsersPage():
 def adminQuizzes():
     quizform = QuizForm()
     quizList = Quiz.query.all()
-    quizzes=[]
+    quizzes = []
     for item in quizList:
-        ele={
-                'quiz_id':item.quiz_id,
-                "question":item.question,
-                "ques_point":item.ques_point,
-                "date":item.date,
-            }
+        ele = {
+            'quiz_id': item.quiz_id,
+            "question": item.question,
+            "ques_point": item.ques_point,
+            "date": item.date,
+        }
         if ele not in quizzes:
             quizzes.append(ele)
-            
-    return render_template("/admin/admin_quizzes.html",activeNav="quiz",quizform=quizform,quizzes=quizzes)
+
+    return render_template("/admin/admin_quizzes.html", activeNav="quiz", quizform=quizform, quizzes=quizzes)
+
 
 @admin_bp.route('/add-quiz/<quiz_id>', methods=["post"])
 @admin_login_required
 def AddNewQuiz(quiz_id):
     try:
-        if quiz_id=='new':
+        if quiz_id == 'new':
             quiz_id = uuid.uuid1()
-            
+
         ques_id = uuid.uuid1()
         question = request.form.get('question')
-        ques_point=request.form.get("ques_point")
+        ques_point = request.form.get("ques_point")
         correct_answer = request.form.get('Option 1 Name (Correct Option)')
         date = datetime.datetime.now().strftime("%x")
-        newQuiz = Quiz(quiz_id=quiz_id,ques_id=ques_id, question=question, date=date, correct_answer=correct_answer,ques_point=ques_point)
+        correct_hash = helperFunc.hashValue(correct_answer)
+        newQuiz = Quiz(quiz_id=quiz_id, ques_id=ques_id, question=question,
+                       date=date, correct_answer=correct_answer, ques_point=ques_point, correct_hash=correct_hash)
         db.session.add(newQuiz)
         db.session.commit()
-        
+
         totalOptions = request.form.get('optionsNumber')
         option_id = uuid.uuid1()
-        option_add= QuizOptions(quiz_id=quiz_id,ques_id=ques_id, option_id=option_id, option_name=correct_answer)
+        option_add = QuizOptions(
+            quiz_id=quiz_id, ques_id=ques_id, option_id=option_id, option_name=correct_answer)
         db.session.add(option_add)
         db.session.commit()
-        
-        for i in range(2,int(totalOptions)+1):
-            ques_id=ques_id
+
+        for i in range(2, int(totalOptions)+1):
+            ques_id = ques_id
             option_id = uuid.uuid1()
             option_name = request.form.get('Option {} Name'.format(i))
-            quizOption = QuizOptions(quiz_id=quiz_id,ques_id=ques_id, option_id=option_id, option_name= option_name)
+            quizOption = QuizOptions(
+                quiz_id=quiz_id, ques_id=ques_id, option_id=option_id, option_name=option_name)
             db.session.add(quizOption)
             db.session.commit()
-            
+
         return redirect('/admin/quiz/'+str(quiz_id)+'/details')
     except Exception as e:
         print(e)
+
 
 @admin_bp.route('/quiz/<quiz_id>/deletequiz')
 @admin_login_required
@@ -758,24 +767,27 @@ def deleteQuiz(quiz_id):
         print(e)
         return redirect("/")
 
+
 @admin_bp.route('/quiz/<quiz_id>/details')
 @admin_login_required
 def QuizDetails(quiz_id):
     try:
-        quizDetails=[]
-        quizzes=Quiz.query.filter_by(quiz_id=quiz_id).all()
-    
+        quizDetails = []
+        quizzes = Quiz.query.filter_by(quiz_id=quiz_id).all()
+
         for item in quizzes:
-            quiz_options=QuizOptions.query.filter_by(ques_id=item.ques_id).all()
-            li=[]
+            quiz_options = QuizOptions.query.filter_by(
+                ques_id=item.ques_id).all()
+            li = []
             for option in quiz_options:
                 li.append(option.option_name)
-            quizDetails.append({'quiz_id':quiz_id,'question':item.question,'ques_id':item.ques_id,'options':li,'ques_point':item.ques_point,"correct_answer":item.correct_answer})
-            
-        quizForm=QuizForm()
-    
-        return render_template('/admin/admin_quiz_details.html',quizDetails=quizDetails,quizForm=quizForm)
-    
+            quizDetails.append({'quiz_id': quiz_id, 'question': item.question, 'ques_id': item.ques_id,
+                               'options': li, 'ques_point': item.ques_point, "correct_answer": item.correct_answer})
+
+        quizForm = QuizForm()
+
+        return render_template('/admin/admin_quiz_details.html', quizDetails=quizDetails, quizForm=quizForm)
+
     except Exception as e:
         print(e)
         # return redirect("/")

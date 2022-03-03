@@ -6,6 +6,8 @@ from datetime import datetime
 db = SQLAlchemy()
 
 # user model should come here
+
+
 class Eventdemo(db.Model):
     __tablename__ = 'eventdemo'
     id = db.Column(db.Integer, primary_key=True)
@@ -37,6 +39,7 @@ class UserInfo(db.Model):
     college_name = db.Column(db.String(100), nullable=True)
     date_registered = db.Column(db.String(30), nullable=True)
     isAdmin = db.Column(db.String(10), default=False)
+    quizzes_score = db.Column(db.Integer())
     # cart_user_id = db.relationship('Cart', backref='userinfo', lazy=True)
 
     def __repr__(self, email, name, image_url, isAdmin):
@@ -196,25 +199,29 @@ class Categories(db.Model):
     name = db.Column(db.String(50), nullable=False)
     img_url = db.Column(db.String(300), nullable=False)
 
+
 class Quiz(db.Model):
     __tablename__ = 'quizzes'
     quiz_id = db.Column(db.String(50))
     ques_id = db.Column(db.String(50), nullable=False, primary_key=True)
     question = db.Column(db.String(300), nullable=False)
     correct_answer = db.Column(db.String(50), nullable=False)
+    correct_hash = db.Column(db.String(50), unique=True)
     ques_point = db.Column(db.Integer, nullable=False)
     date = db.Column(db.Text(10), nullable=False)
+
 
 class QuizOptions(db.Model):
     __tablename__ = 'quiz_options'
     quiz_id = db.Column(db.String(50))
-    ques_id = db.Column(db.String(50),nullable=False)
+    ques_id = db.Column(db.String(50), nullable=False)
     option_id = db.Column(db.String(50), nullable=False, primary_key=True)
     option_name = db.Column(db.String(50), nullable=False)
-    
+
+
 class QuizUserResponse(db.Model):
     __tablename__ = 'quiz_user_responses'
     hashed_user_id = db.Column(db.String(50), primary_key=True)
-    quiz_id = db.Column(db.Integer,nullable=False)
+    quiz_id = db.Column(db.Integer, nullable=False)
     ques_id = db.Column(db.Integer, primary_key=True)
-    ques_option_id = db.Column(db.String(50),nullable=False)
+    ques_option_id = db.Column(db.String(50), nullable=False)
