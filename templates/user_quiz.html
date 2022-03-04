@@ -1,0 +1,153 @@
+{% extends 'user_layout.html' %}
+
+
+{% block headContent %}
+<style>
+    .quiz_instructions {
+        padding: 1rem 2rem;
+    }
+
+    @media screen and (max-width:600px) {
+        .quiz_instructions {
+            padding: 1rem 1.2rem;
+        }
+    }
+</style>
+
+
+{% endblock headContent %}
+
+
+{% block title %}
+Alegria 2022 | Alegria Quiz 2022
+{% endblock %}
+
+{% block content %}
+<div class="bg-cover min-vh-100">
+    <div class="container py-2 h-100">
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show d-flex align-items-center position-absolute main-font main-bg flash"
+            role="alert">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 me-2" fill="none" viewBox="0 0 24 24" width="30px"
+                height="30px" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
+        <div class="row my-2">
+            <div class="col text-center">
+                <h2 class="main-font text-red fs-4">
+                    Alegria Quiz 2022
+                </h2>
+            </div>
+        </div>
+        <div class="row my-2 mt-4">
+            <div class="col-lg-3">
+                <a href="/user/quiz-leaderboard?order=highest" class="sec-font text-black go_back_btn py-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="text-black me-2" width="24px" height="24px"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    View Leaderboard
+                </a>
+            </div>
+        </div>
+        <div class="row my-4 g-2">
+            <!-- quiz questions -->
+            <div class="col-lg-7 col-sm-12 pe-1">
+                <div class="col p-4 py-2 rounded-3 main-bg shadow mb-3">
+                    <!-- quiz instructions -->
+                    <h3 class="main-font text-black fs-4 py-1 my-1 text-center">
+                        Instructions
+                    </h3>
+                    <ul class="quiz_instructions fs-6 text-black sec-font">
+                        <li style="list-style-type:upper-roman;" class="p-1">
+                            For every correct answer you would be rewarded 2 points & 0 points if incorrect.
+                        </li>
+                        <li style="list-style-type:upper-roman;" class="p-1">
+                            If you change tab while answering quiz, your quiz will be ended and no points would be
+                            given.
+                        </li>
+                        <li style="list-style-type:upper-roman;" class="p-1">
+                            This quiz is intended only for fun & entertainment and not for any prize money.
+                        </li>
+                        <li style="list-style-type:upper-roman;" class="p-1">
+                            For every question, you will be provided with 2-4 options.
+                        </li>
+                        <li style="list-style-type:upper-roman;" class="p-1">
+                            The quiz is valid for all students.
+                        </li>
+                        <li style="list-style-type:upper-roman;" class="p-1">
+                            The quiz is only accessible once.
+                        </li>
+                    </ul>
+                    {% for quiz_id in quizIds %}
+                    <div class="d-flex justify-content-center my-1 pb-3">
+                        <button class="buttons" style="width:60%">
+                            <a href={{"/user/quiz/{}?ques_no=1".format(quiz_id)}} class="button_top w-100 text-dark">
+                                Proceed To Quiz {{loop.index}}
+                            </a>
+                        </button>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- user stats -->
+            <div class="col-lg-5 col-sm-12">
+                {% if signed_in==False %}
+                <div class="main-bg p-3 rounded-3 shadow">
+                    <h3 class="text-center main-font text-black fs-4 mb-2">
+                        <i class="fa-solid fa-lock-keyhole"></i>
+                        Sign in to view your quiz stats
+                    </h3>
+                </div>
+                {% else %}
+                <!-- will show only if signed in -->
+                <div class="main-bg p-3 shadow rounded-3">
+                    <h2 class="text-center main-font text-black fs-5 mb-2">Your Stats</h2>
+                    <div class="row py-2">
+                        <div class="col d-flex flex-column align-items-center">
+                            <h4 class="text-center sec-font text-black fs-6">Questions Answered</h4>
+                            <p class="fw-bold fs-4 text-red">
+                                {{user_stats["questions_answered"]}}
+                            </p>
+                        </div>
+                        <div class="col d-flex flex-column align-items-center">
+                            <h4 class="text-center sec-font text-black fs-6">Your Score</h4>
+                            <p class="fw-bold fs-4 text-red">
+                                {{user_stats["total_score"]}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+
+    <!-- question 
+                {% for ques in questions_list %}
+<h4 class="main-font text-black fs-5">
+    Q.
+    {{ques["question"]}}
+</h4>
+<p class="sec-font text-black fs-7">
+    Points-
+    {{ques["points"]}}
+</p>
+<a href={{"/user/quiz/{}".format(ques["question_id"])}}
+    class="button main-font text-black fs-6 border border-1 border-dark d-flex align-items-center"
+    style="width: fit-content;">
+    Answer Quiz
+    <i class="ms-2 fa fa-arrow-right" aria-hidden="true"></i>
+</a>
+</div>
+{% endfor %} -->

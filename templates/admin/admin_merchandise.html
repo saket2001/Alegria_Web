@@ -9,9 +9,10 @@ All Merchandise
 <br>
 <div class="container">
   <div class="row d-flex align-items-center">
-    <div class="col my-1">
-      <a class="button outline_btn fs-7" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Add
-        Merchandise</a>
+    <div class="col-lg-4 col-sm-6 my-1">
+      <button class="normal-button fs-7" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add New Merchandise +
+      </button>
     </div>
   </div>
 </div>
@@ -126,10 +127,10 @@ All Merchandise
           {{form.image1.label}}
         </p>
         {{form.image1(class="input_value")}}
-        <p class="mb-0 fs-7 main-font">
+        <!-- <p class="mb-0 fs-7 main-font">
           {{form.image2.label}}
         </p>
-        {{form.image2(class="input_value")}}
+        {{form.image2(class="input_value")}} -->
         <p class="mb-0 fs-7 main-font">
           {{form.sizes.label}}
         </p>
@@ -137,7 +138,9 @@ All Merchandise
         <span class="fs-7 sec-font mt-1">Accepted sizes: XS,S,M,L,XL,XXL</span>
         <br>
 
-        <button type="submit" class="button w-100 my-2 bg-brown text-beige">Save Merchandise</button>
+        <button type="submit" class="normal-button w-100 my-2">
+          Save Merchandise
+        </button>
       </form>
     </div>
   </div>

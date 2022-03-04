@@ -119,7 +119,6 @@
 
 <div class="w-100 min-vh-100 overflow-hidden sec-font bg-teal bg-cover">
     <div class="row m-3">
-
         <div class="col-lg-2 col-sm-3">
             <a href={{ "/merchandise/{}" .format(merchandise_data[ "category" ])}} type="button"
                 class="go_back_btn text-dark py-1">
@@ -204,9 +203,12 @@
 
                     {% if signed_in %}
                     <button
-                        class="w-100 d-flex align-items-center justify-content-center border-0 bg-red text-teal my-3 fs-6 py-1 px-3 rounded-3 btncart "
-                        style="max-width: 12rem; " type="submit ">
-                        Add to Cart
+                        class="normal-button w-100 d-flex align-items-center justify-content-center border-0 bg-red text-teal my-3 fs-6 py-1 px-3 rounded-3 btncart "
+                        style="max-width: 14.5rem;" type="submit">
+                        Add To Cart
+                        <!-- <span class="fs-8 mx-2">
+                            ( Coming soon )
+                        </span> -->
                     </button>
                     {% else %}
                     <button

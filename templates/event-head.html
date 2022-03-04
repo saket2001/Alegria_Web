@@ -3,306 +3,156 @@
 
 {% block headContent %}
 <style>
-    .anouncement {
-        color: white;
+    .contact_card {
+        border: 5px solid var(--navbar);
+        border-radius: 20px;
+        height: 15rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
     }
 
-    .ann-bg {
-        background-color: #4F2908;
-        border-radius: 10px;
+    .contact_card-img {
+        width: 6rem;
+        height: 6rem;
     }
 
-    .black {
-        color: #3d3d3d;
-        font-weight: 600;
-        font-size: 20px;
+    @media screen and (max-width:600px) {
+        .contact_card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            height: auto;
+            width: 100%;
+        }
+
+        .contact_card-img {
+            width: 5rem;
+            height: 5rem;
+        }
     }
 </style>
 {% endblock headContent %}
 
 
 {% block title %}
-<<<<<<< HEAD
-Alegria 2022 | Event Heads
-=======
 Alegria 2022 | Event Heads Contact
->>>>>>> c55894357debbbf18922746fcf33bf0eaa0529ec
 {% endblock %}
 
 {% block content %}
 
-<div class="container-fluid py-5 text-center bg-teal bg-cover">
-    <h1 class="text-red fs-2">Event Heads</h1>
-
-    <div class="container mt-4">
-
-        <div class="row row-cols-md-3 row-cols-sm-1 p-3">
-            <div class="col p-4">
-                <div class="row">
-                    <div class="col text-start  m-0 p-0">
-                        <img src="/static/images/icons/Group 57.png" alt="" width="80px" height="80px">
-                    </div>
-                    <div class="col text-end m-0 p-0">
-                        <img src="/static/images/icons/Group 56.png" alt="" width="80px" height="80px">
-                    </div>
+<div class="container-fluid p-3 min-vh-100 w-100 text-center bg-beige bg-cover overflow-hidden">
+    <h1 class="text-red main-font fs-2 py-2">Event Heads</h1>
+    <!-- row1 -->
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-2 g-5 p-4">
+        {% for item in event_heads_row1 %}
+        <div class="col-md-6 col-sm-12">
+            <div class="px-4 contact_card p-3 shadow main-bg gap-2">
+                <div class="d-flex flex-column align-items-center">
+                    <h4 class=" main-font text-red fs-4">
+                        {{item["label"]}}
+                    </h4>
+                    <img src={{item["logo"]}} class="contact_card-img" alt="logo">
                 </div>
-                <div>
-                    <p class="text-red fs-5 main-font">
-                        Technical Workshops
+                <div class="d-flex flex-column">
+                    {% for row in item["details"] %}
+                    <p class="mb-1 main-font text-black fs-6">
+                        {{row["name"]}}
                     </p>
-                    <p>
-                        <a href="tel:+917887494095" class=" black" style="display: none;">7887494095</a><br>
-                        <a href="tel:+917887494095" class="black">Athul Tulasidasan: 7887494095</a> <br>
-                        <a href="tel:+917887494095" class=" black" style="display: none;">7887494095</a><br>
-                        <a href="tel:+917887494095" class=" black" style="display: none;">7887494095</a><br>
+                    <p class="d-flex align-items-center mb-1 main-font text-red fs-6">
+                        <i class="fas fa-phone me-2"></i>
+                        <a href={{"tel:+91{}".format(row["phone_number"])}} class="text-red">+91
+                            {{row["phone_number"]}}</a>
                     </p>
-                </div>
-                <div class="row">
-                    <div class="col text-start m-0 p-0">
-                        <img src="/static/images/icons/Group 59.png" alt="" width="80px" height="80px">
-                    </div>
-                    <div class="col text-end m-0 p-0">
-                        <img src="/static/images/icons/Group 58.png" alt="" width="80px" height="80px">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 p-4">
-                <div class="row">
-                    <div class="col text-start  m-0 p-0">
-                        <img src="/static/images/icons/Group 57.png" alt="" width="80px" height="80px">
-                    </div>
-                    <div class="col text-end m-0 p-0">
-                        <img src="/static/images/icons/Group 56.png" alt="" width="80px" height="80px">
-                    </div>
-                </div>
-                <div>
-                    <p class="text-red fs-5 main-font">Management Events</p>
-                    <p>
-                        <a href="tel:+917887494095" class=" black" style="display: none;">7887494095</a><br>
-                        <a href="tel:+918779839634" class="black">Janesh Shetty: 8779839634</a><br>
-                        <a href="tel:+91810841100" class=" black">Sreelakshmi Priyan:810841100</a><br>
-                        <a href="tel:+917887494095" class=" black" style="display: none;">7887494095</a><br>
-                    </p>
-                </div>
-                <div class="row">
-                    <div class="col text-start m-0 p-0">
-                        <img src="/static/images/icons/Group 59.png" alt="" width="80px" height="80px">
-                    </div>
-                    <div class="col text-end m-0 p-0">
-                        <img src="/static/images/icons/Group 58.png" alt="" width="80px" height="80px">
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 p-4">
-                <div class="row">
-                    <div class="col text-start  m-0 p-0">
-                        <img src="/static/images/icons/Group 57.png" alt="" width="80px" height="80px">
-                    </div>
-                    <div class="col text-end m-0 p-0">
-                        <img src="/static/images/icons/Group 56.png" alt="" width="80px" height="80px">
-                    </div>
-                </div>
-                <div>
-                    <p class="text-red fs-5 main-font">Technical Events</p>
-                    <p>
-                        <a href="tel:+917887494095" class=" black" style="display: none;">Atul:7887494095</a><br>
-                        <a href="tel:+917887494095" class=" black">Athul Tulasidasan:7887494095</a><br>
-                        <a href="tel:+917887494095" class=" black" style="display: none;">7887494095</a><br>
-                        <a href="tel:+917887494095" class=" black" style="display: none;">7887494095</a><br>
-                    </p>
-                </div>
-                <div class="row">
-                    <div class="col text-start m-0 p-0">
-                        <img src="/static/images/icons/Group 59.png" alt="" width="80px" height="80px">
-                    </div>
-                    <div class="col text-end m-0 p-0">
-                        <img src="/static/images/icons/Group 58.png" alt="" width="80px" height="80px">
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="row p-3">
-
-            <div class="col-md-4 p-4 ">
-                <div class="row">
-                    <div class="col text-start  m-0 p-0">
-                        <img src="/static/images/icons/Group 57.png" alt="" width="80px" height="80px">
-                    </div>
-                    <div class="col text-end m-0 p-0">
-                        <img src="/static/images/icons/Group 56.png" alt="" width="80px" height="80px">
-                    </div>
-                </div>
-                <div>
-                    <p class="text-red fs-5 main-font">Fine Arts</p>
-                    <p>
-                        <a href="tel:+919768000278" class=" black">Teejal Singh:9768000278</a><br>
-                        <a href="tel:+918268182173" class=" black">Tushar Surve:8268182173</a><br>
-                        <a href="tel:+917887494095" class=" black">Avanti Salwatkar:9689655699</a><br>
-                        <a href="tel:+919930575106" class=" black">Renuka Chavan:9930575106</a><br>
-                    </p>
-                </div>
-                <div class="row">
-                    <div class="col text-start m-0 p-0">
-                        <img src="/static/images/icons/Group 59.png" alt="" width="80px" height="80px">
-                    </div>
-                    <div class="col text-end m-0 p-0">
-                        <img src="/static/images/icons/Group 58.png" alt="" width="80px" height="80px">
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 p-4 ">
-                <div class="row">
-                    <div class="col text-start  m-0 p-0">
-                        <img src="/static/images/icons/Group 57.png" alt="" width="80px" height="80px">
-                    </div>
-                    <div class="col text-end m-0 p-0">
-                        <img src="/static/images/icons/Group 56.png" alt="" width="80px" height="80px">
-                    </div>
-                </div>
-                <div>
-                    <p class="text-red fs-5 main-font">Literary Arts</p>
-                    <p>
-                        <a href="tel:+917887494095" class=" black" style="display: none;">7887494095</a><br>
-                        <a href="tel:+919309871554" class=" black">Paree Gadhe:9309871554</a><br>
-                        <a href="tel:+919820409717" class=" black">Emaan Qureshi:9820409717</a><br>
-                        <a href="tel:+917887494095" class=" black" style="display: none;">7887494095</a><br>
-                    </p>
-                </div>
-                <div class="row">
-                    <div class="col text-start m-0 p-0">
-                        <img src="/static/images/icons/Group 59.png" alt="" width="80px" height="80px">
-                    </div>
-                    <div class="col text-end m-0 p-0">
-                        <img src="/static/images/icons/Group 58.png" alt="" width="80px" height="80px">
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 p-4 ">
-                <div class="row">
-                    <div class="col text-start  m-0 p-0">
-                        <img src="/static/images/icons/Group 57.png" alt="" width="80px" height="80px">
-                    </div>
-                    <div class="col text-end m-0 p-0">
-                        <img src="/static/images/icons/Group 56.png" alt="" width="80px" height="80px">
-                    </div>
-                </div>
-                <div>
-                    <p class="text-red fs-5 main-font">Performing Arts</p>
-                    <p>
-                        <a href="tel:+919987071544" class=" black">Yog Agarwal:9987071544</a><br>
-                        <a href="tel:+917021555531" class=" black">Dishad Koli:7021555531</a><br>
-                        <a href="tel:+919869541542" class=" black">Parth Balsaraf:9869541542</a><br>
-                        <a href="tel:+91808231294" class=" black">Deepesh Gaikar:808231294</a><br>
-                    </p>
-                </div>
-                <div class="row">
-                    <div class="col text-start m-0 p-0">
-                        <img src="/static/images/icons/Group 59.png" alt="" width="80px" height="80px">
-                    </div>
-                    <div class="col text-end m-0 p-0">
-                        <img src="/static/images/icons/Group 58.png" alt="" width="80px" height="80px">
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-
-        <div class="row p-3">
-
-            <div class="col-md-4 p-4 ">
-                <div class="row">
-                    <div class="col text-start  m-0 p-0">
-                        <img src="/static/images/icons/Group 57.png" alt="" width="80px" height="80px">
-                    </div>
-                    <div class="col text-end m-0 p-0">
-                        <img src="/static/images/icons/Group 56.png" alt="" width="80px" height="80px">
-                    </div>
-                </div>
-                <div>
-                    <p class="text-red fs-5 main-font">Informals</p>
-                    <p>
-                        <a href="tel:+91808231294" class=" black" style="display: none;">Deepesh
-                            Gaikar:808231294</a><br>
-                        <a href="tel:+919082683799" class=" black">Nupur Kelkar:9082683799</a><br>
-                        <a href="tel:+919137516163" class=" black">Sejal Hadkar:9137516163</a><br>
-                        <a href="tel:+917977723755" class=" black">Mehroz Chiwan:7977723755</a><br>
-                    </p>
-                </div>
-                <div class="row">
-                    <div class="col text-start m-0 p-0">
-                        <img src="/static/images/icons/Group 59.png" alt="" width="80px" height="80px">
-                    </div>
-                    <div class="col text-end m-0 p-0">
-                        <img src="/static/images/icons/Group 58.png" alt="" width="80px" height="80px">
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 p-4 ">
-                <div class="row">
-                    <div class="col text-start  m-0 p-0">
-                        <img src="/static/images/icons/Group 57.png" alt="" width="80px" height="80px">
-                    </div>
-                    <div class="col text-end m-0 p-0">
-                        <img src="/static/images/icons/Group 56.png" alt="" width="80px" height="80px">
-                    </div>
-                </div>
-                <div>
-                    <p class="text-red fs-5 main-font">Gaming</p>
-                    <p>
-                        <a href="tel:+917887494095" class=" black" style="display: none;">7887494095</a><br>
-                        <a href="tel:+919834634592" class=" black">Atharva Kale:9834634592</a><br>
-                        <a href="tel:+919768378344" class=" black">Mihir Deshmukh:9768378344</a><br>
-                        <a href="tel:+917887494095" class=" black" style="display: none;">7887494095</a><br>
-                    </p>
-                </div>
-                <div class="row">
-                    <div class="col text-start m-0 p-0">
-                        <img src="/static/images/icons/Group 59.png" alt="" width="80px" height="80px">
-                    </div>
-                    <div class="col text-end m-0 p-0">
-                        <img src="/static/images/icons/Group 58.png" alt="" width="80px" height="80px">
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 p-4">
-                <div class="row">
-                    <div class="col text-start  m-0 p-0">
-                        <img src="/static/images/icons/Group 57.png" alt="" width="80px" height="80px">
-                    </div>
-                    <div class="col text-end m-0 p-0">
-                        <img src="/static/images/icons/Group 56.png" alt="" width="80px" height="80px">
-                    </div>
-                </div>
-                <div>
-                    <p class="text-red fs-5 main-font">SPORTS</p>
-                    <p>
-                        <a href="tel:+917887494095" class=" black" style="display: none;">7887494095</a><br>
-                        <a href="tel:+919860377037" class=" black">Soham Bhujbal:9860377037</a><br>
-                        <a href="tel:+917900019313" class=" black">Faraz Raza:7900019313</a><br>
-                        <a href="tel:+917887494095" class=" black" style="display: none;">7887494095</a><br>
-                    </p>
-                </div>
-                <div class="row">
-                    <div class="col text-start m-0 p-0">
-                        <img src="/static/images/icons/Group 59.png" alt="" width="80px" height="80px">
-                    </div>
-                    <div class="col text-end m-0 p-0">
-                        <img src="/static/images/icons/Group 58.png" alt="" width="80px" height="80px">
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-
+        {% endfor %}
     </div>
-
+    <!-- row2 -->
+    <div class="row row-cols-lg-2 row-cols-sm-1 g-5 p-4">
+        {% for item in event_heads_row2 %}
+        <div class="col-md-6 col-sm-12">
+            <div class="px-4 contact_card p-3 shadow main-bg gap-2">
+                <div class="d-flex flex-column align-items-center">
+                    <h4 class=" main-font text-red fs-4">
+                        {{item["label"]}}
+                    </h4>
+                    <img src={{item["logo"]}} class="contact_card-img" alt="logo">
+                </div>
+                <div class="d-flex flex-column">
+                    {% for row in item["details"] %}
+                    <p class="mb-1 main-font text-black fs-6">
+                        {{row["name"]}}
+                    </p>
+                    <p class="d-flex align-items-center mb-1 main-font text-red fs-6">
+                        <i class="fas fa-phone me-2"></i>
+                        <a href={{"tel:+91{}".format(row["phone_number"])}} class="text-red">+91
+                            {{row["phone_number"]}}</a>
+                    </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- row3 -->
+    <div class="row row-cols-lg-2 row-cols-sm-1 g-5 p-4">
+        {% for item in event_heads_row3 %}
+        <div class="col-md-6 col-sm-12">
+            <div class="px-4 contact_card p-3 shadow main-bg gap-2">
+                <div class="d-flex flex-column align-items-center">
+                    <h4 class=" main-font text-red fs-4">
+                        {{item["label"]}}
+                    </h4>
+                    <img src={{item["logo"]}} class="contact_card-img" alt="logo">
+                </div>
+                <div class="d-flex flex-column">
+                    {% for row in item["details"] %}
+                    <p class="mb-1 main-font text-black fs-6">
+                        {{row["name"]}}
+                    </p>
+                    <p class="d-flex align-items-center mb-1 main-font text-red fs-6">
+                        <i class="fas fa-phone me-2"></i>
+                        <a href={{"tel:+91{}".format(row["phone_number"])}} class="text-red">+91
+                            {{row["phone_number"]}}</a>
+                    </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- row 4 -->
+    <div class="row row-cols-lg-2 row-cols-sm-1 g-5 gx-4 p-4">
+        {% for item in event_heads_row4 %}
+        <div class="col-md-6 col-sm-12">
+            <div class="px-4 contact_card p-3 shadow main-bg gap-2">
+                <div class="d-flex flex-column align-items-center">
+                    <h4 class=" main-font text-red fs-4">
+                        {{item["label"]}}
+                    </h4>
+                    <img src={{item["logo"]}} class="contact_card-img" alt="logo">
+                </div>
+                <div class="d-flex flex-column">
+                    {% for row in item["details"] %}
+                    <p class="mb-1 main-font text-black fs-6">
+                        {{row["name"]}}
+                    </p>
+                    <p class="d-flex align-items-center mb-1 main-font text-red fs-6">
+                        <i class="fas fa-phone me-2"></i>
+                        <a href={{"tel:+91{}".format(row["phone_number"])}} class="text-red">+91
+                            {{row["phone_number"]}}</a>
+                    </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

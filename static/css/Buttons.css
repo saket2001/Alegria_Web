@@ -1,0 +1,156 @@
+/* simple button  */
+button.up-button {
+    border: none;
+    outline: none;
+    margin: 0.2rem;
+    padding: 0.35rem 1rem;
+    border-radius: 8px;
+    background-color: transparent;
+    transition: all .6s ease-out;
+}
+
+button.up-button:hover {
+    /* transform: translateY(-4px) !important; */
+    transform: scale(0.95) !important;
+}
+
+
+/* quiz button */
+.buttons {
+    --button_radius: 0.75em;
+    --button_color: #f5f1f1;
+    --button_outline_color: #000000;
+    width: 100%;
+    font-size: 17px;
+    font-weight: bold;
+    border: none;
+    border-radius: var(--button_radius);
+    background: var(--button_outline_color);
+    margin: 0.2rem;
+}
+
+.buttons .button_top {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    border: 2px solid var(--button_outline_color);
+    border-radius: var(--button_radius);
+    padding: 0.4rem 1rem;
+    background: var(--button_color);
+    transform: translateY(-0.3em);
+    transition: transform 0.1s ease;
+}
+
+.buttons:hover .button_top {
+    /* Pull the button upwards when hovered */
+    transform: translateY(-0.36em);
+}
+
+.buttons button:active .button_top {
+    /* Push the button downwards when pressed */
+    transform: translateY(0);
+}
+
+/* another button */
+/* mostly admin side */
+.spl-button {
+    border: none;
+    display: block;
+    position: relative;
+    padding: 0.4rem 1rem;
+    font-size: 18px;
+    background: transparent;
+    cursor: pointer;
+    user-select: none;
+    overflow: hidden;
+    color: var(--u_red);
+    z-index: 1;
+    font-family: inherit;
+    font-weight: 500;
+    margin: 0.2rem;
+}
+
+.spl-button a {
+    color: var(--u_red);
+}
+
+.spl-button span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: -1;
+    border: 4px solid var(--u_red);
+}
+
+.spl-button span::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 8%;
+    height: 500%;
+    background: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-60deg);
+    transition: all 0.3s;
+}
+
+.spl-button:hover span::before {
+    transform: translate(-50%, -50%) rotate(-90deg);
+    width: 100%;
+    background: var(--u_red);
+}
+
+.spl-button:hover {
+    color: #fff;
+}
+
+.spl-button:active span::before {
+    background: var(--u_red);
+}
+
+/* another button */
+/* user side mostly */
+
+.normal-button {
+    font-size: 18px;
+    display: inline-block;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    will-change: box-shadow, transform;
+    background-color: #842703;
+    box-shadow: 0px 0.01em 0.01em #d65b2ae3,
+        0px 0.3em 0.7em -0.01em #a5340780,
+        inset 0px -0.01em 0px #bd552b6e;
+    padding: 0.35rem 1rem;
+    border-radius: 8px;
+    color: #fff;
+    text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.normal-button a {
+    color: #fff;
+}
+
+.normal-button:hover {
+    box-shadow: 0px 0.1em 0.2em #a5340780,
+        0px 0.4em 0.7em -0.1em #d65b2ae3,
+        inset 0px -0.1em 0px #842703;
+    transform: translateY(-0.1em);
+}
+
+.normal-button:active {
+    box-shadow: inset 0px 0.1em 0.6em #842703;
+    transform: translateY(0em);
+}
+
+@media screen and (max-width:600px) {
+    .normal-button {
+        font-size: 16px;
+    }
+}

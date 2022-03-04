@@ -41,7 +41,7 @@ Alegria 2022 | Your Cart
 
     <div class="row p-0 m-0">
       <form action={{"/user/{}/clearCart".format(user_id)}} method="post">
-        <button type="submit" class="button fs-7 sec-font mx-1 text-decoration-underline">
+        <button type="submit" class="btn fs-7 sec-font mx-1 text-decoration-underline">
           Clear Whole Cart
         </button>
       </form>
@@ -86,7 +86,7 @@ Alegria 2022 | Your Cart
               <form action={{"/user/edit-cart-merchandise/{}/{}".format(user_id,product['id'])}} method="post">
                 <input type="number" name='count' value={{product['count']}} min="1" class="p-1 me-1 input_value"
                   style="width: 3rem;" required>
-                <button type="submit" class="button py-1 px-3 bg-brown text-beige">
+                <button type="submit" class="normal-button">
                   Update
                 </button>
               </form>
@@ -94,7 +94,7 @@ Alegria 2022 | Your Cart
 
             <form class="my-1 text-black" action={{"/user/remove-from-cart/{}/{}".format(user_id,product['id'])}}
               method="post">
-              <button type="submit" class="d-flex justify-content-center align-items-center button main-font fs-6"
+              <button type="submit" class="d-flex justify-content-center align-items-center up-button main-font fs-6"
                 style="border: 1px solid #3D3D3D;">
                 Remove
                 <i class="far fa-trash-alt ms-2"></i>

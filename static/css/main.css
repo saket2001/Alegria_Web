@@ -1,32 +1,19 @@
 :root {
-    --brown: #26251A;
-    --teal: #f5eee0e0;
-    --beige: #F1E3C8;
+    --beige: #f8dede;
     --black: #3d3d3d;
-    --gray: #696565;
+    --u_bg: #FFF8EF;
+    --u_red: #842703;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-size: 20px;
-}
 
 /* defaults & common css classes */
-.main-font {
-    font-family: 'gilroy-bold',
-        serif;
+.bg-beige {
+    background-color: var(--beige);
 }
 
-.sec-font {
-    font-family: 'gilroy-medium',
-        serif;
+.main-bg {
+    background-color: var(--u_bg);
 }
-
 
 .navbar_links {
     color: var(--beige);
@@ -39,10 +26,6 @@ body {
     color: var(--brown);
     display: flex;
     justify-content: center;
-}
-
-.fs-7 {
-    font-size: 0.9rem;
 }
 
 a {
@@ -60,44 +43,27 @@ li {
     list-style: none;
 }
 
-.button {
-    outline: none;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    color: var(--black);
-    padding: 0.25rem 0.5rem;
-    background-color: transparent;
-    transition: all .5s ease-out;
-}
-
 .go_back_btn {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0.25rem 0.6rem;
     outline: none;
-    border: 2px solid var(--brown);
-    border-radius: 6px;
+    border-radius: 8px;
+    border: 2px solid transparent;
     font-size: 0.9rem;
-    color: var(--brown);
-    font-weight: 700;
+    color: var(--black);
+    font-weight: 600;
     background-color: transparent;
     transition: all .5s ease-out;
 }
 
 .go_back_btn:hover {
-    transform: scale(0.95);
-}
-
-.outline_btn {
-    border: 2px solid var(--brown);
-    color: var(--brown);
-    font-weight: 600;
+    border: 2px solid var(--black);
 }
 
 .input_value {
-    border: 1px solid var(--brown);
+    border: 1px solid var(--black);
     padding: 0.2rem 0.4rem;
     margin: 0.2rem 0;
     background-color: transparent;
@@ -108,7 +74,6 @@ li {
     transition: all 0.3s ease-out;
 }
 
-
 .input_value:focus {
     border: 2px solid #131fcf;
 }
@@ -117,46 +82,11 @@ input[type='file']:focus {
     border: none;
 }
 
-/* colors */
-
-.bg-brown {
-    background-color: var(--brown);
-}
-
-.bg-beige {
-    background-color: var(--beige)
-}
-
-.bg-teal {
-    background-color: var(--teal);
-}
-
-.bg-gray {
-    background-color: var(--gray)
-}
-
-.text-brown {
-    color: var(--brown);
-}
-
-.text-teal {
-    color: var(--teal);
-}
-
-.text-beige {
-    color: var(--beige);
-}
-
-.text-gray {
-    color: var(--gray);
-}
-
 /* nav */
 
 .nav-links {
     color: var(--beige);
 }
-
 
 .nav-button {
     padding: 0.4rem 0.6rem;

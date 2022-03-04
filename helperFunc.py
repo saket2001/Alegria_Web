@@ -26,3 +26,17 @@ def compareHashValues(hashed_value, value):
 def generate_global_api_key():
     api_key = hashing.hash_value(config("SESSION_KEY"), salt="alegriahashkey")
     return api_key
+
+# filter values
+def filterList(arr):
+    filteredArr=set(arr)
+    return list(filteredArr)
+
+# compare values across lists
+def compareLists(list1,list2):
+    list3=[]
+    for x in list1:
+        if x not in list2:
+            list3.append(x)
+    
+    return list3

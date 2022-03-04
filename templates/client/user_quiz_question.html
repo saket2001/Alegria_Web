@@ -1,0 +1,196 @@
+{% extends 'user_layout.html' %}
+
+{% block headContent %}
+<style>
+    .form {
+        width: 60%;
+        padding: 2rem;
+        border-radius: 20px;
+    }
+
+    .timer {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        border: 15px solid #ccc;
+        border-top: 15px solid var(--navbar);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: 800;
+    }
+
+    .custom_input {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        border: 2px solid #300330;
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+        font-weight: normal;
+        color: var(--black);
+        background-color: transparent;
+        transition: all 0.25s;
+    }
+
+    .custom_input:hover {
+        transform: translateY(-5px) translateX(2px);
+        border: 2px solid #842703;
+        box-shadow: 6px 6px 18px #adadad;
+    }
+
+    .custom_input-active {
+        background-color: #842703;
+        color: var(--beige);
+        border: 2px solid #842703;
+    }
+
+    .custom_input_label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.4rem;
+        width: 2rem;
+        height: 90%;
+        border-radius: 50%;
+        color: var(--black);
+        background-color: #ffbfa6;
+    }
+
+    .options_container {
+        width: 80%;
+    }
+
+    @media screen and (max-width:600px) {
+        .form {
+            width: 100%;
+            padding: 1.2rem;
+        }
+
+        .custom_input {
+            padding: 0.6rem;
+            font-size: 0.8rem;
+        }
+
+        .custom_input_label {
+            padding: 0.3rem;
+            width: 1.6rem;
+            height: 100%;
+            font-size: 0.8rem;
+        }
+
+        .options_container {
+            width: 90%;
+        }
+    }
+</style>
+<script defer src="/static/js/quiz.js"></script>
+{% endblock headContent %}
+
+
+{% block title %}
+Alegria 2022 | Alegria Quiz 2022
+{% endblock %}
+
+{% block content %}
+<div class="bg-beige bg-cover min-vh-100 overflow-hidden">
+    <div class="container py-2 h-100">
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show d-flex align-items-center position-absolute main-font main-bg flash"
+            role="alert">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 me-2" fill="none" viewBox="0 0 24 24" width="30px"
+                height="30px" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
+        <!-- go back -->
+        <div class="row my-3">
+            <div class="col-lg-2 col-sm-3">
+                <a href="/user/quiz" class="go_back_btn text-dark py-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="me-2"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg> Quit Quiz
+                </a>
+            </div>
+        </div>
+        <!-- form -->
+        <div class="quiz-container row my-3">
+            <form action={{"/user/quiz/check-answer/{}/{}/{}".format(quiz["quiz_id"],quiz["ques_id"],current_question)}}
+                method="POST" class="col d-flex flex-column align-items-center main-bg shadow m-3 form">
+
+                <div class="row w-100 d-flex flex-column align-items-center justify-content-center">
+                    <div class="row d-flex flex-column align-items-center text-center">
+                        <h2 class="main-font fs-4 text-red my-0">
+                            {{quiz['question']}}
+                        </h2>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center py-2">
+                        <p class="fs-5 text-black sec-font px-3 text-center m-0">
+                            {{quiz['ques_point']}}
+                            <i class="fa fa-gift" aria-hidden="true"></i>
+                        </p>
+                        <!-- <p
+                            class="d-flex align-items-center justify-content-center fs-5 main-font text-red ps-2 text-center m-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="me-2" width="28px" height="28px" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="quiz_timer">
+                                30
+                            </span>
+                        </p> -->
+                    </div>
+                </div>
+
+                <div class="row my-3 g-3 options_container">
+                    {% for option in quiz["options"] %}
+                    <div class="col-lg-6 col-sm-12 main-font text-black rounded-3 d-flex justify-content-center">
+                        <div class="custom_input">
+                            <input type="hidden" value={{option["option_id"]}}>
+                            <div class="custom_input_label">
+                                {{option["label"]}}
+                            </div>
+                            {{option["option_name"]}}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {% if current_question != total_questions %}
+                <div class="d-flex justify-content-center my-3">
+                    <button type="submit" class="buttons">
+                        <p class="button_top w-100 text-black m-0">
+                            Next Question
+                        </p>
+                    </button>
+                </div>
+                {% endif %}
+
+                {% if current_question == total_questions %}
+                <div class="d-flex justify-content-center my-3">
+                    <button type="submit" class="buttons">
+                        <p class="button_top w-100 text-black m-0">
+                            Submit Quiz
+                        </p>
+                    </button>
+                </div>
+                {% endif %}
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

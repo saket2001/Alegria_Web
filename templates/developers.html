@@ -46,8 +46,7 @@ Alegria 2022 | Our Developers
 
 
 {% block content %}
-<div class="be-beige bg-cover">
-
+<div class="bg-cover">
     <div class="dev_page pb-4">
         <br>
         <h3 class="mb-4 pb-3 text-red main-font fs-3" style="text-align: center;">Web Team</h3>
@@ -88,7 +87,7 @@ Alegria 2022 | Our Developers
             {% endfor %}
         </div>
     </div>
-    <div class="pb-4 ">
+    <div class="pb-4">
         <br>
         <h3 class="mb-4 pb-3 text-red main-font fs-3" style="text-align: center;">App Team</h3>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 " id="team-row">
@@ -124,7 +123,46 @@ Alegria 2022 | Our Developers
                         </div>
                     </div>
                 </div>
-
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="pb-4">
+        <br>
+        <h3 class="mb-4 pb-3 text-red main-font fs-3" style="text-align: center;">UI UX Team</h3>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 " id="team-row">
+            {% for ele in ui_team %}
+            <div class="col">
+                <div class="bg-transparent main-bg team-card p-2 mb-2">
+                    <div class="team-box">
+                        <div class="content p-3" style="text-align: center;">
+                            <img class="mb-3 mt-2" style="height:120px; width:120px; border-radius: 50%;"
+                                src="{{ele['img']}}">
+                            <h5 class="mb-2 main-font fs-5 text-red">
+                                {{ele['name']}}
+                            </h5>
+                            <p class="fs-7 sec-font">{{ele['role']}}</p>
+                            <p class="fs-7 sec-font">
+                                <i class="fas fa-phone-alt me-1"></i>
+                                <a href="tel:{{ele['call']}}" class="text-black">
+                                    {{ele['call']}}
+                                </a>
+                            </p>
+                            <p class="fs-4">
+                                <a href="mailto:{{ele['gmail']}}" target="_blank" rel="noopener noreferrer"
+                                    class="me-1">
+                                    <i class="fas fa-envelope-square text-black"></i>
+                                </a>
+                                <a href="{{ele['github']}}" target="_blank" rel="noopener noreferrer" class="me-1">
+                                    <i class="fab fa-github text-black"></i>
+                                </a>
+                                <a href="{{ele['linkedin']}}" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-linkedin text-black"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>

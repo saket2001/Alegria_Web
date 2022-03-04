@@ -1,6 +1,3 @@
-from flask import Flask, session
-from enum import unique
-from unicodedata import category
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -8,18 +5,7 @@ from datetime import datetime
 # initialize database
 db = SQLAlchemy()
 
-
 # user model should come here
-
-
-# user model should come here
-class adminss(db.Model):
-    __tablename__ = 'adminss'
-    id = db.Column(db.Integer, primary_key=True)
-    email_id = db.Column(db.String(50), unique=True, nullable=False)
-
-    def __repr__(self) -> str:
-        return f"Event('{self.email_id}'')"
 
 
 class Eventdemo(db.Model):
@@ -53,9 +39,7 @@ class UserInfo(db.Model):
     college_name = db.Column(db.String(100), nullable=True)
     date_registered = db.Column(db.String(30), nullable=True)
     isAdmin = db.Column(db.String(10), default=False)
-    # registeruser_id = db.relationship(
-    #     'RegisterEvent', backref='RegisterUser', lazy=True)
-    cart_user_id = db.relationship('Cart', backref='userinfo', lazy=True)
+    quizzes_score=db.Column(db.Integer,nullable=False)
 
     def __repr__(self, email, name, image_url, isAdmin):
         return f"UserInfo('{self.email}'-'{self.name}'-'{self.image_url}'-'{self.phone_number}'-'{self.college_name}'-'{self.isadmin}')"
@@ -114,7 +98,7 @@ class PollUserResponse(db.Model):
     __tablename__ = 'poll_user_responses'
     hashed_user_id = db.Column(db.String(50), primary_key=True)
     poll_id = db.Column(db.Integer, primary_key=True)
-    poll_option_id = db.Column(db.Integer, primary_key=True)
+    poll_option_id = db.Column(db.Integer)
 
 
 class CouponList(db.Model):
@@ -213,5 +197,30 @@ class Categories(db.Model):
     id = db.Column(db.String(10), primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     img_url = db.Column(db.String(300), nullable=False)
-    img_url = db.Column(db.String(300), nullable=False)
 
+
+class Quiz(db.Model):
+    __tablename__ = 'quizzes'
+    quiz_id = db.Column(db.String(50))
+    ques_id = db.Column(db.String(50), nullable=False, primary_key=True)
+    question = db.Column(db.String(300), nullable=False)
+    correct_answer = db.Column(db.String(50), nullable=False)
+    correct_hash = db.Column(db.String(50), unique=True)
+    ques_point = db.Column(db.Integer, nullable=False)
+    date = db.Column(db.Text(10), nullable=False)
+
+
+class QuizOptions(db.Model):
+    __tablename__ = 'quiz_options'
+    quiz_id = db.Column(db.String(50))
+    ques_id = db.Column(db.String(50), nullable=False)
+    option_id = db.Column(db.String(50), nullable=False, primary_key=True)
+    option_name = db.Column(db.String(50), nullable=False)
+
+
+class QuizUserResponse(db.Model):
+    __tablename__ = 'quiz_user_responses'
+    hashed_user_id = db.Column(db.String(50), primary_key=True)
+    quiz_id = db.Column(db.Integer, nullable=False)
+    ques_id = db.Column(db.Integer, primary_key=True)
+    ques_option_id = db.Column(db.String(50), nullable=False)

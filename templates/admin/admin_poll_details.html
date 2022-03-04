@@ -25,13 +25,13 @@ Poll Details
     <div class="row p-2 my-5 g-3">
         <div class="col-lg-6 col-sm-12" id="chart"></div>
         <div class="col-lg-6 col-sm-12">
-            <p class="sec-font fs-7 mb-0 text-black">Poll ID: {{polldetails['id']}}
+            <p class="sec-font fs-7 mb-0 text-black">Poll ID: {{polldetails[0]['id']}}
 
             </p>
-            <h5 class="card-title main-font fs-5 text-red pb-1 mb-0">{{polldetails['question']}}
+            <h5 class="card-title main-font fs-5 text-red pb-1 mb-0">{{polldetails[0]['question']}}
             </h5>
             <p class="text-red sec-font mb-0">
-                Status: {{polldetails['status']}}
+                Status: {{polldetails[0]['status']}}
             </p>
             <p class="text-red sec-font">Total Votes
                 <span class="main-font">
@@ -39,19 +39,19 @@ Poll Details
                 </span>
             </p>
 
-            <div class="buttons">
-                <a href={{"/admin/polls/{}/details/togglestatus".format(polldetails["id"])}}
+            <div>
+                <a href={{"/admin/polls/{}/details/togglestatus".format(polldetails[0]["id"])}}
                     class="btn bg-brown text-beige">
                     Turn Poll
-                    {% if polldetails['status'] == "Active" %}
+                    {% if polldetails[0]['status'] == "Active" %}
                     Off
                     {% endif %}
-                    {% if polldetails['status'] == "Expired" %}
+                    {% if polldetails[0]['status'] == "Expired" %}
                     On
                     {% endif %}
                 </a>
                 &nbsp;
-                <a href={{"/admin/polls/{}/deletepoll".format(polldetails["id"])}} class="btn btn-outline-danger">
+                <a href={{"/admin/polls/{}/deletepoll".format(polldetails[0]["id"])}} class="btn btn-outline-danger">
                     Delete
                 </a>
             </div>

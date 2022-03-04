@@ -1,28 +1,10 @@
-from dis import disco
 from flask.helpers import flash
-from flask import Blueprint, redirect, render_template, url_for, session, request
+from flask import Blueprint, redirect, render_template, session, request
 from functools import wraps
-from models import db, Eventdemo, Eventdemo_details, Merchandise, UserInfo, Poll, PollResponses, Announcement, EventsToday, CartRecords
-from flask_wtf.csrf import CSRFProtect
-
-from models import Cart, Merchandise, UserInfo
-from views.admin import merchandise
-
-
-# def login_required(f):
-#     @wraps(f)
-#     def decorated_function(*args, **kwargs):
-#         user = dict(session).get('profile', None)
-#         # You would add a check here and usethe user id or something to fetch
-#         # the other data for that user/check if they exist
-#         if user:
-#             return f(*args, **kwargs)
-#         return render_template('401.html')
-#     return decorated_function
-
-
-# csrf
-# csrf = CSRFProtect()
+from models import UserInfo, db,Cart, Merchandise, Quiz, QuizOptions,QuizUserResponse,CartRecords
+from sqlalchemy import asc, desc
+from models import db, Cart, Merchandise, Quiz, QuizOptions, QuizUserResponse, UserInfo
+import helperFunc
 
 # create blueprint to group views
 
@@ -50,15 +32,233 @@ def user_login_required(f):
         return render_template('401.html')
     return decorated_function
 
-# you need to use return statement but it was working fine before
 
+# quiz routes
+# fetches all quiz questions and stats
+@client_bp.route('/quiz')
+@user_login_required
+def QuizPage():
+    try:
+        signed_in = False
+        cartLen = None
+        # checks if logged in
+        user_id = session.get("user_id")
+        if session.get('user_id') != None:
+            signed_in = True
+            cartLen = session.get('cartLength')
 
+        # getting quizzes which aren't answered by user
+        quizIds = []
+        allQuizIDs = []
+        quizIDsAnswered = []
+        temp_list1 = []
+        temp_list2 = []
+
+        # getting unique ids
+        allQuizIDsRaw = Quiz.query.distinct(Quiz.quiz_id)
+        for item in allQuizIDsRaw:
+            temp_list1.append(item.quiz_id)
+        allQuizIDs = helperFunc.filterList(temp_list1)
+        
+        session['total_quiz_questions']=len(temp_list1)
+
+        # getting all quiz ids answered by user
+        quizIDsAnsweredRaw = QuizUserResponse.query.filter_by(
+            hashed_user_id=user_id).all()
+        for item in quizIDsAnsweredRaw:
+            temp_list2.append(item.quiz_id)
+        quizIDsAnswered = helperFunc.filterList(temp_list2)
+
+        # next add quiz_ids which are not answered by user
+        quizIds = helperFunc.compareLists(allQuizIDs, quizIDsAnswered)
+
+        # user stats
+        user_stats=getUserQuizStats(user_id)
+
+        return render_template('user_quiz.html', questions_list=[], user_stats=user_stats, cartLen=cartLen, signed_in=signed_in, quizIds=quizIds)
+
+    except Exception as e:
+        print(e)
+        return redirect('/')
+    
+
+#quiz user stats
+def getUserQuizStats(user_id):
+    try:
+        # getting 
+        user_responses=QuizUserResponse.query.filter_by(hashed_user_id=user_id).all()
+        # quiz user score
+        Userdata = UserInfo.query.filter_by(id=user_id).first()
+        score=Userdata.quizzes_score
+        
+            
+        return {
+            "total_score": score,
+            "questions_answered": len(user_responses),
+        }
+
+        
+    except Exception as e:
+        print(e)
+        return redirect('/')   
+
+# fetches single quiz questions
+@client_bp.route('/quiz/<string:quiz_id>')
+@user_login_required
+def AnswerQuizPage(quiz_id):
+    try:
+        signed_in = False
+        cartLen = None
+        # checks if logged in
+        if session.get('user_id') != None:
+            signed_in = True
+            cartLen = session.get('cartLength')
+
+        # getting quiz data
+        quiz = []
+        quizData = Quiz.query.filter_by(quiz_id=quiz_id).all()
+
+        for details in quizData:
+            quiz_question = {
+                "quiz_id": details.quiz_id,
+                "ques_id": details.ques_id,
+                "question": details.question,
+                "ques_point": details.ques_point,
+                "options": []
+            }
+
+            # fetch options of the current question
+            quesOptions = QuizOptions.query.filter_by(
+                ques_id=details.ques_id).all()
+
+            for option in quesOptions:
+                quiz_question['options'].append({
+                    "option_id": option.option_id,
+                    "option_name": option.option_name,
+                })
+
+            quiz.append(quiz_question)
+            
+        # print(quiz)
+        
+        current_question = int(request.args.get("ques_no"))
+        quiz_question = quiz[current_question-1]
+
+        input_labels = ['A', 'B', 'C', 'D', 'E']
+        for i, option in enumerate(quiz_question["options"]):
+            option['label'] = input_labels[i]
+
+        return render_template('/client/user_quiz_question.html', quiz=quiz_question, cartLen=cartLen, signed_in=signed_in, total_questions=len(quiz)-1, enumerate=enumerate, current_question=current_question-1)
+
+    except Exception as e:
+        print(e)
+        return redirect('/')
+
+# quiz submit route
+@client_bp.route('/quiz/check-answer/<string:quiz_id>/<string:ques_id>/<int:ques_no>', methods=["POST"])
+@user_login_required
+def submitQuizResponse(quiz_id,ques_id, ques_no):
+    try:
+        # current ques
+        cur_quiz=ques_no+1
+        # gets the selected option's value
+        selected_answer = request.form.get('selected-answer')
+        
+        if(selected_answer == None):
+            flash("Please select a answer for getting points !!")
+            return redirect('/user/quiz/{}?ques_no={}'.format(quiz_id, ques_no+1))
+        
+        else:
+            quizans = []
+            quizanswer = QuizOptions.query.filter_by(option_id=selected_answer).all()
+
+            for option in quizanswer:
+                quizans.append(option.option_name)
+
+            selected_answer_hash = helperFunc.hashValue(quizans[0])
+            quizData = Quiz.query.filter_by(quiz_id=quiz_id).all()
+            quizcorrectans = []
+            quizpoints = []
+
+            for details in quizData:
+                quizcorrectans.append(details.correct_answer)
+                quizpoints.append(details.ques_point)
+
+            correct_answer_hash = helperFunc.hashValue(quizcorrectans[0])
+            
+            # saving user response anyway i.e right or wrong
+            user_id=session.get("user_id")
+            user_response=QuizUserResponse(hashed_user_id=user_id,quiz_id=quiz_id,ques_id=ques_id,ques_option_id=selected_answer)
+            db.session.add(user_response)
+            db.session.commit()
+
+            if(selected_answer_hash == correct_answer_hash):
+                #if answer is right
+                user_id = dict(session).get('user_id', None)
+                Userdata = UserInfo.query.filter_by(id=user_id).first()
+                Userdata.quizzes_score = Userdata.quizzes_score+quizpoints[0]
+                db.session.commit()
+                
+
+            total_ques=session.get("total_quiz_questions")
+                
+            # check ques_no===quiz total questions for ending quiz
+            # go to next question
+            if(total_ques==cur_quiz):
+                flash("Well Played! Quiz ended")
+                return redirect("/user/quiz")
+            else:
+                return redirect('/user/quiz/{}?ques_no={}'.format(quiz_id, ques_no+2))
+
+    except Exception as e:
+        print(e)
+        return redirect('/')
+        
+#####################
+# leaderboard page
+@client_bp.route('/quiz-leaderboard')
+@user_login_required
+def leaderboardPage():
+    try:
+        signed_in = False
+        cartLen = None
+        # checks if logged in
+        if session.get('user_id') != None:
+            signed_in = True
+            cartLen = session.get('cartLength')
+        
+        # by default show newest announcements first
+        leaderboard_list=[]
+        filter_value = request.args['order']
+        if filter_value == "highest":
+            usersData = UserInfo.query.order_by(desc("quizzes_score")).all()
+        else:
+            usersData = UserInfo.query.order_by(asc("quizzes_score")).all()
+
+        if usersData:
+            for i,item in enumerate(usersData):
+                leaderboard_list.append({
+                "rank":i+1,
+                "p_image":item.image_url,
+                "full_name":item.name,
+                "college_name":item.college_name,
+                "score":item.quizzes_score,
+            })
+    
+        return render_template('/client/user_leaderboard.html',leaderboard_list=leaderboard_list,cartLen=cartLen, signed_in=signed_in)
+    
+    except Exception as e:
+        print(e)
+        return redirect('/')  
+
+######################################
+
+#cart routes
 @client_bp.route('/addToCart/<string:id>', methods=['POST'])
 @user_login_required
 def AddToCart(id):
     if session.get('user_id') == None:
         flash("You haven't logged in to your account!")
-        return redirect('/')
     else:
         try:
             # 1. take current item details
@@ -99,9 +299,8 @@ def AddToCart(id):
             print(e)
             return redirect('/')
 
+
 # fetch cart logic
-
-
 @client_bp.route('/cart')
 @user_login_required
 def cartPage():
@@ -190,6 +389,7 @@ def cartPage():
 
 
 @client_bp.route('/remove-from-cart/<u_id>/<merchandise_id>', methods=["post"])
+@user_login_required
 def deleteItem(u_id, merchandise_id):
     try:
         product = Cart.query.filter(
@@ -209,6 +409,7 @@ def deleteItem(u_id, merchandise_id):
 
 
 @client_bp.route('/edit-cart-merchandise/<u_id>/<merchandise_id>', methods=["post"])
+@user_login_required
 def editCartItem(u_id, merchandise_id):
     try:
         new_count = request.form.get('count')

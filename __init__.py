@@ -2,10 +2,10 @@ from flask import Flask, redirect, url_for, session
 from flask.helpers import flash
 from flask_restful import Api
 from authlib.integrations.flask_client import OAuth
+from models import  Cart
 from datetime import datetime
 from flask_hashing import Hashing
 import helperFunc
-from models import Cart
 import random
 import string
 from decouple import config
@@ -97,7 +97,7 @@ def create_app():
             resp = google.get('userinfo')
             user_info = resp.json()
             user = oauth.google.userinfo()
-            print("---------------------------", user)
+            # s("---------------------------", user)
 
             user_email = user_info.get('email')
             profile_pic = user_info.get('picture')
@@ -165,13 +165,13 @@ def create_app():
                     return redirect('/')
 
             else:
-                # user entry
+                # user entry (sign up)
                 user_id = helperFunc.hashValue(user_email)
                 email = user_email
                 name = user_name
                 image_url = profile_pic
                 entry = UserInfo(id=user_id, email=email, name=name,
-                                 image_url=image_url, date_registered=datetime.now())
+                                 image_url=image_url, date_registered=datetime.now(),quizzes_score=0)
                 db.session.add(entry)
                 db.session.commit()
 
@@ -206,8 +206,11 @@ def create_app():
         return redirect('/')
 
     # csrf.init_app(app)
+    app.run(debug=True)
 
     # enable csrf
     # csrf.init_app(app)
     return app
 
+
+create_app()

@@ -1,0 +1,120 @@
+{% extends '/admin/admin_layout.html' %}
+
+{% block title %}
+Quiz Details
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row my-2 py-2 gy-2">
+        <div class="col-lg-3 col-sm-3">
+            <a href="/admin/quiz" type="button" class="go_back_btn text-black fs-7">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="me-2"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Go Back
+            </a>
+        </div>
+        <div class="col-lg-9 col-sm-12 d-flex justify-content-center align-items-center">
+            <h5 class="fs-4 main-font text-red">Quiz Details</h5>
+        </div>
+    </div>
+
+    <div class="row p-2 my-5 g-3">
+        <div class="col-12">
+            <div class="p-3 my-1 bg-teal shadow rounded-3" style="border: 3px solid var(--navbar);">
+                <p class="sec-font fs-6 text-black mb-1">
+                    To Add Multiple Questions To Quiz, Click on Following Button
+                </p>
+                <button class="up-button border border-dark fs-7" data-bs-toggle="modal" data-bs-target="#quizModal">
+                    Add New Question +
+                </button>
+                <hr>
+
+                <h2 class="sec-font fs-7 text-black">
+                    ID: {{quizDetails[0].quiz_id}}
+                </h2>
+
+                {% for ques in quizDetails %}
+                <div class="my-2">
+                    <h5 class="main-font fs-5 text-red pb-1 ">
+                        Q.{{loop.index}} {{ques.question}}
+                    </h5>
+                    <p class="sec-font fs-6 text-black mb-1">
+                        Point: {{ques.ques_point}}
+                    </p>
+                    <p class="sec-font fs-6 text-black mb-1">
+                        Correct Answer: {{ques.correct_answer}}
+                    </p>
+                    <p class="sec-font fs-6 text-black mb-1">
+                        Options:
+                    </p>
+                    {% for option in ques.options %}
+                    <p class="sec-font fs-6 text-black mb-1">
+                        {{loop.index}}) {{option}}
+                    </p>
+                    {% endfor %}
+
+                    <a href={{"/admin/quiz/{}/deleteQuestion".format(ques.ques_id)}}
+                        class="btn btn-outline-danger p-1 px-2 my-1">
+                        Delete Question
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="buttons">
+            <div class="modal fade" id="quizModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add New Question</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <form class="modal-body" id="QuizForm"
+                            action={{"/admin/add-quiz/{}".format(quizDetails[0].quiz_id)}} method="post">
+                            {{quizForm.csrf_token}}
+                            <p class="mb-0 fs-7 main-font">
+                                Quiz Question
+                            </p>
+                            <input type="text" class="input_value" placeholder="Quiz Question" name="question">
+
+                            <p class="mb-0 fs-7 main-font">
+                                Quiz Question Point
+                            </p>
+                            <input type="text" class="input_value" placeholder="Quiz Question Point" name="ques_point">
+
+                            <p class="mb-0 fs-7 main-font pt-1">
+                                Total No. Of options question will have
+                            </p>
+                            <div class="row d-flex align-items-center w-100 my-1">
+                                <div class="col-3 m-0 pe-0">
+                                    <input type="number" id="optionsNumber" name="optionsNumber" required
+                                        class="p-1 rounded-3" value="2" min="2"
+                                        style="width: 90%;border: 1px solid lightgray;">
+                                </div>
+                                <div class="col-7 m-0 ps-0">
+                                    <button type="button" class=" up-button border border-dark text-black fs-7 py-1"
+                                        id="addNewQuizOptionBtn">
+                                        Add +
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- inputs will come from quiz.js -->
+                            <div id="quiz-form"></div>
+                            <button type="submit" class="up-button w-100 my-2 bg-red  text-light">
+                                Save Question
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

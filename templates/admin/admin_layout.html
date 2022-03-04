@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block head %}
+<script defer src="/static/js/nav.js"></script>
 
 {% block headContent %}
 {% endblock headContent %}
@@ -124,6 +125,17 @@
                             Polls
                         </a>
                     </li>
+                    <li class="nav-links p-2 rounded d-flex align-items-center fs-6 fw-normal" {% if activeNav=='quiz'
+                        %} style="background-color:  #ac150a;" {% endif %}>
+                        <a href="/admin/quiz" class="w-100 d-flex align-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="text-beige me-2" width="28px" height="28px"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                            </svg>
+                            Quiz
+                        </a>
+                    </li>
                     <li class="nav-links p-2 rounded d-flex align-items-center fs-6 fw-normal" {% if activeNav=='users'
                         %} style="background-color:  #ac150a;" {% endif %}>
                         <a href="/admin/users?filter=newest" class="w-100 d-flex align-items-center">
@@ -245,12 +257,19 @@
                     <li class="nav-links p-2 rounded d-flex align-items-center fs-7 fw-normal" {% if activeNav=='polls'
                         %} style="background-color:  #ac150a;" {% endif %}>
                         <a href="/admin/polls" class="w-100 d-flex align-items-center">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                            Polls
+                        </a>
+                    </li>
+                    <li class="nav-links p-2 rounded d-flex align-items-center fs-7 fw-normal" {% if activeNav=='quiz'
+                        %} style="background-color:  #ac150a;" {% endif %}>
+                        <a href="/admin/quiz" class="w-100 d-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="text-beige me-2" width="28px" height="28px"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                             </svg>
-                            Polls
+                            Quiz
                         </a>
                     </li>
                     <li class="nav-links p-2 rounded d-flex align-items-center fs-6 fw-normal" {% if activeNav=='users'
@@ -297,5 +316,7 @@
             {% endblock %}
         </div>
     </div>
+
+    <script defer src="/static/js/adminquiz.js"></script>
 </body>
 {% endblock %}

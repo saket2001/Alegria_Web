@@ -1,18 +1,10 @@
-from flask import Blueprint, redirect, render_template, flash, session, request, send_from_directory
+from flask import Blueprint, redirect, render_template, session, request, send_from_directory
 from functools import wraps
-from flask_wtf.csrf import CSRFProtect
 from forms import UserContact, AddToCart
-from models import Cart, Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, PollUserResponse, db, UserInfo, Announcement, EventsToday
+from models import  Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, PollUserResponse, db, UserInfo, Announcement, EventsToday
 import basicData as client_data
 from datetime import datetime
-import os
 from pathlib import Path
-# csrf
-# csrf = CSRFProtect()
-
-# flask mail
-# mail = Mail()
-
 
 # create blueprint to group views
 app_mbp = Blueprint(
@@ -375,7 +367,7 @@ def Poll_list(id):
                     "id": ele.poll_id,
                     "poll_option_id": ele.poll_option_id,
                     "option_name": ele.option_name,
-                    "image_url": ele.option_image,
+                    "image_ url": ele.option_image,
                     "option_votes": ele.option_votes
                 })
             return render_template('user_polls.html', activeNav='events', polls=res["polls"], images=res["images"], result='', nextPoll=nextPoll, signed_in=signed_in, cartLen=cartLen)
@@ -462,7 +454,7 @@ def DevelopersPage():
             signed_in = True
             cartLen = session.get('cartLength')
 
-        return render_template('developers.html', activeNav='Developers', web_team_list=client_data.web_team_list, app_team_list=client_data.app_team_list, signed_in=signed_in, cartLen=cartLen)
+        return render_template('developers.html', activeNav='Developers', web_team_list=client_data.web_team_list, app_team_list=client_data.app_team_list,ui_team=client_data.ui_team,signed_in=signed_in, cartLen=cartLen)
 
     except Exception as e:
         print(e)
@@ -522,7 +514,7 @@ def eventHeadPage():
             signed_in = True
             cartLen = session.get('cartLength')
 
-        return render_template('event-head.html', activeNav='Event heads', signed_in=signed_in, cartLen=cartLen)
+        return render_template('event-head.html', activeNav='Event heads', signed_in=signed_in, cartLen=cartLen,event_heads_row1=client_data.event_heads_row1,event_heads_row2=client_data.event_heads_row2,event_heads_row3=client_data.event_heads_row3,event_heads_row4=client_data.event_heads_row4)
     except Exception as e:
         print(e)
         return redirect("/")
@@ -611,11 +603,13 @@ def highlights():
 
 @app_mbp.route("/Alegria-Brochure-2022")
 def BrochurePage():
-    # try:
-    #     BASE_DIR = Path(__file__).resolve().parent.parent
-    #     exactPath = str(BASE_DIR) + "/static" + "/" + "files/"
-    #     return send_from_directory(exactPath, "sample-brochure-2022.pdf")
-    # except Exception as e:
-    #     print(e)
-    return render_template("404.html")
+    try:
+        BASE_DIR = Path(__file__).resolve().parent.parent
+        exactPath = str(BASE_DIR) + "/static" + "/" + "files/"
+        return send_from_directory(exactPath, "EBrochure2022.pdf")
+    except Exception as e:
+        print(e)
+        return redirect("/")
 
+
+##################################
