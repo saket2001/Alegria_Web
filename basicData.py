@@ -216,6 +216,11 @@ app_team_list = [
      "github": "https://github.com/PranavShegekar", "linkedin": "https://www.linkedin.com/in/pranav-shegekar"}
 ]
 
+ui_team=[
+        {"img": "../static/images/developer/Tomcy.JPG", "name": "Tomcy Thomas", "role": "UI UX Designer", "call": "+91 7208708451",
+        "gmail": "designsbytomc@gmail.com", "github": "https://github.com/TomcyT", "linkedin": "https://www.linkedin.com/in/tomcyt/"},
+    ]
+
 event_heads_row1=[
     {
             "label":"Technical",

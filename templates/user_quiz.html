@@ -25,6 +25,20 @@ Alegria 2022 | Alegria Quiz 2022
 {% block content %}
 <div class="bg-cover min-vh-100">
     <div class="container py-2 h-100">
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show d-flex align-items-center position-absolute main-font main-bg flash"
+            role="alert">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 me-2" fill="none" viewBox="0 0 24 24" width="30px"
+                height="30px" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
         <div class="row my-2">
             <div class="col text-center">
                 <h2 class="main-font text-red fs-4">
@@ -100,11 +114,15 @@ Alegria 2022 | Alegria Quiz 2022
                     <div class="row py-2">
                         <div class="col d-flex flex-column align-items-center">
                             <h4 class="text-center sec-font text-black fs-6">Questions Answered</h4>
-                            <p class="fw-bold fs-4 text-red">{{user_stats["total_answered"]}}</p>
+                            <p class="fw-bold fs-4 text-red">
+                                {{user_stats["questions_answered"]}}
+                            </p>
                         </div>
                         <div class="col d-flex flex-column align-items-center">
                             <h4 class="text-center sec-font text-black fs-6">Your Score</h4>
-                            <p class="fw-bold fs-4 text-red">{{user_stats["total_score"]}}</p>
+                            <p class="fw-bold fs-4 text-red">
+                                {{user_stats["total_score"]}}
+                            </p>
                         </div>
                     </div>
                 </div>

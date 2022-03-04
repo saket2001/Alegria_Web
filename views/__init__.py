@@ -462,7 +462,7 @@ def DevelopersPage():
             signed_in = True
             cartLen = session.get('cartLength')
 
-        return render_template('developers.html', activeNav='Developers', web_team_list=client_data.web_team_list, app_team_list=client_data.app_team_list, signed_in=signed_in, cartLen=cartLen)
+        return render_template('developers.html', activeNav='Developers', web_team_list=client_data.web_team_list, app_team_list=client_data.app_team_list,ui_team=client_data.ui_team,signed_in=signed_in, cartLen=cartLen)
 
     except Exception as e:
         print(e)
@@ -621,36 +621,3 @@ def BrochurePage():
 
 
 ##################################
-
-# leaderboard page
-@app_mbp.route('/quiz-leaderboard')
-def leaderboardPage():
-    try:
-        signed_in = False
-        cartLen = None
-        # checks if logged in
-        if session.get('user_id') != None:
-            signed_in = True
-            cartLen = session.get('cartLength')
-        
-        # dummy data
-        # sort the values by asc by default
-        leaderboard_list=[{
-            "rank":1,
-            "p_image":"",
-            "full_name":"Saket Chandorkar",
-            "college_name":"PCE",
-            "score":20,
-        },{
-            "rank":2,
-            "p_image":"",
-            "full_name":"Saket Chandorkar",
-            "college_name":"PCE",
-            "score":15,
-        }]
-    
-        return render_template('user_leaderboard.html',leaderboard_list=leaderboard_list,cartLen=cartLen, signed_in=signed_in)
-    
-    except Exception as e:
-        print(e)
-        return redirect('/')
