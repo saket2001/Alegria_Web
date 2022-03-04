@@ -611,11 +611,11 @@ def highlights():
 
 @app_mbp.route("/Alegria-Brochure-2022")
 def BrochurePage():
-    try:
-        BASE_DIR = Path(__file__).resolve().parent.parent
-        exactPath = str(BASE_DIR) + "/static" + "/" + "files/"
-        return send_from_directory(exactPath, "sample-brochure-2022.pdf")
-    except Exception as e:
-        print(e)
-        return redirect("/")
+    # try:
+    #     BASE_DIR = Path(__file__).resolve().parent.parent
+    #     exactPath = str(BASE_DIR) + "/static" + "/" + "files/"
+    #     return send_from_directory(exactPath, "sample-brochure-2022.pdf")
+    # except Exception as e:
+    #     print(e)
+    return render_template("404.html")
 
