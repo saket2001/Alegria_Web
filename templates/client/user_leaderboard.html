@@ -19,8 +19,8 @@ Alegria 2022 | Quiz Leaderboard
                 </a>
             </div>
         </div>
-        <div class="row d-flex align-items-center my-1">
-            <div class="col d-flex align-items-center my-1">
+        <div class="row d-flex align-items-center my-1 mt-3">
+            <div class="col d-flex align-items-center my-1 mt-2">
                 <h5 class="fs-4 my-0 mx-2 main-font text-black">
                     Quiz Leaderboard
                 </h5>
@@ -71,14 +71,13 @@ Alegria 2022 | Quiz Leaderboard
                         {% if ele["p_image"]== "" %}
                         <i class="fa-solid fa-circle-user fs-4"></i>
                         {% else %}
-                        <img src={{ele["p_image"]}} alt="user profile image"
-                            style="width: 20%;height:20%;border-radius: 100%;">
+                        <img src={{ele["p_image"]}} alt="user profile image" class="leaderboard_img">
                         {% endif %}
                     </td>
-                    <td>
+                    <td class="sec-font">
                         {{ele["full_name"]}}
                     </td>
-                    <td>
+                    <td class="sec-font">
                         {{ele["college_name"]}}
                     </td>
                     <td class="text-red main-font">

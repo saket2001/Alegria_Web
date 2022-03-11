@@ -11,7 +11,7 @@ hashing = Hashing()
 
 
 def hashValue(value):
-    return hashing.hash_value(value, salt='alegriahashkey')
+    return hashing.hash_value(value, salt=config("HASH_KEY"))
 
 # to check hash value against normal value
 

@@ -15,12 +15,12 @@ def create_app():
     # create and configure the app
     app = Flask(__name__)
     app.config.from_mapping(
-        SECRET_KEY='alegriaisfun',
+        SECRET_KEY=config("SESSION_KEY"),
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         SQLALCHEMY_POOL_RECYCLE=299,
         SQLALCHEMY_POOL_TIMEOUT=20,
-        SQLALCHEMY_DATABASE_URI=config('ALEGRIA_SERVER_LINK'),
-        # SQLALCHEMY_DATABASE_URI=config('ALEGRIA_LOCALHOST_LINK'),
+        # SQLALCHEMY_DATABASE_URI=config('ALEGRIA_SERVER_LINK'),
+        SQLALCHEMY_DATABASE_URI=config('ALEGRIA_LOCALHOST_LINK'),
         MAIL_SERVER='smtp.gmail.com',
         MAIL_PORT=465,
         MAIL_USE_SSL=True,
@@ -68,8 +68,8 @@ def create_app():
     oauth = OAuth(app)
     google = oauth.register(
         name='google',
-        client_id='391737203590-h2n6bbjhc2lkbpf5gkp0tpgbp6t35hgg.apps.googleusercontent.com',
-        client_secret='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',
+        client_id=config('OAUTH_CLIENT_ID'),
+        client_secret=config('OAUTH_CLIENT_SECRET'),
         access_token_url='https://accounts.google.com/o/oauth2/token',
         access_token_params=None,
         authorize_url='https://accounts.google.com/o/oauth2/auth',

@@ -141,6 +141,12 @@ body {
     background-repeat: no-repeat;
 }
 
+.leaderboard_img{
+        width: 20%;
+        height: 20%;
+        border-radius: 100%;
+}
+
 /* fix for a color change on hover */
 a.text-red:hover {
     color: var(--u_red);
@@ -225,34 +231,6 @@ a.text-black:hover {
     animation: letter_fade 1.2s .6s ease-out infinite forwards;
 }
 
-#loader-A {
-    animation: letter_fade 1.2s .7s ease-out infinite forwards;
-}
-
-#loader-L {
-    animation: letter_fade 1.2s .8s ease-out infinite forwards;
-}
-
-#loader-E {
-    animation: letter_fade 1.2s .9s ease-out infinite forwards;
-}
-
-#loader-G {
-    animation: letter_fade 1.2s 1s ease-out infinite forwards;
-}
-
-#loader-R {
-    animation: letter_fade 1.2s 1.1s ease-out infinite forwards;
-}
-
-#loader-I {
-    animation: letter_fade 1.2s 1.2s ease-out infinite forwards;
-}
-
-#loader-Aa {
-    animation: letter_fade 1.2s 1.3s ease-out infinite forwards;
-}
-
 
 @keyframes letter_fade {
     0% {
@@ -282,6 +260,13 @@ a.text-black:hover {
     width: 70%;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.flash_air{
+    position: absolute;
+    width: 40%;
+    z-index: 10;
+    top: 1rem;
 }
 
 /* nav bar */
@@ -830,6 +815,14 @@ h1 {
 
     .flash {
         width: 90%;
+    }
+
+    .flash_air{
+        width: 90%;
+    }
+
+    .leaderboard_img{
+        width: 60%;
     }
 
     .hide {

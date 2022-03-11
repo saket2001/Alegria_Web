@@ -1,10 +1,11 @@
-from flask import Blueprint, redirect, render_template, session, request, send_from_directory
+from flask import Blueprint, flash, redirect, render_template, session, request, send_from_directory
 from functools import wraps
 from forms import UserContact, AddToCart
-from models import  Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, PollUserResponse, db, UserInfo, Announcement, EventsToday
+from models import  APIKeys, Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, PollUserResponse, db, UserInfo, Announcement, EventsToday
 import basicData as client_data
 from datetime import datetime
 from pathlib import Path
+import re
 
 # create blueprint to group views
 app_mbp = Blueprint(
@@ -540,12 +541,18 @@ def userDetails(user_id):
         phone_number = request.form.get('user_contact')
         college_name = request.form.get('user_college_name')
 
-        adminList.phone_number = phone_number
-        adminList.college_name = college_name
-        print(session)
+        # validating inputs
+        valid_number=re.findall("\d{10}", phone_number)
+        print(len(phone_number))
+        if len(phone_number)>10:
+            flash("Please enter a valid 10 digits phone number !")
+            return redirect("/new-user-login/{}".format(user_id))
+        else:
+            adminList.phone_number = phone_number
+            adminList.college_name = college_name
 
-        db.session.commit()
-        return redirect('/')
+            db.session.commit()
+            return redirect('/')
 
     except Exception as e:
         print(e)
@@ -556,9 +563,10 @@ def userDetails(user_id):
 def deleteUserOnCancel(user_id):
     try:
         user_details = UserInfo.query.filter_by(id=user_id).first()
+        user_api_key=APIKeys.query.filter_by(user_id=user_id).first()
         db.session.delete(user_details)
+        db.session.delete(user_api_key)
         db.session.commit()
-        print(session)
 
         return redirect('/session-logout')
 

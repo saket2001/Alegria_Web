@@ -117,8 +117,8 @@ Alegria 2022 | Merchandise | {{category}}
                             class="d-flex flex-column justify-content-center merch-card">
                             {% if ele['category']=='Tshirts' %}
                             <div class="w-100 d-flex justify-content-center overflow-hidden">
-                                <img src={{ele['img1']}} alt="merchandise-image" height="220px" width="100%"
-                                    class="rounded-3 mb-1">
+                                <img src={{ele['img1']}} alt="merchandise-image" loading="lazy" height="220px"
+                                    width="100%" class="rounded-3 mb-1">
                             </div>
                             {% endif %}
                             {% if ele['category']=='Badges' %}
