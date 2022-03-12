@@ -11,7 +11,7 @@
 <script defer src="/static/js/loading.js"></script>
 {% endblock %} {% block title %} Alegria 2022 | Homepage {% endblock %} {% block body %}
 
-<body class="loader-body">
+<body class="loader-body position-relative">
     <div class="loading-bg">
     </div>
     <div class="loader-div d-flex flex-column justify-content-center align-items-center">
@@ -245,6 +245,50 @@
     </div>
     {% endfor %} {% endif %} {% endwith %}
 
+    <!-- hero alert -->
+    <div class="hero_alert_div">
+        <ul class="hero_ul">
+            <!-- alert div -->
+            {% for d in data %}
+            {% if d.title and d.message %}
+            <li class="hero_alert bg-light text-black sec-font d-flex flex-column my-2" data-id={{loop.index}}>
+                <!-- div style -->
+                <div class="bg-red" style="height: 0.5rem;"></div>
+                <!-- title -->
+                <div class="py-2 px-3">
+                    <!-- close btn -->
+                    <div class="d-flex align-items-center justify-content-between border-bottom border-danger mb-2">
+                        <h3 class="main-font text-red fs-5 p-0 m-0">
+                            {{d.title}}
+                        </h3>
+                        <div class="d-flex justify-content-end">
+                            <button class="up-button p-0 fs-5" id="hero_alert-close-btn" data-id={{loop.index}}>
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- body -->
+                    <p class="main-font fs-7 text-black">
+                        {{d.message}}
+                    </p>
+                </div>
+            </li>
+            {% else %}
+            <li class="hero_alert text-black sec-font d-flex flex-column my-2" data-id={{loop.index}}>
+                <!-- img -->
+                <!-- close btn -->
+                <div class="d-flex justify-content-end">
+                    <button class="up-button p-0 fs-5" id="hero_alert-close-btn" data-id={{loop.index}}>
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <img src={{d.img}}>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
     <div class="parallax_section">
         <!-- theme banner -->
         <section class="parallax-container">
@@ -295,6 +339,7 @@
         </div>
     </div>
     <div class="main-bg homepage-gap"></div>
+
     <!-- events -->
     <section class="main-bg min-vh-100 overflow-hidden d-flex flex-column align-items-center justify-content-center">
         <div class="row p-1 w-100 d-flex flex-column justify-content-center pb-4" id="events-section">
@@ -415,8 +460,23 @@
             </div>
     </section>
 
+    <div class="poster-extra-div"></div>
+    <section class="poster-section">
+        <img src="/static/images/homepage/poster.png" class="poster-image" alt="">
+    </section>
+    <div class="poster-extra-div flex flex-column align-items-center text-center p-3">
+        <p class="text-red main-font mb-1">
+            *Tickets will be available soon
+        </p>
+        <!-- <button class="normal-button">
+            <a href="/alegria-comedy-night-with-abhishek-upmanyu">
+                Read More
+            </a>
+        </button> -->
+    </div>
+
     <!--hackathon-->
-    <section
+    <!-- <section
         class="homepage_section bg-red position-relative overflow-hidden py-4 px-2 d-flex flex-column align-items-center hackathon">
         <div class="text-beige row py-3 px-2 w-100 min-vh-100 d-flex flex-column align-items-center">
             <div class="col px-3">
@@ -461,42 +521,42 @@
                     <!-- <div class="col-lg-4 col-sm-12 d-flex justify-content-center">
                         <img src="/static/images/hackathon/hackathon.png" class="responsive_images"
                             alt="hackathon logo image">
-                    </div> -->
-                </div>
+                    </div> 
+    </div>
 
-                <div class="row py-3 mx-3 my-4 d-flex justify-content-center hackathon">
-                    <div class="col-12">
-                        <h2 class="main-font text-light text-center fs-3 px-0 mx-0 hackathon-prize mb-2">Prizes
-                        </h2>
-                    </div>
-                    <div
-                        class="col-lg-4 col-sm-12 d-flex flex-column align-items-center justify-content-center my-2 hackathon-prize">
-                        <div class="main-bg d-flex justify-content-center align-items-center mx-3 text-red fs-3 fw-bold main-font text-center"
-                            style="border-radius: 100px;width:4rem;height:4rem;">
-                            01
-                        </div>
-                        <p class="fs-6 sec-font text-center my-2">3000 Rs Plus Certificates</p>
-                    </div>
-                    <div
-                        class="col-lg-4 col-sm-12 d-flex flex-column align-items-center justify-content-center my-2 hackathon-prize">
-                        <div class="main-bg d-flex justify-content-center align-items-center mx-3 text-red fs-3 fw-bold main-font text-center"
-                            style="border-radius: 100px;width:4rem;height:4rem;">
-                            02
-                        </div>
-                        <p class="fs-6 sec-font text-center my-2">1500 Rs Plus Certificates</p>
-                    </div>
-                    <div
-                        class="col-lg-4 col-sm-12 d-flex flex-column align-items-center justify-content-center my-2 hackathon-prize">
-                        <div class="main-bg d-flex justify-content-center align-items-center mx-3 text-red fs-3 fw-bold main-font text-center"
-                            style="border-radius: 100px;width:4rem;height:4rem;">
-                            03
-                        </div>
-                        <p class="fs-6 sec-font text-center my-2">Only Certificates</p>
-                    </div>
-                </div>
-            </div>
+    <div class="row py-3 mx-3 my-4 d-flex justify-content-center hackathon">
+        <div class="col-12">
+            <h2 class="main-font text-light text-center fs-3 px-0 mx-0 hackathon-prize mb-2">Prizes
+            </h2>
         </div>
-    </section>
+        <div
+            class="col-lg-4 col-sm-12 d-flex flex-column align-items-center justify-content-center my-2 hackathon-prize">
+            <div class="main-bg d-flex justify-content-center align-items-center mx-3 text-red fs-3 fw-bold main-font text-center"
+                style="border-radius: 100px;width:4rem;height:4rem;">
+                01
+            </div>
+            <p class="fs-6 sec-font text-center my-2">3000 Rs Plus Certificates</p>
+        </div>
+        <div
+            class="col-lg-4 col-sm-12 d-flex flex-column align-items-center justify-content-center my-2 hackathon-prize">
+            <div class="main-bg d-flex justify-content-center align-items-center mx-3 text-red fs-3 fw-bold main-font text-center"
+                style="border-radius: 100px;width:4rem;height:4rem;">
+                02
+            </div>
+            <p class="fs-6 sec-font text-center my-2">1500 Rs Plus Certificates</p>
+        </div>
+        <div
+            class="col-lg-4 col-sm-12 d-flex flex-column align-items-center justify-content-center my-2 hackathon-prize">
+            <div class="main-bg d-flex justify-content-center align-items-center mx-3 text-red fs-3 fw-bold main-font text-center"
+                style="border-radius: 100px;width:4rem;height:4rem;">
+                03
+            </div>
+            <p class="fs-6 sec-font text-center my-2">Only Certificates</p>
+        </div>
+    </div>
+    </div>
+    </div>
+    </section> -->
 
     <!-- gallery -->
     <section class="main-bg homepage_section main-bg position-relative overflow-hidden pb-4" id="gallery">
@@ -562,6 +622,7 @@
                 </div>
             </div>
     </section>
+
     <!-- testimonials -->
     <section class="main-bg min-vh-100 position-relative overflow-hidden py-3">
         <div class="row text-center mb-1">
@@ -713,7 +774,6 @@
             </div>
         </div>
     </section>
-
 
     <!-- footer -->
     <footer class="d-flex flex-column px-2 overflow-hidden u-text-beige" style="background-color: #272626;">
