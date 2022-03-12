@@ -105,13 +105,12 @@ window.addEventListener("load", () => {
   // fill the modal with messages or message
   const BtnIds = getBtnId(allCloseBtn);
   BtnIds.forEach((id) => {
-    const toShow = sessionStorage.getItem(`heroAlert${id}Closed`) ?? false;
-    console.log(toShow);
-    if (!toShow)
-      setTimeout(() => {
+    // const toShow = sessionStorage.getItem(`heroAlert${id}Closed`) ?? false;
+    // if (!toShow)
+    setTimeout(() => {
         allHeroModal[id - 1].classList.add("fade-in");
         allHeroModal[id - 1].style.visibility = "visible";
-      }, 2000);
+    }, 1000);
   });
 });
 

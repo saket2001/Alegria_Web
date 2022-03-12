@@ -38,21 +38,13 @@ def landingPage():
     if session.get('user_id') != None:
         signed_in = True
         cartLen = session.get('cartLength')
-        
+
     BASE_DIR = Path(__file__).resolve().parent.parent
     exactPath = str(BASE_DIR) + "/static" + "/" + "images/homepage/"
-    
+
     print(send_from_directory(exactPath, "mobile-poster.jpg"))
-        
+
     data = [
-        {
-            "title": " Hello Alegrian's",
-            "message":"Alegria The Festival of Joy is pleased to present comedy night with Abhishek Upmanyu this year. Don't forget to checkout the banner below.",
-        },
-        {
-            "title": " Hello Alegrian's",
-            "message":"Alegria The Festival of Joy event calender is released now.",
-        },
         {
             "img":"/static/images/homepage/mobile-poster.jpg",
         },

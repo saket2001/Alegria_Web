@@ -367,7 +367,7 @@ a.text-black:hover {
     font-size: 0.9rem !important;
 }
 
-/* 
+/*
 .navbar-main .nav-item a:hover {
     transform: translateY(50px);
     color: #f3f0f0;
@@ -881,6 +881,7 @@ h1 {
     }
 
     .hero_ul{
+        bottom: 20%;
         width: 80%;
     }
 
