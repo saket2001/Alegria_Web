@@ -47,29 +47,29 @@ const scene2 = new ScrollMagic.Scene({
 
 //
 
-t3.fromTo(
-  "#hackathon-title",
-  { y: "50px", opacity: 0.2 },
-  { y: "0px", opacity: 1, duration: 2 }
-)
-  .fromTo(
-    ".hackathon-content",
-    { y: "50px", opacity: 0.2 },
-    { y: "0px", opacity: 1, duration: 2 },
-    "-=2"
-  )
-  .fromTo(
-    ".hackathon-image",
-    { y: "50px", opacity: 0 },
-    { y: "0px", opacity: 1, duration: 2 },
-    "-=2"
-  )
-  .fromTo(
-    ".hackathon-prize",
-    { y: "50px", opacity: 0 },
-    { y: "0px", opacity: 1, duration: 2 },
-    "-=2"
-  );
+// t3.fromTo(
+//   "#hackathon-title",
+//   { y: "50px", opacity: 0.2 },
+//   { y: "0px", opacity: 1, duration: 2 }
+// )
+//   .fromTo(
+//     ".hackathon-content",
+//     { y: "50px", opacity: 0.2 },
+//     { y: "0px", opacity: 1, duration: 2 },
+//     "-=2"
+//   )
+//   .fromTo(
+//     ".hackathon-image",
+//     { y: "50px", opacity: 0 },
+//     { y: "0px", opacity: 1, duration: 2 },
+//     "-=2"
+//   )
+//   .fromTo(
+//     ".hackathon-prize",
+//     { y: "50px", opacity: 0 },
+//     { y: "0px", opacity: 1, duration: 2 },
+//     "-=2"
+//   );
 
 const scene3 = new ScrollMagic.Scene({
   triggerElement: ".hackathon",
@@ -94,3 +94,40 @@ const scene4 = new ScrollMagic.Scene({
 })
   .setTween(t4)
   .addTo(controller);
+
+// hero alert
+const allCloseBtn = document.querySelectorAll("#hero_alert-close-btn");
+const heroModalDiv = document.querySelector(".hero_alert_div");
+const allHeroModal = document.querySelectorAll(".hero_alert");
+
+// show modal after sometime of load
+window.addEventListener("load", () => {
+  // fill the modal with messages or message
+  const BtnIds = getBtnId(allCloseBtn);
+  BtnIds.forEach((id) => {
+    const toShow = sessionStorage.getItem(`heroAlert${id}Closed`) ?? false;
+    console.log(toShow);
+    if (!toShow)
+      setTimeout(() => {
+        allHeroModal[id - 1].classList.add("fade-in");
+        allHeroModal[id - 1].style.visibility = "visible";
+      }, 2000);
+  });
+});
+
+// close modal
+allCloseBtn.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const btnId = e.target.parentElement.getAttribute("data-id");
+    allHeroModal[btnId - 1].classList.add("fade-out");
+    sessionStorage.setItem(`heroAlert${btnId}Closed`, true);
+  });
+});
+
+const getBtnId = (btnArr) => {
+  let btnIDs = [];
+  Array.from(btnArr).forEach((btn) => {
+    btnIDs.push(btn.getAttribute("data-id"));
+  });
+  return btnIDs;
+};

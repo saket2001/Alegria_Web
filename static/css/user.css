@@ -160,7 +160,7 @@ body {
 
 .poster-image{
     width: 100%;
-    height: 100vh;
+    height: 95vh;
     object-fit: contain;
 }
 
@@ -284,6 +284,48 @@ a.text-black:hover {
     width: 40%;
     z-index: 10;
     top: 1rem;
+}
+
+/* hero alert */
+.hero_alert_div{
+    height: 100vh;
+    min-width: 100%;
+    z-index: 3;
+    position: fixed;
+    background-color: #3d3d3d75;
+    visibility: hidden;
+}
+
+.hero_ul{
+    width: 40%;
+    position: absolute;
+    bottom: 1rem;
+    right: 0.3rem;
+    margin: 0;
+    margin-right: 0.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.hero_alert{
+    width: 80%;
+    border-radius: 6px;
+    visibility: hidden;
+    transform: translateY(-50);
+    opacity: 0;
+    transition: all .2s ease;
+}
+
+.fade-in{
+    transform: translateY(0) !important;
+    opacity: 1;
+}
+
+.fade-out{
+    transform: translateY(80) !important;
+    opacity: 0.1;
+    display: none !important;
 }
 
 /* nav bar */
@@ -827,11 +869,19 @@ h1 {
 @media screen and (max-width :600px) {
 
     .poster-extra-div{
-     min-height: 8vh;
+        min-height: 8vh;
     }
 
     .poster-section{
-    min-height: auto;
+        min-height: auto;
+    }
+
+    .hero_alert{
+        width: 100%;
+    }
+
+    .hero_ul{
+        width: 80%;
     }
 
     .poster-image{

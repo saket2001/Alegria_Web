@@ -11,7 +11,7 @@
 <script defer src="/static/js/loading.js"></script>
 {% endblock %} {% block title %} Alegria 2022 | Homepage {% endblock %} {% block body %}
 
-<body class="loader-body">
+<body class="loader-body position-relative">
     <div class="loading-bg">
     </div>
     <div class="loader-div d-flex flex-column justify-content-center align-items-center">
@@ -244,6 +244,50 @@
         </div>
     </div>
     {% endfor %} {% endif %} {% endwith %}
+
+    <!-- hero alert -->
+    <div class="hero_alert_div">
+        <ul class="hero_ul">
+            <!-- alert div -->
+            {% for d in data %}
+            {% if d.title and d.message %}
+            <li class="hero_alert bg-light text-black sec-font d-flex flex-column my-2" data-id={{loop.index}}>
+                <!-- div style -->
+                <div class="bg-red" style="height: 0.5rem;"></div>
+                <!-- title -->
+                <div class="py-2 px-3">
+                    <!-- close btn -->
+                    <div class="d-flex align-items-center justify-content-between border-bottom border-danger mb-2">
+                        <h3 class="main-font text-red fs-5 p-0 m-0">
+                            {{d.title}}
+                        </h3>
+                        <div class="d-flex justify-content-end">
+                            <button class="up-button p-0 fs-5" id="hero_alert-close-btn" data-id={{loop.index}}>
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- body -->
+                    <p class="main-font fs-7 text-black">
+                        {{d.message}}
+                    </p>
+                </div>
+            </li>
+            {% else %}
+            <li class="hero_alert text-black sec-font d-flex flex-column my-2" data-id={{loop.index}}>
+                <!-- img -->
+                <!-- close btn -->
+                <div class="d-flex justify-content-end">
+                    <button class="up-button p-0 fs-5" id="hero_alert-close-btn" data-id={{loop.index}}>
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <img src={{d.img}}>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
 
     <div class="parallax_section">
         <!-- theme banner -->

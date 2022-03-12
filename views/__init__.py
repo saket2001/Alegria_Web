@@ -38,8 +38,28 @@ def landingPage():
     if session.get('user_id') != None:
         signed_in = True
         cartLen = session.get('cartLength')
+        
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    exactPath = str(BASE_DIR) + "/static" + "/" + "images/homepage/"
+    
+    print(send_from_directory(exactPath, "mobile-poster.jpg"))
+        
+    data = [
+        {
+            "title": " Hello Alegrian's",
+            "message":"Alegria The Festival of Joy is pleased to present comedy night with Abhishek Upmanyu this year. Don't forget to checkout the banner below.",
+        },
+        {
+            "title": " Hello Alegrian's",
+            "message":"Alegria The Festival of Joy event calender is released now.",
+        },
+        {
+            "img":"/static/images/homepage/mobile-poster.jpg",
+        },
+    ]
 
-    return render_template('user_homepage.html', activeNav='Home', signed_in=signed_in, row1=client_data.events_row1, row2=client_data.events_row2, row3=client_data.events_row3, cartLen=cartLen)
+
+    return render_template('user_homepage.html', activeNav='Home', signed_in=signed_in, row1=client_data.events_row1, row2=client_data.events_row2, row3=client_data.events_row3, cartLen=cartLen,data=data)
 
 
 @app_mbp.route("/user-login")
