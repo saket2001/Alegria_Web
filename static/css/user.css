@@ -147,6 +147,23 @@ body {
         border-radius: 100%;
 }
 
+.poster-extra-div{
+     min-height: 8vh;
+    background-color: #FEC71D;
+}
+
+.poster-section{
+    min-height: 100vh;
+    overflow: hidden;
+    background-color: #FEC71D;
+}
+
+.poster-image{
+    width: 100%;
+    height: 100vh;
+    object-fit: contain;
+}
+
 /* fix for a color change on hover */
 a.text-red:hover {
     color: var(--u_red);
@@ -809,6 +826,18 @@ h1 {
 
 @media screen and (max-width :600px) {
 
+    .poster-extra-div{
+     min-height: 8vh;
+    }
+
+    .poster-section{
+    min-height: auto;
+    }
+
+    .poster-image{
+        height: auto;
+        object-fit: contain;
+    }
     .loader {
         font-size: 1.5rem;
     }
