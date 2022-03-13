@@ -346,6 +346,7 @@ event_heads_row3=[
     }
 ]
 event_heads_row4=[
+    
     { 
         "label":"Gaming",
         "logo":"/static/images/icons/Category%20Icons/Gaming.png",
@@ -376,3 +377,19 @@ event_heads_row4=[
             }]
     }
 ]
+
+artistDetails=[
+    {
+    "name":"Abhishek Upmanyu",
+    "p":"<p class='fs-7 sec-font text-black' style='text-align: justify;'>The very first artist for one of the biggest festivals in Mumbai “Alegria - The festival of Joy” 2022 has been announced! Abhishek Upmanyu, the eternal tragic standup comedian and one of the most popular personalities is going to perform live on 27th March 2022 on Pillai's campus. He is an engineer who left his corporate job to pursue his dream of becoming a stand-up comedian. It is not easy to make people laugh, but the one that succeeds to do it is one with the biggest hearts.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>The one who makes the crowd laugh until the stomach aches! Get ready to attend the gushingly funny standup of all time. HE did start off as a writer for 'On Air with AIB' but his years of hard work did pay off. He is now known nationwide for his amazing performances. Alegria 2022 is all set to give you an exquisite experience with his funny personality who not only vows to the crowd but also keeps you smiling throughout the show.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>Roll up your sleeves and get ready for a rollercoaster of wrapped-up funny punchlines that you wouldn't want to miss any time! The humorous character, a splash of cheerful night, an amazing time with friends - what a perfect trio! Get your pals along and spend the wittiest night of your life.</p>",
+    "date":"27 th March 2022, Sunday",
+    "type":"Comedy Night",
+    "img":"../static/images/homepage/mobile-poster.jpg",
+    }
+    ,{
+    "name":"Arjun Kanungo",
+    "p":"<p class='fs-7 sec-font text-black' style='text-align: justify;'>Arjun Kanungo, a man of many talents is someone Alegria is honoured to have. When we speak about his talents, we cannot forget to mention that he is a three-time gold medalist in Centre Fire Pistol and also a national level basketball player. He ignited his career as an entrepreneur and has gained increasing recognition for his hit songs in Go Goa Gone in 2013. His talents have only known growth since then.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>His hit debut song ‘Baaki Baatein Peene Baad’ was followed by two more sensational hits, ‘Fursat’ and ‘Ek Dafaa (Chinnama)’. His debut song also won an award in the Jagdish Singh Award for best debut category. His voice is so soothing and calming that listening to his songs on repeat is the only thing his fans do to feel content. He’s been a part of many Bollywood projects and is a method actor too. Having been graduated from Lee Strasberg Theatre and Film Institute in New York City, he’s made his debut in the film industry alongside Bollywood’s Bhai, Salman Khan</p><p class='fs-7 sec-font text-black' style='text-align: justify;'> This multilingual singer has won hearts in different languages and has set a fanbase so wide that having him at Pillai’s Alegria is like a dream come true. Singing alongside the Bollywood legend Asha Bhosale and touring around the world, he is now all set to have his first concert in Navi Mumbai on the Pillai’s campus. Get ready to have him rob your hearts with his charm, wit and most mesmerizing voice for he is going to set the stage on fire on the 26TH March 2022. The wait is going to be worth this experience of a lifetime.</p>",
+    "date":"26 th March 2022, Saturday",
+    "type":"Live In Concert",
+    "img":"../static/images/homepage/arjun-poster.jpg",
+}]

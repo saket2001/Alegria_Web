@@ -11,7 +11,7 @@
 <script defer src="/static/js/loading.js"></script>
 {% endblock %} {% block title %} Alegria 2022 | Homepage {% endblock %} {% block body %}
 
-<body class="loader-body position-relative">
+<body class="loader-body position-relative" style="overflow-x: hidden;">
     <div class="loading-bg">
     </div>
     <div class="loader-div d-flex flex-column justify-content-center align-items-center">
@@ -246,17 +246,13 @@
     {% endfor %} {% endif %} {% endwith %}
 
     <!-- hero alert -->
-    <div class="hero_alert_div">
+    <!-- <div class="hero_alert_div">
         <ul class="hero_ul">
-            <!-- alert div -->
             {% for d in data %}
             {% if d.title and d.message %}
             <li class="hero_alert bg-light text-black sec-font d-flex flex-column my-2" data-id={{loop.index}}>
-                <!-- div style -->
                 <div class="bg-red" style="height: 0.5rem;"></div>
-                <!-- title -->
                 <div class="py-2 px-3">
-                    <!-- close btn -->
                     <div class="d-flex align-items-center justify-content-between border-bottom border-danger mb-2">
                         <h3 class="main-font text-red fs-5 p-0 m-0">
                             {{d.title}}
@@ -267,7 +263,6 @@
                             </button>
                         </div>
                     </div>
-                    <!-- body -->
                     <p class="main-font fs-7 text-black">
                         {{d.message}}
                     </p>
@@ -275,19 +270,50 @@
             </li>
             {% else %}
             <li class="hero_alert text-black sec-font d-flex flex-column my-2" data-id={{loop.index}}>
-                <!-- img -->
-                <!-- close btn -->
                 <div class="d-flex justify-content-end">
                     <button class="up-button p-0 fs-5" id="hero_alert-close-btn" data-id={{loop.index}}>
-                        <i class="fa-solid fa-xmark"></i>
+                        <i class="fa-solid fa-xmark text-white"></i>
                     </button>
                 </div>
-                <img src={{d.img}}>
+                <div class="col d-flex justify-content-center align-items-center">
+                    <div id="carouselExampleIndicators2" class="carousel slide py-2" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                        </div>
+                        <div class="carousel-inner p-3">
+                            <div class="carousel-item active">
+                                <div class="col d-flex flex-column align-items-center my-2">
+                                    <img src="/static/images/homepage/mobile-poster.jpg" class="poster-image mb-4"
+                                        alt="...">
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="col d-flex flex-column align-items-center my-2">
+                                    <img src="/static/images/homepage/mobile-poster.jpg" class="poster-image mb-4"
+                                        alt="...">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon bg-brown rounded-3" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                data-bs-target="#carouselExampleIndicators2" data-bs-slide="next">
+                                <span class="carousel-control-next-icon bg-brown rounded-3" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </li>
             {% endif %}
             {% endfor %}
         </ul>
-    </div>
+    </div> -->
 
     <div class="parallax_section">
         <!-- theme banner -->
@@ -298,13 +324,12 @@
                 alt="parallax mountain image">
             <img src="/static/images/homepage/land2.png" class="parallax_images land" alt="parallax land image"
                 style="bottom: 0%;">
-            <img class="parallax_title title responsive_images" src="/static/images/homepage/homepageCover.png"
-                alt="Alegria logo">
+            <img class="parallax_title title" src="/static/images/homepage/WebsiteHeroImage.png" alt="Alegria logo">
         </section>
 
         <!-- about alegria 2022 -->
-        <div class="about_us">
-            <section
+        <div class="about_us" style="overflow-x: hidden;width: 100%;">
+            <!-- <section
                 class="w-100 py-5 overflow-hidden position-relative d-flex align-items-center justify-content-center min-vh-100">
                 <div class="row p-3 d-flex justify-content-center align-items-center">
                     <div class="about_img col-lg-5 col-sm-12 d-flex justify-content-center"
@@ -335,231 +360,198 @@
                         </button>
                     </div>
                 </div>
+            </section> -->
+            <!-- events -->
+            <section class="min-vh-100 overflow-hidden d-flex flex-column align-items-center justify-content-center"
+                style="overflow-x: hidden;width: 100%;">
+                <div class="row p-1 w-100 d-flex flex-column justify-content-center pb-4" id="events-section">
+                    <div class="col-sm-12 d-flex justify-content-center text-center">
+                        <h2 class="fs-1 main-font">
+                            EVENTS
+                        </h2>
+                    </div>
+                    <div class="col-12 p-0">
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner p-4">
+                                <div class="carousel-item active">
+                                    <div class="row row-cols-lg-3 row-cols-md-1 g-4">
+                                        {% for col in row1 %}
+                                        <div class="col d-flex flex-column align-items-center event-card-container">
+                                            <div class="event-card">
+                                                <div class="event-card-front">
+                                                    <h3 class="fs-5 main-font text-red py-1 px-2">
+                                                        {{col["title"]}}
+                                                    </h3>
+                                                    <div class="event-circle">
+                                                        <img src={{col[ "icon" ]}} alt="card-image" width="170px"
+                                                            height="170px">
+                                                    </div>
+                                                </div>
+                                                <div class="event-card-back">
+                                                    <p class="sec-font fs-6">
+                                                        {{col['content']}}
+                                                    </p>
+                                                    <div class="d-flex justify-content-center">
+                                                        <a href={{col[ 'link' ]}}
+                                                            class=" w-100 text-center sec-font text-light fs-7 py-1 px-3 rounded-3 shadow"
+                                                            style="background-color: #bd2828;">
+                                                            View
+                                                            All
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="row row-cols-lg-3 row-cols-md-1 g-4">
+                                        {% for col in row2 %}
+                                        <div class="col d-flex flex-column align-items-center event-card-container">
+                                            <div class="event-card">
+                                                <div class="event-card-front">
+                                                    <h3 class="fs-5 text-red main-font py-1 px-2">
+                                                        {{col["title"]}}
+                                                    </h3>
+                                                    <div class="event-circle">
+                                                        <img src={{col[ "icon" ]}} alt="card-image" width="170px"
+                                                            height="170px">
+                                                    </div>
+                                                </div>
+                                                <div class="event-card-back">
+                                                    <p class="sec-font fs-6">
+                                                        {{col['content']}}
+                                                    </p>
+                                                    <div class="d-flex justify-content-center">
+                                                        <a href={{col[ 'link' ]}}
+                                                            class="w-100 text-center sec-font text-light fs-7 py-1 px-3 rounded-3 shadow"
+                                                            style="background-color: #bd2828;">
+                                                            View
+                                                            All
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="row row-cols-lg-3 row-cols-md-1 g-4">
+                                        {% for col in row3 %}
+                                        <div class="col d-flex flex-column align-items-center event-card-container">
+                                            <div class="event-card">
+                                                <div class="event-card-front">
+                                                    <h3 class="fs-5 text-red main-font py-1 px-2">
+                                                        {{col["title"]}}
+                                                    </h3>
+                                                    <div class="event-circle">
+                                                        <img src={{col[ "icon" ]}} alt="card-image" width="170px"
+                                                            height="170px">
+                                                    </div>
+                                                </div>
+                                                <div class="event-card-back">
+                                                    <p class="sec-font fs-6">
+                                                        {{col['content']}}
+                                                    </p>
+                                                    <div class="d-flex justify-content-center">
+                                                        <a href={{col[ 'link' ]}}
+                                                            class="w-100 text-center sec-font text-light fs-7 py-1 px-3 rounded-3 shadow"
+                                                            style="background-color: #bd2828;">
+                                                            View
+                                                            All
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon bg-brown px-2" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon bg-brown px-2" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
             </section>
         </div>
     </div>
-    <div class="main-bg homepage-gap"></div>
 
-    <!-- events -->
-    <section class="main-bg min-vh-100 overflow-hidden d-flex flex-column align-items-center justify-content-center">
-        <div class="row p-1 w-100 d-flex flex-column justify-content-center pb-4" id="events-section">
-            <div class="col-sm-12 d-flex justify-content-center text-center">
-                <h2 class="fs-1 main-font text-red">EVENTS</h2>
-            </div>
-            <div class="col-12 p-0">
-                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner p-3">
-                        <div class="carousel-item active">
-                            <div class="row row-cols-lg-3 row-cols-md-1 g-4">
-                                {% for col in row1 %}
-                                <div class="col d-flex flex-column align-items-center event-card-container">
-                                    <div class="event-card">
-                                        <div class="event-card-front">
-                                            <h3 class="fs-5 text-red main-font py-1 px-2">
-                                                {{col["title"]}}
-                                            </h3>
-                                            <div class="event-circle">
-                                                <img src={{col[ "icon" ]}} alt="card-image" width="170px"
-                                                    height="170px">
-                                            </div>
-                                        </div>
-                                        <div class="event-card-back">
-                                            <p class="sec-font fs-6">
-                                                {{col['content']}}
-                                            </p>
-                                            <div class="d-flex justify-content-center">
-                                                <a href={{col[ 'link' ]}}
-                                                    class=" w-100 text-center sec-font text-light fs-7 py-1 px-3 rounded-3 shadow"
-                                                    style="background-color: #bd2828;">
-                                                    View
-                                                    All
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row row-cols-lg-3 row-cols-md-1 g-4">
-                                {% for col in row2 %}
-                                <div class="col d-flex flex-column align-items-center event-card-container">
-                                    <div class="event-card">
-                                        <div class="event-card-front">
-                                            <h3 class="fs-5 text-red main-font py-1 px-2">
-                                                {{col["title"]}}
-                                            </h3>
-                                            <div class="event-circle">
-                                                <img src={{col[ "icon" ]}} alt="card-image" width="170px"
-                                                    height="170px">
-                                            </div>
-                                        </div>
-                                        <div class="event-card-back">
-                                            <p class="sec-font fs-6">
-                                                {{col['content']}}
-                                            </p>
-                                            <div class="d-flex justify-content-center">
-                                                <a href={{col[ 'link' ]}}
-                                                    class="w-100 text-center sec-font text-light fs-7 py-1 px-3 rounded-3 shadow"
-                                                    style="background-color: #bd2828;">
-                                                    View
-                                                    All
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row row-cols-lg-3 row-cols-md-1 g-4">
-                                {% for col in row3 %}
-                                <div class="col d-flex flex-column align-items-center event-card-container">
-                                    <div class="event-card">
-                                        <div class="event-card-front">
-                                            <h3 class="fs-5 text-red main-font py-1 px-2">
-                                                {{col["title"]}}
-                                            </h3>
-                                            <div class="event-circle">
-                                                <img src={{col[ "icon" ]}} alt="card-image" width="170px"
-                                                    height="170px">
-                                            </div>
-                                        </div>
-                                        <div class="event-card-back">
-                                            <p class="sec-font fs-6">
-                                                {{col['content']}}
-                                            </p>
-                                            <div class="d-flex justify-content-center">
-                                                <a href={{col[ 'link' ]}}
-                                                    class="w-100 text-center sec-font text-light fs-7 py-1 px-3 rounded-3 shadow"
-                                                    style="background-color: #bd2828;">
-                                                    View
-                                                    All
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon bg-brown px-2" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon bg-brown px-2" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
-    </section>
+    <div class="homepage-gap main-bg"></div>
 
     <div class="poster-extra-div"></div>
-    <section class="poster-section">
-        <img src="/static/images/homepage/poster.png" class="poster-image" alt="">
-    </section>
-    <div class="poster-extra-div flex flex-column align-items-center text-center p-3">
-        <p class="text-red main-font mb-1">
-            *Tickets will be available soon
-        </p>
-        <!-- <button class="normal-button">
-            <a href="/alegria-comedy-night-with-abhishek-upmanyu">
-                Read More
-            </a>
-        </button> -->
-    </div>
-
-    <!--hackathon-->
-    <!-- <section
-        class="homepage_section bg-red position-relative overflow-hidden py-4 px-2 d-flex flex-column align-items-center hackathon">
-        <div class="text-beige row py-3 px-2 w-100 min-vh-100 d-flex flex-column align-items-center">
-            <div class="col px-3">
-                <div class="row">
-                    <div style="position: relative;" class="container d-flex justify-content-center"
-                        id="hackathon-title">
-                        <svg width="100%" height="100%" class="d-flex align-items-center"
-                            style="max-width: 450px;max-height:100px" viewBox="0 0 526 149" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <rect x="37.7002" y="9" width="142.56" height="86" transform="rotate(26 37.7002 9)"
-                                fill="#5f3f20" />
-                            <path d="M0 0H526L471 44L526 86H0V0Z" fill="#96642C" />
-                            <path
-                                d="M7 26V14.6667H8.5V10.488L12.9643 10.4523L12.9523 8.95238L24.857 8.85714L24.869 10.3571L36.7738 10.2619L36.7618 8.76191L48.6666 8.66667L48.6786 10.1666L60.5833 10.0714L60.5713 8.57143L72.4761 8.47619L72.4881 9.97614L84.3929 9.8809L84.3809 8.38095L96.2857 8.28571L96.2977 9.78567L108.202 9.69043L108.19 8.19048L120.095 8.09524L120.107 9.59519L132.012 9.49995L132 8L143.905 7.90476L143.917 9.40471L155.822 9.30948L155.81 7.80952L167.714 7.71429L167.726 9.21424L179.631 9.119L179.619 7.61905L191.524 7.52381L191.536 9.02376L203.441 8.92852L203.429 7.42857L215.333 7.33333L215.345 8.83329L227.25 8.73805L227.238 7.23809L239.143 7.14286L239.155 8.64281L251.06 8.54757L251.048 7.04762L262.952 6.95238L262.964 8.45233L274.869 8.35709L274.857 6.85714L286.762 6.7619L286.774 8.26186L298.679 8.16662L298.667 6.66667L310.571 6.57143L310.583 8.07138L322.488 7.97614L322.476 6.47619L334.381 6.38095L334.393 7.8809L346.298 7.78567L346.286 6.28571L358.19 6.19048L358.202 7.69043L370.107 7.59519L370.095 6.09524L382 6L382.012 7.49995L393.917 7.40471L393.905 5.90476L405.81 5.80952L405.822 7.30948L417.726 7.21424L417.714 5.71429L429.619 5.61905L429.631 7.119L441.536 7.02376L441.524 5.52381L453.429 5.42857L453.441 6.92852L465.345 6.83329L465.333 5.33333L477.238 5.2381L477.25 6.73805L489.155 6.64281L489.143 5.14286L501.048 5.04762L501.06 6.54757L502.817 6.53351L502.04 7.181L503 8.33333L495 15L494.04 13.8477L486.04 20.5143L487 21.6667L479 28.3333L478.04 27.181L470.04 33.8477L471 35L463 41.6667L462.04 40.5143L458.04 43.8477L456.496 45.1337L458.168 46.2481L464.168 50.2481L465 49L477 57L476.168 58.2481L488.168 66.2481L489 65L501 73L500.168 74.2481L502.046 75.5H501.047V77H489.143V75.5H477.238V77H465.333V75.5H453.428V77H441.524V75.5H429.619V77H417.714V75.5H405.809V77H393.905V75.5H382V77H370.095V75.5H358.19V77H346.286V75.5H334.381V77H322.476V75.5H310.571V77H298.667V75.5H286.762V77H274.857V75.5H262.952V77H251.048V75.5H239.143V77H227.238V75.5H215.333V77H203.429V75.5H191.524V77H179.619V75.5H167.714V77H155.81V75.5H143.905V77H132V75.5H120.095V77H108.19V75.5H96.2857V77H84.381V75.5H72.4762V77H60.5714V75.5H48.6667V77H36.7619V75.5H24.8571V77H12.9524V75.5H8.5V71.3333H7V60H8.5V48.6667H7V37.3333H8.5V26H7Z"
-                                fill="#96642C" stroke="#F9EF99" stroke-width="3" stroke-dasharray="12 12" />
-                            <text x="50" y="55" fill="white" class="main-font fs-2">HACKATHON 2022</text>
-                        </svg>
-                    </div>
-                </div>
-                <div class="row mx-3 my-3 d-flex justify-content-center">
-                    <div class="col-lg-8 col-sm-12">
-                        <p class="fs-7 text-light sec-font lh-lg mb-2 hackathon-content" style="text-align: justify;">
-                            Hackathons are like marathons, only a few make it to the end but most people take part to
-                            better themselves and have fun. Regardless of why you participate, make sure you're
-                            upholding the spirit of the hackathon by collaborating with other teams, helping
-                            beginners and having fun in the competition.
-                        </p>
-                        <div class="d-flex flex-column align-items-center text-light sec-font hackathon-content mt-4"
-                            style="text-align: justify;">
-                            <p class="fs-7 mb-1" style="text-align: justify;">No Of Participants : 2-4 </p>
-                            <p class="fs-7 mb-1" style="text-align: justify;">Criteria : Semi-open </p>
-                            <p class="fs-7 mb-1" style="text-align: justify;">Fees : 200(Per Team) </p>
-                            <p class="fs-7 mb-1" style="text-align: justify;">Event Mode : Online </p>
-                            <button class="up-button mt-4" style="background-color: #bd2828;">
-                                <a href="/hackathon" class=" sec-font text-light fs-6">
-                                    View More
-                                </a>
-                            </button>
-                        </div>
-
-                    </div>
-                    <!-- <div class="col-lg-4 col-sm-12 d-flex justify-content-center">
-                        <img src="/static/images/hackathon/hackathon.png" class="responsive_images"
-                            alt="hackathon logo image">
-                    </div> 
-    </div>
-
-    <div class="row py-3 mx-3 my-4 d-flex justify-content-center hackathon">
-        <div class="col-12">
-            <h2 class="main-font text-light text-center fs-3 px-0 mx-0 hackathon-prize mb-2">Prizes
+    <section class="main-bg overflow-hidden" style="overflow-x: hidden;">
+        <div class="col-sm-12 d-flex justify-content-center text-center">
+            <h2 class="fs-1 main-font text-red">
+                ARTISTS
             </h2>
         </div>
-        <div
-            class="col-lg-4 col-sm-12 d-flex flex-column align-items-center justify-content-center my-2 hackathon-prize">
-            <div class="main-bg d-flex justify-content-center align-items-center mx-3 text-red fs-3 fw-bold main-font text-center"
-                style="border-radius: 100px;width:4rem;height:4rem;">
-                01
+        <div class="row h-100 d-flex justify-content-center align-items-center">
+            <div class="col h-100 d-flex justify-content-center align-items-center">
+                <div id="carouselExampleIndicators2" class="carousel slide py-2 testimonial-carousel"
+                    data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                    </div>
+                    <div class="carousel-inner p-3">
+                        <div class="carousel-item active border-3 border-danger">
+                            <div class="col d-flex flex-column align-items-center my-2">
+                                <img src="/static/images/homepage/poster.png" class="poster-image mb-4" alt="...">
+                                <p class="text-red main-font mb-1">
+                                    *Tickets will be available soon
+                                </p>
+                                <button class="normal-button" style="width: auto;">
+                                    <a href="/artist-details/a1">
+                                        Read More
+                                    </a>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="col d-flex flex-column align-items-center my-2">
+                                <img src="/static/images/homepage/Arjun_TV.jpg" class="poster-image mb-4" alt="...">
+                                <p class="text-red main-font mb-1">
+                                    *Tickets will be available soon
+                                </p>
+                                <button class="normal-button" style="width: auto;">
+                                    <a href="/artist-details/a2">
+                                        Read More
+                                    </a>
+                                </button>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon bg-brown rounded-3" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon bg-brown rounded-3" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <p class="fs-6 sec-font text-center my-2">3000 Rs Plus Certificates</p>
         </div>
-        <div
-            class="col-lg-4 col-sm-12 d-flex flex-column align-items-center justify-content-center my-2 hackathon-prize">
-            <div class="main-bg d-flex justify-content-center align-items-center mx-3 text-red fs-3 fw-bold main-font text-center"
-                style="border-radius: 100px;width:4rem;height:4rem;">
-                02
-            </div>
-            <p class="fs-6 sec-font text-center my-2">1500 Rs Plus Certificates</p>
-        </div>
-        <div
-            class="col-lg-4 col-sm-12 d-flex flex-column align-items-center justify-content-center my-2 hackathon-prize">
-            <div class="main-bg d-flex justify-content-center align-items-center mx-3 text-red fs-3 fw-bold main-font text-center"
-                style="border-radius: 100px;width:4rem;height:4rem;">
-                03
-            </div>
-            <p class="fs-6 sec-font text-center my-2">Only Certificates</p>
-        </div>
-    </div>
-    </div>
-    </div>
-    </section> -->
+    </section>
+    <!-- <div class="poster-extra-div"></div> -->
 
     <!-- gallery -->
-    <section class="main-bg homepage_section main-bg position-relative overflow-hidden pb-4" id="gallery">
+    <section class="main-bg homepage_section main-bg position-relative overflow-hidden pb-4" id="gallery"
+        style="overflow-x: hidden;">
         <div class="row py-3 px-2 min-vh-100 d-flex justify-content-center align-items-center">
             <div class="row text-center">
                 <h2 class="text-red main-font fs-1">GALLERY</h2>
@@ -624,7 +616,7 @@
     </section>
 
     <!-- testimonials -->
-    <section class="main-bg min-vh-100 position-relative overflow-hidden py-3">
+    <section class="main-bg min-vh-100 position-relative overflow-hidden py-3" style="overflow-x: hidden;">
         <div class="row text-center mb-1">
             <h2 class="text-red main-font fs-1">TESTIMONIALS.</h2>
         </div>
@@ -660,7 +652,7 @@
                                         </p>
                                         <h5 class="fs-7 text-red main-font mb-1">Armaan Malik</h5>
                                         <p class="fs-7 text-black sec-font mb-1">Singer</p>
-                                        <p class="fs-7 text-black sec-font mb-1">2019</p>
+                                        <p class="fs-7 text-black sec-font mb-1">2020</p>
                                     </div>
                                 </div>
                             </div>
@@ -681,7 +673,7 @@
                                         </p>
                                         <h5 class="fs-7 text-red main-font mb-1">Dhvani Bhanushali</h5>
                                         <p class="fs-7 text-black sec-font mb-1">Singer</p>
-                                        <p class="fs-7 text-black sec-font mb-1">2019</p>
+                                        <p class="fs-7 text-black sec-font mb-1">2020</p>
                                     </div>
                                 </div>
                             </div>

@@ -149,7 +149,8 @@ body {
 
 .poster-extra-div{
      min-height: 8vh;
-    background-color: #FEC71D;
+    /* background-color: #FEC71D; */
+    background-color:var(--u_bg);
 }
 
 .poster-section{
@@ -468,8 +469,8 @@ a.text-black:hover {
     justify-content: center;
     width: 100%;
     height: 330px;
-    border: 7px solid var(--u_red);
-    border-radius: 24px;
+    /* border: 7px solid var(--u_bg); */
+    border-radius: 16px;
     padding: 0.6rem;
     box-shadow: 10px 10px 15px #38020449;
 }
@@ -479,6 +480,8 @@ a.text-black:hover {
     overflow: hidden;
     transition: 0.5s;
     transform-style: preserve-3d;
+    background-color: var(--u_bg);
+
 }
 
 .event-card:hover {
@@ -534,8 +537,8 @@ a.text-black:hover {
     opacity: 0;
     padding-top: 60px;
     backface-visibility: visible;
-    background: var(--u_red);
-    color: white;
+    background: var(--u_bg);
+    color: var(--u_red);
 }
 
 
@@ -940,7 +943,7 @@ h1 {
     }
 
     .parallax-container .parallax_title {
-        width: 80%;
+        width: 100%;
     }
 
     .about_us {

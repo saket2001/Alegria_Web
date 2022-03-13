@@ -1,0 +1,35 @@
+{% extends 'user_layout.html' %}
+
+
+{% block headContent %}
+
+{% endblock headContent %}
+
+
+{% block title %}
+Alegria 2022 | Artist Detail
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center min-vh-100 overflow-hidden main-bg py-2">
+    <div class="container">
+        <div class="row py-4 g-4">
+            <div class="col-lg-6 col-sm-12 py-3">
+                <img src={{details.img}} class="rounded-3" width="100%" alt="artist-image">
+            </div>
+            <div class="col-lg-6 col-sm-12 py-3">
+                <h3 class="fs-4 main-font text-red">{{details.name}}</h3>
+                <p class="mb-1 fs-6 text-black mb-1">{{details.type}}</p>
+                <p class="mb-1 fs-6 text-black mb-1">{{details.date}}</p>
+                <p class="mb-1 fs-6 text-black mb-1">For Passes please contact,</p>
+                <p class="d-flex mb-1 fs-6 text-red mb-1">
+                    <a href="tel:+918652323878" class="text-red">+91 8652323878</a> &nbsp; / &nbsp;
+                    <a href="tel:+918097261674" class="text-red">+91 8097261674</a>
+                </p>
+                <hr>
+                {{details.p | safe }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

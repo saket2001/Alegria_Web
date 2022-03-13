@@ -105,12 +105,10 @@ window.addEventListener("load", () => {
   // fill the modal with messages or message
   const BtnIds = getBtnId(allCloseBtn);
   BtnIds.forEach((id) => {
-    // const toShow = sessionStorage.getItem(`heroAlert${id}Closed`) ?? false;
-    // if (!toShow)
     setTimeout(() => {
-        allHeroModal[id - 1].classList.add("fade-in");
-        allHeroModal[id - 1].style.visibility = "visible";
-    }, 1000);
+      allHeroModal[id - 1].classList.add("fade-in");
+      allHeroModal[id - 1].style.visibility = "visible";
+    }, 500);
   });
 });
 
@@ -119,7 +117,6 @@ allCloseBtn.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     const btnId = e.target.parentElement.getAttribute("data-id");
     allHeroModal[btnId - 1].classList.add("fade-out");
-    sessionStorage.setItem(`heroAlert${btnId}Closed`, true);
   });
 });
 
@@ -130,3 +127,12 @@ const getBtnId = (btnArr) => {
   });
   return btnIDs;
 };
+
+// close modal automatically after 10 sec
+setTimeout(() => {
+  const BtnIds = getBtnId(allCloseBtn);
+  BtnIds.forEach((id) => {
+    allHeroModal[id - 1].classList.add("fade-out");
+    allHeroModal[id - 1].style.visibility = "hidden";
+  });
+}, 1000);
