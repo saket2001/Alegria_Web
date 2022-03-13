@@ -634,18 +634,18 @@ def BrochurePage():
 
 ##################################
 
-@app_mbp.route("/artist-details/<string:artist_name>")
-def artistDetailsPage(artist_name):
+@app_mbp.route("/artists/<string:artist_id>")
+def artistDetailsPage(artist_id):
     signed_in = False
     cartLen = None
     # checks if logged in
     if session.get('user_id') != None:
         signed_in = True
         cartLen = session.get('cartLength')
-        
-    if artist_name=='a1':
+
+    if artist_id=='a1':
         details=client_data.artistDetails[0]
-    elif artist_name=="a2":
+    elif artist_id=="a2":
         details=client_data.artistDetails[1]
-        
+
     return render_template('artist_details.html',cartLen=cartLen, signed_in=signed_in,details=details)
