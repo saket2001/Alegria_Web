@@ -60,7 +60,7 @@
                     <li class="nav-item dropdown">
                         <a class='navbar_links dropdown-toggle' id="dropdownMenuButton1" data-bs-toggle="dropdown"
                             aria-expanded="false" {% if activeNav=='Events' %}
-                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Events</a>
+                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %} onmouseover="dropdown(this)" onmouseout="dropup(this)">Events</a>
                         <ul class="dropdown-menu border-0" style="background-color: #ffd04f;"
                             aria-labelledby="dropdownMenuButton1">
                             <li>
@@ -728,7 +728,7 @@
                                     <div class="d-flex flex-column align-items-center">
                                         <!-- artist review -->
                                         <p class="fs-6 text-black sec-font text-center">
-                                            Thank you for all the love.Big love and respect !!
+                                            Thank you for all the love. Big love and respect !!
                                         </p>
                                         <h5 class="fs-7 text-red main-font  mb-1">Sidharth Malhotra</h5>
                                         <p class="fs-7 text-black sec-font mb-1">Actor</p>
@@ -904,5 +904,13 @@
             </div>
         </div>
     </footer>
+    <script>
+        /*function dropdown(x){
+            x.classList.add("show");
+        }
+        function dropup(x){
+            x.classList.remove("show");
+        }*/
+    </script>
 </body>
 {% endblock %}
