@@ -7,6 +7,7 @@ import random, string
 from functools import wraps
 from helperFunc import generate_global_api_key
 import re
+from basicData import aboutus_2013, aboutus_2014, aboutus_2015, aboutus_2016, aboutus_2017, aboutus_2018, aboutus_2019, aboutus_2020
 
 # A default rate limit of 200 per day, and 50 per hour applied to all routes.
 # Add hashlib.sha256
@@ -281,7 +282,7 @@ class RegisterEmail(Resource):
                     "message": "User already exists"
                 }, 400
             new_user = UserInfo(id=user_id, email=email, name=name,image_url=image_url,
-                                phone_number=phone_no, college_name=college_name, date_registered=datetime.now())
+                                phone_number=phone_no, college_name=college_name, date_registered=datetime.now(), quizzes_score=0)
             db.session.add(new_user)
             db.session.commit()
 
@@ -343,3 +344,110 @@ class UpdateUserAPI(Resource):
         db.session.commit()
 
         return {},200
+
+
+class TodayAtAlegria(Resource):
+
+    @global_api_key_required
+    @user_api_key_required
+    def get(self):
+        return {
+            "is_implemented": False,
+            "data": []
+        }, 200
+
+
+class TodayEvents(Resource):
+
+    @global_api_key_required
+    @user_api_key_required
+    def get(self):
+        return {
+            "is_implemented": False,
+            "data": []
+        }, 200
+
+
+class UpcomingEvents(Resource):
+
+    @global_api_key_required
+    @user_api_key_required
+    def get(self):
+        return {
+            "is_implemented": False,
+            "data": []
+        }, 200
+
+
+class CalendarAPI(Resource):
+
+    @global_api_key_required
+    @user_api_key_required
+    def get(self):
+        return {
+            "is_implemented": False,
+            "data": []
+        }, 200
+
+
+class TimelineAPI(Resource):
+
+    @global_api_key_required
+    @user_api_key_required
+    def get(self):
+        content = [
+                {
+                    "year": "2013",
+                    "theme_title": "Out of The Box",
+                    "theme_content": "Some Content",
+                    "data": aboutus_2013,
+                },
+                {
+                    "year": "2014",
+                    "theme_title": "Out of The Box",
+                    "theme_content": "Some Content",
+                    "data": aboutus_2014,
+                },
+                {
+                    "year": "2015",
+                    "theme_title": "Out of The Box",
+                    "theme_content": "Some Content",
+                    "data": aboutus_2015,
+                },
+                {
+                    "year": "2016",
+                    "theme_title": "Out of The Box",
+                    "theme_content": "Some Content",
+                    "data": aboutus_2016,
+                },
+                {
+                    "year": "2017",
+                    "theme_title": "Out of The Box",
+                    "theme_content": "Some Content",
+                    "data": aboutus_2017,
+                },
+                {
+                    "year": "2018",
+                    "theme_title": "Out of The Box",
+                    "theme_content": "Some Content",
+                    "data": aboutus_2018,
+                },
+                {
+                    "year": "2019",
+                    "theme_title": "Out of The Box",
+                    "theme_content": "Some Content",
+                    "data": aboutus_2019,
+                },
+                {
+                    "year": "2020",
+                    "theme_title": "Out of The Box",
+                    "theme_content": "Some Content",
+                    "data": aboutus_2020,
+                },
+            ]
+        return {
+            "is_implemented": True,
+            "data": content
+        }, 200
+
+
