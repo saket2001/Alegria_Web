@@ -943,7 +943,8 @@ h1 {
     }
 
     .parallax-container .parallax_title {
-        width: 100%;
+        height:38vh;
+        width: 130%;
     }
 
     .about_us {
