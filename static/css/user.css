@@ -36,6 +36,9 @@ body {
 }
 
 /* colors */
+.cover-color{
+      background-color: #f1f1f1b4;
+}
 
 .main-bg {
     background-color: var(--u_bg);
@@ -135,9 +138,11 @@ body {
 
 .bg-cover {
     background-color: var(--u_bg);
-    background-image: url("/static/images/cover.png");
+    /* background-image: url("/static/images/cover.png"); */
+    background-image: url("/static/images/bg.png");
     background-position: center;
     background-size: cover;
+    background-attachment: fixed;
     background-repeat: no-repeat;
 }
 
@@ -475,6 +480,10 @@ a.text-black:hover {
     box-shadow: 10px 10px 15px #38020449;
 }
 
+.event-card-small{
+    border: 6px solid var(--navbar);
+}
+
 .event-card {
     position: relative;
     overflow: hidden;
@@ -568,7 +577,9 @@ a.text-black:hover {
     border-radius: 10px;
     transition: all .2s;
     box-shadow: 8px 8px 2px 1px #611e0d70;
+    background-color: #f1f1f1b4;
 }
+
 
 .event_card-container:hover {
     box-shadow: none;

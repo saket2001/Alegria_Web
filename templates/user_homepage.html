@@ -60,7 +60,8 @@
                     <li class="nav-item dropdown">
                         <a class='navbar_links dropdown-toggle' id="dropdownMenuButton1" data-bs-toggle="dropdown"
                             aria-expanded="false" {% if activeNav=='Events' %}
-                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %} onmouseover="dropdown(this)" onmouseout="dropup(this)">Events</a>
+                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}
+                            onmouseover="dropdown(this)" onmouseout="dropup(this)">Events</a>
                         <ul class="dropdown-menu border-0" style="background-color: #ffd04f;"
                             aria-labelledby="dropdownMenuButton1">
                             <li>
@@ -122,23 +123,25 @@
                             style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Hackathon</a>
                     </li>
 
-                    <li class="nav-item dropdown">
-                        <a class='navbar_links dropdown-toggle' id="dropdownMenuButton2" data-bs-toggle="dropdown"
-                            aria-expanded="false" {% if activeNav=='News' %}
-                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>News</a>
-                        <ul class="dropdown-menu border-0" style="background-color: #ffd04f;"
-                            aria-labelledby="dropdownMenuButton2">
-                            <li>
-                                <a class="dropdown-item navbar_links" href="https://pillaialegria.wordpress.com/"
-                                    target="_blank" rel="noopener noreferrer">Blog</a>
-                            </li>
-                            <!-- <li>
-                                <a class="dropdown-item navbar_links" href="/buzz">Buzz</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item navbar_links" href="/highlights">Highlights</a>
-                            </li> -->
-                        </ul>
+                    <li class="nav-item">
+                        <a href="https://pillaialegria.wordpress.com/" target="_blank" rel="noopener noreferrer"
+                            class='navbar_links' {% if activeNav=='Blogs' %} style='color: #e8ff84;' {% endif
+                            %}>Blogs</a>
+                        <!-- <a href="" class='navbar_links dropdown-toggle' id="dropdownMenuButton2"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">News</a>
+                                                <ul class="dropdown-menu" style="background-color: #681b0aec !important;"
+                                                    aria-labelledby="dropdownMenuButton2">
+                                                    <li>
+                                                        <a class="dropdown-item navbar_links" href="https://pillaialegria.wordpress.com/"
+                                                            target="_blank" rel="noopener noreferrer">Blog</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item navbar_links" href="/buzz">Buzz</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item navbar_links" href="/highlights">Highlights</a>
+                                                    </li>
+                                                </ul> -->
                     </li>
                     <li class="nav-item dropdown">
                         <a class='navbar_links dropdown-toggle' id="dropdownMenuButton2" data-bs-toggle="dropdown"
@@ -510,11 +513,15 @@
                             <div class="col d-flex flex-column align-items-center my-2">
                                 <img src="/static/images/homepage/poster.png" class="poster-image mb-4" alt="...">
                                 <p class="mb-1 fs-6 text-black mb-1">For passes please contact,</p>
-                                <p class="d-flex mb-1 fs-6 text-red mb-1">
-                                    <a href="tel:+918652323878" class="text-red">+91 8652323878</a> &nbsp; / &nbsp;
-                                    <a href="tel:+918097261674" class="text-red">+91 8097261674</a>
-                                </p>
-                                <button class="normal-button" style="width: auto;">
+                                <div class="row mb-1 fs-6 text-red mb-1">
+                                    <div class="col-lg-6 col-sm-12 text-center">
+                                        <a href="tel:+918652323878" class="text-red">+91 8652323878</a>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 text-center">
+                                        <a href="tel:+918097261674" class="text-red">+91 8097261674</a>
+                                    </div>
+                                </div>
+                                <button class="normal-button mt-1" style="width: auto;">
                                     <a href="/artists/a1">
                                         Read More
                                     </a>
@@ -525,11 +532,15 @@
                             <div class="col d-flex flex-column align-items-center my-2">
                                 <img src="/static/images/homepage/Arjun_TV.jpg" class="poster-image mb-4" alt="...">
                                 <p class="mb-1 fs-6 text-black mb-1">For passes please contact,</p>
-                                <p class="d-flex mb-1 fs-6 text-red mb-1">
-                                    <a href="tel:+918652323878" class="text-red">+91 8652323878</a> &nbsp; / &nbsp;
-                                    <a href="tel:+918097261674" class="text-red">+91 8097261674</a>
-                                </p>
-                                <button class="normal-button" style="width: auto;">
+                                <div class="row mb-1 fs-6 text-red mb-1">
+                                    <div class="col-lg-6 col-sm-12 text-center">
+                                        <a href="tel:+918652323878" class="text-red">+91 8652323878</a>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 text-center">
+                                        <a href="tel:+918097261674" class="text-red">+91 8097261674</a>
+                                    </div>
+                                </div>
+                                <button class="normal-button mt-1" style="width: auto;">
                                     <a href="/artists/a2">
                                         Read More
                                     </a>

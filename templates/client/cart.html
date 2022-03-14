@@ -17,10 +17,10 @@ Alegria 2022 | Your Cart
     </div>
   </div>
   {% endfor %} {% endif %} {% endwith %}
-  <div class="row py-3 px-1 d-flex flex-column align-items-center">
+  <div class="row py-3 px-1 d-flex flex-column align-items-center justify-content-center">
     {% if cart_details['total_items']==0 %}
     <!-- cart is empty div -->
-    <div class="row py-5 d-flex flex-column align-items-center">
+    <div class="row p-4 w-75 my-2 rounded-3 d-flex flex-column align-items-center cover-color">
       <img src="/static/images/undraw_empty_cart_co35.svg" alt="empty cart image" height="200px" />
       <h2 class="text-center main-font text-red fs-3 py-1 mt-2">
         Looks like your cart is empty

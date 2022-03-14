@@ -4,37 +4,59 @@
 {% block headContent %}
 <style>
     .team-card {
-        /* box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.2),
-            inset -3px -3px 3px rgba(255, 255, 255, 0.2),
-            3px 3px 3px rgba(0, 0, 0, 0.5),
-            -3px -3px 3px rgba(255, 255, 255, 0.2); */
-        border: 6px double var(--u_red);
-        border-radius: 15px;
+        display: grid;
+        grid-template-columns: 1fr;
+        place-items: center;
+        border-radius: 16px;
+        color: #fff;
+        transition: all .3s ease-out;
+        border: none;
     }
 
-    .team-box {
-        /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); */
-        border-radius: 15px;
-        transition: 0.5s;
+    .row-padding {
+        padding: 0.2rem 2rem;
     }
 
-    .team-card:hover .team-box {
-        transform: translateY(-30px);
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
+    h5 {
+        text-transform: uppercase;
+    }
+
+    .team_card-img {
+        height: 15rem;
+        width: 100%;
+        object-fit: cover;
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+    }
+
+    .team_card-info {
+        width: 100%;
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
         background-color: #631909;
-        /* background-image: linear-gradient(315deg, #a55c1b 0%, #000000 74%); */
-        color: #ffffffea;
     }
 
-    .team-card:hover .team-box h5,
-    .team-card:hover .team-box a,
-    .team-card:hover .team-box i {
-        color: #ffffffea;
+    .team-card:hover {
+        transform: scale(1.05);
     }
 
-    #team-row {
-        width: 96%;
-        margin-left: 2%;
+    .bottom {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .divider {
+        width: 100%;
+        height: 0.1rem;
+        margin: 0.3rem auto;
+        background-color: #631909;
+    }
+
+    @media screen and (max-width:600px) {
+        .row-padding {
+            padding: 0.2rem 1rem;
+        }
     }
 </style>
 {% endblock headContent %}
@@ -46,125 +68,142 @@ Alegria 2022 | Our Developers
 
 
 {% block content %}
-<div class="bg-cover">
-    <div class="dev_page pb-4">
-        <br>
-        <h3 class="mb-4 pb-3 text-red main-font fs-3" style="text-align: center;">Web Team</h3>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 " id="team-row">
-            {% for ele in web_team_list %}
-            <div class="col">
-                <div class="bg-transparent team-card p-2 mb-2">
-                    <div class="team-box">
-                        <div class="content p-3" style="text-align: center;">
-                            <img class="mb-3 mt-2" style="height:120px; width:120px; border-radius: 50%;"
-                                src="{{ele['img']}}">
-                            <h5 class="mb-2 main-font fs-5 text-red">
-                                {{ele['name']}}
-                            </h5>
-                            <p class="fs-7 sec-font">{{ele['role']}}</p>
-                            <p class="fs-7 sec-font">
-                                <i class="fas fa-phone-alt me-1"></i>
-                                <a href="tel:{{ele['call']}}" class="text-black">
-                                    {{ele['call']}}
-                                </a>
-                            </p>
-                            <p class="fs-4">
-                                <a href="mailto:{{ele['gmail']}}" target="_blank" rel="noopener noreferrer"
-                                    class="me-1">
-                                    <i class="fas fa-envelope-square text-black"></i>
-                                </a>
-                                <a href="{{ele['github']}}" target="_blank" rel="noopener noreferrer" class="me-1">
-                                    <i class="fab fa-github text-black"></i>
-                                </a>
-                                <a href="{{ele['linkedin']}}" target="_blank" rel="noopener noreferrer">
-                                    <i class="fab fa-linkedin text-black"></i>
-                                </a>
-                            </p>
+<div class="bg-cover container-fluid overflow-hidden">
+    <div class="row py-4">
+        <div class="col-12">
+            <h3 class="mb-4 pb-3 text-red main-font fs-3 text-center">
+                Web Team
+            </h3>
+        </div>
+        <div class="col-12">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 row-padding">
+                {% for ele in web_team_list %}
+                <div class="col">
+                    <div class="team-card">
+                        <img class="team_card-img" src="{{ele['img']}}" alt="team person image">
+                        <!-- info div -->
+                        <div class="d-flex flex-column team_card-info w-100">
+                            <div class="py-3">
+                                <h5 class="mb-0 main-font fs-5 px-2 text-center">
+                                    {{ele['name']}}
+                                </h5>
+                                <p class="fs-7 sec-font text-light px-2 text-center mb-2">
+                                    {{ele['role']}}
+                                </p>
+                                <div class="fs-4 bottom w-100 px-3 py-1 text-center">
+                                    <a href="tel:{{ele['call']}}" class="me-1">
+                                        <i class="fas fa-phone-alt text-light"></i>
+                                    </a>
+                                    <a href="mailto:{{ele['gmail']}}" target="_blank" rel="noopener noreferrer"
+                                        class="me-1">
+                                        <i class="fas fa-envelope-square text-light"></i>
+                                    </a>
+
+                                    <a href="{{ele['linkedin']}}" target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-linkedin text-light"></i>
+                                    </a>
+                                    <a href="{{ele['github']}}" target="_blank" rel="noopener noreferrer" class="me-1">
+                                        <i class="fab fa-github text-light"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
-    <div class="pb-4">
-        <br>
-        <h3 class="mb-4 pb-3 text-red main-font fs-3" style="text-align: center;">App Team</h3>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 " id="team-row">
-            {% for ele in app_team_list %}
-            <div class="col">
-                <div class="bg-transparent main-bg team-card p-2 mb-2">
-                    <div class="team-box">
-                        <div class="content p-3" style="text-align: center;">
-                            <img class="mb-3 mt-2" style="height:120px; width:120px; border-radius: 50%;"
-                                src="{{ele['img']}}">
-                            <h5 class="mb-2 main-font fs-5 text-red">
-                                {{ele['name']}}
-                            </h5>
-                            <p class="fs-7 sec-font">{{ele['role']}}</p>
-                            <p class="fs-7 sec-font">
-                                <i class="fas fa-phone-alt me-1"></i>
-                                <a href="tel:{{ele['call']}}" class="text-black">
-                                    {{ele['call']}}
-                                </a>
-                            </p>
-                            <p class="fs-4">
-                                <a href="mailto:{{ele['gmail']}}" target="_blank" rel="noopener noreferrer"
-                                    class="me-1">
-                                    <i class="fas fa-envelope-square text-black"></i>
-                                </a>
-                                <a href="{{ele['github']}}" target="_blank" rel="noopener noreferrer" class="me-1">
-                                    <i class="fab fa-github text-black"></i>
-                                </a>
-                                <a href="{{ele['linkedin']}}" target="_blank" rel="noopener noreferrer">
-                                    <i class="fab fa-linkedin text-black"></i>
-                                </a>
-                            </p>
+    <div class="divider"></div>
+    <div class="row py-4">
+        <div class="col-12">
+            <h3 class="mb-4 pb-3 text-red main-font fs-3 text-center">
+                App Team
+            </h3>
+        </div>
+        <div class="col-12">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 row-padding">
+                {% for ele in app_team_list %}
+                <div class="col">
+                    <div class="team-card">
+                        <img class="team_card-img" src="{{ele['img']}}" alt="team person image">
+                        <!-- info div -->
+                        <div class="d-flex flex-column team_card-info w-100">
+                            <div class="py-3">
+                                <h5 class="mb-0 main-font fs-5 px-2 text-center">
+                                    {{ele['name']}}
+                                </h5>
+                                <p class="fs-7 sec-font text-light px-2 text-center mb-2">
+                                    {{ele['role']}}
+                                </p>
+                                <div class="fs-4 bottom w-100 px-3 py-1 text-center">
+                                    <a href="tel:{{ele['call']}}" class="me-1">
+                                        <i class="fas fa-phone-alt text-light"></i>
+                                    </a>
+                                    <a href="mailto:{{ele['gmail']}}" target="_blank" rel="noopener noreferrer"
+                                        class="me-1">
+                                        <i class="fas fa-envelope-square text-light"></i>
+                                    </a>
+
+                                    <a href="{{ele['linkedin']}}" target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-linkedin text-light"></i>
+                                    </a>
+                                    <a href="{{ele['github']}}" target="_blank" rel="noopener noreferrer" class="me-1">
+                                        <i class="fab fa-github text-light"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
-    <div class="pb-4">
-        <br>
-        <h3 class="mb-4 pb-3 text-red main-font fs-3" style="text-align: center;">UI UX Team</h3>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 " id="team-row">
-            {% for ele in ui_team %}
-            <div class="col">
-                <div class="bg-transparent main-bg team-card p-2 mb-2">
-                    <div class="team-box">
-                        <div class="content p-3" style="text-align: center;">
-                            <img class="mb-3 mt-2" style="height:120px; width:120px; border-radius: 50%;"
-                                src="{{ele['img']}}">
-                            <h5 class="mb-2 main-font fs-5 text-red">
-                                {{ele['name']}}
-                            </h5>
-                            <p class="fs-7 sec-font">{{ele['role']}}</p>
-                            <p class="fs-7 sec-font">
-                                <i class="fas fa-phone-alt me-1"></i>
-                                <a href="tel:{{ele['call']}}" class="text-black">
-                                    {{ele['call']}}
-                                </a>
-                            </p>
-                            <p class="fs-4">
-                                <a href="mailto:{{ele['gmail']}}" target="_blank" rel="noopener noreferrer"
-                                    class="me-1">
-                                    <i class="fas fa-envelope-square text-black"></i>
-                                </a>
-                                <a href="{{ele['github']}}" target="_blank" rel="noopener noreferrer" class="me-1">
-                                    <i class="fab fa-github text-black"></i>
-                                </a>
-                                <a href="{{ele['linkedin']}}" target="_blank" rel="noopener noreferrer">
-                                    <i class="fab fa-linkedin text-black"></i>
-                                </a>
-                            </p>
+    <div class="divider"></div>
+    <div class="row py-4">
+        <div class="col-12">
+            <h3 class="mb-4 pb-3 text-red main-font fs-3 text-center">
+                UI UX Team
+            </h3>
+        </div>
+        <div class="col-12">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 row-padding">
+                {% for ele in ui_team %}
+                <div class="col">
+                    <div class="team-card">
+                        <img class="team_card-img" src="{{ele['img']}}" alt="team person image">
+                        <!-- info div -->
+                        <div class="d-flex flex-column team_card-info w-100">
+                            <div class="py-3">
+                                <h5 class="mb-0 main-font fs-5 px-2 text-center">
+                                    {{ele['name']}}
+                                </h5>
+                                <p class="fs-7 sec-font text-light px-2 text-center mb-2">
+                                    {{ele['role']}}
+                                </p>
+                                <div class="fs-4 bottom w-100 px-3 py-1 text-center">
+                                    <a href="tel:{{ele['call']}}" class="me-1">
+                                        <i class="fas fa-phone-alt text-light"></i>
+                                    </a>
+                                    <a href="mailto:{{ele['gmail']}}" target="_blank" rel="noopener noreferrer"
+                                        class="me-1">
+                                        <i class="fas fa-envelope-square text-light"></i>
+                                    </a>
+
+                                    <a href="{{ele['linkedin']}}" target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-linkedin text-light"></i>
+                                    </a>
+                                    <a href="{{ele['github']}}" target="_blank" rel="noopener noreferrer" class="me-1">
+                                        <i class="fab fa-github text-light"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
 </div>

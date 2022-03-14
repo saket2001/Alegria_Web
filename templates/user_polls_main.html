@@ -8,10 +8,6 @@ Alegria 2022 | Polls
 
 {% block content %}
 <style>
-    .poll-card {
-        background-color: rgba(79, 41, 8, 0.7);
-    }
-
     .poll-box {
         background: linear-gradient(180deg, #a55c1b 0%, #2e1602 74%);
     }
@@ -49,14 +45,16 @@ Alegria 2022 | Polls
         }
     }
 </style>
-<div class="bg-cover">
+<div class="bg-cover min-vh-100">
     <br>
-    <h1 class="m-4 mt-0 text-brown" style="text-align: center;">Polls</h1>
+    <h1 class="m-4 mt-0 text-red main-font" style="text-align: center;">
+        Polls
+    </h1>
     <div class="p-4 pt-0">
-        <div class="poll-card card p-4 ">
+        <div class="poll-card h-100 card cover-color p-4 ">
             <div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 g-4 justify-content-center">
                 {% if count==0 %}
-                <i class='fs-3 main-font my-3 text-beige text-center'>Coming Soon</i>
+                <i class='fs-3 main-font my-3 text-black text-center'>Coming Soon</i>
                 {% else %}
                 {% for ele in poll_cards %}
                 <a href="polls/{{ele['id']}}">
