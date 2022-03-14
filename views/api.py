@@ -394,7 +394,7 @@ class TodayEvents(Resource):
                 },
             ]
         return {
-            "is_implemented": True,
+            "is_implemented": False,
             "data": content
         }, 200
 
@@ -459,7 +459,7 @@ class UpcomingEvents(Resource):
           },
         ]
         return {
-            "is_implemented": True,
+            "is_implemented": False,
             "data": content
         }, 200
 
@@ -470,10 +470,11 @@ class CalendarAPI(Resource):
     @user_api_key_required
     def get(self):
         content = [
+            "https://www.alegria.co.in/static/images/Announcements_for_app.png",
             "https://www.alegria.co.in/static/images/Announcements_for_app.png"
             ]
         return {
-            "is_implemented": True,
+            "is_implemented": False,
             "data": content
         }, 200
 
@@ -484,58 +485,96 @@ class TimelineAPI(Resource):
     @user_api_key_required
     def get(self):
         content = [
-                {
-                    "year": "2013",
-                    "theme_title": "Out of The Box",
-                    "theme_content": "Some Content",
-                    "data": aboutus_2013,
-                },
-                {
-                    "year": "2014",
-                    "theme_title": "Out of The Box",
-                    "theme_content": "Some Content",
-                    "data": aboutus_2014,
-                },
-                {
-                    "year": "2015",
-                    "theme_title": "Out of The Box",
-                    "theme_content": "Some Content",
-                    "data": aboutus_2015,
-                },
-                {
-                    "year": "2016",
-                    "theme_title": "Out of The Box",
-                    "theme_content": "Some Content",
-                    "data": aboutus_2016,
-                },
-                {
-                    "year": "2017",
-                    "theme_title": "Out of The Box",
-                    "theme_content": "Some Content",
-                    "data": aboutus_2017,
-                },
-                {
-                    "year": "2018",
-                    "theme_title": "Out of The Box",
-                    "theme_content": "Some Content",
-                    "data": aboutus_2018,
-                },
-                {
-                    "year": "2019",
-                    "theme_title": "Out of The Box",
-                    "theme_content": "Some Content",
-                    "data": aboutus_2019,
-                },
-                {
-                    "year": "2020",
-                    "theme_title": "Out of The Box",
-                    "theme_content": "Some Content",
-                    "data": aboutus_2020,
-                },
+            "https://www.alegria.co.in/static/images/Announcements_for_app.png",
+            "https://www.alegria.co.in/static/images/Announcements_for_app.png"
             ]
         return {
-            "is_implemented": True,
+            "is_implemented": False,
             "data": content
         }, 200
+
+
+class HomeContentsAPI(Resource):
+
+    @global_api_key_required
+    @user_api_key_required
+    def get(self):
+        today_at_alegria = {
+            "is_implemented": False,
+            "data": [
+                "https://www.alegria.co.in/static/images/homepage/arjun-poster.jpg",
+                "https://www.alegria.co.in/static/images/homepage/mobile-poster.jpg"
+            ]
+        }
+
+        todays_events = {
+            "is_implemented": False,
+            "data": [
+                {
+                    "event_id": "FA01",
+                    "event_name": "Sketching (Artistry Strokes)",
+                    "event_code": "FA01",
+                    "event_image": "/static/images/icons/Fine%20Arts/Sketching.png",
+                    "event_cost": "100"
+                },
+                {
+                    "event_id": "FA02",
+                    "event_name": "Canvas Painting (Color Drips)",
+                    "event_code": "FA02",
+                    "event_image": "/static/images/icons/Fine%20Arts/Canvas%20Painting.png",
+                    "event_cost": "200"
+                },
+                {
+                    "event_id": "FA03",
+                    "event_name": "Mandala Art (Vedic Circles)",
+                    "event_code": "FA03",
+                    "event_image": "/static/images/icons/Fine%20Arts/Mandala%20Art.png",
+                    "event_cost": "100"
+                },
+            ]
+        }
+
+        announcements = {
+            "is_implemented": True,
+            "data": [
+                {
+                    "title": "Comedy Night with Abhishek Upamanyu",
+                    "subtitle": "The headlining act of the Alegria 2022 Comedy Night will be the uber funny and supremely talented @aupmanyu.",
+                    "image": "https://www.alegria.co.in/static/images/homepage/mobile-poster.jpg",
+                    "link": "https://www.alegria.co.in/artists/a1",
+                },
+                {
+                    "title": "Concert Night with Arjun Kanungo",
+                    "subtitle": "Live In Concert 26 th March 2022, Saturday",
+                    "image": "https://www.alegria.co.in/static/images/homepage/arjun-poster.jpg",
+                    "link": "https://www.alegria.co.in/artists/a2",
+                }
+            ]
+        }
+
+        categories = Categories.query.all()
+        res = {
+            "length": len(categories),
+            "eventCategories": []
+        }
+
+        for category in categories:
+            res["eventCategories"].append(
+                {
+                    "eventCategoryID": category.id,
+                    "eventCategoryName": category.name,
+                    "iconUrl": category.img_url
+                }
+            )
+
+        data = {
+            "todays_images": today_at_alegria,
+            "todays_events": todays_events,
+            "announcements": announcements,
+            "categories": res,
+            }
+
+        return data, 200
+
 
 
