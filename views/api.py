@@ -143,21 +143,25 @@ class AnnoucementsAPI(Resource):
     @global_api_key_required
     @user_api_key_required
     def get(self):
-        annoucements_queryset = Announcement.query.order_by(
-            Announcement.id.desc()).all()
-        res = {
-            "length": len(annoucements_queryset),
-            "annoucements": []
-        }
-        for item in annoucements_queryset:
-            res["annoucements"].append(
-                {
-                    "id": item.id,
-                    "title": item.title,
-                    "description": item.title_desc
-                }
-            )
-        return res, 200
+        content = [
+            {
+                "title": "Comedy Night with Abhishek Upamanyu",
+                "subtitle": "The headlining act of the Alegria 2022 Comedy Night will be the uber funny and supremely talented @aupmanyu.",
+                "image": "https://www.alegria.co.in/static/images/homepage/mobile-poster.jpg",
+                "link": "https://www.alegria.co.in/artists/a1",
+            },
+            {
+                "title": "Concert Night with Arjun Kanungo",
+                "subtitle": "Live In Concert 26 th March 2022, Saturday",
+                "image": "https://www.alegria.co.in/static/images/homepage/arjun-poster.jpg",
+                "link": "https://www.alegria.co.in/artists/a2",
+            }
+            ]
+
+        return {
+            "is_implemented": True,
+            "data": content
+            }, 200
 
 
 class PollsAPI(Resource):
@@ -351,9 +355,13 @@ class TodayAtAlegria(Resource):
     @global_api_key_required
     @user_api_key_required
     def get(self):
+        content = [
+            "https://www.alegria.co.in/static/images/homepage/arjun-poster.jpg",
+            "https://www.alegria.co.in/static/images/homepage/mobile-poster.jpg"
+            ]
         return {
-            "is_implemented": False,
-            "data": []
+            "is_implemented": True,
+            "data": content
         }, 200
 
 
@@ -362,9 +370,32 @@ class TodayEvents(Resource):
     @global_api_key_required
     @user_api_key_required
     def get(self):
+        content = [
+                {
+                    "event_id": "FA01",
+                    "event_name": "Sketching (Artistry Strokes)",
+                    "event_code": "FA01",
+                    "event_image": "/static/images/icons/Fine%20Arts/Sketching.png",
+                    "event_cost": "100"
+                },
+                {
+                    "event_id": "FA02",
+                    "event_name": "Canvas Painting (Color Drips)",
+                    "event_code": "FA02",
+                    "event_image": "/static/images/icons/Fine%20Arts/Canvas%20Painting.png",
+                    "event_cost": "200"
+                },
+                {
+                    "event_id": "FA03",
+                    "event_name": "Mandala Art (Vedic Circles)",
+                    "event_code": "FA03",
+                    "event_image": "/static/images/icons/Fine%20Arts/Mandala%20Art.png",
+                    "event_cost": "100"
+                },
+            ]
         return {
-            "is_implemented": False,
-            "data": []
+            "is_implemented": True,
+            "data": content
         }, 200
 
 
@@ -373,9 +404,63 @@ class UpcomingEvents(Resource):
     @global_api_key_required
     @user_api_key_required
     def get(self):
+        content = [
+          {
+            "date":"26-3-2022",
+            "events":[
+                {
+                    "event_id": "FA01",
+                    "event_name": "Sketching (Artistry Strokes)",
+                    "event_code": "FA01",
+                    "event_image": "/static/images/icons/Fine%20Arts/Sketching.png",
+                    "event_cost": "100"
+                },
+                {
+                    "event_id": "FA02",
+                    "event_name": "Canvas Painting (Color Drips)",
+                    "event_code": "FA02",
+                    "event_image": "/static/images/icons/Fine%20Arts/Canvas%20Painting.png",
+                    "event_cost": "200"
+                },
+                {
+                    "event_id": "FA03",
+                    "event_name": "Mandala Art (Vedic Circles)",
+                    "event_code": "FA03",
+                    "event_image": "/static/images/icons/Fine%20Arts/Mandala%20Art.png",
+                    "event_cost": "100"
+                },
+            ],
+          },
+          {
+            "date":"27-3-2022",
+            "events":[
+                {
+                    "event_id": "FA01",
+                    "event_name": "Sketching (Artistry Strokes)",
+                    "event_code": "FA01",
+                    "event_image": "/static/images/icons/Fine%20Arts/Sketching.png",
+                    "event_cost": "100"
+                },
+                {
+                    "event_id": "FA02",
+                    "event_name": "Canvas Painting (Color Drips)",
+                    "event_code": "FA02",
+                    "event_image": "/static/images/icons/Fine%20Arts/Canvas%20Painting.png",
+                    "event_cost": "200"
+                },
+                {
+                    "event_id": "FA03",
+                    "event_name": "Mandala Art (Vedic Circles)",
+                    "event_code": "FA03",
+                    "event_image": "/static/images/icons/Fine%20Arts/Mandala%20Art.png",
+                    "event_cost": "100"
+                },
+            ],
+          },
+        ]
         return {
-            "is_implemented": False,
-            "data": []
+            "is_implemented": True,
+            "data": content
         }, 200
 
 
@@ -384,9 +469,12 @@ class CalendarAPI(Resource):
     @global_api_key_required
     @user_api_key_required
     def get(self):
+        content = [
+            "https://www.alegria.co.in/static/images/Announcements_for_app.png"
+            ]
         return {
-            "is_implemented": False,
-            "data": []
+            "is_implemented": True,
+            "data": content
         }, 200
 
 

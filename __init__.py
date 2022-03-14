@@ -64,7 +64,7 @@ def create_app():
     api.add_resource(RegisterEmail, "/register-user")
     api.add_resource(DeleteUser, "/user/delete")
     api.add_resource(UpdateUserAPI, "/user/update-user")
-    api.add_resource(TodayAtAlegria, "/today/alegria")
+    api.add_resource(TodayAtAlegria, "/today-at-alegria")
     api.add_resource(TodayEvents, "/events/today")
     api.add_resource(UpcomingEvents, "/events/upcoming")
     api.add_resource(CalendarAPI, "/events/calendar")
