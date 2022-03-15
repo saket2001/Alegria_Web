@@ -19,6 +19,7 @@ problem_statements = [
     ["PS10", "Management System for Old Age Home/NGO",
      "App(Web/Mobile)", "To have a management system that aims to replace the traditional record keeping logbooks. The system will be able to track and keep records for categories like health, personal information,  food, and other necessary information. The system should have a clean user interface, easy to use with an easily searchable interface.", "/static/images/hackathon/ps10.png"]
 ]
+
 aboutus_2021 = [
     {"title": "Light the Night", "description": "Alegria 2021 at Pillai's",
      "img": "../static/images/aboutus-ribbons/alegria21.png"},
@@ -222,7 +223,7 @@ web_team_list = [
 app_team_list = [
     {"img": "../static/images/developer/Aditya.jpg", "name": "Aaditya Cholayil", "role": "App Developer", "call": "+91 8291369867",
      "gmail": "cholayilaaditya@gmail.com", "github": "https://github.com/AadityaCholayil", "linkedin": "https://www.linkedin.com/in/aaditya-cholayil/"},
-    {"img": "../static/images/developer/Yash.jpg", "name": "Yash Lalit", "role": "App Developer", "call": "+91 9136858108",
+    {"img": "../static/images/developer/yash.jpg", "name": "Yash Lalit", "role": "App Developer", "call": "+91 9136858108",
      "gmail": "yashlalit.23@gmail.com", "github": "https://github.com/happy-mammal", "linkedin": "https://www.linkedin.com/in/yash-lalit-0a6a6320b"},
     {"img": "../static/images/developer/Pranav.jpg", "name": "Pranav Shegekar", "role": "App Developer", "call": "+91 9324530205", "gmail": "pranav.shegekar@gmail.com",
      "github": "https://github.com/PranavShegekar", "linkedin": "https://www.linkedin.com/in/pranav-shegekar"}

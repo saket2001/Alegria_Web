@@ -4,6 +4,7 @@
 {% block headContent %}
 <style>
     .team-card {
+        width: 90%;
         display: grid;
         grid-template-columns: 1fr;
         place-items: center;
@@ -22,7 +23,7 @@
     }
 
     .team_card-img {
-        height: 15rem;
+        height: 13rem;
         width: 100%;
         object-fit: cover;
         border-top-left-radius: 16px;
@@ -76,9 +77,9 @@ Alegria 2022 | Our Developers
             </h3>
         </div>
         <div class="col-12">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 row-padding">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 row-padding justify-content-center">
                 {% for ele in web_team_list %}
-                <div class="col">
+                <div class="col d-flex flex-column align-items-center">
                     <div class="team-card">
                         <img class="team_card-img" src="{{ele['img']}}" alt="team person image">
                         <!-- info div -->
@@ -124,7 +125,7 @@ Alegria 2022 | Our Developers
         <div class="col-12">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 row-padding">
                 {% for ele in app_team_list %}
-                <div class="col">
+                <div class="col d-flex flex-column align-items-center">
                     <div class="team-card">
                         <img class="team_card-img" src="{{ele['img']}}" alt="team person image">
                         <!-- info div -->
@@ -170,7 +171,7 @@ Alegria 2022 | Our Developers
         <div class="col-12">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5 row-padding">
                 {% for ele in ui_team %}
-                <div class="col">
+                <div class="col d-flex flex-column align-items-center">
                     <div class="team-card">
                         <img class="team_card-img" src="{{ele['img']}}" alt="team person image">
                         <!-- info div -->
