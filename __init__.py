@@ -3,7 +3,7 @@ from flask.helpers import flash
 from flask_restful import Api
 from authlib.integrations.flask_client import OAuth
 from sqlalchemy import true
-from models import  Cart
+from models import Cart
 from datetime import datetime
 from flask_hashing import Hashing
 import helperFunc
@@ -178,7 +178,7 @@ def create_app():
                 name = user_name
                 image_url = profile_pic
                 entry = UserInfo(id=user_id, email=email, name=name,
-                                 image_url=image_url, date_registered=datetime.now(),quizzes_score=0)
+                                 image_url=image_url, date_registered=datetime.now(), quizzes_score=0)
                 db.session.add(entry)
                 db.session.commit()
 
@@ -211,8 +211,12 @@ def create_app():
             session.pop(key)
 
         return redirect('/')
+    # app.run(debug=True)
 
     # csrf.init_app(app)
     # enable csrf
     # csrf.init_app(app)
     return app
+
+
+# create_app()

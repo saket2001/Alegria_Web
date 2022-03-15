@@ -4,6 +4,13 @@
 {% block headContent %}
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v12.0"
     nonce="wutfUaiR"></script>
+
+<style>
+     #ecard{
+        border: 5px solid var(--navbar);
+        border-radius: 20px;
+    }
+</style>
 {% endblock headContent %}
 
 {% block title %}
@@ -12,22 +19,30 @@ Alegria 2022 | Events
 
 {% block content %}
 <div class="containr-fluid bg-cover overflow-hidden">
+
+
 <br>
-<h2 class="m-4 mt-0 text-brown" style="text-align: center;">Events</h2>
+<!-- Technical Events -->
+<h2 class="m-4 mt-0 text-brown" style="text-align: center;">Gaming</h2>
 <div class="px-4 d-flex justify-content-center">
-    <div id="admin-events" class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-2">
-        {% for ele in events_list %}
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <a href={{ele['link']}}
-                class="d-flex flex-column justify-content-center py-1 event_card m-2">
-                <div class="event_card-container">
+    <div id="admin-events" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 gx-3 mx-4">
+        {% for ele in events_list1 %}
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <a href={{"/events/technical-events/{}".format(ele['event_id'])}}
+                class="d-flex flex-column justify-content-center py-1 m-2">
+                <div id ="ecard" class="event_card event_card-container shadow bg-white">
                     <div class="d-flex flex-column justify-content-center align-items-center my-2 mt-2">
-                        <img src={{ele['icon']}} width="130px" height="130px" alt="event-image">
+                        <br>
+                        <img src={{ele['icon_url']}} width="130px" height="130px" alt="event-image">
+                        <!-- <img src="../static/images/icons/Category Icons/Fine Arts.png" width="130px" height="130px" alt="event-image"> -->
                     </div>
                     <div class="d-flex flex-column justify-content-center align-items-center">
                         <h3 class="w-100 fs-5 text-red mt-2 mb-0 px-2 main-font text-center">
-                            {{ele['title']}}
+                            {{ele['event_name']}}
                         </h3>
+                        <h4 class="w-100 fs-7 text-black mt-2 mb-0 px-2 main-font text-center">
+                            {{ele['event_cost']}} ₹
+                        </h4>
                         <br>
                     </div>
                 </div>
@@ -36,7 +51,245 @@ Alegria 2022 | Events
         {% endfor %}
     </div>
 </div>
+<br>
+<!-- Management -->
+<h2 class="m-4 mt-0 text-brown" style="text-align: center;">Sports</h2>
+<div class="px-4 d-flex justify-content-center">
+    <div id="admin-events" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 gx-3 mx-4">
+        {% for ele in events_list2 %}
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <a href={{"/events/management/{}".format(ele['event_id'])}}
+                class="d-flex flex-column justify-content-center py-1 m-2">
+                <div id ="ecard" class="event_card event_card-container shadow bg-white">
+                    <div class="d-flex flex-column justify-content-center align-items-center my-2 mt-2">
+                        <br>
+                        <img src={{ele['icon_url']}} width="130px" height="130px" alt="event-image">
+                        <!-- <img src="../static/images/icons/Category Icons/Fine Arts.png" width="130px" height="130px" alt="event-image"> -->
+                    </div>
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h3 class="w-100 fs-5 text-red mt-2 mb-0 px-2 main-font text-center">
+                            {{ele['event_name']}}
+                        </h3>
+                        <h4 class="w-100 fs-7 text-black mt-2 mb-0 px-2 main-font text-center">
+                            {{ele['event_cost']}} ₹
+                        </h4>
+                        <br>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
 </div>
+<br>
+<!-- Literary Arts -->
+<h2 class="m-4 mt-0 text-brown" style="text-align: center;">Literary Arts</h2>
+<div class="px-4 d-flex justify-content-center">
+    <div id="admin-events" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 gx-3 mx-4">
+        {% for ele in events_list3 %}
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <a href={{"/events/literary-arts/{}".format(ele['event_id'])}}
+                class="d-flex flex-column justify-content-center py-1 m-2">
+                <div id ="ecard" class="event_card event_card-container shadow bg-white">
+                    <div class="d-flex flex-column justify-content-center align-items-center my-2 mt-2">
+                        <br>
+                        <img src={{ele['icon_url']}} width="130px" height="130px" alt="event-image">
+                        <!-- <img src="../static/images/icons/Category Icons/Fine Arts.png" width="130px" height="130px" alt="event-image"> -->
+                    </div>
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h3 class="w-100 fs-5 text-red mt-2 mb-0 px-2 main-font text-center">
+                            {{ele['event_name']}}
+                        </h3>
+                        <h4 class="w-100 fs-7 text-black mt-2 mb-0 px-2 main-font text-center">
+                            {{ele['event_cost']}} ₹
+                        </h4>
+                        <br>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+<!-- Fine Arts -->
+<h2 class="m-4 mt-0 text-brown" style="text-align: center;">Fine Arts</h2>
+<div class="px-4 d-flex justify-content-center">
+    <div id="admin-events" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 gx-3 mx-4">
+        {% for ele in events_list4  %}
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <a href={{"/events/fine-arts/{}".format(ele['event_id'])}}
+                class="d-flex flex-column justify-content-center py-1 m-2">
+                <div id ="ecard" class="event_card event_card-container shadow bg-white">
+                    <div class="d-flex flex-column justify-content-center align-items-center my-2 mt-2">
+                        <br>
+                        <img src={{ele['icon_url']}} width="130px" height="130px" alt="event-image">
+                        <!-- <img src="../static/images/icons/Category Icons/Fine Arts.png" width="130px" height="130px" alt="event-image"> -->
+                    </div>
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h3 class="w-100 fs-5 text-red mt-2 mb-0 px-2 main-font text-center">
+                            {{ele['event_name']}}
+                        </h3>
+                        <h4 class="w-100 fs-7 text-black mt-2 mb-0 px-2 main-font text-center">
+                            {{ele['event_cost']}} ₹
+                        </h4>
+                        <br>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+<!-- Performing Arts -->
+<h2 class="m-4 mt-0 text-brown" style="text-align: center;">Performing Arts</h2>
+<div class="px-4 d-flex justify-content-center">
+    <div id="admin-events" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 gx-3 mx-4">
+        {% for ele in events_list5  %}
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <a href={{"/events/performing-arts/{}".format(ele['event_id'])}}
+                class="d-flex flex-column justify-content-center py-1 m-2">
+                <div id ="ecard" class="event_card event_card-container shadow bg-white">
+                    <div class="d-flex flex-column justify-content-center align-items-center my-2 mt-2">
+                        <br>
+                        <img src={{ele['icon_url']}} width="130px" height="130px" alt="event-image">
+                        <!-- <img src="../static/images/icons/Category Icons/Fine Arts.png" width="130px" height="130px" alt="event-image"> -->
+                    </div>
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h3 class="w-100 fs-5 text-red mt-2 mb-0 px-2 main-font text-center">
+                            {{ele['event_name']}}
+                        </h3>
+                        <h4 class="w-100 fs-7 text-black mt-2 mb-0 px-2 main-font text-center">
+                            {{ele['event_cost']}} ₹
+                        </h4>
+                        <br>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+<!-- Informals -->
+<h2 class="m-4 mt-0 text-brown" style="text-align: center;">Informals</h2>
+<div class="px-4 d-flex justify-content-center">
+    <div id="admin-events" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 gx-3 mx-4">
+        {% for ele in events_list6  %}
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <a href={{"/events/informals/{}".format(ele['event_id'])}}
+                class="d-flex flex-column justify-content-center py-1 m-2">
+                <div id ="ecard" class="event_card event_card-container shadow bg-white">
+                    <div class="d-flex flex-column justify-content-center align-items-center my-2 mt-2">
+                        <br>
+                        <img src={{ele['icon_url']}} width="130px" height="130px" alt="event-image">
+                        <!-- <img src="../static/images/icons/Category Icons/Fine Arts.png" width="130px" height="130px" alt="event-image"> -->
+                    </div>
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h3 class="w-100 fs-5 text-red mt-2 mb-0 px-2 main-font text-center">
+                            {{ele['event_name']}}
+                        </h3>
+                        <h4 class="w-100 fs-7 text-black mt-2 mb-0 px-2 main-font text-center">
+                            {{ele['event_cost']}} ₹
+                        </h4>
+                        <br>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+<!-- Gaming -->
+<h2 class="m-4 mt-0 text-brown" style="text-align: center;">Technical Events</h2>
+<div class="px-4 d-flex justify-content-center">
+    <div id="admin-events" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 gx-3 mx-4">
+        {% for ele in events_list7  %}
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <a href={{"/events/gaming/{}".format(ele['event_id'])}}
+                class="d-flex flex-column justify-content-center py-1 m-2">
+                <div id ="ecard" class="event_card event_card-container shadow bg-white">
+                    <div class="d-flex flex-column justify-content-center align-items-center my-2 mt-2">
+                        <br>
+                        <img src={{ele['icon_url']}} width="130px" height="130px" alt="event-image">
+                        <!-- <img src="../static/images/icons/Category Icons/Fine Arts.png" width="130px" height="130px" alt="event-image"> -->
+                    </div>
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h3 class="w-100 fs-5 text-red mt-2 mb-0 px-2 main-font text-center">
+                            {{ele['event_name']}}
+                        </h3>
+                        <h4 class="w-100 fs-7 text-black mt-2 mb-0 px-2 main-font text-center">
+                            {{ele['event_cost']}} ₹
+                        </h4>
+                        <br>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+<!-- Sports -->
+<h2 class="m-4 mt-0 text-brown" style="text-align: center;">Management</h2>
+<div class="px-4 d-flex justify-content-center">
+    <div id="admin-events" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 gx-3 mx-4">
+        {% for ele in events_list8  %}
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <a href={{"/events/sports/{}".format(ele['event_id'])}}
+                class="d-flex flex-column justify-content-center py-1 m-2">
+                <div id ="ecard" class="event_card event_card-container shadow bg-white">
+                    <div class="d-flex flex-column justify-content-center align-items-center my-2 mt-2">
+                        <br>
+                        <img src={{ele['icon_url']}} width="130px" height="130px" alt="event-image">
+                        <!-- <img src="../static/images/icons/Category Icons/Fine Arts.png" width="130px" height="130px" alt="event-image"> -->
+                    </div>
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h3 class="w-100 fs-5 text-red mt-2 mb-0 px-2 main-font text-center">
+                            {{ele['event_name']}}
+                        </h3>
+                        <h4 class="w-100 fs-7 text-black mt-2 mb-0 px-2 main-font text-center">
+                            {{ele['event_cost']}} ₹
+                        </h4>
+                        <br>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+<!-- Technical Workshop -->
+<h2 class="m-4 mt-0 text-brown" style="text-align: center;">Technical Workshops</h2>
+<div class="px-4 d-flex justify-content-center">
+    <div id="admin-events" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 gx-3 mx-4">
+        {% for ele in events_list9  %}
+        <div class="col-lg-3 col-md-6 col-sm-12">
+            <a href={{"/events/technical-workshop/{}".format(ele['event_id'])}}
+                class="d-flex flex-column justify-content-center py-1 m-2">
+                <div id ="ecard" class="event_card event_card-container shadow bg-white">
+                    <div class="d-flex flex-column justify-content-center align-items-center my-2 mt-2">
+                        <br>
+                        <img src={{ele['icon_url']}} width="130px" height="130px" alt="event-image">
+                        <!-- <img src="../static/images/icons/Category Icons/Fine Arts.png" width="130px" height="130px" alt="event-image"> -->
+                    </div>
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h3 class="w-100 fs-5 text-red mt-2 mb-0 px-2 main-font text-center">
+                            {{ele['event_name']}}
+                        </h3>
+                        <h4 class="w-100 fs-7 text-black mt-2 mb-0 px-2 main-font text-center">
+                            {{ele['event_cost']}} ₹
+                        </h4>
+                        <br>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 </div>
 {% endblock %}
