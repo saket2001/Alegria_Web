@@ -490,7 +490,6 @@ a.text-black:hover {
     transition: 0.5s;
     transform-style: preserve-3d;
     background-color: var(--u_bg);
-
 }
 
 .event-card:hover {

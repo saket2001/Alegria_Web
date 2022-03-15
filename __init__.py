@@ -217,4 +217,3 @@ def create_app():
     # csrf.init_app(app)
     return app
 
-

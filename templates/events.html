@@ -1,0 +1,47 @@
+{% extends 'user_layout.html' %}
+
+
+{% block headContent %}
+<style>
+    #category-card {
+        border: 6px solid var(--navbar);
+        transition: all 0.3s ease-out;
+    }
+
+    #category-card:hover {
+        transform: scale(0.95);
+        box-shadow: 10px 10px 15px #3033;
+    }
+</style>
+{% endblock headContent %}
+
+
+{% block title %}
+Alegria 2022 | Events
+{% endblock %}
+
+{% block content %}
+<div class="containr-fluid bg-cover overflow-hidden">
+    <h2 class="m-4 text-red main-font py-2" style="text-align: center;">
+        EVENTS
+    </h2>
+    <div class="px-4 d-flex justify-content-center">
+        <div id="admin-events" class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-2 mb-2">
+            {% for ele in events_list %}
+            <div class="col">
+                <a href={{"{}".format(ele['link'])}} class="d-flex flex-column justify-content-center m-2">
+                    <span id="category-card" class="py-5 px-1 main-bg" style="border-radius: 16px;">
+                        <h3 class="w-100 fs-4 text-red px-2 main-font text-center">
+                            {{ele['title']}}
+                        </h3>
+                        <div class="d-flex flex-column justify-content-center align-items-center my-2">
+                            <img src={{ele['icon']}} width="150px" height="150px" alt="event-image">
+                        </div>
+                    </span>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

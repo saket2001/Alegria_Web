@@ -148,6 +148,55 @@ paymentLinks = {
     "workshop": "https://pages.razorpay.com/Technical-Workshops-alegria22"
 }
 
+events_list=[
+    {
+    "title": "Technical Events",
+    "content": "Here is your opportunity to showcase your technical skills and get a chance to win in our technical events ",
+    "link": '/events/technical-events',
+    "icon": '/static/images/icons/Category%20Icons/Tech.png'
+}, {
+    "title": "Technical Workshop",
+    "content": "Come here and get a chance  to explore and learn new technical skills at a reasonable price in our technical workshops.",
+    "link": '/events/technical-workshops',
+    "icon": '/static/images/icons/Category%20Icons/Technical_workshop.jpeg'
+}, {
+    "title": "Management",
+    "content": "The masterminds behind a successful company or event is the proper management, here is an opportunity awaiting for you in the form of management competitions",
+    "link": '/events/management',
+    "icon": '/static/images/icons/Category%20Icons/management.png'
+},{
+    "title": "Fine Arts",
+    "content": "Creative strokes, dripping colours and creative mind is more than enough for the artist within you to express his talent,  so come and grab this opportunity to flaunt your art .",
+    "link": '/events/fine-arts',
+    "icon": '/static/images/icons/Category%20Icons/Fine%20Arts.png'
+}, {
+    "title": "Performing Arts",
+    "content": "Representing the true beauty of talent, we provide a way to display your amazing dancing, singing and acting skills in our intriguing events",
+    "link": '/events/performing-arts',
+    "icon": '/static/images/icons/Category%20Icons/Performing%20Arts.png'
+}, {
+    "title": "Literary Arts",
+    "content": "If you have the creativity to express feelings through words then we have a platform for you to come and participate.",
+    "link": '/events/literary-arts',
+    "icon": '/static/images/icons/Category%20Icons/Literary%20Arts.png'
+},{
+    "title": "Informals",
+    "content": "Informals events are one's chance to change the definition of beauty through your immense inside talent by taking part in different informals events. ",
+    "link": '/events/informals',
+    "icon": '/static/images/icons/Category%20Icons/Informals.png'
+}, {
+    "title": "Gaming",
+    "content": "If you are fond of crazy and adventure games then come and get a chance to showcase your talent and win.",
+    "link": '/events/gaming',
+    "icon": '/static/images/icons/Category%20Icons/Gaming.png'
+}, {
+    "title": "Sports",
+    "content": "Sports is all about the spirit and sportsmanship of the player so if you posses the true spirit of sports then you stand a chance to win by taking part in our sports events.",
+    "link": '/events/sports',
+    "icon": '/static/images/icons/Category%20Icons/Sports.png'
+}
+]
+
 events_row1 = [{
     "title": "Technical Events",
     "content": "Here is your opportunity to showcase your technical skills and get a chance to win in our technical events ",
