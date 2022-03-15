@@ -227,40 +227,78 @@ def eventsseperate():
             })
 
         events_arr = []
-        event_arr2 = []
-        event_arr3 = []
-        event_arr4 = []
-        event_arr5 = []
-        event_arr6 = []
-        event_arr7 = []
-        event_arr8 = []
-        event_arr9 = []
+        events_arr2 = []
+        events_arr3 = []
+        events_arr4 = []
+        events_arr5 = []
+        events_arr6 = []
+        events_arr7 = []
+        events_arr8 = []
+        events_arr9 = []
 
         if res['type'] > 0:
             events_arr = res['events']
-            event_arr2 = res['event2']
-            event_arr3 = res['event3']
-            event_arr4 = res['event4']
-            event_arr5 = res['event5']
-            event_arr6 = res['event6']
-            event_arr7 = res['event7']
-            event_arr8 = res['event8']
-            event_arr9 = res['event9']
+            events_arr2 = res['event2']
+            events_arr3 = res['event3']
+            events_arr4 = res['event4']
+            events_arr5 = res['event5']
+            events_arr6 = res['event6']
+            events_arr7 = res['event7']
+            events_arr8 = res['event8']
+            events_arr9 = res['event9']
 
-            print(event_arr9)
         else:
             events_arr = []
             events_arr2 = []
-            event_arr3 = []
-            event_arr4 = []
-            event_arr5 = []
-            event_arr6 = []
-            event_arr7 = []
-            event_arr8 = []
-            event_arr9 = []
+            events_arr3 = []
+            events_arr4 = []
+            events_arr5 = []
+            events_arr6 = []
+            events_arr7 = []
+            events_arr8 = []
+            events_arr9 = []
+            
+        events_list=[
+            {
+                "title":"Gaming",
+                "data":events_arr,
+            },
+            {
+                "title":"Sports",
+                "data":events_arr2,
+            },
+            {
+                "title":"Literary Arts",
+                "data":events_arr3,
+            },
+            {
+                "title":"Fine Arts",
+                "data":events_arr4,
+            },
+            {
+                "title":"Performing Arts",
+                "data":events_arr5,
+            },
+            {
+                "title":"Informals",
+                "data":events_arr6,
+            },
+            {
+                "title":"Technical Events",
+                "data":events_arr7,
+            },
+            {
+                "title":"Management",
+                "data":events_arr8,
+            },
+            {
+                "title":"Technical Workshops",
+                "data":events_arr9,
+            },
+        ]
 
-        return render_template('user_events.html', activeNav='Events', events_list1=events_arr, events_list2=event_arr2,
-                               events_list3=event_arr3, events_list4=event_arr4, events_list5=event_arr5, events_list6=event_arr6, events_list7=event_arr7, events_list8=event_arr8, events_list9=event_arr9, signed_in=signed_in, cartLen=cartLen)
+        return render_template('user_events.html', activeNav='Events', signed_in=signed_in, 
+                               events_list=events_list,cartLen=cartLen)
 
     except Exception as e:
         print(e)
