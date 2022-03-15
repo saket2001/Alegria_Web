@@ -1,7 +1,7 @@
 from flask import Blueprint, flash, redirect, render_template, session, request, send_from_directory
 from functools import wraps
 from forms import UserContact, AddToCart
-from models import  APIKeys, Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, PollUserResponse, db, UserInfo, Announcement, EventsToday
+from models import APIKeys, Eventdemo, Eventdemo_details, Merchandise, Poll, PollResponses, PollUserResponse, db, UserInfo, Announcement, EventsToday
 import basicData as client_data
 from datetime import datetime
 from pathlib import Path
@@ -46,12 +46,11 @@ def landingPage():
 
     data = [
         {
-            "img":"/static/images/homepage/mobile-poster.jpg",
+            "img": "/static/images/homepage/mobile-poster.jpg",
         },
     ]
 
-
-    return render_template('user_homepage.html', activeNav='Home', signed_in=signed_in, row1=client_data.events_row1, row2=client_data.events_row2, row3=client_data.events_row3, cartLen=cartLen,data=data)
+    return render_template('user_homepage.html', activeNav='Home', signed_in=signed_in, row1=client_data.events_row1, row2=client_data.events_row2, row3=client_data.events_row3, cartLen=cartLen, data=data)
 
 
 @app_mbp.route("/user-login")
@@ -70,6 +69,200 @@ def aboutUs():
         cartLen = None
 
         return render_template('user_aboutus.html', aboutus_2020=client_data.aboutus_2020, aboutus_2019=client_data.aboutus_2019, aboutus_2018=client_data.aboutus_2018, aboutus_2017=client_data.aboutus_2017, aboutus_2016=client_data.aboutus_2016, aboutus_2015=client_data.aboutus_2015, aboutus_2014=client_data.aboutus_2014, aboutus_2013=client_data.aboutus_2013, cartLen=cartLen)
+    except Exception as e:
+        print(e)
+        return redirect("/")
+
+
+# new event page
+@app_mbp.route('/events/', methods=['GET'])
+def eventsseperate():
+    try:
+        signed_in = False
+        cartLen = None
+        # checks if logged in
+        if session.get('user_id') != None:
+            signed_in = True
+            cartLen = session.get('cartLength')
+
+        filter_category_events = Eventdemo.query.filter_by(
+            event_category_name="Gaming")
+        filter_category_events2 = Eventdemo.query.filter_by(
+            event_category_name="Sports")
+        filter_category_events3 = Eventdemo.query.filter_by(
+            event_category_name="literary-arts")
+        filter_category_events4 = Eventdemo.query.filter_by(
+            event_category_name="fine-arts")
+        filter_category_events5 = Eventdemo.query.filter_by(
+            event_category_name="performing-arts")
+        filter_category_events6 = Eventdemo.query.filter_by(
+            event_category_name="informals")
+        filter_category_events7 = Eventdemo.query.filter_by(
+            event_category_name="technical-events")
+        filter_category_events8 = Eventdemo.query.filter_by(
+            event_category_name="Management")
+        filter_category_events9 = Eventdemo.query.filter_by(
+            event_category_name="technical-workshop")
+
+        res = {
+            "type": True,
+            "events": [],
+            "event2": [],
+            "event3": [],
+            "event4": [],
+            "event5": [],
+            "event6": [],
+            "event7": [],
+            "event8": [],
+            "event9": []
+
+        }
+
+        for event in filter_category_events:
+            event_details = Eventdemo_details.query.filter_by(
+                event_id=event.id).first()
+            res["events"].append({
+                "event_id": event.id,
+                "event_name": event.event_name,
+                "event_cost": event.event_cost,
+                "event_mode": event_details.event_mode,
+                "category": event.event_category_name,
+                "category_id": event.event_category_id,
+                "icon_url": event_details.icon_url
+            })
+        for event in filter_category_events2:
+            event_details = Eventdemo_details.query.filter_by(
+                event_id=event.id).first()
+            res["event2"].append({
+                "event_id": event.id,
+                "event_name": event.event_name,
+                "event_cost": event.event_cost,
+                "event_mode": event_details.event_mode,
+                "category": event.event_category_name,
+                "category_id": event.event_category_id,
+                "icon_url": event_details.icon_url
+            })
+        for event in filter_category_events3:
+            event_details = Eventdemo_details.query.filter_by(
+                event_id=event.id).first()
+            res["event3"].append({
+                "event_id": event.id,
+                "event_name": event.event_name,
+                "event_cost": event.event_cost,
+                "event_mode": event_details.event_mode,
+                "category": event.event_category_name,
+                "category_id": event.event_category_id,
+                "icon_url": event_details.icon_url
+            })
+        for event in filter_category_events4:
+            event_details = Eventdemo_details.query.filter_by(
+                event_id=event.id).first()
+            res["event4"].append({
+                "event_id": event.id,
+                "event_name": event.event_name,
+                "event_cost": event.event_cost,
+                "event_mode": event_details.event_mode,
+                "category": event.event_category_name,
+                "category_id": event.event_category_id,
+                "icon_url": event_details.icon_url
+            })
+        for event in filter_category_events5:
+            event_details = Eventdemo_details.query.filter_by(
+                event_id=event.id).first()
+            res["event5"].append({
+                "event_id": event.id,
+                "event_name": event.event_name,
+                "event_cost": event.event_cost,
+                "event_mode": event_details.event_mode,
+                "category": event.event_category_name,
+                "category_id": event.event_category_id,
+                "icon_url": event_details.icon_url
+            })
+        for event in filter_category_events6:
+            event_details = Eventdemo_details.query.filter_by(
+                event_id=event.id).first()
+            res["event6"].append({
+                "event_id": event.id,
+                "event_name": event.event_name,
+                "event_cost": event.event_cost,
+                "event_mode": event_details.event_mode,
+                "category": event.event_category_name,
+                "category_id": event.event_category_id,
+                "icon_url": event_details.icon_url
+            })
+        for event in filter_category_events7:
+            event_details = Eventdemo_details.query.filter_by(
+                event_id=event.id).first()
+            res["event7"].append({
+                "event_id": event.id,
+                "event_name": event.event_name,
+                "event_cost": event.event_cost,
+                "event_mode": event_details.event_mode,
+                "category": event.event_category_name,
+                "category_id": event.event_category_id,
+                "icon_url": event_details.icon_url
+            })
+        for event in filter_category_events8:
+            event_details = Eventdemo_details.query.filter_by(
+                event_id=event.id).first()
+            res["event8"].append({
+                "event_id": event.id,
+                "event_name": event.event_name,
+                "event_cost": event.event_cost,
+                "event_mode": event_details.event_mode,
+                "category": event.event_category_name,
+                "category_id": event.event_category_id,
+                "icon_url": event_details.icon_url
+            })
+        for event in filter_category_events9:
+            event_details = Eventdemo_details.query.filter_by(
+                event_id=event.id).first()
+            res["event9"].append({
+                "event_id": event.id,
+                "event_name": event.event_name,
+                "event_cost": event.event_cost,
+                "event_mode": event_details.event_mode,
+                "category": event.event_category_name,
+                "category_id": event.event_category_id,
+                "icon_url": event_details.icon_url
+            })
+
+        events_arr = []
+        event_arr2 = []
+        event_arr3 = []
+        event_arr4 = []
+        event_arr5 = []
+        event_arr6 = []
+        event_arr7 = []
+        event_arr8 = []
+        event_arr9 = []
+
+        if res['type'] > 0:
+            events_arr = res['events']
+            event_arr2 = res['event2']
+            event_arr3 = res['event3']
+            event_arr4 = res['event4']
+            event_arr5 = res['event5']
+            event_arr6 = res['event6']
+            event_arr7 = res['event7']
+            event_arr8 = res['event8']
+            event_arr9 = res['event9']
+
+            print(event_arr9)
+        else:
+            events_arr = []
+            events_arr2 = []
+            event_arr3 = []
+            event_arr4 = []
+            event_arr5 = []
+            event_arr6 = []
+            event_arr7 = []
+            event_arr8 = []
+            event_arr9 = []
+
+        return render_template('user_events.html', activeNav='Events', events_list1=events_arr, events_list2=event_arr2,
+                               events_list3=event_arr3, events_list4=event_arr4, events_list5=event_arr5, events_list6=event_arr6, events_list7=event_arr7, events_list8=event_arr8, events_list9=event_arr9, signed_in=signed_in, cartLen=cartLen)
+
     except Exception as e:
         print(e)
         return redirect("/")
@@ -467,7 +660,7 @@ def DevelopersPage():
             signed_in = True
             cartLen = session.get('cartLength')
 
-        return render_template('developers.html', activeNav='Developers', web_team_list=client_data.web_team_list, app_team_list=client_data.app_team_list,ui_team=client_data.ui_team,signed_in=signed_in, cartLen=cartLen)
+        return render_template('developers.html', activeNav='Developers', web_team_list=client_data.web_team_list, app_team_list=client_data.app_team_list, ui_team=client_data.ui_team, signed_in=signed_in, cartLen=cartLen)
 
     except Exception as e:
         print(e)
@@ -527,7 +720,7 @@ def eventHeadPage():
             signed_in = True
             cartLen = session.get('cartLength')
 
-        return render_template('event-head.html', activeNav='Event heads', signed_in=signed_in, cartLen=cartLen,event_heads_row1=client_data.event_heads_row1,event_heads_row2=client_data.event_heads_row2,event_heads_row3=client_data.event_heads_row3,event_heads_row4=client_data.event_heads_row4)
+        return render_template('event-head.html', activeNav='Event heads', signed_in=signed_in, cartLen=cartLen, event_heads_row1=client_data.event_heads_row1, event_heads_row2=client_data.event_heads_row2, event_heads_row3=client_data.event_heads_row3, event_heads_row4=client_data.event_heads_row4)
     except Exception as e:
         print(e)
         return redirect("/")
@@ -554,9 +747,9 @@ def userDetails(user_id):
         college_name = request.form.get('user_college_name')
 
         # validating inputs
-        valid_number=re.findall("\d{10}", phone_number)
+        valid_number = re.findall("\d{10}", phone_number)
         print(len(phone_number))
-        if len(phone_number)>10:
+        if len(phone_number) > 10:
             flash("Please enter a valid 10 digits phone number !")
             return redirect("/new-user-login/{}".format(user_id))
         else:
@@ -575,7 +768,7 @@ def userDetails(user_id):
 def deleteUserOnCancel(user_id):
     try:
         user_details = UserInfo.query.filter_by(id=user_id).first()
-        user_api_key=APIKeys.query.filter_by(user_id=user_id).first()
+        user_api_key = APIKeys.query.filter_by(user_id=user_id).first()
         db.session.delete(user_details)
         db.session.delete(user_api_key)
         db.session.commit()
@@ -643,9 +836,9 @@ def artistDetailsPage(artist_id):
         signed_in = True
         cartLen = session.get('cartLength')
 
-    if artist_id=='a1':
-        details=client_data.artistDetails[0]
-    elif artist_id=="a2":
-        details=client_data.artistDetails[1]
+    if artist_id == 'a1':
+        details = client_data.artistDetails[0]
+    elif artist_id == "a2":
+        details = client_data.artistDetails[1]
 
-    return render_template('artist_details.html',cartLen=cartLen, signed_in=signed_in,details=details)
+    return render_template('artist_details.html', cartLen=cartLen, signed_in=signed_in, details=details)
