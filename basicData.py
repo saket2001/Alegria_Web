@@ -19,6 +19,18 @@ problem_statements = [
     ["PS10", "Management System for Old Age Home/NGO",
      "App(Web/Mobile)", "To have a management system that aims to replace the traditional record keeping logbooks. The system will be able to track and keep records for categories like health, personal information,  food, and other necessary information. The system should have a clean user interface, easy to use with an easily searchable interface.", "/static/images/hackathon/ps10.png"]
 ]
+aboutus_2021 = [
+    {"title": "Light the Night", "description": "Alegria 2021 at Pillai's",
+     "img": "../static/images/aboutus-ribbons/alegria21.png"},
+    {"title": "Soundarya Sharma", "description": "Mr and Ms Alegria Judge at Pillai's Alegria 2021",
+     "img": "../static/images/aboutus-ribbons/saundarya.jpg"},
+    {"title": "Danish Halfaz", "description": "Judge for Singing event at Pillai's Alegria 2021",
+     "img": "../static/images/aboutus-ribbons/danish.jpg"},
+    {"title": "Aby Mashe & Raptonicz", "description": "Judge for Rapping event at Pillai's Alegria 2021",
+     "img": "../static/images/aboutus-ribbons/rap.jpg"},
+    {"title": "Final Day of Alegria 2021", "description": "Indeed a spectacular day",
+     "img": "../static/images/aboutus-ribbons/final21.png"}
+]
 aboutus_2020 = [
     {"title": "Alegria Banner", "description": "Alegria 2020 Banner Unveiling Ceremony",
      "img": "../static/images/aboutus-ribbons/alegria_banner.JPG"},

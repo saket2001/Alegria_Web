@@ -279,6 +279,22 @@ Alegria 2022 | About Us
     </div>
     <!--  -->
     <div class="ribbon" style="text-align: center;">
+      <img src="../static/images/aboutus-ribbons/2021.png">
+    </div>
+    <ul id="hexGrid">
+      {% for ele in aboutus_2021 %}
+      <li class="hex">
+        <div class="hexIn">
+          <div class="hexLink">
+            <img src='{{ele["img"]}}' alt="" />
+            <h1>{{ele["title"]}}</h1>
+            <p>{{ele['description']}}</p>
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    <div class="ribbon" style="text-align: center;">
       <img src="../static/images/aboutus-ribbons/2020.png">
     </div>
     <ul id="hexGrid">
