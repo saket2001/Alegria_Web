@@ -2,7 +2,6 @@ from flask import Flask, redirect, url_for, session
 from flask.helpers import flash
 from flask_restful import Api
 from authlib.integrations.flask_client import OAuth
-from sqlalchemy import true
 from models import  Cart
 from datetime import datetime
 from flask_hashing import Hashing
@@ -45,7 +44,7 @@ def create_app():
     from views import app_mbp
     from views.admin import admin_bp
     from views.client import client_bp
-    from views.api import IdFilterEventAPI, AllCategoryFilterEventAPI, AnnoucementsAPI, PollsAPI, MerchandiseAPI, CategoryEventFilter, VerifyEmail, RegisterEmail, UserInfo, APIKeys, DeleteUser, UpdateUserAPI, CalendarAPI, TimelineAPI, TodayAtAlegria, TodayEvents, UpcomingEvents, HomeContentsAPI
+    from views.api import IdFilterEventAPI, AllCategoryFilterEventAPI, AnnoucementsAPI, PollsAPI, MerchandiseAPI, CategoryEventFilter, VerifyEmail, RegisterEmail, UserInfo, APIKeys, DeleteUser, UpdateUserAPI
 
     app.register_blueprint(app_mbp)
     app.register_blueprint(client_bp)
@@ -65,12 +64,6 @@ def create_app():
     api.add_resource(RegisterEmail, "/register-user")
     api.add_resource(DeleteUser, "/user/delete")
     api.add_resource(UpdateUserAPI, "/user/update-user")
-    api.add_resource(TodayAtAlegria, "/today-at-alegria")
-    api.add_resource(TodayEvents, "/events/today")
-    api.add_resource(UpcomingEvents, "/events/upcoming")
-    api.add_resource(CalendarAPI, "/events/calendar")
-    api.add_resource(TimelineAPI, "/timeline")
-    api.add_resource(HomeContentsAPI, "/home-contents")
 
     oauth = OAuth(app)
     google = oauth.register(
@@ -216,5 +209,3 @@ def create_app():
     # enable csrf
     # csrf.init_app(app)
     return app
-
-

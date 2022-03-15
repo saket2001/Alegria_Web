@@ -1,0 +1,42 @@
+{% extends 'user_layout.html' %}
+
+
+{% block headContent %}
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v12.0"
+    nonce="wutfUaiR"></script>
+{% endblock headContent %}
+
+{% block title %}
+Alegria 2022 | Events 
+{% endblock %}
+
+{% block content %}
+<div class="containr-fluid bg-cover overflow-hidden">
+<br>
+<h2 class="m-4 mt-0 text-brown" style="text-align: center;">Events</h2>
+<div class="px-4 d-flex justify-content-center">
+    <div id="admin-events" class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-2">
+        {% for ele in events_list %}
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <a href={{ele['link']}}
+                class="d-flex flex-column justify-content-center py-1 event_card m-2">
+                <div class="event_card-container">
+                    <div class="d-flex flex-column justify-content-center align-items-center my-2 mt-2">
+                        <img src={{ele['icon']}} width="130px" height="130px" alt="event-image">
+                    </div>
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h3 class="w-100 fs-5 text-red mt-2 mb-0 px-2 main-font text-center">
+                            {{ele['title']}}
+                        </h3>
+                        <br>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
