@@ -74,6 +74,9 @@ def aboutUs():
         print(e)
         return redirect("/")
 
+@app_mbp.route("/events")
+def eventsPage():
+    return render_template('user_events.html', activeNav='events',events_list=client_data.events_row1+client_data.events_row2+client_data.events_row3,)
 
 @app_mbp.route('/events/<event_category>', methods=['GET'])
 def events(event_category=None):
