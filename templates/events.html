@@ -4,13 +4,31 @@
 {% block headContent %}
 <style>
     #category-card {
+        padding: 1.5rem 1.8rem;
+        border-radius: 16px;
         border: 6px solid var(--navbar);
         transition: all 0.3s ease-out;
+    }
+
+    #category_card-img {
+        width: 140px;
+        width: 140px;
     }
 
     #category-card:hover {
         transform: scale(0.95);
         box-shadow: 10px 10px 15px #3033;
+    }
+
+    @media screen and (max-width:600px) {
+        #category-card {
+            padding: 1rem 1.2rem;
+        }
+
+        #category_card-img {
+            width: 110px;
+            width: 110px;
+        }
     }
 </style>
 {% endblock headContent %}
@@ -21,21 +39,38 @@ Alegria 2022 | Events
 {% endblock %}
 
 {% block content %}
-<div class="containr-fluid bg-cover overflow-hidden">
-    <h2 class="m-4 text-red main-font py-2" style="text-align: center;">
-        EVENTS
-    </h2>
+<div class="container-fluid bg-cover overflow-hidden">
+    <!-- go back button -->
+    <div class="row my-2 px-2">
+        <div class="col-lg-2 col-sm-3">
+            <a href="/" type="button" class="go_back_btn py-1 text-dark">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="me-2"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Go Back
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2 class="m-4 text-red main-font py-2 text-center">
+                EVENTS
+            </h2>
+        </div>
+    </div>
     <div class="px-4 d-flex justify-content-center">
         <div id="admin-events" class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-2 mb-2">
             {% for ele in events_list %}
             <div class="col">
                 <a href={{"{}".format(ele['link'])}} class="d-flex flex-column justify-content-center m-2">
-                    <span id="category-card" class="py-5 px-1 main-bg" style="border-radius: 16px;">
+                    <span id="category-card" class="main-bg">
                         <h3 class="w-100 fs-4 text-red px-2 main-font text-center">
                             {{ele['title']}}
                         </h3>
                         <div class="d-flex flex-column justify-content-center align-items-center my-2">
-                            <img src={{ele['icon']}} width="150px" height="150px" alt="event-image">
+                            <img src={{ele['icon']}} id="category_card-img" alt="event-image">
                         </div>
                     </span>
                 </a>
