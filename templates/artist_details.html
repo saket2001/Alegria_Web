@@ -2,7 +2,16 @@
 
 
 {% block headContent %}
+<style>
+    .other_artist_card {
+        width: 100%;
+    }
 
+    .other_artist_card .other_artist_card-img {
+        width: 80%;
+        border-radius: 6px;
+    }
+</style>
 {% endblock headContent %}
 
 
@@ -45,6 +54,18 @@ Alegria 2022 | Artist Detail
                 </div>
                 <hr>
                 {{details.p | safe }}
+            </div>
+            <hr>
+            <div class="row row-cols-lg-3 row-cols-sm-1">
+                <div class="col-12 my-2">
+                    <h4 class="main-font fs-5">Other Artists</h4>
+                </div>
+                {% for artist in all_details %}
+                <a href={{"/artists/{}".format(artist.id)}} class="col other_artist_card">
+                    <img src={{artist.img}} class="other_artist_card-img" alt="">
+                    <p class="fs-5 main-font text-black my-1">{{artist.name}}</p>
+                </a>
+                {% endfor %}
             </div>
         </div>
     </div>

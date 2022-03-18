@@ -32,7 +32,7 @@
         <nav class="navbar navbar-main navbar-expand-lg navbar-light p-2 position-relative">
             <div class="container-fluid">
                 <a class="" href="/">
-                    <img src="/static/images/AlegriaLogo.png" alt="alegria logo" width="60px" height="60px">
+                    <img src="/static/images/AlegriaLogo.png" alt="alegria logo" class="alegria-logo">
                 </a>
                 <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -50,9 +50,9 @@
                                 %}>Home</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class='navbar_links dropdown-toggle' id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                aria-expanded="false" {% if activeNav=='Events' %} style='color: #e8ff84;' {% endif
-                                %}>Events</a>
+                            <a class='navbar_links dropdown-toggle cursor-pointer' id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false" {% if activeNav=='Events' %}
+                                style='color: #e8ff84;' {% endif %}>Events</a>
                             <ul class="dropdown-menu" style="background-color: #681b0aec !important;"
                                 aria-labelledby="dropdownMenuButton1">
                                 <li>
@@ -95,7 +95,7 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a href="" class='navbar_links dropdown-toggle' id="dropdownMenuButton1"
+                            <a class='navbar_links dropdown-toggle cursor-pointer' id="dropdownMenuButton1"
                                 data-bs-toggle="dropdown" aria-expanded="false" {% if activeNav=='Merchandise' %}
                                 style='color: #e8ff84;' {% endif %}>Merchandise</a>
                             <ul class="dropdown-menu" style="background-color: #681b0aec !important;"
@@ -113,28 +113,16 @@
                                 style='color: #e8ff84;' {% endif %}>Hackathon</a>
                         </li>
                         <li class="nav-item">
-                            <a href="https://pillaialegria.wordpress.com/" target="_blank" rel="noopener noreferrer"
-                                class='navbar_links' {% if activeNav=='Blogs' %} style='color: #e8ff84;' {% endif
-                                %}>Blogs</a>
-                            <!-- <a href="" class='navbar_links dropdown-toggle' id="dropdownMenuButton2"
-                                data-bs-toggle="dropdown" aria-expanded="false">News</a>
-                            <ul class="dropdown-menu" style="background-color: #681b0aec !important;"
-                                aria-labelledby="dropdownMenuButton2">
-                                <li>
-                                    <a class="dropdown-item navbar_links" href="https://pillaialegria.wordpress.com/"
-                                        target="_blank" rel="noopener noreferrer">Blog</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item navbar_links" href="/buzz">Buzz</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item navbar_links" href="/highlights">Highlights</a>
-                                </li>
-                            </ul> -->
+                            <a href="/announcements?filter=None" target="_blank" rel="noopener noreferrer"
+                                class='navbar_links' {% if activeNav=='announcements' %} style='color: #e8ff84;' {%
+                                endif %}>Announcements</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/#artists" class='navbar_links'>Artists</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class='navbar_links dropdown-toggle' id="dropdownMenuButton2" data-bs-toggle="dropdown"
-                                aria-expanded="false">More</a>
+                            <a class='navbar_links dropdown-toggle cursor-pointer' id="dropdownMenuButton2"
+                                data-bs-toggle="dropdown" aria-expanded="false">More</a>
                             <ul class="dropdown-menu border-0" style="background-color: #681b0aec;"
                                 aria-labelledby="dropdownMenuButton2">
                                 <li>
@@ -147,8 +135,8 @@
                                     <a href="/user/quiz" class="dropdown-item navbar_links">Quiz</a>
                                 </li>
                                 <li>
-                                    <a href="/announcements?filter=None"
-                                        class="dropdown-item navbar_links">Announcements</a>
+                                    <a href="https://pillaialegria.wordpress.com/" target="_blank"
+                                        rel="noopener noreferrer" class="dropdown-item navbar_links">Blogs</a>
                                 </li>
                                 <li>
                                     <a href="/Alegria-Brochure-2022" class="dropdown-item navbar_links">EBrochure

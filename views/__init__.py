@@ -81,236 +81,6 @@ def aboutUs():
         return redirect("/")
 
 
-# @app_mbp.route('/events/', methods=['GET'])
-# def eventsseperate():
-#     try:
-#         signed_in = False
-#         cartLen = None
-#         # checks if logged in
-#         if session.get('user_id') != None:
-#             signed_in = True
-#             cartLen = session.get('cartLength')
-
-#         filter_category_events = Eventdemo.query.filter_by(
-#             event_category_name="Gaming")
-#         filter_category_events2 = Eventdemo.query.filter_by(
-#             event_category_name="Sports")
-#         filter_category_events3 = Eventdemo.query.filter_by(
-#             event_category_name="literary-arts")
-#         filter_category_events4 = Eventdemo.query.filter_by(
-#             event_category_name="fine-arts")
-#         filter_category_events5 = Eventdemo.query.filter_by(
-#             event_category_name="performing-arts")
-#         filter_category_events6 = Eventdemo.query.filter_by(
-#             event_category_name="informals")
-#         filter_category_events7 = Eventdemo.query.filter_by(
-#             event_category_name="technical-events")
-#         filter_category_events8 = Eventdemo.query.filter_by(
-#             event_category_name="Management")
-#         filter_category_events9 = Eventdemo.query.filter_by(
-#             event_category_name="technical-workshop")
-
-#         res = {
-#             "type": True,
-#             "events": [],
-#             "event2": [],
-#             "event3": [],
-#             "event4": [],
-#             "event5": [],
-#             "event6": [],
-#             "event7": [],
-#             "event8": [],
-#             "event9": []
-
-#         }
-
-#         for event in filter_category_events:
-#             event_details = Eventdemo_details.query.filter_by(
-#                 event_id=event.id).first()
-#             res["events"].append({
-#                 "event_id": event.id,
-#                 "event_name": event.event_name,
-#                 "event_cost": event.event_cost,
-#                 "event_mode": event_details.event_mode,
-#                 "category": event.event_category_name,
-#                 "category_id": event.event_category_id,
-#                 "icon_url": event_details.icon_url
-#             })
-#         for event in filter_category_events2:
-#             event_details = Eventdemo_details.query.filter_by(
-#                 event_id=event.id).first()
-#             res["event2"].append({
-#                 "event_id": event.id,
-#                 "event_name": event.event_name,
-#                 "event_cost": event.event_cost,
-#                 "event_mode": event_details.event_mode,
-#                 "category": event.event_category_name,
-#                 "category_id": event.event_category_id,
-#                 "icon_url": event_details.icon_url
-#             })
-#         for event in filter_category_events3:
-#             event_details = Eventdemo_details.query.filter_by(
-#                 event_id=event.id).first()
-#             res["event3"].append({
-#                 "event_id": event.id,
-#                 "event_name": event.event_name,
-#                 "event_cost": event.event_cost,
-#                 "event_mode": event_details.event_mode,
-#                 "category": event.event_category_name,
-#                 "category_id": event.event_category_id,
-#                 "icon_url": event_details.icon_url
-#             })
-#         for event in filter_category_events4:
-#             event_details = Eventdemo_details.query.filter_by(
-#                 event_id=event.id).first()
-#             res["event4"].append({
-#                 "event_id": event.id,
-#                 "event_name": event.event_name,
-#                 "event_cost": event.event_cost,
-#                 "event_mode": event_details.event_mode,
-#                 "category": event.event_category_name,
-#                 "category_id": event.event_category_id,
-#                 "icon_url": event_details.icon_url
-#             })
-#         for event in filter_category_events5:
-#             event_details = Eventdemo_details.query.filter_by(
-#                 event_id=event.id).first()
-#             res["event5"].append({
-#                 "event_id": event.id,
-#                 "event_name": event.event_name,
-#                 "event_cost": event.event_cost,
-#                 "event_mode": event_details.event_mode,
-#                 "category": event.event_category_name,
-#                 "category_id": event.event_category_id,
-#                 "icon_url": event_details.icon_url
-#             })
-#         for event in filter_category_events6:
-#             event_details = Eventdemo_details.query.filter_by(
-#                 event_id=event.id).first()
-#             res["event6"].append({
-#                 "event_id": event.id,
-#                 "event_name": event.event_name,
-#                 "event_cost": event.event_cost,
-#                 "event_mode": event_details.event_mode,
-#                 "category": event.event_category_name,
-#                 "category_id": event.event_category_id,
-#                 "icon_url": event_details.icon_url
-#             })
-#         for event in filter_category_events7:
-#             event_details = Eventdemo_details.query.filter_by(
-#                 event_id=event.id).first()
-#             res["event7"].append({
-#                 "event_id": event.id,
-#                 "event_name": event.event_name,
-#                 "event_cost": event.event_cost,
-#                 "event_mode": event_details.event_mode,
-#                 "category": event.event_category_name,
-#                 "category_id": event.event_category_id,
-#                 "icon_url": event_details.icon_url
-#             })
-#         for event in filter_category_events8:
-#             event_details = Eventdemo_details.query.filter_by(
-#                 event_id=event.id).first()
-#             res["event8"].append({
-#                 "event_id": event.id,
-#                 "event_name": event.event_name,
-#                 "event_cost": event.event_cost,
-#                 "event_mode": event_details.event_mode,
-#                 "category": event.event_category_name,
-#                 "category_id": event.event_category_id,
-#                 "icon_url": event_details.icon_url
-#             })
-#         for event in filter_category_events9:
-#             event_details = Eventdemo_details.query.filter_by(
-#                 event_id=event.id).first()
-#             res["event9"].append({
-#                 "event_id": event.id,
-#                 "event_name": event.event_name,
-#                 "event_cost": event.event_cost,
-#                 "event_mode": event_details.event_mode,
-#                 "category": event.event_category_name,
-#                 "category_id": event.event_category_id,
-#                 "icon_url": event_details.icon_url
-#             })
-
-#         events_arr = []
-#         events_arr2 = []
-#         events_arr3 = []
-#         events_arr4 = []
-#         events_arr5 = []
-#         events_arr6 = []
-#         events_arr7 = []
-#         events_arr8 = []
-#         events_arr9 = []
-
-#         if res['type'] > 0:
-#             events_arr = res['events']
-#             events_arr2 = res['event2']
-#             events_arr3 = res['event3']
-#             events_arr4 = res['event4']
-#             events_arr5 = res['event5']
-#             events_arr6 = res['event6']
-#             events_arr7 = res['event7']
-#             events_arr8 = res['event8']
-#             events_arr9 = res['event9']
-
-#         else:
-#             events_arr = []
-#             events_arr2 = []
-#             events_arr3 = []
-#             events_arr4 = []
-#             events_arr5 = []
-#             events_arr6 = []
-#             events_arr7 = []
-#             events_arr8 = []
-#             events_arr9 = []
-            
-#         events_list=[
-#             {
-#                 "title":"Gaming",
-#                 "data":events_arr,
-#             },
-#             {
-#                 "title":"Sports",
-#                 "data":events_arr2,
-#             },
-#             {
-#                 "title":"Literary Arts",
-#                 "data":events_arr3,
-#             },
-#             {
-#                 "title":"Fine Arts",
-#                 "data":events_arr4,
-#             },
-#             {
-#                 "title":"Performing Arts",
-#                 "data":events_arr5,
-#             },
-#             {
-#                 "title":"Informals",
-#                 "data":events_arr6,
-#             },
-#             {
-#                 "title":"Technical Events",
-#                 "data":events_arr7,
-#             },
-#             {
-#                 "title":"Management",
-#                 "data":events_arr8,
-#             },
-#             {
-#                 "title":"Technical Workshops",
-#                 "data":events_arr9,
-#             },
-#         ]
-
-#         return render_template('user_events.html', activeNav='Events', signed_in=signed_in, 
-#                                events_list=events_list,cartLen=cartLen)
-
-#     except Exception as e:
-#         print(e)
-#         return redirect("/")
-
 @app_mbp.route('/events/',methods=["GET"])
 def categories():
     signed_in = False
@@ -894,5 +664,20 @@ def artistDetailsPage(artist_id):
         details = client_data.artistDetails[0]
     elif artist_id == "a2":
         details = client_data.artistDetails[1]
+    elif artist_id == "a3":
+        details = client_data.artistDetails[2]
+    elif artist_id == "a4":
+        details = client_data.artistDetails[3]
+    
+    all_details=[] 
+    data=client_data.artistDetails
+    for i in data:
+        if(i["id"]!=artist_id):
+            all_details.append({
+                "id":i["id"],
+                "name":i["name"],
+                "img":i["img"],
+            })
+            
 
-    return render_template('artist_details.html', cartLen=cartLen, signed_in=signed_in, details=details)
+    return render_template('artist_details.html', cartLen=cartLen, signed_in=signed_in, details=details,all_details=all_details)

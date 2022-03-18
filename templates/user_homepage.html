@@ -41,7 +41,7 @@
     <nav class="w-100 navbar navbar-expand-lg navbar-light p-2 py-3 parallax_navbar">
         <div class="container-fluid">
             <a href="/">
-                <img src="/static/images/AlegriaLogo.png" alt="alegria logo" width="75px" height="60px">
+                <img src="/static/images/AlegriaLogo.png" alt="alegria logo" class="alegria-logo">
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -54,12 +54,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="ms-2 navbar-nav me-auto mt-1 mb-2 mb-lg-0 sec-font fw-bold gy-3">
                     <li class="nav-item">
-                        <a href="/" class='navbar_links' {% if activeNav=='Home' %} style='color: #c74221;' {% endif
-                            %}>Home</a>
+                        <a href="/" class='navbar_links' {% if activeNav=='Home' %} style='color: #c74221;' {% endif %}>
+                            Home
+                        </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class='navbar_links dropdown-toggle' id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                            aria-expanded="false" {% if activeNav=='Events' %}
+                        <a class='navbar_links dropdown-toggle cursor-pointer' id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false" {% if activeNav=='Events' %}
                             style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}
                             onmouseover="dropdown(this)" onmouseout="dropup(this)">Events</a>
                         <ul class="dropdown-menu border-0" style="background-color: #ffd04f;"
@@ -105,8 +106,8 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class='navbar_links dropdown-toggle' id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                            aria-expanded="false" {% if activeNav=='Merchandise' %}
+                        <a class='navbar_links dropdown-toggle cursor-pointer' id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false" {% if activeNav=='Merchandise' %}
                             style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Merchandise</a>
                         <ul class="dropdown-menu border-0" style="background-color: #ffd04f;"
                             aria-labelledby="dropdownMenuButton1">
@@ -122,30 +123,17 @@
                         <a href="/hackathon" class='navbar_links' {% if activeNav=='Hackathon' %}
                             style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Hackathon</a>
                     </li>
-
                     <li class="nav-item">
-                        <a href="https://pillaialegria.wordpress.com/" target="_blank" rel="noopener noreferrer"
-                            class='navbar_links' {% if activeNav=='Blogs' %} style='color: #e8ff84;' {% endif
-                            %}>Blogs</a>
-                        <!-- <a href="" class='navbar_links dropdown-toggle' id="dropdownMenuButton2"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">News</a>
-                                                <ul class="dropdown-menu" style="background-color: #681b0aec !important;"
-                                                    aria-labelledby="dropdownMenuButton2">
-                                                    <li>
-                                                        <a class="dropdown-item navbar_links" href="https://pillaialegria.wordpress.com/"
-                                                            target="_blank" rel="noopener noreferrer">Blog</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item navbar_links" href="/buzz">Buzz</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item navbar_links" href="/highlights">Highlights</a>
-                                                    </li>
-                                                </ul> -->
+                        <a href="/announcements?filter=None" class='navbar_links' {% if activeNav=='announcements' %}
+                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Announcements</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="#artists" class='navbar_links'>Artists</a>
+                    </li>
+
                     <li class="nav-item dropdown">
-                        <a class='navbar_links dropdown-toggle' id="dropdownMenuButton2" data-bs-toggle="dropdown"
-                            aria-expanded="false">More</a>
+                        <a class='navbar_links dropdown-toggle cursor-pointer' id="dropdownMenuButton2"
+                            data-bs-toggle="dropdown" aria-expanded="false">More</a>
                         <ul class="dropdown-menu border-0" style="background-color: #ffd04f;"
                             aria-labelledby="dropdownMenuButton2">
                             <li>
@@ -159,8 +147,8 @@
                                 <a href="/user/quiz" class="dropdown-item navbar_links">Quiz</a>
                             </li>
                             <li>
-                                <a href="/announcements?filter=None"
-                                    class="dropdown-item navbar_links">Announcements</a>
+                                <a href="https://pillaialegria.wordpress.com/" target="_blank" rel="noopener noreferrer"
+                                    class="dropdown-item navbar_links">Blogs</a>
                             </li>
                             <li>
                                 <a href="/Alegria-Brochure-2022" class="dropdown-item navbar_links">EBrochure
@@ -374,7 +362,7 @@
                         </h2>
                     </div>
                     <div class="col-12 p-0">
-                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                        <div id="carouselExampleControls" class="carousel slide " data-bs-ride="carousel">
                             <div class="carousel-inner p-4">
                                 <div class="carousel-item active">
                                     <div class="row row-cols-lg-3 row-cols-md-1 g-4">
@@ -564,35 +552,74 @@
     </section> -->
 
     <div class="poster-extra-div"></div>
+    <a name="artists"></a>
     <section class="main-bg overflow-hidden" style="overflow-x: hidden;">
-        <div class="col-sm-12 d-flex justify-content-center text-center">
+        <div class="row d-flex justify-content-center text-center">
             <h2 class="fs-1 main-font text-red">
                 ARTISTS
             </h2>
         </div>
-        <div class="row h-100 d-flex justify-content-center align-items-center py-3 px-2 g-3 mb-3">
-            <div class="col-lg-6 col-sm-12 d-flex flex-column align-items-center">
-                <a href="/artists/a1" class="artist_card">
-                    <img src="../static/images/homepage/mobile-poster.jpg" class="artist_card-img" alt="">
-                </a>
-            </div>
-            <div class="col-lg-6 col-sm-12 d-flex flex-column align-items-center">
-                <a href="/artists/a2" class="artist_card">
-                    <img src="../static/images/homepage/arjun-poster.jpg" class="artist_card-img" alt="">
-                </a>
-            </div>
-        </div>
         <div class="row d-flex justify-content-center text-center">
-            <p class="fs-6 sec-font text-black">
-                For passes please contact
-            </p>
-        </div>
-        <div class="row mb-1 fs-6 text-red mb-1 d-flex justify-content-center">
-            <div class="col-lg-auto col-sm-12 text-center">
-                <a href="tel:+918652323878" class="text-red">+91 8652323878</a>
+            <div class="col-12">
+                <p class="fs-6 sec-font text-black mb-0">
+                    For passes please contact
+                </p>
             </div>
-            <div class="col-lg-auto col-sm-12 text-center">
-                <a href="tel:+918097261674" class="text-red">+91 8097261674</a>
+            <div class="row mb-2 fs-6 text-red d-flex justify-content-center">
+                <div class="col-lg-auto col-sm-12 text-center">
+                    <a href="tel:+918652323878" class="text-red">+91 8652323878</a>
+                </div>
+                <div class="col-lg-auto col-sm-12 text-center">
+                    <a href="tel:+918097261674" class="text-red">+91 8097261674</a>
+                </div>
+            </div>
+        </div>
+        <div class="row h-100 d-flex justify-content-center align-items-center py-3 px-2 g-3 mb-3">
+            <div id="carouselExampleControls3" class="carousel slide py-2" data-bs-ride="carousel">
+                <div class="carousel-inner py-3">
+                    <div class="carousel-item active">
+                        <div class="row row-cols-lg-2 row-cols-sm-1 gy-3">
+                            <div class="col-lg-6 col-sm-12 d-flex justify-content-center">
+                                <a href="/artists/a1" class="artist_card">
+                                    <img src="../static/images/homepage/mobile-poster.jpg" class="artist_card-img"
+                                        alt="">
+                                </a>
+                            </div>
+                            <div class="col-lg-6 col-sm-12 d-flex justify-content-center">
+                                <a href="/artists/a2" class="artist_card">
+                                    <img src="../static/images/homepage/arjun-poster.jpg" class="artist_card-img"
+                                        alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row row-cols-lg-2 row-cols-sm-1 gy-3">
+                            <div class="col-lg-6 col-sm-12 d-flex justify-content-center">
+                                <a href="/artists/a4" class="artist_card">
+                                    <img src="../static/images/homepage/anusha_dandekar-poster.jpg"
+                                        class="artist_card-img" alt="">
+                                </a>
+                            </div>
+                            <div class="col-lg-6 col-sm-12 d-flex justify-content-center">
+                                <a href="/artists/a3" class="artist_card">
+                                    <img src="../static/images/homepage/shraddha_das-poster.jpg" class="artist_card-img"
+                                        alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls3"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-red rounded-3" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls3"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-red rounded-3" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
         </div>
     </section>
