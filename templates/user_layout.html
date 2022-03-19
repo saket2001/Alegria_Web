@@ -29,9 +29,9 @@
     </div>
 
     <body class="min-vh-100">
-        <nav class="navbar navbar-main navbar-expand-lg navbar-light p-2 position-relative">
+        <nav class="navbar navbar-main navbar-expand-lg navbar-light p-1 position-relative">
             <div class="container-fluid">
-                <a class="" href="/">
+                <a class="p-0" href="/">
                     <img src="/static/images/AlegriaLogo.png" alt="alegria logo" class="alegria-logo">
                 </a>
                 <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
@@ -44,7 +44,7 @@
                     </svg>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="ms-5 navbar-nav me-auto mt-1 mb-2 mb-lg-0 sec-font fw-bold gy-3">
+                    <ul class="ms-3 navbar-nav me-auto mt-1 mb-2 mb-lg-0 sec-font fw-bold gy-3">
                         <li class="nav-item">
                             <a href="/" class='navbar_links' {% if activeNav=='Home' %} style='color: #e8ff84;' {% endif
                                 %}>Home</a>
@@ -164,12 +164,12 @@
                     {% if signed_in==False %}
                     <button class="up-button">
                         <a href="/user-login"
-                            class="d-flex justify-content-center align-items-center rounded-3 text-red bg-white fs-7 px-5 py-1 me-2 main-font">
+                            class="d-flex justify-content-center align-items-center rounded-3 text-red bg-white fs-7 px-4 py-2 me-2 main-font">
                             <p class="my-0 me-2">
                                 Sign In
                             </p>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor" class="text-beige ms-3" width="24px" height="24px">
+                                stroke="currentColor" class="text-beige ms-2" width="24px" height="24px">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
                             </svg>
