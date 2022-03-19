@@ -73,7 +73,7 @@ def aboutUs():
             signed_in = True
             cartLen = session.get('cartLength')
 
-        
+
         return render_template('user_aboutus.html',
                                aboutus_2021=client_data.aboutus_2021, aboutus_2020=client_data.aboutus_2020, aboutus_2019=client_data.aboutus_2019, aboutus_2018=client_data.aboutus_2018, aboutus_2017=client_data.aboutus_2017, aboutus_2016=client_data.aboutus_2016, aboutus_2015=client_data.aboutus_2015, aboutus_2014=client_data.aboutus_2014, aboutus_2013=client_data.aboutus_2013, cartLen=cartLen,signed_in=signed_in)
     except Exception as e:
@@ -264,7 +264,7 @@ def aboutUs():
 #             events_arr7 = []
 #             events_arr8 = []
 #             events_arr9 = []
-            
+
 #         events_list=[
 #             {
 #                 "title":"Gaming",
@@ -304,7 +304,7 @@ def aboutUs():
 #             },
 #         ]
 
-#         return render_template('user_events.html', activeNav='Events', signed_in=signed_in, 
+#         return render_template('user_events.html', activeNav='Events', signed_in=signed_in,
 #                                events_list=events_list,cartLen=cartLen)
 
 #     except Exception as e:
@@ -319,7 +319,7 @@ def categories():
     if session.get('user_id') != None:
         signed_in = True
         cartLen = session.get('cartLength')
-    
+
     return render_template("events.html",signed_in=signed_in, cartLen=cartLen,events_list=client_data.events_list)
 
 @app_mbp.route('/events/<event_category>', methods=['GET'])
@@ -856,6 +856,17 @@ def termsandconditions():
         cartLen = session.get('cartLength')
 
     return render_template('terms_and_services.html', cartLen=cartLen, signed_in=signed_in)
+
+@app_mbp.route("/app-privacy-policy")
+def appPrivacyPolicy():
+    signed_in = False
+    cartLen = None
+    # checks if logged in
+    if session.get('user_id') != None:
+        signed_in = True
+        cartLen = session.get('cartLength')
+
+    return render_template('app_privacy_policy.html', cartLen=cartLen, signed_in=signed_in)
 
 
 @app_mbp.route("/buzz")
