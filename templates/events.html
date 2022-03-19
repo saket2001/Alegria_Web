@@ -4,7 +4,7 @@
 {% block headContent %}
 <style>
     #category-card {
-        padding: 1.5rem 1.8rem;
+        padding: 2rem 1.5rem;
         border-radius: 16px;
         border: 6px solid var(--navbar);
         transition: all 0.3s ease-out;
@@ -22,7 +22,7 @@
 
     @media screen and (max-width:600px) {
         #category-card {
-            padding: 1rem 1.2rem;
+            padding: 1rem;
         }
 
         #category_card-img {
@@ -39,9 +39,9 @@ Alegria 2022 | Events
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid bg-cover overflow-hidden">
+<div class="container-fluid py-2 bg-cover overflow-hidden">
     <!-- go back button -->
-    <div class="row my-2 px-2">
+    <div class="row d-flex justify-content-between my-2 px-2 gap-2">
         <div class="col-lg-2 col-sm-3">
             <a href="/" type="button" class="go_back_btn py-1 text-dark">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" class="me-2"
@@ -52,6 +52,19 @@ Alegria 2022 | Events
                 Go Back
             </a>
         </div>
+        <div class="col-lg-auto col-sm-12">
+            <div class="d-flex flex-column justify-content-end align-items-center gap-2 text-black sec-font px-2">
+                <h5 class="fs-5 text-black sec-font mb-1">For any queries contact</h5>
+                <p class="d-flex gap-2 mb-0 fs-6">
+                    Ujwal Sanas
+                    <a class="text-black sec-font fs-6" href="tel:+918433859680">8433859680</a>
+                </p>
+                <p class="d-flex gap-2 mb-0 fs-6">
+                    Chinmay Malkar
+                    <a class="text-black sec-font fs-6" href="tel:+918097105574">8097105574</a>
+                </p>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col">
@@ -60,6 +73,7 @@ Alegria 2022 | Events
             </h2>
         </div>
     </div>
+
     <div class="px-4 d-flex justify-content-center">
         <div id="admin-events" class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-2 mb-2">
             {% for ele in events_list %}
