@@ -120,10 +120,6 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="/hackathon" class='navbar_links' {% if activeNav=='Hackathon' %}
-                            style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Hackathon</a>
-                    </li>
-                    <li class="nav-item">
                         <a href="/announcements?filter=None" class='navbar_links' {% if activeNav=='announcements' %}
                             style='color: #c74221;border-bottom: 2px solid #c74221;' {% endif %}>Announcements</a>
                     </li>
@@ -139,6 +135,10 @@
                             <li>
                                 <a href="/about-us" class="dropdown-item navbar_links">About
                                     Us</a>
+                            </li>
+                            <li>
+                                <a href="/hackathon" class="dropdown-item navbar_links">Hackathon
+                                    </a>
                             </li>
                             <li>
                                 <a href="/polls" class="dropdown-item navbar_links">Polls</a>
