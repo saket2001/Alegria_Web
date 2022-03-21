@@ -291,12 +291,12 @@ event_heads_row1=[
             {
                 "name": "Athul Tulasidasan",
                 "phone_number": "7887494095",
-                "role": "Technical"        
+                "role": "Technical"
             } ,{
                 "name": "Amit Naik",
                 "phone_number": "8779624030",
-                "role": "Technical"        
-            }   
+                "role": "Technical"
+            }
             ]
     },
     {
@@ -306,60 +306,60 @@ event_heads_row1=[
             {
                 "name": "Janesh Shetty",
                 "phone_number": "7887494095",
-                "role": "Management"   
+                "role": "Management"
             },
             {
                 "name": "Sreelakshmi Priyan",
                 "phone_number": "810841100",
-                "role": "Management"       
+                "role": "Management"
             }
             ]
     }
 ]
 event_heads_row2=[
-     {  
+     {
         "label":"Fine Arts",
         "logo":"/static/images/icons/Category%20Icons/Fine%20Arts.png",
         "details":[
             {
                 "name": "Teejal Singh",
                 "phone_number": "9768000278",
-                "role": "Fine Arts"       
+                "role": "Fine Arts"
             },
             {
                 "name": "Tushar Surve",
                 "phone_number": "8268182173",
-                "role": "Fine Arts"       
+                "role": "Fine Arts"
             },
             {
                 "name": "Avanti Salwatkar",
                 "phone_number": "9689655699",
-                "role": "Fine Arts"       
+                "role": "Fine Arts"
             },
             # {
             #     "name": "Renuka Chavan",
             #     "phone_number": "9930575106",
-            #     "role": "Fine Arts"       
+            #     "role": "Fine Arts"
             # }
             ]
     },
-     { 
+     {
         "label":"Performing",
         "logo":"/static/images/icons/Category%20Icons/Performing%20Arts.png",
         "details":[{
                 "name": "Yog Agarwal",
                 "phone_number": "9987071544",
-                "role": "Performing"       
+                "role": "Performing"
             },
             {
                 "name": "Dishad Koli",
                 "phone_number": "7021555531",
-                "role": "Performing"       
+                "role": "Performing"
             },
             {
                 "name": "Parth Balsaraf",
                 "phone_number": "9869541542",
-                "role": "Performing"       
+                "role": "Performing"
             },
             # {
             #     "name": "Deepesh Gaikar",
@@ -373,16 +373,16 @@ event_heads_row3=[
     {
         "label":"Literary",
         "logo":"/static/images/icons/Category%20Icons/Literary%20Arts.png",
-        "details":[ 
+        "details":[
             {
                 "name": "Paree Gadhe",
                 "phone_number": "9309871554",
-                "role": "Literary"       
+                "role": "Literary"
             },
             {
                 "name": "Emaan Qureshi",
                 "phone_number": "9820409717",
-                "role": "Literary"       
+                "role": "Literary"
             }]
     }
     ,{
@@ -408,8 +408,8 @@ event_heads_row3=[
     }
 ]
 event_heads_row4=[
-    
-    { 
+
+    {
         "label":"Gaming",
         "logo":"/static/images/icons/Category%20Icons/Gaming.png",
         "details":[{
@@ -443,9 +443,9 @@ event_heads_row4=[
 artistDetails=[
     {
         "id":"a1",
-    "name":"Abhishek Upmanyu",
-    "p":"<p class='fs-7 sec-font text-black' style='text-align: justify;'>The very first artist for one of the biggest festivals in Mumbai “Alegria - The festival of Joy” 2022 has been announced! Abhishek Upmanyu, the eternal tragic standup comedian and one of the most popular personalities is going to perform live on 27th March 2022 on Pillai's campus. He is an engineer who left his corporate job to pursue his dream of becoming a stand-up comedian. It is not easy to make people laugh, but the one that succeeds to do it is one with the biggest hearts.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>The one who makes the crowd laugh until the stomach aches! Get ready to attend the gushingly funny standup of all time. HE did start off as a writer for 'On Air with AIB' but his years of hard work did pay off. He is now known nationwide for his amazing performances. Alegria 2022 is all set to give you an exquisite experience with his funny personality who not only vows to the crowd but also keeps you smiling throughout the show.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>Roll up your sleeves and get ready for a rollercoaster of wrapped-up funny punchlines that you wouldn't want to miss any time! The humorous character, a splash of cheerful night, an amazing time with friends - what a perfect trio! Get your pals along and spend the wittiest night of your life.</p>",
-    "date":"27 th March 2022, Sunday",
+    "name":"Anubhav Bassi",
+    "p":"<p class='fs-7 sec-font text-black' style='text-align: justify;'></p><p class='fs-7 sec-font text-black' style='text-align: justify;'></p><p class='fs-7 sec-font text-black' style='text-align: justify;'></p>",
+    "date":"25 th March 2022, Friday",
     "type":"Comedy Night",
     "img":"../static/images/homepage/mobile-poster.jpg",
     }
@@ -468,4 +468,16 @@ artistDetails=[
     "type":"Judge for Face of Alegria",
     "img":"../static/images/homepage/anusha_dandekar-poster.jpg",
     "p":"<p class='fs-7 sec-font text-black' style='text-align: justify;'>Anusha Dandekar, an Australian-Indian VJ, actress and singer has made a name for herself worldwide. There's isn't any platform that won't be honoured to have her. This self-made artist has come to the top after a lot of struggle and looking at it now, her hard work paid off in the best way possible. Hosting several shows, acting in movies and making her singing debut with the song 'Better than your Ex', and built her empire</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>She's also won and been nominated for prestigious awards. But wait, if you think that's it, there's more. She has also come up with her skincare line called Brown Skin Beauty and earned the love of many women. </p><p class='fs-7 sec-font text-black' style='text-align: justify;'>It is like a dream come true for someone like her to be at Alegria. She's gonna be our celebrity guest and also going to find 'The Face of Alegria'. Her experience, knowledge and guidance sure will do justice to the title. Alegria is elated to have her on stage with us and grace the event with poise.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>Alegrian! Make some noise for one of the most beautiful and gracious women is going to be a part of our very own Pillai's Alegria! </p>",
-}]
+},{
+    "id":"a5",
+    "name":"Suresh Mukund",
+    "type":"Judge for Freestyle Group Dance",
+    "img":"../static/images/homepage/suresh_mukund-poster.jpg",
+    "p":"<p class='fs-7 sec-font text-black' style='text-align: justify;'>Dancing to express is the tagline of every dancer on stage. Swaying and grooving to the beats is what gets them going. To judge and recognise these talents the dancing sensation, Suresh Mukund is going to be at Pillai's Alegria 2022.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>Suresh Mukund, a name known all over the dance industry is all set to see the talents of Alegria. He is a choreographer on whom the biopic movie ABCD 2 was primarily based. Starting from the ground, he is now one of the best performers, choreographers and has a humble personality. He too was a boy with dreams, but more than that he had the drive needed to struggle and earn his way to the top. After a long wait, he is now the founder of 'Kings United'.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>Kings United has internationally brought fame and recognition as they have won the 3rd Season of 'World of Dance'. It is an American reality competition television series, judged by Jennifer Lopez, Ne-Yo, and Derek Hough. Wherein they had earned perfect score with their impressive moves along with top notch choreography and stunning stunts. The 14-member Bollywood Hip-Hop team routinely got high points during the show. The Kings won the $1 million top prize after 12 weeks of amazing dance offs and synchronised flips</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>Suresh Mukund is also the co-founder of the iconic 'Fictitious Dance Crew' making him the ideal judge for the freestyle group competition. Where he will decide the winner of Alegria's Freestyle Group Dance Competition and carve out the best dance group who'll take the winner title home.</p>",
+},{
+    "id":"a6",
+    "name":"Chetna Pande",
+    "type":"Judge for Mr. & Ms. Alegria",
+    "img":"../static/images/homepage/chetna_pande-poster.jpg",
+    "p":"<p class='fs-7 sec-font text-black' style='text-align: justify;'>Having Chetna Pande on the Pillai's Campus is not less than a dream come true! It's an honor to have her as a judge for the competition 'Mr & Ms. Alegria' on 26th March, 2022. She is a magnificent and fabulous Indian film and television actress who made her acting debut in MTV's Webbed in 2010. Widely known for her glam, beauty, and haute couture, she is unquestionably a diva, as evidenced by her work and acting debuts. Lock your calendars as she is going to be present at Pillai's Alegria 2022! She had earlier graced us with her presence as she'd come for the promotions of 'Class of 2020' in Alegria 2020.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>Chetna Pandey's acting career began while she was studying for her MBA, when she was asked to audition. When she got the offer, she dropped out of school and went to try her luck in Bollywood and luckily that was her calling! Chetna made her Bollywood film debut in 2013 with the film 'I Don't Luv U', and she went on to star in the 'MTV Fanaah: An Impossible Love Story'. 'Dilwale' and 'Munna Michael' are two of Chetna's acting credits. She has also been a part of the popular web series, 'Class of 2020'.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>We see heads turn and jaw drops when a glamorous personality like her walks in front of you! A fan base of more than 1.7 million followers and her elegant looks keeps millions of fans in awe! Get ready to be around and witness one of the most exquisite personalities famous today, arriving at Pillai's Alegria 2022 as the Judge for Mr. & Ms. Alegria! .</p>"
+},]

@@ -679,8 +679,12 @@ def artistDetailsPage(artist_id):
         details = client_data.artistDetails[2]
     elif artist_id == "a4":
         details = client_data.artistDetails[3]
-    
-    all_details=[] 
+    elif artist_id == "a5":
+        details = client_data.artistDetails[4]
+    elif artist_id == "a6":
+        details = client_data.artistDetails[5]
+
+    all_details=[]
     data=client_data.artistDetails
     for i in data:
         if(i["id"]!=artist_id):
@@ -689,6 +693,6 @@ def artistDetailsPage(artist_id):
                 "name":i["name"],
                 "img":i["img"],
             })
-            
+
 
     return render_template('artist_details.html', cartLen=cartLen, signed_in=signed_in, details=details,all_details=all_details)
