@@ -538,8 +538,8 @@ class HomeContentsAPI(Resource):
             "is_implemented": True,
             "data": [
                 {
-                    "title": "Comedy Night with Abhishek Upamanyu",
-                    "subtitle": "The headlining act of the Alegria 2022 Comedy Night will be the uber funny and supremely talented @aupmanyu.",
+                    "title": "Comedy Night with Anubhav Bassi",
+                    "subtitle": "The headlining act of the Alegria 2022 Comedy Night will be the uber funny and supremely talented @be_a_bassi.",
                     "image": "https://www.alegria.co.in/static/images/homepage/mobile-poster.jpg",
                     "link": "https://www.alegria.co.in/artists/a1",
                 },
@@ -548,7 +548,7 @@ class HomeContentsAPI(Resource):
                     "subtitle": "Live In Concert 26 th March 2022, Saturday",
                     "image": "https://www.alegria.co.in/static/images/homepage/arjun-poster.jpg",
                     "link": "https://www.alegria.co.in/artists/a2",
-                }
+                },
             ]
         }
 
