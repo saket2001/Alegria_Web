@@ -659,6 +659,16 @@ def BrochurePage():
         print(e)
         return redirect("/")
 
+@app_mbp.route("/app-down")
+def appdown():
+    signed_in = False
+    cartLen = None
+    # checks if logged in
+    if session.get('user_id') != None:
+        signed_in = True
+        cartLen = session.get('cartLength')
+
+    return render_template('user_app_download.html', cartLen=cartLen, signed_in=signed_in)
 
 ##################################
 
