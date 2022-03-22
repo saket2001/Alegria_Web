@@ -440,44 +440,50 @@ event_heads_row4=[
     }
 ]
 
-artistDetails=[
-    {
+artistDetails={
+    "a1":{
         "id":"a1",
     "name":"Anubhav Bassi",
     "p":"<p class='fs-7 sec-font text-black' style='text-align: justify;'>Anubhav Singh Bassi, also known as Bassi to his fans across the country, is set to perform on the dias of Alegria 2022 on 25th March, Friday. He is a personality with an enormous sense of humour and eternal comedies.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>Bassi is a stand-up comedian who specializes in anecdotal comedy. He began his standup comedy career in 2017 after performing at an open mic event. He now has a YouTube channel with over 200 million views and over 3 million subscribers, as well as 1 million + Instagram followers.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>The one that makes everyone in the room laugh until their stomachs hurt! Expect to see the most outrageously humorous standups of all time. The stage at Alegria will soon be taken over by a buzzed-about celebrity who has won the hearts of fans all across social media. Alegria 2022 is all set to let you have an unforgettable experience, packed with an extremely amusing presenter who not only entertains the audience but also keeps them smiling throughout the event.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>A monologue for Amazon Funnies and a cameo in Zee5's Comedy Couple are two of his most well-known works. He also gave a TED talk about his struggles, which he delivered with aplomb. ‘Bas Kar Bassi’, his concert tour, has taken him to over 35 places across India. In 2021, the Golden Glory Awards recognised Bassi as 'Youth Icon of the Year'. </p> <p class='fs-7 sec-font text-black' style='text-align: justify;'>Roll up your sleeves and prepare for a whirlwind of wrapped-up humorous punchlines that you won't want to miss! One of his most famous punchlines known country-wide is ‘Koi sense hai is baat ki’. What a great trio: a witty character, a splash of cheerful night, and an amazing time with friends! Bring your friends and have the wittiest night of your life. </p>",
     "date":"25 th March 2022, Friday",
     "type":"Comedy Night",
     "img":"../static/images/homepage/mobile-poster.jpg",
-    }
-    ,{
+    },
+    "a2":{
          "id":"a2",
     "name":"Arjun Kanungo",
     "p":"<p class='fs-7 sec-font text-black' style='text-align: justify;'>Arjun Kanungo, a man of many talents is someone Alegria is honoured to have. When we speak about his talents, we cannot forget to mention that he is a three-time gold medalist in Centre Fire Pistol and also a national level basketball player. He ignited his career as an entrepreneur and has gained increasing recognition for his hit songs in Go Goa Gone in 2013. His talents have only known growth since then.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>His hit debut song ‘Baaki Baatein Peene Baad’ was followed by two more sensational hits, ‘Fursat’ and ‘Ek Dafaa (Chinnama)’. His debut song also won an award in the Jagdish Singh Award for best debut category. His voice is so soothing and calming that listening to his songs on repeat is the only thing his fans do to feel content. He’s been a part of many Bollywood projects and is a method actor too. Having been graduated from Lee Strasberg Theatre and Film Institute in New York City, he’s made his debut in the film industry alongside Bollywood’s Bhai, Salman Khan</p><p class='fs-7 sec-font text-black' style='text-align: justify;'> This multilingual singer has won hearts in different languages and has set a fanbase so wide that having him at Pillai’s Alegria is like a dream come true. Singing alongside the Bollywood legend Asha Bhosale and touring around the world, he is now all set to have his first concert in Navi Mumbai on the Pillai’s campus. Get ready to have him rob your hearts with his charm, wit and most mesmerizing voice for he is going to set the stage on fire on the 26TH March 2022. The wait is going to be worth this experience of a lifetime.</p>",
     "date":"26 th March 2022, Saturday",
     "type":"Live In Concert",
     "img":"../static/images/homepage/arjun-poster.jpg",
-},{
+},"a3":{
      "id":"a3",
     "name":"Shraddha Das",
      "type":"Judge For Duet Dance",
     "p":"<p class='fs-7 sec-font text-black' style='text-align: justify;'>Shraddha Das, a woman with beauty and brains, also known as the 'sequel queen', is now arriving at the outset of Alegria 2022. Not to forget, she has judged the fashion show in Alegria 2019 with great enthusiasm. We welcome her again this year to judge the duet dance competition on 25th March, 2022</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>A lady with zeal and zest passionate for acting and dancing will now support and judge the attendees for the duet dance. When it comes to her career, she began in the final year of her graduation. She has worked on all of the hit releases, beginning with telugu films and progressing to the bollywood industry. Her first film, 'Arya 2', was a box office success. She has appeared in nearly 40 films in a variety of languages. Her Bollywood phase is exemplified by films such as 'Sanam Teri Kasam' and 'Great Grand Masti.'</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>An indian actress who is popular for her graceful and solemn moves, has a mesmerizing screen presence is now going to grace the vibe of Alegria. Besides films, she has a solid fan following on Instagram with over 1 million followers. It's such an honor to have a personality that leaves not only high profile judgement but also footprints of her glamour. Lock your calendars for 25th March, 2022 for it's going to be the drip of a bombshell and jaws dropped all around. </p>",
     "img":"../static/images/homepage/shraddha_das-poster.jpg",
-},{
+},"a4":{
      "id":"a4",
     "name":"Anusha Dandekar",
     "type":"Judge for Face of Alegria",
     "img":"../static/images/homepage/anusha_dandekar-poster.jpg",
     "p":"<p class='fs-7 sec-font text-black' style='text-align: justify;'>Anusha Dandekar, an Australian-Indian VJ, actress and singer has made a name for herself worldwide. There's isn't any platform that won't be honoured to have her. This self-made artist has come to the top after a lot of struggle and looking at it now, her hard work paid off in the best way possible. Hosting several shows, acting in movies and making her singing debut with the song 'Better than your Ex', and built her empire</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>She's also won and been nominated for prestigious awards. But wait, if you think that's it, there's more. She has also come up with her skincare line called Brown Skin Beauty and earned the love of many women. </p><p class='fs-7 sec-font text-black' style='text-align: justify;'>It is like a dream come true for someone like her to be at Alegria. She's gonna be our celebrity guest and also going to find 'The Face of Alegria'. Her experience, knowledge and guidance sure will do justice to the title. Alegria is elated to have her on stage with us and grace the event with poise.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>Alegrian! Make some noise for one of the most beautiful and gracious women is going to be a part of our very own Pillai's Alegria! </p>",
-},{
+},"a5":{
     "id":"a5",
     "name":"Suresh Mukund",
     "type":"Judge for Freestyle Group Dance",
     "img":"../static/images/homepage/suresh_mukund-poster.jpg",
     "p":"<p class='fs-7 sec-font text-black' style='text-align: justify;'>Dancing to express is the tagline of every dancer on stage. Swaying and grooving to the beats is what gets them going. To judge and recognise these talents the dancing sensation, Suresh Mukund is going to be at Pillai's Alegria 2022.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>Suresh Mukund, a name known all over the dance industry is all set to see the talents of Alegria. He is a choreographer on whom the biopic movie ABCD 2 was primarily based. Starting from the ground, he is now one of the best performers, choreographers and has a humble personality. He too was a boy with dreams, but more than that he had the drive needed to struggle and earn his way to the top. After a long wait, he is now the founder of 'Kings United'.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>Kings United has internationally brought fame and recognition as they have won the 3rd Season of 'World of Dance'. It is an American reality competition television series, judged by Jennifer Lopez, Ne-Yo, and Derek Hough. Wherein they had earned perfect score with their impressive moves along with top notch choreography and stunning stunts. The 14-member Bollywood Hip-Hop team routinely got high points during the show. The Kings won the $1 million top prize after 12 weeks of amazing dance offs and synchronised flips</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>Suresh Mukund is also the co-founder of the iconic 'Fictitious Dance Crew' making him the ideal judge for the freestyle group competition. Where he will decide the winner of Alegria's Freestyle Group Dance Competition and carve out the best dance group who'll take the winner title home.</p>",
-},{
+},"a6":{
     "id":"a6",
     "name":"Chetna Pande",
     "type":"Judge for Mr. & Ms. Alegria",
     "img":"../static/images/homepage/chetna_pande-poster.jpg",
     "p":"<p class='fs-7 sec-font text-black' style='text-align: justify;'>Having Chetna Pande on the Pillai's Campus is not less than a dream come true! It's an honor to have her as a judge for the competition 'Mr & Ms. Alegria' on 26th March, 2022. She is a magnificent and fabulous Indian film and television actress who made her acting debut in MTV's Webbed in 2010. Widely known for her glam, beauty, and haute couture, she is unquestionably a diva, as evidenced by her work and acting debuts. Lock your calendars as she is going to be present at Pillai's Alegria 2022! She had earlier graced us with her presence as she'd come for the promotions of 'Class of 2020' in Alegria 2020.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>Chetna Pandey's acting career began while she was studying for her MBA, when she was asked to audition. When she got the offer, she dropped out of school and went to try her luck in Bollywood and luckily that was her calling! Chetna made her Bollywood film debut in 2013 with the film 'I Don't Luv U', and she went on to star in the 'MTV Fanaah: An Impossible Love Story'. 'Dilwale' and 'Munna Michael' are two of Chetna's acting credits. She has also been a part of the popular web series, 'Class of 2020'.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>We see heads turn and jaw drops when a glamorous personality like her walks in front of you! A fan base of more than 1.7 million followers and her elegant looks keeps millions of fans in awe! Get ready to be around and witness one of the most exquisite personalities famous today, arriving at Pillai's Alegria 2022 as the Judge for Mr. & Ms. Alegria! .</p>"
-},]
+},"a7":{
+    "id":"a7",
+    "name":"Priyank Sharma",
+    "type":"Judge for Freestyle Solo Dance",
+    "img":"../static/images/homepage/priyank_sharma-poster.png",
+    "p":"<p class='fs-7 sec-font text-black' style='text-align: justify;'></p>"
+}}

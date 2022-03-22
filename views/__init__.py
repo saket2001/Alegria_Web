@@ -671,27 +671,17 @@ def artistDetailsPage(artist_id):
         signed_in = True
         cartLen = session.get('cartLength')
 
-    if artist_id == 'a1':
-        details = client_data.artistDetails[0]
-    elif artist_id == "a2":
-        details = client_data.artistDetails[1]
-    elif artist_id == "a3":
-        details = client_data.artistDetails[2]
-    elif artist_id == "a4":
-        details = client_data.artistDetails[3]
-    elif artist_id == "a5":
-        details = client_data.artistDetails[4]
-    elif artist_id == "a6":
-        details = client_data.artistDetails[5]
+
+    details= client_data.artistDetails[artist_id]
 
     all_details=[]
     data=client_data.artistDetails
     for i in data:
-        if(i["id"]!=artist_id):
+        if(data[i]["id"]!=artist_id):
             all_details.append({
-                "id":i["id"],
-                "name":i["name"],
-                "img":i["img"],
+                "id":data[i]["id"],
+                "name":data[i]["name"],
+                "img":data[i]["img"],
             })
 
 
