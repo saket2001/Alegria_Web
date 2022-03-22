@@ -659,8 +659,8 @@ def BrochurePage():
         print(e)
         return redirect("/")
 
-@app_mbp.route("/app-down")
-def appdown():
+@app_mbp.route("/app-download")
+def appDownload():
     signed_in = False
     cartLen = None
     # checks if logged in

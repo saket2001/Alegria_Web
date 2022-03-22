@@ -2,96 +2,85 @@
 
 {% block headContent %}
 <style>
-    .base{
-        background-color: black;
+    .app-images {
+        width: 90%;
+        height: 500px;
+        object-fit: contain;
     }
-    .playstore
-    {
-        background-color: #842703;
-        border-radius: 10px 0;
-        height: 55px;
-        color: white;
-        transition: 0.3s;
-    }
-    .playstore:hover
-    {
-        box-shadow:  5px 10px #381001;
-    }
-    .btm-down
-    {
-        background-color: #381001;
-        border-radius: 10px 0;
-        transition: 0.5s;
-    }
-    .btm-down:hover
-    {
-        box-shadow:  5px 10px #140600;
-    }
-    .descr
-    {
-        font-size: 30px;
-    }
-    .app-size
-    {
-        font-size: 70px;
-    }
-    .card1
-    {
-        border: 2px solid black;
-        border-radius: 10px;
+
+    @media screen and (max-width:600px) {
+        .app-images {
+            width: 80%;
+            height: 20rem;
+        }
     }
 </style>
 {% endblock %}
 
 
 {% block title %}
-Alegria 2022 | App Download Page 
+Alegria 2022 | Alegria App 2022
 {% endblock %}
 
 {% block content %}
-<div class="d-flex flex-column justify-content-center min-w-100 min-vh-100 bg-teal bg-cover overflow-hidden">
-    <div class="row">
-        <h1 class="main-font text-red text-center app-size py-3">ALEGRIA APP</h1>
+<div class="container-fluid min-vh-100 bg-cover overflow-hidden">
+    <div class="row py-2">
+        <h1 class="main-font text-red text-center fs-2 py-3">
+            Alegria App 2022
+        </h1>
     </div>
-    <div class="row py-2"> 
-            <div class="col justify-content-center text-center">
-                <img src="/static/images/apphome.png"  class="img-responsive" alt='alegria-app' width="600px" height="600px">
+    <div class="row px-2 py-3 gx-2 gy-4">
+        <div class="col-lg-5 col-sm-12 justify-content-center text-center">
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="/static/images/apphome.png" class="app-images" alt='alegria-app-images'>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/static/images/left.png" class="app-images" alt='alegria-app-images'>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/static/images/bassi.png" class="app-images" alt='alegria-app-images'>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/static/images/right.png" class="app-images" alt='alegria-app-images'>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-            <div class="col mx-5">
-            <p class="descr py-2 ">
-                ALEGRIA launches its very own app ! Integrating all the initiatives on a single platform. <br>
-                Introducing, the ALEGRIA 2022 App! Download the app to stay in the loop of all things happening, get notified on all events including competition updates and results instantly. <br> Whatever you need to know about ALEGRIA 2022, you'll find here! ✨ <br>
-                Now available on Playstore. Press on the Download now button or Scan the QR code to know more .
-            </p>
-            <div class="row px-2">
-                    <a href="https://play.google.com/store/apps/details?id=com.mespillai.alegria" ><div class="col-sm-5 py-2 px-1 playstore main-font"><img src="/static/images/icons/playstore.png" class="px-3">GET IT ON PLAYSTORE</div></a>
+        </div>
+        <div class="col-lg-7 col-sm-12">
+            <div class="d-flex flex-column cover-color rounded-3 p-3 shadow">
+                <p class="fs-6 sec-font text-black">
+                    ALEGRIA launches its very own app ! Integrating all the initiatives on a single platform. <br>
+                    Introducing, the ALEGRIA 2022 App! Download the app to stay in the loop of all things happening, get
+                    notified on all events including competition updates and results instantly. <br> Whatever you need
+                    to
+                    know about ALEGRIA 2022, you'll find here! ✨ <br>
+                    Now available on Playstore. Press on the Download now button or Scan the QR code to know more .
+                </p>
+                <div class="row p-2">
+                    <div class="col d-flex justify-content-center">
+                        <button type="button" class="w-auto normal-button">
+                            <a href="https://play.google.com/store/apps/details?id=com.mespillai.alegria"
+                                target="_blank" rel="noopener noreferrer">
+                                Download Now
+                            </a>
+                        </button>
+                    </div>
+                </div>
             </div>
-            </div>   
-    </div>
-    <div class="row py-4 px-5">   
-        <div class="col-sm px-5 py-4">
-            
-            <div class="row"><img src="/static/images/left.png"></div>
         </div>
-        <div class="col-sm px-5 py-4">
-            
-            <div class="row"><img src="/static/images/bassi.png"></div>
-        </div>
-        <div class="col-sm px-5 py-4">
-            
-            <div class="row"><img src="/static/images/right.png"></div>
-        </div>
-    </div>
-    <div div class="row justify-content-md-center">
-        <div class="col"></div>
-        <div class="col"></div>
-        <div class="col btm-down my-5">
-            <a href="https://play.google.com/store/apps/details?id=com.mespillai.alegria" >    
-                <div class="col-sm-7 py-2 px-1 mx-5 main-font text-center">Download now !</div>
-            </a>  
-        </div>
-        <div class="col"></div>
-        <div class="col"></div>    
     </div>
 </div>
+
 {% endblock %}
