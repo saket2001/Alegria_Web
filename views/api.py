@@ -530,10 +530,9 @@ class HomeContentsAPI(Resource):
     @user_api_key_required
     def get(self):
         today_at_alegria = {
-            "is_implemented": False,
+            "is_implemented": True,
             "data": [
-                "https://www.alegria.co.in/static/images/homepage/arjun-poster.jpg",
-                "https://www.alegria.co.in/static/images/homepage/mobile-poster.jpg"
+                "https://www.alegria.co.in/static/images/today@alegria_24.png",
             ]
         }
 
