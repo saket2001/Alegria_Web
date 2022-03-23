@@ -157,7 +157,7 @@ events_list=[
 }, {
     "title": "Technical Workshop",
     "content": "Come here and get a chance  to explore and learn new technical skills at a reasonable price in our technical workshops.",
-    "link": '/events/technical-workshops',
+    "link": '/events/technical-workshop',
     "icon": '/static/images/icons/Category%20Icons/Technical_workshop.jpeg'
 }, {
     "title": "Management",
@@ -485,5 +485,5 @@ artistDetails={
     "name":"Priyank Sharma",
     "type":"Judge for Freestyle Solo Dance",
     "img":"../static/images/homepage/priyank_sharma-poster.png",
-    "p":"<p class='fs-7 sec-font text-black' style='text-align: justify;'></p>"
+    "p":"<p class='fs-7 sec-font text-black' style='text-align: justify;'></p>Priyank Sharma a multipotentialite, who has carved his name in the fields of acting, dancing and reality shows is all set to step his foot in Pillai’s Alegria as the judge for Freestyle Solo Dance. Priyank started his journey as a dancer in showbiz with Shaimak Davar’s dancing troupe. He rose to fame with his appearance on MTV Roadies to move on to being a finalist on MTV Splitsvilla followed by being a part of one of the biggest Indian Reality TV shows- BiggBoss. With his tough and charming personality, he became a huge craze among the youth in no time.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'></p>From Reality TV shows he leapt into the Bollywood industry, making his debut with Aastha Gill and Badshah’s chart breaking song ‘BUZZ’. He then starred in many popular music videos like ‘Saara India’ and ‘Raanjhana’ and became a familiar face in the music video space. With the web series ‘Puncch Beat’, ‘The Holiday’ and ‘Mumbhai’ to his name, Priyank has made an unhindered spot for himself in the acting field.</p><p class='fs-7 sec-font text-black' style='text-align: justify;'></p>From being an ordinary boy in a middle-class family to being India’s heartthrob, Priyank took this voyage to be who he is today. Pillai College is all set to Welcome this multi-talented personality on 26th March to rock the Alegria stage with his moves and to guide and evaluate all the participants of Freestyle Solo. So buckle up and get ready for your hearts to be stolen by his charm and his groovy moves. Bring along your friends and have the time of your life in Alegria 2022.</p>"
 }}

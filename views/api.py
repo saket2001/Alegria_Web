@@ -145,16 +145,46 @@ class AnnoucementsAPI(Resource):
     def get(self):
         content = [
             {
-                "title": "Comedy Night with Abhishek Upamanyu",
-                "subtitle": "The headlining act of the Alegria 2022 Comedy Night will be the uber funny and supremely talented @aupmanyu.",
+                "title": "Comedy Night with Anubhav Bassi",
+                "subtitle": "The headlining act of the Alegria 2022 Comedy Night will be one India's biggest stand up comedians @be_a_bassi.",
                 "image": "https://www.alegria.co.in/static/images/homepage/mobile-poster.jpg",
                 "link": "https://www.alegria.co.in/artists/a1",
             },
             {
                 "title": "Concert Night with Arjun Kanungo",
-                "subtitle": "Live In Concert 26 th March 2022, Saturday",
+                "subtitle": "Alegria 2022 will bring to you the heartthrob Arjun Kanungo who will be live in concert on Saturday, 26th March at @pillaiscollege. The singer of famous hits such as 'Aaya Na Tu, Fursat, Baaki Baatein Peene Baad' and many more is all set to perform live for the first time in Navi Mumbai and steal your heart with his mesmerizing voice.",
                 "image": "https://www.alegria.co.in/static/images/homepage/arjun-poster.jpg",
                 "link": "https://www.alegria.co.in/artists/a2",
+            },
+            {
+                "title": "Judge For Duet Dance - Shraddha Das",
+                "subtitle": "Catch this talented actress on 25th March, Friday 2022.Catch this talented actress on 25th March, Friday 2022. A woman with beauty and brains, and multiple successes to her name! ",
+                "image": "https://www.alegria.co.in/static/images/homepage/shraddha_das-poster.jpg",
+                "link": "https://www.alegria.co.in/artists/a3",
+            },
+            {
+                "title": "Judge for Face of Alegria - Anusha Dandekar",
+                "subtitle": "One of the headlining events of Alegria - the festival of joy, Face of Alegria has always been star studded. To add to the glamour and grace, the one and only, VJ, actor and singer Anusha Dandekar is going to judge this magnificent event.",
+                "image": "https://www.alegria.co.in/static/images/homepage/anusha_dandekar-poster.jpg",
+                "link": "https://www.alegria.co.in/artists/a4",
+            },
+            {
+                "title": "Judge for Freestyle Group Dance - Suresh Mukund",
+                "subtitle": "One of India's biggest dance choreographers Suresh Mukund, the founder of @kings_united_india will be the judge of the freestyle group dance competition at Pillai Alegria 2022. 🔥",
+                "image": "https://www.alegria.co.in/static/images/homepage/suresh_mukund-poster.jpg",
+                "link": "https://www.alegria.co.in/artists/a5",
+            },
+            {
+                "title": "Judge for Mr. & Ms. Alegria - Chetna Pande",
+                "subtitle": "Here's presenting the judge for our headlining event 'Mr. & Ms. Alegria' Personality Contest, Ms. Chetna Pande, one of the most glamorous stars in the industry who will be wooing the crowd with her stunning looks!",
+                "image": "https://www.alegria.co.in/static/images/homepage/chetna_pande-poster.jpg",
+                "link": "https://www.alegria.co.in/artists/a6",
+            },
+            {
+                "title": "Judge for Freestyle Solo Dance - Priyank Sharma",
+                "subtitle": "The heartthrob @priyanksharmaaa will be the judge for the freestyle solo dance competition at Pillai Alegria 2022. Priyank has been part of many shows including MTV Roadies, MTV Splitsvilla and Bigg Boss.",
+                "image": "https://www.alegria.co.in/static/images/homepage/priyank_sharma-poster.png",
+                "link": "https://www.alegria.co.in/artists/a7",
             }
             ]
 
