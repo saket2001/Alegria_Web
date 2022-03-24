@@ -377,6 +377,13 @@ a.text-black:hover {
     box-shadow: 0px 3px 17px #1b1a1a54;
 }
 
+nav.stroke .navbar_links::before,
+nav.stroke .navbar_links::after{
+    border: none;
+    width: 0;
+}
+
+
 .navbar-main .navbar_links,
 .navbar_links {
     color: var(--u_beige);
@@ -388,13 +395,43 @@ a.text-black:hover {
     font-size: 0.9rem !important;
 }
 
-/*
-.navbar-main .nav-item a:hover {
-    transform: translateY(50px);
-    color: #f3f0f0;
-    background-color: #842703;
-    border-radius: 6px;
-} */
+nav.stroke ul li a,
+nav.stroke ul li a::before,
+nav.stroke ul li a::after
+ {
+    position: relative;
+    transition: all 500ms;
+}
+
+nav.parallax_navbar ul li a:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: var(--navbar);
+  height: 2px;
+}
+
+nav.navbar-main ul li a:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: var(--u_bg);
+  height: 2px;
+}
+
+nav.stroke ul li a:hover:after {
+  width: 90%;
+}
 
 .nav-item .dropdown-item:hover {
     color: var(--u_black);

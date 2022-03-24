@@ -4,8 +4,15 @@
 {% block headContent %} {% endblock headContent %} {% endblock head %} {% block body %}
 
 <body class="loader-body">
-    <div class="loading-bg"></div>
+    <div class="loading-bg">
+    </div>
     <div class="loader-div d-flex flex-column justify-content-center align-items-center">
+        <!-- <div class="loader d-flex flex-column align-items-center">
+            <video width="400" height="500" loop autoplay>
+                <source src="../static/files/loader.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+        </div> -->
         <div class="d-flex flex-column align-items-center">
             <img src="/static/images/AlegriaLogo.png" alt="alegria-logo" id="loader-logo" height="150px">
             <div class="loader d-flex align-items-center justify-content-center px-3 sec-font fs-1 my-2">
@@ -16,20 +23,13 @@
                 <p id="loader-i">i</p>
                 <p id="loader-n">n</p>
                 <p id="loader-g">g</p>
-                <!-- <div class="px-2"></div>
-                <p id="loader-A">A</p>
-                <p id="loader-L">l</p>
-                <p id="loader-E">e</p>
-                <p id="loader-G">g</p>
-                <p id="loader-R">r</p>
-                <p id="loader-I">i</p>
-                <p id="loader-Aa">a</p> -->
             </div>
         </div>
     </div>
 
+
     <body class="min-vh-100">
-        <nav class="navbar navbar-main navbar-expand-lg navbar-light p-1 position-relative">
+        <nav class="navbar navbar-main navbar-expand-lg navbar-light p-1 position-relative stroke">
             <div class="container-fluid">
                 <a class="p-0" href="/">
                     <img src="/static/images/AlegriaLogo.png" alt="alegria logo" class="alegria-logo">
@@ -109,9 +109,8 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="/announcements?filter=None" target="_blank" rel="noopener noreferrer"
-                                class='navbar_links' {% if activeNav=='announcements' %} style='color: #e8ff84;' {%
-                                endif %}>Announcements</a>
+                            <a href="/announcements?filter=None" class='navbar_links' {% if activeNav=='announcements'
+                                %} style='color: #e8ff84;' {% endif %}>Announcements</a>
                         </li>
                         <li class="nav-item">
                             <a href="/#artists" class='navbar_links'>Artists</a>
