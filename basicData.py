@@ -506,7 +506,7 @@ sponsors_list=[
         "title":"Aestus Supply",
     },
     {
-        "img":"../static/images/sponsors/Brew_House.png",
+        "img":"../static/images/sponsors/Brew_house.png",
         "title":"Brew House",
     },
     {
@@ -539,7 +539,7 @@ sponsors_list=[
     },
     {
         "img":"../static/images/sponsors/Hi_Rich.jpg",
-         "title":"HI Rich"
+         "title":"Hi Rich"
     },
     {
         "img":"../static/images/sponsors/HSM_School_&_Hair_Makeup.png",
@@ -555,7 +555,7 @@ sponsors_list=[
     },
     {
         "img":"../static/images/sponsors/rk_resort.jpg",
-         "title":"Rk Resort"
+         "title":"Rk's Resort"
     },
     {
         "img":"../static/images/sponsors/sr_resort.jpg",
