@@ -1,0 +1,58 @@
+{% extends 'user_layout.html' %}
+
+{% block headContent %}
+<style>
+    #sponsor_card {
+        border-top: 10px solid #631909;
+        padding: 6px;
+        transition: all 300ms;
+    }
+
+    #sponsor_card:hover {
+        transform: scale(0.98);
+        box-shadow: none;
+    }
+
+    #sponsor_card img {
+        width: 12.4rem;
+        height: 10.3rem;
+    }
+
+    @media screen and (max-width) {
+        #sponsor_card img {
+            width: 12.4rem;
+            height: 8rem;
+        }
+    }
+</style>
+{% endblock headContent %}
+
+
+{% block title %}
+Alegria 2022 | Our Sponsors 2022
+{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid py-2 bg-cover min-vh-100 overflow-hidden">
+
+    <div class="row py-3 g-4">
+        <div class="col-12 d-flex justify-content-center">
+            <h2 class="main-font fs-2 text-red">Our Sponsors</h2>
+        </div>
+        <div class="col-12">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-5">
+                {% for ele in sponsor_list %}
+                <div class="col d-flex flex-column justify-content-center align-items-center">
+                    <div class="card d-flex flex-column" id="sponsor_card">
+                        <img src="{{ele['img']}}" alt="sponsor-image" class="mb-1">
+                    </div>
+                    <h3 class="my-1 main-font text-black fs-5">{{ele['title']}}</h3>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

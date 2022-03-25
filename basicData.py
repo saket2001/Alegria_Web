@@ -499,3 +499,74 @@ artistDetails={
     "img":"../static/images/homepage/monika_starling-poster.jpg",
     "p":"<p class='fs-7 sec-font text-black' style='text-align: justify;'>Presenting the judge for the most glamorous event of Alegria - 'The Fashion Show!', the sensational, dazzling, talented and sassy DJ from LA, MoniKa Starling!</p><p class='fs-7 sec-font text-black' style='text-align: justify;'>@monikastarling was titled the hottest DJ by Maxim magazine. Her phenomenal songs like 'Breathe' which was at #1 on iTunes’ top songs list have captured the hearts of millions and enticed the audience. We are excited for her presence at our campus😍</p>",
 }}
+
+sponsors_list=[
+    {
+        "img":"../static/images/sponsors/Aestus_supply (1).jpg",
+        "title":"Aestus Supply",
+    },
+    {
+        "img":"../static/images/sponsors/Brew_House.png",
+        "title":"Brew House",
+    },
+    {
+        "img":"../static/images/sponsors/cg.jpg",
+        "title":"CG",
+    },
+    {
+        "img":"../static/images/sponsors/chaatwich_1.jpg",
+        "title":"Chaatwich"
+    },
+    {
+        "img":"../static/images/sponsors/Elree.jpg",
+        "title":"Elree",
+    },
+    {
+        "img":"../static/images/sponsors/fitness.jpg",
+        "title":"Aesthetic Arena"
+    },
+    {
+        "img":"../static/images/sponsors/Food_street.jpg",
+         "title":"Food Street"
+    },
+    {
+        "img":"../static/images/sponsors/Foodstop_Logo-04.png",
+         "title":"Foodstop"
+    },
+    {
+        "img":"../static/images/sponsors/Gracias_Granny_Logos_4.png",
+         "title":"Gracias Granny"
+    },
+    {
+        "img":"../static/images/sponsors/Hi_Rich.jpg",
+         "title":"HI Rich"
+    },
+    {
+        "img":"../static/images/sponsors/HSM_School_&_Hair_Makeup.png",
+         "title":"HSM"
+    },
+    {
+        "img":"../static/images/sponsors/leverage.png",
+         "title":"Leverage Edu"
+    },
+    {
+        "img":"../static/images/sponsors/malhari.jpg",
+         "title":"Malhari Juice Bar"
+    },
+    {
+        "img":"../static/images/sponsors/rk_resort.jpg",
+         "title":"Rk Resort"
+    },
+    {
+        "img":"../static/images/sponsors/sr_resort.jpg",
+         "title":"Sk Resort"
+    },
+    {
+        "img":"../static/images/sponsors/sweet_fusion.jpg",
+         "title":"Sweet Fusion"
+    },
+    {
+        "img":"../static/images/sponsors/ZReaXStudios.png",
+         "title":"ZReaX Studio"
+    },
+]

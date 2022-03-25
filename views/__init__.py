@@ -327,9 +327,16 @@ def hackathonDetails():
 @app_mbp.route("/sponsors")
 def sponsorsPage():
     try:
-        return render_template('404.html')
-        cartLen = session.get('cartLength')
+        signed_in = False
         cartLen = None
+        # checks if logged in
+        if session.get('user_id') != None:
+            signed_in = True
+            cartLen = session.get('cartLength')
+            
+            
+        return render_template('user_sponsor.html',signed_in=signed_in,cartLen=cartLen,sponsor_list=client_data.sponsors_list)
+    
     except Exception as e:
         print(e)
         return redirect("/")
